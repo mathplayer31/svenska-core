@@ -1,6 +1,6 @@
 # SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1).
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveau A2 (issue #2).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -19,6 +19,13 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
+
+## Niveau A2 : AJOUTÉ (18 nov 2026, issue #2)
+- Programme complet A1 à B2 : `docs/PROGRAMME.md` (sections, unités, thèmes, grammaire). B1 et B2 restent à produire, une issue par niveau.
+- A2 = Section 3 « Ma vie au quotidien » (Unités 8 à 11) + Section 4 « Se débrouiller en Suède » (Unités 12 à 15), 18 cartes par unité (10 mots + 8 phrases), plus le deck de fondation « 4. Grammaire A2 » (12 cartes, débloqué après l'Unité 15). 156 cartes A2, 319 au total.
+- Fichiers : `unit8-data.mjs` à `unit15-data.mjs`, `grammar-a2-data.mjs`. Écriture compacte via `content-helpers.mjs` (`vocab`, `phrase`, `cloze`, `unitDeck`) : chaque carte porte son anglais dans `en`, et la glose s'écrit en triplets `[suédois, français, anglais]`. Les sections A2 portent `title_en` / `description_en` dans `sections-data.mjs`. `content-en.mjs` ne sert plus qu'à l'A1.
+- Pour l'audio d'une carte dont le texte n'est pas lisible tel quel (ex. *Ring 1177…*), `words` donne le texte à prononcer (*Ring elva sjuttiosju…*).
+- Tableau de bord : sections groupées par niveau CECR (déduit du `cefr_level` des decks de la section), et l'en-tête affiche le niveau de la dernière section ouverte.
 
 ## Sélecteur de langue FR / EN : AJOUTÉ (18 nov 2026, issue #1)
 - Bouton FR / EN dans l'en-tête de l'accueil, mémorisé sur l'appareil (`localStorage`, clé `svenska.lang`). Français par défaut.
@@ -227,7 +234,7 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 5. [~] Carte `phrase` : glose affichée en chips mot/traduction sur la face réponse (pas encore au tap).
 6. [x] Boucle de révision FSRS (Again/Hard/Good/Easy + upsert `user_card_progress`), faite directement dans App.tsx. Typage corrigé (`Rating` -> `Grade`, ts-fsrs v5).
 7. [x] Page d'unité Découvrir -> Pratiquer + 5 types d'exercices (`UnitPractice.tsx`).
-8. [x] Seeds Unités 2 à 7 + Section 2 complète.
+8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2 (Unités 8 à 15, Sections 3 et 4, Grammaire A2) livré (issue #2). Prochaines étapes : B1 puis B2 selon `docs/PROGRAMME.md`.
 8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`grammar-data.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).

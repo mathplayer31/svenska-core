@@ -8,6 +8,15 @@ import { UNIT4_DECK, UNIT4_CARDS } from './unit4-data.mjs';
 import { UNIT5_DECK, UNIT5_CARDS } from './unit5-data.mjs';
 import { UNIT6_DECK, UNIT6_CARDS } from './unit6-data.mjs';
 import { UNIT7_DECK, UNIT7_CARDS } from './unit7-data.mjs';
+import { UNIT8_DECK, UNIT8_CARDS } from './unit8-data.mjs';
+import { UNIT9_DECK, UNIT9_CARDS } from './unit9-data.mjs';
+import { UNIT10_DECK, UNIT10_CARDS } from './unit10-data.mjs';
+import { UNIT11_DECK, UNIT11_CARDS } from './unit11-data.mjs';
+import { UNIT12_DECK, UNIT12_CARDS } from './unit12-data.mjs';
+import { UNIT13_DECK, UNIT13_CARDS } from './unit13-data.mjs';
+import { UNIT14_DECK, UNIT14_CARDS } from './unit14-data.mjs';
+import { UNIT15_DECK, UNIT15_CARDS } from './unit15-data.mjs';
+import { GRAMMAR_A2_DECK, GRAMMAR_A2_CARDS } from './grammar-a2-data.mjs';
 import { GRAMMAR_CARDS } from './grammar-data.mjs';
 import { SECTIONS } from './sections-data.mjs';
 import { CARDS_EN, DECKS_EN, SECTIONS_EN } from './content-en.mjs';
@@ -230,18 +239,30 @@ const CARDS_DATA = [
   },
 ];
 
-const ALL_DECKS = [...DECKS_DATA, UNIT1_DECK, UNIT2_DECK, UNIT3_DECK, UNIT4_DECK, UNIT5_DECK, UNIT6_DECK, UNIT7_DECK];
+const ALL_DECKS = [
+  ...DECKS_DATA, UNIT1_DECK, UNIT2_DECK, UNIT3_DECK, UNIT4_DECK, UNIT5_DECK, UNIT6_DECK, UNIT7_DECK,
+  // A2
+  UNIT8_DECK, UNIT9_DECK, UNIT10_DECK, UNIT11_DECK, UNIT12_DECK, UNIT13_DECK, UNIT14_DECK, UNIT15_DECK, GRAMMAR_A2_DECK,
+];
 const ALL_CARDS = [
   ...CARDS_DATA, ...GRAMMAR_CARDS, ...UNIT1_CARDS, ...UNIT2_CARDS, ...UNIT3_CARDS,
   ...UNIT4_CARDS, ...UNIT5_CARDS, ...UNIT6_CARDS, ...UNIT7_CARDS,
+  // A2
+  ...UNIT8_CARDS, ...UNIT9_CARDS, ...UNIT10_CARDS, ...UNIT11_CARDS,
+  ...UNIT12_CARDS, ...UNIT13_CARDS, ...UNIT14_CARDS, ...UNIT15_CARDS, ...GRAMMAR_A2_CARDS,
 ];
 
 // Contrôle du contenu anglais avant toute écriture en base : chaque carte, deck et section doit avoir
 // sa version anglaise, et chaque glose anglaise doit avoir autant de mots que la glose française.
+// Anglais d'une carte, d'un deck ou d'une section : inline (unités A2+) ou dans content-en.mjs (A1)
+const enCard = (c) => c.en ?? CARDS_EN[c.slug];
+const enDeckTitle = (d) => d.title_en ?? DECKS_EN[d.slug];
+const enSection = (s) => (s.title_en ? { title: s.title_en, description: s.description_en } : SECTIONS_EN[s.slug]);
+
 function checkEnglish() {
   const errors = [];
   for (const c of ALL_CARDS) {
-    const en = CARDS_EN[c.slug];
+    const en = enCard(c);
     if (!en?.prompt || !en?.translation) errors.push(`${c.slug} : consigne ou traduction anglaise manquante`);
     else if (c.gloss && en.gloss?.length !== c.gloss.length)
       errors.push(`${c.slug} : glose anglaise de ${en.gloss?.length ?? 0} mot(s) au lieu de ${c.gloss.length}`);
@@ -249,8 +270,8 @@ function checkEnglish() {
   }
   const cardSlugs = new Set(ALL_CARDS.map((c) => c.slug));
   for (const slug of Object.keys(CARDS_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : traduction sans carte`);
-  for (const d of ALL_DECKS) if (!DECKS_EN[d.slug]) errors.push(`deck ${d.slug} : titre anglais manquant`);
-  for (const s of SECTIONS) if (!SECTIONS_EN[s.slug]) errors.push(`section ${s.slug} : titre anglais manquant`);
+  for (const d of ALL_DECKS) if (!enDeckTitle(d)) errors.push(`deck ${d.slug} : titre anglais manquant`);
+  for (const s of SECTIONS) if (!enSection(s)?.title || !enSection(s)?.description) errors.push(`section ${s.slug} : titre anglais manquant`);
   if (errors.length > 0) throw new Error(`Contenu anglais incomplet (content-en.mjs) :\n- ${errors.join('\n- ')}`);
 }
 
@@ -295,7 +316,7 @@ for (const s of SECTIONS) {
   const { data, error } = await supabase
     .from('sections')
     .upsert(
-      { ...s, title_en: SECTIONS_EN[s.slug].title, description_en: SECTIONS_EN[s.slug].description },
+      { ...s, title_en: enSection(s).title, description_en: enSection(s).description },
       { onConflict: 'slug' }
     )
     .select()
@@ -309,7 +330,7 @@ for (const d of ALL_DECKS) {
   const { section_slug, prerequisite_slug: _prereq, ...row } = d;
   const payload = {
     ...row,
-    title_en: DECKS_EN[d.slug],
+    title_en: enDeckTitle(d),
     ...(section_slug ? { section_id: sectionMap.get(section_slug) } : {}),
   };
   const { data, error } = await supabase
@@ -365,15 +386,15 @@ for (const d of ALL_DECKS) {
         deck_id: deckMap.get(item.deck_slug),
         card_type: item.card_type,
         swedish_prompt: item.swedish_prompt,
-        prompt_en: CARDS_EN[item.slug].prompt,
+        prompt_en: enCard(item).prompt,
         swedish_target: item.swedish_target,
         // Dans les fichiers *-data.mjs, `english_translation` contient le français (nom historique)
-        english_translation: CARDS_EN[item.slug].translation,
+        english_translation: enCard(item).translation,
         ipa_transcription: item.ipa_transcription,
         pitch_accent: item.pitch_accent,
         explanation_md: item.explanation_md,
         audio_url: localUrls.join('|'),
-        gloss: item.gloss?.map((g, i) => ({ ...g, en: CARDS_EN[item.slug].gloss[i] })) ?? null,
+        gloss: item.gloss?.map((g, i) => ({ ...g, en: enCard(item).gloss[i] })) ?? null,
         french_translation: item.french_translation ?? item.english_translation,
       },
       { onConflict: 'slug' }
@@ -382,7 +403,7 @@ for (const d of ALL_DECKS) {
     if (upsertErr) throw upsertErr;
   }
 
-  console.log(`\nTerminé ! ${ALL_CARDS.length} cartes A1 sont synchronisées dans PostgreSQL.`);
+  console.log(`\nTerminé ! ${ALL_CARDS.length} cartes sont synchronisées dans PostgreSQL.`);
 
   await exportContent();
 }

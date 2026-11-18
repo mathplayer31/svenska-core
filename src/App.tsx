@@ -645,6 +645,11 @@ export default function App() {
     const orphanThematicDecks = sortedDecks.filter((d) => d.track === 'thematic' && !d.sectionId);
     const thematicCards = cards.filter((c) => decks.find((d) => d.id === c.deckId)?.track === 'thematic');
     const thematicSeen = thematicCards.filter((c) => c.fsrsCard.state !== 0).length;
+    // Niveau CECR d'une section = celui de ses decks ; niveau en cours = celui de la dernière section ouverte
+    const sectionLevel = (x: SectionInfo) => decks.find((d) => d.sectionId === x.id)?.cefrLevel ?? 'A1';
+    const levels = [...new Set(sortedSections.map(sectionLevel))];
+    const openSections = sortedSections.filter((x) => unlockedSectionIds.has(x.id));
+    const currentLevel = openSections.length ? sectionLevel(openSections[openSections.length - 1]) : 'A1';
 
     const lockReasonFor = (deck: DeckInfo) => {
       if (deck.sectionId && !unlockedSectionIds.has(deck.sectionId)) return t.lockPrevSection;
@@ -820,7 +825,7 @@ export default function App() {
         {tab === 'parcours' && (
           <div className="space-y-12">
             <div>
-              <Eyebrow>{t.levelA1}</Eyebrow>
+              <Eyebrow>{t.level(currentLevel)}</Eyebrow>
               <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{t.yourPath}</h1>
               <div className="mt-6 flex items-center gap-4">
                 <ProgressBar value={thematicCards.length ? thematicSeen / thematicCards.length : 0} />
@@ -843,7 +848,17 @@ export default function App() {
                 </button>
               )}
             </div>
-            {sortedSections.map(renderSection)}
+            {levels.map((lvl) => (
+              <div key={lvl} className="space-y-12">
+                {levels.length > 1 && (
+                  <div className="flex items-center gap-4">
+                    <span className="font-serif text-xl text-ink shrink-0">{t.level(lvl)}</span>
+                    <span className="h-px flex-1 bg-line" aria-hidden />
+                  </div>
+                )}
+                {sortedSections.map((x, i) => (sectionLevel(x) === lvl ? renderSection(x, i) : null))}
+              </div>
+            ))}
             {orphanThematicDecks.length > 0 && <ul className="space-y-3">{orphanThematicDecks.map(renderUnitRow)}</ul>}
           </div>
         )}

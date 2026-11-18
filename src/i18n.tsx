@@ -16,7 +16,7 @@ const fr = {
   home: 'Accueil',
   unit: 'Unité',
   // Parcours
-  levelA1: 'Niveau A1',
+  level: (l: string) => `Niveau ${l}`,
   yourPath: 'Ton parcours',
   cardsCount: (a: number, b: number) => `${a}/${b} cartes`,
   dueToday: (n: number) => `${n} carte${s(n)} à étudier aujourd’hui`,
@@ -152,7 +152,7 @@ const en: typeof fr = {
   langLabel: 'Language',
   home: 'Home',
   unit: 'Unit',
-  levelA1: 'Level A1',
+  level: (l) => `Level ${l}`,
   yourPath: 'Your path',
   cardsCount: (a, b) => `${a}/${b} cards`,
   dueToday: (n) => `${n} card${s(n)} to study today`,
