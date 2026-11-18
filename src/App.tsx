@@ -19,8 +19,10 @@ import {
   Dumbbell,
   Play,
   Snail,
+  CircleUser,
 } from 'lucide-react';
-import { getDataSource, LOCAL_USER_ID } from './dataSource';
+import * as data from './dataSource';
+import AccountScreen from './AccountScreen';
 import SectionTest from './SectionTest';
 import { useI18n, type Lang } from './i18n';
 import UnitPractice from './UnitPractice';
@@ -131,11 +133,22 @@ export default function App() {
   const [cramMode, setCramMode] = useState(false);
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [syncError, setSyncError] = useState<string | null>(null);
+  const [showAccount, setShowAccount] = useState(false);
 
-  const loadData = useCallback(async () => {
-    setLoading(true);
-    const source = await getDataSource();
-    const loaded = await source.load();
+  // silent : rechargement en arrière-plan (retour sur l'app), sans écran de chargement
+  const loadData = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+    // Synchro du compte d'abord (sans effet si déconnecté) ; en cas d'échec réseau, la progression locale suffit
+    try {
+      await data.sync();
+      setSyncError(null);
+    } catch (e) {
+      setSyncError(e instanceof Error ? e.message : String(e));
+    }
+    setUserEmail((await data.currentUser())?.email ?? null);
+    const loaded = await data.load();
     const decksRes = { data: loaded.decks };
     const cardsRes = { data: loaded.cards };
     const progressRes = { data: loaded.progress };
@@ -198,7 +211,7 @@ export default function App() {
               lapses: saved.lapses,
               state: saved.state,
               last_review: saved.last_review ? new Date(saved.last_review) : undefined,
-              learning_steps: 0,
+              learning_steps: saved.learning_steps ?? 0,
             }
           : createEmptyCard();
 
@@ -228,6 +241,10 @@ export default function App() {
 
   useEffect(() => {
     loadData();
+    // Retour sur l'app (onglet ou appli Android) : on récupère ce qui a été fait sur un autre appareil
+    const onVisible = () => document.visibilityState === 'visible' && loadData(true);
+    document.addEventListener('visibilitychange', onVisible);
+    return () => document.removeEventListener('visibilitychange', onVisible);
   }, [loadData]);
 
   // ---------------------------------------------------------------------------
@@ -363,8 +380,7 @@ export default function App() {
         prev.map((c) => (c.id === currentCard.id ? { ...c, fsrsCard: updated } : c))
       );
 
-      await (await getDataSource()).saveCardProgress({
-        user_id: LOCAL_USER_ID,
+      await data.saveCardProgress({
         card_id: currentCard.id,
         state: updated.state,
         due: updated.due.toISOString(),
@@ -372,6 +388,7 @@ export default function App() {
         difficulty: updated.difficulty,
         elapsed_days: updated.elapsed_days,
         scheduled_days: updated.scheduled_days,
+        learning_steps: updated.learning_steps,
         reps: updated.reps,
         lapses: updated.lapses,
         last_review: now.toISOString(),
@@ -397,8 +414,7 @@ export default function App() {
 
       setSectionProgress((old) => new Map(old).set(section.id, next));
 
-      await (await getDataSource()).saveSectionProgress({
-        user_id: LOCAL_USER_ID,
+      await data.saveSectionProgress({
         section_id: section.id,
         best_score: next.bestScore,
         passed: next.passed,
@@ -502,6 +518,20 @@ export default function App() {
     setUnitDeckId(null);
     setSelectedDeckId('ALL');
   };
+
+  // ============================================================================
+  // VUE COMPTE (connexion, inscription, synchro)
+  // ============================================================================
+  if (showAccount) {
+    return (
+      <AccountScreen
+        email={userEmail}
+        syncError={syncError}
+        onClose={() => setShowAccount(false)}
+        onChanged={() => loadData(true)}
+      />
+    );
+  }
 
   // ============================================================================
   // VUE 0 : TEST DE FIN DE SECTION
@@ -831,7 +861,21 @@ export default function App() {
               </button>
             ))}
           </nav>
-          <LangSwitch lang={lang} onChange={setLang} label={t.langLabel} />
+          <div className="flex items-center gap-2">
+            <LangSwitch lang={lang} onChange={setLang} label={t.langLabel} />
+            {data.accountsAvailable && (
+              <button
+                onClick={() => setShowAccount(true)}
+                aria-label={t.account}
+                title={userEmail ?? t.account}
+                className={`grid place-items-center w-9 h-9 rounded-full border transition cursor-pointer ${
+                  userEmail ? 'bg-accent text-accent-ink border-accent' : 'bg-surface text-muted border-line hover:text-ink'
+                }`}
+              >
+                <CircleUser className="w-5 h-5" aria-hidden />
+              </button>
+            )}
+          </div>
         </header>
 
         {tab === 'parcours' && (

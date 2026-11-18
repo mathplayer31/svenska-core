@@ -1,0 +1,6 @@
+// Déploiement du site sur Cloudflare (Workers, fichiers statiques) : build `npm run build`, puis `npx wrangler deploy`.
+{
+  "name": "svenska-core",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./dist" }
+}

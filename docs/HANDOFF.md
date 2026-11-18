@@ -1,6 +1,6 @@
 # SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4), notes en anglais (issue #5), rangement des fichiers (issue #7).
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4), notes en anglais (issue #5), rangement des fichiers (issue #7), comptes et synchro de progression (issue #8).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -10,7 +10,8 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - **Frontend :** React 19 + TypeScript + Vite + Tailwind CSS v4 (`@tailwindcss/vite`)
 - **Mobile :** Capacitor (`@capacitor/core`, `@capacitor/android`)
 - **SRS :** `ts-fsrs`
-- **Backend/DB :** Supabase local (Docker) -> PostgreSQL + Storage (bucket public `card-audio`)
+- **Backend/DB :** Supabase local (Docker) pour le pipeline de contenu ; Supabase Cloud (gratuit) pour les comptes et la progression (issue #8)
+- **Web en ligne :** Cloudflare Pages
 - **Audio :** `edge-tts` (`sv-SE-SofieNeural`) via `scripts/sync-content.mjs`
 
 ## Environnement local
@@ -76,13 +77,23 @@ alter table public.sections add column if not exists description_en text;
 - Nettoyage : `src/App.css`, `src/assets/` et la dépendance `dexie` supprimés (inutilisés).
 
 ## Mode hors ligne & Android : AJOUTÉ (18 nov 2026)
-- Décision : l'APK fonctionne **100 % hors ligne**. Pas de synchro de progression entre PC et téléphone pour l'instant.
-- `src/dataSource.ts` : couche d'accès aux données. Web = Supabase ; Android (`Capacitor.isNativePlatform()`) ou `VITE_DATA_SOURCE=local` (fichier `.env.android`) = contenu embarqué `src/content.json` + progression en `localStorage` (clés `svenska.cardProgress`, `svenska.sectionProgress`).
+- Décision : l'APK fonctionne **100 % hors ligne**. La synchro entre appareils passe par un compte facultatif (section suivante).
+- `src/dataSource.ts` : couche d'accès aux données. Web et Android lisent le contenu embarqué `src/content.json` ; progression en `localStorage` (clés `svenska.cardProgress`, `svenska.sectionProgress`), synchronisée avec le compte si connecté.
 - `src/content.json` est **généré** par `scripts/sync-content.mjs` à chaque synchro (sections, decks, cartes ; les uuid sont remplacés par les slugs, donc la progression locale survit à un re-seed). Les MP3 de `public/audio` sont embarqués dans l'APK.
 - `capacitor.config.json` (le `.ts` a été abandonné : Capacitor ne sait pas le lire avec TypeScript 7). Wrapper Gradle passé en **9.1.0** (le seul JDK installé est le JDK 25 d'Android Studio).
 - Build : `npm run apk` → `scripts/build-android.mjs`. Le script mesure cœurs / charge CPU / RAM libre et adapte le build (1 à 4 workers Gradle, JVM 1 à 3 Go, priorité basse, sans daemon) pour ne pas saturer le PC. APK debug : `android/app/build/outputs/apk/debug/app-debug.apk`.
-- Test local du mode hors ligne dans le navigateur : `npm run dev:local`.
 - Les notes (`explanation_md`) sont rendues avec un mini-markdown (`**gras**`, `*italique*`, `~~barré~~`).
+
+## Comptes et synchro de progression : AJOUTÉ (18 nov 2026, issue #8)
+- Seule la progression se synchronise ; le contenu reste embarqué. L'app marche sans compte.
+- Base des comptes : Supabase Cloud, tables `progress_cards` / `progress_sections` clés par slug, RLS `auth.uid() = user_id` : `supabase/cloud-schema.sql` (appliqué aussi sur la base locale pour le dev).
+- Connexion e-mail + mot de passe : bouton Compte en haut à droite, `src/AccountScreen.tsx`.
+- Synchro (`src/dataSource.ts`) à l'ouverture et au retour sur l'app : fusion carte par carte, la révision la plus récente gagne ; tests de section : meilleur score, validé si validé sur un appareil. Chaque révision est écrite sur l'appareil puis envoyée ; faite hors ligne, elle part à la synchro suivante. Règles : `src/syncMerge.ts`, test : `node --experimental-strip-types --no-warnings scripts/check-sync.ts`.
+- Config : `.env.local` (dev, base locale), `.env.production` (`npm run build`, Cloudflare) et `.env.android` (APK) contiennent `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`. Vides : comptes désactivés. La clé anon est publique par conception, la protection vient de la RLS.
+- Retiré : le mode web « contenu et progression dans Supabase local » (`npm run dev:local`, `VITE_DATA_SOURCE`). Supabase local ne sert plus qu'à `npm run content` et au test des comptes en dev.
+- Import de l'ancienne progression PC (tables `user_card_progress` / `user_section_progress`) dans un compte : `scripts/import-progress.ts`, commande en en-tête du fichier. Relancer ne change rien.
+- Web en ligne : Cloudflare Pages relié au dépôt GitHub, commande `npm run build`, dossier `dist`, Node 22 (`.node-version`).
+- Vérifié le 18 nov 2026 sur la base locale avec un compte de test : import de 25 cartes + 1 test ; connexion sur un stockage vide, progression récupérée ; révision faite dans l'app, présente dans le compte ; révision faite hors ligne, envoyée à la synchro suivante ; un second compte ne voit rien et ne peut pas écrire chez le premier ; écran Compte en FR et EN ; déconnexion, progression gardée sur l'appareil.
 
 ## Grammaire V2 réécrite : AJOUTÉ (18 nov 2026)
 - `content/a1/grammar.mjs` : 12 cartes `cloze_grammar` qui n'utilisent que le vocabulaire des unités 1 à 7 (V2 avec idag/imorgon/igår, questions, *inte*, *sin/hans*, accord en -t, forme définie, *det här tåget*). Prérequis du deck : **Unité 7**.
@@ -263,7 +274,8 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`content/a1/grammar.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
-10. [~] APK Android hors ligne fait (`npm run apk`). Restent : icône et splash, APK signé (release), synchro de progression PC <-> téléphone, auth + restriction RLS.
+10. [~] APK Android hors ligne fait (`npm run apk`). Restent : icône et splash, APK signé (release).
+11. [~] Comptes et synchro (issue #8) : code fait. Restent : projet Supabase Cloud, clés dans `.env.production` et `.env.android`, Cloudflare Pages, import de la progression PC.
 
 ## Consignes pour Gemini
 - Garder les décisions ci-dessus ; ne pas réintroduire `'thematic'` dans `category`.

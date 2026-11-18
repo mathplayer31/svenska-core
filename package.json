@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:local": "vite --mode android",
     "build": "tsc -b && vite build",
     "content": "node --env-file=.env.local scripts/sync-content.mjs",
     "apk": "node scripts/build-android.mjs",

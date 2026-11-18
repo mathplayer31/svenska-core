@@ -141,6 +141,21 @@ const fr = {
   listenThenChoose: 'Écoute, puis choisis la bonne traduction',
   next: 'Suivant',
   seeResult: 'Voir le résultat',
+  // Compte
+  account: 'Compte',
+  accountIntro: 'Connecte-toi pour retrouver ta progression sur tous tes appareils. Sans compte, elle reste sur cet appareil.',
+  email: 'E-mail',
+  password: 'Mot de passe',
+  passwordHint: '6 caractères minimum',
+  signIn: 'Se connecter',
+  signUp: 'Créer un compte',
+  signOut: 'Se déconnecter',
+  syncNow: 'Synchroniser maintenant',
+  signedInAs: (email: string) => `Connecté avec ${email}. Ta progression se synchronise automatiquement.`,
+  syncedOk: 'Progression synchronisée.',
+  syncFailed: (m: string) => `Synchro impossible pour l’instant (${m}). Ta progression reste enregistrée sur cet appareil.`,
+  confirmEmail: 'Compte créé : valide le lien reçu par e-mail, puis connecte-toi.',
+  authError: (m: string) => `Échec : ${m}`,
 };
 
 const en: typeof fr = {
@@ -269,6 +284,20 @@ const en: typeof fr = {
   listenThenChoose: 'Listen, then choose the right translation',
   next: 'Next',
   seeResult: 'See the result',
+  account: 'Account',
+  accountIntro: 'Sign in to keep your progress on all your devices. Without an account, it stays on this device.',
+  email: 'Email',
+  password: 'Password',
+  passwordHint: 'At least 6 characters',
+  signIn: 'Sign in',
+  signUp: 'Create an account',
+  signOut: 'Sign out',
+  syncNow: 'Sync now',
+  signedInAs: (email) => `Signed in as ${email}. Your progress syncs automatically.`,
+  syncedOk: 'Progress synced.',
+  syncFailed: (m) => `Sync unavailable right now (${m}). Your progress is still saved on this device.`,
+  confirmEmail: 'Account created: click the link in the email we sent, then sign in.',
+  authError: (m) => `Failed: ${m}`,
 };
 
 export type Strings = typeof fr;
