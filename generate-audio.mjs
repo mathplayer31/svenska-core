@@ -26,6 +26,15 @@ import { UNIT21_DECK, UNIT21_CARDS } from './unit21-data.mjs';
 import { UNIT22_DECK, UNIT22_CARDS } from './unit22-data.mjs';
 import { UNIT23_DECK, UNIT23_CARDS } from './unit23-data.mjs';
 import { GRAMMAR_B1_DECK, GRAMMAR_B1_CARDS } from './grammar-b1-data.mjs';
+import { UNIT24_DECK, UNIT24_CARDS } from './unit24-data.mjs';
+import { UNIT25_DECK, UNIT25_CARDS } from './unit25-data.mjs';
+import { UNIT26_DECK, UNIT26_CARDS } from './unit26-data.mjs';
+import { UNIT27_DECK, UNIT27_CARDS } from './unit27-data.mjs';
+import { UNIT28_DECK, UNIT28_CARDS } from './unit28-data.mjs';
+import { UNIT29_DECK, UNIT29_CARDS } from './unit29-data.mjs';
+import { UNIT30_DECK, UNIT30_CARDS } from './unit30-data.mjs';
+import { UNIT31_DECK, UNIT31_CARDS } from './unit31-data.mjs';
+import { GRAMMAR_B2_DECK, GRAMMAR_B2_CARDS } from './grammar-b2-data.mjs';
 import { GRAMMAR_CARDS } from './grammar-data.mjs';
 import { SECTIONS } from './sections-data.mjs';
 import { CARDS_EN, DECKS_EN, SECTIONS_EN } from './content-en.mjs';
@@ -254,6 +263,8 @@ const ALL_DECKS = [
   UNIT8_DECK, UNIT9_DECK, UNIT10_DECK, UNIT11_DECK, UNIT12_DECK, UNIT13_DECK, UNIT14_DECK, UNIT15_DECK, GRAMMAR_A2_DECK,
   // B1
   UNIT16_DECK, UNIT17_DECK, UNIT18_DECK, UNIT19_DECK, UNIT20_DECK, UNIT21_DECK, UNIT22_DECK, UNIT23_DECK, GRAMMAR_B1_DECK,
+  // B2
+  UNIT24_DECK, UNIT25_DECK, UNIT26_DECK, UNIT27_DECK, UNIT28_DECK, UNIT29_DECK, UNIT30_DECK, UNIT31_DECK, GRAMMAR_B2_DECK,
 ];
 const ALL_CARDS = [
   ...CARDS_DATA, ...GRAMMAR_CARDS, ...UNIT1_CARDS, ...UNIT2_CARDS, ...UNIT3_CARDS,
@@ -264,6 +275,9 @@ const ALL_CARDS = [
   // B1
   ...UNIT16_CARDS, ...UNIT17_CARDS, ...UNIT18_CARDS, ...UNIT19_CARDS,
   ...UNIT20_CARDS, ...UNIT21_CARDS, ...UNIT22_CARDS, ...UNIT23_CARDS, ...GRAMMAR_B1_CARDS,
+  // B2
+  ...UNIT24_CARDS, ...UNIT25_CARDS, ...UNIT26_CARDS, ...UNIT27_CARDS,
+  ...UNIT28_CARDS, ...UNIT29_CARDS, ...UNIT30_CARDS, ...UNIT31_CARDS, ...GRAMMAR_B2_CARDS,
 ];
 
 // Contrôle du contenu anglais avant toute écriture en base : chaque carte, deck et section doit avoir

@@ -53,4 +53,23 @@ export const SECTIONS = [
     sort_order: 6,
     pass_score: 80,
   },
+  // ===================== B2 =====================
+  {
+    slug: 'section-7-travailler',
+    title: 'Section 7 : Travailler en suédois',
+    description: 'Vie pro, économie, protection sociale et climat : comprendre et débattre des sujets de société.',
+    title_en: 'Section 7: Working in Swedish',
+    description_en: 'Work life, economy, welfare and climate: understanding and debating social issues.',
+    sort_order: 7,
+    pass_score: 80,
+  },
+  {
+    slug: 'section-8-nuances',
+    title: 'Section 8 : Nuances & expression',
+    description: 'Expressions, argumentation, registres et histoire : parler comme un Suédois.',
+    title_en: 'Section 8: Nuance & expression',
+    description_en: 'Idioms, argumentation, registers and history: speaking like a Swede.',
+    sort_order: 8,
+    pass_score: 80,
+  },
 ];

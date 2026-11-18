@@ -1,6 +1,6 @@
 # SvenskaCore : programme A1 à B2
 
-Dernière mise à jour : 18 nov 2026 (issue #2).
+Dernière mise à jour : 19 nov 2026 (issues #2, #3, #4).
 
 Principes communs à tous les niveaux :
 - Une **section** = 4 unités thématiques + un test de fin de section (80 % pour valider). La section suivante s'ouvre quand le test est réussi.
@@ -8,7 +8,7 @@ Principes communs à tous les niveaux :
 - Les phrases n'utilisent que des mots déjà vus (unités précédentes ou mots de l'unité) ; chaque mot est glosé.
 - Un **deck de grammaire de fondation** par niveau, débloqué après la dernière unité du niveau, construit uniquement avec le vocabulaire déjà vu.
 
-État : A1 livré, **A2 livré avec cette issue**, B1 et B2 à produire (une issue par niveau).
+État au 19 nov 2026 : **A1, A2, B1 et B2 produits** (issues #2, #3, #4). 631 cartes au total.
 
 ## A1 (livré)
 
@@ -17,7 +17,7 @@ Principes communs à tous les niveaux :
 | 1 : Premiers pas | 1 Salutations, 2 Café & fika, 3 Famille | Fondation A1 : V2, questions, *inte*, *sin/hans*, accord en -t, forme définie |
 | 2 : Vie quotidienne | 4 Courses, 5 Restaurant, 6 Transports, 7 Météo | |
 
-## A2 (livré avec l'issue #2)
+## A2 (livré, issue #2)
 
 | Section | Unité | Thème et vocabulaire | Point de grammaire mis en avant |
 |---|---|---|---|
@@ -31,7 +31,7 @@ Principes communs à tous les niveaux :
 | | 15 Projets & vacances | semester, resa, boka, planera, sommarstuga | futur (*ska*, *kommer att*), *om* + présent |
 | Fondation | Grammaire A2 | | prétérit des 4 groupes, parfait vs prétérit, *kommer att* vs *ska*, comparatifs, modaux, réfléchis, *i / på / för … sedan* |
 
-## B1 (à produire)
+## B1 (livré, issue #3)
 
 | Section | Unité | Thème | Point de grammaire |
 |---|---|---|---|
@@ -45,7 +45,7 @@ Principes communs à tous les niveaux :
 | | 23 Raconter au passé | berättelse, minnas, hände, plötsligt | enchaînement des temps, *medan / innan / efter att* |
 | Fondation | Grammaire B1 | | BIFF, *som*, conjonctions (*eftersom, fast, trots att*), verbes à particule, plus-que-parfait |
 
-## B2 (à produire)
+## B2 (livré, issue #4)
 
 | Section | Unité | Thème | Point de grammaire |
 |---|---|---|---|
