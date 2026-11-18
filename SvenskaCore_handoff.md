@@ -1,6 +1,6 @@
 # SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4).
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4), notes en anglais (issue #5).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -19,6 +19,17 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
+
+## Notes en anglais : AJOUTÉ (19 nov 2026, issue #5)
+- En mode anglais, plus aucun texte français : les 631 notes de grammaire sont traduites et adaptées à un anglophone (repères de prononciation et pièges comparés à l'anglais).
+- Fichiers `notes-en-a1.mjs`, `notes-en-a2.mjs`, `notes-en-b1.mjs`, `notes-en-b2.mjs` : une note par slug. `IPA_EN` (dans `notes-en-a1.mjs`) remplace les indications de prononciation rédigées en français (8 cartes de phonétique + *och*).
+- `generate-audio.mjs` s'arrête si une carte n'a pas de note anglaise. Toute nouvelle carte doit donc avoir sa note dans le fichier `notes-en-*` de son niveau.
+- Colonnes ajoutées (fichier `supabase/migration_notes_en.sql`, appliqué) :
+```sql
+alter table public.cards add column if not exists explanation_en text;
+alter table public.cards add column if not exists ipa_en text;
+```
+- L'accent tonal, saisi en français (« Accent 1 (Aigu) »), est affiché « (acute) / (grave) » en anglais. La mention « Note (in French) » a disparu.
 
 ## Niveaux B1 et B2 : AJOUTÉS (19 nov 2026, issues #3 et #4)
 - B1 = Section 5 « S'installer en Suède » (Unités 16 à 19 : démarches, logement & voisinage, travail & entretien, avis & débats) + Section 6 « Société & culture » (Unités 20 à 23 : nature & allemansrätten, médias, émotions, raconter au passé) + deck « 5. Grammaire B1 » (BIFF, *som*, *om*, *fast*, verbes à particule, plus-que-parfait, questions indirectes). Fichiers `unit16-data.mjs` à `unit23-data.mjs`, `grammar-b1-data.mjs`.

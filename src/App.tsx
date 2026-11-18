@@ -74,6 +74,8 @@ interface SwedishCard {
   ipa: string;
   pitchAccent?: string;
   explanation: string;
+  explanationEn: string | null;
+  ipaEn: string | null;
   audioUrl?: string;
   gloss: GlossItem[] | null;
   fsrsCard: FSRSCard;
@@ -212,6 +214,8 @@ export default function App() {
           ipa: row.ipa_transcription || '',
           pitchAccent: row.pitch_accent,
           explanation: row.explanation_md,
+          explanationEn: row.explanation_en ?? null,
+          ipaEn: row.ipa_en ?? null,
           audioUrl: row.audio_url,
           gloss: Array.isArray(row.gloss) ? row.gloss : null,
           fsrsCard,
@@ -472,6 +476,10 @@ export default function App() {
   const L = {
     prompt: (c: SwedishCard) => (lang === 'en' && c.promptEn) || c.swedishPrompt,
     tr: (c: SwedishCard) => (lang === 'en' && c.englishEn) || c.english,
+    note: (c: SwedishCard) => (lang === 'en' && c.explanationEn) || c.explanation,
+    ipa: (c: SwedishCard) => (lang === 'en' && c.ipaEn) || c.ipa,
+    // Les accents tonals sont saisis en français (« Accent 1 (Aigu) ») : seuls ces deux mots changent
+    accent: (x: string) => (lang === 'en' ? x.replace('(Aigu)', '(acute)').replace('(Grave)', '(grave)') : x),
     gloss: (c: SwedishCard) => c.gloss?.map((g) => ({ sv: g.sv, fr: (lang === 'en' && g.en) || g.fr })) ?? null,
     deck: (d: DeckInfo) => (lang === 'en' && d.titleEn) || d.title,
     section: (x: SectionInfo) => (lang === 'en' && x.titleEn) || x.title,
@@ -1011,7 +1019,7 @@ export default function App() {
             <TypeIcon className="w-3.5 h-3.5" aria-hidden />
             {t.cardType[currentCard.cardType] ?? currentCard.cardType}
           </span>
-          {currentCard.pitchAccent && <span className="text-xs text-faint">{currentCard.pitchAccent}</span>}
+          {currentCard.pitchAccent && <span className="text-xs text-faint">{L.accent(currentCard.pitchAccent)}</span>}
         </div>
 
         <h1 className="font-serif text-2xl md:text-3xl text-ink leading-snug mt-5">{L.prompt(currentCard)}</h1>
@@ -1020,7 +1028,7 @@ export default function App() {
           <div className="mt-8 pt-8 border-t border-line space-y-6">
             <div>
               <p className="font-serif text-3xl md:text-4xl text-accent leading-tight">{currentCard.swedishTarget}</p>
-              {currentCard.ipa && <p className="font-mono text-sm text-faint mt-2">{currentCard.ipa}</p>}
+              {currentCard.ipa && <p className="font-mono text-sm text-faint mt-2">{L.ipa(currentCard)}</p>}
               <p className="text-lg text-ink mt-3">{L.tr(currentCard)}</p>
             </div>
 
@@ -1059,10 +1067,7 @@ export default function App() {
             )}
 
             <div className="rounded-2xl bg-gold-soft/60 border border-gold/30 p-4 text-[15px] leading-relaxed text-ink">
-              {t.noteLabel && (
-                <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-gold-ink mb-1.5">{t.noteLabel}</span>
-              )}
-              {renderInlineMd(currentCard.explanation)}
+              {renderInlineMd(L.note(currentCard))}
             </div>
           </div>
         ) : (

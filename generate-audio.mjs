@@ -38,6 +38,13 @@ import { GRAMMAR_B2_DECK, GRAMMAR_B2_CARDS } from './grammar-b2-data.mjs';
 import { GRAMMAR_CARDS } from './grammar-data.mjs';
 import { SECTIONS } from './sections-data.mjs';
 import { CARDS_EN, DECKS_EN, SECTIONS_EN } from './content-en.mjs';
+import { NOTES_EN_A1, IPA_EN } from './notes-en-a1.mjs';
+import { NOTES_EN_A2 } from './notes-en-a2.mjs';
+import { NOTES_EN_B1 } from './notes-en-b1.mjs';
+import { NOTES_EN_B2 } from './notes-en-b2.mjs';
+
+// Notes de grammaire en anglais, par slug (issue #5)
+const NOTES_EN = { ...NOTES_EN_A1, ...NOTES_EN_A2, ...NOTES_EN_B1, ...NOTES_EN_B2 };
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -296,7 +303,9 @@ function checkEnglish() {
       errors.push(`${c.slug} : glose anglaise de ${en.gloss?.length ?? 0} mot(s) au lieu de ${c.gloss.length}`);
     else if (!c.gloss && en.gloss) errors.push(`${c.slug} : glose anglaise sans glose française`);
   }
+  for (const c of ALL_CARDS) if (!NOTES_EN[c.slug]) errors.push(`${c.slug} : note anglaise manquante`);
   const cardSlugs = new Set(ALL_CARDS.map((c) => c.slug));
+  for (const slug of Object.keys(NOTES_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : note anglaise sans carte`);
   for (const slug of Object.keys(CARDS_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : traduction sans carte`);
   for (const d of ALL_DECKS) if (!enDeckTitle(d)) errors.push(`deck ${d.slug} : titre anglais manquant`);
   for (const s of SECTIONS) if (!enSection(s)?.title || !enSection(s)?.description) errors.push(`section ${s.slug} : titre anglais manquant`);
@@ -421,6 +430,8 @@ for (const d of ALL_DECKS) {
         ipa_transcription: item.ipa_transcription,
         pitch_accent: item.pitch_accent,
         explanation_md: item.explanation_md,
+        explanation_en: NOTES_EN[item.slug],
+        ipa_en: IPA_EN[item.slug] ?? null,
         audio_url: localUrls.join('|'),
         gloss: item.gloss?.map((g, i) => ({ ...g, en: enCard(item).gloss[i] })) ?? null,
         french_translation: item.french_translation ?? item.english_translation,

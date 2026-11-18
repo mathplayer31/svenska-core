@@ -19,6 +19,8 @@ CREATE TABLE public.cards (
     gloss jsonb,
     french_translation text,
     prompt_en text,
+    explanation_en text,
+    ipa_en text,
     CONSTRAINT cards_card_type_check CHECK ((card_type = ANY (ARRAY['minimal_pair'::text, 'vocab'::text, 'cloze_grammar'::text, 'listening'::text, 'phrase'::text])))
 );
 
