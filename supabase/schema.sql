@@ -3,9 +3,6 @@
 --   node --env-file=.env.local generate-audio.mjs   pour remplir sections, decks et cartes.
 -- RLS : policies de dev permissives, à restreindre avant toute mise en ligne.
 
-
-
-
 CREATE TABLE public.cards (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     deck_id uuid NOT NULL,
@@ -21,6 +18,7 @@ CREATE TABLE public.cards (
     slug text,
     gloss jsonb,
     french_translation text,
+    prompt_en text,
     CONSTRAINT cards_card_type_check CHECK ((card_type = ANY (ARRAY['minimal_pair'::text, 'vocab'::text, 'cloze_grammar'::text, 'listening'::text, 'phrase'::text])))
 );
 
@@ -35,6 +33,7 @@ CREATE TABLE public.decks (
     unit_number integer,
     prerequisite_deck_id uuid,
     section_id uuid,
+    title_en text,
     CONSTRAINT decks_category_check CHECK ((category = ANY (ARRAY['phonetics'::text, 'grammar'::text, 'vocabulary'::text]))),
     CONSTRAINT decks_track_check CHECK ((track = ANY (ARRAY['foundation'::text, 'thematic'::text])))
 );
@@ -46,6 +45,8 @@ CREATE TABLE public.sections (
     description text,
     sort_order integer DEFAULT 0 NOT NULL,
     pass_score integer DEFAULT 80 NOT NULL,
+    title_en text,
+    description_en text,
     CONSTRAINT sections_pass_score_check CHECK (((pass_score >= 1) AND (pass_score <= 100)))
 );
 
@@ -134,5 +135,4 @@ ALTER TABLE public.sections ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_card_progress ENABLE ROW LEVEL SECURITY;
 
 ALTER TABLE public.user_section_progress ENABLE ROW LEVEL SECURITY;
-
 

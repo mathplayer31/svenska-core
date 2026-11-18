@@ -9,6 +9,7 @@ import {
   Snail,
   AlertTriangle,
 } from 'lucide-react';
+import { useI18n, type Strings } from './i18n';
 
 // ============================================================================
 // Types
@@ -17,7 +18,7 @@ export interface PracticeCard {
   id: string;
   cardType: string;
   swedishTarget: string;
-  english: string; // traduction française
+  english: string; // traduction dans la langue choisie
   audioUrl?: string;
   gloss: { sv: string; fr: string }[] | null;
 }
@@ -89,7 +90,7 @@ function levenshtein(a: string, b: string): number {
 }
 
 /** Correction tolérante d'une réponse écrite */
-function checkWritten(input: string, target: string): Verdict {
+function checkWritten(input: string, target: string, t: Strings): Verdict {
   const got = normalize(input);
   const want = normalize(target);
   if (!got) return { ok: false };
@@ -97,16 +98,16 @@ function checkWritten(input: string, target: string): Verdict {
 
   const article = want.match(/^(en|ett) (.+)$/);
   if (article && got === article[2]) {
-    return { ok: false, message: `Il manque l’article « ${article[1]} » : le genre fait partie du mot.` };
+    return { ok: false, message: t.missingArticle(article[1]) };
   }
   if (article && got === `${article[1] === 'en' ? 'ett' : 'en'} ${article[2]}`) {
-    return { ok: false, message: `Mauvais genre : c’est « ${article[1]} ${article[2]} ».` };
+    return { ok: false, message: t.wrongGender(`${article[1]} ${article[2]}`) };
   }
   if (stripAccents(got) === stripAccents(want)) {
-    return { ok: true, message: 'Accepté, mais attention aux lettres å / ä / ö : elles changent le son (et parfois le sens).' };
+    return { ok: true, message: t.accentsWarning };
   }
   if (want.length >= 6 && levenshtein(got, want) === 1) {
-    return { ok: true, message: 'Accepté avec une petite faute de frappe.' };
+    return { ok: true, message: t.typoAccepted };
   }
   return { ok: false };
 }
@@ -232,15 +233,15 @@ function regenerate(ex: Exercise, cards: PracticeCard[], extraWords: string[], s
 // ============================================================================
 // Composant principal
 // ============================================================================
-const KIND_LABEL: Record<Exercise['kind'], string> = {
-  match: 'Associe les paires',
-  mcq_sv: 'Choisis la bonne traduction',
-  mcq_listen: 'Compréhension orale',
-  build: 'Compose la phrase',
-  write: 'Écris en suédois',
-};
-
 export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, onFinish, onExit }: Props) {
+  const { t } = useI18n();
+  const KIND_LABEL: Record<Exercise['kind'], string> = {
+    match: t.kindMatch,
+    mcq_sv: t.kindMcqSv,
+    mcq_listen: t.kindMcqListen,
+    build: t.kindBuild,
+    write: t.kindWrite,
+  };
   const [queue, setQueue] = useState<Exercise[]>(() => buildExercises(cards, extraWords));
   const [baseCount, setBaseCount] = useState(() => queue.length);
   const [index, setIndex] = useState(0);
@@ -313,8 +314,8 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
 
   if (queue.length === 0) {
     return (
-      <Shell onExit={onExit} title={unitTitle}>
-        <p className="text-muted text-center py-10">Pas assez de cartes dans cette unité pour générer des exercices.</p>
+      <Shell onExit={onExit} title={unitTitle} quitLabel={t.quit}>
+        <p className="text-muted text-center py-10">{t.notEnoughCards}</p>
       </Shell>
     );
   }
@@ -326,25 +327,25 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
       <div className="min-h-dvh bg-bg text-ink flex flex-col items-center justify-center p-6 text-center">
         <div className="w-full max-w-md bg-surface border border-line rounded-2xl p-8 space-y-5 shadow-card">
           <Trophy className={`w-14 h-14 mx-auto ${score >= 80 ? 'text-gold' : 'text-faint'}`} />
-          <h2 className="font-serif text-3xl text-ink">Entraînement terminé</h2>
+          <h2 className="font-serif text-3xl text-ink">{t.practiceDone}</h2>
           <p className="font-serif text-6xl text-accent tabular-nums">{score}%</p>
           <p className="text-sm text-muted leading-relaxed">
-            {firstTryCorrect} exercice{firstTryCorrect > 1 ? 's' : ''} réussi{firstTryCorrect > 1 ? 's' : ''} du premier coup sur {baseCount}.
-            {retried.size > 0 && ` Les ${retried.size} ratés ont été reproposés en fin de série.`}
-            {score > bestScore && bestScore > 0 && ' Nouveau record !'}
+            {t.firstTry(firstTryCorrect, baseCount)}
+            {retried.size > 0 && t.retriedInfo(retried.size)}
+            {score > bestScore && bestScore > 0 && t.newRecord}
           </p>
           <div className="flex flex-col gap-3 pt-2">
             <button
               onClick={onExit}
               className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm transition cursor-pointer"
             >
-              Retour à l’unité
+              {t.backToUnit}
             </button>
             <button
               onClick={handleRestart}
               className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
             >
-              <RotateCcw className="w-4 h-4" /> Nouvelle série
+              <RotateCcw className="w-4 h-4" /> {t.newSeries}
             </button>
           </div>
         </div>
@@ -357,7 +358,9 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
   const answerCard = exercise.kind === 'match' ? null : exercise.card;
 
   return (
-    <Shell onExit={onExit} title={`${unitTitle} • ${Math.min(index + 1, baseCount)}/${baseCount}${isRetry ? ' • rattrapage' : ''}`}>
+    <Shell onExit={onExit} title={`${unitTitle} • ${Math.min(index + 1, baseCount)}/${baseCount}${isRetry ? ` • ${t.retry}` : ''}`}
+      quitLabel={t.quit}
+    >
       <div className="w-full h-1.5 bg-surface-2 rounded-full mb-6 overflow-hidden">
         <div className="h-full bg-accent transition-all" style={{ width: `${progress * 100}%` }} />
       </div>
@@ -385,10 +388,10 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
         >
           <div className={`flex items-center gap-2 font-semibold ${verdict.ok ? 'text-success' : 'text-danger'}`}>
             {verdict.ok ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
-            {verdict.ok ? 'Bien joué !' : 'Pas tout à fait…'}
+            {verdict.ok ? t.wellDone : t.notQuite}
           </div>
           {verdict.message && (
-            <p className="text-sm text-accent flex items-start gap-2">
+            <p className="text-sm text-gold-ink flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" /> {verdict.message}
             </p>
           )}
@@ -402,7 +405,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
                 <button
                   onClick={() => playUrl(firstAudio(answerCard))}
                   className="p-2.5 rounded-lg bg-surface hover:bg-surface-2 text-accent cursor-pointer"
-                  aria-label="Réécouter"
+                  aria-label={t.listenAgain}
                 >
                   <Volume2 className="w-5 h-5" />
                 </button>
@@ -422,10 +425,10 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
           <button
             onClick={handleContinue}
             className={`w-full py-3.5 rounded-xl font-semibold text-sm transition cursor-pointer ${
-              verdict.ok ? 'bg-success hover:opacity-90 text-ink' : 'bg-danger hover:opacity-90 text-ink'
+              verdict.ok ? 'bg-success hover:opacity-90 text-accent-ink' : 'bg-danger hover:opacity-90 text-accent-ink'
             }`}
           >
-            Continuer (Entrée)
+            {t.continueEnter}
           </button>
         </div>
       )}
@@ -433,7 +436,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
   );
 }
 
-function Shell({ onExit, title, children }: { onExit: () => void; title: string; children: React.ReactNode }) {
+function Shell({ onExit, title, quitLabel, children }: { onExit: () => void; title: string; quitLabel: string; children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-bg text-ink flex flex-col items-center p-4 pt-8 select-none">
       <div className="w-full max-w-xl">
@@ -442,7 +445,7 @@ function Shell({ onExit, title, children }: { onExit: () => void; title: string;
             onClick={onExit}
             className="inline-flex items-center gap-1.5 font-semibold text-muted hover:text-accent transition cursor-pointer shrink-0"
           >
-            <ArrowLeft className="w-4 h-4" /> Quitter
+            <ArrowLeft className="w-4 h-4" /> {quitLabel}
           </button>
           <span className="truncate">{title}</span>
         </div>
@@ -462,6 +465,7 @@ function MatchExercise({
   ex: Extract<Exercise, { kind: 'match' }>;
   onDone: (v: Verdict) => void;
 }) {
+  const { t } = useI18n();
   const left = useMemo(() => shuffle(ex.pairs), [ex]);
   const right = useMemo(() => shuffle(ex.pairs), [ex]);
   const [pickedLeft, setPickedLeft] = useState<string | null>(null);
@@ -489,8 +493,8 @@ function MatchExercise({
           n === 0
             ? { ok: true }
             : n === 1
-              ? { ok: true, message: '1 erreur d’association, on la laisse passer.' }
-              : { ok: false, message: `${n} erreurs d’association : on refera cet exercice à la fin.` }
+              ? { ok: true, message: t.matchOneError }
+              : { ok: false, message: t.matchErrors(n) }
         );
       }
       return;
@@ -568,6 +572,7 @@ function McqExercise({
   locked: boolean;
   onAnswer: (v: Verdict) => void;
 }) {
+  const { t } = useI18n();
   const [selected, setSelected] = useState<string | null>(null);
   const listen = ex.kind === 'mcq_listen';
   const answer = listen ? ex.card.english : ex.card.swedishTarget;
@@ -601,18 +606,18 @@ function McqExercise({
             onClick={() => playUrl(audio)}
             className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
           >
-            <Volume2 className="w-6 h-6" /> Écouter
+            <Volume2 className="w-6 h-6" /> {t.listen}
           </button>
           <button
             onClick={() => playUrl(audio, 0.65)}
             className="p-4 rounded-2xl bg-surface-2 hover:bg-line text-accent transition cursor-pointer"
-            aria-label="Écouter lentement"
+            aria-label={t.listenSlowly}
           >
             <Snail className="w-6 h-6" />
           </button>
         </div>
       ) : (
-        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
+        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
       )}
 
       <div className="space-y-3">
@@ -654,6 +659,7 @@ function BuildExercise({
   locked: boolean;
   onCheck: (v: Verdict) => void;
 }) {
+  const { t } = useI18n();
   const [chosen, setChosen] = useState<number[]>([]);
   const glossMap = useMemo(
     () => new Map((ex.card.gloss ?? []).map((g) => [g.sv.toLowerCase(), g.fr])),
@@ -677,10 +683,10 @@ function BuildExercise({
 
   return (
     <div className="space-y-6">
-      <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
+      <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
 
       <div className="min-h-[64px] border-b-2 border-line pb-3 flex flex-wrap gap-2 items-end">
-        {chosen.length === 0 && <span className="text-sm text-faint">Touche les mots dans l’ordre…</span>}
+        {chosen.length === 0 && <span className="text-sm text-faint">{t.tapWords}</span>}
         {chosen.map((id) => (
           <button
             key={id}
@@ -721,7 +727,7 @@ function BuildExercise({
           disabled={chosen.length === 0}
           className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed"
         >
-          Vérifier (Entrée)
+          {t.checkEnter}
         </button>
       )}
     </div>
@@ -742,6 +748,7 @@ function WriteExercise({
   locked: boolean;
   onCheck: (v: Verdict) => void;
 }) {
+  const { t } = useI18n();
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const audio = firstAudio(ex.card);
@@ -753,7 +760,7 @@ function WriteExercise({
 
   const check = () => {
     if (locked || !value.trim()) return;
-    onCheck(checkWritten(value, ex.card.swedishTarget));
+    onCheck(checkWritten(value, ex.card.swedishTarget, t));
   };
 
   const insert = (ch: string) => {
@@ -773,25 +780,25 @@ function WriteExercise({
     <div className="space-y-5">
       {ex.dictation ? (
         <div className="space-y-3">
-          <h2 className="text-lg font-semibold text-ink">Écris ce que tu entends</h2>
+          <h2 className="text-lg font-semibold text-ink">{t.writeWhatYouHear}</h2>
           <div className="flex items-center gap-3">
             <button
               onClick={() => playUrl(audio)}
               className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
             >
-              <Volume2 className="w-6 h-6" /> Écouter
+              <Volume2 className="w-6 h-6" /> {t.listen}
             </button>
             <button
               onClick={() => playUrl(audio, 0.65)}
               className="p-4 rounded-2xl bg-surface-2 hover:bg-line text-accent transition cursor-pointer"
-              aria-label="Écouter lentement"
+              aria-label={t.listenSlowly}
             >
               <Snail className="w-6 h-6" />
             </button>
           </div>
         </div>
       ) : (
-        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
+        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
       )}
 
       <input
@@ -806,7 +813,7 @@ function WriteExercise({
             check();
           }
         }}
-        placeholder="Tape ta réponse en suédois…"
+        placeholder={t.typePlaceholder}
         autoComplete="off"
         autoCapitalize="off"
         spellCheck={false}
@@ -825,7 +832,7 @@ function WriteExercise({
             {ch}
           </button>
         ))}
-        <span className="text-xs text-faint ml-2">Majuscules et ponctuation ignorées</span>
+        <span className="text-xs text-faint ml-2">{t.caseIgnored}</span>
       </div>
 
       {!locked && (
@@ -834,7 +841,7 @@ function WriteExercise({
           disabled={!value.trim()}
           className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed"
         >
-          Vérifier (Entrée)
+          {t.checkEnter}
         </button>
       )}
     </div>

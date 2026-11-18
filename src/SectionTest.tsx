@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, CheckCircle2, XCircle, Volume2, Trophy, RotateCcw } from 'lucide-react';
+import { useI18n } from './i18n';
 
 export interface TestCard {
   id: string;
@@ -58,7 +59,7 @@ function buildQuestions(cards: TestCard[]): Question[] {
       return {
         id: card.id,
         kind: listen ? 'listen' : 'translate',
-        prompt: listen ? 'Écoute, puis choisis la bonne traduction' : card.english,
+        prompt: listen ? '' : card.english,
         audio: listen ? card.audioUrl!.split('|')[0].trim() : undefined,
         options: shuffle([answer, ...distractors]),
         answer,
@@ -79,6 +80,7 @@ export default function SectionTest({
   onFinish,
   onExit,
 }: Props) {
+  const { t } = useI18n();
   const [questions, setQuestions] = useState<Question[]>(() => buildQuestions(cards));
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -128,12 +130,12 @@ export default function SectionTest({
     return (
       <div className="min-h-dvh bg-bg text-ink flex items-center justify-center p-6 text-center">
         <div className="max-w-md space-y-4">
-          <p className="text-muted">Pas assez de cartes (mots ou phrases) pour générer un test.</p>
+          <p className="text-muted">{t.notEnoughForTest}</p>
           <button
             onClick={onExit}
             className="px-6 py-3 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm cursor-pointer"
           >
-            Retour
+            {t.back}
           </button>
         </div>
       </div>
@@ -152,27 +154,27 @@ export default function SectionTest({
             <XCircle className="w-14 h-14 text-danger mx-auto" />
           )}
           <h2 className="font-serif text-3xl text-ink">
-            {passed ? 'Section validée !' : 'Pas encore…'}
+            {passed ? t.sectionValidated : t.notYet}
           </h2>
           <p className="font-serif text-6xl text-accent tabular-nums">{finalScore}%</p>
           <p className="text-sm text-muted leading-relaxed">
-            {correct} bonne{correct > 1 ? 's' : ''} réponse{correct > 1 ? 's' : ''} sur {questions.length}.{' '}
+            {t.correctAnswers(correct, questions.length)}{' '}
             {passed
-              ? 'La section suivante est débloquée.'
-              : `Il faut ${passScore}% pour valider. Révise les cartes et réessaie.`}
+              ? t.nextSectionUnlocked
+              : t.needScore(passScore)}
           </p>
           <div className="flex flex-col gap-3 pt-2">
             <button
               onClick={onExit}
               className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm transition cursor-pointer"
             >
-              Retour au Tableau de Bord
+              {t.backHome}
             </button>
             <button
               onClick={handleRetry}
               className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
             >
-              <RotateCcw className="w-4 h-4" /> Refaire le test
+              <RotateCcw className="w-4 h-4" /> {t.retakeTestShort}
             </button>
           </div>
         </div>
@@ -188,11 +190,11 @@ export default function SectionTest({
           onClick={onExit}
           className="inline-flex items-center gap-1.5 font-semibold text-muted hover:text-accent transition cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" /> Quitter le test
+          <ArrowLeft className="w-4 h-4" /> {t.quitTest}
         </button>
         <span>
-          {sectionTitle} • Question {index + 1}/{questions.length}
-          {bestScore > 0 ? ` • Meilleur : ${bestScore}%` : ''}
+          {sectionTitle} • {t.questionN(index + 1, questions.length)}
+          {bestScore > 0 ? ` • ${t.bestShort(bestScore)}` : ''}
         </span>
       </div>
 
@@ -206,15 +208,15 @@ export default function SectionTest({
       <div className="w-full max-w-xl bg-surface border border-line rounded-2xl p-6 md:p-8 shadow-card space-y-6">
         <div className="space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-            {question.kind === 'listen' ? 'Compréhension orale' : 'Traduction'}
+            {question.kind === 'listen' ? t.listening : t.translation}
           </p>
-          <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{question.prompt}</h2>
+          <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{question.prompt || t.listenThenChoose}</h2>
           {question.audio && (
             <button
               onClick={() => playUrl(question.audio!)}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-line text-accent text-sm font-semibold transition cursor-pointer"
             >
-              <Volume2 className="w-5 h-5" /> Réécouter
+              <Volume2 className="w-5 h-5" /> {t.listenAgain}
             </button>
           )}
         </div>
@@ -251,7 +253,7 @@ export default function SectionTest({
           disabled={selected === null}
           className="w-full py-4 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-base transition  cursor-pointer disabled:cursor-not-allowed"
         >
-          {index + 1 < questions.length ? 'Suivant' : 'Voir le résultat'}
+          {index + 1 < questions.length ? t.next : t.seeResult}
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 # SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle (branche `feat/refonte-ui`).
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -19,6 +19,21 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
+
+## Sélecteur de langue FR / EN : AJOUTÉ (18 nov 2026, issue #1)
+- Bouton FR / EN dans l'en-tête de l'accueil, mémorisé sur l'appareil (`localStorage`, clé `svenska.lang`). Français par défaut.
+- Interface : `src/i18n.tsx` (dictionnaires `fr` / `en`, `I18nProvider` dans `main.tsx`, hook `useI18n()` qui donne `{ lang, setLang, t }`). Tout nouveau texte d'interface passe par ce fichier, dans les deux langues.
+- Contenu : `content-en.mjs` donne par slug la consigne, la traduction et la glose anglaises de chaque carte (`CARDS_EN`), plus les titres des decks (`DECKS_EN`) et des sections (`SECTIONS_EN`). Les notes de grammaire (`explanation_md`) restent en français (libellé « Note (in French) » en mode anglais).
+- `generate-audio.mjs` vérifie le contenu anglais **avant** toute écriture en base et s'arrête avec la liste des manques (carte sans traduction, glose anglaise de longueur différente, deck ou section sans titre anglais).
+- Colonnes : `cards.english_translation` contient désormais **vraiment l'anglais** ; le français est dans `cards.french_translation` (dans les fichiers `*-data.mjs`, le champ `english_translation` contient toujours le français, nom historique). `cards.gloss` = `[{"sv","fr","en"}]`. Nouvelles colonnes `cards.prompt_en`, `decks.title_en`, `sections.title_en`, `sections.description_en`.
+- Migration appliquée (fichier `supabase/migration_langue_en.sql`) :
+```sql
+alter table public.cards add column if not exists prompt_en text;
+alter table public.decks add column if not exists title_en text;
+alter table public.sections add column if not exists title_en text;
+alter table public.sections add column if not exists description_en text;
+```
+- Corrigé au passage : les 8 cartes du deck « Vocabulaire & Genres » avaient leur traduction en anglais même en mode français.
 
 ## Refonte visuelle « nordique clair » : AJOUTÉ (18 nov 2026)
 - Thème dans `src/index.css` : variables CSS (`--bg`, `--surface`, `--ink`, `--accent` bleu #1F4E8C, `--gold` #F2C14E…) exposées à Tailwind via `@theme inline` (classes `bg-bg`, `bg-surface`, `text-ink`, `text-muted`, `bg-accent`, `border-line`…). Mode sombre automatique (`prefers-color-scheme`). Ne plus utiliser de couleurs Tailwind brutes (`slate-*`, `amber-*`…).

@@ -10,6 +10,7 @@ import { UNIT6_DECK, UNIT6_CARDS } from './unit6-data.mjs';
 import { UNIT7_DECK, UNIT7_CARDS } from './unit7-data.mjs';
 import { GRAMMAR_CARDS } from './grammar-data.mjs';
 import { SECTIONS } from './sections-data.mjs';
+import { CARDS_EN, DECKS_EN, SECTIONS_EN } from './content-en.mjs';
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -137,7 +138,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Déclinaison complète (Genre + Pluriel) : "un livre / le livre / les livres"',
     swedish_target: 'en bok / boken / böckerna',
-    english_translation: 'a book / the book / the books',
+    english_translation: 'un livre / le livre / les livres',
     ipa_transcription: '/ɛn buːk/ / /ˈbuːkɛn/ / /ˈbœkːɛɳa/',
     pitch_accent: 'Accent 1 -> Accent 2',
     explanation_md: 'Pluriel du 3e groupe (-er) avec inflexion de la voyelle (Umlaut : o -> ö) et raccourcissement vocalique : "bok" (/uː/ long) devient "böcker" (/œ/ court).',
@@ -149,7 +150,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Pluriel du 1er groupe (-or) : "une fille / la fille / des filles"',
     swedish_target: 'en flicka / flickan / flickor',
-    english_translation: 'a girl / the girl / girls',
+    english_translation: 'une fille / la fille / des filles',
     ipa_transcription: '/ɛn ˈflɪkːa/ / /ˈflɪkːan/ / /ˈflɪkːʊr/',
     pitch_accent: 'Accent 2 (Grave)',
     explanation_md: '1er groupe : Tous les noms en "-a" de genre commun ("en") perdent leur "-a" et prennent "-or" au pluriel indéfini ("flickor") et "-orna" au défini ("flickorna").',
@@ -161,7 +162,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Pluriel du 2e groupe (-ar) : "un garçon / le garçon / des garçons"',
     swedish_target: 'en pojke / pojken / pojkar',
-    english_translation: 'a boy / the boy / boys',
+    english_translation: 'un garçon / le garçon / des garçons',
     ipa_transcription: '/ɛn ˈpɔjːkɛ/ / /ˈpɔjːkɛn/ / /ˈpɔjːkar/',
     pitch_accent: 'Accent 2 (Grave)',
     explanation_md: '2e groupe : Les noms communs ("en") courts ou terminés par un "-e" non accentué remplacent le "-e" par "-ar" au pluriel ("pojkar", défini "pojkarna").',
@@ -173,7 +174,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Pluriel du 4e groupe (-n) : "une pomme / la pomme / des pommes"',
     swedish_target: 'ett äpple / äpplet / äpplen',
-    english_translation: 'an apple / the apple / apples',
+    english_translation: 'une pomme / la pomme / des pommes',
     ipa_transcription: '/ɛtː ˈɛpːlɛ/ / /ˈɛpːlɛt/ / /ˈɛpːlɛn/',
     pitch_accent: 'Accent 2 (Grave)',
     explanation_md: '4e groupe : Les noms neutres ("ett") qui se terminent par une voyelle prennent simplement "-n" au pluriel indéfini ("äpplen") et "-na" au pluriel défini ("äpplena").',
@@ -185,7 +186,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Pluriel du 5e groupe (invariable) : "une maison / la maison / les maisons"',
     swedish_target: 'ett hus / huset / husen',
-    english_translation: 'a house / the house / the houses',
+    english_translation: 'une maison / la maison / les maisons',
     ipa_transcription: '/ɛtː hʉːs/ / /ˈhʉːsɛt/ / /ˈhʉːsɛn/',
     pitch_accent: 'Accent 1 (Aigu)',
     explanation_md: '5e groupe : Les noms neutres ("ett") terminés par une consonne ne changent pas au pluriel indéfini ("ett hus -> flera hus") et prennent "-en" au pluriel défini ("husen").',
@@ -197,7 +198,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Genres au quotidien : "l’eau" vs "le café"',
     swedish_target: 'vattnet (ett vatten) / kaffet (ett kaffe)',
-    english_translation: 'the water / the coffee',
+    english_translation: 'l’eau / le café',
     ipa_transcription: '/ˈvatːnɛt/ / /ˈkafːɛt/',
     pitch_accent: 'Accent 1 (Aigu)',
     explanation_md: 'Attention : "vatten" et "kaffe" sont tous les deux de genre neutre ("ett") ! Au défini, "vatten" perd son "e" muet ("vattnet").',
@@ -209,7 +210,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Verbes du 1er groupe (-ar) : "parler / discuter" (infinitif / présent / passé)',
     swedish_target: 'att prata / pratar / pratade',
-    english_translation: 'to talk/chat / talks / talked',
+    english_translation: 'parler / parle / a parlé',
     ipa_transcription: '/atː ˈprɑːta/ / /ˈprɑːtar/ / /ˈprɑːtadɛ/',
     pitch_accent: 'Accent 2 (Grave)',
     explanation_md: 'Le groupe 1 (verbes en -ar au présent) représente 80% des nouveaux verbes suédois. Le prétérit se forme toujours en "-ade" et le supin en "-at" (har pratat).',
@@ -221,7 +222,7 @@ const CARDS_DATA = [
     card_type: 'vocab',
     swedish_prompt: 'Verbe fort (4e groupe) : "boire" (infinitif / présent / passé / supin)',
     swedish_target: 'att dricka / dricker / drack / har druckit',
-    english_translation: 'to drink / drinks / drank / has drunk',
+    english_translation: 'boire / boit / but / a bu',
     ipa_transcription: '/ˈdrɪkːa/ / /ˈdrɪkːɛr/ / /drakː/ / /ˈdrɵkːɪt/',
     pitch_accent: 'Accent 2 / Accent 1',
     explanation_md: 'Comme en anglais (drink / drank / drunk), les verbes forts suédois changent de voyelle interne (i -> a -> u) au passé sans prendre de terminaison au prétérit ("jag drack").',
@@ -234,6 +235,24 @@ const ALL_CARDS = [
   ...CARDS_DATA, ...GRAMMAR_CARDS, ...UNIT1_CARDS, ...UNIT2_CARDS, ...UNIT3_CARDS,
   ...UNIT4_CARDS, ...UNIT5_CARDS, ...UNIT6_CARDS, ...UNIT7_CARDS,
 ];
+
+// Contrôle du contenu anglais avant toute écriture en base : chaque carte, deck et section doit avoir
+// sa version anglaise, et chaque glose anglaise doit avoir autant de mots que la glose française.
+function checkEnglish() {
+  const errors = [];
+  for (const c of ALL_CARDS) {
+    const en = CARDS_EN[c.slug];
+    if (!en?.prompt || !en?.translation) errors.push(`${c.slug} : consigne ou traduction anglaise manquante`);
+    else if (c.gloss && en.gloss?.length !== c.gloss.length)
+      errors.push(`${c.slug} : glose anglaise de ${en.gloss?.length ?? 0} mot(s) au lieu de ${c.gloss.length}`);
+    else if (!c.gloss && en.gloss) errors.push(`${c.slug} : glose anglaise sans glose française`);
+  }
+  const cardSlugs = new Set(ALL_CARDS.map((c) => c.slug));
+  for (const slug of Object.keys(CARDS_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : traduction sans carte`);
+  for (const d of ALL_DECKS) if (!DECKS_EN[d.slug]) errors.push(`deck ${d.slug} : titre anglais manquant`);
+  for (const s of SECTIONS) if (!SECTIONS_EN[s.slug]) errors.push(`section ${s.slug} : titre anglais manquant`);
+  if (errors.length > 0) throw new Error(`Contenu anglais incomplet (content-en.mjs) :\n- ${errors.join('\n- ')}`);
+}
 
 // edge-tts peut se figer : timeout de 30 s, 3 tentatives, et suppression des MP3 tronqués.
 function generateMp3(pythonCmd, text, filePath) {
@@ -266,6 +285,7 @@ function getPythonCmd() {
 }
 
 async function run() {
+  checkEnglish();
   const pythonCmd = getPythonCmd();
   mkdirSync('./public/audio', { recursive: true });
 
@@ -273,7 +293,13 @@ async function run() {
 const sectionMap = new Map();
 for (const s of SECTIONS) {
   const { data, error } = await supabase
-    .from('sections').upsert(s, { onConflict: 'slug' }).select().single();
+    .from('sections')
+    .upsert(
+      { ...s, title_en: SECTIONS_EN[s.slug].title, description_en: SECTIONS_EN[s.slug].description },
+      { onConflict: 'slug' }
+    )
+    .select()
+    .single();
   if (error) throw error;
   sectionMap.set(s.slug, data.id);
 }
@@ -281,9 +307,11 @@ for (const s of SECTIONS) {
 const deckMap = new Map();
 for (const d of ALL_DECKS) {
   const { section_slug, prerequisite_slug: _prereq, ...row } = d;
-  const payload = section_slug
-    ? { ...row, section_id: sectionMap.get(section_slug) }
-    : row;
+  const payload = {
+    ...row,
+    title_en: DECKS_EN[d.slug],
+    ...(section_slug ? { section_id: sectionMap.get(section_slug) } : {}),
+  };
   const { data, error } = await supabase
     .from('decks').upsert(payload, { onConflict: 'slug' }).select().single();
   if (error) throw error;
@@ -337,13 +365,15 @@ for (const d of ALL_DECKS) {
         deck_id: deckMap.get(item.deck_slug),
         card_type: item.card_type,
         swedish_prompt: item.swedish_prompt,
+        prompt_en: CARDS_EN[item.slug].prompt,
         swedish_target: item.swedish_target,
-        english_translation: item.english_translation,
+        // Dans les fichiers *-data.mjs, `english_translation` contient le français (nom historique)
+        english_translation: CARDS_EN[item.slug].translation,
         ipa_transcription: item.ipa_transcription,
         pitch_accent: item.pitch_accent,
         explanation_md: item.explanation_md,
         audio_url: localUrls.join('|'),
-        gloss: item.gloss ?? null,
+        gloss: item.gloss?.map((g, i) => ({ ...g, en: CARDS_EN[item.slug].gloss[i] })) ?? null,
         french_translation: item.french_translation ?? item.english_translation,
       },
       { onConflict: 'slug' }

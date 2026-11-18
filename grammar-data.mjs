@@ -9,7 +9,7 @@ export const GRAMMAR_CARDS = [
   // ===================== RÈGLE V2 =====================
   {
     slug: 'gram2-v2-idag', deck_slug: D, card_type: 'cloze_grammar',
-    swedish_prompt: 'Ordre V2 / remets dans l’ordre, en commençant par « idag » : det / är / varmt / idag',
+    swedish_prompt: 'Ordre V2 : remets dans l’ordre, en commençant par « idag » : det / är / varmt / idag',
     swedish_target: 'Idag är det varmt.',
     english_translation: 'Aujourd’hui, il fait chaud.',
     ipa_transcription: '/ɪˈdɑː æːr deː varmt/',
