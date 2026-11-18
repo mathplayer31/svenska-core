@@ -1,0 +1,162 @@
+// FranceCore, Unité 28 : Expressions idiomatiques (poser un lapin, avoir le cafard, coûter les yeux de la tête).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT28_DECK = unitDeck({
+  n: 28, slug: 'fr-unit-28-idioms', sv: 'Idiomatiska uttryck', en: 'Idioms',
+  level: 'B2', section: 'fr-section-8-nuances', after: 'fr-unit-27-climate',
+});
+const D = UNIT28_DECK.slug;
+
+export const UNIT28_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u28-poser-un-lapin', {
+    prompt: 'Inte dyka upp på en träff man har bestämt', promptEn: 'Not turn up to a date you arranged',
+    fr: 'poser un lapin', sv: 'inte dyka upp / låta någon vänta förgäves', en: 'to stand someone up',
+    ipa: '/po.ze œ̃ la.pɛ̃/',
+    note: 'Ordagrant ”ställa en kanin”. Konstruktionen är **poser un lapin à quelqu’un**: *Il m’a posé un lapin* = han dök aldrig upp. Ingen kanin finns med i svenskan eller engelskan.',
+    noteEn: 'Literally "to put down a rabbit". The pattern is **poser un lapin à quelqu’un**: *Il m’a posé un lapin* = he stood me up.',
+  }),
+  vocab(D, 'fr-u28-avoir-le-cafard', {
+    prompt: 'Känna sig nere och melankolisk', promptEn: 'Feel down and gloomy',
+    fr: 'avoir le cafard', sv: 'vara deppig / känna sig nere', en: 'to have the blues / to feel down',
+    ipa: '/a.vwaʁ lə ka.faʁ/',
+    note: '**un cafard** är en kackerlacka. Den bildliga betydelsen spreds av Baudelaire på 1800-talet. *Ce temps gris me donne le cafard* = det här grå vädret gör mig deppig.',
+    noteEn: '**un cafard** is a cockroach. The figurative sense was popularised by Baudelaire in the 19th century. *Ce temps gris me donne le cafard* = this grey weather gets me down.',
+  }),
+  vocab(D, 'fr-u28-yeux-de-la-tete', {
+    prompt: 'Vara extremt dyrt', promptEn: 'Be outrageously expensive',
+    fr: 'coûter les yeux de la tête', sv: 'kosta skjortan', en: 'to cost an arm and a leg',
+    ipa: '/ku.te le.z‿jø də la tɛt/',
+    note: 'Ordagrant ”kosta ögonen ur huvudet”. Var och en har sin kroppsdel: franskan tar ögonen, engelskan arm och ben, svenskan skjortan. Bindning: *les yeux* [lezjø].',
+    noteEn: 'Literally "to cost the eyes out of your head". French gives up its eyes where English gives an arm and a leg. Liaison: *les yeux* [lezjø].',
+  }),
+  vocab(D, 'fr-u28-avoir-la-flemme', {
+    prompt: 'Inte orka göra något, av ren lättja', promptEn: 'Not be bothered to do something, out of pure laziness',
+    fr: 'avoir la flemme', sv: 'inte orka', en: 'can’t be bothered',
+    ipa: '/a.vwaʁ la flɛm/',
+    note: 'Ledigt och extremt vanligt bland unga: *J’ai la flemme de faire la vaisselle.* Fungerar precis som svenskans ”orka inte”, och är nästan lika svåröversatt till engelska.',
+    noteEn: 'Casual and extremely common among young people: *J’ai la flemme de faire la vaisselle.* (I can’t be bothered to do the dishes.)',
+  }),
+  vocab(D, 'fr-u28-casser-les-pieds', {
+    prompt: 'Irritera någon genom att vara jobbig', promptEn: 'Annoy someone by being a pain',
+    fr: 'casser les pieds à quelqu’un', sv: 'gå någon på nerverna', en: 'to get on someone’s nerves',
+    ipa: '/ka.se le pje a kɛl.kœ̃/',
+    note: 'Ordagrant ”krossa fötterna på någon”. Därav **un casse-pieds** = en plåga, en jobbig person. Det finns en grövre variant som man bör undvika.',
+    noteEn: 'Literally "to break someone’s feet". Hence **un casse-pieds** = a pain in the neck. A cruder version exists that is best avoided.',
+  }),
+  vocab(D, 'fr-u28-tomber-dans-les-pommes', {
+    prompt: 'Svimma', promptEn: 'Faint',
+    fr: 'tomber dans les pommes', sv: 'svimma', en: 'to pass out / to faint',
+    ipa: '/tɔ̃.be dɑ̃ le pɔm/',
+    note: 'Ordagrant ”falla ner i äpplena”. Ledigt men helt okej i de flesta sammanhang. Det neutrala ordet är **s’évanouir**.',
+    noteEn: 'Literally "to fall into the apples". Casual but fine in most contexts. The neutral verb is **s’évanouir**.',
+  }),
+  vocab(D, 'fr-u28-poil-dans-la-main', {
+    prompt: 'Vara riktigt lat', promptEn: 'Be really lazy',
+    fr: 'avoir un poil dans la main', sv: 'vara lat som en mask', en: 'to be bone idle',
+    ipa: '/a.vwaʁ œ̃ pwal dɑ̃ la mɛ̃/',
+    note: 'Bilden: handen arbetar så lite att det har vuxit ett hårstrå i handflatan. Ofta skämtsamt förstärkt: *un poil dans la main long comme ça*.',
+    noteEn: 'The image: the hand does so little work that a hair has grown on the palm. Often exaggerated for fun: *un poil dans la main long comme ça*.',
+  }),
+  vocab(D, 'fr-u28-dans-la-lune', {
+    prompt: 'Vara frånvarande och drömmande', promptEn: 'Be absent-minded and dreamy',
+    fr: 'être dans la lune', sv: 'vara borta i tankarna', en: 'to have your head in the clouds',
+    ipa: '/ɛtʁ dɑ̃ la lyn/',
+    note: 'Ordagrant ”vara på månen”. Används ofta om barn i skolan: *Arrête d’être dans la lune !* Närbesläktat: **être tête en l’air** (vara tankspridd).',
+    noteEn: 'Literally "to be in the moon". Often said to daydreaming pupils: *Arrête d’être dans la lune !* Related: **être tête en l’air** (to be scatterbrained).',
+  }),
+  vocab(D, 'fr-u28-raconter-des-salades', {
+    prompt: 'Ljuga eller hitta på historier', promptEn: 'Tell lies or spin stories',
+    fr: 'raconter des salades', sv: 'dra lögner / ljuga ihop saker', en: 'to tell fibs / to spin a yarn',
+    ipa: '/ʁa.kɔ̃.te de sa.lad/',
+    note: 'Ordagrant ”berätta sallader”: en blandning som inte hänger ihop. Ofta i formen *Arrête de me raconter des salades !* = sluta ljuga för mig!',
+    noteEn: 'Literally "to tell salads": a jumble that doesn’t add up. Often heard as *Arrête de me raconter des salades !* = stop feeding me lies!',
+  }),
+  vocab(D, 'fr-u28-pleut-des-cordes', {
+    prompt: 'Det regnar väldigt mycket', promptEn: 'It is raining very heavily',
+    fr: 'il pleut des cordes', sv: 'det ösregnar / det spöregnar', en: 'it’s raining cats and dogs',
+    ipa: '/il plø de kɔʁd/',
+    note: 'Ordagrant ”det regnar rep”: regnet faller i tjocka strängar. Mer folkligt: **il pleut comme vache qui pisse**, som är vulgärt men mycket vanligt.',
+    noteEn: 'Literally "it’s raining ropes": the rain falls in thick strands. A cruder but very common version compares it to a cow relieving itself.',
+  }),
+  vocab(D, 'fr-u28-avoir-la-peche', {
+    prompt: 'Vara full av energi och på gott humör', promptEn: 'Be full of energy and in a good mood',
+    fr: 'avoir la pêche', sv: 'vara pigg och glad', en: 'to be full of beans',
+    ipa: '/a.vwaʁ la pɛʃ/',
+    note: '**la pêche** är persikan (och fisket). Synonymer: **avoir la frite**, **avoir la patate**. Motsatsen kan vara *avoir le cafard*.',
+    noteEn: '**la pêche** is the peach (and also fishing). Synonyms: **avoir la frite**, **avoir la patate**. The opposite might be *avoir le cafard*.',
+  }),
+  vocab(D, 'fr-u28-grain-de-sel', {
+    prompt: 'Lägga sig i och ge sin åsikt utan att bli tillfrågad', promptEn: 'Butt in with an opinion nobody asked for',
+    fr: 'mettre son grain de sel', sv: 'lägga sig i / lägga sina två ören', en: 'to put your two cents in',
+    ipa: '/mɛtʁ sɔ̃ ɡʁɛ̃ də sɛl/',
+    note: 'Ordagrant ”lägga i sitt saltkorn”. Nästan alltid lite negativt: *Il faut toujours qu’il mette son grain de sel !* Possessivet följer subjektet: *je mets mon grain de sel*.',
+    noteEn: 'Literally "to add your grain of salt". Almost always mildly critical: *Il faut toujours qu’il mette son grain de sel !* The possessive follows the subject: *je mets mon grain de sel*.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u28-mer-a-boire', {
+    prompt: 'Lugna någon: det är inte så svårt', promptEn: 'Reassure someone: it’s not that hard',
+    fr: 'Ce n’est pas la mer à boire.', sv: 'Det är inte hela världen.', en: 'It’s not the end of the world.',
+    ipa: '/sə nɛ pa la mɛʁ a bwaʁ/',
+    note: 'Ordagrant ”det är inte havet som ska drickas upp”, alltså ingen omöjlig uppgift. Används om något som verkar jobbigt men går att klara.',
+    noteEn: 'Literally "it’s not the sea to drink up", so not an impossible task. Used for something that seems daunting but is manageable.',
+    gloss: [['ce n’est pas', 'det är inte', 'it isn’t'], ['la mer', 'havet', 'the sea'], ['à boire', 'att dricka', 'to drink']],
+  }),
+  phrase(D, 'fr-u28-chats-a-fouetter', {
+    prompt: 'Säg att du har viktigare saker för dig', promptEn: 'Say you have more important things to do',
+    fr: 'J’ai d’autres chats à fouetter.', sv: 'Jag har viktigare saker för mig.', en: 'I’ve got bigger fish to fry.',
+    ipa: '/ʒe do.tʁə ʃa a fwɛ.te/',
+    note: 'Ordagrant ”jag har andra katter att piska”. Franskan använder katter, engelskan fiskar. **t** i *chats* är stumt, och ingen bindning görs med *à*.',
+    noteEn: 'Literally "I have other cats to whip". French whips cats where English fries fish. The **t** in *chats* is silent, and there is no liaison with *à*.',
+    gloss: [['j’ai', 'jag har', 'I have'], ['d’autres', 'andra', 'other'], ['chats', 'katter', 'cats'], ['à fouetter', 'att piska', 'to whip']],
+  }),
+  phrase(D, 'fr-u28-tourner-autour-du-pot', {
+    prompt: 'Be någon att komma till saken', promptEn: 'Ask someone to get to the point',
+    fr: 'Arrête de tourner autour du pot !', sv: 'Sluta gå som katten kring het gröt!', en: 'Stop beating around the bush!',
+    ipa: '/a.ʁɛt də tuʁ.ne o.tuʁ dy po/',
+    note: 'Ordagrant ”sluta gå runt grytan”. Svenskan har katten och gröten, franskan bara grytan. **t** i *pot* är stumt.',
+    noteEn: 'Literally "stop circling the pot". English beats the bush, French circles the pot. The **t** in *pot* is silent.',
+    gloss: [['arrête', 'sluta', 'stop'], ['de tourner', 'att gå runt', 'going round'], ['autour du', 'kring', 'around the'], ['pot', 'grytan', 'pot']],
+  }),
+  phrase(D, 'fr-u28-sortis-de-lauberge', {
+    prompt: 'Säg att problemen långt ifrån är lösta', promptEn: 'Say the trouble is far from over',
+    fr: 'On n’est pas sortis de l’auberge.', sv: 'Vi är inte ur knipan än.', en: 'We’re not out of the woods yet.',
+    ipa: '/ɔ̃ nɛ pa sɔʁ.ti də lo.bɛʁʒ/',
+    note: 'Ordagrant ”vi har inte kommit ut från värdshuset”. Med **on** = vi böjs participet ofta i plural: *sortis*. Lägg märke till **n’** efter *on*: det hörs knappt men skrivs.',
+    noteEn: 'Literally "we’re not out of the inn". With **on** meaning "we", the participle often takes the plural: *sortis*. Note the **n’** after *on*: barely audible, but written.',
+    gloss: [['on', 'vi', 'we'], ['n’est pas', 'är inte', 'aren’t'], ['sortis', 'ute', 'out'], ['de l’auberge', 'ur värdshuset', 'of the inn']],
+  }),
+  phrase(D, 'fr-u28-jambes-a-son-cou', {
+    prompt: 'Berätta att han sprang därifrån så fort han kunde', promptEn: 'Say he ran off as fast as he could',
+    fr: 'Il a pris ses jambes à son cou.', sv: 'Han tog till benen.', en: 'He took to his heels.',
+    ipa: '/il a pʁi se ʒɑ̃b a sɔ̃ ku/',
+    note: 'Ordagrant ”han tog benen om halsen”, för att springa snabbare. Possessivet följer personen: *j’ai pris mes jambes à mon cou*.',
+    noteEn: 'Literally "he put his legs round his neck", to run faster. The possessive follows the person: *j’ai pris mes jambes à mon cou*.',
+    gloss: [['il a pris', 'han tog', 'he took'], ['ses jambes', 'sina ben', 'his legs'], ['à son cou', 'om halsen', 'round his neck']],
+  }),
+  phrase(D, 'fr-u28-peau-de-lours', {
+    prompt: 'Varna för att ta ut segern i förskott', promptEn: 'Warn against celebrating too early',
+    fr: 'Il ne faut pas vendre la peau de l’ours avant de l’avoir tué.', sv: 'Man ska inte sälja skinnet förrän björnen är skjuten.', en: 'Don’t count your chickens before they hatch.',
+    ipa: '/il nə fo pa vɑ̃.dʁə la po də luʁs a.vɑ̃ də la.vwaʁ ty.e/',
+    note: 'Samma ordspråk finns på svenska. **avant de** + perfekt infinitiv (*l’avoir tué*) = innan man har dödat den. **s** i *ours* uttalas: [uʁs].',
+    noteEn: 'Literally "don’t sell the bear’s skin before you’ve killed it". **avant de** + perfect infinitive (*l’avoir tué*) = before having killed it. The **s** in *ours* is pronounced: [uʁs].',
+    gloss: [['il ne faut pas', 'man ska inte', 'you mustn’t'], ['vendre', 'sälja', 'sell'], ['la peau', 'skinnet', 'the skin'], ['de l’ours', 'av björnen', 'of the bear'], ['avant de', 'innan', 'before'], ['l’avoir tué', 'man har dödat den', 'having killed it']],
+  }),
+  phrase(D, 'fr-u28-doigts-dans-le-nez', {
+    prompt: 'Säg att provet var hur lätt som helst', promptEn: 'Say the exam was a piece of cake',
+    fr: 'L’examen ? Je l’ai eu les doigts dans le nez.', sv: 'Provet? Det klarade jag med vänsterhanden.', en: 'The exam? I passed it with my eyes closed.',
+    ipa: '/lɛɡ.za.mɛ̃ ʒə le y le dwa dɑ̃ lə ne/',
+    note: 'Ordagrant ”med fingrarna i näsan”, alltså utan att ens använda händerna. **avoir un examen** = klara ett prov. **eu** (particip av *avoir*) uttalas [y].',
+    noteEn: 'Literally "with my fingers up my nose", so without even using my hands. **avoir un examen** = to pass an exam. **eu** (past participle of *avoir*) is pronounced [y].',
+    gloss: [['l’examen', 'provet', 'the exam'], ['je', 'jag', 'I'], ['l’ai eu', 'klarade det', 'passed it'], ['les doigts', 'fingrarna', 'fingers'], ['dans le nez', 'i näsan', 'up my nose']],
+  }),
+  phrase(D, 'fr-u28-appeler-un-chat', {
+    prompt: 'Säg att man ska tala klarspråk', promptEn: 'Say you should call things by their name',
+    fr: 'Il faut appeler un chat un chat.', sv: 'Man ska kalla en spade för en spade.', en: 'Let’s call a spade a spade.',
+    ipa: '/il fo a.ple œ̃ ʃa œ̃ ʃa/',
+    note: 'Samma idé, olika föremål: franskan har katten, svenskan och engelskan spaden. **appeler** har ett **l** här, men två i *j’appelle*.',
+    noteEn: 'Same idea, different object: French has the cat, English the spade. **appeler** has one **l** here, but two in *j’appelle*.',
+    gloss: [['il faut', 'man ska', 'you should'], ['appeler', 'kalla', 'call'], ['un chat', 'en katt', 'a cat'], ['un chat', 'en katt', 'a cat']],
+  }),
+];

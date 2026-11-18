@@ -1,8 +1,13 @@
-// Textes de l'interface en français et en anglais (issue #1).
-// Le contenu des cartes est traduit côté données (content/a1/en.mjs) ; ici, seulement l'interface.
+// Textes de l'interface en français, anglais et suédois (issues #1 et #9), et cours actif.
+// Le contenu des cartes est traduit côté données (content/) ; ici, seulement l'interface.
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
-export type Lang = 'fr' | 'en';
+export type Lang = 'fr' | 'en' | 'sv';
+
+/** Cours : sv = apprendre le suédois (SvenskaCore), fr = apprendre le français (FranceCore). */
+export type Course = 'sv' | 'fr';
+/** Langues d'interface de chaque cours, la première est celle par défaut. */
+export const COURSE_LANGS: Record<Course, Lang[]> = { sv: ['fr', 'en'], fr: ['en', 'sv'] };
 
 const s = (n: number) => (n > 1 ? 's' : '');
 
@@ -13,6 +18,7 @@ const fr = {
   navFondations: 'Fondations',
   mainNav: 'Navigation principale',
   langLabel: 'Langue',
+  switchCourse: (name: string) => `Passer à ${name}`,
   home: 'Accueil',
   unit: 'Unité',
   // Parcours
@@ -164,6 +170,7 @@ const en: typeof fr = {
   navFondations: 'Foundations',
   mainNav: 'Main navigation',
   langLabel: 'Language',
+  switchCourse: (name) => `Switch to ${name}`,
   home: 'Home',
   unit: 'Unit',
   level: (l) => `Level ${l}`,
@@ -300,38 +307,211 @@ const en: typeof fr = {
   authError: (m) => `Failed: ${m}`,
 };
 
-export type Strings = typeof fr;
-const STRINGS: Record<Lang, Strings> = { fr, en };
+const sv: typeof fr = {
+  navParcours: 'Kurs',
+  navReviser: 'Repetera',
+  navFondations: 'Grunder',
+  mainNav: 'Huvudmeny',
+  langLabel: 'Språk',
+  switchCourse: (name) => `Byt till ${name}`,
+  home: 'Hem',
+  unit: 'Enhet',
+  level: (l) => `Nivå ${l}`,
+  yourPath: 'Din kurs',
+  cardsCount: (a, b) => `${a}/${b} kort`,
+  dueToday: (n) => `${n} kort att plugga i dag`,
+  dueTodaySub: 'Nya kort och repetitioner från allt som är upplåst',
+  lockPrevSection: 'Klara testet i förra avsnittet',
+  lockAfter: (what) => `Efter ${what}`,
+  unitDue: (n, seen, total) => `${n} att plugga, ${seen}/${total} upptäckta`,
+  unitUpToDate: (total) => `${total} kort, klart för i dag`,
+  sectionLocked: (prev) => `Klara testet ”${prev}” för att låsa upp det här avsnittet.`,
+  sectionPassed: (score) => `Godkänt, ${score} %`,
+  retakeTest: 'Gör om avsnittstestet',
+  sectionTest: 'Avsnittstest',
+  testReady: (pass) => `10 frågor, ${pass} % för godkänt`,
+  bestScoreSuffix: (score) => `. Bästa resultat: ${score} %`,
+  testNotReady: (seen, total) => `Upptäck alla kort i avsnittet (${seen}/${total})`,
+  spacedRepetition: 'Spridd repetition',
+  reviewIntro:
+    'Alla upplåsta kort, i den ordning som FSRS-algoritmen väljer: först repetitionerna som är på tur, sedan nya kort från kursen.',
+  toStudyNow: () => 'kort att plugga nu',
+  nextIn: (label) => `, nästa om ${label}`,
+  statNew: 'Nya',
+  statLearning: 'Pågående',
+  statReview: 'Att repetera',
+  startSession: 'Starta passet',
+  freePractice: 'Fri träning',
+  supportsPath: 'Stöd till kursen',
+  foundationsIntro: 'Uttal och grammatik. Modulerna låses upp i takt med enheterna.',
+  foundationDue: (n, m) => `${n} nya, ${m} att repetera`,
+  foundationUpToDate: (total, next) => `${total} kort, klart för i dag${next ? ` (nästa om ${next})` : ''}`,
+  discovered: (seen, total) => `${seen}/${total} upptäckta`,
+  discover: 'Upptäck',
+  discoverText: (v, p) => `${v} ord och ${p} fraser, med ljud och ord-för-ord-översättning.`,
+  discoverDue: (n, r) => `${n} nya, ${r} att repetera`,
+  discoverUpToDate: (next) => `Klart för i dag${next ? `, nästa repetition om ${next}` : ''}`,
+  studyCards: 'Plugga korten',
+  reviewFreely: 'Repetera fritt',
+  practice: 'Öva',
+  practiceText: 'Para ihop, flerval, hörförståelse, bygg meningar och diktamen.',
+  bestScore: (score) => `Bästa resultat: ${score} %`,
+  readyToStart: 'Redo att börja',
+  discoverMore: (n) => `Upptäck ${n} kort till`,
+  train: 'Börja öva',
+  lexicon: 'Ordlista',
+  phrases: 'Fraser',
+  toDiscover: 'Inte upptäckta än',
+  sessionDone: 'Passet är klart',
+  sessionDoneText: 'Alla kort som var på tur har schemalagts om av FSRS-algoritmen.',
+  backToUnit: 'Tillbaka till enheten',
+  backHome: 'Tillbaka hem',
+  reviewAnyway: 'Repetera ändå (fritt läge)',
+  freeMode: 'Fritt läge',
+  remaining: (n) => `${n} kvar`,
+  cardType: {
+    minimal_pair: 'Minimalt par',
+    vocab: 'Ordförråd',
+    cloze_grammar: 'Grammatik',
+    phrase: 'Fras',
+    listening: 'Hörförståelse',
+  },
+  audioN: (n) => `Ljud ${n}`,
+  listenSlowly: 'Lyssna långsamt',
+  sayItFirst: 'Säg svaret högt och vänd sedan kortet.',
+  showAnswer: 'Visa svaret',
+  spaceKey: '(Mellanslag)',
+  rateAgain: 'Igen',
+  rateHard: 'Svårt',
+  rateGood: 'Bra',
+  rateEasy: 'Lätt',
+  unitMinutes: 'min',
+  unitHours: 'h',
+  unitDays: 'd',
+  quit: 'Avsluta',
+  kindMatch: 'Para ihop',
+  kindMcqSv: 'Välj rätt översättning',
+  kindMcqListen: 'Hörförståelse',
+  kindBuild: 'Bygg meningen',
+  kindWrite: 'Skriv på franska',
+  notEnoughCards: 'Det finns inte tillräckligt med kort i den här enheten för att skapa övningar.',
+  practiceDone: 'Övningen är klar',
+  firstTry: (ok, total) => `${ok} av ${total} övningar rätt på första försöket.`,
+  retriedInfo: (n) => ` De ${n} missade kom tillbaka på slutet.`,
+  newRecord: ' Nytt rekord!',
+  newSeries: 'Ny omgång',
+  retry: 'nytt försök',
+  wellDone: 'Snyggt!',
+  notQuite: 'Inte riktigt…',
+  listenAgain: 'Lyssna igen',
+  continueEnter: 'Fortsätt (Enter)',
+  checkEnter: 'Kontrollera (Enter)',
+  listen: 'Lyssna',
+  quote: (x) => `”${x}”`,
+  tapWords: 'Tryck på orden i rätt ordning…',
+  writeWhatYouHear: 'Skriv det du hör',
+  typePlaceholder: 'Skriv ditt svar på franska…',
+  caseIgnored: 'Stora bokstäver och skiljetecken ignoreras',
+  matchOneError: '1 fel ihopparning, vi låter det passera.',
+  matchErrors: (n) => `${n} fel ihopparningar: övningen kommer tillbaka på slutet.`,
+  missingArticle: (a) => `Artikeln ”${a}” saknas: genuset hör till ordet.`,
+  wrongGender: (full) => `Fel genus: det heter ”${full}”.`,
+  accentsWarning: 'Godkänt, men tänk på accenterna (é, è, à, ç…): de ändrar ljudet och ibland betydelsen.',
+  typoAccepted: 'Godkänt med ett litet stavfel.',
+  notEnoughForTest: 'Det finns inte tillräckligt med kort (ord eller fraser) för att skapa ett test.',
+  back: 'Tillbaka',
+  sectionValidated: 'Avsnittet är godkänt!',
+  notYet: 'Inte än…',
+  correctAnswers: (n, total) => `${n} rätt av ${total}.`,
+  nextSectionUnlocked: 'Nästa avsnitt är upplåst.',
+  needScore: (pass) => `Du behöver ${pass} % för godkänt. Repetera korten och försök igen.`,
+  retakeTestShort: 'Gör om testet',
+  quitTest: 'Avsluta testet',
+  questionN: (i, n) => `Fråga ${i}/${n}`,
+  bestShort: (score) => `Bästa: ${score} %`,
+  listening: 'Hörförståelse',
+  translation: 'Översättning',
+  listenThenChoose: 'Lyssna och välj sedan rätt översättning',
+  next: 'Nästa',
+  seeResult: 'Se resultatet',
+  account: 'Konto',
+  accountIntro: 'Logga in för att ha kvar dina framsteg på alla dina enheter. Utan konto sparas de bara på den här enheten.',
+  email: 'E-post',
+  password: 'Lösenord',
+  passwordHint: 'Minst 6 tecken',
+  signIn: 'Logga in',
+  signUp: 'Skapa konto',
+  signOut: 'Logga ut',
+  syncNow: 'Synka nu',
+  signedInAs: (email) => `Inloggad som ${email}. Dina framsteg synkas automatiskt.`,
+  syncedOk: 'Framstegen är synkade.',
+  syncFailed: (m) => `Synkningen går inte just nu (${m}). Dina framsteg finns kvar på den här enheten.`,
+  confirmEmail: 'Kontot är skapat: klicka på länken i mejlet vi skickade och logga sedan in.',
+  authError: (m) => `Misslyckades: ${m}`,
+};
 
-const LANG_KEY = 'svenska.lang';
-function loadLang(): Lang {
+export type Strings = typeof fr;
+const STRINGS: Record<Lang, Strings> = { fr, en, sv };
+
+// Textes qui dépendent de la langue étudiée : en anglais, ils changent selon le cours
+const EN_FOR_FRENCH: Partial<Strings> = {
+  kindWrite: 'Write in French',
+  typePlaceholder: 'Type your answer in French…',
+  accentsWarning: 'Accepted, but watch the accents (é, è, à, ç…): they change the sound and sometimes the meaning.',
+  foundationsIntro: 'Pronunciation and grammar. These modules unlock as you complete units.',
+};
+
+const COURSE_KEY = 'svenska.course';
+// Langue mémorisée par cours ; la clé historique du suédois est conservée
+const langKey = (course: Course) => (course === 'sv' ? 'svenska.lang' : `svenska.lang.${course}`);
+
+function read(key: string) {
   try {
-    return localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'fr';
+    return localStorage.getItem(key);
   } catch {
-    return 'fr';
+    return null;
+  }
+}
+function write(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // stockage indisponible : le choix vaut pour cette session seulement
   }
 }
 
-const I18nContext = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: Strings }>({
-  lang: 'fr',
-  setLang: () => {},
-  t: fr,
-});
+const loadCourse = (): Course => (read(COURSE_KEY) === 'fr' ? 'fr' : 'sv');
+function loadLang(course: Course): Lang {
+  const saved = read(langKey(course)) as Lang | null;
+  return saved && COURSE_LANGS[course].includes(saved) ? saved : COURSE_LANGS[course][0];
+}
+
+const I18nContext = createContext<{
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  course: Course;
+  setCourse: (c: Course) => void;
+  t: Strings;
+}>({ lang: 'fr', setLang: () => {}, course: 'sv', setCourse: () => {}, t: fr });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(loadLang);
+  const [course, setCourseState] = useState<Course>(loadCourse);
+  const [lang, setLangState] = useState<Lang>(() => loadLang(loadCourse()));
   useEffect(() => {
     document.documentElement.lang = lang;
-  }, [lang]);
+    document.title = course === 'sv' ? 'SvenskaCore' : 'FranceCore';
+  }, [lang, course]);
   const setLang = (l: Lang) => {
     setLangState(l);
-    try {
-      localStorage.setItem(LANG_KEY, l);
-    } catch {
-      // stockage indisponible : le choix vaut pour cette session seulement
-    }
+    write(langKey(course), l);
   };
-  return <I18nContext.Provider value={{ lang, setLang, t: STRINGS[lang] }}>{children}</I18nContext.Provider>;
+  const setCourse = (c: Course) => {
+    setCourseState(c);
+    setLangState(loadLang(c));
+    write(COURSE_KEY, c);
+  };
+  const t = course === 'fr' && lang === 'en' ? { ...en, ...EN_FOR_FRENCH } : STRINGS[lang];
+  return <I18nContext.Provider value={{ lang, setLang, course, setCourse, t }}>{children}</I18nContext.Provider>;
 }
 
 export const useI18n = () => useContext(I18nContext);

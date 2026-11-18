@@ -1,0 +1,162 @@
+// FranceCore, Unité 24 : Vie professionnelle (réunion, négocier, courriel formel, télétravail).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT24_DECK = unitDeck({
+  n: 24, slug: 'fr-unit-24-professional', sv: 'Yrkesliv', en: 'Professional life',
+  level: 'B2', section: 'fr-section-7-societe', after: 'fr-unit-23-stories',
+});
+const D = UNIT24_DECK.slug;
+
+export const UNIT24_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u24-ordre-du-jour', {
+    prompt: 'Listan över punkter som ska tas upp på ett möte', promptEn: 'The list of points to cover in a meeting',
+    fr: 'l’ordre du jour', sv: 'dagordningen', en: 'the agenda',
+    ipa: '/lɔʁ.dʁə dy ʒuʁ/',
+    note: 'Falsk vän: **un agenda** är en almanacka eller kalender, inte en dagordning. *Le premier point à l’ordre du jour* = första punkten på dagordningen.',
+    noteEn: 'False friend: **un agenda** is a diary or planner, not a meeting agenda. *Le premier point à l’ordre du jour* = the first item on the agenda.',
+  }),
+  vocab(D, 'fr-u24-compte-rendu', {
+    prompt: 'Den skriftliga sammanfattningen efter ett möte', promptEn: 'The written summary after a meeting',
+    fr: 'le compte rendu', sv: 'protokollet / mötesanteckningarna', en: 'the minutes / the report',
+    ipa: '/lə kɔ̃t ʁɑ̃.dy/',
+    note: 'Ordagrant ”redovisat konto”. **p** i *compte* är stumt. Någon får alltid uppdraget *faire le compte rendu* efter mötet.',
+    noteEn: 'Literally "rendered account". The **p** in *compte* is silent. Someone is always tasked with *faire le compte rendu* after the meeting.',
+  }),
+  vocab(D, 'fr-u24-faire-le-point', {
+    prompt: 'Gå igenom läget tillsammans', promptEn: 'Take stock of where things stand together',
+    fr: 'faire le point', sv: 'stämma av / gå igenom läget', en: 'to take stock / to touch base',
+    ipa: '/fɛʁ lə pwɛ̃/',
+    note: 'Ett av de vanligaste uttrycken på franska arbetsplatser: *On fait le point lundi ?* Ursprunget är sjöfartens ”bestämma positionen” på sjökortet.',
+    noteEn: 'One of the most common phrases in French workplaces: *On fait le point lundi ?* It comes from sailing: plotting the ship’s position on the chart.',
+  }),
+  vocab(D, 'fr-u24-negocier', {
+    prompt: 'Förhandla om ett pris eller en lön', promptEn: 'Bargain over a price or a salary',
+    fr: 'négocier', sv: 'förhandla', en: 'to negotiate',
+    ipa: '/ne.ɡɔ.sje/',
+    note: 'Löneförhandling heter **négocier son salaire**. Verbet används också om att ta sig igenom något knepigt: *négocier un virage* = ta en kurva.',
+    noteEn: 'Salary talks are **négocier son salaire**. The verb is also used for getting through something tricky: *négocier un virage* = to take a bend.',
+  }),
+  vocab(D, 'fr-u24-teletravail', {
+    prompt: 'Att jobba hemifrån', promptEn: 'Working from home',
+    fr: 'le télétravail', sv: 'distansarbetet / hemarbetet', en: 'remote work / working from home',
+    ipa: '/lə te.le.tʁa.vaj/',
+    note: '**être en télétravail** = jobba hemifrån. Sedan pandemin regleras det ofta i ett avtal på arbetsplatsen, typiskt två dagar i veckan. **-ail** uttalas [aj].',
+    noteEn: '**être en télétravail** = to be working from home. Since the pandemic it is often set out in a workplace agreement, typically two days a week. **-ail** is pronounced [aj].',
+  }),
+  vocab(D, 'fr-u24-courriel', {
+    prompt: 'Det officiella franska ordet för e-post', promptEn: 'The official French word for email',
+    fr: 'le courriel', sv: 'mejlet / e-postmeddelandet', en: 'the email',
+    ipa: '/lə ku.ʁjɛl/',
+    note: 'Ordet kommer från Québec (*courrier électronique*) och rekommenderas officiellt. I vardagen säger fransmän oftast **un mail**.',
+    noteEn: 'The word comes from Quebec (*courrier électronique*) and is officially recommended. In everyday speech the French mostly say **un mail**.',
+  }),
+  vocab(D, 'fr-u24-echeance', {
+    prompt: 'Datumet då något måste vara klart', promptEn: 'The date by which something must be done',
+    fr: 'l’échéance', sv: 'tidsfristen / deadline', en: 'the deadline',
+    ipa: '/le.ʃe.ɑ̃s/',
+    note: 'Femininum: **une échéance**. Synonymer: **la date limite** och **la date butoir**. Ordet *deadline* hörs också, men räknas som anglicism.',
+    noteEn: 'Feminine: **une échéance**. Synonyms: **la date limite** and **la date butoir**. *Deadline* is heard too, but counts as an anglicism.',
+  }),
+  vocab(D, 'fr-u24-relancer', {
+    prompt: 'Påminna någon som inte har svarat', promptEn: 'Chase up someone who hasn’t replied',
+    fr: 'relancer', sv: 'påminna / följa upp', en: 'to follow up / to chase up',
+    ipa: '/ʁə.lɑ̃.se/',
+    note: 'Artigt men tydligt: *Je me permets de vous relancer*. Samma verb betyder också att sätta fart på något igen: *relancer l’économie*.',
+    noteEn: 'Polite but clear: *Je me permets de vous relancer*. The same verb also means to revive something: *relancer l’économie* (to kick-start the economy).',
+  }),
+  vocab(D, 'fr-u24-cadre', {
+    prompt: 'Anställd med chefs- eller expertstatus', promptEn: 'Employee with managerial or expert status',
+    fr: 'le cadre', sv: 'tjänstemannen i ledande ställning', en: 'the executive / the manager',
+    ipa: '/lə kɑdʁ/',
+    note: 'I Frankrike är **cadre** en formell status i anställningsavtalet, med egen pensionskassa och ofta arbetstid räknad i dagar. Motsatsen är *non-cadre*. Samma ord betyder också ram eller miljö.',
+    noteEn: 'In France **cadre** is a formal status in your contract, with its own pension scheme and often working time counted in days. The opposite is *non-cadre*. The word also means frame or setting.',
+  }),
+  vocab(D, 'fr-u24-rtt', {
+    prompt: 'Extra lediga dagar för att kompensera arbetstiden', promptEn: 'Extra days off to offset working hours',
+    fr: 'les RTT', sv: 'arbetstidsförkortningsdagarna', en: 'the extra days off (working time reduction)',
+    ipa: '/le ɛʁ.te.te/',
+    note: 'Förkortning av **réduction du temps de travail**, från 35-timmarsveckan (lagarna Aubry, 1998 och 2000). Den som jobbar 39 timmar får lediga dagar i gengäld: *Je pose une RTT vendredi.*',
+    noteEn: 'Short for **réduction du temps de travail**, from the 35-hour week (the Aubry laws, 1998 and 2000). If you work 39 hours you get days off in return: *Je pose une RTT vendredi.*',
+  }),
+  vocab(D, 'fr-u24-superieur-hierarchique', {
+    prompt: 'Den som är din chef enligt organisationsschemat', promptEn: 'The person above you in the org chart',
+    fr: 'le supérieur hiérarchique / la supérieure hiérarchique', sv: 'närmaste chefen', en: 'the line manager',
+    ipa: '/lə sy.pe.ʁjœʁ je.ʁaʁ.ʃik/',
+    note: 'Franska arbetsplatser är ofta mer hierarkiska än svenska: man skickar beslut uppåt och använder *vous* längre. I vardagen säger man **mon chef / ma cheffe** eller **mon N+1**.',
+    noteEn: 'French workplaces are often more hierarchical than Nordic or Anglo ones: decisions go up the chain and *vous* lasts longer. Day to day people say **mon chef / ma cheffe** or **mon N+1**.',
+  }),
+  vocab(D, 'fr-u24-visio', {
+    prompt: 'Möte via kamera och skärm', promptEn: 'Meeting by camera and screen',
+    fr: 'la visio', sv: 'videomötet', en: 'the video call',
+    ipa: '/la vi.zjo/',
+    note: 'Kortform av **la visioconférence**. *On se fait une visio ?* Franskan älskar att korta ord: *le resto, l’appart, la fac*.',
+    noteEn: 'Short for **la visioconférence**. *On se fait une visio ?* French loves clipping words: *le resto, l’appart, la fac*.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u24-merci-retour', {
+    prompt: 'Tacka formellt för ett svar i ett mejl', promptEn: 'Formally thank someone for their reply in an email',
+    fr: 'Je vous remercie pour votre retour.', sv: 'Tack för ert svar.', en: 'Thank you for your feedback.',
+    ipa: '/ʒə vu ʁə.mɛʁ.si puʁ vɔ.tʁə ʁə.tuʁ/',
+    note: '**un retour** är kontorsfranska för svar eller återkoppling. *Je vous remercie* är mer formellt än *merci*. Puristerna föredrar *de votre retour*, men *pour* är helt vanligt.',
+    noteEn: '**un retour** is office French for a reply or feedback. *Je vous remercie* is more formal than *merci*. Purists prefer *de votre retour*, but *pour* is perfectly common.',
+    gloss: [['je', 'jag', 'I'], ['vous', 'er', 'you'], ['remercie', 'tackar', 'thank'], ['pour', 'för', 'for'], ['votre', 'ert', 'your'], ['retour', 'svar', 'feedback']],
+  }),
+  phrase(D, 'fr-u24-ci-joint', {
+    prompt: 'Skriv att protokollet finns bifogat', promptEn: 'Write that the minutes are attached',
+    fr: 'Veuillez trouver ci-joint le compte rendu de la réunion.', sv: 'Bifogat finns protokollet från mötet.', en: 'Please find attached the minutes of the meeting.',
+    ipa: '/vœ.je tʁu.ve si.ʒwɛ̃ lə kɔ̃t ʁɑ̃.dy də la ʁe.y.njɔ̃/',
+    note: '**Veuillez** är imperativ av *vouloir* och används som ett mycket artigt ”var vänlig”. **ci-joint** böjs inte när det står före substantivet.',
+    noteEn: '**Veuillez** is the imperative of *vouloir*, used as a very polite "kindly". **ci-joint** stays invariable when it comes before the noun.',
+    gloss: [['veuillez', 'var vänlig', 'kindly'], ['trouver', 'finna', 'find'], ['ci-joint', 'bifogat', 'attached'], ['le compte rendu', 'protokollet', 'the minutes'], ['de', 'från', 'of'], ['la réunion', 'mötet', 'the meeting']],
+  }),
+  phrase(D, 'fr-u24-salutations', {
+    prompt: 'Avsluta ett formellt brev', promptEn: 'Close a formal letter',
+    fr: 'Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.', sv: 'Med vänlig hälsning.', en: 'Yours faithfully.',
+    ipa: '/ʒə vu pʁi da.ɡʁe ma.dam mə.sjø lɛk.spʁɛ.sjɔ̃ də me sa.ly.ta.sjɔ̃ dis.tɛ̃.ɡe/',
+    note: 'Franska formella brev slutar med en lång, fast formel som saknar motsvarighet i svenskan. I mejl räcker **Cordialement** eller **Bien cordialement**. **Monsieur** uttalas [məsjø], utan n.',
+    noteEn: 'Formal French letters end with a long fixed formula; English just says "Yours faithfully". In emails **Cordialement** or **Bien cordialement** is enough. **Monsieur** is pronounced [məsjø], with no n.',
+    gloss: [['je', 'jag', 'I'], ['vous', 'er', 'you'], ['prie', 'ber', 'ask'], ['d’agréer', 'att motta', 'to accept'], ['Madame, Monsieur', 'fru, herr', 'Madam, Sir'], ['l’expression', 'uttrycket', 'the expression'], ['de', 'för', 'of'], ['mes', 'mina', 'my'], ['salutations', 'hälsningar', 'greetings'], ['distinguées', 'utmärkta', 'distinguished']],
+  }),
+  phrase(D, 'fr-u24-reporter', {
+    prompt: 'Föreslå att mötet flyttas till torsdag', promptEn: 'Suggest moving the meeting to Thursday',
+    fr: 'Est-ce qu’on pourrait reporter la réunion à jeudi ?', sv: 'Skulle vi kunna flytta mötet till torsdag?', en: 'Could we postpone the meeting to Thursday?',
+    ipa: '/ɛs.kɔ̃ pu.ʁɛ ʁə.pɔʁ.te la ʁe.y.njɔ̃ a ʒø.di/',
+    note: 'Konditionalis **pourrait** mildrar förslaget. Falsk vän: **reporter** betyder skjuta upp, inte rapportera (det heter *signaler* eller *rendre compte*).',
+    noteEn: 'The conditional **pourrait** softens the suggestion. False friend: **reporter** means to postpone, not to report (that is *signaler* or *rendre compte*).',
+    gloss: [['est-ce qu’', '(frågeord)', '(question marker)'], ['on', 'vi', 'we'], ['pourrait', 'skulle kunna', 'could'], ['reporter', 'skjuta upp', 'postpone'], ['la réunion', 'mötet', 'the meeting'], ['à', 'till', 'to'], ['jeudi', 'torsdag', 'Thursday']],
+  }),
+  phrase(D, 'fr-u24-teletravail-vendredi', {
+    prompt: 'Säg att du jobbar hemifrån på fredagar', promptEn: 'Say you work from home on Fridays',
+    fr: 'Je suis en télétravail le vendredi.', sv: 'Jag jobbar hemifrån på fredagar.', en: 'I work from home on Fridays.',
+    ipa: '/ʒə sɥi ɑ̃ te.le.tʁa.vaj lə vɑ̃.dʁə.di/',
+    note: '**le vendredi** med bestämd artikel betyder ”varje fredag”. Utan artikel, *vendredi*, menar man den kommande fredagen.',
+    noteEn: '**le vendredi** with the definite article means "every Friday". Without it, *vendredi* means this coming Friday.',
+    gloss: [['je', 'jag', 'I'], ['suis', 'är', 'am'], ['en télétravail', 'på distans', 'working remotely'], ['le vendredi', 'på fredagar', 'on Fridays']],
+  }),
+  phrase(D, 'fr-u24-faire-le-point-phrase', {
+    prompt: 'Föreslå en avstämning nästa vecka', promptEn: 'Suggest catching up next week',
+    fr: 'Il faudrait qu’on fasse le point la semaine prochaine.', sv: 'Vi borde stämma av nästa vecka.', en: 'We should touch base next week.',
+    ipa: '/il fo.dʁɛ kɔ̃ fas lə pwɛ̃ la sə.mɛn pʁɔ.ʃɛn/',
+    note: '**Il faudrait que** (konditionalis av *il faut*) följs av konjunktiv: **fasse**. Konditionalis gör uppmaningen mjukare, ungefär som svenskans ”borde”.',
+    noteEn: '**Il faudrait que** (conditional of *il faut*) takes the subjunctive: **fasse**. The conditional makes it a gentle "we should" rather than "we must".',
+    gloss: [['il faudrait', 'det skulle behövas', 'it would be necessary'], ['qu’on', 'att vi', 'that we'], ['fasse', 'gör', 'do'], ['le point', 'en avstämning', 'a review'], ['la semaine prochaine', 'nästa vecka', 'next week']],
+  }),
+  phrase(D, 'fr-u24-relancer-phrase', {
+    prompt: 'Påminn artigt om en obesvarad förfrågan', promptEn: 'Politely chase up an unanswered request',
+    fr: 'Je me permets de vous relancer au sujet de ma demande.', sv: 'Jag tillåter mig att påminna om min förfrågan.', en: 'I am following up on my request.',
+    ipa: '/ʒə mə pɛʁ.mɛ də vu ʁə.lɑ̃.se o sy.ʒɛ də ma də.mɑ̃d/',
+    note: '**Je me permets de** (”jag tar mig friheten att”) är den artiga standardinledningen i franska mejl. Falsk vän: **une demande** är en förfrågan, inte ett krav.',
+    noteEn: '**Je me permets de** ("I take the liberty of") is the standard polite opener in French emails. False friend: **une demande** is a request, not a demand.',
+    gloss: [['je', 'jag', 'I'], ['me permets', 'tillåter mig', 'take the liberty'], ['de', 'att', 'of'], ['vous', 'er', 'you'], ['relancer', 'påminna', 'chasing up'], ['au sujet de', 'angående', 'about'], ['ma', 'min', 'my'], ['demande', 'förfrågan', 'request']],
+  }),
+  phrase(D, 'fr-u24-geste', {
+    prompt: 'Säg i en förhandling att ni kan sänka priset lite', promptEn: 'Say in a negotiation that you can lower the price a bit',
+    fr: 'Nous sommes prêts à faire un geste sur le prix.', sv: 'Vi är beredda att gå er till mötes på priset.', en: 'We are willing to make a concession on the price.',
+    ipa: '/nu sɔm pʁɛ a fɛʁ œ̃ ʒɛst syʁ lə pʁi/',
+    note: '**faire un geste** = göra en eftergift, ofta en rabatt. **commercial** läggs ofta till: *un geste commercial*, när en butik kompenserar en missnöjd kund.',
+    noteEn: '**faire un geste** = to make a concession, often a discount. Shops offer *un geste commercial* to make up for a complaint, a goodwill gesture.',
+    gloss: [['nous', 'vi', 'we'], ['sommes', 'är', 'are'], ['prêts', 'beredda', 'willing'], ['à', 'att', 'to'], ['faire', 'göra', 'make'], ['un geste', 'en eftergift', 'a concession'], ['sur', 'på', 'on'], ['le prix', 'priset', 'the price']],
+  }),
+];

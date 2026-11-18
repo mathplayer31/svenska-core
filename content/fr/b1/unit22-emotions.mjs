@@ -1,0 +1,162 @@
+// FranceCore, Unité 22 : Sentiments et relations (se disputer, se réconcilier).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT22_DECK = unitDeck({
+  n: 22, slug: 'fr-unit-22-emotions', sv: 'Känslor och relationer', en: 'Emotions and relationships',
+  level: 'B1', section: 'fr-section-6-comprendre', after: 'fr-unit-21-news',
+});
+const D = UNIT22_DECK.slug;
+
+export const UNIT22_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u22-se-disputer', {
+    prompt: 'Bråka med ord, gräla', promptEn: 'Argue, quarrel',
+    fr: 'se disputer', sv: 'gräla / bråka', en: 'to argue / to have a row',
+    ipa: '/sə dis.py.te/',
+    note: 'Reflexivt och ömsesidigt: *ils se disputent* = de grälar med varandra. Med någon: *se disputer avec quelqu’un*. Ett gräl heter **une dispute**.',
+    noteEn: 'Reflexive and reciprocal: *ils se disputent* = they argue with each other. With someone: *se disputer avec quelqu’un*. A row is **une dispute**.',
+  }),
+  vocab(D, 'fr-u22-se-reconcilier', {
+    prompt: 'Bli sams igen efter ett gräl', promptEn: 'Make up after a quarrel',
+    fr: 'se réconcilier', sv: 'försonas / bli sams', en: 'to make up / to reconcile',
+    ipa: '/sə ʁe.kɔ̃.si.lje/',
+    note: 'Vardagligt säger man också **se rabibocher**. I passé composé tar reflexiva verb **être**: *on s’est réconciliés*.',
+    noteEn: 'Casually you also hear **se rabibocher**. In the passé composé reflexive verbs take **être**: *on s’est réconciliés*.',
+  }),
+  vocab(D, 'fr-u22-sentendre-bien', {
+    prompt: 'Komma bra överens med någon', promptEn: 'Get on well with someone',
+    fr: 's’entendre bien', sv: 'komma bra överens', en: 'to get on well',
+    ipa: '/sɑ̃.tɑ̃dʁ bjɛ̃/',
+    note: '**Entendre** betyder höra, men **s’entendre avec quelqu’un** = komma överens med någon. Motsatsen: *on ne s’entend pas du tout*.',
+    noteEn: '**Entendre** means to hear, but **s’entendre avec quelqu’un** = to get on with someone. The opposite: *on ne s’entend pas du tout*.',
+  }),
+  vocab(D, 'fr-u22-tomber-amoureux', {
+    prompt: 'Bli kär i någon (man / kvinna)', promptEn: 'Fall in love with someone (man / woman)',
+    fr: 'tomber amoureux / amoureuse de', sv: 'bli kär i', en: 'to fall in love with',
+    ipa: '/tɔ̃.be a.mu.ʁø/ /a.mu.ʁøz/',
+    note: 'Ordagrant ”falla förälskad”. Prepositionen är **de**, inte *en* eller *dans*: *elle est tombée amoureuse de lui*.',
+    noteEn: 'Literally "fall in-love". The preposition is **de**, not *avec*: *elle est tombée amoureuse de lui*.',
+  }),
+  vocab(D, 'fr-u22-copain-copine', {
+    prompt: 'Kompis, eller pojkvän / flickvän', promptEn: 'Friend, or boyfriend / girlfriend',
+    fr: 'le copain / la copine', sv: 'kompisen / pojkvännen, flickvännen', en: 'the friend / the boyfriend, girlfriend',
+    ipa: '/lə kɔ.pɛ̃/ /la kɔ.pin/',
+    note: 'Possessivet avgör: **mon copain** betyder oftast *min pojkvän*, medan *un copain* är en kompis. Säg *un ami* om du vill undvika missförstånd.',
+    noteEn: 'The possessive decides: **mon copain** usually means *my boyfriend*, while *un copain* is a mate. Say *un ami* if you want to avoid confusion.',
+  }),
+  vocab(D, 'fr-u22-avoir-confiance', {
+    prompt: 'Lita på någon', promptEn: 'Trust someone',
+    fr: 'avoir confiance en', sv: 'lita på', en: 'to trust',
+    ipa: '/a.vwaʁ kɔ̃.fjɑ̃s ɑ̃/',
+    note: 'Ordagrant ”ha förtroende i”: *j’ai confiance en toi*. Framför bestämd artikel säger man oftare **dans**: *j’ai confiance dans l’avenir*.',
+    noteEn: 'Literally "have confidence in": *j’ai confiance en toi*. Before a definite article **dans** is more common: *j’ai confiance dans l’avenir*.',
+  }),
+  vocab(D, 'fr-u22-jaloux', {
+    prompt: 'Svartsjuk eller avundsjuk (man / kvinna)', promptEn: 'Jealous or envious (man / woman)',
+    fr: 'jaloux / jalouse', sv: 'svartsjuk / avundsjuk', en: 'jealous',
+    ipa: '/ʒa.lu/ /ʒa.luz/',
+    note: 'Svenskan skiljer på svartsjuk och avundsjuk, franskan använder **jaloux** för båda. Vill man vara tydlig med avund finns **envieux**.',
+    noteEn: '**Jaloux** covers both romantic jealousy and envy. To stress envy specifically, French also has **envieux**.',
+  }),
+  vocab(D, 'fr-u22-decu', {
+    prompt: 'Känna sig sviken av att något inte blev som man hoppats (man / kvinna)', promptEn: 'Feel let down when something didn’t turn out as hoped (man / woman)',
+    fr: 'déçu / déçue', sv: 'besviken', en: 'disappointed',
+    ipa: '/de.sy/',
+    note: 'Se upp om du tänker på engelska: **décevoir** = göra besviken, inte bedra (*deceive*). **ç** behövs för att c:et ska uttalas [s] framför *u*.',
+    noteEn: 'False friend: **décevoir** = to disappoint, not *to deceive* (that is *tromper*). The **ç** keeps the c soft, [s], before *u*.',
+  }),
+  vocab(D, 'fr-u22-vexe', {
+    prompt: 'Sårad eller stött av en kommentar (man / kvinna)', promptEn: 'Hurt or offended by a remark (man / woman)',
+    fr: 'vexé / vexée', sv: 'sårad / stött', en: 'offended / hurt',
+    ipa: '/vɛk.se/',
+    note: 'Mildare än *blessé* (skadad, djupt sårad). *Ne te vexe pas, mais...* = ta inte illa upp, men... är en vanlig inledning på kritik.',
+    noteEn: 'Milder than *blessé* (wounded, deeply hurt). *Ne te vexe pas, mais...* = don’t take this the wrong way, but... is a common lead-in to criticism.',
+  }),
+  vocab(D, 'fr-u22-emu', {
+    prompt: 'Rörd, berörd av något (man / kvinna)', promptEn: 'Moved, touched by something (man / woman)',
+    fr: 'ému / émue', sv: 'rörd / berörd', en: 'moved / touched',
+    ipa: '/e.my/',
+    note: 'Particip av **émouvoir** (beröra). Något som berör är **émouvant**. *Être ému aux larmes* = vara rörd till tårar.',
+    noteEn: 'Past participle of **émouvoir** (to move). Something moving is **émouvant**. *Être ému aux larmes* = to be moved to tears.',
+  }),
+  vocab(D, 'fr-u22-en-avoir-marre', {
+    prompt: 'Vardagligt: ha fått nog av något', promptEn: 'Casual: be fed up with something',
+    fr: 'en avoir marre', sv: 'vara trött på / ha fått nog', en: 'to be fed up',
+    ipa: '/ɑ̃.n‿a.vwaʁ maʁ/',
+    note: '**J’en ai marre !** = jag har fått nog! Det lilla **en** måste vara med. Följs av *de* + substantiv eller *que* + subjonctif.',
+    noteEn: '**J’en ai marre !** = I’m sick of it! The little **en** is compulsory. Followed by *de* + noun or *que* + subjunctive.',
+  }),
+  vocab(D, 'fr-u22-rompre', {
+    prompt: 'Göra slut med någon', promptEn: 'Break up with someone',
+    fr: 'rompre', sv: 'göra slut', en: 'to break up',
+    ipa: '/ʁɔ̃pʁ/',
+    note: '**Rompre avec quelqu’un** är neutralt. I talspråk säger man oftare *se séparer* eller, ledigt, *larguer quelqu’un* (dumpa någon).',
+    noteEn: '**Rompre avec quelqu’un** is neutral. In speech people more often say *se séparer* or, casually, *larguer quelqu’un* (to dump someone).',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u22-disputes-reconcilies', {
+    prompt: 'Säg att ni grälade i går kväll men blev sams i morse', promptEn: 'Say you argued last night but made up this morning',
+    fr: 'On s’est disputés hier soir, mais on s’est réconciliés ce matin.', sv: 'Vi grälade i går kväll, men vi blev sams i morse.', en: 'We had a row last night, but we made up this morning.',
+    ipa: '/ɔ̃ sɛ dis.py.te jɛʁ swaʁ mɛ ɔ̃ sɛ ʁe.kɔ̃.si.lje sə ma.tɛ̃/',
+    note: 'Reflexiva verb tar **être** i passé composé, och particip böjs. När **on** betyder *vi* får participet gärna plural: *disputés*, *réconciliés*.',
+    noteEn: 'Reflexive verbs take **être** in the passé composé, and the participle agrees. When **on** means *we*, the participle usually goes plural: *disputés*, *réconciliés*.',
+    gloss: [['on s’est disputés', 'vi grälade', 'we argued'], ['hier soir', 'i går kväll', 'last night'], ['mais', 'men', 'but'], ['on s’est réconciliés', 'vi blev sams', 'we made up'], ['ce matin', 'i morse', 'this morning']],
+  }),
+  phrase(D, 'fr-u22-contente-que-tu-sois-venu', {
+    prompt: 'Säg (kvinna) till en vän att du är glad att han kom', promptEn: 'Tell a male friend (as a woman) you’re glad he came',
+    fr: 'Je suis contente que tu sois venu.', sv: 'Jag är glad att du kom.', en: 'I’m glad you came.',
+    ipa: '/ʒə sɥi kɔ̃.tɑ̃t kə ty swa və.ny/',
+    note: 'Efter en känsla (*content que, triste que*) kommer **subjonctif**: *que tu sois venu* är subjonctif i dåtid. *Contente* böjs efter talaren, *venu* efter vännen.',
+    noteEn: 'After a feeling (*content que, triste que*) comes the **subjunctive**: *que tu sois venu* is the past subjunctive. *Contente* agrees with the speaker, *venu* with the friend.',
+    gloss: [['je suis contente', 'jag är glad', 'I’m glad'], ['que', 'att', 'that'], ['tu sois venu', 'du kom', 'you came']],
+  }),
+  phrase(D, 'fr-u22-peur-quil-ne-maime-plus', {
+    prompt: 'Säg att du är rädd att han inte älskar dig längre', promptEn: 'Say you’re afraid he doesn’t love you any more',
+    fr: 'J’ai peur qu’il ne m’aime plus.', sv: 'Jag är rädd att han inte älskar mig längre.', en: 'I’m afraid he doesn’t love me any more.',
+    ipa: '/ʒe pœʁ kil nə mɛm ply/',
+    note: 'Franskan säger **avoir peur** (ha rädsla), inte *vara rädd*. Rädsla kräver subjonctif: *aime* ser ut som presens men är subjonctif här. **Ne ... plus** = inte längre.',
+    noteEn: 'French says **avoir peur** (have fear). Fear takes the subjunctive: *aime* looks like the present but is subjunctive here. **Ne ... plus** = no longer.',
+    gloss: [['j’ai peur', 'jag är rädd', 'I’m afraid'], ['qu’il', 'att han', 'that he'], ['ne', '(inte)', '(not)'], ['m’aime', 'älskar mig', 'loves me'], ['plus', 'längre', 'any more']],
+  }),
+  phrase(D, 'fr-u22-ca-me-rend-triste', {
+    prompt: 'Säg att det gör dig ledsen när han inte svarar på dina meddelanden', promptEn: 'Say it makes you sad when he doesn’t answer your messages',
+    fr: 'Ça me rend triste quand tu ne réponds pas à mes messages.', sv: 'Jag blir ledsen när du inte svarar på mina meddelanden.', en: 'It makes me sad when you don’t answer my messages.',
+    ipa: '/sa mə ʁɑ̃ tʁist kɑ̃ ty nə ʁe.pɔ̃ pa a me me.saʒ/',
+    note: '**Rendre** + adjektiv = göra någon (glad, ledsen, galen): *ça me rend fou*. **Répondre à** tar alltid *à*: *répondre à un message*.',
+    noteEn: '**Rendre** + adjective = make someone (happy, sad, crazy): *ça me rend fou*. **Répondre à** always takes *à*: *répondre à un message*.',
+    gloss: [['ça me rend triste', 'det gör mig ledsen', 'it makes me sad'], ['quand', 'när', 'when'], ['tu ne réponds pas', 'du inte svarar', 'you don’t answer'], ['à mes messages', 'på mina meddelanden', 'my messages']],
+  }),
+  phrase(D, 'fr-u22-sentend-avec-tout-le-monde', {
+    prompt: 'Säg att han kommer bra överens med alla utom sin styvfar', promptEn: 'Say he gets on with everyone except his stepfather',
+    fr: 'Il s’entend bien avec tout le monde, sauf avec son beau-père.', sv: 'Han kommer bra överens med alla, utom med sin styvpappa.', en: 'He gets on well with everyone, except his stepfather.',
+    ipa: '/il sɑ̃.tɑ̃ bjɛ̃ a.vɛk tu lə mɔ̃d sof a.vɛk sɔ̃ bo.pɛʁ/',
+    note: '**Beau-père** betyder både styvfar och svärfar: sammanhanget avgör. **Tout le monde** (hela världen) = alla, med verbet i singular.',
+    noteEn: '**Beau-père** means both stepfather and father-in-law: context decides. **Tout le monde** (the whole world) = everyone, with a singular verb.',
+    gloss: [['il s’entend bien', 'han kommer bra överens', 'he gets on well'], ['avec tout le monde', 'med alla', 'with everyone'], ['sauf', 'utom', 'except'], ['avec son beau-père', 'med sin styvpappa', 'with his stepfather']],
+  }),
+  phrase(D, 'fr-u22-marre-quon-se-dispute', {
+    prompt: 'Säg att du är trött på att ni grälar om struntsaker', promptEn: 'Say you’re fed up with the two of you arguing over silly things',
+    fr: 'J’en ai marre qu’on se dispute pour des bêtises.', sv: 'Jag är trött på att vi grälar om struntsaker.', en: 'I’m fed up with us arguing over silly things.',
+    ipa: '/ʒɑ̃.n‿e maʁ kɔ̃ sə dis.pyt puʁ de be.tiz/',
+    note: '**En avoir marre que** + subjonctif: *qu’on se dispute* (formen sammanfaller här med presens). **Des bêtises** = dumheter, struntsaker.',
+    noteEn: '**En avoir marre que** + subjunctive: *qu’on se dispute* (here the same form as the present). **Des bêtises** = silly things, nonsense.',
+    gloss: [['j’en ai marre', 'jag är trött på', 'I’m fed up'], ['qu’on se dispute', 'att vi grälar', 'with us arguing'], ['pour des bêtises', 'om struntsaker', 'over silly things']],
+  }),
+  phrase(D, 'fr-u22-se-pacser', {
+    prompt: 'Berätta att de har varit tillsammans i tre år och just har ingått PACS', promptEn: 'Say they’ve been together for three years and have just signed a PACS',
+    fr: 'Ça fait trois ans qu’ils sont ensemble, et ils viennent de se pacser.', sv: 'De har varit tillsammans i tre år, och de har just ingått PACS.', en: 'They’ve been together for three years, and they’ve just entered a civil partnership.',
+    ipa: '/sa fɛ tʁwa.z‿ɑ̃ kil sɔ̃.t‿ɑ̃.sɑ̃bl e il vjɛn də sə pak.se/',
+    note: '**Le PACS** (*pacte civil de solidarité*) är ett civilrättsligt samlevnadsavtal mellan två personer, ungefär som ett förstärkt samboavtal och mycket vanligt i Frankrike, och *se pacser* är verbet. **Venir de** + infinitiv = just ha gjort.',
+    noteEn: '**Le PACS** (*pacte civil de solidarité*) is a registered civil partnership, very common in France, and *se pacser* is the verb. **Venir de** + infinitive = to have just done.',
+    gloss: [['ça fait trois ans', 'i tre år', 'for three years'], ['qu’ils sont ensemble', 'har de varit tillsammans', 'they’ve been together'], ['et', 'och', 'and'], ['ils viennent de', 'de har just', 'they’ve just'], ['se pacser', 'ingått PACS', 'entered a civil partnership']],
+  }),
+  phrase(D, 'fr-u22-demande-pardon', {
+    prompt: 'Be om förlåtelse: du ville inte såra hen', promptEn: 'Apologise: you didn’t mean to hurt them',
+    fr: 'Je te demande pardon, je ne voulais pas te blesser.', sv: 'Förlåt mig, jag ville inte såra dig.', en: 'I’m so sorry, I didn’t mean to hurt you.',
+    ipa: '/ʒə tə də.mɑ̃d paʁ.dɔ̃ ʒə nə vu.lɛ pa tə blɛ.se/',
+    note: '**Demander pardon** är starkare och allvarligare än *pardon* eller *désolé*. **Imparfait** *je ne voulais pas* beskriver avsikten bakom handlingen.',
+    noteEn: '**Demander pardon** is stronger and more serious than *pardon* or *désolé*. The **imparfait** *je ne voulais pas* describes the intention behind the act.',
+    gloss: [['je te demande pardon', 'förlåt mig', 'I’m so sorry'], ['je ne voulais pas', 'jag ville inte', 'I didn’t mean'], ['te blesser', 'såra dig', 'to hurt you']],
+  }),
+];

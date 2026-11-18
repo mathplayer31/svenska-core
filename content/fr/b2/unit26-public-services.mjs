@@ -1,0 +1,162 @@
+// FranceCore, Unité 26 : Services publics (Sécurité sociale, mutuelle, retraite, école publique).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT26_DECK = unitDeck({
+  n: 26, slug: 'fr-unit-26-public-services', sv: 'Offentlig service', en: 'Public services',
+  level: 'B2', section: 'fr-section-7-societe', after: 'fr-unit-25-economy',
+});
+const D = UNIT26_DECK.slug;
+
+export const UNIT26_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u26-securite-sociale', {
+    prompt: 'Det offentliga systemet för sjukvård, pension och familjestöd', promptEn: 'The public system for healthcare, pensions and family benefits',
+    fr: 'la Sécurité sociale / la Sécu', sv: 'socialförsäkringen', en: 'the national health and social security system',
+    ipa: '/la se.ky.ʁi.te sɔ.sjal/ /la se.ky/',
+    note: 'Grundades 1945, efter befrielsen, och är en stolthet för många fransmän. Den finansieras främst av avgifter på lönen, **les cotisations**, inte bara av skatt som i Sverige. I vardagen: **la Sécu**.',
+    noteEn: 'Founded in 1945, after the Liberation, and a source of national pride. It is funded mainly by payroll contributions, **les cotisations**, rather than general taxation. Informally: **la Sécu**.',
+  }),
+  vocab(D, 'fr-u26-carte-vitale', {
+    prompt: 'Det gröna kortet man visar hos läkaren', promptEn: 'The green card you show at the doctor’s',
+    fr: 'la carte Vitale', sv: 'sjukförsäkringskortet', en: 'the health insurance card',
+    ipa: '/la kaʁt vi.tal/',
+    note: 'Ett chipkort med ditt socialförsäkringsnummer. Läkaren eller apoteket läser kortet, och ersättningen kommer automatiskt in på ditt konto efter några dagar.',
+    noteEn: 'A chip card linked to your social security number. The doctor or pharmacy reads it, and the refund lands in your bank account a few days later.',
+  }),
+  vocab(D, 'fr-u26-mutuelle', {
+    prompt: 'Den kompletterande sjukförsäkringen', promptEn: 'The top-up health insurance',
+    fr: 'la mutuelle', sv: 'tilläggsförsäkringen för vård', en: 'the top-up health insurance',
+    ipa: '/la my.tɥɛl/',
+    note: 'Sécu betalar bara en del av kostnaden; resten täcks av en **mutuelle**. Sedan 2016 måste arbetsgivare i privat sektor erbjuda en till sina anställda. Utan mutuelle kan tandvård och glasögon bli dyra.',
+    noteEn: 'The Sécu only pays part of the cost; a **mutuelle** covers the rest. Since 2016 private-sector employers must offer one to their staff. Without a mutuelle, dental care and glasses get expensive.',
+  }),
+  vocab(D, 'fr-u26-medecin-traitant', {
+    prompt: 'Den husläkare man har registrerat sig hos', promptEn: 'The family doctor you are registered with',
+    fr: 'le médecin traitant', sv: 'husläkaren / den fasta läkaren', en: 'the registered GP',
+    ipa: '/lə med.sɛ̃ tʁɛ.tɑ̃/',
+    note: 'Man väljer själv sin läkare och anmäler hen till Sécu. Annars får man mindre ersättning. Specialister besöker man oftast via remiss från **le médecin traitant**. Första **e** i *médecin* hörs knappt: [medsɛ̃].',
+    noteEn: 'You choose your own doctor and register them with the Sécu, or you get lower refunds. Specialists are usually seen on referral from **le médecin traitant**. The first **e** of *médecin* is barely heard: [medsɛ̃].',
+  }),
+  vocab(D, 'fr-u26-rembourser', {
+    prompt: 'Få tillbaka pengarna man har lagt ut', promptEn: 'Get back money you have paid out',
+    fr: 'rembourser', sv: 'ersätta / betala tillbaka', en: 'to reimburse / to refund',
+    ipa: '/ʁɑ̃.buʁ.se/',
+    note: 'I franska vården betalar man ofta först och får **un remboursement** efteråt. Läkemedel ersätts till olika grad, därför frågar man: *C’est remboursé ?*',
+    noteEn: 'In French healthcare you often pay first and get **un remboursement** afterwards. Medicines are reimbursed at different rates, hence the question: *C’est remboursé ?*',
+  }),
+  vocab(D, 'fr-u26-retraite', {
+    prompt: 'Tiden efter arbetslivet', promptEn: 'The time after your working life',
+    fr: 'la retraite', sv: 'pensionen', en: 'retirement / the pension',
+    ipa: '/la ʁə.tʁɛt/',
+    note: '**partir à la retraite** = gå i pension, **un retraité / une retraitée** = en pensionär. Pensionsreformer har utlöst stora strejker och demonstrationer, senast 2023. Systemet bygger på **la répartition**: de som jobbar betalar för dagens pensionärer.',
+    noteEn: '**partir à la retraite** = to retire, **un retraité / une retraitée** = a pensioner. Pension reforms have triggered huge strikes and protests, most recently in 2023. The system runs on **la répartition**: today’s workers pay for today’s retirees.',
+  }),
+  vocab(D, 'fr-u26-caf', {
+    prompt: 'Myndigheten som betalar ut barnbidrag och bostadsbidrag', promptEn: 'The office that pays family and housing benefits',
+    fr: 'la CAF', sv: 'Försäkringskassan (för familj och bostad)', en: 'the family benefits office',
+    ipa: '/la kaf/',
+    note: 'Förkortning av **Caisse d’allocations familiales**, som uttalas som ett ord. Även studenter kan få bostadsbidrag därifrån: **l’aide au logement**, ofta kallad **les APL**.',
+    noteEn: 'Short for **Caisse d’allocations familiales**, said as one word. Even students can get housing benefit from it: **l’aide au logement**, often called **les APL**.',
+  }),
+  vocab(D, 'fr-u26-france-travail', {
+    prompt: 'Myndigheten för arbetssökande', promptEn: 'The public employment service',
+    fr: 'France Travail', sv: 'Arbetsförmedlingen', en: 'the job centre / the employment agency',
+    ipa: '/fʁɑ̃s tʁa.vaj/',
+    note: 'Hette **Pôle emploi** fram till 2024, och många använder fortfarande det gamla namnet. Där skriver man in sig när man blir arbetslös och får **le chômage** (arbetslöshetsersättning).',
+    noteEn: 'Called **Pôle emploi** until 2024, and many people still use the old name. You register there when you lose your job and claim **le chômage** (unemployment benefit).',
+  }),
+  vocab(D, 'fr-u26-fonctionnaire', {
+    prompt: 'Den som är anställd av staten med särskild status', promptEn: 'A state employee with special status',
+    fr: 'le fonctionnaire / la fonctionnaire', sv: 'statstjänstemannen', en: 'the civil servant',
+    ipa: '/lə fɔ̃k.sjɔ.nɛʁ/',
+    note: 'Lärare, sjuksköterskor på offentliga sjukhus och poliser är ofta **fonctionnaires**, med en tjänst som i praktiken är på livstid. Ungefär var femte anställd i Frankrike arbetar i offentlig sektor. Man blir det oftast genom ett uttagningsprov, **un concours**.',
+    noteEn: 'Teachers, public hospital nurses and police officers are often **fonctionnaires**, with what is in practice a job for life. About one in five French employees works in the public sector. You usually get in through a competitive exam, **un concours**.',
+  }),
+  vocab(D, 'fr-u26-maternelle', {
+    prompt: 'Den franska förskolan för barn från tre år', promptEn: 'The French nursery school for children from three',
+    fr: 'l’école maternelle', sv: 'förskolan', en: 'nursery school / preschool',
+    ipa: '/le.kɔl ma.tɛʁ.nɛl/',
+    note: 'En riktig skola med lärare, gratis och obligatorisk från tre års ålder sedan 2019. Den hör till **l’Éducation nationale**, inte till kommunens barnomsorg som i Sverige.',
+    noteEn: 'A real school with qualified teachers, free and compulsory from age three since 2019. It belongs to **l’Éducation nationale**, the national education system.',
+  }),
+  vocab(D, 'fr-u26-college', {
+    prompt: 'Skolan för elever mellan 11 och 15 år', promptEn: 'The school for pupils aged 11 to 15',
+    fr: 'le collège', sv: 'högstadiet', en: 'secondary school / middle school',
+    ipa: '/lə kɔ.lɛʒ/',
+    note: 'Falsk vän: **le collège** är högstadiet, inte college. Ordningen är *école primaire*, *collège*, sedan **le lycée** (gymnasiet). Universitetet heter **la fac** i vardagen.',
+    noteEn: 'False friend: **le collège** is middle school, not college. The order is *école primaire*, *collège*, then **le lycée** (upper secondary). University is **la fac** in everyday speech.',
+  }),
+  vocab(D, 'fr-u26-bac', {
+    prompt: 'Den nationella examen i slutet av gymnasiet', promptEn: 'The national exam at the end of upper secondary',
+    fr: 'le bac', sv: 'studentexamen', en: 'the baccalaureate / A levels',
+    ipa: '/lə bak/',
+    note: 'Kortform av **le baccalauréat**, infört av Napoleon 1808. Det är både en examen och en symbol: årskurser och utbildningsnivåer räknas från det, till exempel *bac + 5* för en masterexamen.',
+    noteEn: 'Short for **le baccalauréat**, created by Napoleon in 1808. It is both an exam and a yardstick: education levels are counted from it, as in *bac + 5* for a master’s degree.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u26-carte-vitale-phrase', {
+    prompt: 'Frågan du får hos läkaren eller på apoteket', promptEn: 'The question you get at the doctor’s or pharmacy',
+    fr: 'Vous avez votre carte Vitale ?', sv: 'Har ni ert sjukförsäkringskort?', en: 'Do you have your health card?',
+    ipa: '/vu.za.ve vɔ.tʁə kaʁt vi.tal/',
+    note: 'Bindning: **vous avez** uttalas [vuzave], s:et blir [z] framför vokal. Har man inget kort kan man ändå få en blankett för ersättning, **une feuille de soins**.',
+    noteEn: 'Liaison: **vous avez** is pronounced [vuzave], the s becomes [z] before a vowel. Without the card you can still get a paper claim form, **une feuille de soins**.',
+    gloss: [['vous', 'ni', 'you'], ['avez', 'har', 'have'], ['votre', 'ert', 'your'], ['carte Vitale', 'sjukförsäkringskort', 'health card']],
+  }),
+  phrase(D, 'fr-u26-70-pourcent', {
+    prompt: 'Säg att Sécu ersätter 70 % av läkarbesöket', promptEn: 'Say the Sécu reimburses 70 % of the consultation',
+    fr: 'La Sécu rembourse 70 % de la consultation.', sv: 'Försäkringen ersätter 70 % av läkarbesöket.', en: 'The Sécu reimburses 70 % of the consultation.',
+    ipa: '/la se.ky ʁɑ̃.buʁs swa.sɑ̃t.dis puʁ sɑ̃ də la kɔ̃.syl.ta.sjɔ̃/',
+    note: '70 heter **soixante-dix** (”sextio-tio”). I Belgien och Schweiz säger man **septante**. På franska skriver man mellanslag före **%**.',
+    noteEn: '70 is **soixante-dix** ("sixty-ten"). In Belgium and Switzerland people say **septante**. French puts a space before **%**.',
+    gloss: [['la Sécu', 'socialförsäkringen', 'the Sécu'], ['rembourse', 'ersätter', 'reimburses'], ['70 %', '70 %', '70 %'], ['de', 'av', 'of'], ['la consultation', 'läkarbesöket', 'the consultation']],
+  }),
+  phrase(D, 'fr-u26-mutuelle-phrase', {
+    prompt: 'Säg att din tilläggsförsäkring betalar resten', promptEn: 'Say your top-up insurance pays the rest',
+    fr: 'Ma mutuelle prend en charge le reste.', sv: 'Min tilläggsförsäkring står för resten.', en: 'My top-up insurance covers the rest.',
+    ipa: '/ma my.tɥɛl pʁɑ̃.t‿ɑ̃ ʃaʁʒ lə ʁɛst/',
+    note: '**prendre en charge** = stå för, täcka kostnaden, ett nyckeluttryck i administrativ franska. Bindning: *prend en* uttalas [pʁɑ̃tɑ̃], d:et låter som [t].',
+    noteEn: '**prendre en charge** = to cover, take on the cost, a key phrase in administrative French. Liaison: *prend en* is said [pʁɑ̃tɑ̃], the d sounds like [t].',
+    gloss: [['ma', 'min', 'my'], ['mutuelle', 'tilläggsförsäkring', 'top-up insurance'], ['prend en charge', 'står för', 'covers'], ['le reste', 'resten', 'the rest']],
+  }),
+  phrase(D, 'fr-u26-retraite-debat', {
+    prompt: 'Säg att pensionsåldern fortfarande debatteras', promptEn: 'Say the retirement age is still hotly debated',
+    fr: 'L’âge de départ à la retraite fait toujours débat.', sv: 'Pensionsåldern är fortfarande omdebatterad.', en: 'The retirement age is still a matter of debate.',
+    ipa: '/laʒ də de.paʁ a la ʁə.tʁɛt fɛ tu.ʒuʁ de.ba/',
+    note: '**faire débat** (utan artikel) = vara omstritt. **toujours** betyder här ”fortfarande”, inte ”alltid”: sammanhanget avgör.',
+    noteEn: '**faire débat** (no article) = to be controversial. **toujours** means "still" here, not "always": context decides.',
+    gloss: [['l’âge', 'åldern', 'the age'], ['de départ', 'för avgång', 'of leaving'], ['à la retraite', 'i pension', 'into retirement'], ['fait débat', 'är omdebatterad', 'is debated'], ['toujours', 'fortfarande', 'still']],
+  }),
+  phrase(D, 'fr-u26-ecole-laique', {
+    prompt: 'Beskriv den franska offentliga skolans principer', promptEn: 'Describe the principles of French state schools',
+    fr: 'L’école publique est gratuite et laïque.', sv: 'Den offentliga skolan är avgiftsfri och konfessionslös.', en: 'State schools are free and secular.',
+    ipa: '/le.kɔl py.blik ɛ ɡʁa.tɥit e la.ik/',
+    note: 'Principerna kommer från Jules Ferrys skollagar 1881 och 1882: **gratuite, obligatoire et laïque**. **laïque** betyder att staten är neutral i religiösa frågor, ett centralt begrepp i Frankrike. **ï** visar att a och i uttalas var för sig: [la.ik].',
+    noteEn: 'The principles come from Jules Ferry’s school laws of 1881 and 1882: **gratuite, obligatoire et laïque**. **laïque** means the state is neutral on religion, a core French value. The **ï** shows that a and i are pronounced separately: [la.ik].',
+    gloss: [['l’école', 'skolan', 'school'], ['publique', 'offentliga', 'state'], ['est', 'är', 'is'], ['gratuite', 'avgiftsfri', 'free'], ['et', 'och', 'and'], ['laïque', 'konfessionslös', 'secular']],
+  }),
+  phrase(D, 'fr-u26-passer-le-bac', {
+    prompt: 'Säg att hon skriver studentexamen i år', promptEn: 'Say she is sitting the baccalaureate this year',
+    fr: 'Elle passe le bac cette année.', sv: 'Hon tar studenten i år.', en: 'She’s sitting the bac this year.',
+    ipa: '/ɛl pas lə bak sɛt a.ne/',
+    note: 'Falsk vän: **passer un examen** betyder att skriva ett prov, inte att klara det. Att klara heter **réussir** eller **avoir son bac**. Underkänd: **rater**.',
+    noteEn: 'False friend: **passer un examen** means to sit an exam, not to pass it. To pass is **réussir** or **avoir son bac**. To fail: **rater**.',
+    gloss: [['elle', 'hon', 'she'], ['passe', 'skriver', 'is sitting'], ['le bac', 'studentexamen', 'the bac'], ['cette année', 'i år', 'this year']],
+  }),
+  phrase(D, 'fr-u26-medecin-traitant-phrase', {
+    prompt: 'Säg att man måste registrera en husläkare', promptEn: 'Say you have to register a family doctor',
+    fr: 'Il faut déclarer un médecin traitant pour être bien remboursé.', sv: 'Man måste anmäla en husläkare för att få full ersättning.', en: 'You have to register a GP to get proper reimbursement.',
+    ipa: '/il fo de.kla.ʁe œ̃ med.sɛ̃ tʁɛ.tɑ̃ puʁ ɛtʁ bjɛ̃ ʁɑ̃.buʁ.se/',
+    note: '**Il faut** + infinitiv = man måste, utan något subjekt för vem. **pour** + infinitiv = för att. Passiv konstruktion: *être remboursé*.',
+    noteEn: '**Il faut** + infinitive = you have to, with no stated subject. **pour** + infinitive = in order to. Passive: *être remboursé*.',
+    gloss: [['il faut', 'man måste', 'you have to'], ['déclarer', 'anmäla', 'register'], ['un médecin traitant', 'en husläkare', 'a GP'], ['pour', 'för att', 'to'], ['être', 'bli', 'be'], ['bien', 'ordentligt', 'properly'], ['remboursé', 'ersatt', 'reimbursed']],
+  }),
+  phrase(D, 'fr-u26-caf-phrase', {
+    prompt: 'Säg att du har ansökt om bostadsbidrag', promptEn: 'Say you have applied for housing benefit',
+    fr: 'J’ai fait une demande d’aide au logement à la CAF.', sv: 'Jag har ansökt om bostadsbidrag hos CAF.', en: 'I’ve applied to the CAF for housing benefit.',
+    ipa: '/ʒe fɛ yn də.mɑ̃d dɛd o lɔʒ.mɑ̃ a la kaf/',
+    note: '**faire une demande** = ansöka, det vanligaste uttrycket i myndighetsfranska (mer formellt: *déposer une demande*). Ansökan görs nästan alltid på nätet.',
+    noteEn: '**faire une demande** = to apply, the standard phrase in official French (more formal: *déposer une demande*). Applications are almost always made online.',
+    gloss: [['j’ai fait', 'jag har gjort', 'I made'], ['une demande', 'en ansökan', 'an application'], ['d’aide au logement', 'om bostadsbidrag', 'for housing benefit'], ['à la CAF', 'hos CAF', 'to the CAF']],
+  }),
+];

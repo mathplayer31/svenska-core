@@ -9,7 +9,7 @@ import {
   Snail,
   AlertTriangle,
 } from 'lucide-react';
-import { useI18n, type Strings } from './i18n';
+import { useI18n, type Course, type Strings } from './i18n';
 
 // ============================================================================
 // Types
@@ -70,9 +70,16 @@ function normalize(text: string): string {
     .trim();
 }
 
+// å ä ö é è ç... sans leurs signes diacritiques
 function stripAccents(text: string): string {
-  return text.replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e');
+  return text.normalize('NFD').replace(/\p{M}/gu, '');
 }
+
+// Paires d'articles qui portent le genre : oublier l'article ou prendre l'autre est signalé
+const ARTICLE_PAIRS: Record<Course, [string, string][]> = {
+  sv: [['en', 'ett']],
+  fr: [['un', 'une'], ['le', 'la']],
+};
 
 function levenshtein(a: string, b: string): number {
   const dp = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
@@ -90,18 +97,19 @@ function levenshtein(a: string, b: string): number {
 }
 
 /** Correction tolérante d'une réponse écrite */
-function checkWritten(input: string, target: string, t: Strings): Verdict {
+function checkWritten(input: string, target: string, t: Strings, course: Course = 'sv'): Verdict {
   const got = normalize(input);
   const want = normalize(target);
   if (!got) return { ok: false };
   if (got === want) return { ok: true };
 
-  const article = want.match(/^(en|ett) (.+)$/);
-  if (article && got === article[2]) {
-    return { ok: false, message: t.missingArticle(article[1]) };
-  }
-  if (article && got === `${article[1] === 'en' ? 'ett' : 'en'} ${article[2]}`) {
-    return { ok: false, message: t.wrongGender(`${article[1]} ${article[2]}`) };
+  for (const [a, b] of ARTICLE_PAIRS[course]) {
+    const article = want.match(new RegExp(`^(${a}|${b}) (.+)$`));
+    if (!article) continue;
+    if (got === article[2]) return { ok: false, message: t.missingArticle(article[1]) };
+    if (got === `${article[1] === a ? b : a} ${article[2]}`) {
+      return { ok: false, message: t.wrongGender(`${article[1]} ${article[2]}`) };
+    }
   }
   if (stripAccents(got) === stripAccents(want)) {
     return { ok: true, message: t.accentsWarning };
@@ -748,7 +756,7 @@ function WriteExercise({
   locked: boolean;
   onCheck: (v: Verdict) => void;
 }) {
-  const { t } = useI18n();
+  const { t, course } = useI18n();
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const audio = firstAudio(ex.card);
@@ -760,7 +768,7 @@ function WriteExercise({
 
   const check = () => {
     if (locked || !value.trim()) return;
-    onCheck(checkWritten(value, ex.card.swedishTarget, t));
+    onCheck(checkWritten(value, ex.card.swedishTarget, t, course));
   };
 
   const insert = (ch: string) => {

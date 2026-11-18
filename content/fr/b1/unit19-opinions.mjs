@@ -1,0 +1,162 @@
+// FranceCore, Unité 19 : Donner son avis (je pense que, à mon avis, subjonctif d'opinion).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT19_DECK = unitDeck({
+  n: 19, slug: 'fr-unit-19-opinions', sv: 'Säga sin åsikt', en: 'Giving your opinion',
+  level: 'B1', section: 'fr-section-5-sinstaller', after: 'fr-unit-18-job-hunting',
+});
+const D = UNIT19_DECK.slug;
+
+export const UNIT19_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u19-a-mon-avis', {
+    prompt: 'Inled din åsikt: ”enligt mig”', promptEn: 'Introduce your view: "in my opinion"',
+    fr: 'à mon avis', sv: 'enligt mig / som jag ser det', en: 'in my opinion',
+    ipa: '/a mɔ̃.n‿a.vi/',
+    note: 'Prepositionen är **à**, inte *dans*: *dans mon avis* är ett vanligt fel. **Avis** är maskulint, och bindningen ger [mɔ̃navi].',
+    noteEn: 'The preposition is **à**, not *dans*: *dans mon avis* is a common mistake. **Avis** is masculine, and the liaison gives [mɔ̃navi].',
+  }),
+  vocab(D, 'fr-u19-je-pense-que', {
+    prompt: 'Det vanligaste sättet att säga vad man tycker', promptEn: 'The most common way to say what you think',
+    fr: 'je pense que', sv: 'jag tycker att / jag tror att', en: 'I think that',
+    ipa: '/ʒə pɑ̃s kə/',
+    note: 'Jakande **je pense que** följs av indikativ: *je pense qu’il a raison*. Nekande **je ne pense pas que** följs av **subjonctif**: *je ne pense pas qu’il ait raison*.',
+    noteEn: 'Affirmative **je pense que** takes the indicative: *je pense qu’il a raison*. Negative **je ne pense pas que** takes the **subjunctive**: *je ne pense pas qu’il ait raison*.',
+  }),
+  vocab(D, 'fr-u19-je-trouve-que', {
+    prompt: 'Säga vad man tycker om något man upplevt', promptEn: 'Say what you think of something you’ve experienced',
+    fr: 'je trouve que', sv: 'jag tycker att', en: 'I find that / I think that',
+    ipa: '/ʒə tʁuv kə/',
+    note: '**Trouver** (hitta) används för omdömen, precis som svenskans *tycka*: *je trouve ce film nul* = jag tycker att filmen är usel.',
+    noteEn: '**Trouver** (to find) is used for judgements: *je trouve ce film nul* = I think this film is rubbish.',
+  }),
+  vocab(D, 'fr-u19-je-ne-crois-pas-que', {
+    prompt: 'Uttrycka tvivel: ”jag tror inte att”', promptEn: 'Express doubt: "I don’t think that"',
+    fr: 'je ne crois pas que', sv: 'jag tror inte att', en: 'I don’t believe that',
+    ipa: '/ʒə nə kʁwa pa kə/',
+    note: 'Tvivel utlöser **subjonctif**: *je ne crois pas que ce soit vrai*. Det är samma regel som för *penser*: osäkerhet kräver konjunktiv.',
+    noteEn: 'Doubt triggers the **subjunctive**: *je ne crois pas que ce soit vrai*. Same rule as *penser*: uncertainty calls for the subjunctive.',
+  }),
+  vocab(D, 'fr-u19-etre-daccord', {
+    prompt: 'Hålla med någon', promptEn: 'Agree with someone',
+    fr: 'être d’accord', sv: 'hålla med / vara överens', en: 'to agree',
+    ipa: '/ɛtʁ da.kɔʁ/',
+    note: 'Franskan använder **être**: *je suis d’accord avec toi*. Ensamt betyder **d’accord** ”okej”, ofta förkortat **d’acc** i talspråk.',
+    noteEn: 'French uses **être**: *je suis d’accord avec toi* (I am in agreement). On its own, **d’accord** means "OK", often shortened to **d’acc** in speech.',
+  }),
+  vocab(D, 'fr-u19-avoir-raison-tort', {
+    prompt: 'Ha rätt och ha fel', promptEn: 'Be right and be wrong',
+    fr: 'avoir raison / avoir tort', sv: 'ha rätt / ha fel', en: 'to be right / to be wrong',
+    ipa: '/a.vwaʁ ʁɛ.zɔ̃/ /a.vwaʁ tɔʁ/',
+    note: 'Som svenskan använder franskan **avoir** (ha), medan engelskan säger *be*. **Raison** betyder också förnuft och skäl.',
+    noteEn: 'French uses **avoir** (have), not *être*: *tu as raison* = you are right. **Raison** also means reason, both reasoning and cause.',
+  }),
+  vocab(D, 'fr-u19-point-de-vue', {
+    prompt: 'Hur man ser på en fråga', promptEn: 'How you see an issue',
+    fr: 'un point de vue', sv: 'en synvinkel / en ståndpunkt', en: 'a point of view',
+    ipa: '/œ̃ pwɛ̃ də vy/',
+    note: '*De mon point de vue* = ur min synvinkel. *Je comprends ton point de vue, mais...* är ett artigt sätt att inleda en invändning.',
+    noteEn: '*De mon point de vue* = from my point of view. *Je comprends ton point de vue, mais...* is a polite way to start disagreeing.',
+  }),
+  vocab(D, 'fr-u19-en-revanche', {
+    prompt: 'Sambandsord för en motsats', promptEn: 'Linking word for a contrast',
+    fr: 'en revanche', sv: 'däremot', en: 'on the other hand',
+    ipa: '/ɑ̃ ʁə.vɑ̃ʃ/',
+    note: '**Revanche** betyder revansch, men *en revanche* är bara ett neutralt ”däremot”. Synonymen **par contre** är vanligare i talspråk.',
+    noteEn: '**Revanche** means revenge, but *en revanche* is just a neutral "on the other hand". The synonym **par contre** is more common in speech.',
+  }),
+  vocab(D, 'fr-u19-ca-depend', {
+    prompt: 'Svara att det beror på', promptEn: 'Answer that it depends',
+    fr: 'ça dépend', sv: 'det beror på', en: 'it depends',
+    ipa: '/sa de.pɑ̃/',
+    note: 'Följs av **de**: *ça dépend du temps* = det beror på vädret. Det svenska *på* blir alltså *de*, inte *sur*.',
+    noteEn: 'Followed by **de**: *ça dépend du temps* = it depends on the weather. English *on* becomes *de*, not *sur*.',
+  }),
+  vocab(D, 'fr-u19-il-est-important-que', {
+    prompt: 'Betona att något är viktigt', promptEn: 'Stress that something matters',
+    fr: 'il est important que', sv: 'det är viktigt att', en: 'it is important that',
+    ipa: '/i.l‿ɛ.t‿ɛ̃.pɔʁ.tɑ̃ kə/',
+    note: 'Opersonliga uttryck för behov, vilja eller värdering följs av **subjonctif**: *il est important que tu viennes*. I talspråk säger man ofta *c’est important que*.',
+    noteEn: 'Impersonal phrases of need, will or judgement take the **subjunctive**: *il est important que tu viennes*. In speech people often say *c’est important que*.',
+  }),
+  vocab(D, 'fr-u19-bof', {
+    prompt: 'Det franska ljudet för ljum entusiasm', promptEn: 'The French sound of lukewarm enthusiasm',
+    fr: 'bof', sv: 'sådär / njae', en: 'meh / not really',
+    ipa: '/bɔf/',
+    note: 'Sägs gärna med en axelryckning och utskjuten underläpp. *C’était bien, le film ? Bof.* = Var filmen bra? Sådär.',
+    noteEn: 'Best said with a shrug and a pout. *C’était bien, le film ? Bof.* = Was the film good? Meh.',
+  }),
+  vocab(D, 'fr-u19-raler', {
+    prompt: 'Klaga och gnälla, ofta för sakens skull', promptEn: 'Complain and grumble, often for the sake of it',
+    fr: 'râler', sv: 'gnälla / klaga', en: 'to grumble / to moan',
+    ipa: '/ʁɑ.le/',
+    note: 'Fransmännen säger själva att de är ett folk av **râleurs**. Att gnälla är ofta ett sätt att skapa samhörighet, inte ett tecken på att man är olycklig.',
+    noteEn: 'The French readily call themselves a nation of **râleurs** (grumblers). Grumbling is often a way of bonding, not a sign of real unhappiness.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u19-pas-une-bonne-idee', {
+    prompt: 'Säg att du inte tror att det är en bra idé', promptEn: 'Say you don’t think it’s a good idea',
+    fr: 'Je ne pense pas que ce soit une bonne idée.', sv: 'Jag tror inte att det är en bra idé.', en: 'I don’t think it’s a good idea.',
+    ipa: '/ʒə nə pɑ̃s pa kə sə swa yn bɔn i.de/',
+    note: '**Soit** är subjonctif av *être*, utlöst av nekningen. Jämför jakande: *je pense que c’est une bonne idée*.',
+    noteEn: '**Soit** is the subjunctive of *être*, triggered by the negation. Compare the affirmative: *je pense que c’est une bonne idée*.',
+    gloss: [['je ne pense pas', 'jag tror inte', 'I don’t think'], ['que', 'att', 'that'], ['ce soit', 'det är', 'it is'], ['une bonne idée', 'en bra idé', 'a good idea']],
+  }),
+  phrase(D, 'fr-u19-il-faudrait-que', {
+    prompt: 'Säg att kommunen enligt dig borde göra mer för cyklister', promptEn: 'Say that in your view the town should do more for cyclists',
+    fr: 'À mon avis, il faudrait que la mairie fasse plus pour les vélos.', sv: 'Enligt mig borde kommunen göra mer för cyklisterna.', en: 'In my opinion, the council should do more for cyclists.',
+    ipa: '/a mɔ̃.n‿a.vi il fo.dʁɛ kə la me.ʁi fas plys puʁ le ve.lo/',
+    note: '**Il faudrait que** (det skulle behövas att) är en mjukare variant av *il faut que*, också med **subjonctif**: *fasse* av *faire*. **Plus** betyder här *mer* och uttalas [plys].',
+    noteEn: '**Il faudrait que** (it would be necessary that) is a softer *il faut que*, also with the **subjunctive**: *fasse* from *faire*. **Plus** here means *more* and is pronounced [plys].',
+    gloss: [['à mon avis', 'enligt mig', 'in my opinion'], ['il faudrait que', 'borde', 'should'], ['la mairie', 'kommunen', 'the council'], ['fasse', 'göra', 'do'], ['plus', 'mer', 'more'], ['pour les vélos', 'för cyklarna', 'for bikes']],
+  }),
+  phrase(D, 'fr-u19-tout-a-fait-daccord', {
+    prompt: 'Säg till en vän att du håller med till fullo', promptEn: 'Tell a friend you completely agree',
+    fr: 'Je suis tout à fait d’accord avec toi.', sv: 'Jag håller helt och hållet med dig.', en: 'I completely agree with you.',
+    ipa: '/ʒə sɥi tu.t‿a fɛ da.kɔʁ a.vɛk twa/',
+    note: '**Tout à fait** = helt, absolut, och fungerar också ensamt som ett entusiastiskt ”precis!”. Bindningen ger [tutafɛ].',
+    noteEn: '**Tout à fait** = completely, absolutely, and also works alone as an enthusiastic "exactly!". The liaison gives [tutafɛ].',
+    gloss: [['je suis', 'jag är', 'I am'], ['tout à fait', 'helt', 'completely'], ['d’accord', 'överens', 'in agreement'], ['avec toi', 'med dig', 'with you']],
+  }),
+  phrase(D, 'fr-u19-tu-as-raison-mais', {
+    prompt: 'Ge vännen rätt på en punkt, men säg att du ser saken annorlunda', promptEn: 'Grant your friend one point, but say you see things differently',
+    fr: 'Tu as raison sur ce point, mais je vois les choses autrement.', sv: 'Du har rätt på den punkten, men jag ser annorlunda på saken.', en: 'You’re right on that point, but I see things differently.',
+    ipa: '/ty a ʁɛ.zɔ̃ syʁ sə pwɛ̃ mɛ ʒə vwa le ʃoz o.tʁə.mɑ̃/',
+    note: 'Att ge motparten rätt först och sedan invända är grundtekniken i en fransk diskussion. **Autrement** = annorlunda, på ett annat sätt.',
+    noteEn: 'Conceding a point before objecting is the basic move in a French discussion. **Autrement** = differently, otherwise.',
+    gloss: [['tu as raison', 'du har rätt', 'you’re right'], ['sur ce point', 'på den punkten', 'on that point'], ['mais', 'men', 'but'], ['je vois', 'jag ser', 'I see'], ['les choses', 'saken', 'things'], ['autrement', 'annorlunda', 'differently']],
+  }),
+  phrase(D, 'fr-u19-francais-ralent', {
+    prompt: 'Säg att du tycker att fransmän gnäller mycket, men ofta med goda skäl', promptEn: 'Say you find the French grumble a lot, but often for good reasons',
+    fr: 'Je trouve que les Français râlent beaucoup, mais ils ont souvent de bonnes raisons.', sv: 'Jag tycker att fransmän gnäller mycket, men de har ofta goda skäl.', en: 'I find the French grumble a lot, but they often have good reasons.',
+    ipa: '/ʒə tʁuv kə le fʁɑ̃.sɛ ʁɑl bo.ku mɛ il.z‿ɔ̃ su.vɑ̃ də bɔn ʁɛ.zɔ̃/',
+    note: 'Folket skrivs med stor bokstav (**les Français**), språket och adjektivet med liten (*le français*). **Des** blir **de** framför ett adjektiv: *de bonnes raisons*.',
+    noteEn: 'The people take a capital (**les Français**), the language and adjective don’t (*le français*). **Des** becomes **de** before an adjective: *de bonnes raisons*.',
+    gloss: [['je trouve que', 'jag tycker att', 'I find that'], ['les Français', 'fransmännen', 'the French'], ['râlent', 'gnäller', 'grumble'], ['beaucoup', 'mycket', 'a lot'], ['mais', 'men', 'but'], ['ils ont', 'de har', 'they have'], ['souvent', 'ofta', 'often'], ['de bonnes raisons', 'goda skäl', 'good reasons']],
+  }),
+  phrase(D, 'fr-u19-ca-metonnerait', {
+    prompt: 'Säg att det skulle förvåna dig om han kom', promptEn: 'Say you’d be surprised if he came',
+    fr: 'Ça m’étonnerait qu’il vienne.', sv: 'Det skulle förvåna mig om han kom.', en: 'I’d be surprised if he came.',
+    ipa: '/sa me.tɔn.ʁɛ kil vjɛn/',
+    note: 'Ett mycket franskt sätt att säga ”det tror jag inte”. Känslor och tvivel kräver **subjonctif**: *vienne* av *venir*, där svenskan och engelskan säger *om han kom*.',
+    noteEn: 'A very French way of saying "I doubt it". Feelings and doubt require the **subjunctive**: *vienne* from *venir*, where English says *if he came*.',
+    gloss: [['ça m’étonnerait', 'det skulle förvåna mig', 'I’d be surprised'], ['qu’il', 'om han', 'if he'], ['vienne', 'kom', 'came']],
+  }),
+  phrase(D, 'fr-u19-pas-davis', {
+    prompt: 'Säg ärligt att du inte har någon åsikt i frågan', promptEn: 'Honestly say you have no opinion on the matter',
+    fr: 'Franchement, je n’ai pas d’avis sur la question.', sv: 'Ärligt talat har jag ingen åsikt i frågan.', en: 'Honestly, I don’t have an opinion on that.',
+    ipa: '/fʁɑ̃ʃ.mɑ̃ ʒə ne pa da.vi syʁ la kɛs.tjɔ̃/',
+    note: 'Efter nekning blir **un** till **de**: *j’ai un avis* men *je n’ai pas d’avis*. **Franchement** inleder ofta en ärlig, ibland lite burdus kommentar.',
+    noteEn: 'After a negative, **un** becomes **de**: *j’ai un avis* but *je n’ai pas d’avis*. **Franchement** often opens a frank, sometimes blunt remark.',
+    gloss: [['franchement', 'ärligt talat', 'honestly'], ['je n’ai pas', 'jag har inte', 'I don’t have'], ['d’avis', 'någon åsikt', 'an opinion'], ['sur la question', 'i frågan', 'on the matter']],
+  }),
+  phrase(D, 'fr-u19-chacun-puisse', {
+    prompt: 'Säg att det är viktigt att alla kan säga sin åsikt', promptEn: 'Say it’s important that everyone can give their opinion',
+    fr: 'Il est important que chacun puisse donner son avis.', sv: 'Det är viktigt att alla kan säga sin åsikt.', en: 'It’s important that everyone can give their opinion.',
+    ipa: '/i.l‿ɛ.t‿ɛ̃.pɔʁ.tɑ̃ kə ʃa.kœ̃ pɥis dɔ.ne sɔ̃.n‿a.vi/',
+    note: '**Puisse** är subjonctif av *pouvoir*, en av de oregelbundna formerna man måste kunna utantill. **Chacun** (var och en) är singular: *son avis*, inte *leur avis*.',
+    noteEn: '**Puisse** is the subjunctive of *pouvoir*, one of the irregular forms to learn by heart. **Chacun** (each one) is singular: *son avis*, not *leur avis*.',
+    gloss: [['il est important', 'det är viktigt', 'it’s important'], ['que', 'att', 'that'], ['chacun', 'alla / var och en', 'everyone'], ['puisse', 'kan', 'can'], ['donner', 'säga', 'give'], ['son avis', 'sin åsikt', 'their opinion']],
+  }),
+];

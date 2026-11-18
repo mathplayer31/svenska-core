@@ -1,0 +1,162 @@
+// FranceCore, Unité 10 : Le travail et les études.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT10_DECK = unitDeck({
+  n: 10, slug: 'fr-unit-10-work', sv: 'Jobb och studier', en: 'Work and studies',
+  level: 'A2', section: 'fr-section-3-ma-vie', after: 'fr-unit-9-day',
+});
+const D = UNIT10_DECK.slug;
+
+export const UNIT10_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u10-travail', {
+    prompt: 'Det man gör för att tjäna pengar', promptEn: 'What you do to earn money',
+    fr: 'le travail', sv: 'arbetet / jobbet', en: 'work / the job',
+    ipa: '/lə tʁa.vaj/',
+    note: 'Plural: **les travaux**, som också betyder renovering eller vägarbete. I vardagligt tal säger man **le boulot**.',
+    noteEn: 'Plural: **les travaux**, which also means building works or roadworks. In everyday speech people say **le boulot**.',
+  }),
+  vocab(D, 'fr-u10-metier', {
+    prompt: 'Det yrke man har', promptEn: 'The trade or profession you have',
+    fr: 'le métier', sv: 'yrket', en: 'the profession / the trade',
+    ipa: '/lə me.tje/',
+    note: '**Métier** är yrket man lärt sig, *le travail* är själva jobbet. *Quel est ton métier ?* = vad har du för yrke?',
+    noteEn: '**Métier** is the trade you have learned, *le travail* the job itself. *Quel est ton métier ?* = what’s your profession?',
+  }),
+  vocab(D, 'fr-u10-bureau', {
+    prompt: 'Platsen eller möbeln där man arbetar', promptEn: 'The place or the piece of furniture where you work',
+    fr: 'le bureau', sv: 'kontoret / skrivbordet', en: 'the office / the desk',
+    ipa: '/lə by.ʁo/',
+    note: 'Betyder både kontor och skrivbord. Plural med **-x**: *les bureaux*. **eau** uttalas [o].',
+    noteEn: 'Means both office and desk. Plural with **-x**: *les bureaux*. **eau** is pronounced [o].',
+  }),
+  vocab(D, 'fr-u10-collegue', {
+    prompt: 'En person du arbetar med', promptEn: 'A person you work with',
+    fr: 'le / la collègue', sv: 'kollegan', en: 'the colleague',
+    ipa: '/lə kɔ.lɛɡ/ /la kɔ.lɛɡ/',
+    note: 'Samma form för båda könen. Med kollegor tar man ofta i hand eller gör *la bise*, beroende på arbetsplatsen.',
+    noteEn: 'Same form for both genders. Colleagues shake hands or do *la bise*, depending on the workplace.',
+  }),
+  vocab(D, 'fr-u10-chef', {
+    prompt: 'Den som bestämmer på jobbet', promptEn: 'The person in charge at work',
+    fr: 'le chef / la cheffe', sv: 'chefen', en: 'the boss / the manager',
+    ipa: '/lə ʃɛf/ /la ʃɛf/',
+    note: '**Chef** betyder chef i allmänhet, inte bara kock (*le chef cuisinier*). Femininformen **cheffe** är ny och vanlig, men man hör också *la chef*.',
+    noteEn: '**Chef** means boss in general, not just a cook (*le chef cuisinier*). The feminine **cheffe** is recent and common, but *la chef* is also heard.',
+  }),
+  vocab(D, 'fr-u10-entreprise', {
+    prompt: 'Ett företag', promptEn: 'A company',
+    fr: 'l’entreprise', sv: 'företaget', en: 'the company / the business',
+    ipa: '/lɑ̃.tʁə.pʁiz/',
+    note: 'Femininum: *une entreprise*. **s** mellan två vokaler uttalas [z]: [ɑ̃tʁəpʁiz].',
+    noteEn: 'Feminine: *une entreprise*. An **s** between two vowels is [z]: [ɑ̃tʁəpʁiz].',
+  }),
+  vocab(D, 'fr-u10-fac', {
+    prompt: 'Universitetet, i vardagligt tal', promptEn: 'University, in everyday speech',
+    fr: 'la fac', sv: 'universitetet / plugget', en: 'uni / college',
+    ipa: '/la fak/',
+    note: 'Kortform för *la faculté*. **Aller à la fac** = gå på universitetet. De statliga universiteten är nästan avgiftsfria.',
+    noteEn: 'Short for *la faculté*. **Aller à la fac** = to go to university. State universities charge only a small registration fee.',
+  }),
+  vocab(D, 'fr-u10-etudiant', {
+    prompt: 'En person som studerar vid universitetet', promptEn: 'Someone who studies at university',
+    fr: 'l’étudiant / l’étudiante', sv: 'studenten', en: 'the student',
+    ipa: '/le.ty.djɑ̃/ /le.ty.djɑ̃t/',
+    note: 'I maskulinum är **t** stumt, i femininum uttalas det: [etydjɑ̃] / [etydjɑ̃t]. En skolelev heter *un élève*.',
+    noteEn: 'In the masculine the **t** is silent, in the feminine it is sounded: [etydjɑ̃] / [etydjɑ̃t]. A school pupil is *un élève*.',
+  }),
+  vocab(D, 'fr-u10-stage', {
+    prompt: 'En praktikperiod på ett företag', promptEn: 'A work placement at a company',
+    fr: 'le stage', sv: 'praktiken', en: 'the internship',
+    ipa: '/lə staʒ/',
+    note: 'Praktikanten heter **le / la stagiaire**. Praktik är en vanlig del av franska utbildningar. **g** före *e* uttalas [ʒ], som i *journal*.',
+    noteEn: 'The intern is **le / la stagiaire**. Internships are a standard part of French degrees. **g** before *e* is [ʒ], like the s in *pleasure*.',
+  }),
+  vocab(D, 'fr-u10-horaires', {
+    prompt: 'Tiderna då man börjar och slutar', promptEn: 'The times you start and finish',
+    fr: 'les horaires', sv: 'arbetstiderna / tiderna', en: 'the hours / the timetable',
+    ipa: '/le.zɔ.ʁɛʁ/',
+    note: 'Maskulinum plural. **h** är stumt, så *les* binds: [lez‿ɔʁɛʁ]. Betyder också tidtabell: *les horaires du train*.',
+    noteEn: 'Masculine plural. The **h** is silent, so *les* links: [lez‿ɔʁɛʁ]. Also means timetable: *les horaires du train*.',
+  }),
+  vocab(D, 'fr-u10-pause-dejeuner', {
+    prompt: 'Lunchrasten', promptEn: 'The lunch break',
+    fr: 'la pause déjeuner', sv: 'lunchrasten', en: 'the lunch break',
+    ipa: '/la poz de.ʒœ.ne/',
+    note: '**au** uttalas [o] och **s** mellan vokaler [z]: [poz]. Kaffepausen heter **la pause café**, men någon riktig motsvarighet till fikat finns inte.',
+    noteEn: '**au** is [o] and an **s** between vowels is [z]: [poz]. The coffee break is **la pause café**.',
+  }),
+  vocab(D, 'fr-u10-infirmier', {
+    prompt: 'Yrket: sjuksköterska', promptEn: 'The profession: nurse',
+    fr: 'infirmier / infirmière', sv: 'sjuksköterska', en: 'nurse',
+    ipa: '/ɛ̃.fiʁ.mje/ /ɛ̃.fiʁ.mjɛʁ/',
+    note: 'Många yrken har en form för varje kön: **-ier / -ière**, som *boulanger / boulangère*. **in** framför konsonant är nasalt, [ɛ̃].',
+    noteEn: 'Many job titles have a form for each gender: **-ier / -ière**, like *boulanger / boulangère*. **in** before a consonant is nasal, [ɛ̃].',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u10-dans-la-vie', {
+    prompt: 'Fråga någon vad hen jobbar med', promptEn: 'Ask someone what they do for a living',
+    fr: 'Qu’est-ce que tu fais dans la vie ?', sv: 'Vad jobbar du med?', en: 'What do you do for a living?',
+    ipa: '/kɛs.kə ty fɛ dɑ̃ la vi/',
+    note: 'Ordagrant ”vad gör du i livet?”. **Qu’est-ce que** inleder en fråga om saker och uttalas som ett ord, [kɛskə].',
+    noteEn: 'Literally "what do you do in life?". **Qu’est-ce que** introduces a question about things and is said as one word, [kɛskə].',
+    gloss: [['qu’est-ce que', 'vad', 'what'], ['tu', 'du', 'you'], ['fais', 'gör', 'do'], ['dans la vie', 'i livet', 'in life']],
+  }),
+  phrase(D, 'fr-u10-infirmiere-hopital', {
+    prompt: 'Säg att du (kvinna) är sjuksköterska på ett sjukhus', promptEn: 'Say you (a woman) are a nurse in a hospital',
+    fr: 'Je suis infirmière dans un hôpital.', sv: 'Jag är sjuksköterska på ett sjukhus.', en: 'I’m a nurse in a hospital.',
+    ipa: '/ʒə sɥi ɛ̃.fiʁ.mjɛʁ dɑ̃.zœ̃.nɔ.pi.tal/',
+    note: 'Ingen artikel framför yrket, precis som på svenska (men inte som engelskans *a nurse*). **Hôpital** är maskulinum och **h** är stumt: [œ̃n‿ɔpital].',
+    noteEn: 'No article before a profession, unlike English *a nurse*. **Hôpital** is masculine and the **h** is silent: [œ̃n‿ɔpital].',
+    gloss: [['je', 'jag', 'I'], ['suis', 'är', 'am'], ['infirmière', 'sjuksköterska', 'a nurse'], ['dans', 'på', 'in'], ['un hôpital', 'ett sjukhus', 'a hospital']],
+  }),
+  phrase(D, 'fr-u10-banque-lyon', {
+    prompt: 'Säg att du jobbar på en bank i Lyon', promptEn: 'Say you work at a bank in Lyon',
+    fr: 'Je travaille dans une banque à Lyon.', sv: 'Jag jobbar på en bank i Lyon.', en: 'I work at a bank in Lyon.',
+    ipa: '/ʒə tʁa.vaj dɑ̃.zyn bɑ̃k a ljɔ̃/',
+    note: '**Dans** + typ av arbetsplats, men **chez** + företagets namn: *je travaille chez Renault*. **Lyon** uttalas [ljɔ̃], utan n-ljud.',
+    noteEn: '**Dans** + a type of workplace, but **chez** + the company’s name: *je travaille chez Renault*. **Lyon** is [ljɔ̃], with no n sound.',
+    gloss: [['je', 'jag', 'I'], ['travaille', 'jobbar', 'work'], ['dans', 'på', 'at'], ['une banque', 'en bank', 'a bank'], ['à', 'i', 'in'], ['Lyon', 'Lyon', 'Lyon']],
+  }),
+  phrase(D, 'fr-u10-commence-stage', {
+    prompt: 'Säg att du började din praktik i måndags', promptEn: 'Say you started your internship on Monday',
+    fr: 'J’ai commencé mon stage lundi.', sv: 'Jag började min praktik i måndags.', en: 'I started my internship on Monday.',
+    ipa: '/ʒe kɔ.mɑ̃.se mɔ̃ staʒ lœ̃.di/',
+    note: '**Lundi** utan artikel = i måndags eller på måndag. **Le lundi** = på måndagar, varje vecka. Veckodagar skrivs med liten bokstav.',
+    noteEn: '**Lundi** with no article = last Monday or next Monday. **Le lundi** = on Mondays, every week. Days are written in lower case.',
+    gloss: [['j’ai commencé', 'jag började', 'I started'], ['mon', 'min', 'my'], ['stage', 'praktik', 'internship'], ['lundi', 'i måndags', 'on Monday']],
+  }),
+  phrase(D, 'fr-u10-etudes-droit', {
+    prompt: 'Säg att du läser juridik', promptEn: 'Say you’re studying law',
+    fr: 'Je fais des études de droit.', sv: 'Jag läser juridik.', en: 'I’m studying law.',
+    ipa: '/ʒə fɛ de.ze.tyd də dʁwa/',
+    note: '**Faire des études de** + ämne = studera något vid universitetet. **Le droit** betyder juridik, men också rättighet.',
+    noteEn: '**Faire des études de** + subject = to study something at university. **Le droit** means law, and also a right.',
+    gloss: [['je', 'jag', 'I'], ['fais des études', 'läser', 'am studying'], ['de droit', 'juridik', 'law']],
+  }),
+  phrase(D, 'fr-u10-neuf-dix-huit', {
+    prompt: 'Säg att du jobbar från nio till sex', promptEn: 'Say you work from nine to six',
+    fr: 'Je travaille de neuf heures à dix-huit heures.', sv: 'Jag jobbar från nio till sex.', en: 'I work from nine to six.',
+    ipa: '/ʒə tʁa.vaj də nœ.vœʁ a di.zɥi.tœʁ/',
+    note: 'Lägg märke till uttalet: **neuf heures** blir [nœvœʁ], f:et blir v. **De ... à** = från ... till. Lagstadgad arbetstid är 35 timmar i veckan.',
+    noteEn: 'Note the sound: **neuf heures** becomes [nœvœʁ], the f turns into v. **De ... à** = from ... to. The legal working week is 35 hours.',
+    gloss: [['je', 'jag', 'I'], ['travaille', 'jobbar', 'work'], ['de', 'från', 'from'], ['neuf heures', 'nio', 'nine'], ['à', 'till', 'to'], ['dix-huit heures', 'sex på kvällen', 'six pm']],
+  }),
+  phrase(D, 'fr-u10-cantine', {
+    prompt: 'Berätta att du äter i personalmatsalen vid lunch', promptEn: 'Say you eat in the canteen at lunchtime',
+    fr: 'Le midi, je mange à la cantine.', sv: 'Vid lunch äter jag i personalmatsalen.', en: 'At lunchtime I eat in the canteen.',
+    ipa: '/lə mi.di ʒə mɑ̃ʒ a la kɑ̃.tin/',
+    note: '**Le midi** = vid lunchtid, varje dag. Utan matsal får många anställda **des tickets-restaurant**, lunchkuponger. Att äta vid skrivbordet ses inte gärna.',
+    noteEn: '**Le midi** = at lunchtime, every day. Without a canteen, many employees get **des tickets-restaurant**, meal vouchers. Eating at your desk is frowned upon.',
+    gloss: [['le midi', 'vid lunch', 'at lunchtime'], ['je', 'jag', 'I'], ['mange', 'äter', 'eat'], ['à la cantine', 'i personalmatsalen', 'in the canteen']],
+  }),
+  phrase(D, 'fr-u10-lui-envoyer', {
+    prompt: 'Säg att du ska skicka rapporten till din chef (kvinna) i morgon', promptEn: 'Say you’ll send the report to your (female) boss tomorrow',
+    fr: 'Je vais lui envoyer le rapport demain.', sv: 'Jag ska skicka rapporten till henne i morgon.', en: 'I’m going to send her the report tomorrow.',
+    ipa: '/ʒə vɛ lɥi ɑ̃.vwa.je lə ʁa.pɔʁ də.mɛ̃/',
+    note: '**Lui** = till honom **eller** till henne: samma ord för båda. Det står före infinitiven: *je vais **lui** envoyer*.',
+    noteEn: '**Lui** = to him **or** to her: the same word for both. It goes before the infinitive: *je vais **lui** envoyer*.',
+    gloss: [['je vais', 'jag ska', 'I’m going to'], ['lui', 'till henne', 'her'], ['envoyer', 'skicka', 'send'], ['le rapport', 'rapporten', 'the report'], ['demain', 'i morgon', 'tomorrow']],
+  }),
+];

@@ -1,48 +1,49 @@
 import { createClient } from '@supabase/supabase-js';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, existsSync, statSync, rmSync, writeFileSync } from 'node:fs';
-import { UNIT1_DECK, UNIT1_CARDS } from '../content/a1/unit01-greetings.mjs';
-import { UNIT2_DECK, UNIT2_CARDS } from '../content/a1/unit02-cafe.mjs';
-import { UNIT3_DECK, UNIT3_CARDS } from '../content/a1/unit03-family.mjs';
-import { UNIT4_DECK, UNIT4_CARDS } from '../content/a1/unit04-shopping.mjs';
-import { UNIT5_DECK, UNIT5_CARDS } from '../content/a1/unit05-restaurant.mjs';
-import { UNIT6_DECK, UNIT6_CARDS } from '../content/a1/unit06-transport.mjs';
-import { UNIT7_DECK, UNIT7_CARDS } from '../content/a1/unit07-weather.mjs';
-import { UNIT8_DECK, UNIT8_CARDS } from '../content/a2/unit08-home.mjs';
-import { UNIT9_DECK, UNIT9_CARDS } from '../content/a2/unit09-day.mjs';
-import { UNIT10_DECK, UNIT10_CARDS } from '../content/a2/unit10-work.mjs';
-import { UNIT11_DECK, UNIT11_CARDS } from '../content/a2/unit11-free-time.mjs';
-import { UNIT12_DECK, UNIT12_CARDS } from '../content/a2/unit12-health.mjs';
-import { UNIT13_DECK, UNIT13_CARDS } from '../content/a2/unit13-clothes.mjs';
-import { UNIT14_DECK, UNIT14_CARDS } from '../content/a2/unit14-traditions.mjs';
-import { UNIT15_DECK, UNIT15_CARDS } from '../content/a2/unit15-plans.mjs';
-import { GRAMMAR_A2_DECK, GRAMMAR_A2_CARDS } from '../content/a2/grammar.mjs';
-import { UNIT16_DECK, UNIT16_CARDS } from '../content/b1/unit16-paperwork.mjs';
-import { UNIT17_DECK, UNIT17_CARDS } from '../content/b1/unit17-neighbours.mjs';
-import { UNIT18_DECK, UNIT18_CARDS } from '../content/b1/unit18-job-hunting.mjs';
-import { UNIT19_DECK, UNIT19_CARDS } from '../content/b1/unit19-opinions.mjs';
-import { UNIT20_DECK, UNIT20_CARDS } from '../content/b1/unit20-nature.mjs';
-import { UNIT21_DECK, UNIT21_CARDS } from '../content/b1/unit21-news.mjs';
-import { UNIT22_DECK, UNIT22_CARDS } from '../content/b1/unit22-emotions.mjs';
-import { UNIT23_DECK, UNIT23_CARDS } from '../content/b1/unit23-stories.mjs';
-import { GRAMMAR_B1_DECK, GRAMMAR_B1_CARDS } from '../content/b1/grammar.mjs';
-import { UNIT24_DECK, UNIT24_CARDS } from '../content/b2/unit24-professional.mjs';
-import { UNIT25_DECK, UNIT25_CARDS } from '../content/b2/unit25-economy.mjs';
-import { UNIT26_DECK, UNIT26_CARDS } from '../content/b2/unit26-welfare.mjs';
-import { UNIT27_DECK, UNIT27_CARDS } from '../content/b2/unit27-climate.mjs';
-import { UNIT28_DECK, UNIT28_CARDS } from '../content/b2/unit28-idioms.mjs';
-import { UNIT29_DECK, UNIT29_CARDS } from '../content/b2/unit29-arguing.mjs';
-import { UNIT30_DECK, UNIT30_CARDS } from '../content/b2/unit30-registers.mjs';
-import { UNIT31_DECK, UNIT31_CARDS } from '../content/b2/unit31-history.mjs';
-import { GRAMMAR_B2_DECK, GRAMMAR_B2_CARDS } from '../content/b2/grammar.mjs';
-import { GRAMMAR_CARDS } from '../content/a1/grammar.mjs';
-import { SECTIONS } from '../content/sections.mjs';
-import { FOUNDATION_DECKS, FOUNDATION_CARDS } from '../content/a1/foundations.mjs';
-import { CARDS_EN, DECKS_EN, SECTIONS_EN } from '../content/a1/en.mjs';
-import { NOTES_EN_A1, IPA_EN } from '../content/a1/notes-en.mjs';
-import { NOTES_EN_A2 } from '../content/a2/notes-en.mjs';
-import { NOTES_EN_B1 } from '../content/b1/notes-en.mjs';
-import { NOTES_EN_B2 } from '../content/b2/notes-en.mjs';
+import { UNIT1_DECK, UNIT1_CARDS } from '../content/sv/a1/unit01-greetings.mjs';
+import { UNIT2_DECK, UNIT2_CARDS } from '../content/sv/a1/unit02-cafe.mjs';
+import { UNIT3_DECK, UNIT3_CARDS } from '../content/sv/a1/unit03-family.mjs';
+import { UNIT4_DECK, UNIT4_CARDS } from '../content/sv/a1/unit04-shopping.mjs';
+import { UNIT5_DECK, UNIT5_CARDS } from '../content/sv/a1/unit05-restaurant.mjs';
+import { UNIT6_DECK, UNIT6_CARDS } from '../content/sv/a1/unit06-transport.mjs';
+import { UNIT7_DECK, UNIT7_CARDS } from '../content/sv/a1/unit07-weather.mjs';
+import { UNIT8_DECK, UNIT8_CARDS } from '../content/sv/a2/unit08-home.mjs';
+import { UNIT9_DECK, UNIT9_CARDS } from '../content/sv/a2/unit09-day.mjs';
+import { UNIT10_DECK, UNIT10_CARDS } from '../content/sv/a2/unit10-work.mjs';
+import { UNIT11_DECK, UNIT11_CARDS } from '../content/sv/a2/unit11-free-time.mjs';
+import { UNIT12_DECK, UNIT12_CARDS } from '../content/sv/a2/unit12-health.mjs';
+import { UNIT13_DECK, UNIT13_CARDS } from '../content/sv/a2/unit13-clothes.mjs';
+import { UNIT14_DECK, UNIT14_CARDS } from '../content/sv/a2/unit14-traditions.mjs';
+import { UNIT15_DECK, UNIT15_CARDS } from '../content/sv/a2/unit15-plans.mjs';
+import { GRAMMAR_A2_DECK, GRAMMAR_A2_CARDS } from '../content/sv/a2/grammar.mjs';
+import { UNIT16_DECK, UNIT16_CARDS } from '../content/sv/b1/unit16-paperwork.mjs';
+import { UNIT17_DECK, UNIT17_CARDS } from '../content/sv/b1/unit17-neighbours.mjs';
+import { UNIT18_DECK, UNIT18_CARDS } from '../content/sv/b1/unit18-job-hunting.mjs';
+import { UNIT19_DECK, UNIT19_CARDS } from '../content/sv/b1/unit19-opinions.mjs';
+import { UNIT20_DECK, UNIT20_CARDS } from '../content/sv/b1/unit20-nature.mjs';
+import { UNIT21_DECK, UNIT21_CARDS } from '../content/sv/b1/unit21-news.mjs';
+import { UNIT22_DECK, UNIT22_CARDS } from '../content/sv/b1/unit22-emotions.mjs';
+import { UNIT23_DECK, UNIT23_CARDS } from '../content/sv/b1/unit23-stories.mjs';
+import { GRAMMAR_B1_DECK, GRAMMAR_B1_CARDS } from '../content/sv/b1/grammar.mjs';
+import { UNIT24_DECK, UNIT24_CARDS } from '../content/sv/b2/unit24-professional.mjs';
+import { UNIT25_DECK, UNIT25_CARDS } from '../content/sv/b2/unit25-economy.mjs';
+import { UNIT26_DECK, UNIT26_CARDS } from '../content/sv/b2/unit26-welfare.mjs';
+import { UNIT27_DECK, UNIT27_CARDS } from '../content/sv/b2/unit27-climate.mjs';
+import { UNIT28_DECK, UNIT28_CARDS } from '../content/sv/b2/unit28-idioms.mjs';
+import { UNIT29_DECK, UNIT29_CARDS } from '../content/sv/b2/unit29-arguing.mjs';
+import { UNIT30_DECK, UNIT30_CARDS } from '../content/sv/b2/unit30-registers.mjs';
+import { UNIT31_DECK, UNIT31_CARDS } from '../content/sv/b2/unit31-history.mjs';
+import { GRAMMAR_B2_DECK, GRAMMAR_B2_CARDS } from '../content/sv/b2/grammar.mjs';
+import { GRAMMAR_CARDS } from '../content/sv/a1/grammar.mjs';
+import { SECTIONS } from '../content/sv/sections.mjs';
+import { FOUNDATION_DECKS, FOUNDATION_CARDS } from '../content/sv/a1/foundations.mjs';
+import { CARDS_EN, DECKS_EN, SECTIONS_EN } from '../content/sv/a1/en.mjs';
+import { NOTES_EN_A1, IPA_EN } from '../content/sv/a1/notes-en.mjs';
+import { NOTES_EN_A2 } from '../content/sv/a2/notes-en.mjs';
+import { NOTES_EN_B1 } from '../content/sv/b1/notes-en.mjs';
+import { NOTES_EN_B2 } from '../content/sv/b2/notes-en.mjs';
+import { FR_SECTIONS, FR_DECKS, FR_CARDS } from '../content/fr/index.mjs';
 
 // Notes de grammaire en anglais, par slug (issue #5)
 const NOTES_EN = { ...NOTES_EN_A1, ...NOTES_EN_A2, ...NOTES_EN_B1, ...NOTES_EN_B2 };
@@ -66,6 +67,8 @@ const ALL_DECKS = [
   UNIT16_DECK, UNIT17_DECK, UNIT18_DECK, UNIT19_DECK, UNIT20_DECK, UNIT21_DECK, UNIT22_DECK, UNIT23_DECK, GRAMMAR_B1_DECK,
   // B2
   UNIT24_DECK, UNIT25_DECK, UNIT26_DECK, UNIT27_DECK, UNIT28_DECK, UNIT29_DECK, UNIT30_DECK, UNIT31_DECK, GRAMMAR_B2_DECK,
+  // FranceCore (issue #9)
+  ...FR_DECKS,
 ];
 const ALL_CARDS = [
   ...FOUNDATION_CARDS, ...GRAMMAR_CARDS, ...UNIT1_CARDS, ...UNIT2_CARDS, ...UNIT3_CARDS,
@@ -79,11 +82,21 @@ const ALL_CARDS = [
   // B2
   ...UNIT24_CARDS, ...UNIT25_CARDS, ...UNIT26_CARDS, ...UNIT27_CARDS,
   ...UNIT28_CARDS, ...UNIT29_CARDS, ...UNIT30_CARDS, ...UNIT31_CARDS, ...GRAMMAR_B2_CARDS,
+  // FranceCore (issue #9)
+  ...FR_CARDS,
 ];
+const ALL_SECTIONS = [...SECTIONS, ...FR_SECTIONS];
+
+// Cours de chaque deck (sv par défaut) et voix edge-tts de la langue étudiée
+const deckCourse = new Map(ALL_DECKS.map((d) => [d.slug, d.course ?? 'sv']));
+const VOICES = { sv: 'sv-SE-SofieNeural', fr: 'fr-FR-DeniseNeural' };
+const courseOf = (card) => deckCourse.get(card.deck_slug);
+// Note anglaise : inline (cours de français) ou dans content/sv/*/notes-en.mjs (cours de suédois)
+const noteEn = (c) => c.note_en ?? NOTES_EN[c.slug];
 
 // Contrôle du contenu anglais avant toute écriture en base : chaque carte, deck et section doit avoir
 // sa version anglaise, et chaque glose anglaise doit avoir autant de mots que la glose française.
-// Anglais d'une carte, d'un deck ou d'une section : inline (unités A2+) ou dans content/a1/en.mjs (A1)
+// Anglais d'une carte, d'un deck ou d'une section : inline (unités A2+) ou dans content/sv/a1/en.mjs (A1)
 const enCard = (c) => c.en ?? CARDS_EN[c.slug];
 const enDeckTitle = (d) => d.title_en ?? DECKS_EN[d.slug];
 const enSection = (s) => (s.title_en ? { title: s.title_en, description: s.description_en } : SECTIONS_EN[s.slug]);
@@ -97,22 +110,35 @@ function checkEnglish() {
       errors.push(`${c.slug} : glose anglaise de ${en.gloss?.length ?? 0} mot(s) au lieu de ${c.gloss.length}`);
     else if (!c.gloss && en.gloss) errors.push(`${c.slug} : glose anglaise sans glose française`);
   }
-  for (const c of ALL_CARDS) if (!NOTES_EN[c.slug]) errors.push(`${c.slug} : note anglaise manquante`);
+  for (const c of ALL_CARDS) if (!noteEn(c)) errors.push(`${c.slug} : note anglaise manquante`);
+  // Cours de français : la langue de base est le suédois, chaque carte doit l'avoir aussi
+  for (const c of ALL_CARDS.filter((x) => courseOf(x) === 'fr')) {
+    if (!c.slug.startsWith('fr-')) errors.push(`${c.slug} : les slugs du cours de français commencent par fr-`);
+    if (!c.swedish_prompt || !c.english_translation || !c.explanation_md || !c.swedish_target)
+      errors.push(`${c.slug} : français, consigne, traduction ou note suédoise manquante`);
+    if (c.gloss?.some((g) => !g.sv || !g.fr)) errors.push(`${c.slug} : glose suédoise incomplète`);
+  }
+  for (const c of ALL_CARDS) if (!deckCourse.has(c.deck_slug)) errors.push(`${c.slug} : deck ${c.deck_slug} inconnu`);
+  const seen = new Set();
+  for (const c of ALL_CARDS) {
+    if (seen.has(c.slug)) errors.push(`${c.slug} : slug en double`);
+    seen.add(c.slug);
+  }
   const cardSlugs = new Set(ALL_CARDS.map((c) => c.slug));
   for (const slug of Object.keys(NOTES_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : note anglaise sans carte`);
   for (const slug of Object.keys(CARDS_EN)) if (!cardSlugs.has(slug)) errors.push(`${slug} : traduction sans carte`);
   for (const d of ALL_DECKS) if (!enDeckTitle(d)) errors.push(`deck ${d.slug} : titre anglais manquant`);
-  for (const s of SECTIONS) if (!enSection(s)?.title || !enSection(s)?.description) errors.push(`section ${s.slug} : titre anglais manquant`);
-  if (errors.length > 0) throw new Error(`Contenu anglais incomplet (content/a1/en.mjs) :\n- ${errors.join('\n- ')}`);
+  for (const s of ALL_SECTIONS) if (!enSection(s)?.title || !enSection(s)?.description) errors.push(`section ${s.slug} : titre anglais manquant`);
+  if (errors.length > 0) throw new Error(`Contenu incomplet (content/) :\n- ${errors.join('\n- ')}`);
 }
 
 // edge-tts peut se figer : timeout de 30 s, 3 tentatives, et suppression des MP3 tronqués.
-function generateMp3(pythonCmd, text, filePath) {
+function generateMp3(pythonCmd, text, filePath, voice) {
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
       execFileSync(
         pythonCmd,
-        ['-m', 'edge_tts', '--voice', 'sv-SE-SofieNeural', '--rate=-10%', '--text', text, '--write-media', filePath],
+        ['-m', 'edge_tts', '--voice', voice, '--rate=-10%', '--text', text, '--write-media', filePath],
         { stdio: 'inherit', timeout: 30_000 }
       );
       if (existsSync(filePath) && statSync(filePath).size > 0) return;
@@ -143,7 +169,7 @@ async function run() {
 
   // 1. Upsert des sections puis des decks
 const sectionMap = new Map();
-for (const s of SECTIONS) {
+for (const s of ALL_SECTIONS) {
   const { data, error } = await supabase
     .from('sections')
     .upsert(
@@ -182,7 +208,7 @@ for (const d of ALL_DECKS) {
   //    (les fichiers content/ sont la source de vérité ; la progression de ces cartes part avec elles)
   await supabase.from('cards').delete().is('slug', null);
   const keep = new Set(ALL_CARDS.map((c) => c.slug));
-  const { data: existing, error: listErr } = await supabase.from('cards').select('slug');
+  const { data: existing, error: listErr } = await selectAll(() => supabase.from('cards').select('slug').order('slug'));
   if (listErr) throw listErr;
   const obsolete = existing.map((c) => c.slug).filter((slug) => slug && !keep.has(slug));
   if (obsolete.length > 0) {
@@ -203,7 +229,7 @@ for (const d of ALL_DECKS) {
       // Ne génère le MP3 que s'il n'existe pas déjà sur le disque !
       if (!existsSync(filePath) || statSync(filePath).size === 0) {
         console.log(`Génération MP3 : "${word}" -> ${fileName}`);
-        generateMp3(pythonCmd, word, filePath);
+        generateMp3(pythonCmd, word, filePath, VOICES[courseOf(item)]);
       } else {
         console.log(`Cache MP3 OK : ${fileName}`);
       }
@@ -224,7 +250,7 @@ for (const d of ALL_DECKS) {
         ipa_transcription: item.ipa_transcription,
         pitch_accent: item.pitch_accent,
         explanation_md: item.explanation_md,
-        explanation_en: NOTES_EN[item.slug],
+        explanation_en: noteEn(item),
         ipa_en: IPA_EN[item.slug] ?? null,
         audio_url: localUrls.join('|'),
         gloss: item.gloss?.map((g, i) => ({ ...g, en: enCard(item).gloss[i] })) ?? null,
@@ -241,6 +267,17 @@ for (const d of ALL_DECKS) {
   await exportContent();
 }
 
+// Supabase renvoie au plus 1 000 lignes par requête : on lit par pages jusqu'à la dernière
+async function selectAll(query, pageSize = 1000) {
+  const data = [];
+  for (let from = 0; ; from += pageSize) {
+    const res = await query().range(from, from + pageSize - 1);
+    if (res.error) return res;
+    data.push(...res.data);
+    if (res.data.length < pageSize) return { data, error: null };
+  }
+}
+
 // Export du contenu pour le mode hors ligne (APK Android) : src/content.json, embarqué au build.
 // Les uuid sont remplacés par les slugs pour que la progression locale survive à un re-seed.
 async function exportContent() {
@@ -248,7 +285,7 @@ async function exportContent() {
     supabase.from('sections').select('*').order('sort_order', { ascending: true }),
     // Tri secondaire par slug : plusieurs decks ont sort_order 0, l'export doit être déterministe
     supabase.from('decks').select('*').order('sort_order', { ascending: true }).order('slug', { ascending: true }),
-    supabase.from('cards').select('*').order('created_at', { ascending: true }),
+    selectAll(() => supabase.from('cards').select('*').order('created_at', { ascending: true }).order('slug', { ascending: true })),
   ]);
   for (const res of [sections, decks, cards]) if (res.error) throw res.error;
 

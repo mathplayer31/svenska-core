@@ -20,11 +20,12 @@ import {
   Play,
   Snail,
   CircleUser,
+  ChevronsUpDown,
 } from 'lucide-react';
 import * as data from './dataSource';
 import AccountScreen from './AccountScreen';
 import SectionTest from './SectionTest';
-import { useI18n, type Lang } from './i18n';
+import { COURSE_LANGS, useI18n, type Course, type Lang } from './i18n';
 import UnitPractice from './UnitPractice';
 
 interface DeckInfo {
@@ -117,7 +118,7 @@ function savePracticeScores(scores: Record<string, number>) {
 }
 
 export default function App() {
-  const { lang, setLang, t } = useI18n();
+  const { lang, setLang, course, setCourse, t } = useI18n();
   const [decks, setDecks] = useState<DeckInfo[]>([]);
   const [cards, setCards] = useState<SwedishCard[]>([]);
   const [sections, setSections] = useState<SectionInfo[]>([]);
@@ -149,10 +150,14 @@ export default function App() {
     }
     setUserEmail((await data.currentUser())?.email ?? null);
     const loaded = await data.load();
-    const decksRes = { data: loaded.decks };
-    const cardsRes = { data: loaded.cards };
+    // Seul le cours actif est chargé : parcours, révisions et fondations ne voient que lui
+    const inCourse = (x: { course?: string | null }) => (x.course ?? 'sv') === course;
+    const courseDecks = loaded.decks.filter(inCourse);
+    const courseDeckIds = new Set(courseDecks.map((d) => d.id));
+    const decksRes = { data: courseDecks };
+    const cardsRes = { data: loaded.cards.filter((c) => courseDeckIds.has(c.deck_id)) };
     const progressRes = { data: loaded.progress };
-    const sectionsRes = { data: loaded.sections };
+    const sectionsRes = { data: loaded.sections.filter(inCourse) };
     const sectionProgRes = { data: loaded.sectionProgress };
 
     const progressMap = new Map(
@@ -237,7 +242,7 @@ export default function App() {
     );
 
     setLoading(false);
-  }, []);
+  }, [course]);
 
   useEffect(() => {
     loadData();
@@ -488,7 +493,7 @@ export default function App() {
     };
   };
 
-  // Contenu dans la langue choisie (repli sur le français si une traduction manque)
+  // Contenu dans la langue choisie : champs `En` en anglais, sinon langue de base du cours (français ou suédois)
   const L = {
     prompt: (c: SwedishCard) => (lang === 'en' && c.promptEn) || c.swedishPrompt,
     tr: (c: SwedishCard) => (lang === 'en' && c.englishEn) || c.english,
@@ -500,6 +505,15 @@ export default function App() {
     deck: (d: DeckInfo) => (lang === 'en' && d.titleEn) || d.title,
     section: (x: SectionInfo) => (lang === 'en' && x.titleEn) || x.title,
     sectionDesc: (x: SectionInfo) => (lang === 'en' && x.descriptionEn) || x.description,
+  };
+  const switchCourse = (c: Course) => {
+    setSelectedDeckId(null);
+    setTestSectionId(null);
+    setUnitDeckId(null);
+    setPracticeDeckId(null);
+    setCurrentCardId(null);
+    setTab('parcours');
+    setCourse(c);
   };
   const localize = (c: SwedishCard) => ({ ...c, swedishPrompt: L.prompt(c), english: L.tr(c), gloss: L.gloss(c) });
 
@@ -846,7 +860,15 @@ export default function App() {
     return (
       <Page withNav>
         <header className="flex items-center justify-between gap-4 pt-2 pb-8">
-          <Wordmark className="text-2xl" />
+          <button
+            onClick={() => switchCourse(course === 'sv' ? 'fr' : 'sv')}
+            title={course === 'sv' ? 'FranceCore' : 'SvenskaCore'}
+            aria-label={t.switchCourse(course === 'sv' ? 'FranceCore' : 'SvenskaCore')}
+            className="inline-flex items-center gap-1.5 rounded-lg -ml-1 px-1 cursor-pointer hover:bg-surface-2 transition"
+          >
+            <Wordmark className="text-2xl" />
+            <ChevronsUpDown className="w-4 h-4 text-faint" aria-hidden />
+          </button>
           <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-surface border border-line" aria-label={t.mainNav}>
             {NAV.map((item) => (
               <button
@@ -862,7 +884,7 @@ export default function App() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <LangSwitch lang={lang} onChange={setLang} label={t.langLabel} />
+            <LangSwitch langs={COURSE_LANGS[course]} lang={lang} onChange={setLang} label={t.langLabel} />
             {data.accountsAvailable && (
               <button
                 onClick={() => setShowAccount(true)}
@@ -1174,10 +1196,10 @@ function splitTitle(text: string) {
   return m ? { eyebrow: m[1], title: m[2] } : { eyebrow: '', title: text };
 }
 
-function LangSwitch({ lang, onChange, label }: { lang: Lang; onChange: (l: Lang) => void; label: string }) {
+function LangSwitch({ langs, lang, onChange, label }: { langs: Lang[]; lang: Lang; onChange: (l: Lang) => void; label: string }) {
   return (
     <div role="group" aria-label={label} className="flex items-center p-1 rounded-full bg-surface border border-line text-xs font-semibold">
-      {(['fr', 'en'] as const).map((l) => (
+      {langs.map((l) => (
         <button
           key={l}
           onClick={() => onChange(l)}
@@ -1195,9 +1217,11 @@ function LangSwitch({ lang, onChange, label }: { lang: Lang; onChange: (l: Lang)
 }
 
 function Wordmark({ className = '' }: { className?: string }) {
+  const { course } = useI18n();
   return (
     <span className={`font-serif font-semibold tracking-tight text-ink ${className}`}>
-      Svenska<span className="text-accent">Core</span>
+      {course === 'sv' ? 'Svenska' : 'France'}
+      <span className="text-accent">Core</span>
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold ml-1 align-super" aria-hidden />
     </span>
   );

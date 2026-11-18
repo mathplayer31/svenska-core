@@ -1,0 +1,162 @@
+// FranceCore, Unité 4 : Boulangerie et marché. Pain, fruits et légumes, quantités, prix, combien.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT4_DECK = unitDeck({
+  n: 4, slug: 'fr-unit-4-shopping', sv: 'Bageri och marknad', en: 'Bakery and market',
+  level: 'A1', section: 'fr-section-2-vie-quotidienne', after: 'fr-unit-3-family',
+});
+const D = UNIT4_DECK.slug;
+
+export const UNIT4_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u4-la-boulangerie', {
+    prompt: 'Butiken där man köper bröd', promptEn: 'The shop where you buy bread',
+    fr: 'la boulangerie', sv: 'bageriet', en: 'the bakery',
+    ipa: '/la bu.lɑ̃ʒ.ʁi/',
+    note: 'Det finns en boulangerie i nästan varje kvarter, och många fransmän köper färskt bröd varje dag. Bagaren heter **le boulanger / la boulangère**.',
+    noteEn: 'There is a boulangerie in almost every neighbourhood, and many French people buy fresh bread every day. The baker is **le boulanger / la boulangère**.',
+  }),
+  vocab(D, 'fr-u4-une-baguette', {
+    prompt: 'Det långa, smala vita brödet', promptEn: 'The long, thin white loaf',
+    fr: 'une baguette', sv: 'en baguette', en: 'a baguette',
+    ipa: '/yn ba.ɡɛt/',
+    note: 'Feminint: **une** baguette. Den bästa heter **une tradition**, gjord enligt lag med bara mjöl, vatten, salt och jäst. **gu** uttalas [ɡ], u:et hörs inte.',
+    noteEn: 'Feminine: **une** baguette. The best kind is **une tradition**, made by law with only flour, water, salt and yeast. **gu** is a hard [ɡ], the u is silent.',
+  }),
+  vocab(D, 'fr-u4-un-croissant', {
+    prompt: 'Det halvmåneformade smörbakverket', promptEn: 'The crescent-shaped butter pastry',
+    fr: 'un croissant', sv: 'en croissant', en: 'a croissant',
+    ipa: '/œ̃ kʁwa.sɑ̃/',
+    note: '**oi** uttalas [wa] och **-ant** är nasalt, t:et är stumt. Det är ett frukostbakverk, sällan något man äter på eftermiddagen.',
+    noteEn: '**oi** is [wa] and **-ant** is nasal, with a silent t. It is a breakfast pastry, rarely eaten in the afternoon.',
+  }),
+  vocab(D, 'fr-u4-pain-au-chocolat', {
+    prompt: 'Smördeg med chokladbitar', promptEn: 'Butter pastry with chocolate inside',
+    fr: 'un pain au chocolat', sv: 'en chokladcroissant', en: 'a chocolate croissant',
+    ipa: '/œ̃ pɛ̃ o ʃɔ.kɔ.la/',
+    note: 'I sydvästra Frankrike heter den **une chocolatine**, och namnet är en klassisk vänskaplig tvist. **ain** är nasalt [ɛ̃].',
+    noteEn: 'In south-west France it is called **une chocolatine**, and the name is a classic friendly argument. **ain** is the nasal [ɛ̃].',
+  }),
+  vocab(D, 'fr-u4-le-marche', {
+    prompt: 'Utomhustorget där man handlar mat', promptEn: 'The open-air food market',
+    fr: 'le marché', sv: 'torget / marknaden', en: 'the market',
+    ipa: '/lə maʁ.ʃe/',
+    note: 'De flesta städer har torghandel några förmiddagar i veckan. Man går dit **le samedi matin** för färska grönsaker, ost och samtal med försäljarna.',
+    noteEn: 'Most towns have a market a few mornings a week. People go **le samedi matin** (on Saturday mornings) for fresh vegetables, cheese and a chat with the stallholders.',
+  }),
+  vocab(D, 'fr-u4-une-pomme', {
+    prompt: 'Vanlig frukt, röd eller grön', promptEn: 'Common fruit, red or green',
+    fr: 'une pomme', sv: 'ett äpple', en: 'an apple',
+    ipa: '/yn pɔm/',
+    note: 'Feminint på franska, neutrum på svenska: genus följer inte mellan språken. Potatis heter **une pomme de terre**, ”jordäpple”.',
+    noteEn: 'Feminine in French: gender has nothing to do with meaning. A potato is **une pomme de terre**, an "earth apple".',
+  }),
+  vocab(D, 'fr-u4-une-tomate', {
+    prompt: 'Röd grönsak till sallad', promptEn: 'Red vegetable for salads',
+    fr: 'une tomate', sv: 'en tomat', en: 'a tomato',
+    ipa: '/yn tɔ.mat/',
+    note: 'Slutets **e** är stumt, men det gör att **t** hörs: [tɔmat]. Utan e skulle t:et vara stumt.',
+    noteEn: 'The final **e** is silent, but it makes the **t** heard: [tɔmat]. Without the e, the t would be silent.',
+  }),
+  vocab(D, 'fr-u4-le-fromage', {
+    prompt: 'Det man äter efter huvudrätten, före efterrätten', promptEn: 'What you eat after the main course, before dessert',
+    fr: 'le fromage', sv: 'osten', en: 'the cheese',
+    ipa: '/lə fʁɔ.maʒ/',
+    note: 'Frankrike har hundratals ostar, köpta hos **le fromager**. Osten äts i slutet av måltiden, inte på frukostmackan. **g** framför **e** uttalas [ʒ].',
+    noteEn: 'France has hundreds of cheeses, bought from **le fromager**. Cheese comes at the end of the meal, not on breakfast toast. **g** before **e** is [ʒ].',
+  }),
+  vocab(D, 'fr-u4-un-kilo-de', {
+    prompt: 'Mängd: tusen gram av något', promptEn: 'Quantity: a thousand grams of something',
+    fr: 'un kilo de', sv: 'ett kilo', en: 'a kilo of',
+    ipa: '/œ̃ ki.lo də/',
+    note: 'Efter en mängd kommer alltid **de**, utan artikel: *un kilo de pommes, un peu de fromage*. På torget hör man också **une livre**, ett halvt kilo.',
+    noteEn: 'A quantity is always followed by **de** with no article: *un kilo de pommes, un peu de fromage*. At the market you also hear **une livre**, half a kilo.',
+  }),
+  vocab(D, 'fr-u4-combien', {
+    prompt: 'Frågeordet för pris och antal', promptEn: 'The question word for price and amount',
+    fr: 'combien', sv: 'hur mycket / hur många', en: 'how much / how many',
+    ipa: '/kɔ̃.bjɛ̃/',
+    note: 'Två olika nasaler i samma ord: **om** [ɔ̃] och **ien** [jɛ̃]. Med substantiv: *combien **de** pommes ?*',
+    noteEn: 'Two different nasal vowels in one word: **om** [ɔ̃] and **ien** [jɛ̃]. With a noun: *combien **de** pommes ?*',
+  }),
+  vocab(D, 'fr-u4-un-euro', {
+    prompt: 'Valutan i Frankrike', promptEn: 'The currency in France',
+    fr: 'un euro / des euros', sv: 'en euro / euro', en: 'one euro / euros',
+    ipa: '/œ̃.n‿ø.ʁo/ /de.z‿ø.ʁo/',
+    note: 'Uttalas [øʁo], inte ”evro”. Bindning: *deux‿euros* [døzøʁo], *trois‿euros*. Cent heter **centime**: *trois euros vingt* = 3,20 euro.',
+    noteEn: 'Pronounced [øʁo], nothing like English "you-roe". Liaison: *deux‿euros* [døzøʁo], *trois‿euros*. Cents are **centimes**: *trois euros vingt* = 3.20 euros.',
+  }),
+  vocab(D, 'fr-u4-la-monnaie', {
+    prompt: 'Småpengar, och pengarna man får tillbaka', promptEn: 'Small coins, and the money you get back',
+    fr: 'la monnaie', sv: 'växeln / småpengarna', en: 'the change / small coins',
+    ipa: '/la mɔ.nɛ/',
+    note: 'Inte ”pengar” i allmänhet, det heter **l’argent**. Bagaren kan fråga **Vous avez de la monnaie ?** om du betalar med en stor sedel.',
+    noteEn: 'Not "money" in general, which is **l’argent**. The baker may ask **Vous avez de la monnaie ?** if you pay with a big note.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u4-une-tradition-pas-trop-cuite', {
+    prompt: 'Beställ en baguette som inte är för mörkt gräddad', promptEn: 'Order a baguette that isn’t too well baked',
+    fr: 'Une tradition pas trop cuite, s’il vous plaît.', sv: 'En baguette, inte för mörk, tack.', en: 'A traditional baguette, not too dark, please.',
+    ipa: '/yn tʁa.di.sjɔ̃ pa tʁo kɥit sil vu plɛ/',
+    note: 'Fransmän har en åsikt om gräddningen: **pas trop cuite** (ljus), **bien cuite** (mörk). *Cuite* får ett **e** eftersom *tradition* är feminint.',
+    noteEn: 'The French have opinions about how well baked it is: **pas trop cuite** (pale), **bien cuite** (dark). *Cuite* takes an **e** because *tradition* is feminine.',
+    gloss: [['une', 'en', 'a'], ['tradition', 'traditionell baguette', 'traditional baguette'], ['pas', 'inte', 'not'], ['trop', 'för', 'too'], ['cuite', 'gräddad', 'baked'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u4-je-prends-deux-croissants', {
+    prompt: 'Säg att du tar två croissanter', promptEn: 'Say you’ll take two croissants',
+    fr: 'Je prends deux croissants.', sv: 'Jag tar två croissanter.', en: 'I’ll take two croissants.',
+    ipa: '/ʒə pʁɑ̃ dø kʁwa.sɑ̃/',
+    note: 'Pluralets **s** hörs inte: *croissant* och *croissants* låter likadant. Det är **deux** som visar att det är flera.',
+    noteEn: 'The plural **s** is silent: *croissant* and *croissants* sound the same. It is **deux** that shows there is more than one.',
+    gloss: [['je', 'jag', 'I'], ['prends', 'tar', 'take'], ['deux', 'två', 'two'], ['croissants', 'croissanter', 'croissants']],
+  }),
+  phrase(D, 'fr-u4-cest-combien', {
+    prompt: 'Fråga vad det kostar', promptEn: 'Ask how much it is',
+    fr: 'C’est combien ?', sv: 'Hur mycket kostar det?', en: 'How much is it?',
+    ipa: '/sɛ kɔ̃.bjɛ̃/',
+    note: 'Ordagrant ”det är hur mycket?”. Lite mer formellt: **Ça coûte combien ?** eller **Combien ça coûte ?**',
+    noteEn: 'Literally "it is how much?". A bit more formal: **Ça coûte combien ?** or **Combien ça coûte ?**',
+    gloss: [['c’est', 'det är', 'it is'], ['combien', 'hur mycket', 'how much']],
+  }),
+  phrase(D, 'fr-u4-ca-fait-trois-euros-vingt', {
+    prompt: 'Säg priset som bagaren gör: 3,20 euro', promptEn: 'Give the price like the baker: 3.20 euros',
+    fr: 'Ça fait trois euros vingt.', sv: 'Det blir tre euro och tjugo cent.', en: 'That’s three euros twenty.',
+    ipa: '/sa fɛ tʁwa.z‿ø.ʁo vɛ̃/',
+    note: '**Ça fait** = det blir, när man räknar ihop. Man säger *trois euros vingt*, utan ordet *centimes*. Bindningen ger [tʁwazøʁo].',
+    noteEn: '**Ça fait** = that comes to, when adding up. People say *trois euros vingt*, without the word *centimes*. Liaison gives [tʁwazøʁo].',
+    gloss: [['ça', 'det', 'that'], ['fait', 'blir', 'makes'], ['trois', 'tre', 'three'], ['euros', 'euro', 'euros'], ['vingt', 'tjugo', 'twenty']],
+  }),
+  phrase(D, 'fr-u4-un-kilo-de-tomates', {
+    prompt: 'Beställ ett kilo tomater på torget', promptEn: 'Order a kilo of tomatoes at the market',
+    fr: 'Je voudrais un kilo de tomates.', sv: 'Jag skulle vilja ha ett kilo tomater.', en: 'I’d like a kilo of tomatoes.',
+    ipa: '/ʒə vu.dʁɛ œ̃ ki.lo də tɔ.mat/',
+    note: 'Samma artiga **je voudrais** som på kaféet. Efter *un kilo* kommer **de** och substantivet utan artikel, aldrig *de les*.',
+    noteEn: 'The same polite **je voudrais** as at the café. After *un kilo* comes **de** and the noun with no article, never *de les*.',
+    gloss: [['je', 'jag', 'I'], ['voudrais', 'skulle vilja ha', 'would like'], ['un', 'ett', 'a'], ['kilo', 'kilo', 'kilo'], ['de', '(av)', 'of'], ['tomates', 'tomater', 'tomatoes']],
+  }),
+  phrase(D, 'fr-u4-du-fromage', {
+    prompt: 'Säg att du vill ha ost (en obestämd mängd)', promptEn: 'Say you want some cheese (an unspecified amount)',
+    fr: 'Je voudrais du fromage.', sv: 'Jag skulle vilja ha ost.', en: 'I’d like some cheese.',
+    ipa: '/ʒə vu.dʁɛ dy fʁɔ.maʒ/',
+    note: 'För en obestämd mängd kräver franskan en **delningsartikel**: **du** (maskulint), **de la** (feminint), **des** (plural). Svenskan och engelskan klarar sig utan.',
+    noteEn: 'For an unspecified amount French needs a **partitive article**: **du** (masculine), **de la** (feminine), **des** (plural). English can use *some* or nothing at all.',
+    gloss: [['je', 'jag', 'I'], ['voudrais', 'skulle vilja ha', 'would like'], ['du', '(lite)', 'some'], ['fromage', 'ost', 'cheese']],
+  }),
+  phrase(D, 'fr-u4-et-avec-ceci', {
+    prompt: 'Frågan försäljaren ställer efter varje vara', promptEn: 'What the shopkeeper asks after each item',
+    fr: 'Et avec ceci ?', sv: 'Något mer?', en: 'Anything else?',
+    ipa: '/e a.vɛk sə.si/',
+    note: 'Ordagrant ”och med detta?”. Du hör den hela tiden i bagerier och på torget. Svara med nästa vara, eller *C’est tout*.',
+    noteEn: 'Literally "and with this?". You hear it constantly in bakeries and at the market. Answer with the next item, or *C’est tout*.',
+    gloss: [['et', 'och', 'and'], ['avec', 'med', 'with'], ['ceci', 'detta', 'this']],
+  }),
+  phrase(D, 'fr-u4-cest-tout-merci', {
+    prompt: 'Säg att du inte vill ha något mer', promptEn: 'Say that’s all you need',
+    fr: 'C’est tout, merci.', sv: 'Det var allt, tack.', en: 'That’s all, thanks.',
+    ipa: '/sɛ tu mɛʁ.si/',
+    note: '**Tout** uttalas [tu], med stumt t. Avsluta köpet med **merci, au revoir** och gärna **bonne journée**.',
+    noteEn: '**Tout** is [tu], with a silent t. End the purchase with **merci, au revoir** and ideally **bonne journée** (have a nice day).',
+    gloss: [['c’est', 'det är', 'it is'], ['tout', 'allt', 'all'], ['merci', 'tack', 'thanks']],
+  }),
+];

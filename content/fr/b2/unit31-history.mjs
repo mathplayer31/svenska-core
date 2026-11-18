@@ -1,0 +1,162 @@
+// FranceCore, Unité 31 : Histoire et culture (Révolution, laïcité, francophonie, littérature).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT31_DECK = unitDeck({
+  n: 31, slug: 'fr-unit-31-history', sv: 'Historia och kultur', en: 'History and culture',
+  level: 'B2', section: 'fr-section-8-nuances', after: 'fr-unit-30-registers',
+});
+const D = UNIT31_DECK.slug;
+
+export const UNIT31_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u31-revolution', {
+    prompt: 'Omvälvningen som började 1789', promptEn: 'The upheaval that began in 1789',
+    fr: 'la Révolution française', sv: 'franska revolutionen', en: 'the French Revolution',
+    ipa: '/la ʁe.vɔ.ly.sjɔ̃ fʁɑ̃.sɛz/',
+    note: 'Med stor bokstav, **la Révolution**, menar fransmän alltid 1789. Den avskaffade de feodala privilegierna och monarkin; Ludvig XVI avrättades 1793. Nästan hela det moderna Frankrikes politiska vokabulär kommer härifrån.',
+    noteEn: 'With a capital, **la Révolution** always means 1789 to the French. It abolished feudal privileges and the monarchy; Louis XVI was executed in 1793. Most of modern France’s political vocabulary dates from it.',
+  }),
+  vocab(D, 'fr-u31-prise-bastille', {
+    prompt: 'Händelsen den 14 juli 1789', promptEn: 'The event of 14 July 1789',
+    fr: 'la prise de la Bastille', sv: 'stormningen av Bastiljen', en: 'the storming of the Bastille',
+    ipa: '/la pʁiz də la bas.tij/',
+    note: '**la prise** = intagandet, av *prendre*. Fängelset rymde bara sju fångar den dagen, men blev en symbol för kungamaktens fall. Nationaldagen kallas ändå oftast bara **le 14 Juillet**.',
+    noteEn: '**la prise** = the taking, from *prendre*. The prison held only seven inmates that day, but became a symbol of royal power falling. The national holiday is usually just called **le 14 Juillet**.',
+  }),
+  vocab(D, 'fr-u31-declaration', {
+    prompt: 'Texten om mänskliga rättigheter från 1789', promptEn: 'The 1789 text on human rights',
+    fr: 'la Déclaration des droits de l’homme et du citoyen', sv: 'deklarationen om människans och medborgarens rättigheter', en: 'the Declaration of the Rights of Man and of the Citizen',
+    ipa: '/la de.kla.ʁa.sjɔ̃ de dʁwa də lɔm e dy si.twa.jɛ̃/',
+    note: 'Antogs den 26 augusti 1789 och ingår fortfarande i den franska grundlagen. Första artikeln: *Les hommes naissent et demeurent libres et égaux en droits.* **l’homme** betyder här människan, inte bara mannen.',
+    noteEn: 'Adopted on 26 August 1789 and still part of the French constitution. Article 1: *Les hommes naissent et demeurent libres et égaux en droits.* **l’homme** here means humankind, not just men.',
+  }),
+  vocab(D, 'fr-u31-devise', {
+    prompt: 'Republikens valspråk i tre ord', promptEn: 'The Republic’s motto in three words',
+    fr: 'Liberté, Égalité, Fraternité', sv: 'frihet, jämlikhet, broderskap', en: 'liberty, equality, fraternity',
+    ipa: '/li.bɛʁ.te e.ɡa.li.te fʁa.tɛʁ.ni.te/',
+    note: 'Valspråket föddes under revolutionen och står i grundlagen från 1958. Det finns på varje skola och rådhus. Lägg märke till accenten på stora **É**: franskan behåller accenter på versaler.',
+    noteEn: 'The motto was born in the Revolution and is written into the 1958 constitution. It appears on every school and town hall. Note the accent on capital **É**: French keeps accents on capitals.',
+  }),
+  vocab(D, 'fr-u31-marianne', {
+    prompt: 'Kvinnogestalten som symboliserar republiken', promptEn: 'The female figure symbolising the Republic',
+    fr: 'Marianne', sv: 'Marianne (republikens symbol)', en: 'Marianne (symbol of the Republic)',
+    ipa: '/ma.ʁjan/',
+    note: 'Hon bär en röd frygisk mössa, frihetens symbol. Hennes byst står i varje **mairie**, och hon finns på frimärken och på vissa franska euromynt. Kända kvinnor, till exempel Brigitte Bardot, har fått låna ut sitt ansikte till henne.',
+    noteEn: 'She wears a red Phrygian cap, the symbol of liberty. Her bust stands in every **mairie**, and she appears on stamps and some French euro coins. Famous women such as Brigitte Bardot have lent her their face.',
+  }),
+  vocab(D, 'fr-u31-laicite', {
+    prompt: 'Principen om statens religiösa neutralitet', promptEn: 'The principle of the state’s religious neutrality',
+    fr: 'la laïcité', sv: 'sekularismen / den religiösa neutraliteten', en: 'secularism (French-style)',
+    ipa: '/la la.i.si.te/',
+    note: 'Lagen från 1905 skiljer kyrka och stat åt. **La laïcité** betyder inte fientlighet mot religion utan att staten är neutral; sedan 2004 får elever i offentliga skolor inte bära iögonfallande religiösa symboler. Ett känsligt och ofta debatterat ämne.',
+    noteEn: 'The 1905 law separates church and state. **La laïcité** does not mean hostility to religion but state neutrality; since 2004 pupils in state schools may not wear conspicuous religious symbols. A sensitive, much-debated subject.',
+  }),
+  vocab(D, 'fr-u31-lumieres', {
+    prompt: '1700-talets filosofiska rörelse', promptEn: 'The 18th-century philosophical movement',
+    fr: 'les Lumières', sv: 'upplysningen', en: 'the Enlightenment',
+    ipa: '/le ly.mjɛʁ/',
+    note: 'Ordagrant ”ljusen”, alltid i plural. Voltaire, Rousseau, Montesquieu och Diderot med sin *Encyclopédie*. **le siècle des Lumières** = upplysningstiden, 1700-talet.',
+    noteEn: 'Literally "the lights", always plural. Voltaire, Rousseau, Montesquieu, and Diderot with his *Encyclopédie*. **le siècle des Lumières** = the Age of Enlightenment, the 18th century.',
+  }),
+  vocab(D, 'fr-u31-academie', {
+    prompt: 'Institutionen som vakar över franska språket', promptEn: 'The institution that watches over the French language',
+    fr: 'l’Académie française', sv: 'Franska akademien', en: 'the Académie française',
+    ipa: '/la.ka.de.mi fʁɑ̃.sɛz/',
+    note: 'Grundad 1635 av kardinal Richelieu. Dess 40 ledamöter kallas **les Immortels** och arbetar med en ordbok. Den svenska motsvarigheten, Svenska Akademien (1786), har 18 ledamöter och är byggd efter fransk förebild.',
+    noteEn: 'Founded in 1635 by Cardinal Richelieu. Its 40 members are called **les Immortels** and work on a dictionary. Its rulings are respected but not legally binding.',
+  }),
+  vocab(D, 'fr-u31-francophonie', {
+    prompt: 'Alla som talar franska i världen', promptEn: 'All French speakers around the world',
+    fr: 'la francophonie', sv: 'den fransktalande världen', en: 'the French-speaking world',
+    ipa: '/la fʁɑ̃.kɔ.fɔ.ni/',
+    note: 'Över 300 miljoner människor talar franska, och de flesta bor i Afrika, inte i Europa. Med stor bokstav, **la Francophonie**, menas organisationen OIF med närmare nittio medlemsstater och observatörer.',
+    noteEn: 'Over 300 million people speak French, and most of them live in Africa, not Europe. With a capital, **la Francophonie** refers to the organisation (OIF), with nearly ninety member and observer states.',
+  }),
+  vocab(D, 'fr-u31-resistance', {
+    prompt: 'Motståndsrörelsen under ockupationen', promptEn: 'The resistance movement during the Occupation',
+    fr: 'la Résistance', sv: 'motståndsrörelsen', en: 'the French Resistance',
+    ipa: '/la ʁe.zis.tɑ̃s/',
+    note: 'Kampen mot den tyska ockupationen 1940 till 1944. Den symboliseras av de Gaulles radiotal från London den 18 juni 1940, **l’appel du 18 Juin**. **s** mellan vokaler uttalas [z]: [ʁezistɑ̃s].',
+    noteEn: 'The fight against the German occupation from 1940 to 1944, symbolised by de Gaulle’s radio broadcast from London on 18 June 1940, **l’appel du 18 Juin**. An **s** between vowels is voiced: [ʁezistɑ̃s].',
+  }),
+  vocab(D, 'fr-u31-mai-68', {
+    prompt: 'Studentupproret och generalstrejken 1968', promptEn: 'The 1968 student revolt and general strike',
+    fr: 'Mai 68', sv: 'majrevolten 1968', en: 'May 1968',
+    ipa: '/mɛ swa.sɑ̃t.ɥit/',
+    note: 'Studentprotester i Paris följda av en generalstrejk som lamslog landet. En kulturell vändpunkt: slagord som *Il est interdit d’interdire* är fortfarande kända. Man säger nästan alltid bara *Mai 68*.',
+    noteEn: 'Student protests in Paris followed by a general strike that paralysed the country. A cultural turning point: slogans like *Il est interdit d’interdire* are still famous. People say *Mai 68*, rarely the full year.',
+  }),
+  vocab(D, 'fr-u31-cinquieme-republique', {
+    prompt: 'Det nuvarande franska statsskicket', promptEn: 'France’s current system of government',
+    fr: 'la Cinquième République', sv: 'femte republiken', en: 'the Fifth Republic',
+    ipa: '/la sɛ̃.kjɛm ʁe.py.blik/',
+    note: 'Grundad 1958 under de Gaulle, med en stark president, sedan 1962 vald direkt av folket. Skrivs också **la Ve République**. Frankrike har alltså haft fem republiker, två kejsardömen och flera monarkier sedan 1789.',
+    noteEn: 'Founded in 1958 under de Gaulle, with a strong president elected directly by the people since 1962. Also written **la Ve République**. Since 1789 France has had five republics, two empires and several monarchies.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u31-bastille-fut-prise', {
+    prompt: 'Berätta i historisk stil när Bastiljen stormades', promptEn: 'Say in historical style when the Bastille was stormed',
+    fr: 'La Bastille fut prise le 14 juillet 1789.', sv: 'Bastiljen stormades den 14 juli 1789.', en: 'The Bastille was stormed on 14 July 1789.',
+    ipa: '/la bas.tij fy pʁiz lə ka.tɔʁz ʒɥi.jɛ mil sɛt sɑ̃ ka.tʁə.vɛ̃.nœf/',
+    note: '**fut** är passé simple av *être*, en tempusform som nästan bara finns i skrift: i historieböcker och romaner. I tal säger man *a été prise*. Participet böjs efter subjektet: *prise*.',
+    noteEn: '**fut** is the passé simple of *être*, a tense found almost only in writing: history books and novels. In speech you’d say *a été prise*. The participle agrees with the subject: *prise*.',
+    gloss: [['la Bastille', 'Bastiljen', 'the Bastille'], ['fut prise', 'intogs', 'was taken'], ['le 14 juillet', 'den 14 juli', 'on 14 July'], ['1789', '1789', '1789']],
+  }),
+  phrase(D, 'fr-u31-loi-1905', {
+    prompt: 'Säg vad lagen från 1905 gör', promptEn: 'Say what the 1905 law does',
+    fr: 'La loi de 1905 sépare les Églises et l’État.', sv: 'Lagen från 1905 skiljer kyrkorna och staten åt.', en: 'The 1905 law separates the churches and the state.',
+    ipa: '/la lwa də mil nœf sɑ̃ sɛ̃k se.paʁ le.z‿e.ɡliz e le.ta/',
+    note: '**les Églises** står i plural och med stor bokstav: lagen gäller alla trossamfund, inte bara den katolska kyrkan. Staten varken erkänner eller finansierar någon religion.',
+    noteEn: '**les Églises** is plural and capitalised: the law covers all faiths, not only the Catholic Church. The state neither recognises nor funds any religion.',
+    gloss: [['la loi', 'lagen', 'the law'], ['de 1905', 'från 1905', 'of 1905'], ['sépare', 'skiljer åt', 'separates'], ['les Églises', 'kyrkorna', 'the churches'], ['et', 'och', 'and'], ['l’État', 'staten', 'the state']],
+  }),
+  phrase(D, 'fr-u31-hugo-exil', {
+    prompt: 'Säg att Victor Hugo skrev klart De elända i exil', promptEn: 'Say Victor Hugo finished Les Misérables in exile',
+    fr: 'Victor Hugo a achevé Les Misérables pendant son exil.', sv: 'Victor Hugo skrev klart De elända under sin landsflykt.', en: 'Victor Hugo finished Les Misérables while in exile.',
+    ipa: '/vik.tɔʁ y.ɡo a a.ʃə.ve le mi.ze.ʁabl pɑ̃.dɑ̃ sɔ̃.n‿ɛɡ.zil/',
+    note: 'Hugo levde i exil på kanalöarna i nästan tjugo år, som motståndare till Napoleon III. **achever** = fullborda, inte ”uppnå” (det heter *atteindre*). **H** i *Hugo* är stumt.',
+    noteEn: 'Hugo spent nearly twenty years in exile on the Channel Islands as an opponent of Napoleon III. **achever** = to complete, not "to achieve" (that’s *atteindre* or *réaliser*). The **H** in *Hugo* is silent.',
+    gloss: [['Victor Hugo', 'Victor Hugo', 'Victor Hugo'], ['a achevé', 'skrev klart', 'finished'], ['Les Misérables', 'De elända', 'Les Misérables'], ['pendant', 'under', 'during'], ['son exil', 'sin landsflykt', 'his exile']],
+  }),
+  phrase(D, 'fr-u31-cinq-continents', {
+    prompt: 'Säg att franska talas överallt i världen', promptEn: 'Say French is spoken all over the world',
+    fr: 'Le français est parlé sur les cinq continents.', sv: 'Franska talas på alla fem kontinenterna.', en: 'French is spoken on all five continents.',
+    ipa: '/lə fʁɑ̃.sɛ ɛ paʁ.le syʁ le sɛ̃ kɔ̃.ti.nɑ̃/',
+    note: 'Passiv med **être**, där svenskan gärna använder s-form: *talas*. Fransmän räknar traditionellt med fem kontinenter. Prepositionen är **sur**: *sur le continent*, men *en Afrique*.',
+    noteEn: 'Passive with **être**. French tradition counts five continents. The preposition is **sur**: *sur le continent*, but *en Afrique*.',
+    gloss: [['le français', 'franska', 'French'], ['est parlé', 'talas', 'is spoken'], ['sur', 'på', 'on'], ['les cinq continents', 'de fem kontinenterna', 'the five continents']],
+  }),
+  phrase(D, 'fr-u31-academie-veille', {
+    prompt: 'Säg sedan när Franska akademien vakar över språket', promptEn: 'Say how long the Académie has watched over the language',
+    fr: 'L’Académie française veille sur la langue depuis 1635.', sv: 'Franska akademien har vakat över språket sedan 1635.', en: 'The Académie française has watched over the language since 1635.',
+    ipa: '/la.ka.de.mi fʁɑ̃.sɛz vɛj syʁ la lɑ̃ɡ də.pɥi mil si sɑ̃ tʁɑ̃t.sɛ̃k/',
+    note: '**depuis** + presens = har ... sedan, eftersom det fortfarande pågår. **veiller sur** = vaka över; *veiller* ensamt betyder att vara vaken: *veiller tard*.',
+    noteEn: '**depuis** + present = has ... since, because it is still going on. **veiller sur** = to watch over; *veiller* alone means to stay up: *veiller tard*.',
+    gloss: [['l’Académie française', 'Franska akademien', 'the Académie française'], ['veille sur', 'vakar över', 'has watched over'], ['la langue', 'språket', 'the language'], ['depuis 1635', 'sedan 1635', 'since 1635']],
+  }),
+  phrase(D, 'fr-u31-droit-de-vote', {
+    prompt: 'Säg när de franska kvinnorna fick rösträtt', promptEn: 'Say when French women got the vote',
+    fr: 'Les Françaises ont obtenu le droit de vote en 1944.', sv: 'De franska kvinnorna fick rösträtt 1944.', en: 'French women won the right to vote in 1944.',
+    ipa: '/le fʁɑ̃.sɛz ɔ̃.t‿ɔp.tə.ny lə dʁwa də vɔt ɑ̃ mil nœf sɑ̃ ka.ʁɑ̃t.katʁ/',
+    note: 'Sent jämfört med Sverige (1919, första valet 1921): de röstade första gången 1945. **les Françaises** = de franska kvinnorna, en form som svenskan saknar.',
+    noteEn: 'Late compared with the UK (1918) or the US (1920): they first voted in 1945. **les Françaises** = French women, a single word in French.',
+    gloss: [['les Françaises', 'de franska kvinnorna', 'French women'], ['ont obtenu', 'fick', 'won'], ['le droit de vote', 'rösträtt', 'the right to vote'], ['en 1944', '1944', 'in 1944']],
+  }),
+  phrase(D, 'fr-u31-descartes', {
+    prompt: 'Citera Descartes mest kända mening', promptEn: 'Quote Descartes’ most famous line',
+    fr: '« Je pense, donc je suis », écrivait Descartes.', sv: '”Jag tänker, alltså finns jag”, skrev Descartes.', en: '"I think, therefore I am," wrote Descartes.',
+    ipa: '/ʒə pɑ̃s dɔ̃k ʒə sɥi e.kʁi.vɛ de.kaʁt/',
+    note: 'Från *Discours de la méthode* (1637), som Descartes skrev på franska i stället för latin, ett djärvt val då. Franska citattecken är **« »** med mellanslag innanför. Inversion efter citat: *écrivait Descartes*.',
+    noteEn: 'From *Discours de la méthode* (1637), which Descartes wrote in French rather than Latin, a bold choice then. French quotation marks are **« »** with spaces inside. Note the inversion after a quote: *écrivait Descartes*.',
+    gloss: [['je pense', 'jag tänker', 'I think'], ['donc', 'alltså', 'therefore'], ['je suis', 'finns jag', 'I am'], ['écrivait', 'skrev', 'wrote'], ['Descartes', 'Descartes', 'Descartes']],
+  }),
+  phrase(D, 'fr-u31-ve-republique', {
+    prompt: 'Säg när femte republiken föddes', promptEn: 'Say when the Fifth Republic was born',
+    fr: 'La Cinquième République est née en 1958.', sv: 'Femte republiken föddes 1958.', en: 'The Fifth Republic was born in 1958.',
+    ipa: '/la sɛ̃.kjɛm ʁe.py.blik ɛ ne ɑ̃ mil nœf sɑ̃ sɛ̃.kɑ̃t.ɥit/',
+    note: '**naître** bildar perfekt med **être**, och participet **né** böjs: *elle est née*. Samma verb som i *Je suis né à Göteborg*.',
+    noteEn: '**naître** forms the perfect with **être**, and the participle **né** agrees: *elle est née*. Same verb as in *Je suis né à Londres*.',
+    gloss: [['la Cinquième République', 'femte republiken', 'the Fifth Republic'], ['est née', 'föddes', 'was born'], ['en 1958', '1958', 'in 1958']],
+  }),
+];
