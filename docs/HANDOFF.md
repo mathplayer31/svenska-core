@@ -1,6 +1,6 @@
 # SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4), notes en anglais (issue #5), rangement des fichiers (issue #7), comptes et synchro de progression (issue #8).
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle, sélecteur de langue FR / EN (issue #1), niveaux A2, B1 et B2 (issues #2 à #4), notes en anglais (issue #5), rangement des fichiers (issue #7), comptes et synchro de progression (issue #8), second cours FranceCore (issue #9).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -22,15 +22,15 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
 ## Rangement des fichiers : FAIT (19 nov 2026, issue #7)
-- Contenu par niveau dans `content/` : `content/a1/` (foundations.mjs, grammar.mjs, unit01 à unit07, en.mjs, notes-en.mjs), `content/a2/`, `content/b1/`, `content/b2/` (grammar.mjs, unités, notes-en.mjs), plus `content/sections.mjs` et `content/helpers.mjs`. Arborescence complète : README.
-- Script de contenu : `scripts/sync-content.mjs` (ex `generate-audio.mjs`), lancé par `npm run content`. Les fondations phonétique et vocab/genres, autrefois codées dans le script, sont dans `content/a1/foundations.mjs`.
+- Contenu par niveau dans `content/` : `content/sv/a1/` (foundations.mjs, grammar.mjs, unit01 à unit07, en.mjs, notes-en.mjs), `content/sv/a2/`, `content/sv/b1/`, `content/sv/b2/` (grammar.mjs, unités, notes-en.mjs), plus `content/sv/sections.mjs` et `content/sv/helpers.mjs`. Arborescence complète : README.
+- Script de contenu : `scripts/sync-content.mjs` (ex `generate-audio.mjs`), lancé par `npm run content`. Les fondations phonétique et vocab/genres, autrefois codées dans le script, sont dans `content/sv/a1/foundations.mjs`.
 - Docs : `docs/HANDOFF.md` (ce fichier, ex `SvenskaCore_handoff.md`) et `docs/PROGRAMME.md`. Migrations SQL : `supabase/migrations-manuelles/`.
 - Supprimés : `seed-human-audio.mjs` (effaçait la progression de phonétique s'il était lancé) et `GEMINI.md` (obsolète).
-- Pour ajouter une unité : créer `content/<niveau>/unitNN-sujet.mjs` avec `unitDeck` / `vocab` / `phrase`, sa note anglaise dans `content/<niveau>/notes-en.mjs`, puis l'importer dans `scripts/sync-content.mjs`.
+- Pour ajouter une unité : créer `content/sv/<niveau>/unitNN-sujet.mjs` avec `unitDeck` / `vocab` / `phrase`, sa note anglaise dans `content/sv/<niveau>/notes-en.mjs`, puis l'importer dans `scripts/sync-content.mjs`.
 
 ## Notes en anglais : AJOUTÉ (19 nov 2026, issue #5)
 - En mode anglais, plus aucun texte français : les 631 notes de grammaire sont traduites et adaptées à un anglophone (repères de prononciation et pièges comparés à l'anglais).
-- Fichiers `content/a1/notes-en.mjs`, `content/a2/notes-en.mjs`, `content/b1/notes-en.mjs`, `content/b2/notes-en.mjs` : une note par slug. `IPA_EN` (dans `content/a1/notes-en.mjs`) remplace les indications de prononciation rédigées en français (8 cartes de phonétique + *och*).
+- Fichiers `content/sv/a1/notes-en.mjs`, `content/sv/a2/notes-en.mjs`, `content/sv/b1/notes-en.mjs`, `content/sv/b2/notes-en.mjs` : une note par slug. `IPA_EN` (dans `content/sv/a1/notes-en.mjs`) remplace les indications de prononciation rédigées en français (8 cartes de phonétique + *och*).
 - `scripts/sync-content.mjs` s'arrête si une carte n'a pas de note anglaise. Toute nouvelle carte doit donc avoir sa note dans le fichier `notes-en-*` de son niveau.
 - Colonnes ajoutées (fichier `supabase/migrations-manuelles/migration_notes_en.sql`, appliqué) :
 ```sql
@@ -40,23 +40,23 @@ alter table public.cards add column if not exists ipa_en text;
 - L'accent tonal, saisi en français (« Accent 1 (Aigu) »), est affiché « (acute) / (grave) » en anglais. La mention « Note (in French) » a disparu.
 
 ## Niveaux B1 et B2 : AJOUTÉS (19 nov 2026, issues #3 et #4)
-- B1 = Section 5 « S'installer en Suède » (Unités 16 à 19 : démarches, logement & voisinage, travail & entretien, avis & débats) + Section 6 « Société & culture » (Unités 20 à 23 : nature & allemansrätten, médias, émotions, raconter au passé) + deck « 5. Grammaire B1 » (BIFF, *som*, *om*, *fast*, verbes à particule, plus-que-parfait, questions indirectes). Fichiers `content/b1/unit16-paperwork.mjs` à `content/b1/unit23-stories.mjs`, `content/b1/grammar.mjs`.
-- B2 = Section 7 « Travailler en suédois » (Unités 24 à 27 : vie pro, économie, santé & société, climat) + Section 8 « Nuances & expression » (Unités 28 à 31 : expressions idiomatiques, argumenter, registres, histoire & identité) + deck « 6. Grammaire B2 » (passif -s et bli, participes, conditionnel, discours rapporté, verbes réciproques et déponents, dérivation -bar). Fichiers `content/b2/unit24-professional.mjs` à `content/b2/unit31-history.mjs`, `content/b2/grammar.mjs`.
-- Même format que l'A2 (`content/helpers.mjs`, anglais intégré). Total : 631 cartes (A1 163, A2 156, B1 156, B2 156).
+- B1 = Section 5 « S'installer en Suède » (Unités 16 à 19 : démarches, logement & voisinage, travail & entretien, avis & débats) + Section 6 « Société & culture » (Unités 20 à 23 : nature & allemansrätten, médias, émotions, raconter au passé) + deck « 5. Grammaire B1 » (BIFF, *som*, *om*, *fast*, verbes à particule, plus-que-parfait, questions indirectes). Fichiers `content/sv/b1/unit16-paperwork.mjs` à `content/sv/b1/unit23-stories.mjs`, `content/sv/b1/grammar.mjs`.
+- B2 = Section 7 « Travailler en suédois » (Unités 24 à 27 : vie pro, économie, santé & société, climat) + Section 8 « Nuances & expression » (Unités 28 à 31 : expressions idiomatiques, argumenter, registres, histoire & identité) + deck « 6. Grammaire B2 » (passif -s et bli, participes, conditionnel, discours rapporté, verbes réciproques et déponents, dérivation -bar). Fichiers `content/sv/b2/unit24-professional.mjs` à `content/sv/b2/unit31-history.mjs`, `content/sv/b2/grammar.mjs`.
+- Même format que l'A2 (`content/sv/helpers.mjs`, anglais intégré). Total : 631 cartes (A1 163, A2 156, B1 156, B2 156).
 - Fusionné dans `main` le 19 nov 2026 (avance rapide jusqu'au commit a17bd80) ; branches supprimées, issues #2, #3 et #4 fermées.
 - Rendu des notes corrigé : l'italique peut contenir du gras ou être barré (`renderInlineMd` récursif dans `App.tsx`).
 
 ## Niveau A2 : AJOUTÉ (18 nov 2026, issue #2)
 - Programme complet A1 à B2 : `docs/PROGRAMME.md` (sections, unités, thèmes, grammaire). B1 et B2 restent à produire, une issue par niveau.
 - A2 = Section 3 « Ma vie au quotidien » (Unités 8 à 11) + Section 4 « Se débrouiller en Suède » (Unités 12 à 15), 18 cartes par unité (10 mots + 8 phrases), plus le deck de fondation « 4. Grammaire A2 » (12 cartes, débloqué après l'Unité 15). 156 cartes A2, 319 au total.
-- Fichiers : `content/a2/unit08-home.mjs` à `content/a2/unit15-plans.mjs`, `content/a2/grammar.mjs`. Écriture compacte via `content/helpers.mjs` (`vocab`, `phrase`, `cloze`, `unitDeck`) : chaque carte porte son anglais dans `en`, et la glose s'écrit en triplets `[suédois, français, anglais]`. Les sections A2 portent `title_en` / `description_en` dans `content/sections.mjs`. `content/a1/en.mjs` ne sert plus qu'à l'A1.
+- Fichiers : `content/sv/a2/unit08-home.mjs` à `content/sv/a2/unit15-plans.mjs`, `content/sv/a2/grammar.mjs`. Écriture compacte via `content/sv/helpers.mjs` (`vocab`, `phrase`, `cloze`, `unitDeck`) : chaque carte porte son anglais dans `en`, et la glose s'écrit en triplets `[suédois, français, anglais]`. Les sections A2 portent `title_en` / `description_en` dans `content/sv/sections.mjs`. `content/sv/a1/en.mjs` ne sert plus qu'à l'A1.
 - Pour l'audio d'une carte dont le texte n'est pas lisible tel quel (ex. *Ring 1177…*), `words` donne le texte à prononcer (*Ring elva sjuttiosju…*).
 - Tableau de bord : sections groupées par niveau CECR (déduit du `cefr_level` des decks de la section), et l'en-tête affiche le niveau de la dernière section ouverte.
 
 ## Sélecteur de langue FR / EN : AJOUTÉ (18 nov 2026, issue #1)
 - Bouton FR / EN dans l'en-tête de l'accueil, mémorisé sur l'appareil (`localStorage`, clé `svenska.lang`). Français par défaut.
 - Interface : `src/i18n.tsx` (dictionnaires `fr` / `en`, `I18nProvider` dans `main.tsx`, hook `useI18n()` qui donne `{ lang, setLang, t }`). Tout nouveau texte d'interface passe par ce fichier, dans les deux langues.
-- Contenu : `content/a1/en.mjs` donne par slug la consigne, la traduction et la glose anglaises de chaque carte (`CARDS_EN`), plus les titres des decks (`DECKS_EN`) et des sections (`SECTIONS_EN`). Les notes de grammaire (`explanation_md`) restent en français (libellé « Note (in French) » en mode anglais).
+- Contenu : `content/sv/a1/en.mjs` donne par slug la consigne, la traduction et la glose anglaises de chaque carte (`CARDS_EN`), plus les titres des decks (`DECKS_EN`) et des sections (`SECTIONS_EN`). Les notes de grammaire (`explanation_md`) restent en français (libellé « Note (in French) » en mode anglais).
 - `scripts/sync-content.mjs` vérifie le contenu anglais **avant** toute écriture en base et s'arrête avec la liste des manques (carte sans traduction, glose anglaise de longueur différente, deck ou section sans titre anglais).
 - Colonnes : `cards.english_translation` contient désormais **vraiment l'anglais** ; le français est dans `cards.french_translation` (dans les fichiers `content/`, le champ `english_translation` contient toujours le français, nom historique). `cards.gloss` = `[{"sv","fr","en"}]`. Nouvelles colonnes `cards.prompt_en`, `decks.title_en`, `sections.title_en`, `sections.description_en`.
 - Migration appliquée (fichier `supabase/migrations-manuelles/migration_langue_en.sql`) :
@@ -84,6 +84,14 @@ alter table public.sections add column if not exists description_en text;
 - Build : `npm run apk` → `scripts/build-android.mjs`. Le script mesure cœurs / charge CPU / RAM libre et adapte le build (1 à 4 workers Gradle, JVM 1 à 3 Go, priorité basse, sans daemon) pour ne pas saturer le PC. APK debug : `android/app/build/outputs/apk/debug/app-debug.apk`.
 - Les notes (`explanation_md`) sont rendues avec un mini-markdown (`**gras**`, `*italique*`, `~~barré~~`).
 
+## FranceCore, cours de français : AJOUTÉ (18 nov 2026, issue #9)
+- Même app, deux cours : un clic sur le nom de l'app (en-tête) bascule entre **SvenskaCore** (suédois, interface FR / EN) et **FranceCore** (français, interface EN / SV). Cours et langue mémorisés par appareil (`svenska.course`, `svenska.lang`, `svenska.lang.fr`).
+- Contenu : le suédois est rangé dans `content/sv/`, le français dans `content/fr/` (programme : `docs/PROGRAMME-FR.md`, format : `content/fr/helpers.mjs`). 8 sections, 31 unités de 12 mots + 8 phrases, fondations de prononciation et de genre, un deck de grammaire par niveau.
+- Base : colonne `course` (`sv` par défaut, `fr`) sur `decks` et `sections` (`supabase/migrations-manuelles/migration_cours.sql`, incluse dans `schema.sql`). Les colonnes gardent leurs noms historiques : pour une carte française, `swedish_target` = français, `english_translation` / `french_translation` = suédois (langue de base), anglais dans les colonnes `_en`.
+- L'app ne charge que le cours actif (`loadData` dans `src/App.tsx`) ; parcours, révisions, tests et fondations restent inchangés. Tous les slugs français commencent par `fr-` : la progression des deux cours partage les mêmes clés et tables, avec la même synchro de compte.
+- Audio : `scripts/sync-content.mjs` choisit la voix d'après le cours du deck (`fr-FR-DeniseNeural` pour le français). Les exercices écrits reconnaissent les articles des deux langues (en / ett, un / une, le / la) et tolèrent les accents oubliés.
+- Contrôles : `npm run content` refuse une carte française sans suédois ou sans anglais ; `node scripts/check-fr.mjs [niveau]` vérifie le contenu français hors ligne (champs, gloses, 12 + 8 cartes par unité, slugs, tiret cadratin).
+
 ## Comptes et synchro de progression : AJOUTÉ (18 nov 2026, issue #8)
 - Seule la progression se synchronise ; le contenu reste embarqué. L'app marche sans compte.
 - Base des comptes : Supabase Cloud, tables `progress_cards` / `progress_sections` clés par slug, RLS `auth.uid() = user_id` : `supabase/cloud-schema.sql` (appliqué aussi sur la base locale pour le dev).
@@ -96,7 +104,7 @@ alter table public.sections add column if not exists description_en text;
 - Vérifié le 18 nov 2026 sur la base locale avec un compte de test : import de 25 cartes + 1 test ; connexion sur un stockage vide, progression récupérée ; révision faite dans l'app, présente dans le compte ; révision faite hors ligne, envoyée à la synchro suivante ; un second compte ne voit rien et ne peut pas écrire chez le premier ; écran Compte en FR et EN ; déconnexion, progression gardée sur l'appareil.
 
 ## Grammaire V2 réécrite : AJOUTÉ (18 nov 2026)
-- `content/a1/grammar.mjs` : 12 cartes `cloze_grammar` qui n'utilisent que le vocabulaire des unités 1 à 7 (V2 avec idag/imorgon/igår, questions, *inte*, *sin/hans*, accord en -t, forme définie, *det här tåget*). Prérequis du deck : **Unité 7**.
+- `content/sv/a1/grammar.mjs` : 12 cartes `cloze_grammar` qui n'utilisent que le vocabulaire des unités 1 à 7 (V2 avec idag/imorgon/igår, questions, *inte*, *sin/hans*, accord en -t, forme définie, *det här tåget*). Prérequis du deck : **Unité 7**.
 - Les 8 anciennes cartes (*åkte*, *jobbar hemifrån*, *eftersom*…) ont été supprimées. `scripts/sync-content.mjs` supprime désormais toute carte en base dont le slug n'existe plus dans les fichiers de données (et sa progression).
 
 ---
@@ -212,7 +220,7 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 
 ## Pipeline de contenu (IMPORTANT : source de vérité)
 - Les decks et cartes sont définis dans **`scripts/sync-content.mjs`** (`DECKS_DATA`, `CARDS_DATA`) et poussés par `upsert` (onConflict `slug`). Lancer : `npm run content`. Ne pas seeder à la main en SQL.
-- Les nouvelles unités sont dans des modules séparés (`content/a1/unit01-greetings.mjs`, etc.) exportant un deck + un tableau de cartes, importés dans le script.
+- Les nouvelles unités sont dans des modules séparés (`content/sv/a1/unit01-greetings.mjs`, etc.) exportant un deck + un tableau de cartes, importés dans le script.
 - Convention des champs d'une carte : `swedish_prompt` = consigne/indice **en français** ; `swedish_target` = texte suédois ; `english_translation` contient en réalité la **traduction française** (nom de colonne trompeur, à renommer plus tard) ; `french_translation` est rempli avec la même valeur ; `words` = textes dont on génère un MP3 chacun.
 - Audio : MP3 générés en local dans `./public/audio/<slug>_<n>.mp3` (cache si déjà présent), `audio_url` = chemins `/audio/...` joints par `|`. (Le bucket Supabase `card-audio` n'est pas utilisé par le script.)
 - Nouveaux champs de carte : `gloss` (jsonb `[{sv, fr}]`) et `french_translation`.
@@ -223,7 +231,7 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 - Verrouillage : un deck est débloqué quand toutes les cartes de son deck prérequis ont été vues au moins une fois (`state !== 0`). La session globale « ALL » exclut les decks verrouillés et met les nouvelles cartes du parcours thématique en premier.
 - Type de carte `phrase` géré ; affichage de la glose mot à mot sur la face réponse.
 - `scripts/sync-content.mjs` : `generateMp3()` avec timeout 30 s, 3 tentatives et `stdio: 'inherit'` (fait ; un MP3 tronqué est supprimé automatiquement).
-- Prérequis : un deck déclare `prerequisite_slug` (dans `DECKS_DATA` ou `content/*/unitNN-*.mjs`) ; le script le résout en `prerequisite_deck_id` après l'upsert de tous les decks. Grammaire + vocab/genres -> Unité 1 ; Unité 2 -> Unité 1.
+- Prérequis : un deck déclare `prerequisite_slug` (dans `DECKS_DATA` ou `content/sv/*/unitNN-*.mjs`) ; le script le résout en `prerequisite_deck_id` après l'upsert de tous les decks. Grammaire + vocab/genres -> Unité 1 ; Unité 2 -> Unité 1.
 
 ## Page d'unité + exercices : AJOUTÉ (18 nov 2026)
 - Clic sur un deck **thématique** -> page d'unité (pas directement les cartes) : barre de progression, **1. Découvrir** (session de cartes FSRS du deck), **2. Pratiquer** (déverrouillé quand toutes les cartes de l'unité ont été vues), **Lexique** (mots/phrases déjà vus, tap = audio). Les cartes encore non vues sont masquées dans le lexique.
@@ -238,40 +246,40 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 - Meilleur score par unité stocké en `localStorage` (`svenska.practiceScores`) : pas en DB pour l'instant, les exercices n'alimentent pas FSRS.
 
 ## Unité 2 : Café & fika : SEEDÉE
-- `content/a1/unit02-cafe.mjs` : 10 `vocab` (fika, en bryggkaffe, en kanelbulle, ett te, mjölk, en kopp, och, med, ett kort, här) + 8 `phrase` (Ska vi fika?, Jag tar en bryggkaffe och en kanelbulle tack, En kopp te med mjölk tack, Ta med eller äta här?, Äta här tack, Vad kostar det?, Kan jag betala med kort?, Det var gott!). Section 1, `unit_number` 2, prérequis Unité 1.
+- `content/sv/a1/unit02-cafe.mjs` : 10 `vocab` (fika, en bryggkaffe, en kanelbulle, ett te, mjölk, en kopp, och, med, ett kort, här) + 8 `phrase` (Ska vi fika?, Jag tar en bryggkaffe och en kanelbulle tack, En kopp te med mjölk tack, Ta med eller äta här?, Äta här tack, Vad kostar det?, Kan jag betala med kort?, Det var gott!). Section 1, `unit_number` 2, prérequis Unité 1.
 
 ## Unités 3 à 7 + Section 2 : SEEDÉES (18 nov 2026)
 Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan initial a été découpé plus finement : restaurant et météo ont leur propre unité.
 
 | Unité | Section | Fichier | Contenu | Point de grammaire |
 |---|---|---|---|---|
-| U3 Famille & relations | 1 | `content/a1/unit03-family.mjs` | 12 mots (familj, mamma, pappa, föräldrar, syster, bror, barn, flickvän, pojkvän, svärmor, han, hon) + 10 phrases | min/mitt/mina ; piège **sin/sitt/sina vs hans/hennes** (*Hon fikar med sin syster* vs *…hennes syster*) |
-| U4 Courses : ICA & Systembolaget | 2 | `content/a1/unit04-shopping.mjs` | 12 mots (affär, köper, påse, kvitto, bröd, ost, frukt, vin, öl, kronor, dyrt, billigt) + 9 phrases | défini suffixé (*kvittot*), *ni*, *Det blir…*, adjectif en -t après *det är* |
-| U5 Au restaurant | 2 | `content/a1/unit05-restaurant.mjs` | 10 mots (restaurang, bord, meny, vatten, kött, fisk, vegetarisk, två, notan, gärna) + 9 phrases | *Kan jag få…?*, *jätte-*, *var för sig* |
-| U6 Déplacements & transports | 2 | `content/a1/unit06-transport.mjs` | 11 mots (buss, tunnelbana, tåg, biljett, station, spår, nästa, försenad, vänster, höger, till) + 8 phrases | accord *försenat*, *den här bussen* (double défini) |
-| U7 Météo & temps | 2 | `content/a1/unit07-weather.mjs` | 10 mots (vädret, solen, regnar, snöar, kallt, varmt, blåsigt, imorgon, igår, grader) + 9 phrases | **V2** avec adverbe de temps en tête (*Idag är det kallt*, *Imorgon snöar det*), *det* impersonnel |
+| U3 Famille & relations | 1 | `content/sv/a1/unit03-family.mjs` | 12 mots (familj, mamma, pappa, föräldrar, syster, bror, barn, flickvän, pojkvän, svärmor, han, hon) + 10 phrases | min/mitt/mina ; piège **sin/sitt/sina vs hans/hennes** (*Hon fikar med sin syster* vs *…hennes syster*) |
+| U4 Courses : ICA & Systembolaget | 2 | `content/sv/a1/unit04-shopping.mjs` | 12 mots (affär, köper, påse, kvitto, bröd, ost, frukt, vin, öl, kronor, dyrt, billigt) + 9 phrases | défini suffixé (*kvittot*), *ni*, *Det blir…*, adjectif en -t après *det är* |
+| U5 Au restaurant | 2 | `content/sv/a1/unit05-restaurant.mjs` | 10 mots (restaurang, bord, meny, vatten, kött, fisk, vegetarisk, två, notan, gärna) + 9 phrases | *Kan jag få…?*, *jätte-*, *var för sig* |
+| U6 Déplacements & transports | 2 | `content/sv/a1/unit06-transport.mjs` | 11 mots (buss, tunnelbana, tåg, biljett, station, spår, nästa, försenad, vänster, höger, till) + 8 phrases | accord *försenat*, *den här bussen* (double défini) |
+| U7 Météo & temps | 2 | `content/sv/a1/unit07-weather.mjs` | 10 mots (vädret, solen, regnar, snöar, kallt, varmt, blåsigt, imorgon, igår, grader) + 9 phrases | **V2** avec adverbe de temps en tête (*Idag är det kallt*, *Imorgon snöar det*), *det* impersonnel |
 
-- `content/sections.mjs` : ajout de `section-2-vie-quotidienne` (pass_score 80). La section 2 regroupe U4 à U7 et a son test de fin de section (généré automatiquement).
+- `content/sv/sections.mjs` : ajout de `section-2-vie-quotidienne` (pass_score 80). La section 2 regroupe U4 à U7 et a son test de fin de section (généré automatiquement).
 - Total en base : 159 cartes. Mots/notions introduits en phrase sans carte dédiée, toujours glosés : vill ha, ni, hundra, var, ligger, på, få, lite, för, sig, när, går, tre, tio, sväng, sedan, skiner, vilket, fint, hennes, hans.
 
 ## Sections + tests (style Duolingo) : AJOUTÉ
 - Hiérarchie : **Section → Unités (decks thématiques) → cartes**. Les fondations (phonétique, grammaire, vocab/genres) restent hors section.
 - DB (fichier `migration_sections.sql`, à exécuter dans le SQL Editor) : table `sections` (`slug`, `title`, `description`, `sort_order`, `pass_score` défaut 80), colonne `decks.section_id`, table `user_section_progress` (`user_id`, `section_id`, `best_score`, `passed`, `attempts`, `last_attempt`). RLS dev permissive.
-- Données : `content/sections.mjs` (tableau `SECTIONS`). Un deck rattache sa section via `section_slug` dans `content/*/unitNN-*.mjs` ; `scripts/sync-content.mjs` upserte les sections, retire `section_slug` et met `section_id` avant d'upserter le deck.
+- Données : `content/sv/sections.mjs` (tableau `SECTIONS`). Un deck rattache sa section via `section_slug` dans `content/sv/*/unitNN-*.mjs` ; `scripts/sync-content.mjs` upserte les sections, retire `section_slug` et met `section_id` avant d'upserter le deck.
 - Règles : la section 1 est toujours ouverte ; la section N+1 s'ouvre quand le test de la section N est réussi (≥ `pass_score`). Les decks d'une section verrouillée sont verrouillés. Le test devient disponible quand toutes les cartes de la section ont été vues au moins une fois.
 - Test (`SectionTest.tsx`) : 10 QCM générés depuis les cartes `vocab`/`phrase` de la section (1 question sur 2 : écoute -> choisir la traduction ; sinon traduction FR -> choisir le suédois). Score sauvegardé (meilleur score, tentatives).
 - Pour ajouter une section 3 : ajouter une entrée dans `SECTIONS`, puis mettre `section_slug: 'section-3-...'` sur ses decks (et `prerequisite_slug` vers l'unité précédente).
 
 ## Reste à faire (dans l'ordre)
 1. [x] Migration SQL appliquée.
-2. [x] Seed Unité 1 (Salutations) : 10 `vocab` + 7 `phrase` dans `content/a1/unit01-greetings.mjs`, branchée et seedée.
+2. [x] Seed Unité 1 (Salutations) : 10 `vocab` + 7 `phrase` dans `content/sv/a1/unit01-greetings.mjs`, branchée et seedée.
 3. [x] `scripts/sync-content.mjs` génère l'audio des nouvelles cartes, remplit `audio_url`, gère les prérequis.
 4. [x] Frontend : dashboard sections + verrouillage (fait dans App.tsx).
 5. [~] Carte `phrase` : glose affichée en chips mot/traduction sur la face réponse (pas encore au tap).
 6. [x] Boucle de révision FSRS (Again/Hard/Good/Easy + upsert `user_card_progress`), faite directement dans App.tsx. Typage corrigé (`Rating` -> `Grade`, ts-fsrs v5).
 7. [x] Page d'unité Découvrir -> Pratiquer + 5 types d'exercices (`UnitPractice.tsx`).
 8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2, B1 et B2 livrés (issues #2, #3, #4, Unités 8 à 31, Sections 3 à 8, Grammaires A2 / B1 / B2), fusionnés dans `main`. Prochaine étape possible : decks de vocabulaire thématique plus denses pour approcher les 3 000 mots d'un vrai B2.
-8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`content/a1/grammar.mjs`).
+8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`content/sv/a1/grammar.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
 10. [~] APK Android hors ligne fait (`npm run apk`). Restent : icône et splash, APK signé (release).
