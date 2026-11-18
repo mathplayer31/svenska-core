@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, existsSync, statSync, rmSync } from 'node:fs';
+import { mkdirSync, existsSync, statSync, rmSync, writeFileSync } from 'node:fs';
 import { UNIT1_DECK, UNIT1_CARDS } from './unit1-data.mjs';
 import { UNIT2_DECK, UNIT2_CARDS } from './unit2-data.mjs';
 import { UNIT3_DECK, UNIT3_CARDS } from './unit3-data.mjs';
@@ -353,6 +353,35 @@ for (const d of ALL_DECKS) {
   }
 
   console.log(`\nTerminé ! ${ALL_CARDS.length} cartes A1 sont synchronisées dans PostgreSQL.`);
+
+  await exportContent();
+}
+
+// Export du contenu pour le mode hors ligne (APK Android) : src/content.json, embarqué au build.
+// Les uuid sont remplacés par les slugs pour que la progression locale survive à un re-seed.
+async function exportContent() {
+  const [sections, decks, cards] = await Promise.all([
+    supabase.from('sections').select('*').order('sort_order', { ascending: true }),
+    supabase.from('decks').select('*').order('sort_order', { ascending: true }),
+    supabase.from('cards').select('*').order('created_at', { ascending: true }),
+  ]);
+  for (const res of [sections, decks, cards]) if (res.error) throw res.error;
+
+  const sectionSlug = new Map(sections.data.map((s) => [s.id, s.slug]));
+  const deckSlug = new Map(decks.data.map((d) => [d.id, d.slug]));
+
+  const content = {
+    sections: sections.data.map((s) => ({ ...s, id: s.slug })),
+    decks: decks.data.map((d) => ({
+      ...d,
+      id: d.slug,
+      section_id: d.section_id ? sectionSlug.get(d.section_id) : null,
+      prerequisite_deck_id: d.prerequisite_deck_id ? deckSlug.get(d.prerequisite_deck_id) : null,
+    })),
+    cards: cards.data.map(({ created_at: _c, ...c }) => ({ ...c, id: c.slug, deck_id: deckSlug.get(c.deck_id) })),
+  };
+  writeFileSync('./src/content.json', JSON.stringify(content) + '\n');
+  console.log(`Contenu hors ligne exporté : src/content.json (${content.cards.length} cartes).`);
 }
 
 run();

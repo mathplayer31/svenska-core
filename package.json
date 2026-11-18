@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:local": "vite --mode android",
+    "build:android": "tsc -b && vite build --mode android && cap sync android",
+    "apk": "node scripts/build-android.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.6.2",

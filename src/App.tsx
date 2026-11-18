@@ -22,7 +22,7 @@ import {
   Headphones,
   ListChecks,
 } from 'lucide-react';
-import { supabase, LOCAL_USER_ID } from './supabaseClient';
+import { getDataSource, LOCAL_USER_ID } from './dataSource';
 import SectionTest from './SectionTest';
 import UnitPractice from './UnitPractice';
 
@@ -76,6 +76,16 @@ interface SwedishCard {
 
 const f = fsrs();
 
+// Mini-rendu markdown des notes (**gras**, *italique*, ~~barré~~), sans dépendance
+function renderInlineMd(text: string) {
+  return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*[^*]+\*)/g).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) return <strong key={i} className="text-white">{part.slice(2, -2)}</strong>;
+    if (part.startsWith('~~') && part.endsWith('~~')) return <s key={i} className="text-rose-300/80">{part.slice(2, -2)}</s>;
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i} className="text-amber-200">{part.slice(1, -1)}</em>;
+    return part;
+  });
+}
+
 // Meilleurs scores d'entraînement par unité : confort local (pas de DB pour l'instant)
 const PRACTICE_KEY = 'svenska.practiceScores';
 function loadPracticeScores(): Record<string, number> {
@@ -111,13 +121,13 @@ export default function App() {
 
   const loadData = useCallback(async () => {
     setLoading(true);
-    const [decksRes, cardsRes, progressRes, sectionsRes, sectionProgRes] = await Promise.all([
-      supabase.from('decks').select('*').order('sort_order', { ascending: true }),
-      supabase.from('cards').select('*').order('created_at', { ascending: true }),
-      supabase.from('user_card_progress').select('*').eq('user_id', LOCAL_USER_ID),
-      supabase.from('sections').select('*').order('sort_order', { ascending: true }),
-      supabase.from('user_section_progress').select('*').eq('user_id', LOCAL_USER_ID),
-    ]);
+    const source = await getDataSource();
+    const loaded = await source.load();
+    const decksRes = { data: loaded.decks };
+    const cardsRes = { data: loaded.cards };
+    const progressRes = { data: loaded.progress };
+    const sectionsRes = { data: loaded.sections };
+    const sectionProgRes = { data: loaded.sectionProgress };
 
     const progressMap = new Map(
       (progressRes.data || []).map((p) => [p.card_id, p])
@@ -338,7 +348,7 @@ export default function App() {
         prev.map((c) => (c.id === currentCard.id ? { ...c, fsrsCard: updated } : c))
       );
 
-      await supabase.from('user_card_progress').upsert({
+      await (await getDataSource()).saveCardProgress({
         user_id: LOCAL_USER_ID,
         card_id: currentCard.id,
         state: updated.state,
@@ -372,7 +382,7 @@ export default function App() {
 
       setSectionProgress((old) => new Map(old).set(section.id, next));
 
-      await supabase.from('user_section_progress').upsert({
+      await (await getDataSource()).saveSectionProgress({
         user_id: LOCAL_USER_ID,
         section_id: section.id,
         best_score: next.bestScore,
@@ -1024,7 +1034,7 @@ export default function App() {
 
             <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 text-sm text-slate-300 leading-relaxed">
               <span className="font-semibold text-sky-400 block mb-1">Note Linguistique :</span>
-              {currentCard.explanation}
+              {renderInlineMd(currentCard.explanation)}
             </div>
           </div>
         ) : (

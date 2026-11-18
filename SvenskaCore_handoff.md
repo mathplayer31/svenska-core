@@ -1,6 +1,6 @@
 # SvenskaCore — Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (soir) — Unités 2 à 7, Section 2, page d’unité + exercices.
+> Mise à jour : 18 nov 2026 (nuit) — Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git.
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -17,6 +17,21 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - API : `http://127.0.0.1:54321` — Studio : `http://127.0.0.1:54323`
 - Postgres : `postgresql://postgres:postgres@127.0.0.1:54322/postgres`
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+- Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
+- Dépôt git local (branche `main`). Dépôt GitHub **privé** à créer/pousser.
+
+## Mode hors ligne & Android — AJOUTÉ (18 nov 2026)
+- Décision : l'APK fonctionne **100 % hors ligne**. Pas de synchro de progression entre PC et téléphone pour l'instant.
+- `src/dataSource.ts` : couche d'accès aux données. Web = Supabase ; Android (`Capacitor.isNativePlatform()`) ou `VITE_DATA_SOURCE=local` (fichier `.env.android`) = contenu embarqué `src/content.json` + progression en `localStorage` (clés `svenska.cardProgress`, `svenska.sectionProgress`).
+- `src/content.json` est **généré** par `generate-audio.mjs` à chaque synchro (sections, decks, cartes ; les uuid sont remplacés par les slugs, donc la progression locale survit à un re-seed). Les MP3 de `public/audio` sont embarqués dans l'APK.
+- `capacitor.config.json` (le `.ts` a été abandonné : Capacitor ne sait pas le lire avec TypeScript 7). Wrapper Gradle passé en **9.1.0** (le seul JDK installé est le JDK 25 d'Android Studio).
+- Build : `npm run apk` → `scripts/build-android.mjs`. Le script mesure cœurs / charge CPU / RAM libre et adapte le build (1 à 4 workers Gradle, JVM 1 à 3 Go, priorité basse, sans daemon) pour ne pas saturer le PC. APK debug : `android/app/build/outputs/apk/debug/app-debug.apk`.
+- Test local du mode hors ligne dans le navigateur : `npm run dev:local`.
+- Les notes (`explanation_md`) sont rendues avec un mini-markdown (`**gras**`, `*italique*`, `~~barré~~`).
+
+## Grammaire V2 réécrite — AJOUTÉ (18 nov 2026)
+- `grammar-data.mjs` : 12 cartes `cloze_grammar` qui n'utilisent que le vocabulaire des unités 1 à 7 (V2 avec idag/imorgon/igår, questions, *inte*, *sin/hans*, accord en -t, forme définie, *det här tåget*). Prérequis du deck : **Unité 7**.
+- Les 8 anciennes cartes (*åkte*, *jobbar hemifrån*, *eftersom*…) ont été supprimées. `generate-audio.mjs` supprime désormais toute carte en base dont le slug n'existe plus dans les fichiers de données (et sa progression).
 
 ---
 
@@ -190,10 +205,10 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 6. [x] Boucle de révision FSRS (Again/Hard/Good/Easy + upsert `user_card_progress`), faite directement dans App.tsx. Typage corrigé (`Rating` -> `Grade`, ts-fsrs v5).
 7. [x] Page d'unité Découvrir -> Pratiquer + 5 types d'exercices (`UnitPractice.tsx`).
 8. [x] Seeds Unités 2 à 7 + Section 2 complète.
-8b. [ ] Réécrire le deck Grammaire V2 (fondations) avec uniquement du vocabulaire des unités 1 à 7 (ex. *Idag är det kallt*, *Igår var det varmt*, *Hon fikar med sin syster*). Les cartes actuelles (*åkte*, *jobbar hemifrån*, *eftersom*…) utilisent encore du vocabulaire jamais vu.
+8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`grammar-data.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
-10. [ ] Auth + restriction des policies RLS, puis build Capacitor Android.
+10. [~] APK Android hors ligne fait (`npm run apk`). Restent : icône et splash, APK signé (release), synchro de progression PC <-> téléphone, auth + restriction RLS.
 
 ## Consignes pour Gemini
 - Garder les décisions ci-dessus ; ne pas réintroduire `'thematic'` dans `category`.
