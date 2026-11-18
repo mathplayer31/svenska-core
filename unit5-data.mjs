@@ -1,9 +1,9 @@
-// Unité 5 — Au restaurant (Section 2)
+// Unité 5 : Au restaurant (Section 2)
 // Convention : voir unit1-data.mjs. Réutilise jag tar / kan jag / tack / det var gott / betala / vill… des unités 1 à 4.
 
 export const UNIT5_DECK = {
   slug: 'swedish-unit-5-restaurant',
-  title: 'Unité 5 — Au restaurant',
+  title: 'Unité 5 : Au restaurant',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

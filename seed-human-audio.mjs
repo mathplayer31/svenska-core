@@ -20,8 +20,8 @@ const HUMAN_CARDS = [
   {
     card_type: 'minimal_pair',
     swedish_prompt: 'Voyelles postérieures : "mål" (å) vs "sol" (o)',
-    swedish_target: 'ett mål — en sol',
-    english_translation: 'un but/repas — un soleil',
+    swedish_target: 'ett mål / en sol',
+    english_translation: 'un but/repas / un soleil',
     ipa_transcription: '/moːl/ (å = "eau" fermé) vs /suːl/ (o = "ou" très reculé)',
     pitch_accent: 'Accent 1 (Aigu)',
     explanation_md: 'En suédois, le "å" long (/oː/) ressemble au "eau" français très arrondi. À l’inverse, le "o" long (/uː/ dans sol) se prononce comme un "ou" français avec les lèvres très projetées en avant.',
@@ -30,8 +30,8 @@ const HUMAN_CARDS = [
   {
     card_type: 'minimal_pair',
     swedish_prompt: 'Longueur de la voyelle "u" : "ful" vs "full"',
-    swedish_target: 'ful — full',
-    english_translation: 'moche — bourré / plein',
+    swedish_target: 'ful / full',
+    english_translation: 'moche / bourré / plein',
     ipa_transcription: '/fʉːl/ (u long comprimé) vs /fɵlː/ (u court relâché)',
     pitch_accent: 'Accent 1 (Aigu)',
     explanation_md: 'Devant une seule consonne ("ful"), le "u" (/ʉː/) est long avec les lèvres très pincées vers l’intérieur. Devant deux consonnes ("full"), la voyelle devient courte (/ɵ/) et beaucoup plus ouverte.',
@@ -40,8 +40,8 @@ const HUMAN_CARDS = [
   {
     card_type: 'minimal_pair',
     swedish_prompt: 'Longueur de la voyelle "ä" : "väg" vs "vägg"',
-    swedish_target: 'en väg — en vägg',
-    english_translation: 'une route — un mur',
+    swedish_target: 'en väg / en vägg',
+    english_translation: 'une route / un mur',
     ipa_transcription: '/vɛːɡ/ (ä long + g court) vs /vɛɡː/ (ä court + g long)',
     pitch_accent: 'Accent 1 (Aigu)',
     explanation_md: 'En suédois, une syllabe accentuée est toujours longue : soit la voyelle est longue (väääg), soit la consonne qui suit est longue (väggg). Ne raccourcis jamais les deux en même temps !',
@@ -50,8 +50,8 @@ const HUMAN_CARDS = [
   {
     card_type: 'minimal_pair',
     swedish_prompt: 'La voyelle "ö" normale vs devant un R : "öl" vs "öra"',
-    swedish_target: 'en öl — ett öra',
-    english_translation: 'une bière — une oreille',
+    swedish_target: 'en öl / ett öra',
+    english_translation: 'une bière / une oreille',
     ipa_transcription: '/øːl/ (eu fermé) vs /ˈœːra/ (eu très ouvert devant r)',
     pitch_accent: 'Accent 1 vs Accent 2',
     explanation_md: 'Les voyelles "ä" et "ö" changent de son lorsqu’elles précèdent un "r" : dans "öl", le "ö" (/øː/) est fermé (comme dans "peu"), mais devant le "r" de "öra", la bouche s’ouvre grand (/œː/, comme dans "peur").',
@@ -60,7 +60,7 @@ const HUMAN_CARDS = [
   {
     card_type: 'minimal_pair',
     swedish_prompt: 'Accent tonal (Pitch Accent) : "anden" (1) vs "anden" (2)',
-    swedish_target: 'anden (le canard) — anden (l’esprit)',
+    swedish_target: 'anden (le canard) / anden (l’esprit)',
     english_translation: 'the duck (and + en) vs the spirit (ande + n)',
     ipa_transcription: '/¹anːdɛn/ (1 pic mélodique) vs /²anːdɛn/ (2 pics mélodiques)',
     pitch_accent: 'Accent 1 vs Accent 2',

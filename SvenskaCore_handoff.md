@@ -1,6 +1,6 @@
-# SvenskaCore — Handoff (à donner à Gemini)
+# SvenskaCore : Handoff (à donner à Gemini)
 
-> Mise à jour : 18 nov 2026 (nuit) — Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git.
+> Mise à jour : 18 nov 2026 (nuit) : Unités 2 à 7, Section 2, exercices, grammaire V2 réécrite, mode hors ligne + APK Android, dépôt git, refonte visuelle (branche `feat/refonte-ui`).
 > Utilisateur francophone, débutant complet en suédois. Réponds en français.
 
 ## Goal
@@ -14,13 +14,21 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - **Audio :** `edge-tts` (`sv-SE-SofieNeural`) via `generate-audio.mjs`
 
 ## Environnement local
-- API : `http://127.0.0.1:54321` — Studio : `http://127.0.0.1:54323`
+- API : `http://127.0.0.1:54321`, Studio : `http://127.0.0.1:54323`
 - Postgres : `postgresql://postgres:postgres@127.0.0.1:54322/postgres`
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt git local (branche `main`). Dépôt GitHub **privé** à créer/pousser.
 
-## Mode hors ligne & Android — AJOUTÉ (18 nov 2026)
+## Refonte visuelle « nordique clair » : AJOUTÉ (18 nov 2026)
+- Thème dans `src/index.css` : variables CSS (`--bg`, `--surface`, `--ink`, `--accent` bleu #1F4E8C, `--gold` #F2C14E…) exposées à Tailwind via `@theme inline` (classes `bg-bg`, `bg-surface`, `text-ink`, `text-muted`, `bg-accent`, `border-line`…). Mode sombre automatique (`prefers-color-scheme`). Ne plus utiliser de couleurs Tailwind brutes (`slate-*`, `amber-*`…).
+- Polices embarquées (fonctionnent hors ligne) : `@fontsource-variable/fraunces` (titres, classe `font-serif`) et `@fontsource-variable/inter` (texte).
+- Navigation : 3 onglets **Parcours / Réviser / Fondations**, barre en bas sur mobile, sélecteur en haut sur desktop. Écrans intérieurs (unité, cartes, exercices, test) avec bouton retour en haut.
+- Boutons de notation FSRS en français : À revoir / Difficile / Bien / Facile (raccourcis 1 à 4 inchangés).
+- Règle de contenu : aucun tiret cadratin. Titres `Unité 1 : Salutations`, formes multiples `ett mål / en sol` (l'app découpe les étiquettes audio sur ` / `).
+- Nettoyage : `src/App.css`, `src/assets/` et la dépendance `dexie` supprimés (inutilisés).
+
+## Mode hors ligne & Android : AJOUTÉ (18 nov 2026)
 - Décision : l'APK fonctionne **100 % hors ligne**. Pas de synchro de progression entre PC et téléphone pour l'instant.
 - `src/dataSource.ts` : couche d'accès aux données. Web = Supabase ; Android (`Capacitor.isNativePlatform()`) ou `VITE_DATA_SOURCE=local` (fichier `.env.android`) = contenu embarqué `src/content.json` + progression en `localStorage` (clés `svenska.cardProgress`, `svenska.sectionProgress`).
 - `src/content.json` est **généré** par `generate-audio.mjs` à chaque synchro (sections, decks, cartes ; les uuid sont remplacés par les slugs, donc la progression locale survit à un re-seed). Les MP3 de `public/audio` sont embarqués dans l'APK.
@@ -29,7 +37,7 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Test local du mode hors ligne dans le navigateur : `npm run dev:local`.
 - Les notes (`explanation_md`) sont rendues avec un mini-markdown (`**gras**`, `*italique*`, `~~barré~~`).
 
-## Grammaire V2 réécrite — AJOUTÉ (18 nov 2026)
+## Grammaire V2 réécrite : AJOUTÉ (18 nov 2026)
 - `grammar-data.mjs` : 12 cartes `cloze_grammar` qui n'utilisent que le vocabulaire des unités 1 à 7 (V2 avec idag/imorgon/igår, questions, *inte*, *sin/hans*, accord en -t, forme définie, *det här tåget*). Prérequis du deck : **Unité 7**.
 - Les 8 anciennes cartes (*åkte*, *jobbar hemifrån*, *eftersom*…) ont été supprimées. `generate-audio.mjs` supprime désormais toute carte en base dont le slug n'existe plus dans les fichiers de données (et sa progression).
 
@@ -47,7 +55,7 @@ Les cartes de **prononciation** fonctionnent bien. Les cartes de **grammaire/syn
    - Les decks de fondation (grammaire, vocab/genres) sont **déverrouillés par les unités** via `prerequisite_deck_id`, pas dispos dès le départ.
 4. **Plan des unités thématiques :**
    - U1 Salutations & premier contact (Hej, Tjena, God morgon, Hur är läget?, Det är bra tack, Jag heter…, Jag kommer från Frankrike)
-   - U2 Café & fika (« Jag tar en bryggkaffe och en kanelbulle, tack » — pas « Jag vill ha », qui sonne enfantin ; Kan jag betala med kort? ; Ta med eller äta här ?)
+   - U2 Café & fika (« Jag tar en bryggkaffe och en kanelbulle, tack » : pas « Jag vill ha », qui sonne enfantin ; Kan jag betala med kort? ; Ta med eller äta här ?)
    - U3 Famille & relations (flickvän, pojkvän, svärmor, syster, bror ; piège `sin/sitt/sina`)
    - U4 Nourriture, courses, restaurant (ICA/Systembolaget, en påse, kvitto, Notan tack)
    - U5 Déplacements & météo (tunnelbana, spår, nästa avgång, försening, väder)
@@ -55,7 +63,7 @@ Les cartes de **prononciation** fonctionnent bien. Les cartes de **grammaire/syn
 
 ---
 
-## Migration SQL — APPLIQUÉE (confirmé par l'utilisateur)
+## Migration SQL : APPLIQUÉE (confirmé par l'utilisateur)
 
 ```sql
 -- 1. Parcours (thématique / fondation) séparé de la compétence (category)
@@ -84,7 +92,7 @@ create index decks_track_unit_idx on public.decks (track, unit_number, sort_orde
 
 ---
 
-## Schéma de la DB (`public`) — état AVANT migration (les nouvelles colonnes sont listées plus bas et sont désormais en base)
+## Schéma de la DB (`public`) : état AVANT migration (les nouvelles colonnes sont listées plus bas et sont désormais en base)
 
 ### `decks`
 | colonne | type | null | default |
@@ -122,7 +130,7 @@ RLS activé sur les 3 tables avec une policy dev permissive (`ALL`, `true`, rôl
 - `decks.track` text not null default 'foundation' (`'foundation'|'thematic'`)
 - `decks.unit_number` int (nullable)
 - `decks.prerequisite_deck_id` uuid (nullable, FK decks)
-- `cards.gloss` jsonb (nullable) — `[{"sv":"jag","fr":"je"}]`
+- `cards.gloss` jsonb (nullable) : `[{"sv":"jag","fr":"je"}]`
 - `cards.french_translation` text (nullable)
 
 ---
@@ -144,14 +152,14 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 
 ---
 
-## Pipeline de contenu (IMPORTANT — source de vérité)
+## Pipeline de contenu (IMPORTANT : source de vérité)
 - Les decks et cartes sont définis dans **`generate-audio.mjs`** (`DECKS_DATA`, `CARDS_DATA`) et poussés par `upsert` (onConflict `slug`). Lancer : `node --env-file=.env.local generate-audio.mjs`. Ne pas seeder à la main en SQL.
 - Les nouvelles unités sont dans des modules séparés (`unit1-data.mjs`, etc.) exportant un deck + un tableau de cartes, importés dans le script.
 - Convention des champs d'une carte : `swedish_prompt` = consigne/indice **en français** ; `swedish_target` = texte suédois ; `english_translation` contient en réalité la **traduction française** (nom de colonne trompeur, à renommer plus tard) ; `french_translation` est rempli avec la même valeur ; `words` = textes dont on génère un MP3 chacun.
 - Audio : MP3 générés en local dans `./public/audio/<slug>_<n>.mp3` (cache si déjà présent), `audio_url` = chemins `/audio/...` joints par `|`. (Le bucket Supabase `card-audio` n'est pas utilisé par le script.)
 - Nouveaux champs de carte : `gloss` (jsonb `[{sv, fr}]`) et `french_translation`.
 
-## Frontend (`App.tsx`) — état
+## Frontend (`App.tsx`) : état
 - Charge les nouveaux champs : `decks.track/unit_number/prerequisite_deck_id`, `cards.gloss/french_translation`.
 - Dashboard en 2 sections : « Parcours Thématique » puis « Fondations Linguistiques ».
 - Verrouillage : un deck est débloqué quand toutes les cartes de son deck prérequis ont été vues au moins une fois (`state !== 0`). La session globale « ALL » exclut les decks verrouillés et met les nouvelles cartes du parcours thématique en premier.
@@ -159,7 +167,7 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 - `generate-audio.mjs` : `generateMp3()` avec timeout 30 s, 3 tentatives et `stdio: 'inherit'` (fait ; un MP3 tronqué est supprimé automatiquement).
 - Prérequis : un deck déclare `prerequisite_slug` (dans `DECKS_DATA` ou `unit*-data.mjs`) ; le script le résout en `prerequisite_deck_id` après l'upsert de tous les decks. Grammaire + vocab/genres -> Unité 1 ; Unité 2 -> Unité 1.
 
-## Page d'unité + exercices — AJOUTÉ (18 nov 2026)
+## Page d'unité + exercices : AJOUTÉ (18 nov 2026)
 - Clic sur un deck **thématique** -> page d'unité (pas directement les cartes) : barre de progression, **1. Découvrir** (session de cartes FSRS du deck), **2. Pratiquer** (déverrouillé quand toutes les cartes de l'unité ont été vues), **Lexique** (mots/phrases déjà vus, tap = audio). Les cartes encore non vues sont masquées dans le lexique.
 - `src/UnitPractice.tsx` : série d'environ 15 exercices **générés automatiquement depuis les cartes** (aucun contenu à écrire en plus) :
   1. Associer les paires (5 mots sv <-> fr ; 1 erreur tolérée)
@@ -171,10 +179,10 @@ where slug in ('swedish-grammar-a1', 'swedish-vocab-a1');
 - Un exercice raté est reproposé **une fois** en fin de série (« rattrapage »). Score = % réussis du premier coup.
 - Meilleur score par unité stocké en `localStorage` (`svenska.practiceScores`) : pas en DB pour l'instant, les exercices n'alimentent pas FSRS.
 
-## Unité 2 — Café & fika — SEEDÉE
+## Unité 2 : Café & fika : SEEDÉE
 - `unit2-data.mjs` : 10 `vocab` (fika, en bryggkaffe, en kanelbulle, ett te, mjölk, en kopp, och, med, ett kort, här) + 8 `phrase` (Ska vi fika?, Jag tar en bryggkaffe och en kanelbulle tack, En kopp te med mjölk tack, Ta med eller äta här?, Äta här tack, Vad kostar det?, Kan jag betala med kort?, Det var gott!). Section 1, `unit_number` 2, prérequis Unité 1.
 
-## Unités 3 à 7 + Section 2 — SEEDÉES (18 nov 2026)
+## Unités 3 à 7 + Section 2 : SEEDÉES (18 nov 2026)
 Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan initial a été découpé plus finement : restaurant et météo ont leur propre unité.
 
 | Unité | Section | Fichier | Contenu | Point de grammaire |
@@ -188,7 +196,7 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 - `sections-data.mjs` : ajout de `section-2-vie-quotidienne` (pass_score 80). La section 2 regroupe U4 à U7 et a son test de fin de section (généré automatiquement).
 - Total en base : 159 cartes. Mots/notions introduits en phrase sans carte dédiée, toujours glosés : vill ha, ni, hundra, var, ligger, på, få, lite, för, sig, när, går, tre, tio, sväng, sedan, skiner, vilket, fint, hennes, hans.
 
-## Sections + tests (style Duolingo) — AJOUTÉ
+## Sections + tests (style Duolingo) : AJOUTÉ
 - Hiérarchie : **Section → Unités (decks thématiques) → cartes**. Les fondations (phonétique, grammaire, vocab/genres) restent hors section.
 - DB (fichier `migration_sections.sql`, à exécuter dans le SQL Editor) : table `sections` (`slug`, `title`, `description`, `sort_order`, `pass_score` défaut 80), colonne `decks.section_id`, table `user_section_progress` (`user_id`, `section_id`, `best_score`, `passed`, `attempts`, `last_attempt`). RLS dev permissive.
 - Données : `sections-data.mjs` (tableau `SECTIONS`). Un deck rattache sa section via `section_slug` dans `unit*-data.mjs` ; `generate-audio.mjs` upserte les sections, retire `section_slug` et met `section_id` avant d'upserter le deck.

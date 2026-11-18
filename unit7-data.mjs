@@ -1,9 +1,9 @@
-// Unité 7 — Météo & temps (Section 2)
+// Unité 7 : Météo & temps (Section 2)
 // Convention : voir unit1-data.mjs. Unité idéale pour la règle V2 : « Idag är det kallt », « Imorgon snöar det ».
 
 export const UNIT7_DECK = {
   slug: 'swedish-unit-7-weather',
-  title: 'Unité 7 — Météo & temps',
+  title: 'Unité 7 : Météo & temps',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

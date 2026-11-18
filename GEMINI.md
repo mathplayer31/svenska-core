@@ -1,4 +1,4 @@
-# SvenskaCore — Project Context & Architecture
+# SvenskaCore : Project Context & Architecture
 
 ## Goal
 Build a local-first, Mjølnir-style Swedish learning app (Phonetics/Vowels, Grammar/V2 word order, en/ett Vocabulary) targeting **PC Web** and **Android APK**.

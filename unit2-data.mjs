@@ -1,4 +1,4 @@
-// Unité 2 — Café & fika
+// Unité 2 : Café & fika
 // Même convention que unit1-data.mjs :
 //  - swedish_prompt = consigne/indice en français
 //  - swedish_target = texte suédois
@@ -9,7 +9,7 @@
 
 export const UNIT2_DECK = {
   slug: 'swedish-unit-2-cafe',
-  title: 'Unité 2 — Café & fika',
+  title: 'Unité 2 : Café & fika',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

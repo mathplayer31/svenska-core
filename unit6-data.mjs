@@ -1,9 +1,9 @@
-// Unité 6 — Déplacements & transports (Section 2)
+// Unité 6 : Déplacements & transports (Section 2)
 // Convention : voir unit1-data.mjs. Réutilise var / är / det / nästa… et la règle V2.
 
 export const UNIT6_DECK = {
   slug: 'swedish-unit-6-transport',
-  title: 'Unité 6 — Déplacements & transports',
+  title: 'Unité 6 : Déplacements & transports',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

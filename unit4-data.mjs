@@ -1,9 +1,9 @@
-// Unité 4 — Courses : ICA & Systembolaget (Section 2)
+// Unité 4 : Courses : ICA & Systembolaget (Section 2)
 // Convention : voir unit1-data.mjs. Réutilise jag/du/det/har/tack/kort/med/och… des unités 1 à 3.
 
 export const UNIT4_DECK = {
   slug: 'swedish-unit-4-shopping',
-  title: 'Unité 4 — Courses : ICA & Systembolaget',
+  title: 'Unité 4 : Courses : ICA & Systembolaget',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

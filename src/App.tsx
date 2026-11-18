@@ -7,20 +7,18 @@ import {
   Sparkles,
   ArrowLeft,
   CheckCircle2,
+  Check,
+  ChevronRight,
+  Compass,
   Layers,
-  Flame,
   RotateCcw,
-  Clock,
   Lock,
   MessageCircle,
   Trophy,
   ClipboardCheck,
   Dumbbell,
   Play,
-  Puzzle,
-  Keyboard,
-  Headphones,
-  ListChecks,
+  Snail,
 } from 'lucide-react';
 import { getDataSource, LOCAL_USER_ID } from './dataSource';
 import SectionTest from './SectionTest';
@@ -79,9 +77,9 @@ const f = fsrs();
 // Mini-rendu markdown des notes (**gras**, *italique*, ~~barré~~), sans dépendance
 function renderInlineMd(text: string) {
   return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*[^*]+\*)/g).map((part, i) => {
-    if (part.startsWith('**') && part.endsWith('**')) return <strong key={i} className="text-white">{part.slice(2, -2)}</strong>;
-    if (part.startsWith('~~') && part.endsWith('~~')) return <s key={i} className="text-rose-300/80">{part.slice(2, -2)}</s>;
-    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i} className="text-amber-200">{part.slice(1, -1)}</em>;
+    if (part.startsWith('**') && part.endsWith('**')) return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
+    if (part.startsWith('~~') && part.endsWith('~~')) return <s key={i} className="text-danger">{part.slice(2, -2)}</s>;
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i} className="text-accent">{part.slice(1, -1)}</em>;
     return part;
   });
 }
@@ -115,6 +113,7 @@ export default function App() {
   const [unitDeckId, setUnitDeckId] = useState<string | null>(null);
   const [practiceDeckId, setPracticeDeckId] = useState<string | null>(null);
   const [practiceScores, setPracticeScores] = useState<Record<string, number>>(loadPracticeScores);
+  const [tab, setTab] = useState<(typeof NAV)[number]['id']>('parcours');
   const [cramMode, setCramMode] = useState(false);
   const [currentCardId, setCurrentCardId] = useState<string | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -459,11 +458,19 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-300 flex items-center justify-center">
-        Chargement de SvenskaCore...
+      <div className="min-h-dvh flex items-center justify-center">
+        <Wordmark className="text-3xl animate-pulse" />
       </div>
     );
   }
+
+  const availableCards = cards.filter((c) => unlockedDeckIds.has(c.deckId));
+  const globalStats = getStats(availableCards);
+  const startGlobalSession = () => {
+    setCramMode(globalStats.totalDue === 0);
+    setUnitDeckId(null);
+    setSelectedDeckId('ALL');
+  };
 
   // ============================================================================
   // VUE 0 : TEST DE FIN DE SECTION
@@ -529,238 +536,160 @@ export default function App() {
     const vocabCards = unitCards.filter((c) => c.cardType === 'vocab');
     const phraseCards = unitCards.filter((c) => c.cardType === 'phrase');
     const remaining = unitCards.length - seen;
+    const { eyebrow, title } = splitTitle(unitDeck.title);
 
     const lexiconRow = (c: SwedishCard) => {
       const hidden = c.fsrsCard.state === 0;
       return (
-        <button
-          key={c.id}
-          onClick={() => playCardAudio(c.audioUrl)}
-          disabled={hidden}
-          className="w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl hover:bg-slate-800/70 text-left transition cursor-pointer disabled:cursor-default disabled:opacity-40"
-        >
-          <span className="min-w-0">
-            <span className="block font-semibold text-amber-300 truncate">{hidden ? '• • •' : c.swedishTarget}</span>
-            <span className="block text-xs text-slate-400 truncate">{c.english}</span>
-          </span>
-          {!hidden && c.audioUrl && <Volume2 className="w-4 h-4 text-slate-500 shrink-0" />}
-        </button>
+        <li key={c.id}>
+          <button
+            onClick={() => playCardAudio(c.audioUrl)}
+            disabled={hidden}
+            className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl hover:bg-surface-2 text-left transition cursor-pointer disabled:cursor-default disabled:opacity-45"
+          >
+            <span className="min-w-0">
+              <span className="block font-medium text-ink truncate">{hidden ? 'À découvrir' : c.swedishTarget}</span>
+              <span className="block text-sm text-muted truncate">{c.english}</span>
+            </span>
+            {!hidden && c.audioUrl && <Volume2 className="w-4 h-4 text-faint shrink-0" aria-hidden />}
+          </button>
+        </li>
       );
     };
 
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 p-6 flex flex-col items-center">
-        <div className="w-full max-w-2xl space-y-6 mt-4">
-          <button
-            onClick={() => setUnitDeckId(null)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" /> Tableau de bord
-          </button>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-400">Unité {unitDeck.unitNumber}</p>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-white mt-1">
-              {unitDeck.title.replace(/^Unité \d+\s*—\s*/, '')}
-            </h1>
-            <div className="mt-4 h-2 bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-amber-500 transition-all"
-                style={{ width: `${unitCards.length ? (seen / unitCards.length) * 100 : 0}%` }}
-              />
-            </div>
-            <p className="text-xs text-slate-400 mt-1.5">
-              {seen}/{unitCards.length} cartes découvertes
-            </p>
+      <Page>
+        <TopBar onBack={() => setUnitDeckId(null)} backLabel="Parcours" />
+        <header className="pt-2 pb-8">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{title}</h1>
+          <div className="mt-6 flex items-center gap-4">
+            <ProgressBar value={unitCards.length ? seen / unitCards.length : 0} />
+            <span className="text-sm text-muted tabular-nums shrink-0">
+              {seen}/{unitCards.length} découvertes
+            </span>
           </div>
+        </header>
 
-          {/* Étape 1 : Découvrir */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400">
-                <Layers className="w-6 h-6" />
-              </div>
-              <div>
-                <h2 className="font-bold text-white">1. Découvrir</h2>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  {vocabCards.length} mots et {phraseCards.length} phrases en cartes audio, avec glose mot à mot.
-                </p>
-                <p className="text-xs mt-1.5 font-semibold">
-                  {stats.totalDue > 0 ? (
-                    <span className="text-sky-400">
-                      {stats.newCount} nouvelle{stats.newCount > 1 ? 's' : ''} •{' '}
-                      {stats.learningCount + stats.reviewCount} à revoir
-                    </span>
-                  ) : (
-                    <span className="text-emerald-400">
-                      À jour{stats.nextDueLabel ? ` • prochaine révision dans ${stats.nextDueLabel}` : ''}
-                    </span>
-                  )}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                setCramMode(stats.totalDue === 0);
-                setSelectedDeckId(unitDeck.id);
-              }}
-              className={`shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition cursor-pointer ${
-                stats.totalDue > 0
-                  ? 'bg-amber-500 hover:bg-amber-400 text-slate-950'
-                  : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
-              }`}
-            >
-              <Play className="w-4 h-4" /> {stats.totalDue > 0 ? 'Étudier les cartes' : 'Revoir (mode libre)'}
-            </button>
-          </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <StepCard
+            step={1}
+            title="Découvrir"
+            text={`${vocabCards.length} mots et ${phraseCards.length} phrases, avec audio et traduction mot à mot.`}
+            status={
+              stats.totalDue > 0
+                ? `${stats.newCount} nouvelle${stats.newCount > 1 ? 's' : ''}, ${stats.learningCount + stats.reviewCount} à revoir`
+                : `À jour${stats.nextDueLabel ? `, prochaine révision dans ${stats.nextDueLabel}` : ''}`
+            }
+            done={stats.totalDue === 0}
+            action={stats.totalDue > 0 ? 'Étudier les cartes' : 'Revoir librement'}
+            primary={stats.totalDue > 0}
+            onClick={() => {
+              setCramMode(stats.totalDue === 0);
+              setSelectedDeckId(unitDeck.id);
+            }}
+          />
+          <StepCard
+            step={2}
+            title="Pratiquer"
+            text="Paires, QCM, écoute, phrases à composer et dictée."
+            status={
+              allSeen
+                ? best !== undefined
+                  ? `Meilleur score : ${best} %`
+                  : 'Prêt à commencer'
+                : `Découvre encore ${remaining} carte${remaining > 1 ? 's' : ''}`
+            }
+            done={best !== undefined && best >= 80}
+            locked={!allSeen}
+            action="S’entraîner"
+            primary={allSeen && stats.totalDue === 0}
+            onClick={() => allSeen && setPracticeDeckId(unitDeck.id)}
+          />
+        </div>
 
-          {/* Étape 2 : Pratiquer */}
-          <div
-            className={`border rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-              allSeen ? 'bg-slate-900 border-slate-800' : 'bg-slate-900/50 border-slate-800/60'
-            }`}
-          >
-            <div className="flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${allSeen ? 'bg-sky-500/10 text-sky-400' : 'bg-slate-800 text-slate-500'}`}>
-                {allSeen ? <Dumbbell className="w-6 h-6" /> : <Lock className="w-6 h-6" />}
-              </div>
-              <div>
-                <h2 className={`font-bold ${allSeen ? 'text-white' : 'text-slate-400'}`}>2. Pratiquer</h2>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Paires, QCM, écoute, phrases à composer en blocs, écriture et dictée.
-                </p>
-                <div className="flex items-center gap-2 mt-2 text-slate-500">
-                  <Puzzle className="w-4 h-4" />
-                  <ListChecks className="w-4 h-4" />
-                  <Headphones className="w-4 h-4" />
-                  <Keyboard className="w-4 h-4" />
-                  {allSeen ? (
-                    best !== undefined && (
-                      <span className="ml-1 text-xs font-semibold text-emerald-400">Meilleur score : {best}%</span>
-                    )
-                  ) : (
-                    <span className="ml-1 text-xs">
-                      Découvre encore {remaining} carte{remaining > 1 ? 's' : ''} pour débloquer
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-            <button
-              onClick={() => allSeen && setPracticeDeckId(unitDeck.id)}
-              disabled={!allSeen}
-              className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition cursor-pointer bg-sky-600 hover:bg-sky-500 text-white disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed"
-            >
-              <Dumbbell className="w-4 h-4" /> S’entraîner
-            </button>
-          </div>
-
-          {/* Lexique */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-4 pt-2 pb-1">
-              Lexique de l’unité
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-x-2">{vocabCards.map(lexiconRow)}</div>
+        <section className="mt-10">
+          <h2 className="font-serif text-2xl text-ink mb-3">Lexique</h2>
+          <div className="rounded-2xl bg-surface border border-line shadow-card p-2">
+            <ul className="grid sm:grid-cols-2">{vocabCards.map(lexiconRow)}</ul>
             {phraseCards.length > 0 && (
               <>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 px-4 pt-3 pb-1">Phrases</h3>
-                {phraseCards.map(lexiconRow)}
+                <p className="px-4 pt-4 pb-1 text-xs font-semibold uppercase tracking-[0.14em] text-faint">Phrases</p>
+                <ul>{phraseCards.map(lexiconRow)}</ul>
               </>
             )}
           </div>
-        </div>
-      </div>
+        </section>
+      </Page>
     );
   }
 
   // ============================================================================
-  // VUE 1 : TABLEAU DE BORD (DASHBOARD)
+  // VUE 1 : TABLEAU DE BORD (3 onglets)
   // ============================================================================
   if (!selectedDeckId) {
-    const availableCards = cards.filter((c) => unlockedDeckIds.has(c.deckId));
-    const globalStats = getStats(availableCards);
     const foundationDecks = sortedDecks.filter((d) => d.track === 'foundation' && !d.sectionId);
     const orphanThematicDecks = sortedDecks.filter((d) => d.track === 'thematic' && !d.sectionId);
+    const thematicCards = cards.filter((c) => decks.find((d) => d.id === c.deckId)?.track === 'thematic');
+    const thematicSeen = thematicCards.filter((c) => c.fsrsCard.state !== 0).length;
 
-    const renderDeckRow = (deck: DeckInfo) => {
+    const lockReasonFor = (deck: DeckInfo) => {
+      if (deck.sectionId && !unlockedSectionIds.has(deck.sectionId)) return 'Valide le test de la section précédente';
+      const prereq = deck.prerequisiteDeckId ? deckTitleById.get(deck.prerequisiteDeckId) : null;
+      return prereq ? `Après ${splitTitle(prereq).eyebrow || prereq}` : '';
+    };
+
+    const openDeck = (deck: DeckInfo, totalDue: number) => {
+      if (!unlockedDeckIds.has(deck.id)) return;
+      if (deck.track === 'thematic') {
+        setUnitDeckId(deck.id);
+        return;
+      }
+      // Tout est à jour : clic = mode libre direct
+      setCramMode(totalDue === 0);
+      setSelectedDeckId(deck.id);
+    };
+
+    const renderUnitRow = (deck: DeckInfo) => {
       const deckCards = cards.filter((c) => c.deckId === deck.id);
       const stats = getStats(deckCards);
       const locked = !unlockedDeckIds.has(deck.id);
-      const prereqTitle = deck.prerequisiteDeckId
-        ? deckTitleById.get(deck.prerequisiteDeckId)
-        : null;
-
-      let lockReason = '';
-      if (locked) {
-        if (deck.sectionId && !unlockedSectionIds.has(deck.sectionId)) {
-          lockReason = 'Valide le test de la section précédente';
-        } else if (prereqTitle) {
-          lockReason = `Se débloque après : ${prereqTitle}`;
-        }
-      }
+      const seen = deckCards.filter((c) => c.fsrsCard.state !== 0).length;
+      const complete = deckCards.length > 0 && seen === deckCards.length;
+      const { title } = splitTitle(deck.title);
 
       return (
-        <div
-          key={deck.id}
-          onClick={() => {
-            if (locked) return;
-            // Unité thématique : page d'unité (Découvrir -> Pratiquer)
-            if (deck.track === 'thematic') {
-              setUnitDeckId(deck.id);
-              return;
-            }
-            // Si toutes les cartes du module sont déjà faites, clic = mode libre direct
-            setCramMode(stats.totalDue === 0);
-            setSelectedDeckId(deck.id);
-          }}
-          className={`group bg-slate-900 border border-slate-800 rounded-2xl p-5 transition flex items-center justify-between ${
-            locked
-              ? 'opacity-50 cursor-not-allowed'
-              : 'hover:bg-slate-800/80 cursor-pointer'
-          }`}
-        >
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-slate-800 text-sky-400 group-hover:bg-slate-700 transition">
-              {locked ? (
-                <Lock className="w-5 h-5 text-slate-400" />
-              ) : deck.track === 'thematic' ? (
-                <MessageCircle className="w-5 h-5 text-amber-400" />
-              ) : deck.category === 'phonetics' ? (
-                <Ear className="w-5 h-5 text-amber-400" />
-              ) : deck.category === 'grammar' ? (
-                <BookOpen className="w-5 h-5 text-sky-400" />
-              ) : (
-                <Sparkles className="w-5 h-5 text-emerald-400" />
-              )}
-            </div>
-            <div>
-              <h3 className="font-bold text-white text-base">{deck.title}</h3>
-              <div className="flex flex-wrap items-center gap-x-3 text-xs text-slate-400 mt-0.5">
-                <span>{deckCards.length} cartes au total</span>
-                {locked && lockReason && <span>• {lockReason}</span>}
-                {!locked && stats.totalDue === 0 && stats.nextDueLabel && (
-                  <span className="inline-flex items-center gap-1 text-amber-400/90 font-medium">
-                    • Prochaine dans {stats.nextDueLabel} (Clic = mode libre)
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {!locked && (
-            <div className="flex items-center gap-2 text-xs font-mono font-bold">
-              <span className="px-2.5 py-1 rounded-lg bg-sky-950 text-sky-400 border border-sky-800/60" title="Nouvelles">
-                {stats.newCount}
+        <li key={deck.id}>
+          <button
+            onClick={() => openDeck(deck, stats.totalDue)}
+            disabled={locked}
+            className="group w-full text-left flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-surface border border-line shadow-card transition hover:border-accent/40 cursor-pointer disabled:cursor-not-allowed disabled:shadow-none disabled:bg-transparent"
+          >
+            <span
+              className={`grid place-items-center w-11 h-11 rounded-full shrink-0 font-serif text-lg ${
+                locked
+                  ? 'bg-surface-2 text-faint'
+                  : complete
+                    ? 'bg-gold text-[#14213d]'
+                    : 'bg-accent-soft text-accent'
+              }`}
+            >
+              {locked ? <Lock className="w-4 h-4" aria-hidden /> : deck.unitNumber}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className={`block font-semibold ${locked ? 'text-muted' : 'text-ink'}`}>{title}</span>
+              <span className="block text-sm text-muted mt-0.5">
+                {locked
+                  ? lockReasonFor(deck)
+                  : stats.totalDue > 0
+                    ? `${stats.totalDue} à étudier, ${seen}/${deckCards.length} découvertes`
+                    : `${deckCards.length} cartes, à jour`}
               </span>
-              <span className="px-2.5 py-1 rounded-lg bg-orange-950 text-orange-400 border border-orange-800/60" title="En apprentissage">
-                {stats.learningCount}
-              </span>
-              <span className="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-400 border border-emerald-800/60" title="À réviser">
-                {stats.reviewCount}
-              </span>
-            </div>
-          )}
-        </div>
+              {!locked && <ProgressBar value={deckCards.length ? seen / deckCards.length : 0} className="mt-3" thin />}
+            </span>
+            {!locked && <ChevronRight className="w-5 h-5 text-faint group-hover:text-accent transition shrink-0" aria-hidden />}
+          </button>
+        </li>
       );
     };
 
@@ -772,311 +701,488 @@ export default function App() {
       const progress = sectionProgress.get(section.id);
       const seen = sectionCards.filter((c) => c.fsrsCard.state !== 0).length;
       const testReady = unlocked && sectionCards.length > 0 && seen === sectionCards.length;
-      const prevTitle = idx > 0 ? sortedSections[idx - 1].title : null;
+      const prevTitle = idx > 0 ? splitTitle(sortedSections[idx - 1].title).title : null;
+      const { eyebrow, title } = splitTitle(section.title);
 
       return (
-        <div key={section.id} className="space-y-3">
-          <div className="flex items-start justify-between gap-3 px-1">
+        <section key={section.id} className="space-y-4">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                {!unlocked && <Lock className="w-4 h-4 text-slate-400" />}
-                {section.title}
+              <Eyebrow>{eyebrow}</Eyebrow>
+              <h2 className={`font-serif text-3xl font-medium tracking-tight mt-1 ${unlocked ? 'text-ink' : 'text-muted'}`}>
+                {title}
               </h2>
-              {section.description && (
-                <p className="text-xs text-slate-400 mt-1">{section.description}</p>
-              )}
-              {!unlocked && prevTitle && (
-                <p className="text-xs text-slate-500 mt-1">
-                  Réussis le test de « {prevTitle} » pour débloquer cette section.
-                </p>
-              )}
+              <p className="text-sm text-muted mt-1.5 max-w-prose">
+                {unlocked ? section.description : `Réussis le test « ${prevTitle} » pour ouvrir cette section.`}
+              </p>
             </div>
-            {unlocked &&
-              (progress?.passed ? (
-                <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <Trophy className="w-3.5 h-3.5" /> Validée • {progress.bestScore}%
-                </span>
-              ) : (
-                <span className="shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-300">
-                  {seen}/{sectionCards.length} cartes vues
-                </span>
-              ))}
+            {unlocked && progress?.passed && (
+              <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gold-soft text-gold-ink">
+                <Trophy className="w-3.5 h-3.5" aria-hidden /> Validée, {progress.bestScore} %
+              </span>
+            )}
           </div>
 
-          {sectionDecks.map(renderDeckRow)}
+          <ul className="space-y-3">{sectionDecks.map(renderUnitRow)}</ul>
 
           {unlocked && (
             <button
               onClick={() => testReady && setTestSectionId(section.id)}
               disabled={!testReady}
-              className={`w-full rounded-2xl p-4 border flex items-center justify-between gap-3 text-left transition ${
-                testReady
-                  ? 'bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20 cursor-pointer'
-                  : 'bg-slate-900 border-slate-800 opacity-60 cursor-not-allowed'
-              }`}
+              className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border border-dashed border-line text-left transition enabled:hover:border-accent enabled:hover:bg-accent-soft cursor-pointer disabled:cursor-not-allowed"
             >
-              <span className="inline-flex items-center gap-3">
-                <ClipboardCheck className={`w-5 h-5 ${testReady ? 'text-amber-400' : 'text-slate-400'}`} />
-                <span>
-                  <span className="block font-bold text-white text-sm">
-                    {progress?.passed ? 'Refaire le test de section' : 'Test de fin de section'}
-                  </span>
-                  <span className="block text-xs text-slate-400 mt-0.5">
-                    {testReady
-                      ? `10 questions • ${section.passScore}% pour valider${
-                          progress ? ` • Meilleur score : ${progress.bestScore}%` : ''
-                        }`
-                      : 'Vois toutes les cartes de la section pour débloquer le test'}
-                  </span>
+              <span className={`grid place-items-center w-11 h-11 rounded-full shrink-0 ${testReady ? 'bg-accent text-accent-ink' : 'bg-surface-2 text-faint'}`}>
+                <ClipboardCheck className="w-5 h-5" aria-hidden />
+              </span>
+              <span>
+                <span className={`block font-semibold ${testReady ? 'text-ink' : 'text-muted'}`}>
+                  {progress?.passed ? 'Refaire le test de section' : 'Test de fin de section'}
+                </span>
+                <span className="block text-sm text-muted mt-0.5">
+                  {testReady
+                    ? `10 questions, ${section.passScore} % pour valider${progress ? `. Meilleur score : ${progress.bestScore} %` : ''}`
+                    : `Découvre toutes les cartes de la section (${seen}/${sectionCards.length})`}
                 </span>
               </span>
             </button>
           )}
-        </div>
+        </section>
+      );
+    };
+
+    const renderFoundationRow = (deck: DeckInfo) => {
+      const deckCards = cards.filter((c) => c.deckId === deck.id);
+      const stats = getStats(deckCards);
+      const locked = !unlockedDeckIds.has(deck.id);
+      const Icon = deck.category === 'phonetics' ? Ear : deck.category === 'grammar' ? BookOpen : Sparkles;
+      return (
+        <li key={deck.id}>
+          <button
+            onClick={() => openDeck(deck, stats.totalDue)}
+            disabled={locked}
+            className="group w-full text-left flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-surface border border-line shadow-card transition hover:border-accent/40 cursor-pointer disabled:cursor-not-allowed disabled:shadow-none disabled:bg-transparent"
+          >
+            <span className={`grid place-items-center w-11 h-11 rounded-xl shrink-0 ${locked ? 'bg-surface-2 text-faint' : 'bg-accent-soft text-accent'}`}>
+              {locked ? <Lock className="w-4 h-4" aria-hidden /> : <Icon className="w-5 h-5" aria-hidden />}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className={`block font-semibold ${locked ? 'text-muted' : 'text-ink'}`}>{deck.title.replace(/^\d+\.\s*/, '')}</span>
+              <span className="block text-sm text-muted mt-0.5">
+                {locked
+                  ? lockReasonFor(deck)
+                  : stats.totalDue > 0
+                    ? `${stats.newCount} nouvelles, ${stats.learningCount + stats.reviewCount} à revoir`
+                    : `${deckCards.length} cartes, à jour${stats.nextDueLabel ? ` (prochaine dans ${stats.nextDueLabel})` : ''}`}
+              </span>
+            </span>
+            {!locked && <ChevronRight className="w-5 h-5 text-faint group-hover:text-accent transition shrink-0" aria-hidden />}
+          </button>
+        </li>
       );
     };
 
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 p-6 flex flex-col items-center">
-        <div className="w-full max-w-2xl space-y-8 mt-4">
-          <div className="flex items-center justify-between">
+      <Page withNav>
+        <header className="flex items-center justify-between gap-4 pt-2 pb-8">
+          <Wordmark className="text-2xl" />
+          <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-surface border border-line" aria-label="Navigation principale">
+            {NAV.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setTab(item.id)}
+                aria-current={tab === item.id ? 'page' : undefined}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
+                  tab === item.id ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+        </header>
+
+        {tab === 'parcours' && (
+          <div className="space-y-12">
             <div>
-              <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
-                Svenska<span className="text-amber-400">Core</span>
-              </h1>
-              <p className="text-sm text-slate-400 mt-1">
-                Phonétique native, grammaire V2 & répétition espacée FSRS
-              </p>
-            </div>
-            <span className="px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-              Niveau A1 • {cards.length} cartes
-            </span>
-          </div>
-
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
-                <Flame className="w-4 h-4" /> File d'attente du jour
+              <Eyebrow>Niveau A1</Eyebrow>
+              <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">Ton parcours</h1>
+              <div className="mt-6 flex items-center gap-4">
+                <ProgressBar value={thematicCards.length ? thematicSeen / thematicCards.length : 0} />
+                <span className="text-sm text-muted tabular-nums shrink-0">
+                  {thematicSeen}/{thematicCards.length} cartes
+                </span>
               </div>
-              <p className="text-2xl font-bold text-white">
-                {globalStats.totalDue} carte{globalStats.totalDue > 1 ? 's' : ''} à étudier maintenant
-              </p>
-              <div className="flex flex-wrap items-center gap-4 text-xs pt-1">
-                <span className="text-sky-400 font-semibold">{globalStats.newCount} Nouvelles</span>
-                <span className="text-orange-400 font-semibold">{globalStats.learningCount} En cours</span>
-                <span className="text-emerald-400 font-semibold">{globalStats.reviewCount} À réviser</span>
-                {globalStats.totalDue === 0 && globalStats.nextDueLabel && (
-                  <span className="inline-flex items-center gap-1 text-slate-400">
-                    <Clock className="w-3.5 h-3.5 text-amber-400" /> Prochaine dans {globalStats.nextDueLabel}
+              {globalStats.totalDue > 0 && (
+                <button
+                  onClick={startGlobalSession}
+                  className="mt-6 w-full flex items-center justify-between gap-4 p-4 rounded-2xl bg-accent text-accent-ink transition hover:bg-accent-hover cursor-pointer"
+                >
+                  <span className="text-left">
+                    <span className="block font-semibold">
+                      {globalStats.totalDue} carte{globalStats.totalDue > 1 ? 's' : ''} à étudier aujourd’hui
+                    </span>
+                    <span className="block text-sm opacity-80">Nouvelles et révisions de tout ce qui est ouvert</span>
                   </span>
-                )}
-              </div>
+                  <Play className="w-5 h-5 shrink-0" aria-hidden />
+                </button>
+              )}
             </div>
-
-            <button
-              onClick={() => {
-                setCramMode(globalStats.totalDue === 0);
-                setUnitDeckId(null);
-                setSelectedDeckId('ALL');
-              }}
-              className="w-full md:w-auto px-6 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition shadow-lg cursor-pointer"
-            >
-              {globalStats.totalDue > 0 ? 'Lancer la session' : 'Entraînement libre'}
-            </button>
+            {sortedSections.map(renderSection)}
+            {orphanThematicDecks.length > 0 && <ul className="space-y-3">{orphanThematicDecks.map(renderUnitRow)}</ul>}
           </div>
+        )}
 
-          {sortedSections.map(renderSection)}
-
-          {orphanThematicDecks.length > 0 && (
-            <div className="space-y-3">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
-                Parcours Thématique
-              </h2>
-              {orphanThematicDecks.map(renderDeckRow)}
+        {tab === 'reviser' && (
+          <div>
+            <Eyebrow>Répétition espacée</Eyebrow>
+            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">Réviser</h1>
+            <p className="text-muted mt-3 max-w-prose">
+              Toutes les cartes ouvertes, dans l’ordre proposé par l’algorithme FSRS : d’abord les révisions dues,
+              puis les nouvelles cartes du parcours.
+            </p>
+            <div className="mt-8 rounded-3xl bg-surface border border-line shadow-card p-6 md:p-8">
+              <p className="font-serif text-6xl text-ink tabular-nums">{globalStats.totalDue}</p>
+              <p className="text-muted mt-1">
+                carte{globalStats.totalDue > 1 ? 's' : ''} à étudier maintenant
+                {globalStats.totalDue === 0 && globalStats.nextDueLabel ? `, prochaine dans ${globalStats.nextDueLabel}` : ''}
+              </p>
+              <dl className="grid grid-cols-3 gap-3 mt-6">
+                {[
+                  { label: 'Nouvelles', value: globalStats.newCount },
+                  { label: 'En cours', value: globalStats.learningCount },
+                  { label: 'À réviser', value: globalStats.reviewCount },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl bg-surface-2 p-3">
+                    <dt className="text-xs text-muted">{s.label}</dt>
+                    <dd className="font-serif text-2xl text-ink tabular-nums mt-0.5">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <button
+                onClick={startGlobalSession}
+                className="mt-6 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
+              >
+                <Play className="w-4 h-4" aria-hidden />
+                {globalStats.totalDue > 0 ? 'Lancer la session' : 'Entraînement libre'}
+              </button>
             </div>
-          )}
-
-          <div className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 px-1">
-              Fondations Linguistiques
-            </h2>
-            {foundationDecks.map(renderDeckRow)}
           </div>
-        </div>
-      </div>
+        )}
+
+        {tab === 'fondations' && (
+          <div>
+            <Eyebrow>En soutien du parcours</Eyebrow>
+            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">Fondations</h1>
+            <p className="text-muted mt-3 max-w-prose">
+              Prononciation, grammaire et genres en/ett. Ces modules s’ouvrent au fil des unités.
+            </p>
+            <ul className="space-y-3 mt-8">{foundationDecks.map(renderFoundationRow)}</ul>
+          </div>
+        )}
+
+        <nav
+          className="md:hidden fixed bottom-0 inset-x-0 z-10 border-t border-line bg-surface/95 backdrop-blur pb-[env(safe-area-inset-bottom)]"
+          aria-label="Navigation principale"
+        >
+          <div className="grid grid-cols-3">
+            {NAV.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setTab(item.id)}
+                aria-current={tab === item.id ? 'page' : undefined}
+                className={`flex flex-col items-center gap-1 py-2.5 text-xs font-medium transition cursor-pointer ${
+                  tab === item.id ? 'text-accent' : 'text-muted'
+                }`}
+              >
+                <item.Icon className="w-5 h-5" aria-hidden />
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </nav>
+      </Page>
     );
   }
 
+  const backLabel = unitDeckId ? 'Unité' : 'Accueil';
+
   // ============================================================================
-  // VUE 2 : ÉCRAN DE FIN DE SESSION
+  // VUE 2 : FIN DE SESSION
   // ============================================================================
   if (!currentCard) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-5 shadow-2xl">
-          <CheckCircle2 className="w-14 h-14 text-emerald-400 mx-auto" />
-          <h2 className="text-2xl font-bold text-white">Session terminée !</h2>
-          <p className="text-sm text-slate-400 leading-relaxed">
-            Toutes les cartes dues pour ce module ont été programmées par l'algorithme FSRS.
-          </p>
-
-          <div className="flex flex-col gap-3 pt-2">
-            <button
-              onClick={() => setSelectedDeckId(null)}
-              className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition cursor-pointer"
-            >
-              {unitDeckId ? 'Retour à l’unité' : 'Retour au Tableau de Bord'}
-            </button>
-            <button
-              onClick={() => setCramMode(true)}
-              className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs inline-flex items-center justify-center gap-2 transition cursor-pointer"
-            >
-              <RotateCcw className="w-4 h-4" /> Réviser quand même (Mode Libre)
-            </button>
+      <Page>
+        <div className="min-h-[70dvh] flex items-center justify-center">
+          <div className="w-full max-w-md text-center">
+            <span className="grid place-items-center w-16 h-16 mx-auto rounded-full bg-success-soft text-success">
+              <CheckCircle2 className="w-8 h-8" aria-hidden />
+            </span>
+            <h1 className="font-serif text-4xl text-ink mt-6">Session terminée</h1>
+            <p className="text-muted mt-3">Toutes les cartes dues ont été reprogrammées par l’algorithme FSRS.</p>
+            <div className="flex flex-col gap-3 mt-8">
+              <button
+                onClick={() => setSelectedDeckId(null)}
+                className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
+              >
+                {unitDeckId ? 'Retour à l’unité' : 'Retour à l’accueil'}
+              </button>
+              <button
+                onClick={() => setCramMode(true)}
+                className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <RotateCcw className="w-4 h-4" aria-hidden /> Revoir quand même (mode libre)
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Page>
     );
   }
 
   // ============================================================================
-  // VUE 3 : SESSION DE RÉVISION ACTIVE
+  // VUE 3 : SESSION DE CARTES
   // ============================================================================
   const audioUrls = currentCard.audioUrl
     ? currentCard.audioUrl.split('|').map((u) => u.trim()).filter(Boolean)
     : [];
-  const targetParts = currentCard.swedishTarget.split('—').map((s) => s.trim());
+  const targetParts = currentCard.swedishTarget.split(' / ').map((s) => s.trim());
+  const TypeIcon =
+    currentCard.cardType === 'minimal_pair'
+      ? Ear
+      : currentCard.cardType === 'cloze_grammar'
+        ? BookOpen
+        : currentCard.cardType === 'phrase'
+          ? MessageCircle
+          : Sparkles;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-4 select-none">
-      <div className="w-full max-w-xl mb-6 flex items-center justify-between text-xs text-slate-400">
-        <button
-          onClick={() => {
-            setIsFlipped(false);
-            setSelectedDeckId(null);
-          }}
-          className="inline-flex items-center gap-1.5 font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" /> {unitDeckId ? 'Unité' : 'Tableau de bord'}
-        </button>
-
-        <span className="inline-flex items-center gap-1.5">
-          <Layers className="w-3.5 h-3.5 text-amber-400" />
-          {cramMode ? 'Mode Libre' : `${sessionQueue.length} restante(s)`} • Reps: {currentCard.fsrsCard.reps}
-        </span>
-      </div>
-
-      <div className="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl">
-        <div className="flex items-center justify-between mb-6">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-sky-400">
-            {currentCard.cardType === 'minimal_pair' && <Ear className="w-3.5 h-3.5" />}
-            {currentCard.cardType === 'cloze_grammar' && <BookOpen className="w-3.5 h-3.5" />}
-            {currentCard.cardType === 'vocab' && <Sparkles className="w-3.5 h-3.5" />}
-            {currentCard.cardType === 'phrase' && <MessageCircle className="w-3.5 h-3.5" />}
-            {currentCard.cardType.replace('_', ' ').toUpperCase()}
+    <Page narrow>
+      <TopBar
+        onBack={() => {
+          setIsFlipped(false);
+          setSelectedDeckId(null);
+        }}
+        backLabel={backLabel}
+        right={
+          <span className="text-sm text-muted tabular-nums">
+            {cramMode ? 'Mode libre' : `${sessionQueue.length} restante${sessionQueue.length > 1 ? 's' : ''}`}
           </span>
-          {currentCard.pitchAccent && (
-            <span className="text-xs text-slate-400 font-mono">{currentCard.pitchAccent}</span>
-          )}
+        }
+      />
+
+      <article className="rounded-3xl bg-surface border border-line shadow-card p-6 md:p-10">
+        <div className="flex items-center justify-between gap-3">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+            <TypeIcon className="w-3.5 h-3.5" aria-hidden />
+            {CARD_TYPE_LABEL[currentCard.cardType] ?? currentCard.cardType}
+          </span>
+          {currentCard.pitchAccent && <span className="text-xs text-faint">{currentCard.pitchAccent}</span>}
         </div>
 
-        <h2 className="text-xl md:text-2xl font-bold text-white mb-6 leading-snug">
-          {currentCard.swedishPrompt}
-        </h2>
+        <h1 className="font-serif text-2xl md:text-3xl text-ink leading-snug mt-5">{currentCard.swedishPrompt}</h1>
 
         {isFlipped ? (
-          <div className="mt-6 pt-6 border-t border-slate-800 space-y-4">
-            <div className="flex flex-col gap-3">
-              <div>
-                <p className="text-2xl font-bold text-amber-400">{currentCard.swedishTarget}</p>
-                <p className="text-sm font-mono text-slate-400 mt-1">{currentCard.ipa}</p>
-              </div>
+          <div className="mt-8 pt-8 border-t border-line space-y-6">
+            <div>
+              <p className="font-serif text-3xl md:text-4xl text-accent leading-tight">{currentCard.swedishTarget}</p>
+              {currentCard.ipa && <p className="font-mono text-sm text-faint mt-2">{currentCard.ipa}</p>}
+              <p className="text-lg text-ink mt-3">{currentCard.english}</p>
+            </div>
 
-              <div className="flex flex-wrap items-center gap-2 pt-2">
+            {audioUrls.length > 0 && (
+              <div className="flex flex-wrap gap-2">
                 {audioUrls.map((url, idx) => (
-                  <div
-                    key={url}
-                    className="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-xl p-1.5"
-                  >
+                  <div key={url} className="inline-flex items-center rounded-full border border-line overflow-hidden">
                     <button
                       onClick={() => playSingleUrl(url, 1.0)}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold transition cursor-pointer"
+                      className="inline-flex items-center gap-2 pl-3.5 pr-3 py-2 text-sm font-medium text-ink hover:bg-surface-2 transition cursor-pointer"
                     >
-                      <Volume2 className="w-4 h-4" />
+                      <Volume2 className="w-4 h-4 text-accent" aria-hidden />
                       {targetParts[idx] || `Audio ${idx + 1}`}
                     </button>
                     <button
                       onClick={() => playSingleUrl(url, 0.65)}
-                      className="px-2.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-sky-400 text-xs font-mono font-bold transition cursor-pointer"
+                      aria-label={`Écouter lentement ${targetParts[idx] ?? ''}`}
+                      className="px-3 py-2 border-l border-line text-muted hover:bg-surface-2 hover:text-ink transition cursor-pointer"
                     >
-                      0.65x
+                      <Snail className="w-4 h-4" aria-hidden />
                     </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <p className="text-base text-slate-300 font-medium">{currentCard.english}</p>
-
-            {currentCard.gloss && currentCard.gloss.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {currentCard.gloss.map((g, i) => (
-                  <div
-                    key={`${g.sv}-${i}`}
-                    className="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-center"
-                  >
-                    <div className="text-sm font-semibold text-amber-300">{g.sv}</div>
-                    <div className="text-xs text-slate-400">{g.fr}</div>
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 text-sm text-slate-300 leading-relaxed">
-              <span className="font-semibold text-sky-400 block mb-1">Note Linguistique :</span>
+            {currentCard.gloss && currentCard.gloss.length > 1 && (
+              <div className="flex flex-wrap gap-2">
+                {currentCard.gloss.map((g, i) => (
+                  <span key={`${g.sv}-${i}`} className="px-3 py-1.5 rounded-lg bg-surface-2 text-center">
+                    <span className="block text-sm font-semibold text-ink">{g.sv}</span>
+                    <span className="block text-xs text-muted">{g.fr}</span>
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div className="rounded-2xl bg-gold-soft/60 border border-gold/30 p-4 text-[15px] leading-relaxed text-ink">
               {renderInlineMd(currentCard.explanation)}
             </div>
           </div>
         ) : (
-          <div className="py-12 text-center text-slate-500 text-sm">
-            Prononce la réponse à voix haute avant de retourner la carte.
-          </div>
+          <p className="mt-10 mb-2 text-center text-muted">Dis la réponse à voix haute, puis retourne la carte.</p>
         )}
-      </div>
+      </article>
 
-      <div className="w-full max-w-xl mt-6">
+      <div className="sticky bottom-0 mt-6 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] bg-bg/90 backdrop-blur">
         {!isFlipped ? (
           <button
             onClick={() => {
               setIsFlipped(true);
               playCardAudio(currentCard.audioUrl, 1.0);
             }}
-            className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-base transition shadow-lg cursor-pointer"
+            className="w-full py-4 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
           >
-            Afficher la réponse (Espace)
+            Afficher la réponse <span className="hidden md:inline opacity-70 font-normal">(Espace)</span>
           </button>
         ) : (
-          <div className="grid grid-cols-4 gap-3">
-            {([
-              { label: 'Again', key: '1', grade: Rating.Again, color: 'bg-rose-950 hover:bg-rose-900 text-rose-300 border-rose-800' },
-              { label: 'Hard', key: '2', grade: Rating.Hard, color: 'bg-orange-950 hover:bg-orange-900 text-orange-300 border-orange-800' },
-              { label: 'Good', key: '3', grade: Rating.Good, color: 'bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border-emerald-800' },
-              { label: 'Easy', key: '4', grade: Rating.Easy, color: 'bg-sky-950 hover:bg-sky-900 text-sky-300 border-sky-800' },
-            ] satisfies { label: string; key: string; grade: Grade; color: string }[]).map((btn) => (
+          <div className="grid grid-cols-4 gap-2 md:gap-3">
+            {(
+              [
+                { label: 'À revoir', key: '1', grade: Rating.Again, tone: 'text-danger' },
+                { label: 'Difficile', key: '2', grade: Rating.Hard, tone: 'text-gold-ink' },
+                { label: 'Bien', key: '3', grade: Rating.Good, tone: 'text-success' },
+                { label: 'Facile', key: '4', grade: Rating.Easy, tone: 'text-accent' },
+              ] satisfies { label: string; key: string; grade: Grade; tone: string }[]
+            ).map((btn) => (
               <button
                 key={btn.label}
                 onClick={() => handleRate(btn.grade)}
-                className={`flex flex-col items-center py-3 px-2 rounded-xl border transition cursor-pointer ${btn.color}`}
+                className="flex flex-col items-center py-3 px-1 rounded-xl bg-surface border border-line hover:border-accent/40 hover:bg-surface-2 transition cursor-pointer"
               >
-                <span className="text-xs opacity-75 mb-0.5">{getIntervalLabel(btn.grade)}</span>
-                <span className="font-bold text-sm">
-                  {btn.label} <span className="text-xs opacity-60 hidden md:inline">({btn.key})</span>
+                <span className={`font-semibold text-sm ${btn.tone}`}>{btn.label}</span>
+                <span className="text-xs text-faint tabular-nums mt-0.5">
+                  {getIntervalLabel(btn.grade)}
+                  <span className="hidden md:inline"> · {btn.key}</span>
                 </span>
               </button>
             ))}
           </div>
         )}
       </div>
+    </Page>
+  );
+}
+
+// ============================================================================
+// Éléments d'interface partagés
+// ============================================================================
+const NAV = [
+  { id: 'parcours', label: 'Parcours', Icon: Compass },
+  { id: 'reviser', label: 'Réviser', Icon: Layers },
+  { id: 'fondations', label: 'Fondations', Icon: BookOpen },
+] as const;
+
+const CARD_TYPE_LABEL: Record<string, string> = {
+  minimal_pair: 'Paire minimale',
+  vocab: 'Vocabulaire',
+  cloze_grammar: 'Grammaire',
+  phrase: 'Phrase',
+  listening: 'Écoute',
+};
+
+/** « Unité 1 : Salutations » -> { eyebrow: 'Unité 1', title: 'Salutations' } */
+function splitTitle(text: string) {
+  const i = text.indexOf(' : ');
+  return i === -1 ? { eyebrow: '', title: text } : { eyebrow: text.slice(0, i), title: text.slice(i + 3) };
+}
+
+function Wordmark({ className = '' }: { className?: string }) {
+  return (
+    <span className={`font-serif font-semibold tracking-tight text-ink ${className}`}>
+      Svenska<span className="text-accent">Core</span>
+      <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold ml-1 align-super" aria-hidden />
+    </span>
+  );
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  if (!children) return null;
+  return <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{children}</p>;
+}
+
+function ProgressBar({ value, className = '', thin = false }: { value: number; className?: string; thin?: boolean }) {
+  return (
+    <div
+      className={`w-full rounded-full bg-surface-2 overflow-hidden ${thin ? 'h-1' : 'h-1.5'} ${className}`}
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(value * 100)}
+    >
+      <div className="h-full rounded-full bg-accent transition-all duration-500" style={{ width: `${value * 100}%` }} />
+    </div>
+  );
+}
+
+function Page({ children, withNav = false, narrow = false }: { children: React.ReactNode; withNav?: boolean; narrow?: boolean }) {
+  return (
+    <div className={`min-h-dvh px-5 md:px-8 pt-6 md:pt-10 ${withNav ? 'pb-28 md:pb-16' : 'pb-10'}`}>
+      <div className={`mx-auto w-full ${narrow ? 'max-w-xl' : 'max-w-3xl'}`}>{children}</div>
+    </div>
+  );
+}
+
+function TopBar({ onBack, backLabel, right }: { onBack: () => void; backLabel: string; right?: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between gap-4 mb-6">
+      <button
+        onClick={onBack}
+        className="inline-flex items-center gap-1.5 -ml-2 px-2 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-ink hover:bg-surface-2 transition cursor-pointer"
+      >
+        <ArrowLeft className="w-4 h-4" aria-hidden /> {backLabel}
+      </button>
+      {right}
+    </div>
+  );
+}
+
+function StepCard(props: {
+  step: number;
+  title: string;
+  text: string;
+  status: string;
+  action: string;
+  onClick: () => void;
+  primary?: boolean;
+  done?: boolean;
+  locked?: boolean;
+}) {
+  const { step, title, text, status, action, onClick, primary, done, locked } = props;
+  return (
+    <div className={`flex flex-col rounded-2xl border p-5 md:p-6 ${locked ? 'border-dashed border-line' : 'bg-surface border-line shadow-card'}`}>
+      <div className="flex items-center gap-3">
+        <span
+          className={`grid place-items-center w-9 h-9 rounded-full font-serif ${
+            locked ? 'bg-surface-2 text-faint' : done ? 'bg-gold text-[#14213d]' : 'bg-accent-soft text-accent'
+          }`}
+        >
+          {locked ? <Lock className="w-4 h-4" aria-hidden /> : done ? <Check className="w-4 h-4" aria-hidden /> : step}
+        </span>
+        <h2 className={`font-serif text-2xl ${locked ? 'text-muted' : 'text-ink'}`}>{title}</h2>
+      </div>
+      <p className="text-sm text-muted mt-3">{text}</p>
+      <p className={`text-sm font-medium mt-2 ${locked ? 'text-faint' : 'text-ink'}`}>{status}</p>
+      <button
+        onClick={onClick}
+        disabled={locked}
+        className={`mt-5 inline-flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed ${
+          primary
+            ? 'bg-accent hover:bg-accent-hover text-accent-ink'
+            : 'border border-line text-ink hover:bg-surface-2 disabled:text-faint disabled:hover:bg-transparent'
+        }`}
+      >
+        {step === 1 ? <Play className="w-4 h-4" aria-hidden /> : <Dumbbell className="w-4 h-4" aria-hidden />}
+        {action}
+      </button>
     </div>
   );
 }

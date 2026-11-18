@@ -126,12 +126,12 @@ export default function SectionTest({
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6 text-center">
+      <div className="min-h-dvh bg-bg text-ink flex items-center justify-center p-6 text-center">
         <div className="max-w-md space-y-4">
-          <p className="text-slate-300">Pas assez de cartes (mots ou phrases) pour générer un test.</p>
+          <p className="text-muted">Pas assez de cartes (mots ou phrases) pour générer un test.</p>
           <button
             onClick={onExit}
-            className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm cursor-pointer"
+            className="px-6 py-3 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm cursor-pointer"
           >
             Retour
           </button>
@@ -144,18 +144,18 @@ export default function SectionTest({
   if (finished) {
     const passed = finalScore >= passScore;
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-5 shadow-2xl">
+      <div className="min-h-dvh bg-bg text-ink flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-full max-w-md bg-surface border border-line rounded-2xl p-8 space-y-5 shadow-card">
           {passed ? (
-            <Trophy className="w-14 h-14 text-amber-400 mx-auto" />
+            <Trophy className="w-14 h-14 text-gold mx-auto" />
           ) : (
-            <XCircle className="w-14 h-14 text-rose-400 mx-auto" />
+            <XCircle className="w-14 h-14 text-danger mx-auto" />
           )}
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="font-serif text-3xl text-ink">
             {passed ? 'Section validée !' : 'Pas encore…'}
           </h2>
-          <p className="text-5xl font-extrabold text-amber-400">{finalScore}%</p>
-          <p className="text-sm text-slate-400 leading-relaxed">
+          <p className="font-serif text-6xl text-accent tabular-nums">{finalScore}%</p>
+          <p className="text-sm text-muted leading-relaxed">
             {correct} bonne{correct > 1 ? 's' : ''} réponse{correct > 1 ? 's' : ''} sur {questions.length}.{' '}
             {passed
               ? 'La section suivante est débloquée.'
@@ -164,13 +164,13 @@ export default function SectionTest({
           <div className="flex flex-col gap-3 pt-2">
             <button
               onClick={onExit}
-              className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm transition cursor-pointer"
             >
               Retour au Tableau de Bord
             </button>
             <button
               onClick={handleRetry}
-              className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs inline-flex items-center justify-center gap-2 transition cursor-pointer"
+              className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" /> Refaire le test
             </button>
@@ -182,11 +182,11 @@ export default function SectionTest({
 
   // ===================== QUESTION =====================
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-4 select-none">
-      <div className="w-full max-w-xl mb-6 flex items-center justify-between text-xs text-slate-400">
+    <div className="min-h-dvh bg-bg text-ink flex flex-col items-center justify-center p-4 select-none">
+      <div className="w-full max-w-xl mb-6 flex items-center justify-between gap-3 text-sm text-muted">
         <button
           onClick={onExit}
-          className="inline-flex items-center gap-1.5 font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer"
+          className="inline-flex items-center gap-1.5 font-semibold text-muted hover:text-accent transition cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" /> Quitter le test
         </button>
@@ -196,23 +196,23 @@ export default function SectionTest({
         </span>
       </div>
 
-      <div className="w-full max-w-xl h-1.5 bg-slate-800 rounded-full mb-6 overflow-hidden">
+      <div className="w-full max-w-xl h-1.5 bg-surface-2 rounded-full mb-6 overflow-hidden">
         <div
-          className="h-full bg-amber-500 transition-all"
+          className="h-full bg-accent transition-all"
           style={{ width: `${(index / questions.length) * 100}%` }}
         />
       </div>
 
-      <div className="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6">
+      <div className="w-full max-w-xl bg-surface border border-line rounded-2xl p-6 md:p-8 shadow-card space-y-6">
         <div className="space-y-3">
-          <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             {question.kind === 'listen' ? 'Compréhension orale' : 'Traduction'}
           </p>
-          <h2 className="text-xl md:text-2xl font-bold text-white leading-snug">{question.prompt}</h2>
+          <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{question.prompt}</h2>
           {question.audio && (
             <button
               onClick={() => playUrl(question.audio!)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 text-sm font-bold transition cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-line text-accent text-sm font-semibold transition cursor-pointer"
             >
               <Volume2 className="w-5 h-5" /> Réécouter
             </button>
@@ -223,11 +223,11 @@ export default function SectionTest({
           {question.options.map((option) => {
             const isAnswer = option === question.answer;
             const isSelected = option === selected;
-            let style = 'bg-slate-950 border-slate-800 hover:bg-slate-800 text-slate-200';
+            let style = 'bg-surface border-line hover:bg-surface-2 text-ink';
             if (selected !== null) {
-              if (isAnswer) style = 'bg-emerald-950 border-emerald-700 text-emerald-300';
-              else if (isSelected) style = 'bg-rose-950 border-rose-700 text-rose-300';
-              else style = 'bg-slate-950 border-slate-800 text-slate-500';
+              if (isAnswer) style = 'bg-success-soft border-success text-success';
+              else if (isSelected) style = 'bg-danger-soft border-danger text-danger';
+              else style = 'bg-surface border-line text-faint';
             }
             return (
               <button
@@ -249,7 +249,7 @@ export default function SectionTest({
         <button
           onClick={handleNext}
           disabled={selected === null}
-          className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold text-base transition shadow-lg cursor-pointer disabled:cursor-not-allowed"
+          className="w-full py-4 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-base transition  cursor-pointer disabled:cursor-not-allowed"
         >
           {index + 1 < questions.length ? 'Suivant' : 'Voir le résultat'}
         </button>

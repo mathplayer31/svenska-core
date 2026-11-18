@@ -1,4 +1,4 @@
-// Unité 1 — Salutations & premier contact
+// Unité 1 : Salutations & premier contact
 // Même convention que CARDS_DATA dans generate-audio.mjs :
 //  - swedish_prompt = consigne/indice en français
 //  - swedish_target = texte suédois
@@ -7,7 +7,7 @@
 
 export const UNIT1_DECK = {
   slug: 'swedish-unit-1-greetings',
-  title: 'Unité 1 — Salutations & premier contact',
+  title: 'Unité 1 : Salutations & premier contact',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,

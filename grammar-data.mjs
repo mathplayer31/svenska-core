@@ -1,4 +1,4 @@
-// Fondation — Grammaire & Syntaxe V2
+// Fondation / Grammaire & Syntaxe V2
 // Règle de contenu : uniquement du vocabulaire déjà vu dans les Unités 1 à 7.
 // Le deck se débloque après l'Unité 7 (voir prerequisite_slug dans generate-audio.mjs).
 // Convention : swedish_prompt = consigne en français, swedish_target = réponse suédoise.
@@ -9,7 +9,7 @@ export const GRAMMAR_CARDS = [
   // ===================== RÈGLE V2 =====================
   {
     slug: 'gram2-v2-idag', deck_slug: D, card_type: 'cloze_grammar',
-    swedish_prompt: 'Ordre V2 — remets dans l’ordre, en commençant par « idag » : det / är / varmt / idag',
+    swedish_prompt: 'Ordre V2 / remets dans l’ordre, en commençant par « idag » : det / är / varmt / idag',
     swedish_target: 'Idag är det varmt.',
     english_translation: 'Aujourd’hui, il fait chaud.',
     ipa_transcription: '/ɪˈdɑː æːr deː varmt/',
@@ -115,10 +115,10 @@ export const GRAMMAR_CARDS = [
   },
   {
     slug: 'gram2-defini', deck_slug: D, card_type: 'cloze_grammar',
-    swedish_prompt: 'Forme définie : « le billet » (en biljett) — « la table » (ett bord)',
-    swedish_target: 'biljetten — bordet',
-    english_translation: 'le billet — la table',
-    ipa_transcription: '/bɪlˈjɛtːɛn/ — /ˈbuːɖɛt/',
+    swedish_prompt: 'Forme définie : « le billet » (en biljett) / « la table » (ett bord)',
+    swedish_target: 'biljetten / bordet',
+    english_translation: 'le billet / la table',
+    ipa_transcription: '/bɪlˈjɛtːɛn/ / /ˈbuːɖɛt/',
     explanation_md: 'L’article défini se colle **à la fin** : mot *en* → **-en** (*biljetten*, *bussen*), mot *ett* → **-et** (*bordet*, *tåget*). Après une voyelle : *-n* / *-t* (*påsen*, *kvittot*).',
     words: ['biljetten', 'bordet'],
   },

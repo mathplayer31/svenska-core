@@ -314,7 +314,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
   if (queue.length === 0) {
     return (
       <Shell onExit={onExit} title={unitTitle}>
-        <p className="text-slate-300 text-center py-10">Pas assez de cartes dans cette unité pour générer des exercices.</p>
+        <p className="text-muted text-center py-10">Pas assez de cartes dans cette unité pour générer des exercices.</p>
       </Shell>
     );
   }
@@ -323,12 +323,12 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
   if (finished) {
     const score = Math.round((firstTryCorrect / baseCount) * 100);
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-5 shadow-2xl">
-          <Trophy className={`w-14 h-14 mx-auto ${score >= 80 ? 'text-amber-400' : 'text-slate-500'}`} />
-          <h2 className="text-2xl font-bold text-white">Entraînement terminé</h2>
-          <p className="text-5xl font-extrabold text-amber-400">{score}%</p>
-          <p className="text-sm text-slate-400 leading-relaxed">
+      <div className="min-h-dvh bg-bg text-ink flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-full max-w-md bg-surface border border-line rounded-2xl p-8 space-y-5 shadow-card">
+          <Trophy className={`w-14 h-14 mx-auto ${score >= 80 ? 'text-gold' : 'text-faint'}`} />
+          <h2 className="font-serif text-3xl text-ink">Entraînement terminé</h2>
+          <p className="font-serif text-6xl text-accent tabular-nums">{score}%</p>
+          <p className="text-sm text-muted leading-relaxed">
             {firstTryCorrect} exercice{firstTryCorrect > 1 ? 's' : ''} réussi{firstTryCorrect > 1 ? 's' : ''} du premier coup sur {baseCount}.
             {retried.size > 0 && ` Les ${retried.size} ratés ont été reproposés en fin de série.`}
             {score > bestScore && bestScore > 0 && ' Nouveau record !'}
@@ -336,13 +336,13 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
           <div className="flex flex-col gap-3 pt-2">
             <button
               onClick={onExit}
-              className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold text-sm transition cursor-pointer"
             >
               Retour à l’unité
             </button>
             <button
               onClick={handleRestart}
-              className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs inline-flex items-center justify-center gap-2 transition cursor-pointer"
+              className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" /> Nouvelle série
             </button>
@@ -358,12 +358,12 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
 
   return (
     <Shell onExit={onExit} title={`${unitTitle} • ${Math.min(index + 1, baseCount)}/${baseCount}${isRetry ? ' • rattrapage' : ''}`}>
-      <div className="w-full h-1.5 bg-slate-800 rounded-full mb-6 overflow-hidden">
-        <div className="h-full bg-amber-500 transition-all" style={{ width: `${progress * 100}%` }} />
+      <div className="w-full h-1.5 bg-surface-2 rounded-full mb-6 overflow-hidden">
+        <div className="h-full bg-accent transition-all" style={{ width: `${progress * 100}%` }} />
       </div>
 
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl space-y-6">
-        <p className="text-xs uppercase tracking-wider text-sky-400 font-semibold">{KIND_LABEL[exercise.kind]}</p>
+      <div className="bg-surface border border-line rounded-2xl p-6 md:p-8 shadow-card space-y-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">{KIND_LABEL[exercise.kind]}</p>
 
         {exercise.kind === 'match' && <MatchExercise key={exercise.key} ex={exercise} onDone={handleResult} />}
         {(exercise.kind === 'mcq_sv' || exercise.kind === 'mcq_listen') && (
@@ -380,28 +380,28 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
       {verdict && (
         <div
           className={`mt-6 rounded-2xl border p-5 space-y-3 ${
-            verdict.ok ? 'bg-emerald-950/60 border-emerald-800' : 'bg-rose-950/60 border-rose-800'
+            verdict.ok ? 'bg-success-soft border-success/30' : 'bg-danger-soft border-danger/30'
           }`}
         >
-          <div className={`flex items-center gap-2 font-bold ${verdict.ok ? 'text-emerald-300' : 'text-rose-300'}`}>
+          <div className={`flex items-center gap-2 font-semibold ${verdict.ok ? 'text-success' : 'text-danger'}`}>
             {verdict.ok ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
             {verdict.ok ? 'Bien joué !' : 'Pas tout à fait…'}
           </div>
           {verdict.message && (
-            <p className="text-sm text-amber-300 flex items-start gap-2">
+            <p className="text-sm text-accent flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" /> {verdict.message}
             </p>
           )}
           {answerCard && (
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-lg font-bold text-white">{answerCard.swedishTarget}</p>
-                <p className="text-sm text-slate-300">{answerCard.english}</p>
+                <p className="text-lg font-semibold text-ink">{answerCard.swedishTarget}</p>
+                <p className="text-sm text-muted">{answerCard.english}</p>
               </div>
               {firstAudio(answerCard) && (
                 <button
                   onClick={() => playUrl(firstAudio(answerCard))}
-                  className="p-2.5 rounded-lg bg-slate-900/70 hover:bg-slate-800 text-amber-400 cursor-pointer"
+                  className="p-2.5 rounded-lg bg-surface hover:bg-surface-2 text-accent cursor-pointer"
                   aria-label="Réécouter"
                 >
                   <Volume2 className="w-5 h-5" />
@@ -412,17 +412,17 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
           {answerCard?.gloss && answerCard.gloss.length > 1 && (
             <div className="flex flex-wrap gap-1.5">
               {answerCard.gloss.map((g, i) => (
-                <span key={`${g.sv}-${i}`} className="px-2 py-1 rounded-md bg-slate-950/70 text-xs">
-                  <span className="text-amber-300 font-semibold">{g.sv}</span>{' '}
-                  <span className="text-slate-400">{g.fr}</span>
+                <span key={`${g.sv}-${i}`} className="px-2 py-1 rounded-md bg-surface-2 text-xs">
+                  <span className="text-accent font-semibold">{g.sv}</span>{' '}
+                  <span className="text-muted">{g.fr}</span>
                 </span>
               ))}
             </div>
           )}
           <button
             onClick={handleContinue}
-            className={`w-full py-3.5 rounded-xl font-bold text-sm transition cursor-pointer ${
-              verdict.ok ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950' : 'bg-rose-500 hover:bg-rose-400 text-slate-950'
+            className={`w-full py-3.5 rounded-xl font-semibold text-sm transition cursor-pointer ${
+              verdict.ok ? 'bg-success hover:opacity-90 text-ink' : 'bg-danger hover:opacity-90 text-ink'
             }`}
           >
             Continuer (Entrée)
@@ -435,12 +435,12 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
 
 function Shell({ onExit, title, children }: { onExit: () => void; title: string; children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center p-4 pt-8 select-none">
+    <div className="min-h-dvh bg-bg text-ink flex flex-col items-center p-4 pt-8 select-none">
       <div className="w-full max-w-xl">
-        <div className="mb-6 flex items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="mb-6 flex items-center justify-between gap-3 text-xs text-muted">
           <button
             onClick={onExit}
-            className="inline-flex items-center gap-1.5 font-semibold text-slate-300 hover:text-amber-400 transition cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1.5 font-semibold text-muted hover:text-accent transition cursor-pointer shrink-0"
           >
             <ArrowLeft className="w-4 h-4" /> Quitter
           </button>
@@ -520,10 +520,10 @@ function MatchExercise({
     const isMatched = matched.has(id);
     const isPicked = side === 'l' ? pickedLeft === id : pickedRight === id;
     const isWrong = wrong && (side === 'l' ? wrong[0] === id : wrong[1] === id);
-    if (isMatched) return 'bg-emerald-950/40 border-emerald-900 text-emerald-700 cursor-default';
-    if (isWrong) return 'bg-rose-950 border-rose-700 text-rose-300';
-    if (isPicked) return 'bg-sky-950 border-sky-600 text-sky-200';
-    return 'bg-slate-950 border-slate-800 hover:bg-slate-800 text-slate-200';
+    if (isMatched) return 'bg-success-soft border-transparent text-success opacity-60 cursor-default';
+    if (isWrong) return 'bg-danger-soft border-danger text-danger';
+    if (isPicked) return 'bg-accent-soft border-accent text-accent';
+    return 'bg-surface border-line hover:bg-surface-2 text-ink';
   };
 
   return (
@@ -599,31 +599,31 @@ function McqExercise({
         <div className="flex items-center gap-3">
           <button
             onClick={() => playUrl(audio)}
-            className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
           >
             <Volume2 className="w-6 h-6" /> Écouter
           </button>
           <button
             onClick={() => playUrl(audio, 0.65)}
-            className="p-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-sky-400 transition cursor-pointer"
+            className="p-4 rounded-2xl bg-surface-2 hover:bg-line text-accent transition cursor-pointer"
             aria-label="Écouter lentement"
           >
             <Snail className="w-6 h-6" />
           </button>
         </div>
       ) : (
-        <h2 className="text-xl md:text-2xl font-bold text-white leading-snug">« {ex.card.english} »</h2>
+        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
       )}
 
       <div className="space-y-3">
         {ex.options.map((opt, i) => {
           const isAnswer = opt === answer;
           const isSelected = opt === selected;
-          let style = 'bg-slate-950 border-slate-800 hover:bg-slate-800 text-slate-200';
+          let style = 'bg-surface border-line hover:bg-surface-2 text-ink';
           if (selected) {
-            if (isAnswer) style = 'bg-emerald-950 border-emerald-700 text-emerald-300';
-            else if (isSelected) style = 'bg-rose-950 border-rose-700 text-rose-300';
-            else style = 'bg-slate-950 border-slate-800 text-slate-500';
+            if (isAnswer) style = 'bg-success-soft border-success text-success';
+            else if (isSelected) style = 'bg-danger-soft border-danger text-danger';
+            else style = 'bg-surface border-line text-faint';
           }
           return (
             <button
@@ -632,7 +632,7 @@ function McqExercise({
               disabled={!!selected}
               className={`w-full text-left px-4 py-3.5 rounded-xl border font-medium transition cursor-pointer disabled:cursor-default flex items-center gap-3 ${style}`}
             >
-              <span className="text-xs font-mono text-slate-500 hidden md:inline">{i + 1}</span>
+              <span className="text-xs font-mono text-faint hidden md:inline">{i + 1}</span>
               <span>{opt}</span>
             </button>
           );
@@ -677,16 +677,16 @@ function BuildExercise({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl md:text-2xl font-bold text-white leading-snug">« {ex.card.english} »</h2>
+      <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
 
-      <div className="min-h-[64px] border-b-2 border-slate-700 pb-3 flex flex-wrap gap-2 items-end">
-        {chosen.length === 0 && <span className="text-sm text-slate-500">Touche les mots dans l’ordre…</span>}
+      <div className="min-h-[64px] border-b-2 border-line pb-3 flex flex-wrap gap-2 items-end">
+        {chosen.length === 0 && <span className="text-sm text-faint">Touche les mots dans l’ordre…</span>}
         {chosen.map((id) => (
           <button
             key={id}
             disabled={locked}
             onClick={() => setChosen((c) => c.filter((x) => x !== id))}
-            className="px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-600 text-white font-semibold text-base cursor-pointer disabled:cursor-default"
+            className="px-3.5 py-2 rounded-xl bg-surface-2 border border-line text-ink font-semibold text-base cursor-pointer disabled:cursor-default"
           >
             {ex.tokens[id].text}
           </button>
@@ -705,8 +705,8 @@ function BuildExercise({
               title={hint}
               className={`px-3.5 py-2 rounded-xl border font-semibold text-base transition cursor-pointer ${
                 used
-                  ? 'bg-slate-900 border-slate-800 text-transparent cursor-default'
-                  : 'bg-slate-950 border-slate-700 hover:bg-slate-800 text-slate-100'
+                  ? 'bg-surface border-line text-transparent cursor-default'
+                  : 'bg-surface border-line hover:bg-surface-2 text-ink'
               }`}
             >
               {t.text}
@@ -719,7 +719,7 @@ function BuildExercise({
         <button
           onClick={check}
           disabled={chosen.length === 0}
-          className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold text-sm transition cursor-pointer disabled:cursor-not-allowed"
+          className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed"
         >
           Vérifier (Entrée)
         </button>
@@ -773,17 +773,17 @@ function WriteExercise({
     <div className="space-y-5">
       {ex.dictation ? (
         <div className="space-y-3">
-          <h2 className="text-lg font-bold text-white">Écris ce que tu entends</h2>
+          <h2 className="text-lg font-semibold text-ink">Écris ce que tu entends</h2>
           <div className="flex items-center gap-3">
             <button
               onClick={() => playUrl(audio)}
-              className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold transition cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-4 rounded-2xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
             >
               <Volume2 className="w-6 h-6" /> Écouter
             </button>
             <button
               onClick={() => playUrl(audio, 0.65)}
-              className="p-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-sky-400 transition cursor-pointer"
+              className="p-4 rounded-2xl bg-surface-2 hover:bg-line text-accent transition cursor-pointer"
               aria-label="Écouter lentement"
             >
               <Snail className="w-6 h-6" />
@@ -791,7 +791,7 @@ function WriteExercise({
           </div>
         </div>
       ) : (
-        <h2 className="text-xl md:text-2xl font-bold text-white leading-snug">« {ex.card.english} »</h2>
+        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">« {ex.card.english} »</h2>
       )}
 
       <input
@@ -810,7 +810,7 @@ function WriteExercise({
         autoComplete="off"
         autoCapitalize="off"
         spellCheck={false}
-        className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-700 focus:border-amber-500 outline-none text-lg text-white placeholder:text-slate-600 select-text"
+        className="w-full px-4 py-3.5 rounded-xl bg-surface border border-line focus:border-accent outline-none text-lg text-ink placeholder:text-faint select-text"
       />
 
       <div className="flex items-center gap-2">
@@ -820,19 +820,19 @@ function WriteExercise({
             disabled={locked}
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => insert(ch)}
-            className="w-11 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-lg transition cursor-pointer"
+            className="w-11 h-11 rounded-xl bg-surface-2 hover:bg-line text-accent font-semibold text-lg transition cursor-pointer"
           >
             {ch}
           </button>
         ))}
-        <span className="text-xs text-slate-500 ml-2">Majuscules et ponctuation ignorées</span>
+        <span className="text-xs text-faint ml-2">Majuscules et ponctuation ignorées</span>
       </div>
 
       {!locked && (
         <button
           onClick={check}
           disabled={!value.trim()}
-          className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold text-sm transition cursor-pointer disabled:cursor-not-allowed"
+          className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover disabled:bg-surface-2 disabled:text-faint text-accent-ink font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed"
         >
           Vérifier (Entrée)
         </button>

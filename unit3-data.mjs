@@ -1,10 +1,10 @@
-// Unité 3 — Famille & relations (Section 1)
+// Unité 3 : Famille & relations (Section 1)
 // Convention : voir unit1-data.mjs. Phrases construites avec les mots des Unités 1-2 + ceux introduits ici.
 // Point de grammaire central : min/mitt/mina et le piège sin/sitt/sina vs hans/hennes.
 
 export const UNIT3_DECK = {
   slug: 'swedish-unit-3-family',
-  title: 'Unité 3 — Famille & relations',
+  title: 'Unité 3 : Famille & relations',
   category: 'vocabulary',
   cefr_level: 'A1',
   sort_order: 0,
