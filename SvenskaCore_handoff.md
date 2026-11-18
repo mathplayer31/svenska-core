@@ -24,7 +24,7 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - B1 = Section 5 « S'installer en Suède » (Unités 16 à 19 : démarches, logement & voisinage, travail & entretien, avis & débats) + Section 6 « Société & culture » (Unités 20 à 23 : nature & allemansrätten, médias, émotions, raconter au passé) + deck « 5. Grammaire B1 » (BIFF, *som*, *om*, *fast*, verbes à particule, plus-que-parfait, questions indirectes). Fichiers `unit16-data.mjs` à `unit23-data.mjs`, `grammar-b1-data.mjs`.
 - B2 = Section 7 « Travailler en suédois » (Unités 24 à 27 : vie pro, économie, santé & société, climat) + Section 8 « Nuances & expression » (Unités 28 à 31 : expressions idiomatiques, argumenter, registres, histoire & identité) + deck « 6. Grammaire B2 » (passif -s et bli, participes, conditionnel, discours rapporté, verbes réciproques et déponents, dérivation -bar). Fichiers `unit24-data.mjs` à `unit31-data.mjs`, `grammar-b2-data.mjs`.
 - Même format que l'A2 (`content-helpers.mjs`, anglais intégré). Total : 631 cartes (A1 163, A2 156, B1 156, B2 156).
-- Branches en chaîne, **aucune fusionnée dans `main`** (l'utilisateur a demandé d'attendre) : `feat/2-niveaux-a2-b2` → `feat/3-niveau-b1` → `feat/4-niveau-b2`. Fusionner `feat/4-niveau-b2` dans `main` apporte les trois niveaux d'un coup.
+- Fusionné dans `main` le 19 nov 2026 (avance rapide jusqu'au commit a17bd80) ; branches supprimées, issues #2, #3 et #4 fermées.
 - Rendu des notes corrigé : l'italique peut contenir du gras ou être barré (`renderInlineMd` récursif dans `App.tsx`).
 
 ## Niveau A2 : AJOUTÉ (18 nov 2026, issue #2)
@@ -241,7 +241,7 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 5. [~] Carte `phrase` : glose affichée en chips mot/traduction sur la face réponse (pas encore au tap).
 6. [x] Boucle de révision FSRS (Again/Hard/Good/Easy + upsert `user_card_progress`), faite directement dans App.tsx. Typage corrigé (`Rating` -> `Grade`, ts-fsrs v5).
 7. [x] Page d'unité Découvrir -> Pratiquer + 5 types d'exercices (`UnitPractice.tsx`).
-8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2, B1 et B2 livrés (issues #2, #3, #4, Unités 8 à 31, Sections 3 à 8, Grammaires A2 / B1 / B2), sur des branches non fusionnées. Prochaine étape possible : decks de vocabulaire thématique plus denses pour approcher les 3 000 mots d'un vrai B2.
+8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2, B1 et B2 livrés (issues #2, #3, #4, Unités 8 à 31, Sections 3 à 8, Grammaires A2 / B1 / B2), fusionnés dans `main`. Prochaine étape possible : decks de vocabulaire thématique plus denses pour approcher les 3 000 mots d'un vrai B2.
 8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`grammar-data.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
