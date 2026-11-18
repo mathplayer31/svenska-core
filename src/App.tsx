@@ -82,11 +82,15 @@ interface SwedishCard {
 const f = fsrs();
 
 // Mini-rendu markdown des notes (**gras**, *italique*, ~~barré~~), sans dépendance
-function renderInlineMd(text: string) {
-  return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*[^*]+\*)/g).map((part, i) => {
-    if (part.startsWith('**') && part.endsWith('**')) return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
-    if (part.startsWith('~~') && part.endsWith('~~')) return <s key={i} className="text-danger">{part.slice(2, -2)}</s>;
-    if (part.length > 2 && part.startsWith('*') && part.endsWith('*')) return <em key={i} className="text-accent">{part.slice(1, -1)}</em>;
+// L'italique peut contenir du gras : « *att hon **inte har*** » (rendu récursif)
+function renderInlineMd(text: string): React.ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*(?:[^*]|\*\*[^*]+\*\*)+\*)/g).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**') && !part.slice(2, -2).includes('*'))
+      return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
+    if (part.startsWith('~~') && part.endsWith('~~'))
+      return <s key={i} className="text-danger">{renderInlineMd(part.slice(2, -2))}</s>;
+    if (part.length > 2 && part.startsWith('*') && part.endsWith('*'))
+      return <em key={i} className="text-accent">{renderInlineMd(part.slice(1, -1))}</em>;
     return part;
   });
 }

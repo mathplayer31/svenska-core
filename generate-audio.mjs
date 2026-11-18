@@ -17,6 +17,15 @@ import { UNIT13_DECK, UNIT13_CARDS } from './unit13-data.mjs';
 import { UNIT14_DECK, UNIT14_CARDS } from './unit14-data.mjs';
 import { UNIT15_DECK, UNIT15_CARDS } from './unit15-data.mjs';
 import { GRAMMAR_A2_DECK, GRAMMAR_A2_CARDS } from './grammar-a2-data.mjs';
+import { UNIT16_DECK, UNIT16_CARDS } from './unit16-data.mjs';
+import { UNIT17_DECK, UNIT17_CARDS } from './unit17-data.mjs';
+import { UNIT18_DECK, UNIT18_CARDS } from './unit18-data.mjs';
+import { UNIT19_DECK, UNIT19_CARDS } from './unit19-data.mjs';
+import { UNIT20_DECK, UNIT20_CARDS } from './unit20-data.mjs';
+import { UNIT21_DECK, UNIT21_CARDS } from './unit21-data.mjs';
+import { UNIT22_DECK, UNIT22_CARDS } from './unit22-data.mjs';
+import { UNIT23_DECK, UNIT23_CARDS } from './unit23-data.mjs';
+import { GRAMMAR_B1_DECK, GRAMMAR_B1_CARDS } from './grammar-b1-data.mjs';
 import { GRAMMAR_CARDS } from './grammar-data.mjs';
 import { SECTIONS } from './sections-data.mjs';
 import { CARDS_EN, DECKS_EN, SECTIONS_EN } from './content-en.mjs';
@@ -243,6 +252,8 @@ const ALL_DECKS = [
   ...DECKS_DATA, UNIT1_DECK, UNIT2_DECK, UNIT3_DECK, UNIT4_DECK, UNIT5_DECK, UNIT6_DECK, UNIT7_DECK,
   // A2
   UNIT8_DECK, UNIT9_DECK, UNIT10_DECK, UNIT11_DECK, UNIT12_DECK, UNIT13_DECK, UNIT14_DECK, UNIT15_DECK, GRAMMAR_A2_DECK,
+  // B1
+  UNIT16_DECK, UNIT17_DECK, UNIT18_DECK, UNIT19_DECK, UNIT20_DECK, UNIT21_DECK, UNIT22_DECK, UNIT23_DECK, GRAMMAR_B1_DECK,
 ];
 const ALL_CARDS = [
   ...CARDS_DATA, ...GRAMMAR_CARDS, ...UNIT1_CARDS, ...UNIT2_CARDS, ...UNIT3_CARDS,
@@ -250,6 +261,9 @@ const ALL_CARDS = [
   // A2
   ...UNIT8_CARDS, ...UNIT9_CARDS, ...UNIT10_CARDS, ...UNIT11_CARDS,
   ...UNIT12_CARDS, ...UNIT13_CARDS, ...UNIT14_CARDS, ...UNIT15_CARDS, ...GRAMMAR_A2_CARDS,
+  // B1
+  ...UNIT16_CARDS, ...UNIT17_CARDS, ...UNIT18_CARDS, ...UNIT19_CARDS,
+  ...UNIT20_CARDS, ...UNIT21_CARDS, ...UNIT22_CARDS, ...UNIT23_CARDS, ...GRAMMAR_B1_CARDS,
 ];
 
 // Contrôle du contenu anglais avant toute écriture en base : chaque carte, deck et section doit avoir
