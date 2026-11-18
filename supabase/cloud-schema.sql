@@ -32,6 +32,9 @@ create table if not exists public.progress_sections (
 alter table public.progress_cards enable row level security;
 alter table public.progress_sections enable row level security;
 
+-- Accès API explicite : nécessaire si « Grant API access to new tables automatically » est décoché
+grant select, insert, update, delete on public.progress_cards, public.progress_sections to authenticated;
+
 -- Chaque utilisateur connecté ne lit et n'écrit que ses propres lignes. Les visiteurs anonymes n'ont aucun accès.
 drop policy if exists "progression personnelle" on public.progress_cards;
 create policy "progression personnelle" on public.progress_cards
