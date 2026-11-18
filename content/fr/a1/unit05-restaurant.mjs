@@ -1,0 +1,162 @@
+// FranceCore, Unité 5 : Au restaurant. Réserver, la carte, entrée / plat / dessert, la cuisson.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT5_DECK = unitDeck({
+  n: 5, slug: 'fr-unit-5-restaurant', sv: 'På restaurang', en: 'At the restaurant',
+  level: 'A1', section: 'fr-section-2-vie-quotidienne', after: 'fr-unit-4-shopping',
+});
+const D = UNIT5_DECK.slug;
+
+export const UNIT5_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u5-reserver', {
+    prompt: 'Boka ett bord i förväg', promptEn: 'Book a table in advance',
+    fr: 'réserver', sv: 'boka / reservera', en: 'to book / to reserve',
+    ipa: '/ʁe.zɛʁ.ve/',
+    note: 'Ett enkelt **s** mellan två vokaler uttalas [z]: *ré**s**erver* [ʁezɛʁve]. Infinitiven på **-er** slutar på ljudet [e], r:et är stumt.',
+    noteEn: 'A single **s** between two vowels is [z]: *ré**s**erver* [ʁezɛʁve]. The **-er** infinitive ends in the sound [e], with a silent r.',
+  }),
+  vocab(D, 'fr-u5-une-table', {
+    prompt: 'Det man bokar på restaurangen', promptEn: 'What you book at the restaurant',
+    fr: 'une table', sv: 'ett bord', en: 'a table',
+    ipa: '/yn tabl/',
+    note: 'Feminint på franska. Man väntar vid dörren tills någon visar en till bordet, i stället för att sätta sig själv.',
+    noteEn: 'Feminine in French. You wait at the door until someone shows you to a table, rather than seating yourself.',
+  }),
+  vocab(D, 'fr-u5-la-carte', {
+    prompt: 'Listan över alla rätter', promptEn: 'The list of all the dishes',
+    fr: 'la carte', sv: 'menyn', en: 'the menu',
+    ipa: '/la kaʁt/',
+    note: 'En falsk vän: matsedeln heter **la carte**. Att äta **à la carte** betyder att välja rätter fritt från listan.',
+    noteEn: 'A false friend: the list of dishes is **la carte**. Eating **à la carte** means choosing dishes freely from it.',
+  }),
+  vocab(D, 'fr-u5-le-menu', {
+    prompt: 'Fast pris för flera rätter', promptEn: 'Fixed price for several courses',
+    fr: 'le menu / la formule', sv: 'fast meny / dagens meny', en: 'the set menu',
+    ipa: '/lə mə.ny/ /la fɔʁ.myl/',
+    note: '**Le menu** är *inte* matsedeln utan ett paket till fast pris, till exempel förrätt och varmrätt. **La formule** är detsamma, vanligt vid lunch.',
+    noteEn: '**Le menu** is *not* the menu card but a fixed-price deal, for example starter and main. **La formule** is the same thing, common at lunch.',
+  }),
+  vocab(D, 'fr-u5-lentree', {
+    prompt: 'Den första rätten', promptEn: 'The first course',
+    fr: 'l’entrée', sv: 'förrätten', en: 'the starter',
+    ipa: '/lɑ̃.tʁe/',
+    note: 'Ordagrant ”ingången”. Förvirrande för amerikaner: i USA betyder *entrée* huvudrätten, i Frankrike förrätten.',
+    noteEn: 'Literally "the entrance". Confusing for Americans: in the US an *entrée* is the main course, in France it is the starter.',
+  }),
+  vocab(D, 'fr-u5-le-plat', {
+    prompt: 'Huvudrätten', promptEn: 'The main course',
+    fr: 'le plat', sv: 'varmrätten / huvudrätten', en: 'the main course',
+    ipa: '/lə pla/',
+    note: 'Fullständigt **le plat principal**. **Le plat du jour** är dagens rätt. Slutets **t** är stumt.',
+    noteEn: 'In full **le plat principal**. **Le plat du jour** is the dish of the day. The final **t** is silent.',
+  }),
+  vocab(D, 'fr-u5-le-dessert', {
+    prompt: 'Den sista, söta rätten', promptEn: 'The last, sweet course',
+    fr: 'le dessert', sv: 'efterrätten / desserten', en: 'the dessert',
+    ipa: '/lə de.sɛʁ/',
+    note: 'Dubbelt **ss** ger [s]. Med ett enda s blir det [z], och **le désert** betyder öknen. Kaffet kommer **efter** desserten, inte till den.',
+    noteEn: 'Double **ss** gives [s]. With a single s it would be [z], and **le désert** means the desert. Coffee comes **after** dessert, not with it.',
+  }),
+  vocab(D, 'fr-u5-le-vin', {
+    prompt: 'Rött eller vitt till maten', promptEn: 'Red or white with the meal',
+    fr: 'le vin', sv: 'vinet', en: 'the wine',
+    ipa: '/lə vɛ̃/',
+    note: '**in** är nasalt [ɛ̃], n:et uttalas inte. **Du vin rouge** (rödvin), **du vin blanc** (vitt): färgen står efter. Det billigaste är ofta husets vin, **en pichet**.',
+    noteEn: '**in** is the nasal [ɛ̃], the n is not pronounced. **Du vin rouge** (red), **du vin blanc** (white): the colour comes after. The cheapest is often house wine, **en pichet** (by the jug).',
+  }),
+  vocab(D, 'fr-u5-saignant', {
+    prompt: 'Kött stekt kort, rött inuti', promptEn: 'Meat cooked briefly, red inside',
+    fr: 'saignant', sv: 'blodig / lättstekt', en: 'rare',
+    ipa: '/sɛ.ɲɑ̃/',
+    note: 'Ordagrant ”blödande”. Franska kockar steker köttet kortare än i Sverige: **saignant** är ofta det de rekommenderar. **gn** uttalas [ɲ], som i *champagne*.',
+    noteEn: 'Literally "bleeding". French chefs cook meat less than many countries: **saignant** is often what they recommend. **gn** is [ɲ], as in *lasagne*.',
+  }),
+  vocab(D, 'fr-u5-a-point', {
+    prompt: 'Kött stekt mellan rött och genomstekt', promptEn: 'Meat cooked between rare and well done',
+    fr: 'à point', sv: 'medium', en: 'medium',
+    ipa: '/a pwɛ̃/',
+    note: 'Ordagrant ”lagom”. Observera att en fransk **à point** ofta är rosare än en svensk eller amerikansk *medium*.',
+    noteEn: 'Literally "just right". A French **à point** is often pinker than a British or American *medium*.',
+  }),
+  vocab(D, 'fr-u5-bien-cuit', {
+    prompt: 'Kött stekt hela vägen igenom', promptEn: 'Meat cooked all the way through',
+    fr: 'bien cuit', sv: 'genomstekt', en: 'well done',
+    ipa: '/bjɛ̃ kɥi/',
+    note: 'Ordagrant ”väl kokt”. Böjs efter köttet: *le steak bien **cuit***, *la viande bien **cuite*** [kɥit], där e:t gör att t:et hörs.',
+    noteEn: 'Literally "well cooked". It agrees with the meat: *le steak bien **cuit***, *la viande bien **cuite*** [kɥit], where the e makes the t heard.',
+  }),
+  vocab(D, 'fr-u5-bon-appetit', {
+    prompt: 'Det man säger innan man börjar äta', promptEn: 'What you say before you start eating',
+    fr: 'bon appétit', sv: 'smaklig måltid', en: 'enjoy your meal',
+    ipa: '/bɔ.n‿a.pe.ti/',
+    note: 'Bindning: **bon‿appétit** [bɔnapeti], där n:et inte längre är nasalt. Servitören säger det när maten kommer, och man svarar **merci**.',
+    noteEn: 'Liaison: **bon‿appétit** [bɔnapeti], where the n stops being nasal. The waiter says it when the food arrives, and you reply **merci**.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u5-reserver-une-table-pour-deux', {
+    prompt: 'Ring och boka ett bord för två', promptEn: 'Call and book a table for two',
+    fr: 'Je voudrais réserver une table pour deux.', sv: 'Jag skulle vilja boka ett bord för två.', en: 'I’d like to book a table for two.',
+    ipa: '/ʒə vu.dʁɛ ʁe.zɛʁ.ve yn tabl puʁ dø/',
+    note: 'Efter **je voudrais** kommer verbet direkt i infinitiv, utan *att*: *je voudrais **réserver***. Restaurangkök stänger ofta mellan lunch och middag, så boka i tid.',
+    noteEn: 'After **je voudrais** the verb follows straight in the infinitive, with no *to*: *je voudrais **réserver***. Kitchens often close between lunch and dinner, so book ahead.',
+    gloss: [['je', 'jag', 'I'], ['voudrais', 'skulle vilja', 'would like'], ['réserver', 'boka', 'to book'], ['une', 'ett', 'a'], ['table', 'bord', 'table'], ['pour', 'för', 'for'], ['deux', 'två', 'two']],
+  }),
+  phrase(D, 'fr-u5-vous-avez-choisi', {
+    prompt: 'Servitörens fråga: har ni bestämt er?', promptEn: 'The waiter’s question: have you decided?',
+    fr: 'Vous avez choisi ?', sv: 'Har ni bestämt er?', en: 'Are you ready to order?',
+    ipa: '/vu.z‿a.ve ʃwa.zi/',
+    note: 'Ordagrant ”har ni valt?”, i **passé composé**. Inte riktigt? Svara **Pas encore** (inte än).',
+    noteEn: 'Literally "have you chosen?", in the **passé composé**. Not quite? Answer **Pas encore** (not yet).',
+    gloss: [['vous', 'ni', 'you'], ['avez', 'har', 'have'], ['choisi', 'valt', 'chosen']],
+  }),
+  phrase(D, 'fr-u5-en-entree-une-salade', {
+    prompt: 'Beställ en sallad som förrätt', promptEn: 'Order a salad as a starter',
+    fr: 'En entrée, une salade.', sv: 'En sallad som förrätt.', en: 'A salad to start.',
+    ipa: '/ɑ̃.n‿ɑ̃.tʁe yn sa.lad/',
+    note: 'Så beställer man rätt för rätt: **en entrée** ..., **en plat** ..., **en dessert** ... Bindningen i *en‿entrée* ger [ɑ̃nɑ̃tʁe].',
+    noteEn: 'This is how you order course by course: **en entrée** ..., **en plat** ..., **en dessert** ... The liaison in *en‿entrée* gives [ɑ̃nɑ̃tʁe].',
+    gloss: [['en', 'som', 'as'], ['entrée', 'förrätt', 'starter'], ['une', 'en', 'a'], ['salade', 'sallad', 'salad']],
+  }),
+  phrase(D, 'fr-u5-le-plat-du-jour', {
+    prompt: 'Säg att du tar dagens rätt', promptEn: 'Say you’ll have the dish of the day',
+    fr: 'Je vais prendre le plat du jour.', sv: 'Jag tar dagens rätt.', en: 'I’ll have the dish of the day.',
+    ipa: '/ʒə ve pʁɑ̃dʁ lə pla dy ʒuʁ/',
+    note: '**Je vais prendre** (jag ska ta) är det vanligaste sättet att beställa. **Du** = *de* + *le*, som alltid dras ihop.',
+    noteEn: '**Je vais prendre** (I’m going to have) is the most common way to order. **Du** = *de* + *le*, always contracted.',
+    gloss: [['je', 'jag', 'I'], ['vais', 'ska', 'am going to'], ['prendre', 'ta', 'have'], ['le', '(den)', 'the'], ['plat', 'rätt', 'dish'], ['du', 'för', 'of the'], ['jour', 'dagen', 'day']],
+  }),
+  phrase(D, 'fr-u5-quelle-cuisson', {
+    prompt: 'Servitören frågar hur köttet ska vara stekt', promptEn: 'The waiter asks how you want the meat',
+    fr: 'Quelle cuisson pour la viande ?', sv: 'Hur vill ni ha köttet stekt?', en: 'How would you like the meat cooked?',
+    ipa: '/kɛl kɥi.sɔ̃ puʁ la vjɑ̃d/',
+    note: 'Ordagrant ”vilken tillagning för köttet?”. **Quelle** är feminint eftersom *la cuisson* är det. Svara **saignant**, **à point** eller **bien cuit**.',
+    noteEn: 'Literally "what cooking for the meat?". **Quelle** is feminine because *la cuisson* is. Answer **saignant**, **à point** or **bien cuit**.',
+    gloss: [['quelle', 'vilken', 'what'], ['cuisson', 'stekning', 'cooking'], ['pour', 'för', 'for'], ['la', '(det)', 'the'], ['viande', 'köttet', 'meat']],
+  }),
+  phrase(D, 'fr-u5-a-point-svp', {
+    prompt: 'Svara att du vill ha köttet medium', promptEn: 'Say you want the meat medium',
+    fr: 'À point, s’il vous plaît.', sv: 'Medium, tack.', en: 'Medium, please.',
+    ipa: '/a pwɛ̃ sil vu plɛ/',
+    note: 'Ett kort svar räcker. Stor bokstav på **À** behåller accenten, enligt fransk norm.',
+    noteEn: 'A short answer is enough. The capital **À** keeps its accent, as French style requires.',
+    gloss: [['à point', 'medium', 'medium'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u5-la-carte-des-desserts', {
+    prompt: 'Be att få se dessertmenyn', promptEn: 'Ask to see the dessert menu',
+    fr: 'On peut avoir la carte des desserts ?', sv: 'Kan vi få dessertmenyn?', en: 'Could we have the dessert menu?',
+    ipa: '/ɔ̃ pø a.vwaʁ la kaʁt de de.sɛʁ/',
+    note: '**On** betyder här ”vi” och är mycket vanligare än *nous* i talspråk. Verbet böjs som för *il*: *on **peut***.',
+    noteEn: '**On** means "we" here and is far more common than *nous* in speech. The verb takes the *il* form: *on **peut***.',
+    gloss: [['on', 'vi', 'we'], ['peut', 'kan', 'can'], ['avoir', 'få', 'have'], ['la', '(den)', 'the'], ['carte', 'menyn', 'menu'], ['des', 'med', 'of the'], ['desserts', 'efterrätter', 'desserts']],
+  }),
+  phrase(D, 'fr-u5-cetait-tres-bon', {
+    prompt: 'Säg att maten var mycket god', promptEn: 'Say the food was very good',
+    fr: 'C’était très bon.', sv: 'Det var jättegott.', en: 'It was delicious.',
+    ipa: '/se.tɛ tʁɛ bɔ̃/',
+    note: 'Servitören frågar ofta **Ça vous a plu ?** (smakade det?). **C’était** är *c’est* i imperfekt. Om maten säger man **bon**, inte *bien*.',
+    noteEn: 'The waiter often asks **Ça vous a plu ?** (did you enjoy it?). **C’était** is *c’est* in the imperfect. For food you say **bon**, not *bien*.',
+    gloss: [['c’était', 'det var', 'it was'], ['très', 'mycket', 'very'], ['bon', 'gott', 'good']],
+  }),
+];

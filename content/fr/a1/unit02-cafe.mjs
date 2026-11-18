@@ -1,0 +1,162 @@
+// FranceCore, Unité 2 : Au café. Commander, payer, les codes du café français.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT2_DECK = unitDeck({
+  n: 2, slug: 'fr-unit-2-cafe', sv: 'På kaféet', en: 'At the café',
+  level: 'A1', section: 'fr-section-1-premiers-pas', after: 'fr-unit-1-greetings',
+});
+const D = UNIT2_DECK.slug;
+
+export const UNIT2_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u2-un-cafe', {
+    prompt: 'Det man får om man bara beställer ”kaffe”', promptEn: 'What you get if you just order "coffee"',
+    fr: 'un café', sv: 'en espresso', en: 'an espresso',
+    ipa: '/œ̃ ka.fe/',
+    note: 'På ett franskt kafé är **un café** alltid en liten espresso, inte en stor kopp bryggkaffe. Vill du ha mer vatten i, beställ **un café allongé**.',
+    noteEn: 'In a French café **un café** is always a small espresso, not a mug of filter coffee. For a longer, milder one, order **un café allongé**.',
+  }),
+  vocab(D, 'fr-u2-un-creme', {
+    prompt: 'Kaffe med varm mjölk, som man dricker på morgonen', promptEn: 'Coffee with hot milk, drunk in the morning',
+    fr: 'un crème', sv: 'en kaffe med varm mjölk', en: 'a white coffee',
+    ipa: '/œ̃ kʁɛm/',
+    note: 'Kort för *un café crème*. Ordet är maskulint här, **un** crème, fast *la crème* (grädden) är feminint. Fransmän dricker mjölkkaffe mest till frukost.',
+    noteEn: 'Short for *un café crème*. It is masculine here, **un** crème, even though *la crème* (cream) is feminine. The French mostly drink milky coffee at breakfast.',
+  }),
+  vocab(D, 'fr-u2-un-the', {
+    prompt: 'Varm dryck med te', promptEn: 'Hot drink made with tea',
+    fr: 'un thé', sv: 'ett te', en: 'a tea',
+    ipa: '/œ̃ te/',
+    note: '**th** uttalas som ett vanligt [t], aldrig som engelskt *th*. Te serveras oftast utan mjölk, med en tepåse och varmt vatten.',
+    noteEn: '**th** is a plain [t], never the English *th* sound. Tea usually comes without milk: a tea bag and a pot of hot water.',
+  }),
+  vocab(D, 'fr-u2-chocolat-chaud', {
+    prompt: 'Varm choklad', promptEn: 'Hot chocolate',
+    fr: 'un chocolat chaud', sv: 'en varm choklad', en: 'a hot chocolate',
+    ipa: '/œ̃ ʃɔ.kɔ.la ʃo/',
+    note: 'Adjektivet står **efter** substantivet, som de flesta franska adjektiv. **ch** uttalas [ʃ] som i svenskans *sj*, och slutets **t** i *chocolat* och *chaud* är stumt.',
+    noteEn: 'The adjective comes **after** the noun, like most French adjectives. **ch** is [ʃ] as in *shoe*, and the final **t** and **d** are silent.',
+  }),
+  vocab(D, 'fr-u2-jus-dorange', {
+    prompt: 'Apelsinjuice', promptEn: 'Orange juice',
+    fr: 'un jus d’orange', sv: 'en apelsinjuice', en: 'an orange juice',
+    ipa: '/œ̃ ʒy dɔ.ʁɑ̃ʒ/',
+    note: 'Ordagrant ”en juice av apelsin”: franskan bygger sammansättningar med **de**, som blir **d’** framför vokal. **Un jus d’orange pressée** är färskpressad.',
+    noteEn: 'Literally "a juice of orange": French builds compounds with **de**, shortened to **d’** before a vowel. **Un jus d’orange pressée** is freshly squeezed.',
+  }),
+  vocab(D, 'fr-u2-carafe-deau', {
+    prompt: 'Kranvatten i karaff, gratis på restaurang', promptEn: 'Tap water in a jug, free in restaurants',
+    fr: 'une carafe d’eau', sv: 'en karaff vatten', en: 'a jug of tap water',
+    ipa: '/yn ka.ʁaf do/',
+    note: 'En karaff kranvatten är **gratis** och måste serveras om du ber om den. Säger du bara *de l’eau* kan du få en flaska som kostar pengar. **eau** uttalas [o].',
+    noteEn: 'A jug of tap water is **free** and must be served if you ask for it. Just asking for *de l’eau* may get you a bottle you pay for. **eau** is pronounced [o].',
+  }),
+  vocab(D, 'fr-u2-un-demi', {
+    prompt: 'Ett litet glas fatöl', promptEn: 'A small glass of draught beer',
+    fr: 'un demi', sv: 'ett litet glas fatöl (25 cl)', en: 'a small draught beer (25 cl)',
+    ipa: '/œ̃ də.mi/',
+    note: 'Ordagrant ”en halv”: ett glas fatöl på **25 cl**, inte en halv liter. Vill du ha mer, beställ **une pinte** (50 cl).',
+    noteEn: 'Literally "a half": a **25 cl** glass of draught beer, not half a litre or a pint. For more, order **une pinte** (50 cl).',
+  }),
+  vocab(D, 'fr-u2-le-serveur', {
+    prompt: 'Den som serverar på kaféet', promptEn: 'The person who serves you at the café',
+    fr: 'le serveur / la serveuse', sv: 'servitören / servitrisen', en: 'the waiter / the waitress',
+    ipa: '/lə sɛʁ.vœʁ/ /la sɛʁ.vøz/',
+    note: 'Ropa aldrig **garçon !**: det är gammaldags och låter nedlåtande. Säg **Monsieur !**, **Madame !** eller bara **S’il vous plaît !**',
+    noteEn: 'Never call out **garçon !**: it is old-fashioned and sounds condescending. Say **Monsieur !**, **Madame !** or simply **S’il vous plaît !**',
+  }),
+  vocab(D, 'fr-u2-la-terrasse', {
+    prompt: 'Uteserveringen', promptEn: 'The outdoor seating area',
+    fr: 'la terrasse', sv: 'uteserveringen', en: 'the terrace / outdoor seating',
+    ipa: '/la tɛ.ʁas/',
+    note: 'Fransmän sitter ute året runt, även på vintern under värmelampor. Kaffet kan kosta lite mer **en terrasse** än stående **au comptoir** (i baren).',
+    noteEn: 'The French sit outside all year, even in winter under heaters. Coffee can cost a little more **en terrasse** than standing **au comptoir** (at the bar).',
+  }),
+  vocab(D, 'fr-u2-laddition', {
+    prompt: 'Notan man får när man ska betala', promptEn: 'The bill you get when you want to pay',
+    fr: 'l’addition', sv: 'notan', en: 'the bill / the check',
+    ipa: '/la.di.sjɔ̃/',
+    note: 'Notan kommer **inte** av sig själv: att lämna den utan att man bett om den anses oartigt, som att köra ut gästen. Du måste be om den. Feminint: *la* blir *l’* framför vokal.',
+    noteEn: 'The bill does **not** come by itself: bringing it unasked would feel like rushing you out. You have to ask for it. Feminine: *la* becomes *l’* before a vowel.',
+  }),
+  vocab(D, 'fr-u2-je-voudrais', {
+    prompt: 'Artigt sätt att beställa: ”jag skulle vilja ha”', promptEn: 'Polite way to order: "I would like"',
+    fr: 'je voudrais', sv: 'jag skulle vilja ha', en: 'I would like',
+    ipa: '/ʒə vu.dʁɛ/',
+    note: 'Den artiga formen av *je veux* (jag vill), som låter för bryskt i en butik. Slutets **-ais** uttalas [ɛ], **s** är stumt.',
+    noteEn: 'The polite form of *je veux* (I want), which sounds too blunt in a shop. The final **-ais** is [ɛ], the **s** is silent.',
+  }),
+  vocab(D, 'fr-u2-le-pourboire', {
+    prompt: 'Extra pengar till personalen', promptEn: 'Extra money for the staff',
+    fr: 'le pourboire', sv: 'dricksen', en: 'the tip',
+    ipa: '/lə puʁ.bwaʁ/',
+    note: 'Ordagrant ”för att dricka”. Serviceavgiften ingår alltid i priset (**service compris**), så dricks är frivillig: man lämnar ofta lite växel.',
+    noteEn: 'Literally "for drinking". Service is always included in the price (**service compris**), so tipping is optional: people often leave some small change.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u2-je-voudrais-un-cafe', {
+    prompt: 'Beställ en espresso artigt', promptEn: 'Order an espresso politely',
+    fr: 'Je voudrais un café, s’il vous plaît.', sv: 'Jag skulle vilja ha en espresso, tack.', en: 'I’d like an espresso, please.',
+    ipa: '/ʒə vu.dʁɛ œ̃ ka.fe sil vu plɛ/',
+    note: 'Börja alltid med **bonjour** innan du beställer: *Bonjour, je voudrais un café, s’il vous plaît.* Att gå direkt på beställningen låter kyligt.',
+    noteEn: 'Always start with **bonjour** before ordering: *Bonjour, je voudrais un café, s’il vous plaît.* Jumping straight to the order sounds cold.',
+    gloss: [['je', 'jag', 'I'], ['voudrais', 'skulle vilja ha', 'would like'], ['un', 'en', 'an'], ['café', 'espresso', 'espresso'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u2-pour-moi-un-the', {
+    prompt: 'I ett sällskap: säg vad du själv vill ha', promptEn: 'In a group: say what you want for yourself',
+    fr: 'Pour moi, un thé.', sv: 'Jag tar ett te.', en: 'A tea for me.',
+    ipa: '/puʁ mwa œ̃ te/',
+    note: 'Ett kort och naturligt sätt att beställa när servitören går runt bordet. **Moi** är den betonade formen av *je*.',
+    noteEn: 'A short, natural way to order when the waiter goes round the table. **Moi** is the stressed form of *je*.',
+    gloss: [['pour', 'till / för', 'for'], ['moi', 'mig', 'me'], ['un', 'ett', 'a'], ['thé', 'te', 'tea']],
+  }),
+  phrase(D, 'fr-u2-une-carafe-deau', {
+    prompt: 'Be om gratis kranvatten', promptEn: 'Ask for free tap water',
+    fr: 'Une carafe d’eau, s’il vous plaît.', sv: 'En karaff vatten, tack.', en: 'A jug of tap water, please.',
+    ipa: '/yn ka.ʁaf do sil vu plɛ/',
+    note: '**Une** eftersom *carafe* är feminint. Uttalet [yn] har ett hörbart n, till skillnad från nasala **un** [œ̃].',
+    noteEn: '**Une** because *carafe* is feminine. [yn] has an audible n, unlike the nasal **un** [œ̃].',
+    gloss: [['une', 'en', 'a'], ['carafe', 'karaff', 'jug'], ['d’eau', 'vatten', 'of water'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u2-excusez-moi-monsieur', {
+    prompt: 'Påkalla servitörens uppmärksamhet', promptEn: 'Get the waiter’s attention',
+    fr: 'Excusez-moi, monsieur !', sv: 'Ursäkta!', en: 'Excuse me!',
+    ipa: '/ɛk.sky.ze mwa mə.sjø/',
+    note: '**Monsieur** uttalas [məsjø]: *on* är inte nasalt här och *r* är stumt. Till en kvinna: **madame**. Fånga blicken och lyft handen lätt, knäpp aldrig med fingrarna.',
+    noteEn: '**Monsieur** is said [məsjø]: the *on* is not nasal here and the *r* is silent. To a woman: **madame**. Catch their eye and raise a hand slightly, never snap your fingers.',
+    gloss: [['excusez-moi', 'ursäkta', 'excuse me'], ['monsieur', 'herrn', 'sir']],
+  }),
+  phrase(D, 'fr-u2-sur-place-ou-a-emporter', {
+    prompt: 'Frågan du får vid disken: äta här eller ta med?', promptEn: 'The question at the counter: eat in or take away?',
+    fr: 'Sur place ou à emporter ?', sv: 'Äta här eller ta med?', en: 'Eat in or take away?',
+    ipa: '/syʁ plas u a ɑ̃.pɔʁ.te/',
+    note: 'Svara **sur place** (här) eller **à emporter** (ta med). Observera skillnaden mellan **ou** (eller) och **où** (var): samma uttal, olika betydelse.',
+    noteEn: 'Answer **sur place** (eat in) or **à emporter** (take away). Note **ou** (or) versus **où** (where): same sound, different meaning.',
+    gloss: [['sur place', 'här på plats', 'here / eat in'], ['ou', 'eller', 'or'], ['à emporter', 'att ta med', 'to take away']],
+  }),
+  phrase(D, 'fr-u2-je-peux-payer-par-carte', {
+    prompt: 'Fråga om du kan betala med kort', promptEn: 'Ask if you can pay by card',
+    fr: 'Je peux payer par carte ?', sv: 'Kan jag betala med kort?', en: 'Can I pay by card?',
+    ipa: '/ʒə pø pɛ.je paʁ kaʁt/',
+    note: 'Kort fungerar nästan överallt, men små kaféer kan ha ett minimibelopp. Franskan säger **par** carte, inte *avec*. **eu** i *peux* uttalas [ø], som svenskt *ö*.',
+    noteEn: 'Cards work almost everywhere, but small cafés may have a minimum amount. French says **par** carte, not *avec*. **eu** in *peux* is [ø], with rounded lips.',
+    gloss: [['je', 'jag', 'I'], ['peux', 'kan', 'can'], ['payer', 'betala', 'pay'], ['par', 'med', 'by'], ['carte', 'kort', 'card']],
+  }),
+  phrase(D, 'fr-u2-laddition-svp', {
+    prompt: 'Be om notan', promptEn: 'Ask for the bill',
+    fr: 'L’addition, s’il vous plaît.', sv: 'Notan, tack.', en: 'The bill, please.',
+    ipa: '/la.di.sjɔ̃ sil vu plɛ/',
+    note: 'Den vanliga frasen. Man kan också fånga servitörens blick och låtsas skriva i luften. Ofta betalar man vid bordet, och servitören kommer med kortterminalen.',
+    noteEn: 'The standard phrase. You can also catch the waiter’s eye and mime writing in the air. You usually pay at the table, and the waiter brings the card machine.',
+    gloss: [['l’addition', 'notan', 'the bill'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u2-cest-pour-moi', {
+    prompt: 'Säg att du bjuder', promptEn: 'Say that it’s your treat',
+    fr: 'C’est pour moi.', sv: 'Jag bjuder.', en: 'It’s on me.',
+    ipa: '/sɛ puʁ mwa/',
+    note: 'Ordagrant ”det är för mig”. I Frankrike delar man sällan upp notan: en person betalar och nästa gång bjuder den andra. Mellan vänner: **Je t’invite.**',
+    noteEn: 'Literally "it’s for me". The French rarely split the bill: one person pays, and next time the other one does. Between friends: **Je t’invite.**',
+    gloss: [['c’est', 'det är', 'it is'], ['pour', 'för', 'for'], ['moi', 'mig', 'me']],
+  }),
+];

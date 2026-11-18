@@ -1,0 +1,162 @@
+// FranceCore, Unité 12 : La santé.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT12_DECK = unitDeck({
+  n: 12, slug: 'fr-unit-12-health', sv: 'Hälsa', en: 'Health',
+  level: 'A2', section: 'fr-section-4-en-france', after: 'fr-unit-11-free-time',
+});
+const D = UNIT12_DECK.slug;
+
+export const UNIT12_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u12-tete', {
+    prompt: 'Kroppsdelen överst', promptEn: 'The body part at the top',
+    fr: 'la tête', sv: 'huvudet', en: 'the head',
+    ipa: '/la tɛt/',
+    note: 'Cirkumflexen visar ofta ett s som försvunnit, som i *hôpital* / *hospital* och *forêt* / *forest*. **ê** uttalas öppet, [ɛ].',
+    noteEn: 'The circumflex often marks a lost s, as in *hôpital* / *hospital* and *forêt* / *forest*. **ê** is an open [ɛ], as in *bed*.',
+  }),
+  vocab(D, 'fr-u12-gorge', {
+    prompt: 'Där det gör ont när man är förkyld', promptEn: 'Where it hurts when you have a cold',
+    fr: 'la gorge', sv: 'halsen', en: 'the throat',
+    ipa: '/la ɡɔʁʒ/',
+    note: 'Halsen inuti. Halsen utanpå heter **le cou**. Första **g** är hårt [ɡ], andra mjukt [ʒ] eftersom det står före *e*.',
+    noteEn: 'The throat inside. The neck outside is **le cou**. The first **g** is hard [ɡ], the second soft [ʒ] because it comes before *e*.',
+  }),
+  vocab(D, 'fr-u12-ventre', {
+    prompt: 'Magen', promptEn: 'The stomach',
+    fr: 'le ventre', sv: 'magen', en: 'the stomach / the belly',
+    ipa: '/lə vɑ̃tʁ/',
+    note: 'Det vanliga ordet i vardagen; *l’estomac* är själva organet. **en** framför konsonant är nasalt, [ɑ̃].',
+    noteEn: 'The everyday word; *l’estomac* is the organ itself. **en** before a consonant is nasal, [ɑ̃].',
+  }),
+  vocab(D, 'fr-u12-dos', {
+    prompt: 'Baksidan av överkroppen', promptEn: 'The back of the upper body',
+    fr: 'le dos', sv: 'ryggen', en: 'the back',
+    ipa: '/lə do/',
+    note: 'Slutets **s** är stumt: [do]. Ordet är detsamma i plural: *les dos*.',
+    noteEn: 'The final **s** is silent: [do]. The word is the same in the plural: *les dos*.',
+  }),
+  vocab(D, 'fr-u12-avoir-mal-a', {
+    prompt: 'Att ha ont någonstans', promptEn: 'To have a pain somewhere',
+    fr: 'avoir mal à', sv: 'ha ont i', en: 'to have a pain in / to hurt',
+    ipa: '/a.vwaʁ mal a/',
+    note: '**À** smälter ihop med artikeln: **au** ventre, **à la** tête, **aux** dents. Man säger *j’ai mal **au** dos*, inte *à mon dos*.',
+    noteEn: '**À** merges with the article: **au** ventre, **à la** tête, **aux** dents. You say *j’ai mal **au** dos*, not *à mon dos*.',
+  }),
+  vocab(D, 'fr-u12-malade', {
+    prompt: 'Att inte vara frisk', promptEn: 'Not being well',
+    fr: 'malade', sv: 'sjuk', en: 'ill / sick',
+    ipa: '/ma.lad/',
+    note: 'Samma form för båda könen. Akut hjälp: ring **le 15** (SAMU, ambulans) eller det europeiska numret **112**.',
+    noteEn: 'Same form for both genders. For emergencies, call **le 15** (SAMU, ambulance) or the European number **112**.',
+  }),
+  vocab(D, 'fr-u12-fievre', {
+    prompt: 'Hög kroppstemperatur', promptEn: 'A high body temperature',
+    fr: 'la fièvre', sv: 'febern', en: 'a fever / a temperature',
+    ipa: '/la fjɛvʁ/',
+    note: '**Avoir de la fièvre** = ha feber, med partitiv artikel. Temperaturen anges i Celsius, som i Sverige.',
+    noteEn: '**Avoir de la fièvre** = to have a temperature, with the partitive article. Temperatures are in Celsius.',
+  }),
+  vocab(D, 'fr-u12-medecin', {
+    prompt: 'Personen man går till när man är sjuk', promptEn: 'The person you see when you are ill',
+    fr: 'le médecin', sv: 'läkaren', en: 'the doctor',
+    ipa: '/lə med.sɛ̃/',
+    note: 'Det första **e** faller bort i uttalet: [medsɛ̃]. Ordet är maskulinum även för en kvinna. Man tilltalar läkaren med **docteur**.',
+    noteEn: 'The middle **e** drops out in speech: [medsɛ̃]. The word is masculine even for a woman. You address the doctor as **docteur**.',
+  }),
+  vocab(D, 'fr-u12-pharmacie', {
+    prompt: 'Butiken med det gröna korset', promptEn: 'The shop with the green cross',
+    fr: 'la pharmacie', sv: 'apoteket', en: 'the pharmacy / the chemist’s',
+    ipa: '/la faʁ.ma.si/',
+    note: 'Nästan alla läkemedel, även värktabletter, säljs bara på apotek. Apotekaren ger gärna råd. På natten och söndagar finns **la pharmacie de garde**.',
+    noteEn: 'Almost all medicines, painkillers included, are sold only in pharmacies. Pharmacists readily give advice. At night and on Sundays there is **la pharmacie de garde**.',
+  }),
+  vocab(D, 'fr-u12-medicament', {
+    prompt: 'Något man tar för att bli frisk', promptEn: 'Something you take to get better',
+    fr: 'le médicament', sv: 'läkemedlet / medicinen', en: 'the medicine / the medication',
+    ipa: '/lə me.di.ka.mɑ̃/',
+    note: '**La médecine** är läkarvetenskapen, **le médicament** är det man tar. Slutets **t** är stumt.',
+    noteEn: '**La médecine** is the science of medicine, **le médicament** what you actually take. The final **t** is silent.',
+  }),
+  vocab(D, 'fr-u12-ordonnance', {
+    prompt: 'Papperet läkaren skriver ut för medicin', promptEn: 'The paper the doctor writes out for medicine',
+    fr: 'l’ordonnance', sv: 'receptet', en: 'the prescription',
+    ipa: '/lɔʁ.dɔ.nɑ̃s/',
+    note: 'Femininum: *une ordonnance*. Receptet är oftast fortfarande ett papper som man tar med sig till apoteket.',
+    noteEn: 'Feminine: *une ordonnance*. A prescription is still usually a piece of paper you take to the pharmacy.',
+  }),
+  vocab(D, 'fr-u12-carte-vitale', {
+    prompt: 'Det gröna sjukförsäkringskortet', promptEn: 'The green health insurance card',
+    fr: 'la carte Vitale', sv: 'sjukförsäkringskortet', en: 'the health insurance card',
+    ipa: '/la kaʁt vi.tal/',
+    note: 'Kortet från **la Sécurité sociale** som man visar hos läkaren och på apoteket, så att kostnaden ersätts. De flesta har också en tilläggsförsäkring, **une mutuelle**.',
+    noteEn: 'The card from **la Sécurité sociale** you show at the doctor’s and the pharmacy so costs are reimbursed. Most people also have top-up insurance, **une mutuelle**.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u12-mal-a-la-tete', {
+    prompt: 'Säg att du har haft huvudvärk sedan i morse', promptEn: 'Say you’ve had a headache since this morning',
+    fr: 'J’ai mal à la tête depuis ce matin.', sv: 'Jag har haft huvudvärk sedan i morse.', en: 'I’ve had a headache since this morning.',
+    ipa: '/ʒe mal a la tɛt də.pɥi sə ma.tɛ̃/',
+    note: 'Med **depuis** använder franskan **presens** för något som fortfarande pågår, där svenskan och engelskan har perfekt: *j’**ai** mal depuis*.',
+    noteEn: 'With **depuis**, French uses the **present** for something still going on, where English uses the present perfect: *j’**ai** mal depuis*.',
+    gloss: [['j’ai mal', 'jag har ont', 'I have a pain'], ['à la tête', 'i huvudet', 'in the head'], ['depuis', 'sedan', 'since'], ['ce matin', 'i morse', 'this morning']],
+  }),
+  phrase(D, 'fr-u12-mal-aux-dents', {
+    prompt: 'Säg att din son har tandvärk', promptEn: 'Say your son has toothache',
+    fr: 'Mon fils a mal aux dents.', sv: 'Min son har tandvärk.', en: 'My son has toothache.',
+    ipa: '/mɔ̃ fis a mal o dɑ̃/',
+    note: '**À + les = aux**, uttalat [o]. **Fils** uttalas [fis]: l:et är stumt men s:et hörs, till skillnad från *fil* (tråd).',
+    noteEn: '**À + les = aux**, pronounced [o]. **Fils** is [fis]: the l is silent but the s is sounded.',
+    gloss: [['mon fils', 'min son', 'my son'], ['a mal', 'har ont', 'has a pain'], ['aux dents', 'i tänderna', 'in his teeth']],
+  }),
+  phrase(D, 'fr-u12-rendez-vous-medecin', {
+    prompt: 'Säg att du vill boka tid hos läkaren', promptEn: 'Say you’d like to book an appointment with the doctor',
+    fr: 'Je voudrais prendre rendez-vous chez le médecin.', sv: 'Jag skulle vilja boka tid hos läkaren.', en: 'I’d like to make an appointment with the doctor.',
+    ipa: '/ʒə vu.dʁɛ pʁɑ̃dʁ ʁɑ̃.de.vu ʃe lə med.sɛ̃/',
+    note: '**Chez** + person = hos: *chez le médecin, chez le dentiste*. **Un rendez-vous** är både en bokad tid och en dejt. Många bokar via appen Doctolib.',
+    noteEn: '**Chez** + a person = at someone’s: *chez le médecin, chez le dentiste*. **Un rendez-vous** is both an appointment and a date. Many people book through the Doctolib app.',
+    gloss: [['je voudrais', 'jag skulle vilja', 'I’d like'], ['prendre rendez-vous', 'boka tid', 'to make an appointment'], ['chez', 'hos', 'with'], ['le médecin', 'läkaren', 'the doctor']],
+  }),
+  phrase(D, 'fr-u12-mal-de-gorge', {
+    prompt: 'Fråga på apoteket om de har något mot halsont', promptEn: 'Ask at the pharmacy if they have something for a sore throat',
+    fr: 'Vous avez quelque chose pour le mal de gorge ?', sv: 'Har ni något mot halsont?', en: 'Do you have anything for a sore throat?',
+    ipa: '/vu.za.ve kɛl.kə ʃoz puʁ lə mal də ɡɔʁʒ/',
+    note: '**Le mal de gorge** är substantivet (halsont), *avoir mal à la gorge* verbfrasen. Franskan säger **pour** (för), där svenskan säger *mot*.',
+    noteEn: '**Le mal de gorge** is the noun (a sore throat), *avoir mal à la gorge* the verb phrase. French says **pour**, just like English *for*.',
+    gloss: [['vous avez', 'har ni', 'do you have'], ['quelque chose', 'något', 'anything'], ['pour', 'mot', 'for'], ['le mal de gorge', 'halsont', 'a sore throat']],
+  }),
+  phrase(D, 'fr-u12-ma-donne-ordonnance', {
+    prompt: 'Säg att läkaren gav dig ett recept', promptEn: 'Say the doctor gave you a prescription',
+    fr: 'Le médecin m’a donné une ordonnance.', sv: 'Läkaren gav mig ett recept.', en: 'The doctor gave me a prescription.',
+    ipa: '/lə med.sɛ̃ ma dɔ.ne yn ɔʁ.dɔ.nɑ̃s/',
+    note: '**M’** (= *me*, till mig) står före hjälpverbet *a*. En **recette** är ett matrecept, inte ett läkarrecept.',
+    noteEn: '**M’** (= *me*, to me) goes before the auxiliary *a*. A **recette** is a cooking recipe, never a prescription.',
+    gloss: [['le médecin', 'läkaren', 'the doctor'], ['m’', 'mig', 'me'], ['a donné', 'gav', 'gave'], ['une ordonnance', 'ett recept', 'a prescription']],
+  }),
+  phrase(D, 'fr-u12-votre-carte-vitale', {
+    prompt: 'Apotekaren frågar efter ditt sjukförsäkringskort', promptEn: 'The pharmacist asks for your health insurance card',
+    fr: 'Vous avez votre carte Vitale ?', sv: 'Har ni ert sjukförsäkringskort?', en: 'Do you have your health insurance card?',
+    ipa: '/vu.za.ve vɔtʁ kaʁt vi.tal/',
+    note: 'En fråga man hör vid varje besök. **Votre** = er / ert / din (artigt), plural **vos**. Utan kortet får man betala och söka ersättning i efterhand.',
+    noteEn: 'You hear this at every visit. **Votre** = your (polite), plural **vos**. Without the card you pay up front and claim the money back later.',
+    gloss: [['vous avez', 'har ni', 'do you have'], ['votre', 'ert', 'your'], ['carte Vitale', 'sjukförsäkringskort', 'health insurance card']],
+  }),
+  phrase(D, 'fr-u12-fait-mal-au-dos', {
+    prompt: 'Säg att du har gjort illa ryggen', promptEn: 'Say you’ve hurt your back',
+    fr: 'Je me suis fait mal au dos.', sv: 'Jag har gjort illa ryggen.', en: 'I’ve hurt my back.',
+    ipa: '/ʒə mə sɥi fɛ mal o do/',
+    note: '**Se faire mal** = göra sig illa, med **être** i passé composé. Franskan använder artikel, inte possessiv, med kroppsdelar: *au dos*, inte *à mon dos*.',
+    noteEn: '**Se faire mal** = to hurt oneself, with **être** in the passé composé. French uses the article, not a possessive, with body parts: *au dos*, not *à mon dos*.',
+    gloss: [['je', 'jag', 'I'], ['me suis fait mal', 'har gjort illa mig', 'have hurt myself'], ['au dos', 'i ryggen', 'in the back']],
+  }),
+  phrase(D, 'fr-u12-prenez-ce-medicament', {
+    prompt: 'Läkaren säger åt dig att ta medicinen tre gånger om dagen', promptEn: 'The doctor tells you to take the medicine three times a day',
+    fr: 'Prenez ce médicament trois fois par jour.', sv: 'Ta det här läkemedlet tre gånger om dagen.', en: 'Take this medicine three times a day.',
+    ipa: '/pʁə.ne sə me.di.ka.mɑ̃ tʁwa fwa paʁ ʒuʁ/',
+    note: '**Imperativ** med *vous*: verbformen utan subjekt, *prenez*. **Une fois** = en gång; tid i allmänhet heter *le temps*.',
+    noteEn: '**Imperative** with *vous*: the verb form without a subject, *prenez*. **Une fois** = one time, an occurrence; time in general is *le temps*.',
+    gloss: [['prenez', 'ta', 'take'], ['ce médicament', 'det här läkemedlet', 'this medicine'], ['trois fois', 'tre gånger', 'three times'], ['par jour', 'om dagen', 'a day']],
+  }),
+];

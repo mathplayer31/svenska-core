@@ -1,0 +1,162 @@
+// FranceCore, Unité 17 : Voisins et vie sociale (inviter, apéro, rendre service).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT17_DECK = unitDeck({
+  n: 17, slug: 'fr-unit-17-neighbours', sv: 'Grannar och umgänge', en: 'Neighbours and social life',
+  level: 'B1', section: 'fr-section-5-sinstaller', after: 'fr-unit-16-paperwork',
+});
+const D = UNIT17_DECK.slug;
+
+export const UNIT17_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u17-voisin', {
+    prompt: 'Den som bor bredvid dig (man / kvinna)', promptEn: 'The person who lives next to you (man / woman)',
+    fr: 'le voisin / la voisine', sv: 'grannen', en: 'the neighbour',
+    ipa: '/lə vwa.zɛ̃/ /la vwa.zin/',
+    note: 'Maskulinum slutar på nasalljudet [ɛ̃], femininum uttalar n:et: [in]. *Mon voisin de palier* = grannen på samma trappavsats.',
+    noteEn: 'The masculine ends in the nasal [ɛ̃], the feminine pronounces the n: [in]. *Mon voisin de palier* = my neighbour across the landing.',
+  }),
+  vocab(D, 'fr-u17-gardien', {
+    prompt: 'Personen som sköter huset och tar emot paket', promptEn: 'The person who looks after the building and takes in parcels',
+    fr: 'le gardien / la gardienne', sv: 'portvakten / fastighetsskötaren', en: 'the caretaker / the concierge',
+    ipa: '/lə ɡaʁ.djɛ̃/ /la ɡaʁ.djɛn/',
+    note: 'I många parisiska hus bor en gardienne i bottenvåningen, förr kallad **la concierge**. Vid nyår ger man henne gärna en liten summa pengar: **les étrennes**.',
+    noteEn: 'Many Paris buildings have a caretaker living on the ground floor, formerly called **la concierge**. At New Year residents traditionally give her a small sum: **les étrennes**.',
+  }),
+  vocab(D, 'fr-u17-immeuble', {
+    prompt: 'Hus med många lägenheter', promptEn: 'Building with many flats',
+    fr: 'un immeuble', sv: 'ett flerbostadshus', en: 'a block of flats / an apartment building',
+    ipa: '/œ̃.n‿i.mœbl/',
+    note: 'Våningarna räknas från **le rez-de-chaussée** (bottenvåningen), så *le premier étage* motsvarar svensk andra våning. Ett hus för en familj heter i stället **une maison**.',
+    noteEn: '**Immeuble** is a building. Floors are counted from **le rez-de-chaussée** (ground floor), so *le premier étage* is the first floor in British terms and the second in American ones.',
+  }),
+  vocab(D, 'fr-u17-apero', {
+    prompt: 'Drinken och tilltugget före middagen, en social ritual', promptEn: 'Drinks and nibbles before dinner, a social ritual',
+    fr: 'l’apéro', sv: 'fördrinken / aperitifen', en: 'pre-dinner drinks',
+    ipa: '/la.pe.ʁo/',
+    note: 'Kort för **l’apéritif**. Att bli bjuden på apéro (ofta kl. 18 till 20) betyder **inte** att man är bjuden på middag. Ett *apéro dînatoire* är däremot så rikligt att det ersätter middagen.',
+    noteEn: 'Short for **l’apéritif**. Being invited for apéro (often 6 to 8 pm) does **not** mean you are invited to dinner. An *apéro dînatoire*, however, is substantial enough to replace it.',
+  }),
+  vocab(D, 'fr-u17-inviter', {
+    prompt: 'Bjuda in någon, eller bjuda på något', promptEn: 'Invite someone, or treat them',
+    fr: 'inviter', sv: 'bjuda in / bjuda', en: 'to invite / to treat',
+    ipa: '/ɛ̃.vi.te/',
+    note: '**Je t’invite** på en restaurang betyder att *jag betalar*. Fransmän delar sällan notan exakt: man bjuder och väntar sig att bli bjuden nästa gång.',
+    noteEn: '**Je t’invite** at a restaurant means *I’m paying*. The French rarely split the bill exactly: you treat and expect to be treated next time.',
+  }),
+  vocab(D, 'fr-u17-rendre-service', {
+    prompt: 'Göra någon en tjänst', promptEn: 'Do someone a favour',
+    fr: 'rendre service', sv: 'göra en tjänst', en: 'to do a favour',
+    ipa: '/ʁɑ̃dʁ sɛʁ.vis/',
+    note: 'Ordagrant ”återge tjänst”. Man säger *rendre service à quelqu’un*, och artigt: *Est-ce que tu pourrais me rendre un service ?*',
+    noteEn: 'Literally "give back service". You say *rendre service à quelqu’un*, and politely: *Est-ce que tu pourrais me rendre un service ?*',
+  }),
+  vocab(D, 'fr-u17-coup-de-main', {
+    prompt: 'Vardagligt: lite hjälp', promptEn: 'Casual: a bit of help',
+    fr: 'un coup de main', sv: 'ett handtag', en: 'a hand',
+    ipa: '/œ̃ ku də mɛ̃/',
+    note: '*Donner un coup de main* = hjälpa till, precis som svenskans *ta ett handtag*. **Coup** finns i massor av uttryck: *un coup de fil* (ett telefonsamtal), *un coup de soleil* (solbränna).',
+    noteEn: '*Donner un coup de main* = give a hand. **Coup** appears in many expressions: *un coup de fil* (a phone call), *un coup de soleil* (sunburn).',
+  }),
+  vocab(D, 'fr-u17-emprunter-preter', {
+    prompt: 'Låna av någon, och låna ut till någon', promptEn: 'Borrow from someone, and lend to someone',
+    fr: 'emprunter / prêter', sv: 'låna / låna ut', en: 'to borrow / to lend',
+    ipa: '/ɑ̃.pʁœ̃.te/ /pʁɛ.te/',
+    note: 'Svenskan klarar sig med *låna*, franskan har två verb: **emprunter quelque chose à quelqu’un** (låna av) och **prêter quelque chose à quelqu’un** (låna ut).',
+    noteEn: '**Emprunter quelque chose à quelqu’un** = borrow from someone, **prêter quelque chose à quelqu’un** = lend to someone. Note that both use **à**.',
+  }),
+  vocab(D, 'fr-u17-faire-du-bruit', {
+    prompt: 'Störa med ljud', promptEn: 'Disturb with noise',
+    fr: 'faire du bruit', sv: 'föra oväsen / låta', en: 'to make noise',
+    ipa: '/fɛʁ dy bʁɥi/',
+    note: 'Nattligt oljud kallas **tapage nocturne** och kan ge böter. Det är artigt att sätta upp en lapp i trapphuset innan man har fest.',
+    noteEn: 'Noise at night is called **tapage nocturne** and can lead to a fine. It is polite to put a note up in the stairwell before throwing a party.',
+  }),
+  vocab(D, 'fr-u17-fete-des-voisins', {
+    prompt: 'Den årliga festen då grannar träffas på gården eller gatan', promptEn: 'The yearly party where neighbours meet in the courtyard or street',
+    fr: 'la fête des voisins', sv: 'grannfesten', en: 'the neighbours’ party',
+    ipa: '/la fɛt de vwa.zɛ̃/',
+    note: 'Firas i slutet av maj sedan 1999: alla tar med något att äta eller dricka. Ett bra tillfälle att lära känna dem man annars bara hälsar *bonjour* på i trappan.',
+    noteEn: 'Held in late May since 1999: everyone brings something to eat or drink. A good chance to get to know the people you otherwise only say *bonjour* to on the stairs.',
+  }),
+  vocab(D, 'fr-u17-cremaillere', {
+    prompt: 'Festen man har när man flyttat in', promptEn: 'The party you throw after moving in',
+    fr: 'pendre la crémaillère', sv: 'ha inflyttningsfest', en: 'to have a housewarming',
+    ipa: '/pɑ̃dʁ la kʁe.ma.jɛʁ/',
+    note: '**La crémaillère** var kroken där man hängde grytan över elden: när den satt på plats var huset beboeligt och man bjöd hjälparna på mat.',
+    noteEn: '**La crémaillère** was the hook for the cooking pot over the fire: once it was hung, the house was ready and you fed everyone who had helped.',
+  }),
+  vocab(D, 'fr-u17-sympa', {
+    prompt: 'Trevlig, snäll (vardagligt)', promptEn: 'Nice, friendly (casual)',
+    fr: 'sympa', sv: 'trevlig / schysst', en: 'nice / friendly',
+    ipa: '/sɛ̃.pa/',
+    note: 'Kort för **sympathique**, precis som svenskans *sympatisk*. Samma form för båda könen: *un voisin sympa, une voisine sympa*, och i plural *sympas*.',
+    noteEn: 'Short for **sympathique**. A false friend: it means *nice*, not *sympathetic*. Same form for both genders: *un voisin sympa, une voisine sympa*.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u17-ca-vous-dirait', {
+    prompt: 'Bjud in grannarna på apéro på lördag', promptEn: 'Invite the neighbours for drinks on Saturday',
+    fr: 'Ça vous dirait de venir prendre l’apéro samedi ?', sv: 'Skulle ni vilja komma på en drink på lördag?', en: 'Would you like to come over for drinks on Saturday?',
+    ipa: '/sa vu di.ʁɛ də və.niʁ pʁɑ̃dʁ la.pe.ʁo sam.di/',
+    note: '**Ça te dit / ça vous dirait de ...?** (ordagrant ”säger det dig”) är det vanligaste sättet att föreslå något. Inget *på* framför veckodagen: *samedi* räcker.',
+    noteEn: '**Ça te dit / ça vous dirait de ...?** (literally "does it tell you") is the most common way to suggest something. No preposition before the day: just *samedi*.',
+    gloss: [['ça vous dirait', 'skulle ni vilja', 'would you like'], ['de venir', 'att komma', 'to come'], ['prendre l’apéro', 'ta en fördrink', 'have pre-dinner drinks'], ['samedi', 'på lördag', 'on Saturday']],
+  }),
+  phrase(D, 'fr-u17-emprunter-perceuse', {
+    prompt: 'Fråga grannen om du kan låna en borrmaskin', promptEn: 'Ask the neighbour if you could borrow a drill',
+    fr: 'Est-ce que je pourrais vous emprunter une perceuse ?', sv: 'Skulle jag kunna låna en borrmaskin av er?', en: 'Could I borrow a drill from you?',
+    ipa: '/ɛs kə ʒə pu.ʁɛ vu.z‿ɑ̃.pʁœ̃.te yn pɛʁ.søz/',
+    note: 'Pronomenet **vous** (av er) står före infinitiven. Bindning: s:et i *vous* uttalas [z] framför vokal, [vuzɑ̃pʁœ̃te].',
+    noteEn: 'The pronoun **vous** (from you) goes before the infinitive. Liaison: the s of *vous* is pronounced [z] before a vowel, [vuzɑ̃pʁœ̃te].',
+    gloss: [['est-ce que', '(fråga)', '(question)'], ['je pourrais', 'skulle jag kunna', 'could I'], ['vous', 'av er', 'from you'], ['emprunter', 'låna', 'borrow'], ['une perceuse', 'en borrmaskin', 'a drill']],
+  }),
+  phrase(D, 'fr-u17-nhesitez-pas', {
+    prompt: 'Erbjud grannen din hjälp om det behövs', promptEn: 'Offer the neighbour your help if needed',
+    fr: 'Si vous avez besoin d’un coup de main, n’hésitez pas.', sv: 'Om ni behöver hjälp är det bara att säga till.', en: 'If you need a hand, just let me know.',
+    ipa: '/si vu.z‿a.ve bə.zwɛ̃ dœ̃ ku də mɛ̃ ne.zi.te pa/',
+    note: '**N’hésitez pas** (tveka inte) är en fast artighetsfras som avslutar många mejl och erbjudanden. **Avoir besoin de** = behöva, med *avoir* som i *j’ai besoin*.',
+    noteEn: '**N’hésitez pas** (don’t hesitate) is a set courtesy phrase that ends many emails and offers. **Avoir besoin de** = to need, built with *avoir*.',
+    gloss: [['si', 'om', 'if'], ['vous avez besoin', 'ni behöver', 'you need'], ['d’un coup de main', 'ett handtag', 'a hand'], ['n’hésitez pas', 'tveka inte', 'don’t hesitate']],
+  }),
+  phrase(D, 'fr-u17-desolee-pour-le-bruit', {
+    prompt: 'Be (kvinna) om ursäkt för oväsendet i går kväll: ni firade din födelsedag', promptEn: 'Apologise (woman) for last night’s noise: you were celebrating your birthday',
+    fr: 'Désolée pour le bruit d’hier soir, on fêtait mon anniversaire.', sv: 'Förlåt för oväsendet i går kväll, vi firade min födelsedag.', en: 'Sorry about the noise last night, we were celebrating my birthday.',
+    ipa: '/de.zɔ.le puʁ lə bʁɥi djɛʁ swaʁ ɔ̃ fɛ.tɛ mɔ̃.n‿a.ni.vɛʁ.sɛʁ/',
+    note: '**Imparfait** (*on fêtait*) för något som pågick, som engelskans *we were celebrating*. **On** = vi i talspråk, med verbet i tredje person singular.',
+    noteEn: 'The **imparfait** (*on fêtait*) for an ongoing activity, like *we were celebrating*. **On** = we in speech, with the verb in the third person singular.',
+    gloss: [['désolée', 'förlåt', 'sorry'], ['pour le bruit', 'för oväsendet', 'about the noise'], ['d’hier soir', 'i går kväll', 'last night'], ['on fêtait', 'vi firade', 'we were celebrating'], ['mon anniversaire', 'min födelsedag', 'my birthday']],
+  }),
+  phrase(D, 'fr-u17-voisine-du-dessus', {
+    prompt: 'Berätta att grannen ovanför, som är jättesnäll, vattnar dina växter när du reser bort', promptEn: 'Say the upstairs neighbour, who is very kind, waters your plants when you’re away',
+    fr: 'La voisine du dessus, qui est très gentille, arrose mes plantes quand je pars.', sv: 'Grannen ovanför, som är jättesnäll, vattnar mina växter när jag reser bort.', en: 'The upstairs neighbour, who is really kind, waters my plants when I’m away.',
+    ipa: '/la vwa.zin dy də.sy ki ɛ tʁɛ ʒɑ̃.tij a.ʁɔz me plɑ̃t kɑ̃ ʒə paʁ/',
+    note: 'Relativpronomenet **qui** är subjekt i bisatsen. **Du dessus** = ovanför, **du dessous** = nedanför. **Gentil** betyder snäll, inte *gentle*.',
+    noteEn: 'The relative pronoun **qui** is the subject of its clause. **Du dessus** = upstairs, **du dessous** = downstairs. **Gentil** means kind, not *gentle*.',
+    gloss: [['la voisine', 'grannen', 'the neighbour'], ['du dessus', 'ovanför', 'upstairs'], ['qui', 'som', 'who'], ['est', 'är', 'is'], ['très gentille', 'jättesnäll', 'really kind'], ['arrose', 'vattnar', 'waters'], ['mes plantes', 'mina växter', 'my plants'], ['quand', 'när', 'when'], ['je pars', 'jag reser bort', 'I go away']],
+  }),
+  phrase(D, 'fr-u17-cremaillere-vendredi', {
+    prompt: 'Säg att ni har inflyttningsfest på fredag och att grannarna är välkomna', promptEn: 'Say you’re having a housewarming on Friday and the neighbours are welcome',
+    fr: 'Nous pendons la crémaillère vendredi, vous êtes les bienvenus !', sv: 'Vi har inflyttningsfest på fredag, ni är hjärtligt välkomna!', en: 'We’re having a housewarming on Friday, you’re very welcome to come!',
+    ipa: '/nu pɑ̃.dɔ̃ la kʁe.ma.jɛʁ vɑ̃.dʁə.di vu.z‿ɛt le bjɛ̃.və.ny/',
+    note: '**Bienvenu** böjs som ett adjektiv: *les bienvenus* för en grupp, *la bienvenue* till en kvinna. Observera mellanslaget före **!** i fransk text.',
+    noteEn: '**Bienvenu** agrees like an adjective: *les bienvenus* for a group, *la bienvenue* to a woman. Note the space before **!** in French text.',
+    gloss: [['nous pendons la crémaillère', 'vi har inflyttningsfest', 'we’re having a housewarming'], ['vendredi', 'på fredag', 'on Friday'], ['vous êtes', 'ni är', 'you are'], ['les bienvenus', 'välkomna', 'welcome']],
+  }),
+  phrase(D, 'fr-u17-se-tutoyer', {
+    prompt: 'Föreslå att ni ska börja dua varandra', promptEn: 'Suggest you start using tu with each other',
+    fr: 'On peut se tutoyer, si vous voulez.', sv: 'Vi kan säga du till varandra, om ni vill.', en: 'We can drop the formalities and use tu, if you like.',
+    ipa: '/ɔ̃ pø sə ty.twa.je si vu vu.le/',
+    note: 'Övergången från **vous** till **tu** är ett litet steg mot vänskap, och det är ofta den äldre som föreslår den. Lägg märke till att man niar ända tills förslaget är godtaget: *si vous voulez*.',
+    noteEn: 'Switching from **vous** to **tu** is a small step towards friendship, usually offered by the older person. Notice you keep using *vous* until the offer is accepted: *si vous voulez*.',
+    gloss: [['on peut', 'vi kan', 'we can'], ['se tutoyer', 'dua varandra', 'say tu to each other'], ['si', 'om', 'if'], ['vous voulez', 'ni vill', 'you like']],
+  }),
+  phrase(D, 'fr-u17-ca-me-fait-plaisir', {
+    prompt: 'Säg att det inte alls är besvärligt, du gör gärna grannen en tjänst', promptEn: 'Say it’s no trouble at all, you’re happy to do the neighbour a favour',
+    fr: 'Ça ne me dérange pas du tout, ça me fait plaisir de vous rendre service.', sv: 'Det är inte alls besvärligt, jag hjälper er gärna.', en: 'It’s no trouble at all, I’m happy to help you out.',
+    ipa: '/sa nə mə de.ʁɑ̃ʒ pa dy tu sa mə fɛ plɛ.ziʁ də vu ʁɑ̃dʁ sɛʁ.vis/',
+    note: '**Ça me fait plaisir** (det gör mig glad) är det naturliga svaret på ett tack. **Déranger** = störa: *Je ne vous dérange pas ?* frågar man när man ringer på.',
+    noteEn: '**Ça me fait plaisir** (it gives me pleasure) is the natural reply to thanks. **Déranger** = disturb: *Je ne vous dérange pas ?* is what you ask when you knock.',
+    gloss: [['ça', 'det', 'it'], ['ne me dérange pas', 'stör mig inte', 'doesn’t bother me'], ['du tout', 'alls', 'at all'], ['ça me fait plaisir', 'det gör mig glad', 'I’m happy'], ['de vous rendre service', 'att hjälpa er', 'to do you a favour']],
+  }),
+];

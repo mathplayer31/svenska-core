@@ -1,0 +1,162 @@
+// FranceCore, Unité 25 : Économie et consommation (pouvoir d'achat, inflation, budget, banque).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT25_DECK = unitDeck({
+  n: 25, slug: 'fr-unit-25-economy', sv: 'Ekonomi och konsumtion', en: 'Economy and consumption',
+  level: 'B2', section: 'fr-section-7-societe', after: 'fr-unit-24-professional',
+});
+const D = UNIT25_DECK.slug;
+
+export const UNIT25_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u25-pouvoir-dachat', {
+    prompt: 'Vad man faktiskt har råd med för sin lön', promptEn: 'What your income can actually buy',
+    fr: 'le pouvoir d’achat', sv: 'köpkraften', en: 'purchasing power',
+    ipa: '/lə pu.vwaʁ da.ʃa/',
+    note: 'Ett av de mest använda orden i fransk politik och i nyheterna. **t** i *achat* är stumt. *Le pouvoir d’achat des ménages* = hushållens köpkraft.',
+    noteEn: 'One of the most used terms in French politics and on the news. The **t** in *achat* is silent. *Le pouvoir d’achat des ménages* = household purchasing power.',
+  }),
+  vocab(D, 'fr-u25-inflation', {
+    prompt: 'När priserna stiger generellt', promptEn: 'When prices rise across the board',
+    fr: 'l’inflation', sv: 'inflationen', en: 'inflation',
+    ipa: '/lɛ̃.fla.sjɔ̃/',
+    note: 'Femininum, som alla ord på **-tion**. **in-** framför konsonant är nasalt [ɛ̃], och **-tion** uttalas [sjɔ̃], aldrig [ʃ] som i engelskan.',
+    noteEn: 'Feminine, like every noun in **-tion**. **in-** before a consonant is the nasal [ɛ̃], and **-tion** is pronounced [sjɔ̃], never "shun".',
+  }),
+  vocab(D, 'fr-u25-smic', {
+    prompt: 'Den lagstadgade minimilönen i Frankrike', promptEn: 'France’s statutory minimum wage',
+    fr: 'le smic', sv: 'minimilönen', en: 'the minimum wage',
+    ipa: '/lə smik/',
+    note: 'Förkortning av *salaire minimum interprofessionnel de croissance*. Sverige har ingen lagstadgad minimilön (den sätts i kollektivavtal), Frankrike har haft en sedan 1950. **un smicard** = någon som tjänar minimilön.',
+    noteEn: 'Short for *salaire minimum interprofessionnel de croissance*, set by law. **un smicard** (informal) = someone earning the minimum wage.',
+  }),
+  vocab(D, 'fr-u25-brut-net', {
+    prompt: 'Lön före och efter avgifter', promptEn: 'Pay before and after deductions',
+    fr: 'brut / net', sv: 'brutto / netto', en: 'gross / net',
+    ipa: '/bʁyt/ /nɛt/',
+    note: 'I franska platsannonser anges lönen nästan alltid i **brut annuel** (brutto per år). Mellan brutto och netto försvinner ungefär en fjärdedel i sociala avgifter, innan skatten. Både **t** uttalas här.',
+    noteEn: 'French job ads almost always quote pay as **brut annuel** (gross per year). Roughly a quarter goes on social contributions between gross and net, before income tax. Both final **t**s are pronounced here.',
+  }),
+  vocab(D, 'fr-u25-compte-courant', {
+    prompt: 'Bankkontot för vardagliga utgifter', promptEn: 'The bank account for everyday spending',
+    fr: 'le compte courant', sv: 'lönekontot / transaktionskontot', en: 'the current account / the checking account',
+    ipa: '/lə kɔ̃t ku.ʁɑ̃/',
+    note: '**ouvrir un compte** = öppna ett konto. **compte** (konto) och **conte** (saga) uttalas exakt likadant: **p** är stumt.',
+    noteEn: '**ouvrir un compte** = to open an account. **compte** (account) and **conte** (tale) sound exactly the same: the **p** is silent.',
+  }),
+  vocab(D, 'fr-u25-decouvert', {
+    prompt: 'När man har mindre än noll på kontot', promptEn: 'When your account goes below zero',
+    fr: 'être à découvert', sv: 'ha övertrasserat kontot', en: 'to be overdrawn',
+    ipa: '/ɛtʁ a de.ku.vɛʁ/',
+    note: 'Franska banker ger ofta en **découvert autorisé** (beviljad kredit på kontot), men tar ränta, **les agios**. Ordagrant ”att vara avtäckt”.',
+    noteEn: 'French banks often grant a **découvert autorisé** (arranged overdraft), but charge interest, **les agios**. Literally "to be uncovered".',
+  }),
+  vocab(D, 'fr-u25-virement', {
+    prompt: 'Att flytta pengar från ett konto till ett annat', promptEn: 'Moving money from one account to another',
+    fr: 'le virement', sv: 'överföringen', en: 'the bank transfer',
+    ipa: '/lə viʁ.mɑ̃/',
+    note: '**faire un virement** = göra en överföring. Fransmän betalar fortfarande också med **chèque**, något som nästan har försvunnit i Sverige.',
+    noteEn: '**faire un virement** = to make a transfer. The French still also pay by **chèque**, which has nearly vanished in Sweden and the UK.',
+  }),
+  vocab(D, 'fr-u25-rib', {
+    prompt: 'Dokumentet med dina bankuppgifter', promptEn: 'The document with your bank details',
+    fr: 'le RIB', sv: 'kontouppgifterna', en: 'the bank details slip',
+    ipa: '/lə ʁib/',
+    note: 'Förkortning av **relevé d’identité bancaire**, med IBAN och BIC. Man måste lämna sitt RIB till arbetsgivaren, hyresvärden och elbolaget. Uttalas som ett ord: [ʁib].',
+    noteEn: 'Short for **relevé d’identité bancaire**, showing your IBAN and BIC. You hand your RIB to your employer, landlord and energy supplier. Said as one word: [ʁib].',
+  }),
+  vocab(D, 'fr-u25-livret-a', {
+    prompt: 'Det klassiska skattefria sparkontot', promptEn: 'The classic tax-free savings account',
+    fr: 'le livret A', sv: 'det skattefria sparkontot', en: 'the tax-free savings account',
+    ipa: '/lə li.vʁɛ a/',
+    note: 'Ett statligt reglerat sparkonto från 1818, med ränta som staten bestämmer och utan skatt. Nästan alla fransmän har ett. **livret** betyder egentligen ”liten bok”, efter den gamla sparbanksboken.',
+    noteEn: 'A state-regulated savings account dating from 1818, with an interest rate set by the government and no tax. Almost every French person has one. **livret** means "little book", after the old passbook.',
+  }),
+  vocab(D, 'fr-u25-tva', {
+    prompt: 'Momsen', promptEn: 'The sales tax on purchases',
+    fr: 'la TVA', sv: 'momsen', en: 'VAT',
+    ipa: '/la te.ve.a/',
+    note: '**taxe sur la valeur ajoutée**, en fransk uppfinning från 1954. Normalskattesatsen är 20 %. Priser anges **TTC** (*toutes taxes comprises*, inklusive moms) eller **HT** (*hors taxes*).',
+    noteEn: '**taxe sur la valeur ajoutée**, a French invention from 1954. The standard rate is 20 %. Prices are given **TTC** (*toutes taxes comprises*, VAT included) or **HT** (*hors taxes*, before tax).',
+  }),
+  vocab(D, 'fr-u25-prelevement-source', {
+    prompt: 'När skatten dras direkt från lönen', promptEn: 'When tax is taken straight from your pay',
+    fr: 'le prélèvement à la source', sv: 'källskatten', en: 'pay-as-you-earn tax / withholding tax',
+    ipa: '/lə pʁe.lɛv.mɑ̃ a la suʁs/',
+    note: 'Infördes först 2019: innan dess betalade fransmän inkomstskatten året efter. Varje vår gör man ändå sin **déclaration de revenus** (deklaration).',
+    noteEn: 'Only introduced in 2019: before that the French paid income tax the following year. Every spring you still file your **déclaration de revenus** (tax return).',
+  }),
+  vocab(D, 'fr-u25-carte-bleue', {
+    prompt: 'Vardagsordet för bankkort', promptEn: 'The everyday word for a bank card',
+    fr: 'la carte bleue', sv: 'bankkortet', en: 'the bank card / the debit card',
+    ipa: '/la kaʁt blø/',
+    note: 'Ursprungligen ett varumärke som blev ett vanligt ord, som *la CB*: *Je peux payer par CB ?* Lägg märke till prepositionen: **payer par carte**, men **payer en espèces** (kontant).',
+    noteEn: 'Originally a brand name that became the generic word, like *la CB*: *Je peux payer par CB ?* Note the prepositions: **payer par carte**, but **payer en espèces** (in cash).',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u25-prix-flambe', {
+    prompt: 'Säg att priserna har rusat i år', promptEn: 'Say that prices have soared this year',
+    fr: 'Les prix ont flambé cette année.', sv: 'Priserna har rusat i år.', en: 'Prices have soared this year.',
+    ipa: '/le pʁi ɔ̃ flɑ̃.be sɛt a.ne/',
+    note: '**flamber** = flamma upp, en mycket vanlig bild i medierna för priser. Motsatsen är **chuter** eller **dégringoler** (rasa). **x** i *prix* är stumt.',
+    noteEn: '**flamber** = to blaze up, a very common media image for prices. The opposite is **chuter** or **dégringoler** (to tumble). The **x** in *prix* is silent.',
+    gloss: [['les prix', 'priserna', 'prices'], ['ont flambé', 'har rusat', 'have soared'], ['cette année', 'i år', 'this year']],
+  }),
+  phrase(D, 'fr-u25-fins-de-mois', {
+    prompt: 'Säg att pengarna knappt räcker till månadens slut', promptEn: 'Say you struggle to make it to the end of the month',
+    fr: 'J’ai du mal à boucler mes fins de mois.', sv: 'Jag har svårt att få pengarna att räcka månaden ut.', en: 'I struggle to make ends meet.',
+    ipa: '/ʒe dy mal a bu.kle me fɛ̃ də mwa/',
+    note: '**avoir du mal à** + infinitiv = ha svårt att. **les fins de mois difficiles** är ett fast uttryck för ekonomisk knapphet. Samma idé: **joindre les deux bouts** (få det att gå ihop).',
+    noteEn: '**avoir du mal à** + infinitive = to struggle to. **les fins de mois difficiles** is a set phrase for money worries. Same idea: **joindre les deux bouts** (to make ends meet).',
+    gloss: [['j’ai du mal', 'jag har svårt', 'I struggle'], ['à', 'att', 'to'], ['boucler', 'få ihop', 'close'], ['mes', 'mina', 'my'], ['fins de mois', 'månadsslut', 'month ends']],
+  }),
+  phrase(D, 'fr-u25-preoccupation', {
+    prompt: 'Säg att köpkraften är fransmännens största oro', promptEn: 'Say purchasing power is the top concern of the French',
+    fr: 'Le pouvoir d’achat est la première préoccupation des Français.', sv: 'Köpkraften är fransmännens största bekymmer.', en: 'Purchasing power is the number one concern for the French.',
+    ipa: '/lə pu.vwaʁ da.ʃa ɛ la pʁə.mjɛʁ pʁe.ɔ.ky.pa.sjɔ̃ de fʁɑ̃.sɛ/',
+    note: 'Det här ligger i topp i nästan varje opinionsundersökning. **les Français** med stor bokstav är folket, **le français** med liten bokstav är språket.',
+    noteEn: 'This tops almost every French opinion poll. **les Français** with a capital means the people, **le français** in lower case means the language.',
+    gloss: [['le pouvoir d’achat', 'köpkraften', 'purchasing power'], ['est', 'är', 'is'], ['la première', 'det första', 'the first'], ['préoccupation', 'bekymret', 'concern'], ['des Français', 'fransmännens', 'of the French']],
+  }),
+  phrase(D, 'fr-u25-rib-phrase', {
+    prompt: 'Be någon artigt om bankuppgifter', promptEn: 'Politely ask someone for their bank details',
+    fr: 'Pouvez-vous m’envoyer votre RIB ?', sv: 'Kan ni skicka era kontouppgifter?', en: 'Could you send me your bank details?',
+    ipa: '/pu.ve vu mɑ̃.vwa.je vɔ.tʁə ʁib/',
+    note: 'Frågan med omvänd ordföljd, **pouvez-vous**, är artigare än *vous pouvez ... ?* Bindestrecket mellan verb och pronomen är obligatoriskt.',
+    noteEn: 'The inverted question **pouvez-vous** is more formal than *vous pouvez ... ?* The hyphen between verb and pronoun is compulsory.',
+    gloss: [['pouvez-vous', 'kan ni', 'can you'], ['m’envoyer', 'skicka mig', 'send me'], ['votre', 'era', 'your'], ['RIB', 'kontouppgifter', 'bank details']],
+  }),
+  phrase(D, 'fr-u25-decouvert-phrase', {
+    prompt: 'Säg att kontot har varit på minus sedan den 15:e', promptEn: 'Say your account has been overdrawn since the 15th',
+    fr: 'Je suis à découvert depuis le 15.', sv: 'Mitt konto har varit övertrasserat sedan den 15:e.', en: 'I’ve been overdrawn since the 15th.',
+    ipa: '/ʒə sɥi a de.ku.vɛʁ də.pɥi lə kɛ̃z/',
+    note: '**depuis** + presens på franska, där svenskan och engelskan använder perfekt: situationen pågår fortfarande. Datum anges med grundtal: *le 15*, inte ”den femtonde”, utom *le 1er* (*le premier*).',
+    noteEn: '**depuis** + present tense in French where English uses the present perfect: the situation is still going on. Dates use cardinal numbers: *le 15*, except *le 1er* (*le premier*).',
+    gloss: [['je suis', 'jag är', 'I am'], ['à découvert', 'på minus', 'overdrawn'], ['depuis', 'sedan', 'since'], ['le 15', 'den 15:e', 'the 15th']],
+  }),
+  phrase(D, 'fr-u25-ceinture', {
+    prompt: 'Säg att hushållen drar åt svångremmen', promptEn: 'Say households are tightening their belts',
+    fr: 'Les ménages se serrent la ceinture.', sv: 'Hushållen drar åt svångremmen.', en: 'Households are tightening their belts.',
+    ipa: '/le me.naʒ sə sɛʁ la sɛ̃.tyʁ/',
+    note: 'Samma bild som på svenska. **un ménage** är ett hushåll i ekonomiska sammanhang, och *faire le ménage* betyder att städa.',
+    noteEn: 'Same image as in English. **un ménage** is a household in economics, and *faire le ménage* means to do the cleaning.',
+    gloss: [['les ménages', 'hushållen', 'households'], ['se serrent', 'drar åt', 'tighten'], ['la ceinture', 'svångremmen', 'their belts']],
+  }),
+  phrase(D, 'fr-u25-trois-fois', {
+    prompt: 'Fråga om du kan betala i tre delar utan avgift', promptEn: 'Ask if you can pay in three instalments with no fee',
+    fr: 'On peut payer en trois fois sans frais ?', sv: 'Kan man dela upp betalningen på tre gånger utan avgift?', en: 'Can I pay in three interest-free instalments?',
+    ipa: '/ɔ̃ pø pe.je ɑ̃ tʁwa fwa sɑ̃ fʁɛ/',
+    note: '**le paiement en trois fois sans frais** erbjuds i många franska butiker för dyrare köp. **on** används här som ett opersonligt ”man”, mycket vanligt i talspråk.',
+    noteEn: '**le paiement en trois fois sans frais** is offered by many French shops for bigger purchases. **on** here is an impersonal "one / I", very common in speech.',
+    gloss: [['on', 'man', 'one'], ['peut', 'kan', 'can'], ['payer', 'betala', 'pay'], ['en trois fois', 'i tre delar', 'in three instalments'], ['sans frais', 'utan avgift', 'interest-free']],
+  }),
+  phrase(D, 'fr-u25-loyer', {
+    prompt: 'Säg att hyran tar en tredjedel av budgeten', promptEn: 'Say rent eats up a third of your budget',
+    fr: 'Le loyer absorbe un tiers de mon budget.', sv: 'Hyran slukar en tredjedel av min budget.', en: 'Rent takes up a third of my budget.',
+    ipa: '/lə lwa.je ap.sɔʁb œ̃ tjɛʁ də mɔ̃ by.dʒɛ/',
+    note: '**budget** uttalas [bydʒɛ], med stumt **t**. Bråk: **un tiers** (1/3), **un quart** (1/4), men **la moitié** (hälften), alltid med artikel.',
+    noteEn: '**budget** is pronounced [bydʒɛ], silent **t**. Fractions: **un tiers** (1/3), **un quart** (1/4), but **la moitié** (half), always with an article.',
+    gloss: [['le loyer', 'hyran', 'rent'], ['absorbe', 'slukar', 'takes up'], ['un tiers', 'en tredjedel', 'a third'], ['de', 'av', 'of'], ['mon budget', 'min budget', 'my budget']],
+  }),
+];

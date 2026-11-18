@@ -1,0 +1,162 @@
+// FranceCore, Unité 20 : Nature et régions (montagne, mer, campagne, randonnée).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT20_DECK = unitDeck({
+  n: 20, slug: 'fr-unit-20-nature', sv: 'Natur och regioner', en: 'Nature and regions',
+  level: 'B1', section: 'fr-section-6-comprendre', after: 'fr-unit-19-opinions',
+});
+const D = UNIT20_DECK.slug;
+
+export const UNIT20_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u20-region', {
+    prompt: 'Den största administrativa indelningen av Frankrike', promptEn: 'France’s largest administrative division',
+    fr: 'une région', sv: 'en region', en: 'a region',
+    ipa: '/yn ʁe.ʒjɔ̃/',
+    note: 'Sedan 2016 har det europeiska Frankrike 13 regioner, till exempel *l’Occitanie* och *la Bretagne*. Alla ord på **-ion** är feminina.',
+    noteEn: 'Since 2016 mainland France has had 13 regions, such as *l’Occitanie* and *la Bretagne*. All nouns ending in **-ion** are feminine.',
+  }),
+  vocab(D, 'fr-u20-departement', {
+    prompt: 'Den numrerade indelningen under regionen', promptEn: 'The numbered division below the region',
+    fr: 'un département', sv: 'ett departement', en: 'a département',
+    ipa: '/œ̃ de.paʁ.tə.mɑ̃/',
+    note: 'Departementen är numrerade, och numret syns i postnumret och förr på bilskyltarna. Fransmän säger gärna *j’habite dans le 31* eller *il vient du 13*.',
+    noteEn: 'Départements are numbered, and the number shows up in postcodes and used to appear on number plates. People happily say *j’habite dans le 31* or *il vient du 13*.',
+  }),
+  vocab(D, 'fr-u20-la-mer', {
+    prompt: 'Havet, och semesterplatsen vid kusten', promptEn: 'The sea, and the seaside as a holiday spot',
+    fr: 'la mer', sv: 'havet', en: 'the sea',
+    ipa: '/la mɛʁ/',
+    note: '**Aller à la mer** = åka till havet / på badsemester. Se upp: **la mer**, **la mère** (mamman) och **le maire** (borgmästaren) uttalas exakt likadant.',
+    noteEn: '**Aller à la mer** = go to the seaside. Careful: **la mer** (sea), **la mère** (mother) and **le maire** (mayor) sound exactly the same.',
+  }),
+  vocab(D, 'fr-u20-la-montagne', {
+    prompt: 'Bergen, och semester i fjällen', promptEn: 'The mountains, and a mountain holiday',
+    fr: 'la montagne', sv: 'berget / fjällen', en: 'the mountains',
+    ipa: '/la mɔ̃.taɲ/',
+    note: 'Franskan säger singular: **à la montagne** = i bergen. **gn** uttalas [ɲ], ungefär som *nj* i *konjak* (av franska *cognac*).',
+    noteEn: 'French uses the singular: **à la montagne** = in the mountains. **gn** is pronounced [ɲ], like the *ny* in *canyon*.',
+  }),
+  vocab(D, 'fr-u20-la-campagne', {
+    prompt: 'Landet, utanför städerna', promptEn: 'The country, outside the towns',
+    fr: 'la campagne', sv: 'landsbygden / landet', en: 'the countryside',
+    ipa: '/la kɑ̃.paɲ/',
+    note: '**À la campagne** = på landet. Samma ord betyder också kampanj: *la campagne électorale*.',
+    noteEn: '**À la campagne** = in the country. The same word also means campaign: *la campagne électorale*.',
+  }),
+  vocab(D, 'fr-u20-la-cote', {
+    prompt: 'Där land möter hav', promptEn: 'Where land meets the sea',
+    fr: 'la côte', sv: 'kusten', en: 'the coast',
+    ipa: '/la kot/',
+    note: 'Cirkumflexen står ofta där ett **s** har försvunnit: *côte* och engelskans *coast*, *forêt* och *forest*. Förväxla inte med **le côté** [kote] = sidan.',
+    noteEn: 'The circumflex often marks a lost **s**: *côte* / *coast*, *forêt* / *forest*. Don’t confuse with **le côté** [kote] = the side.',
+  }),
+  vocab(D, 'fr-u20-la-foret', {
+    prompt: 'Ett stort område med träd', promptEn: 'A large area of trees',
+    fr: 'la forêt', sv: 'skogen', en: 'the forest',
+    ipa: '/la fɔ.ʁɛ/',
+    note: 'Feminint till skillnad från *le bois* (skogsdunge, trä). Slutets **t** är stumt, och **ê** uttalas öppet [ɛ].',
+    noteEn: 'Feminine, unlike *le bois* (wood, small forest). The final **t** is silent, and **ê** is an open [ɛ].',
+  }),
+  vocab(D, 'fr-u20-randonnee', {
+    prompt: 'En längre promenad i naturen', promptEn: 'A long walk in nature',
+    fr: 'une randonnée', sv: 'en vandring', en: 'a hike',
+    ipa: '/yn ʁɑ̃.dɔ.ne/',
+    note: 'Vardagligt **une rando**. Frankrike korsas av märkta leder, **les GR** (*sentiers de grande randonnée*), med sina röd-vita markeringar.',
+    noteEn: 'Casually **une rando**. France is crossed by waymarked trails, **les GR** (*sentiers de grande randonnée*), with their red and white markings.',
+  }),
+  vocab(D, 'fr-u20-sentier', {
+    prompt: 'En smal väg för fotgängare', promptEn: 'A narrow path for walkers',
+    fr: 'un sentier', sv: 'en stig', en: 'a path / a trail',
+    ipa: '/œ̃ sɑ̃.tje/',
+    note: 'Slutets **r** är stumt, som i de flesta ord på **-ier**: *sentier*, *papier*, *premier*.',
+    noteEn: 'The final **r** is silent, as in most words ending in **-ier**: *sentier*, *papier*, *premier*.',
+  }),
+  vocab(D, 'fr-u20-falaise', {
+    prompt: 'Brant bergvägg vid havet', promptEn: 'Steep rock wall by the sea',
+    fr: 'une falaise', sv: 'en klippa / ett stup', en: 'a cliff',
+    ipa: '/yn fa.lɛz/',
+    note: 'De vita klipporna i **Étretat** i Normandie hör till Frankrikes mest kända motiv. Enkelt **s** mellan vokaler uttalas [z].',
+    noteEn: 'The white cliffs of **Étretat** in Normandy are among France’s most famous sights. A single **s** between vowels is pronounced [z].',
+  }),
+  vocab(D, 'fr-u20-le-midi', {
+    prompt: 'Vardagligt namn på södra Frankrike', promptEn: 'Everyday name for the south of France',
+    fr: 'le Midi', sv: 'Sydfrankrike', en: 'the South of France',
+    ipa: '/lə mi.di/',
+    note: '**Midi** betyder både *klockan tolv* och *söder* (där solen står mitt på dagen). *Descendre dans le Midi* = åka söderut, och söderut är alltid *ner*.',
+    noteEn: '**Midi** means both *noon* and *south* (where the sun is at midday). *Descendre dans le Midi* = head south, and south is always *down*.',
+  }),
+  vocab(D, 'fr-u20-gite', {
+    prompt: 'Ett hus på landet som man hyr på semestern', promptEn: 'A country house you rent for a holiday',
+    fr: 'un gîte', sv: 'en semesterstuga', en: 'a holiday cottage',
+    ipa: '/œ̃ ʒit/',
+    note: 'Ofta en renoverad gård eller lada. Ett **gîte d’étape** är ett enkelt vandrarhem längs leden, och en **chambre d’hôtes** motsvarar ett bed and breakfast.',
+    noteEn: 'Often a renovated farmhouse or barn. A **gîte d’étape** is a simple hikers’ hostel along a trail, and a **chambre d’hôtes** is a B&B.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u20-si-javais-plus-de-temps', {
+    prompt: 'Säg att om du hade mer tid skulle du gå GR20 på Korsika', promptEn: 'Say that if you had more time you’d hike the GR20 in Corsica',
+    fr: 'Si j’avais plus de temps, je ferais le GR20 en Corse.', sv: 'Om jag hade mer tid skulle jag gå GR20 på Korsika.', en: 'If I had more time, I’d do the GR20 in Corsica.',
+    ipa: '/si ʒa.vɛ plys də tɑ̃ ʒə fə.ʁɛ lə ʒe.ɛʁ vɛ̃ ɑ̃ kɔʁs/',
+    note: '**Si + imparfait**, sedan **konditionalis**: *si j’avais..., je ferais*. Aldrig konditionalis direkt efter *si*. Öar tar ofta **en**: *en Corse*.',
+    noteEn: '**Si + imparfait**, then the **conditional**: *si j’avais..., je ferais*. Never a conditional right after *si*. Many islands take **en**: *en Corse*.',
+    gloss: [['si', 'om', 'if'], ['j’avais', 'jag hade', 'I had'], ['plus de temps', 'mer tid', 'more time'], ['je ferais', 'skulle jag göra', 'I’d do'], ['le GR20', 'GR20', 'the GR20'], ['en Corse', 'på Korsika', 'in Corsica']],
+  }),
+  phrase(D, 'fr-u20-pyrenees-me-manquent', {
+    prompt: 'Säg att du saknar Pyrenéerna, dit du åkte på semester som liten', promptEn: 'Say you miss the Pyrenees, where you went on holiday as a child',
+    fr: 'Les Pyrénées, où j’allais en vacances quand j’étais petit, me manquent beaucoup.', sv: 'Jag saknar verkligen Pyrenéerna, dit jag åkte på semester när jag var liten.', en: 'I really miss the Pyrenees, where I used to go on holiday as a child.',
+    ipa: '/le pi.ʁe.ne u ʒa.lɛ ɑ̃ va.kɑ̃s kɑ̃ ʒe.tɛ pə.ti mə mɑ̃k bo.ku/',
+    note: 'Med **manquer** är det saknade subjekt: ”Pyrenéerna fattas mig”, därför plural *manquent*. **Imparfait** *j’allais* beskriver en vana, som engelskans *used to*.',
+    noteEn: 'With **manquer** the thing you miss is the subject: "the Pyrenees are missing to me", hence plural *manquent*. The **imparfait** *j’allais* describes a habit, like *used to*.',
+    gloss: [['les Pyrénées', 'Pyrenéerna', 'the Pyrenees'], ['où', 'dit', 'where'], ['j’allais', 'jag åkte', 'I used to go'], ['en vacances', 'på semester', 'on holiday'], ['quand j’étais petit', 'när jag var liten', 'when I was little'], ['me manquent', 'saknar jag', 'I miss'], ['beaucoup', 'verkligen', 'a lot']],
+  }),
+  phrase(D, 'fr-u20-mer-ou-montagne', {
+    prompt: 'Ställ den klassiska franska semesterfrågan: hav eller berg?', promptEn: 'Ask the classic French holiday question: sea or mountains?',
+    fr: 'Vous préférez la mer ou la montagne ?', sv: 'Föredrar ni havet eller bergen?', en: 'Do you prefer the seaside or the mountains?',
+    ipa: '/vu pʁe.fe.ʁe la mɛʁ u la mɔ̃.taɲ/',
+    note: 'En evig fransk samtalsfråga som säger mycket om ens semestervanor. Med **préférer** står bestämd artikel: *la mer*, inte *de la mer*.',
+    noteEn: 'An eternal French small-talk question that says a lot about your holiday habits. **Préférer** takes the definite article: *la mer*.',
+    gloss: [['vous préférez', 'föredrar ni', 'do you prefer'], ['la mer', 'havet', 'the seaside'], ['ou', 'eller', 'or'], ['la montagne', 'bergen', 'the mountains']],
+  }),
+  phrase(D, 'fr-u20-sentier-mal-indique', {
+    prompt: 'Klaga på att stigen upp till toppen är dåligt skyltad', promptEn: 'Complain that the path to the summit is badly signposted',
+    fr: 'Le sentier qui mène au sommet est mal indiqué.', sv: 'Stigen som leder upp till toppen är dåligt skyltad.', en: 'The path to the summit is badly signposted.',
+    ipa: '/lə sɑ̃.tje ki mɛn o sɔ.mɛ ɛ mal ɛ̃.di.ke/',
+    note: '**Qui** är subjekt i relativsatsen (*le sentier mène*). **Mener à** = leda till, och *tous les chemins mènent à Rome*.',
+    noteEn: '**Qui** is the subject of the relative clause (*le sentier mène*). **Mener à** = lead to, as in *tous les chemins mènent à Rome*.',
+    gloss: [['le sentier', 'stigen', 'the path'], ['qui', 'som', 'that'], ['mène', 'leder', 'leads'], ['au sommet', 'upp till toppen', 'to the summit'], ['est', 'är', 'is'], ['mal indiqué', 'dåligt skyltad', 'badly signposted']],
+  }),
+  phrase(D, 'fr-u20-gite-dans-le-lot', {
+    prompt: 'Berätta att ni har hyrt en stuga i en liten by i Lot', promptEn: 'Say you’ve rented a cottage in a small village in the Lot',
+    fr: 'Nous avons loué un gîte dans un petit village du Lot.', sv: 'Vi har hyrt en stuga i en liten by i Lot.', en: 'We’ve rented a cottage in a small village in the Lot.',
+    ipa: '/nu.z‿a.vɔ̃ lwe œ̃ ʒit dɑ̃.z‿œ̃ pə.ti vi.laʒ dy lɔt/',
+    note: 'Departement och floder tar artikel: *le Lot*, *la Dordogne*, och man säger *un village du Lot*. Här uttalas t:et: [lɔt].',
+    noteEn: 'Départements and rivers take an article: *le Lot*, *la Dordogne*, so *un village du Lot*. Here the t is pronounced: [lɔt].',
+    gloss: [['nous avons loué', 'vi har hyrt', 'we’ve rented'], ['un gîte', 'en stuga', 'a cottage'], ['dans un petit village', 'i en liten by', 'in a small village'], ['du Lot', 'i Lot', 'in the Lot']],
+  }),
+  phrase(D, 'fr-u20-il-parait-bretagne', {
+    prompt: 'Säg att det tydligen ska regna hela helgen i Bretagne', promptEn: 'Say it’s apparently going to rain all weekend in Brittany',
+    fr: 'Il paraît qu’il va pleuvoir tout le week-end en Bretagne.', sv: 'Det ska tydligen regna hela helgen i Bretagne.', en: 'Apparently it’s going to rain all weekend in Brittany.',
+    ipa: '/il pa.ʁɛ kil va plø.vwaʁ tu lə wi.kɛnd ɑ̃ bʁə.taɲ/',
+    note: '**Il paraît que** = tydligen, man säger att: man återger något man hört. Bretagne har rykte om sig att vara regnig, men bretonerna försvarar sig gärna.',
+    noteEn: '**Il paraît que** = apparently, they say: you’re passing on what you’ve heard. Brittany has a rainy reputation, which Bretons are quick to dispute.',
+    gloss: [['il paraît', 'tydligen', 'apparently'], ['qu’il va pleuvoir', 'att det ska regna', 'it’s going to rain'], ['tout le week-end', 'hela helgen', 'all weekend'], ['en Bretagne', 'i Bretagne', 'in Brittany']],
+  }),
+  phrase(D, 'fr-u20-en-descendant', {
+    prompt: 'Säg att man genast känner att det blir varmare när man åker söderut', promptEn: 'Say you can feel it getting warmer straight away as you head south',
+    fr: 'En descendant vers le Midi, on sent tout de suite qu’il fait plus chaud.', sv: 'När man åker söderut känner man genast att det blir varmare.', en: 'As you head south, you can feel straight away that it’s warmer.',
+    ipa: '/ɑ̃ de.sɑ̃.dɑ̃ vɛʁ lə mi.di ɔ̃ sɑ̃ tut sɥit kil fɛ ply ʃo/',
+    note: '**Gerundium** *en descendant* (medan man åker ner) uttrycker samtidighet och ersätter en hel bisats. **On** = man, med verbet i tredje person singular.',
+    noteEn: 'The **gerund** *en descendant* (while going down) expresses simultaneity and replaces a whole clause. **On** = one / you, with a third-person singular verb.',
+    gloss: [['en descendant', 'när man åker ner', 'heading down'], ['vers le Midi', 'mot söder', 'towards the south'], ['on sent', 'man känner', 'you feel'], ['tout de suite', 'genast', 'straight away'], ['qu’il fait plus chaud', 'att det är varmare', 'that it’s warmer']],
+  }),
+  phrase(D, 'fr-u20-il-vaut-mieux', {
+    prompt: 'Säg att det är bäst att ge sig av tidigt för att undvika eftermiddagsvärmen', promptEn: 'Say it’s best to set off early to avoid the afternoon heat',
+    fr: 'Il vaut mieux partir tôt pour éviter la chaleur de l’après-midi.', sv: 'Det är bäst att ge sig av tidigt för att slippa eftermiddagsvärmen.', en: 'It’s best to set off early to avoid the afternoon heat.',
+    ipa: '/il vo mjø paʁ.tiʁ to puʁ e.vi.te la ʃa.lœʁ də la.pʁɛ.mi.di/',
+    note: '**Il vaut mieux** + infinitiv = det är bäst att. Med ett eget subjekt blir det *il vaut mieux que* + subjonctif: *il vaut mieux que tu partes tôt*.',
+    noteEn: '**Il vaut mieux** + infinitive = it’s better to. With its own subject it becomes *il vaut mieux que* + subjunctive: *il vaut mieux que tu partes tôt*.',
+    gloss: [['il vaut mieux', 'det är bäst att', 'it’s best to'], ['partir', 'ge sig av', 'set off'], ['tôt', 'tidigt', 'early'], ['pour éviter', 'för att undvika', 'to avoid'], ['la chaleur', 'värmen', 'the heat'], ['de l’après-midi', 'på eftermiddagen', 'of the afternoon']],
+  }),
+];

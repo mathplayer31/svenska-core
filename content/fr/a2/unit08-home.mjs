@@ -1,0 +1,162 @@
+// FranceCore, Unité 8 : Le logement.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT8_DECK = unitDeck({
+  n: 8, slug: 'fr-unit-8-home', sv: 'Boendet', en: 'Home',
+  level: 'A2', section: 'fr-section-3-ma-vie', after: 'fr-unit-7-weather',
+});
+const D = UNIT8_DECK.slug;
+
+export const UNIT8_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u8-appartement', {
+    prompt: 'Bostaden som de flesta har i franska städer', promptEn: 'Where most people live in French cities',
+    fr: 'un appartement', sv: 'en lägenhet', en: 'a flat / an apartment',
+    ipa: '/œ̃.na.paʁ.tə.mɑ̃/',
+    note: 'Maskulinum, och n:et i *un* binds till vokalen: [œ̃n‿apaʁtəmɑ̃]. Stavas med **pp**, till skillnad från engelskans *apartment*.',
+    noteEn: 'Masculine, and the n of *un* links to the vowel: [œ̃n‿apaʁtəmɑ̃]. Spelt with **pp**, unlike English *apartment*.',
+  }),
+  vocab(D, 'fr-u8-piece', {
+    prompt: 'Ett rum, när man räknar rummen i en bostad', promptEn: 'A room, when counting the rooms in a home',
+    fr: 'une pièce', sv: 'ett rum', en: 'a room',
+    ipa: '/yn pjɛs/',
+    note: '**Un deux-pièces** är en tvåa: vardagsrum plus sovrum, kök och badrum räknas inte. Annonser skriver också **T2** eller **F2**.',
+    noteEn: '**Un deux-pièces** is a two-room flat: living room plus bedroom, not counting kitchen and bathroom. Ads also write **T2** or **F2**.',
+  }),
+  vocab(D, 'fr-u8-chambre', {
+    prompt: 'Rummet där man sover', promptEn: 'The room where you sleep',
+    fr: 'la chambre', sv: 'sovrummet', en: 'the bedroom',
+    ipa: '/la ʃɑ̃bʁ/',
+    note: '**Chambre** betyder bara sovrum (eller hotellrum), aldrig rum i allmänhet: det heter *pièce*. **am** är ett nasalljud, [ɑ̃].',
+    noteEn: '**Chambre** only means bedroom (or hotel room), never a room in general: that is *pièce*. Not an English *chamber*: **am** is a nasal vowel, [ɑ̃].',
+  }),
+  vocab(D, 'fr-u8-cuisine', {
+    prompt: 'Rummet där man lagar mat', promptEn: 'The room where you cook',
+    fr: 'la cuisine', sv: 'köket', en: 'the kitchen',
+    ipa: '/la kɥi.zin/',
+    note: 'Betyder också matlagning: **faire la cuisine** = laga mat. **ui** uttalas [ɥi], ett snabbt *y* följt av *i*.',
+    noteEn: 'Also means cooking: **faire la cuisine** = to cook. **ui** is [ɥi], a quick French *u* gliding into *i*.',
+  }),
+  vocab(D, 'fr-u8-salle-de-bains', {
+    prompt: 'Rummet med dusch eller badkar', promptEn: 'The room with the shower or bath',
+    fr: 'la salle de bains', sv: 'badrummet', en: 'the bathroom',
+    ipa: '/la sal də bɛ̃/',
+    note: 'I Frankrike är toaletten ofta ett **eget rum**, skilt från badrummet. Fråga alltså inte efter *la salle de bains* om du bara behöver gå på toa.',
+    noteEn: 'In France the toilet is often a **separate room** from the bathroom. So don’t ask for *la salle de bains* if you just need the loo.',
+  }),
+  vocab(D, 'fr-u8-toilettes', {
+    prompt: 'Toaletten', promptEn: 'The toilet',
+    fr: 'les toilettes', sv: 'toaletten', en: 'the toilet',
+    ipa: '/le twa.lɛt/',
+    note: 'Alltid i plural: *Où sont les toilettes ?* Man säger också **les WC**, uttalat [ve.se].',
+    noteEn: 'Always plural: *Où sont les toilettes ?* People also say **les WC**, pronounced [ve.se].',
+  }),
+  vocab(D, 'fr-u8-salon', {
+    prompt: 'Rummet där man umgås och tittar på tv', promptEn: 'The room where you sit and watch TV',
+    fr: 'le salon', sv: 'vardagsrummet', en: 'the living room',
+    ipa: '/lə sa.lɔ̃/',
+    note: 'Kallas också **le séjour**. Ett *salon de thé* är däremot ett tesalongskafé.',
+    noteEn: 'Also called **le séjour**. A *salon de thé*, however, is a tea room.',
+  }),
+  vocab(D, 'fr-u8-canape', {
+    prompt: 'Möbeln man sitter flera på i vardagsrummet', promptEn: 'The piece of furniture several people sit on',
+    fr: 'le canapé', sv: 'soffan', en: 'the sofa',
+    ipa: '/lə ka.na.pe/',
+    note: '**é** uttalas alltid som ett slutet [e], som i svenskans *se*. En **canapé-lit** är en bäddsoffa.',
+    noteEn: '**é** is always a closed [e], close to the vowel in *say* without the glide. A **canapé-lit** is a sofa bed.',
+  }),
+  vocab(D, 'fr-u8-loyer', {
+    prompt: 'Det man betalar varje månad för att bo', promptEn: 'What you pay each month to live somewhere',
+    fr: 'le loyer', sv: 'hyran', en: 'the rent',
+    ipa: '/lə lwa.je/',
+    note: '**oy** uttalas [waj]. Hyresvärden begär nästan alltid en deposition, **la caution**, och ofta en borgensman, **un garant**.',
+    noteEn: '**oy** is pronounced [waj]. Landlords almost always ask for a deposit, **la caution**, and often a guarantor, **un garant**.',
+  }),
+  vocab(D, 'fr-u8-colocation', {
+    prompt: 'Att dela lägenhet med andra', promptEn: 'Sharing a flat with other people',
+    fr: 'la colocation', sv: 'delat boende / kompisboende', en: 'a flatshare',
+    ipa: '/la kɔ.lɔ.ka.sjɔ̃/',
+    note: 'Vardagligt **la coloc**. Den man delar med är **un colocataire / une colocataire**. **-tion** uttalas [sjɔ̃], aldrig [ʃ].',
+    noteEn: 'Casually **la coloc**. The person you share with is **un colocataire / une colocataire**. **-tion** is [sjɔ̃], never "shun".',
+  }),
+  vocab(D, 'fr-u8-proprietaire', {
+    prompt: 'Den som äger bostaden du hyr', promptEn: 'The person who owns the place you rent',
+    fr: 'le / la propriétaire', sv: 'hyresvärden / ägaren', en: 'the landlord / the owner',
+    ipa: '/lə pʁɔ.pʁi.je.tɛʁ/ /la pʁɔ.pʁi.je.tɛʁ/',
+    note: 'Samma form för båda könen, bara artikeln ändras. Hyresgästen heter **le / la locataire**.',
+    noteEn: 'Same form for both genders, only the article changes. The tenant is **le / la locataire**.',
+  }),
+  vocab(D, 'fr-u8-rez-de-chaussee', {
+    prompt: 'Våningen i gatuplan', promptEn: 'The floor at street level',
+    fr: 'le rez-de-chaussée', sv: 'bottenvåningen', en: 'the ground floor',
+    ipa: '/lə ʁe.də.ʃo.se/',
+    note: 'Fransmännen räknar inte bottenvåningen: **le premier étage** ligger en trappa upp. Maskulinum trots ändelsen **-ée**.',
+    noteEn: 'The French don’t count the ground floor: **le premier étage** is one flight up, as in British English. Masculine despite the **-ée** ending.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u8-deux-pieces', {
+    prompt: 'Säg att du bor i en tvåa tre trappor upp', promptEn: 'Say you live in a two-room flat on the third floor',
+    fr: 'J’habite dans un deux-pièces au troisième étage.', sv: 'Jag bor i en tvåa tre trappor upp.', en: 'I live in a two-room flat on the third floor.',
+    ipa: '/ʒa.bit dɑ̃.zœ̃ dø.pjɛs o tʁwa.zjɛ.me.taʒ/',
+    note: '**Au troisième étage** = tre trappor upp, eftersom bottenvåningen inte räknas. Ordningstal bildas med **-ième**: *deuxième, troisième*.',
+    noteEn: '**Au troisième étage** = three flights up, since the ground floor isn’t counted. Ordinals are formed with **-ième**: *deuxième, troisième*.',
+    gloss: [['j’habite', 'jag bor', 'I live'], ['dans', 'i', 'in'], ['un', 'en', 'a'], ['deux-pièces', 'tvåa', 'two-room flat'], ['au', 'på', 'on the'], ['troisième', 'tredje', 'third'], ['étage', 'våningen', 'floor']],
+  }),
+  phrase(D, 'fr-u8-loyer-charges', {
+    prompt: 'Berätta vad hyran är, avgifter inräknade', promptEn: 'Say what the rent is, bills included',
+    fr: 'Le loyer est de 800 euros par mois, charges comprises.', sv: 'Hyran ligger på 800 euro i månaden, avgifter inräknade.', en: 'The rent is 800 euros a month, including service charges.',
+    ipa: '/lə lwa.je ɛ də ɥi.sɑ̃.zø.ʁo paʁ mwa ʃaʁʒ kɔ̃.pʁiz/',
+    note: 'I annonser står **CC** (*charges comprises*) eller **HC** (*hors charges*, utan avgifter). *Comprises* står i femininum plural för att det syftar på *charges*.',
+    noteEn: 'Ads say **CC** (*charges comprises*) or **HC** (*hors charges*, charges extra). *Comprises* is feminine plural because it agrees with *charges*.',
+    gloss: [['le loyer', 'hyran', 'the rent'], ['est de', 'ligger på', 'is'], ['800 euros', '800 euro', '800 euros'], ['par mois', 'i månaden', 'a month'], ['charges comprises', 'avgifter inräknade', 'charges included']],
+  }),
+  phrase(D, 'fr-u8-demenage', {
+    prompt: 'Säg att ni flyttade förra månaden', promptEn: 'Say you moved house last month',
+    fr: 'Nous avons déménagé le mois dernier.', sv: 'Vi flyttade förra månaden.', en: 'We moved house last month.',
+    ipa: '/nu.za.vɔ̃ de.me.na.ʒe lə mwa dɛʁ.nje/',
+    note: '**Passé composé** (*avoir* + perfekt particip) används där svenskan har preteritum. **Déménager** gäller bara att flytta bostad.',
+    noteEn: 'The **passé composé** (*avoir* + past participle) is used where English has the simple past. **Déménager** only means moving house.',
+    gloss: [['nous', 'vi', 'we'], ['avons déménagé', 'flyttade', 'moved house'], ['le mois dernier', 'förra månaden', 'last month']],
+  }),
+  phrase(D, 'fr-u8-cherche-coloc', {
+    prompt: 'Säg att du letar efter ett delat boende nära universitetet', promptEn: 'Say you’re looking for a flatshare near the university',
+    fr: 'Je cherche une colocation près de la fac.', sv: 'Jag letar efter ett delat boende nära universitetet.', en: 'I’m looking for a flatshare near the uni.',
+    ipa: '/ʒə ʃɛʁʃ yn kɔ.lɔ.ka.sjɔ̃ pʁɛ də la fak/',
+    note: '**Chercher** tar direkt objekt: inget ord för *efter* eller *for*. **La fac** är kortform för *la faculté*, universitetet.',
+    noteEn: '**Chercher** takes a direct object: no word for *for*. **La fac** is short for *la faculté*, the university.',
+    gloss: [['je', 'jag', 'I'], ['cherche', 'letar efter', 'am looking for'], ['une colocation', 'ett delat boende', 'a flatshare'], ['près de', 'nära', 'near'], ['la fac', 'universitetet', 'the uni']],
+  }),
+  phrase(D, 'fr-u8-caf', {
+    prompt: 'Säg att CAF hjälper dig att betala hyran', promptEn: 'Say the CAF helps you pay the rent',
+    fr: 'La CAF m’aide à payer le loyer.', sv: 'CAF hjälper mig att betala hyran.', en: 'The CAF helps me pay the rent.',
+    ipa: '/la kaf mɛd a pe.je lə lwa.je/',
+    note: '**La CAF** (*Caisse d’allocations familiales*) betalar ut bostadsbidrag, **l’APL**, även till studenter. Uttalas som ett ord, [kaf]. **M’** (= *me*) står före verbet.',
+    noteEn: '**La CAF** (*Caisse d’allocations familiales*) pays housing benefit, **l’APL**, students included. Said as one word, [kaf]. **M’** (= *me*) goes before the verb.',
+    gloss: [['la CAF', 'CAF', 'the CAF'], ['m’aide', 'hjälper mig', 'helps me'], ['à', 'att', 'to'], ['payer', 'betala', 'pay'], ['le loyer', 'hyran', 'the rent']],
+  }),
+  phrase(D, 'fr-u8-machine-a-laver', {
+    prompt: 'Säg att det finns en tvättmaskin i badrummet', promptEn: 'Say there is a washing machine in the bathroom',
+    fr: 'Il y a une machine à laver dans la salle de bains.', sv: 'Det finns en tvättmaskin i badrummet.', en: 'There’s a washing machine in the bathroom.',
+    ipa: '/il i a yn ma.ʃin a la.ve dɑ̃ la sal də bɛ̃/',
+    note: 'Tvättstugor är ovanliga i Frankrike: tvättmaskinen står i badrummet eller köket. **À** anger vad saken är till för: *une machine à laver*, *une tasse à café*.',
+    noteEn: 'Shared laundry rooms are rare in France: the machine sits in the bathroom or kitchen. **À** shows what a thing is for: *une machine à laver*, *une tasse à café*.',
+    gloss: [['il y a', 'det finns', 'there is'], ['une machine à laver', 'en tvättmaskin', 'a washing machine'], ['dans', 'i', 'in'], ['la salle de bains', 'badrummet', 'the bathroom']],
+  }),
+  phrase(D, 'fr-u8-nouveau-canape', {
+    prompt: 'Säg att ni ska köpa en ny soffa', promptEn: 'Say you’re going to buy a new sofa',
+    fr: 'On va acheter un nouveau canapé.', sv: 'Vi ska köpa en ny soffa.', en: 'We’re going to buy a new sofa.',
+    ipa: '/ɔ̃ va aʃ.te œ̃ nu.vo ka.na.pe/',
+    note: '**Futur proche**: *aller* + infinitiv, som svenskans *ska*. **Nouveau** står före substantivet och blir **nouvel** framför vokal: *un nouvel appartement*.',
+    noteEn: '**Futur proche**: *aller* + infinitive, like *going to*. **Nouveau** goes before the noun and becomes **nouvel** before a vowel: *un nouvel appartement*.',
+    gloss: [['on', 'vi', 'we'], ['va acheter', 'ska köpa', 'are going to buy'], ['un', 'en', 'a'], ['nouveau', 'ny', 'new'], ['canapé', 'soffa', 'sofa']],
+  }),
+  phrase(D, 'fr-u8-je-lai-mis', {
+    prompt: 'Svara att du ställde kartongen i sovrummet', promptEn: 'Answer that you put the box in the bedroom',
+    fr: 'Le carton ? Je l’ai mis dans la chambre.', sv: 'Kartongen? Jag ställde den i sovrummet.', en: 'The box? I put it in the bedroom.',
+    ipa: '/lə kaʁ.tɔ̃ ʒə le mi dɑ̃ la ʃɑ̃bʁ/',
+    note: 'Objektspronomenet står **före hjälpverbet**: *je l’ai mis*, inte *j’ai mis le*. **Un carton** är en kartong, inte en tecknad film.',
+    noteEn: 'The object pronoun goes **before the auxiliary**: *je l’ai mis*, never *j’ai mis le*. **Un carton** is a cardboard box, not a cartoon.',
+    gloss: [['le carton', 'kartongen', 'the box'], ['je', 'jag', 'I'], ['l’', 'den', 'it'], ['ai mis', 'ställde', 'put'], ['dans', 'i', 'in'], ['la chambre', 'sovrummet', 'the bedroom']],
+  }),
+];

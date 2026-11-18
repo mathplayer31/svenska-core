@@ -1,0 +1,162 @@
+// FranceCore, Unité 7 : Le temps et les saisons. Il fait beau / froid, il pleut, saisons, mois.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT7_DECK = unitDeck({
+  n: 7, slug: 'fr-unit-7-weather', sv: 'Väder och årstider', en: 'Weather and seasons',
+  level: 'A1', section: 'fr-section-2-vie-quotidienne', after: 'fr-unit-6-transport',
+});
+const D = UNIT7_DECK.slug;
+
+export const UNIT7_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u7-le-temps', {
+    prompt: 'Vädret, men också tiden', promptEn: 'The weather, but also time',
+    fr: 'le temps', sv: 'vädret / tiden', en: 'the weather / time',
+    ipa: '/lə tɑ̃/',
+    note: 'Samma ord för väder och tid: *Quel temps fait-il ?* (hur är vädret?) och *Je n’ai pas le temps* (jag har inte tid). **p** och **s** är stumma: [tɑ̃].',
+    noteEn: 'One word for weather and time: *Quel temps fait-il ?* (what’s the weather like?) and *Je n’ai pas le temps* (I don’t have time). The **p** and **s** are silent: [tɑ̃].',
+  }),
+  vocab(D, 'fr-u7-il-fait-beau', {
+    prompt: 'Fint väder', promptEn: 'Nice weather',
+    fr: 'il fait beau', sv: 'det är fint väder', en: 'the weather is nice',
+    ipa: '/il fɛ bo/',
+    note: 'Väder beskrivs med **il fait** + adjektiv, ordagrant ”det gör vackert”. Motsatsen: **il fait mauvais** (det är dåligt väder).',
+    noteEn: 'Weather is described with **il fait** + adjective, literally "it makes beautiful". The opposite: **il fait mauvais** (the weather is bad).',
+  }),
+  vocab(D, 'fr-u7-il-fait-chaud', {
+    prompt: 'Varmt väder', promptEn: 'Hot weather',
+    fr: 'il fait chaud', sv: 'det är varmt', en: 'it’s hot / it’s warm',
+    ipa: '/il fɛ ʃo/',
+    note: 'Om vädret: **il fait chaud**. Om dig själv: **j’ai chaud** (jag är varm), med *avoir*. Säg aldrig *je suis chaud*, det betyder ”jag är taggad” eller värre.',
+    noteEn: 'For the weather: **il fait chaud**. For yourself: **j’ai chaud** (I’m hot), with *avoir*. Never say *je suis chaud*: it means "I’m up for it", or worse.',
+  }),
+  vocab(D, 'fr-u7-il-fait-froid', {
+    prompt: 'Kallt väder', promptEn: 'Cold weather',
+    fr: 'il fait froid', sv: 'det är kallt', en: 'it’s cold',
+    ipa: '/il fɛ fʁwa/',
+    note: 'Samma mönster: **il fait froid**, men **j’ai froid** (jag fryser). Slutets **d** är stumt.',
+    noteEn: 'Same pattern: **il fait froid**, but **j’ai froid** (I’m cold). The final **d** is silent.',
+  }),
+  vocab(D, 'fr-u7-il-pleut', {
+    prompt: 'Det regnar', promptEn: 'It’s raining',
+    fr: 'il pleut', sv: 'det regnar', en: 'it’s raining',
+    ipa: '/il plø/',
+    note: 'Ett eget verb, *pleuvoir*, inte *il fait*. Regnet heter **la pluie**. **eu** uttalas [ø] och t:et är stumt.',
+    noteEn: 'A verb of its own, *pleuvoir*, not *il fait*. Rain is **la pluie**. **eu** is [ø] and the t is silent.',
+  }),
+  vocab(D, 'fr-u7-il-neige', {
+    prompt: 'Det snöar', promptEn: 'It’s snowing',
+    fr: 'il neige', sv: 'det snöar', en: 'it’s snowing',
+    ipa: '/il nɛʒ/',
+    note: 'Snön heter **la neige**. I större delen av Frankrike är snö sällsynt utanför bergen, så lite snö kan stoppa trafiken.',
+    noteEn: 'Snow is **la neige**. In most of France snow is rare outside the mountains, so a little of it can bring traffic to a halt.',
+  }),
+  vocab(D, 'fr-u7-le-soleil', {
+    prompt: 'Solen', promptEn: 'The sun',
+    fr: 'le soleil', sv: 'solen', en: 'the sun',
+    ipa: '/lə sɔ.lɛj/',
+    note: 'Maskulint på franska. **-eil** uttalas [ɛj]. *Il y a du soleil* = det är soligt.',
+    noteEn: 'Masculine in French. **-eil** is [ɛj]. *Il y a du soleil* = it’s sunny.',
+  }),
+  vocab(D, 'fr-u7-le-printemps', {
+    prompt: 'Årstiden efter vintern', promptEn: 'The season after winter',
+    fr: 'le printemps', sv: 'våren', en: 'spring',
+    ipa: '/lə pʁɛ̃.tɑ̃/',
+    note: 'Den enda årstiden som tar **au**: *au printemps*. De andra tar *en*. Två nasaler, och slutets p och s är stumma: [pʁɛ̃tɑ̃].',
+    noteEn: 'The only season that takes **au**: *au printemps*. The others take *en*. Two nasal vowels, and the final p and s are silent: [pʁɛ̃tɑ̃].',
+  }),
+  vocab(D, 'fr-u7-lete', {
+    prompt: 'Den varmaste årstiden', promptEn: 'The warmest season',
+    fr: 'l’été', sv: 'sommaren', en: 'summer',
+    ipa: '/le.te/',
+    note: 'Maskulint trots slutet på **-é**: *un bel été*. ”På sommaren” heter **en été**, med bindning [ɑ̃nete].',
+    noteEn: 'Masculine despite the **-é** ending: *un bel été*. "In summer" is **en été**, with liaison [ɑ̃nete].',
+  }),
+  vocab(D, 'fr-u7-lautomne', {
+    prompt: 'Årstiden när löven faller', promptEn: 'The season when the leaves fall',
+    fr: 'l’automne', sv: 'hösten', en: 'autumn / fall',
+    ipa: '/lo.tɔn/',
+    note: '**m** är stumt: [otɔn]. *En automne* = på hösten. I september kommer **la rentrée**, när skolan och arbetslivet drar igång igen.',
+    noteEn: 'The **m** is silent: [otɔn]. *En automne* = in autumn. September brings **la rentrée**, when school and working life start up again.',
+  }),
+  vocab(D, 'fr-u7-lhiver', {
+    prompt: 'Den kallaste årstiden', promptEn: 'The coldest season',
+    fr: 'l’hiver', sv: 'vintern', en: 'winter',
+    ipa: '/li.vɛʁ/',
+    note: '**h** är stumt, därför **l’**hiver och bindning i **en‿hiver** [ɑ̃nivɛʁ]. Alla årstider är maskulina.',
+    noteEn: 'The **h** is silent, hence **l’**hiver and the liaison in **en‿hiver** [ɑ̃nivɛʁ]. All the seasons are masculine.',
+  }),
+  vocab(D, 'fr-u7-les-mois', {
+    prompt: 'Tre månader: den första, den sjunde och den åttonde', promptEn: 'Three months: the first, the seventh and the eighth',
+    fr: 'janvier / juillet / août', sv: 'januari / juli / augusti', en: 'January / July / August',
+    ipa: '/ʒɑ̃.vje/ /ʒɥi.jɛ/ /ut/',
+    note: 'Månader skrivs med **liten** bokstav och tar **en**: *en juillet*. **Août** är kort: [ut] eller [u].',
+    noteEn: 'Months take a **small** letter in French and use **en**: *en juillet*. **Août** is short: [ut] or [u].',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u7-quel-temps-fait-il', {
+    prompt: 'Fråga hur vädret är', promptEn: 'Ask what the weather is like',
+    fr: 'Quel temps fait-il ?', sv: 'Hur är vädret?', en: 'What’s the weather like?',
+    ipa: '/kɛl tɑ̃ fɛ.t‿il/',
+    note: 'Omvänd ordföljd med bindestreck: **fait-il**. t:et i *fait* hörs här tack vare bindningen: [fɛtil]. Ledigare: *Il fait quel temps ?*',
+    noteEn: 'Inverted word order with a hyphen: **fait-il**. The t of *fait* is heard here through liaison: [fɛtil]. Casual: *Il fait quel temps ?*',
+    gloss: [['quel', 'vilket', 'what'], ['temps', 'väder', 'weather'], ['fait-il', 'är det', 'is it']],
+  }),
+  phrase(D, 'fr-u7-il-fait-beau-aujourdhui', {
+    prompt: 'Säg att det är fint väder i dag', promptEn: 'Say the weather is nice today',
+    fr: 'Il fait beau aujourd’hui.', sv: 'Det är fint väder i dag.', en: 'The weather is nice today.',
+    ipa: '/il fɛ bo o.ʒuʁ.dɥi/',
+    note: '**Aujourd’hui** skrivs med apostrof inuti ordet. Tidsordet står oftast sist, men kan också stå först: *Aujourd’hui, il fait beau.*',
+    noteEn: '**Aujourd’hui** has an apostrophe inside the word. The time word usually comes last, but can also go first: *Aujourd’hui, il fait beau.*',
+    gloss: [['il', 'det', 'it'], ['fait', 'är', 'is'], ['beau', 'fint väder', 'nice weather'], ['aujourd’hui', 'i dag', 'today']],
+  }),
+  phrase(D, 'fr-u7-il-pleut-a-paris', {
+    prompt: 'Säg att det regnar i Paris', promptEn: 'Say it’s raining in Paris',
+    fr: 'Il pleut à Paris.', sv: 'Det regnar i Paris.', en: 'It’s raining in Paris.',
+    ipa: '/il plø a pa.ʁi/',
+    note: 'Presens täcker både ”regnar” och ”håller på att regna”: franskan har ingen *-ing*-form. **Paris** uttalas [paʁi], s:et är stumt.',
+    noteEn: 'The present covers both "rains" and "is raining": French has no *-ing* form. **Paris** is [paʁi], the s is silent.',
+    gloss: [['il', 'det', 'it'], ['pleut', 'regnar', 'is raining'], ['à', 'i', 'in'], ['Paris', 'Paris', 'Paris']],
+  }),
+  phrase(D, 'fr-u7-en-hiver-il-fait-froid-en-suede', {
+    prompt: 'Berätta hur vintern är i Sverige', promptEn: 'Say what winter is like in Sweden',
+    fr: 'En hiver, il fait très froid en Suède.', sv: 'På vintern är det mycket kallt i Sverige.', en: 'In winter, it’s very cold in Sweden.',
+    ipa: '/ɑ̃.n‿i.vɛʁ il fɛ tʁɛ fʁwa ɑ̃ sɥɛd/',
+    note: 'Två olika **en**: *en hiver* (på vintern) och *en Suède* (i Sverige, ett feminint land). Ett perfekt samtalsämne med fransmän, som ofta frågar om kylan.',
+    noteEn: 'Two different **en**: *en hiver* (in winter) and *en Suède* (in Sweden, a feminine country). A perfect small-talk topic: French people often ask about the cold.',
+    gloss: [['en', 'på', 'in'], ['hiver', 'vintern', 'winter'], ['il', 'det', 'it'], ['fait', 'är', 'is'], ['très', 'mycket', 'very'], ['froid', 'kallt', 'cold'], ['en', 'i', 'in'], ['Suède', 'Sverige', 'Sweden']],
+  }),
+  phrase(D, 'fr-u7-au-printemps-il-fait-doux', {
+    prompt: 'Säg att det är milt på våren', promptEn: 'Say it’s mild in spring',
+    fr: 'Au printemps, il fait doux.', sv: 'På våren är det milt.', en: 'In spring, it’s mild.',
+    ipa: '/o pʁɛ̃.tɑ̃ il fɛ du/',
+    note: '**Au** printemps men **en** été, **en** automne, **en** hiver. **Doux** betyder både ”milt” om väder och ”mjuk” eller ”söt”, och x:et är stumt.',
+    noteEn: '**Au** printemps but **en** été, **en** automne, **en** hiver. **Doux** means "mild" for weather and also "soft" or "sweet", and the x is silent.',
+    gloss: [['au', 'på', 'in'], ['printemps', 'våren', 'spring'], ['il', 'det', 'it'], ['fait', 'är', 'is'], ['doux', 'milt', 'mild']],
+  }),
+  phrase(D, 'fr-u7-en-aout-paris-est-vide', {
+    prompt: 'Berätta vad som händer i Paris i augusti', promptEn: 'Say what happens to Paris in August',
+    fr: 'En août, Paris est vide.', sv: 'I augusti är Paris tomt.', en: 'In August, Paris is empty.',
+    ipa: '/ɑ̃.n‿ut pa.ʁi ɛ vid/',
+    note: 'I augusti åker många fransmän på semester, ofta till havet, och en del bagerier och restauranger stänger. Bindning: *en‿août* [ɑ̃nut].',
+    noteEn: 'In August many French people go on holiday, often to the seaside, and some bakeries and restaurants close. Liaison: *en‿août* [ɑ̃nut].',
+    gloss: [['en', 'i', 'in'], ['août', 'augusti', 'August'], ['Paris', 'Paris', 'Paris'], ['est', 'är', 'is'], ['vide', 'tomt', 'empty']],
+  }),
+  phrase(D, 'fr-u7-il-va-pleuvoir-demain', {
+    prompt: 'Säg att det ska regna i morgon', promptEn: 'Say it’s going to rain tomorrow',
+    fr: 'Il va pleuvoir demain.', sv: 'Det ska regna i morgon.', en: 'It’s going to rain tomorrow.',
+    ipa: '/il va plø.vwaʁ də.mɛ̃/',
+    note: 'Nära framtid: **aller** + infinitiv, precis som engelskans *going to*. Samma **demain** som i *à demain*.',
+    noteEn: 'Near future: **aller** + infinitive, just like English *going to*. Same **demain** as in *à demain*.',
+    gloss: [['il', 'det', 'it'], ['va', 'ska', 'is going to'], ['pleuvoir', 'regna', 'rain'], ['demain', 'i morgon', 'tomorrow']],
+  }),
+  phrase(D, 'fr-u7-jaime-lautomne', {
+    prompt: 'Säg att du tycker om hösten', promptEn: 'Say you like autumn',
+    fr: 'J’aime l’automne.', sv: 'Jag tycker om hösten.', en: 'I like autumn.',
+    ipa: '/ʒɛm lo.tɔn/',
+    note: 'Franskan använder **bestämd artikel** för det man tycker om i allmänhet: *j’aime **le** café, j’aime **l’**automne*. Engelskan har ingen artikel här.',
+    noteEn: 'French uses the **definite article** for things you like in general: *j’aime **le** café, j’aime **l’**automne*. English has no article here.',
+    gloss: [['j’aime', 'jag tycker om', 'I like'], ['l’automne', 'hösten', 'autumn']],
+  }),
+];

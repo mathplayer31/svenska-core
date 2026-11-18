@@ -1,0 +1,162 @@
+// FranceCore, Unité 23 : Raconter (imparfait / passé composé, il était une fois, souvenirs).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT23_DECK = unitDeck({
+  n: 23, slug: 'fr-unit-23-stories', sv: 'Att berätta', en: 'Telling stories',
+  level: 'B1', section: 'fr-section-6-comprendre', after: 'fr-unit-22-emotions',
+});
+const D = UNIT23_DECK.slug;
+
+export const UNIT23_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u23-il-etait-une-fois', {
+    prompt: 'Sagans klassiska början', promptEn: 'The classic opening of a fairy tale',
+    fr: 'il était une fois', sv: 'det var en gång', en: 'once upon a time',
+    ipa: '/i.l‿e.tɛ.t‿yn fwa/',
+    note: 'Ordagrant ”det var en gång”, i **imparfait**, sagans tempus för bakgrund. Sagor slutar ofta med *ils vécurent heureux et eurent beaucoup d’enfants*, i passé simple, ett skriftspråkstempus.',
+    noteEn: 'Literally "it was one time", in the **imparfait**, the tense of background. Tales often end with *ils vécurent heureux et eurent beaucoup d’enfants*, in the passé simple, a written-only tense.',
+  }),
+  vocab(D, 'fr-u23-conte', {
+    prompt: 'En saga', promptEn: 'A fairy tale',
+    fr: 'un conte', sv: 'en saga', en: 'a tale / a fairy tale',
+    ipa: '/œ̃ kɔ̃t/',
+    note: '*Un conte de fées* = en fésaga. **Conte**, **compte** (konto, räkning) och **comte** (greve) uttalas alla [kɔ̃t].',
+    noteEn: '*Un conte de fées* = a fairy tale. **Conte**, **compte** (account) and **comte** (count) are all pronounced [kɔ̃t].',
+  }),
+  vocab(D, 'fr-u23-histoire', {
+    prompt: 'En berättelse, eller det förflutna som skolämne', promptEn: 'A story, or the past as a school subject',
+    fr: 'une histoire', sv: 'en historia / en berättelse', en: 'a story / history',
+    ipa: '/yn is.twaʁ/',
+    note: 'Som svenskans *historia* betyder ordet både berättelse och historia. *Raconter des histoires* kan också betyda att hitta på, ljuga: *arrête de raconter des histoires !*',
+    noteEn: 'Means both story and history. *Raconter des histoires* can also mean to make things up: *arrête de raconter des histoires !* (stop telling tales!)',
+  }),
+  vocab(D, 'fr-u23-raconter', {
+    prompt: 'Återge något som hänt', promptEn: 'Tell what happened',
+    fr: 'raconter', sv: 'berätta', en: 'to tell / to recount',
+    ipa: '/ʁa.kɔ̃.te/',
+    note: '*Raconter quelque chose à quelqu’un*: *raconte-moi !* = berätta! För nyheter och fakta säger man hellre **dire**: *il m’a dit que...*',
+    noteEn: '*Raconter quelque chose à quelqu’un*: *raconte-moi !* = tell me! For facts and news **dire** is more usual: *il m’a dit que...*',
+  }),
+  vocab(D, 'fr-u23-souvenir', {
+    prompt: 'Något man minns', promptEn: 'Something you remember',
+    fr: 'un souvenir', sv: 'ett minne', en: 'a memory',
+    ipa: '/œ̃ suv.niʁ/',
+    note: 'Betyder först och främst *minne*: *j’ai de bons souvenirs de Paris*. Det kan också vara en souvenir man köper, men *minne* i datorn heter *la mémoire*.',
+    noteEn: 'First and foremost a *memory*: *j’ai de bons souvenirs de Paris*. It can also be a souvenir, but computer memory is *la mémoire*.',
+  }),
+  vocab(D, 'fr-u23-se-souvenir-de', {
+    prompt: 'Minnas något', promptEn: 'Remember something',
+    fr: 'se souvenir de', sv: 'minnas / komma ihåg', en: 'to remember',
+    ipa: '/sə suv.niʁ də/',
+    note: 'Reflexivt och med **de**: *je me souviens de toi*. Synonymen **se rappeler** tar direkt objekt: *je me rappelle ce jour*. Quebecs valspråk är *Je me souviens*.',
+    noteEn: 'Reflexive and with **de**: *je me souviens de toi*. The synonym **se rappeler** takes a direct object: *je me rappelle ce jour*. Quebec’s motto is *Je me souviens*.',
+  }),
+  vocab(D, 'fr-u23-quand-jetais-petit', {
+    prompt: 'Inled ett barndomsminne (man / kvinna)', promptEn: 'Start a childhood memory (man / woman)',
+    fr: 'quand j’étais petit / petite', sv: 'när jag var liten', en: 'when I was little',
+    ipa: '/kɑ̃ ʒe.tɛ pə.ti/ /pə.tit/',
+    note: 'Alltid **imparfait**: barndomen är ett tillstånd som varade, inte en händelse. Det som följer står också i imparfait om det var vanor: *je jouais dehors*.',
+    noteEn: 'Always the **imparfait**: childhood is a lasting state, not an event. What follows is also in the imparfait if it was a habit: *je jouais dehors*.',
+  }),
+  vocab(D, 'fr-u23-autrefois', {
+    prompt: 'Förr i tiden', promptEn: 'In the old days',
+    fr: 'autrefois', sv: 'förr i tiden / förr', en: 'in the past / formerly',
+    ipa: '/o.tʁə.fwa/',
+    note: 'Ordagrant ”en annan gång”. Utlöser nästan alltid **imparfait**: *autrefois, on se chauffait au bois*. Vardagligt säger man ofta *avant*.',
+    noteEn: 'Literally "another time". Almost always triggers the **imparfait**: *autrefois, on se chauffait au bois*. In speech people often just say *avant*.',
+  }),
+  vocab(D, 'fr-u23-il-y-a-longtemps', {
+    prompt: 'För länge sedan', promptEn: 'A long time ago',
+    fr: 'il y a longtemps', sv: 'för länge sedan', en: 'a long time ago',
+    ipa: '/il i.a lɔ̃.tɑ̃/',
+    note: '**Il y a** + tid = för ... sedan: *il y a trois ans* = för tre år sedan. Förväxla inte med *depuis* (sedan, i), som används för något som pågår.',
+    noteEn: '**Il y a** + time = ago: *il y a trois ans* = three years ago. Don’t confuse it with *depuis* (since, for), used for something still going on.',
+  }),
+  vocab(D, 'fr-u23-soudain', {
+    prompt: 'Plötsligt, när något oväntat händer', promptEn: 'Suddenly, when something unexpected happens',
+    fr: 'soudain / tout à coup', sv: 'plötsligt / med ens', en: 'suddenly / all of a sudden',
+    ipa: '/su.dɛ̃/ /tu.t‿a ku/',
+    note: 'Signalordet för **passé composé**: bakgrunden står i imparfait, och *soudain* inleder händelsen som bryter in. *Tout à coup* är något vanligare i talspråk.',
+    noteEn: 'The signal word for the **passé composé**: the background is in the imparfait, and *soudain* introduces the event that breaks in. *Tout à coup* is a little more common in speech.',
+  }),
+  vocab(D, 'fr-u23-a-ce-moment-la', {
+    prompt: 'I just det ögonblicket', promptEn: 'At that very moment',
+    fr: 'à ce moment-là', sv: 'i det ögonblicket / just då', en: 'at that moment / just then',
+    ipa: '/a sə mɔ.mɑ̃ la/',
+    note: '**-là** pekar bort från nuet: *ce jour-là* = den dagen, *à cette époque-là* = på den tiden. Utan *-là* betyder *en ce moment* ”just nu”.',
+    noteEn: '**-là** points away from the present: *ce jour-là* = that day, *à cette époque-là* = in those days. Without it, *en ce moment* means "right now".',
+  }),
+  vocab(D, 'fr-u23-dabord-ensuite-enfin', {
+    prompt: 'Ordna stegen i en berättelse', promptEn: 'Order the steps of a story',
+    fr: 'd’abord / ensuite / enfin', sv: 'först / sedan / till slut', en: 'first / then / finally',
+    ipa: '/da.bɔʁ/ /ɑ̃.sɥit/ /ɑ̃.fɛ̃/',
+    note: '**Enfin** betyder *äntligen* eller *till slut*, men också ett irriterat ”alltså” i talspråk: *Enfin, qu’est-ce que tu fais ?* Mellanleden kan också vara **puis**.',
+    noteEn: '**Enfin** means *finally* or *at last*, but in speech also an exasperated "honestly": *Enfin, qu’est-ce que tu fais ?* The middle step can also be **puis**.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u23-princesse-chateau', {
+    prompt: 'Börja en saga om en prinsessa som bodde i ett slott', promptEn: 'Start a fairy tale about a princess who lived in a castle',
+    fr: 'Il était une fois une princesse qui vivait dans un château.', sv: 'Det var en gång en prinsessa som bodde i ett slott.', en: 'Once upon a time there was a princess who lived in a castle.',
+    ipa: '/i.l‿e.tɛ.t‿yn fwa yn pʁɛ̃.sɛs ki vi.vɛ dɑ̃.z‿œ̃ ʃa.to/',
+    note: 'Både *était* och *vivait* står i **imparfait**: de målar upp scenen innan något händer. **Vivre** = leva, bo (varaktigt).',
+    noteEn: 'Both *était* and *vivait* are in the **imparfait**: they paint the scene before anything happens. **Vivre** = to live (in a lasting way).',
+    gloss: [['il était une fois', 'det var en gång', 'once upon a time there was'], ['une princesse', 'en prinsessa', 'a princess'], ['qui', 'som', 'who'], ['vivait', 'bodde', 'lived'], ['dans un château', 'i ett slott', 'in a castle']],
+  }),
+  phrase(D, 'fr-u23-etes-chez-grand-mere', {
+    prompt: 'Berätta (kvinna) att du som liten tillbringade alla somrar hos mormor i Normandie', promptEn: 'Say (woman) that as a child you spent every summer at your grandmother’s in Normandy',
+    fr: 'Quand j’étais petite, je passais tous mes étés chez ma grand-mère en Normandie.', sv: 'När jag var liten tillbringade jag alla somrar hos min mormor i Normandie.', en: 'When I was little, I spent every summer at my grandmother’s in Normandy.',
+    ipa: '/kɑ̃ ʒe.tɛ pə.tit ʒə pa.sɛ tu me.z‿e.te ʃe ma ɡʁɑ̃.mɛʁ ɑ̃ nɔʁ.mɑ̃.di/',
+    note: '**Imparfait** *je passais* för en upprepad vana. Franskan skiljer inte på mormor och farmor: båda är **grand-mère**, och vardagligt *mamie*.',
+    noteEn: 'The **imparfait** *je passais* for a repeated habit, like *used to*. **Chez** = at someone’s place: *chez ma grand-mère*.',
+    gloss: [['quand j’étais petite', 'när jag var liten', 'when I was little'], ['je passais', 'tillbringade jag', 'I spent'], ['tous mes étés', 'alla mina somrar', 'every summer'], ['chez ma grand-mère', 'hos min mormor', 'at my grandmother’s'], ['en Normandie', 'i Normandie', 'in Normandy']],
+  }),
+  phrase(D, 'fr-u23-je-dormais-quand', {
+    prompt: 'Säg att du sov när telefonen ringde', promptEn: 'Say you were sleeping when the phone rang',
+    fr: 'Je dormais quand le téléphone a sonné.', sv: 'Jag sov när telefonen ringde.', en: 'I was sleeping when the phone rang.',
+    ipa: '/ʒə dɔʁ.mɛ kɑ̃ lə te.le.fɔn a sɔ.ne/',
+    note: 'Grundmönstret: **imparfait** för det som pågick (*je dormais*), **passé composé** för det som avbröt (*a sonné*). Svenskan har *sov* och *ringde* i samma tempus.',
+    noteEn: 'The basic pattern: **imparfait** for what was going on (*je dormais*), **passé composé** for what interrupted it (*a sonné*), just like *was sleeping* vs *rang*.',
+    gloss: [['je dormais', 'jag sov', 'I was sleeping'], ['quand', 'när', 'when'], ['le téléphone', 'telefonen', 'the phone'], ['a sonné', 'ringde', 'rang']],
+  }),
+  phrase(D, 'fr-u23-soudain-la-voiture', {
+    prompt: 'Berätta att det regnade och var mörkt, och plötsligt stannade bilen', promptEn: 'Say it was raining and dark, and suddenly the car stopped',
+    fr: 'Il pleuvait, il faisait nuit, et soudain la voiture s’est arrêtée.', sv: 'Det regnade, det var mörkt, och plötsligt stannade bilen.', en: 'It was raining, it was dark, and suddenly the car stopped.',
+    ipa: '/il plø.vɛ il fə.zɛ nɥi e su.dɛ̃ la vwa.tyʁ sɛ.t‿a.ʁɛ.te/',
+    note: 'Två bakgrunder i imparfait, sedan händelsen i passé composé efter *soudain*. **Faisait** uttalas [fəzɛ], inte [fɛzɛ]. *S’est arrêtée* böjs efter *la voiture*.',
+    noteEn: 'Two background verbs in the imparfait, then the event in the passé composé after *soudain*. **Faisait** is pronounced [fəzɛ]. *S’est arrêtée* agrees with *la voiture*.',
+    gloss: [['il pleuvait', 'det regnade', 'it was raining'], ['il faisait nuit', 'det var mörkt', 'it was dark'], ['et', 'och', 'and'], ['soudain', 'plötsligt', 'suddenly'], ['la voiture', 'bilen', 'the car'], ['s’est arrêtée', 'stannade', 'stopped']],
+  }),
+  phrase(D, 'fr-u23-train-deja-parti', {
+    prompt: 'Säg att tåget redan hade gått när du kom till stationen', promptEn: 'Say the train had already left when you got to the station',
+    fr: 'Quand je suis arrivé à la gare, le train était déjà parti.', sv: 'När jag kom till stationen hade tåget redan gått.', en: 'When I got to the station, the train had already left.',
+    ipa: '/kɑ̃ ʒə sɥi.z‿a.ʁi.ve a la ɡaʁ lə tʁɛ̃ e.tɛ de.ʒa paʁ.ti/',
+    note: '**Plus-que-parfait** (*était parti*) för det som hade hänt före en annan händelse i dåtid, precis som svenskt pluskvamperfekt. Hjälpverbet står i imparfait.',
+    noteEn: 'The **plus-que-parfait** (*était parti*) for what had happened before another past event, just like the English past perfect. The auxiliary is in the imparfait.',
+    gloss: [['quand', 'när', 'when'], ['je suis arrivé', 'jag kom', 'I got'], ['à la gare', 'till stationen', 'to the station'], ['le train', 'tåget', 'the train'], ['était déjà parti', 'hade redan gått', 'had already left']],
+  }),
+  phrase(D, 'fr-u23-jour-ou-on-sest-rencontres', {
+    prompt: 'Fråga din partner om hen minns dagen då ni träffades', promptEn: 'Ask your partner if they remember the day you met',
+    fr: 'Tu te souviens du jour où on s’est rencontrés ?', sv: 'Minns du dagen då vi träffades?', en: 'Do you remember the day we met?',
+    ipa: '/ty tə su.vjɛ̃ dy ʒuʁ u ɔ̃ sɛ ʁɑ̃.kɔ̃.tʁe/',
+    note: '**Où** syftar också på tid: *le jour où*, *l’année où*. Engelskan säger *the day (that)*, men franskan kräver *où*, aldrig *quand*.',
+    noteEn: '**Où** also refers to time: *le jour où*, *l’année où*. English says *the day (that)*, but French requires *où*, never *quand*.',
+    gloss: [['tu te souviens', 'minns du', 'do you remember'], ['du jour', 'dagen', 'the day'], ['où', 'då', 'when'], ['on s’est rencontrés', 'vi träffades', 'we met']],
+  }),
+  phrase(D, 'fr-u23-grand-pere-racontait', {
+    prompt: 'Säg att din farfar alltid brukade berätta samma historia', promptEn: 'Say your grandfather always used to tell the same story',
+    fr: 'Mon grand-père nous racontait toujours la même histoire.', sv: 'Min farfar berättade alltid samma historia för oss.', en: 'My grandfather always used to tell us the same story.',
+    ipa: '/mɔ̃ ɡʁɑ̃.pɛʁ nu ʁa.kɔ̃.tɛ tu.ʒuʁ la mɛm is.twaʁ/',
+    note: '**Imparfait** med *toujours* för en vana: *il racontait* = han brukade berätta. **Nous** (för oss) står före verbet, utan preposition.',
+    noteEn: 'The **imparfait** with *toujours* for a habit: *il racontait* = he used to tell. **Nous** (to us) goes before the verb, with no preposition.',
+    gloss: [['mon grand-père', 'min farfar', 'my grandfather'], ['nous', 'för oss', 'us'], ['racontait', 'berättade', 'used to tell'], ['toujours', 'alltid', 'always'], ['la même histoire', 'samma historia', 'the same story']],
+  }),
+  phrase(D, 'fr-u23-comme-ca-que', {
+    prompt: 'Avsluta din berättelse: det var så du blev kär i Frankrike', promptEn: 'End your story: that’s how you fell in love with France',
+    fr: 'Et c’est comme ça que je suis tombé amoureux de la France.', sv: 'Och det var så jag blev kär i Frankrike.', en: 'And that’s how I fell in love with France.',
+    ipa: '/e sɛ kɔm sa kə ʒə sɥi tɔ̃.be a.mu.ʁø də la fʁɑ̃s/',
+    note: '**C’est comme ça que** (det är så som) lyfter fram sättet, en typisk fransk betoningskonstruktion. Lägg märke till presens *c’est*, där svenskan säger *det var så*.',
+    noteEn: '**C’est comme ça que** (it is like this that) puts the manner in focus, a typical French emphatic structure. Note the present *c’est*, even though the story is told in the past.',
+    gloss: [['et', 'och', 'and'], ['c’est comme ça que', 'det var så', 'that’s how'], ['je suis tombé amoureux', 'jag blev kär', 'I fell in love'], ['de la France', 'i Frankrike', 'with France']],
+  }),
+];

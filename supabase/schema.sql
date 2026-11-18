@@ -36,6 +36,7 @@ CREATE TABLE public.decks (
     prerequisite_deck_id uuid,
     section_id uuid,
     title_en text,
+    course text DEFAULT 'sv'::text NOT NULL,
     CONSTRAINT decks_category_check CHECK ((category = ANY (ARRAY['phonetics'::text, 'grammar'::text, 'vocabulary'::text]))),
     CONSTRAINT decks_track_check CHECK ((track = ANY (ARRAY['foundation'::text, 'thematic'::text])))
 );
@@ -49,6 +50,7 @@ CREATE TABLE public.sections (
     pass_score integer DEFAULT 80 NOT NULL,
     title_en text,
     description_en text,
+    course text DEFAULT 'sv'::text NOT NULL,
     CONSTRAINT sections_pass_score_check CHECK (((pass_score >= 1) AND (pass_score <= 100)))
 );
 

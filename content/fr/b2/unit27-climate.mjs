@@ -1,0 +1,162 @@
+// FranceCore, Unité 27 : Environnement (réchauffement, recyclage, transition, débat).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT27_DECK = unitDeck({
+  n: 27, slug: 'fr-unit-27-climate', sv: 'Miljö', en: 'Environment',
+  level: 'B2', section: 'fr-section-7-societe', after: 'fr-unit-26-public-services',
+});
+const D = UNIT27_DECK.slug;
+
+export const UNIT27_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u27-rechauffement', {
+    prompt: 'Jordens stigande medeltemperatur', promptEn: 'The rise in the Earth’s average temperature',
+    fr: 'le réchauffement climatique', sv: 'den globala uppvärmningen', en: 'global warming',
+    ipa: '/lə ʁe.ʃof.mɑ̃ kli.ma.tik/',
+    note: 'Bildat av *chaud* (varm): **ré-chauff-ement**. Man talar också om **le dérèglement climatique** (klimatrubbningen), som betonar extremväder snarare än bara värme.',
+    noteEn: 'Built on *chaud* (hot): **ré-chauff-ement**. People also say **le dérèglement climatique** (climate disruption), which stresses extreme weather rather than heat alone.',
+  }),
+  vocab(D, 'fr-u27-gaz-effet-de-serre', {
+    prompt: 'Gaserna som värmer upp atmosfären', promptEn: 'The gases that heat up the atmosphere',
+    fr: 'les gaz à effet de serre', sv: 'växthusgaserna', en: 'greenhouse gases',
+    ipa: '/le ɡaz a e.fɛ də sɛʁ/',
+    note: '**une serre** = ett växthus. **z** i *gaz* uttalas, till skillnad från de flesta slutkonsonanter. Förkortas ofta **GES** i tidningar.',
+    noteEn: '**une serre** = a greenhouse. The **z** in *gaz* is pronounced, unlike most final consonants. Newspapers often abbreviate it to **GES**.',
+  }),
+  vocab(D, 'fr-u27-empreinte-carbone', {
+    prompt: 'Hur mycket koldioxid ens livsstil orsakar', promptEn: 'How much carbon your lifestyle causes',
+    fr: 'l’empreinte carbone', sv: 'koldioxidavtrycket', en: 'the carbon footprint',
+    ipa: '/lɑ̃.pʁɛ̃t kaʁ.bɔn/',
+    note: '**une empreinte** = ett avtryck, också *une empreinte digitale* (fingeravtryck). Lägg märke till att **carbone** står direkt efter, utan *de*.',
+    noteEn: '**une empreinte** = a print, as in *une empreinte digitale* (fingerprint). Note that **carbone** follows directly, with no *de*.',
+  }),
+  vocab(D, 'fr-u27-trier', {
+    prompt: 'Sortera sopor för återvinning', promptEn: 'Sort rubbish for recycling',
+    fr: 'trier ses déchets', sv: 'sopsortera', en: 'to sort your rubbish',
+    ipa: '/tʁi.je se de.ʃɛ/',
+    note: '**le tri sélectif** = källsortering. I Frankrike går förpackningar och papper i **la poubelle jaune**, glas i en container på gatan. Systemet är enklare än det svenska, men varierar mellan kommuner.',
+    noteEn: '**le tri sélectif** = waste sorting. In France packaging and paper go in **la poubelle jaune** (the yellow bin), glass in a street bottle bank. Rules vary between towns.',
+  }),
+  vocab(D, 'fr-u27-transition', {
+    prompt: 'Övergången från fossil till förnybar energi', promptEn: 'The shift from fossil to clean energy',
+    fr: 'la transition énergétique', sv: 'energiomställningen', en: 'the energy transition',
+    ipa: '/la tʁɑ̃.zi.sjɔ̃ e.nɛʁ.ʒe.tik/',
+    note: '**s** mellan två vokaler uttalas [z]: *tran-si-tion* [tʁɑ̃zisjɔ̃]. Franska politiker talar också om **la transition écologique**, som även har ett eget ministerium.',
+    noteEn: 'An **s** between vowels is voiced: *tran-si-tion* [tʁɑ̃zisjɔ̃]. French politicians also speak of **la transition écologique**, which has its own ministry.',
+  }),
+  vocab(D, 'fr-u27-renouvelables', {
+    prompt: 'Sol, vind och vatten', promptEn: 'Sun, wind and water',
+    fr: 'les énergies renouvelables', sv: 'de förnybara energikällorna', en: 'renewable energy',
+    ipa: '/le.z‿e.nɛʁ.ʒi ʁə.nu.vlabl/',
+    note: 'Bindning: **les énergies** uttalas [lezenɛʁʒi]. **renouveler** = förnya. Typiska exempel: **l’éolien** (vindkraft) och **le solaire** (solenergi).',
+    noteEn: 'Liaison: **les énergies** is pronounced [lezenɛʁʒi]. **renouveler** = to renew. Typical examples: **l’éolien** (wind power) and **le solaire** (solar power).',
+  }),
+  vocab(D, 'fr-u27-nucleaire', {
+    prompt: 'Kärnkraften', promptEn: 'Nuclear power',
+    fr: 'le nucléaire', sv: 'kärnkraften', en: 'nuclear power',
+    ipa: '/lə ny.kle.ɛʁ/',
+    note: 'Frankrike får ungefär två tredjedelar av sin el från kärnkraft, den högsta andelen i världen. Därför är fransk el koldioxidsnål, och kärnkraften är en ständig debattfråga.',
+    noteEn: 'France gets around two thirds of its electricity from nuclear power, the highest share in the world. That makes French electricity low-carbon, and nuclear a constant subject of debate.',
+  }),
+  vocab(D, 'fr-u27-canicule', {
+    prompt: 'En lång period av extrem sommarvärme', promptEn: 'A long spell of extreme summer heat',
+    fr: 'la canicule', sv: 'värmeböljan', en: 'the heatwave',
+    ipa: '/la ka.ni.kyl/',
+    note: 'Värmeböljan 2003 orsakade omkring 15 000 dödsfall i Frankrike och är ett trauma i landets minne. Ordet kommer av latinets *canicula*, ”lilla hunden”, stjärnan Sirius.',
+    noteEn: 'The 2003 heatwave caused around 15,000 deaths in France and remains a national trauma. The word comes from Latin *canicula*, "little dog", the star Sirius.',
+  }),
+  vocab(D, 'fr-u27-secheresse', {
+    prompt: 'När det inte regnar på länge', promptEn: 'When it hasn’t rained for a long time',
+    fr: 'la sécheresse', sv: 'torkan', en: 'drought',
+    ipa: '/la se.ʃʁɛs/',
+    note: 'Av *sec / sèche* (torr). Vid torka inför prefekturen **des restrictions d’eau**: förbud mot att vattna trädgården eller tvätta bilen.',
+    noteEn: 'From *sec / sèche* (dry). During droughts the prefecture imposes **des restrictions d’eau**: bans on watering gardens or washing cars.',
+  }),
+  vocab(D, 'fr-u27-sobriete', {
+    prompt: 'Att medvetet konsumera mindre', promptEn: 'Deliberately consuming less',
+    fr: 'la sobriété', sv: 'återhållsamheten / måttfullheten', en: 'restraint / energy saving',
+    ipa: '/la sɔ.bʁi.je.te/',
+    note: 'Ordet betyder också nykterhet, men här handlar det om att använda mindre. **la sobriété énergétique** blev ett nyckelord under energikrisen 2022.',
+    noteEn: 'Not about not drinking: here it means using less. **la sobriété énergétique** (energy restraint) became a buzzword during the 2022 energy crisis.',
+  }),
+  vocab(D, 'fr-u27-covoiturage', {
+    prompt: 'Att dela bil med andra som ska åt samma håll', promptEn: 'Sharing a car with others going the same way',
+    fr: 'le covoiturage', sv: 'samåkningen', en: 'carpooling / ride-sharing',
+    ipa: '/lə ko.vwa.ty.ʁaʒ/',
+    note: 'Mycket utbrett i Frankrike, där tåget kan vara dyrt: appar som BlaBlaCar kopplar ihop förare och passagerare för långa resor. Bildat av **co-** och **voiture**.',
+    noteEn: 'Hugely popular in France, where trains can be pricey: apps such as BlaBlaCar connect drivers and passengers for long trips. Built from **co-** and **voiture**.',
+  }),
+  vocab(D, 'fr-u27-developpement-durable', {
+    prompt: 'Utveckling som inte förstör för framtida generationer', promptEn: 'Growth that does not harm future generations',
+    fr: 'le développement durable', sv: 'hållbar utveckling', en: 'sustainable development',
+    ipa: '/lə de.vlɔp.mɑ̃ dy.ʁabl/',
+    note: '**durable** = hållbar, varaktig. Ordet handlar om tid: något som håller länge, även för kommande generationer.',
+    noteEn: '**durable** = lasting, sustainable. In English *durable* means hard-wearing, but French **durable** is about time and future generations.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u27-reduire-emissions', {
+    prompt: 'Säg att vi måste minska utsläppen', promptEn: 'Say we must cut emissions',
+    fr: 'Il faut réduire nos émissions de gaz à effet de serre.', sv: 'Vi måste minska våra utsläpp av växthusgaser.', en: 'We need to reduce our greenhouse gas emissions.',
+    ipa: '/il fo ʁe.dɥiʁ no.z‿e.mi.sjɔ̃ də ɡaz a e.fɛ də sɛʁ/',
+    note: 'Falsk vän: **une émission** är både ett utsläpp och ett tv- eller radioprogram. Bindning: *nos émissions* [nozemisjɔ̃].',
+    noteEn: '**une émission** is both an emission and a TV or radio programme. Liaison: *nos émissions* [nozemisjɔ̃].',
+    gloss: [['il faut', 'vi måste', 'we need'], ['réduire', 'minska', 'to reduce'], ['nos', 'våra', 'our'], ['émissions', 'utsläpp', 'emissions'], ['de gaz à effet de serre', 'av växthusgaser', 'greenhouse gas']],
+  }),
+  phrase(D, 'fr-u27-verre', {
+    prompt: 'Förklara att glaset ska till glasigloon', promptEn: 'Explain that glass goes in the bottle bank',
+    fr: 'Le verre, on le dépose dans le conteneur au coin de la rue.', sv: 'Glaset lämnar man i containern i gathörnet.', en: 'Glass goes in the bottle bank on the corner.',
+    ipa: '/lə vɛʁ ɔ̃ lə de.poz dɑ̃ lə kɔ̃t.nœʁ o kwɛ̃ də la ʁy/',
+    note: 'Typisk talspråksfranska: man lyfter fram ämnet först och upprepar det med ett pronomen, **le verre, on le ...** (dislokation). Lägg märke till att **verre** (glas), **vert** (grön) och **vers** (mot) uttalas likadant.',
+    noteEn: 'Typical spoken French: put the topic first, then repeat it with a pronoun, **le verre, on le ...** (dislocation). **verre** (glass), **vert** (green) and **vers** (towards) all sound the same.',
+    gloss: [['le verre', 'glaset', 'glass'], ['on', 'man', 'you'], ['le', 'det', 'it'], ['dépose', 'lämnar', 'drop off'], ['dans le conteneur', 'i containern', 'in the bin'], ['au coin de la rue', 'i gathörnet', 'on the corner']],
+  }),
+  phrase(D, 'fr-u27-canicule-2003', {
+    prompt: 'Säg att värmeböljan 2003 satte djupa spår', promptEn: 'Say the 2003 heatwave left a deep mark',
+    fr: 'La canicule de 2003 a marqué les esprits.', sv: 'Värmeböljan 2003 etsade sig fast i minnet.', en: 'The 2003 heatwave left a lasting impression.',
+    ipa: '/la ka.ni.kyl də dø.mil.tʁwa a maʁ.ke le.z‿ɛs.pʁi/',
+    note: '**marquer les esprits** = göra starkt intryck, ett vanligt journalistiskt uttryck. **2003** läses *deux mille trois*: man säger aldrig ”tjugohundra” på franska.',
+    noteEn: '**marquer les esprits** = to make a strong impression, a common journalistic phrase. **2003** is read *deux mille trois*: French never says "twenty oh three".',
+    gloss: [['la canicule', 'värmeböljan', 'the heatwave'], ['de 2003', 'från 2003', 'of 2003'], ['a marqué', 'har präglat', 'marked'], ['les esprits', 'sinnena', 'minds']],
+  }),
+  phrase(D, 'fr-u27-train-avion', {
+    prompt: 'Säg att du hellre tar tåget än flyget', promptEn: 'Say you take the train rather than the plane',
+    fr: 'Je prends le train plutôt que l’avion.', sv: 'Jag tar tåget hellre än flyget.', en: 'I take the train rather than the plane.',
+    ipa: '/ʒə pʁɑ̃ lə tʁɛ̃ ply.to kə la.vjɔ̃/',
+    note: '**plutôt que** = hellre än. Sedan 2023 är vissa korta inrikesflyg förbjudna i Frankrike när samma resa går med tåg på under två och en halv timme.',
+    noteEn: '**plutôt que** = rather than. Since 2023 some short domestic flights have been banned in France where the same trip takes under two and a half hours by train.',
+    gloss: [['je prends', 'jag tar', 'I take'], ['le train', 'tåget', 'the train'], ['plutôt que', 'hellre än', 'rather than'], ['l’avion', 'flyget', 'the plane']],
+  }),
+  phrase(D, 'fr-u27-debat-nucleaire', {
+    prompt: 'Säg vad debatten handlar om', promptEn: 'Say what the debate is about',
+    fr: 'Le débat porte sur la place du nucléaire.', sv: 'Debatten gäller kärnkraftens roll.', en: 'The debate is about the role of nuclear power.',
+    ipa: '/lə de.ba pɔʁt syʁ la plas dy ny.kle.ɛʁ/',
+    note: '**porter sur** = handla om, gälla, mer formellt än *parler de*. **la place** betyder här ”roll, utrymme”, inte torg.',
+    noteEn: '**porter sur** = to be about, to concern, more formal than *parler de*. **la place** means "role, share" here, not a square.',
+    gloss: [['le débat', 'debatten', 'the debate'], ['porte sur', 'gäller', 'is about'], ['la place', 'rollen', 'the role'], ['du nucléaire', 'kärnkraftens', 'of nuclear power']],
+  }),
+  phrase(D, 'fr-u27-accord-paris', {
+    prompt: 'Säg när Parisavtalet antogs', promptEn: 'Say when the Paris Agreement was adopted',
+    fr: 'L’accord de Paris a été adopté en 2015.', sv: 'Parisavtalet antogs 2015.', en: 'The Paris Agreement was adopted in 2015.',
+    ipa: '/la.kɔʁ də pa.ʁi a e.te a.dɔp.te ɑ̃ dø.mil.kɛ̃z/',
+    note: 'Passiv med **être** + perfekt particip, som böjs efter subjektet: *l’accord a été adopté*, *la loi a été adoptée*. Årtal tar **en**: *en 2015*.',
+    noteEn: 'Passive with **être** + past participle, which agrees with the subject: *l’accord a été adopté*, *la loi a été adoptée*. Years take **en**: *en 2015*.',
+    gloss: [['l’accord', 'avtalet', 'the agreement'], ['de Paris', 'från Paris', 'of Paris'], ['a été adopté', 'antogs', 'was adopted'], ['en 2015', '2015', 'in 2015']],
+  }),
+  phrase(D, 'fr-u27-habitudes', {
+    prompt: 'Säg att det inte räcker med teknik, vi måste ändra vanor', promptEn: 'Say technology is not enough, we must change our habits',
+    fr: 'La technologie ne suffit pas : il faut changer nos habitudes.', sv: 'Tekniken räcker inte: vi måste ändra våra vanor.', en: 'Technology isn’t enough: we have to change our habits.',
+    ipa: '/la tɛk.nɔ.lɔ.ʒi nə sy.fi pa il fo ʃɑ̃.ʒe no.z‿a.bi.tyd/',
+    note: '**suffire** = räcka; *ça suffit !* = nu räcker det! Mellanslag före kolon på franska. **h** i *habitudes* är stumt, därför bindning: [nozabityd].',
+    noteEn: '**suffire** = to be enough; *ça suffit !* = that’s enough! A space goes before the colon in French. The **h** in *habitudes* is silent, hence the liaison [nozabityd].',
+    gloss: [['la technologie', 'tekniken', 'technology'], ['ne suffit pas', 'räcker inte', 'isn’t enough'], ['il faut', 'vi måste', 'we have to'], ['changer', 'ändra', 'change'], ['nos', 'våra', 'our'], ['habitudes', 'vanor', 'habits']],
+  }),
+  phrase(D, 'fr-u27-electricite', {
+    prompt: 'Säg var den mesta franska elen kommer ifrån', promptEn: 'Say where most French electricity comes from',
+    fr: 'La majeure partie de notre électricité provient du nucléaire.', sv: 'Största delen av vår el kommer från kärnkraft.', en: 'Most of our electricity comes from nuclear power.',
+    ipa: '/la ma.ʒœʁ paʁ.ti də nɔ.tʁ e.lɛk.tʁi.si.te pʁɔ.vjɛ̃ dy ny.kle.ɛʁ/',
+    note: '**la majeure partie de** = största delen av, mer formellt än *la plupart de*, som används med plural: *la plupart des gens*. **provenir de** = härröra från, ett vanligt verb i skriftspråk.',
+    noteEn: '**la majeure partie de** = most of, more formal than *la plupart de*, which goes with plurals: *la plupart des gens*. **provenir de** = to come from, a common written verb.',
+    gloss: [['la majeure partie', 'största delen', 'most'], ['de', 'av', 'of'], ['notre', 'vår', 'our'], ['électricité', 'el', 'electricity'], ['provient', 'kommer', 'comes'], ['du nucléaire', 'från kärnkraft', 'from nuclear power']],
+  }),
+];

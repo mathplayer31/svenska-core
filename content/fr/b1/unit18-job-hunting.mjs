@@ -1,0 +1,162 @@
+// FranceCore, Unité 18 : Chercher du travail (CV, lettre de motivation, entretien, CDI / CDD).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT18_DECK = unitDeck({
+  n: 18, slug: 'fr-unit-18-job-hunting', sv: 'Söka jobb', en: 'Job hunting',
+  level: 'B1', section: 'fr-section-5-sinstaller', after: 'fr-unit-17-neighbours',
+});
+const D = UNIT18_DECK.slug;
+
+export const UNIT18_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u18-offre-demploi', {
+    prompt: 'En annons om ett ledigt jobb', promptEn: 'An ad for a vacancy',
+    fr: 'une offre d’emploi', sv: 'en platsannons', en: 'a job offer / a job ad',
+    ipa: '/yn ɔfʁ dɑ̃.plwa/',
+    note: '**Une offre d’emploi** är annonsen, inte ett erbjudande man fått. Ett konkret jobberbjudande heter **une proposition d’embauche**.',
+    noteEn: '**Une offre d’emploi** is the job ad, not an offer you have received. An actual offer is **une proposition d’embauche**.',
+  }),
+  vocab(D, 'fr-u18-postuler', {
+    prompt: 'Söka ett jobb', promptEn: 'Apply for a job',
+    fr: 'postuler', sv: 'söka (jobb)', en: 'to apply',
+    ipa: '/pɔs.ty.le/',
+    note: 'Man säger **postuler à une offre** eller **postuler pour un poste**, aldrig utan preposition. Ordet *appliquer* är en anglicism som inte betyder söka.',
+    noteEn: 'You say **postuler à une offre** or **postuler pour un poste**, always with a preposition. *Appliquer* does not mean to apply for a job: it means to apply a rule or a coat of paint.',
+  }),
+  vocab(D, 'fr-u18-candidature', {
+    prompt: 'Din ansökan till ett jobb', promptEn: 'Your application for a job',
+    fr: 'une candidature', sv: 'en ansökan', en: 'an application',
+    ipa: '/yn kɑ̃.di.da.tyʁ/',
+    note: 'Den som söker kallas **le candidat / la candidate**, inte bara i politiken. *Une candidature spontanée* = en spontanansökan.',
+    noteEn: 'The applicant is **le candidat / la candidate**, not only in politics. *Une candidature spontanée* = an unsolicited application.',
+  }),
+  vocab(D, 'fr-u18-cv', {
+    prompt: 'Sammanställningen av din utbildning och erfarenhet', promptEn: 'The summary of your education and experience',
+    fr: 'un CV', sv: 'ett cv', en: 'a CV / a résumé',
+    ipa: '/œ̃ se.ve/',
+    note: 'Kort för **curriculum vitae**, uttalat bokstav för bokstav: [seve]. Ett franskt cv är helst en sida, och foto var länge standard.',
+    noteEn: 'Short for **curriculum vitae**, spelled out: [seve]. A French CV ideally fits on one page, and a photo used to be standard.',
+  }),
+  vocab(D, 'fr-u18-lettre-de-motivation', {
+    prompt: 'Det personliga brevet till en ansökan', promptEn: 'The cover letter for an application',
+    fr: 'une lettre de motivation', sv: 'ett personligt brev', en: 'a cover letter',
+    ipa: '/yn lɛtʁ də mɔ.ti.va.sjɔ̃/',
+    note: 'Det franska brevet är mycket formellt, med fasta fraser och ett högtidligt avslut. Brevet ska visa varför just *det här* företaget lockar, inte bara vem man är.',
+    noteEn: 'The French cover letter is very formal, with set phrases and a ceremonious closing. It should show why *this* company appeals to you, not just who you are.',
+  }),
+  vocab(D, 'fr-u18-entretien', {
+    prompt: 'Mötet där arbetsgivaren intervjuar dig', promptEn: 'The meeting where the employer interviews you',
+    fr: 'un entretien d’embauche', sv: 'en anställningsintervju', en: 'a job interview',
+    ipa: '/œ̃.n‿ɑ̃.tʁə.tjɛ̃ dɑ̃.boʃ/',
+    note: '**Un entretien** är ett samtal, men också underhåll: *l’entretien de la voiture*. **Embaucher** = anställa, **l’embauche** = anställningen.',
+    noteEn: '**Un entretien** is a conversation, but also maintenance: *l’entretien de la voiture*. **Embaucher** = to hire, **l’embauche** = hiring.',
+  }),
+  vocab(D, 'fr-u18-cdi', {
+    prompt: 'Fast anställning utan slutdatum', promptEn: 'Permanent employment with no end date',
+    fr: 'un CDI', sv: 'en tillsvidareanställning', en: 'a permanent contract',
+    ipa: '/œ̃ se.de.i/',
+    note: '**Contrat à durée indéterminée**. I Frankrike är CDI nästan ett krav för att få hyra en lägenhet eller ta ett lån, så det är många unga vuxnas stora mål.',
+    noteEn: '**Contrat à durée indéterminée**. In France a CDI is almost a requirement for renting a flat or getting a loan, so it is the big goal for many young adults.',
+  }),
+  vocab(D, 'fr-u18-cdd', {
+    prompt: 'Anställning för en bestämd period', promptEn: 'Employment for a fixed period',
+    fr: 'un CDD', sv: 'en visstidsanställning', en: 'a fixed-term contract',
+    ipa: '/œ̃ se.de.de/',
+    note: '**Contrat à durée déterminée**. När ett CDD tar slut får den anställde en ersättning för osäkerheten: **la prime de précarité**, normalt 10 % av lönen.',
+    noteEn: '**Contrat à durée déterminée**. When a CDD ends, the employee gets compensation for the insecurity: **la prime de précarité**, normally 10 % of total pay.',
+  }),
+  vocab(D, 'fr-u18-periode-dessai', {
+    prompt: 'De första månaderna då båda parter kan avbryta anställningen', promptEn: 'The first months when either side can end the job',
+    fr: 'la période d’essai', sv: 'provanställningen', en: 'the probation period',
+    ipa: '/la pe.ʁjɔd de.sɛ/',
+    note: '**Un essai** = ett försök, som i rugby. Under provanställningen kan båda parter avsluta anställningen utan att ange skäl.',
+    noteEn: '**Un essai** = a try, as in rugby. During the probation period either side can end the contract without giving a reason.',
+  }),
+  vocab(D, 'fr-u18-salaire-brut-net', {
+    prompt: 'Lönen före och efter avgifter', promptEn: 'Pay before and after deductions',
+    fr: 'le salaire brut / net', sv: 'bruttolön / nettolön', en: 'gross / net salary',
+    ipa: '/lə sa.lɛʁ bʁyt/ /nɛt/',
+    note: 'Fransmän anger ofta lönen som **brut annuel**, årslön före avgifter: *35 K€ brut*. Avgifterna dras redan från bruttolönen, så nettot är betydligt lägre.',
+    noteEn: 'The French usually quote pay as **brut annuel**, gross annual salary: *35 K€ brut*. Social charges come off the gross, so net pay is noticeably lower.',
+  }),
+  vocab(D, 'fr-u18-stage', {
+    prompt: 'Arbetsplatsförlagd period under utbildningen', promptEn: 'Work placement during your studies',
+    fr: 'un stage', sv: 'en praktik', en: 'an internship',
+    ipa: '/œ̃ staʒ/',
+    note: 'Inte en teaterscen. Praktikanten kallas **le / la stagiaire**, och en praktik på mer än två månader ska vara betald: *la gratification*.',
+    noteEn: 'Not a theatre stage. The intern is **le / la stagiaire**, and an internship longer than two months must be paid: *la gratification*.',
+  }),
+  vocab(D, 'fr-u18-france-travail', {
+    prompt: 'Den statliga myndigheten för arbetssökande', promptEn: 'The state agency for jobseekers',
+    fr: 'France Travail', sv: 'Arbetsförmedlingen', en: 'the job centre',
+    ipa: '/fʁɑ̃s tʁa.vaj/',
+    note: 'Hette **Pôle emploi** fram till 2024, och många använder fortfarande det gamla namnet. Hit vänder man sig när man är **au chômage** (arbetslös).',
+    noteEn: 'Called **Pôle emploi** until 2024, and many people still use the old name. This is where you go when you are **au chômage** (unemployed).',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u18-je-me-permets', {
+    prompt: 'Inled ditt personliga brev formellt: du söker tjänsten som projektledare', promptEn: 'Open your cover letter formally: you’re applying for the project manager post',
+    fr: 'Je me permets de vous adresser ma candidature pour le poste de chef de projet.', sv: 'Härmed söker jag tjänsten som projektledare.', en: 'Please find enclosed my application for the position of project manager.',
+    ipa: '/ʒə mə pɛʁ.mɛ də vu.z‿a.dʁɛ.se ma kɑ̃.di.da.tyʁ puʁ lə pɔst də ʃɛf də pʁɔ.ʒɛ/',
+    note: '**Je me permets de** (jag tar mig friheten att) är typisk fransk brevartighet som skulle låta överdriven på svenska. Yrkestitlar används ofta i maskulinum även för kvinnor: *chef de projet*.',
+    noteEn: '**Je me permets de** (I take the liberty of) is typical French letter politeness that would sound overdone in English. Job titles are often masculine even for women: *chef de projet*.',
+    gloss: [['je me permets de', 'jag tar mig friheten att', 'I take the liberty of'], ['vous adresser', 'skicka till er', 'sending you'], ['ma candidature', 'min ansökan', 'my application'], ['pour le poste', 'till tjänsten', 'for the position'], ['de chef de projet', 'som projektledare', 'of project manager']],
+  }),
+  phrase(D, 'fr-u18-veuillez-agreer', {
+    prompt: 'Avsluta ett formellt brev på klassiskt franskt vis', promptEn: 'Close a formal letter the classic French way',
+    fr: 'Veuillez agréer, Madame, Monsieur, l’expression de mes salutations distinguées.', sv: 'Med vänliga hälsningar.', en: 'Yours faithfully.',
+    ipa: '/vœ.je a.ɡʁe.e ma.dam mə.sjø lɛk.spʁɛ.sjɔ̃ də me sa.ly.ta.sjɔ̃ dis.tɛ̃.ɡe/',
+    note: 'Ordagrant ”behagade godta, fru, herr, uttrycket för mina utmärkta hälsningar”. Ett formellt franskt brev slutar fortfarande så, medan svenskan nöjer sig med *Med vänliga hälsningar*. **Monsieur** uttalas [məsjø].',
+    noteEn: 'Literally "please accept, Madam, Sir, the expression of my distinguished greetings". Formal French letters still end this way. **Monsieur** is pronounced [məsjø].',
+    gloss: [['veuillez agréer', 'behagade godta', 'please accept'], ['Madame, Monsieur', 'fru, herr', 'Madam, Sir'], ['l’expression', 'uttrycket', 'the expression'], ['de mes salutations', 'för mina hälsningar', 'of my greetings'], ['distinguées', 'utmärkta', 'distinguished']],
+  }),
+  phrase(D, 'fr-u18-pourquoi-quitte', {
+    prompt: 'Rekryteraren frågar varför du lämnade ditt förra jobb', promptEn: 'The recruiter asks why you left your last job',
+    fr: 'Pourquoi avez-vous quitté votre dernier emploi ?', sv: 'Varför slutade ni på ert förra jobb?', en: 'Why did you leave your last job?',
+    ipa: '/puʁ.kwa a.ve vu ki.te vɔtʁ dɛʁ.nje.ʁ‿ɑ̃.plwa/',
+    note: 'Under en intervju niar man alltid. **Quitter** kräver ett objekt (*quitter un emploi, quitter Paris*): man kan inte bara säga *j’ai quitté*.',
+    noteEn: 'You always use *vous* in an interview. **Quitter** needs an object (*quitter un emploi, quitter Paris*): you can’t just say *j’ai quitté*.',
+    gloss: [['pourquoi', 'varför', 'why'], ['avez-vous quitté', 'lämnade ni', 'did you leave'], ['votre', 'ert', 'your'], ['dernier', 'förra', 'last'], ['emploi', 'jobb', 'job']],
+  }),
+  phrase(D, 'fr-u18-jai-travaille', {
+    prompt: 'Berätta att du jobbade tre år på en resebyrå, där du ledde ett team på fem personer', promptEn: 'Say you worked three years at a travel agency, where you managed a team of five',
+    fr: 'J’ai travaillé trois ans dans une agence de voyages, où je gérais une équipe de cinq personnes.', sv: 'Jag arbetade tre år på en resebyrå, där jag ledde ett team på fem personer.', en: 'I worked for three years at a travel agency, where I managed a team of five people.',
+    ipa: '/ʒe tʁa.va.je tʁwa.z‿ɑ̃ dɑ̃.z‿yn a.ʒɑ̃s də vwa.jaʒ u ʒə ʒe.ʁɛ yn e.kip də sɛ̃k pɛʁ.sɔn/',
+    note: '**Passé composé** för en avslutad period med angiven längd (*trois ans*), **imparfait** för vad man gjorde under den (*je gérais*). **Où** kan syfta på en plats: *l’agence où je travaillais*.',
+    noteEn: '**Passé composé** for a finished period with a set length (*trois ans*), **imparfait** for what you used to do during it (*je gérais*). **Où** can refer to a place: *l’agence où je travaillais*.',
+    gloss: [['j’ai travaillé', 'jag arbetade', 'I worked'], ['trois ans', 'tre år', 'three years'], ['dans une agence de voyages', 'på en resebyrå', 'at a travel agency'], ['où', 'där', 'where'], ['je gérais', 'jag ledde', 'I managed'], ['une équipe', 'ett team', 'a team'], ['de cinq personnes', 'på fem personer', 'of five people']],
+  }),
+  phrase(D, 'fr-u18-cdd-six-mois', {
+    prompt: 'Förklara att det är en visstidsanställning på sex månader som kan förlängas en gång', promptEn: 'Explain it’s a six-month fixed-term contract, renewable once',
+    fr: 'C’est un CDD de six mois, renouvelable une fois.', sv: 'Det är en visstidsanställning på sex månader, som kan förlängas en gång.', en: 'It’s a six-month fixed-term contract, renewable once.',
+    ipa: '/sɛ.t‿œ̃ se.de.de də si mwa ʁə.nu.vlabl yn fwa/',
+    note: '**Six** uttalas [si] framför konsonant, [siz] framför vokal och [sis] ensamt. **De** anger längden: *un contrat de six mois*.',
+    noteEn: '**Six** is [si] before a consonant, [siz] before a vowel and [sis] on its own. **De** gives the length: *un contrat de six mois*.',
+    gloss: [['c’est', 'det är', 'it’s'], ['un CDD', 'en visstidsanställning', 'a fixed-term contract'], ['de six mois', 'på sex månader', 'of six months'], ['renouvelable', 'som kan förlängas', 'renewable'], ['une fois', 'en gång', 'once']],
+  }),
+  phrase(D, 'fr-u18-quel-serait-le-salaire', {
+    prompt: 'Fråga artigt vad lönen skulle vara, i brutto per år', promptEn: 'Politely ask what the salary would be, gross per year',
+    fr: 'Quel serait le salaire, en brut annuel ?', sv: 'Vad skulle lönen vara, i brutto per år?', en: 'What would the salary be, gross per year?',
+    ipa: '/kɛl sə.ʁɛ lə sa.lɛʁ ɑ̃ bʁy.t‿a.nɥɛl/',
+    note: 'Konditionalis **serait** mjukar upp en känslig fråga. Att prata lön är mer tabu i Frankrike än i Sverige: vänta gärna tills rekryteraren tar upp det.',
+    noteEn: 'The conditional **serait** softens a delicate question. Talking about pay is more taboo in France than in many countries: wait until the recruiter raises it if you can.',
+    gloss: [['quel', 'vad', 'what'], ['serait', 'skulle vara', 'would be'], ['le salaire', 'lönen', 'the salary'], ['en brut annuel', 'i brutto per år', 'gross per year']],
+  }),
+  phrase(D, 'fr-u18-je-cherche-depuis', {
+    prompt: 'Säg att du har letat jobb i två månader men inte hittat något än', promptEn: 'Say you’ve been looking for work for two months but haven’t found anything yet',
+    fr: 'Je cherche du travail depuis deux mois, mais je n’ai encore rien trouvé.', sv: 'Jag har letat jobb i två månader, men jag har inte hittat något än.', en: 'I’ve been looking for work for two months, but I haven’t found anything yet.',
+    ipa: '/ʒə ʃɛʁʃ dy tʁa.vaj də.pɥi dø mwa mɛ ʒə ne ɑ̃.kɔʁ ʁjɛ̃ tʁu.ve/',
+    note: '**Depuis** + **presens** för något som fortfarande pågår: *je cherche depuis* = jag har letat (och letar fortfarande). **Rien** ställs före particip som *pas*: *je n’ai rien trouvé*.',
+    noteEn: '**Depuis** + **present tense** for something still going on: *je cherche depuis* = I have been looking. **Rien** goes before the past participle, like *pas*: *je n’ai rien trouvé*.',
+    gloss: [['je cherche', 'jag letar', 'I’ve been looking for'], ['du travail', 'jobb', 'work'], ['depuis deux mois', 'i två månader', 'for two months'], ['mais', 'men', 'but'], ['je n’ai', 'jag har inte', 'I haven’t'], ['encore', 'än', 'yet'], ['rien', 'något', 'anything'], ['trouvé', 'hittat', 'found']],
+  }),
+  phrase(D, 'fr-u18-on-ma-propose', {
+    prompt: 'Berätta glatt att du fått en fast anställning och tackade ja direkt', promptEn: 'Happily say you were offered a permanent contract and accepted straight away',
+    fr: 'On m’a proposé un CDI, j’ai accepté tout de suite !', sv: 'Jag har fått erbjudande om fast jobb, jag tackade ja direkt!', en: 'They offered me a permanent contract, I accepted straight away!',
+    ipa: '/ɔ̃ ma pʁɔ.pɔ.ze œ̃ se.de.i ʒe ak.sɛp.te tut sɥit/',
+    note: '**On m’a proposé** (man erbjöd mig) är franskans vanliga sätt att undvika passiv. **Tout de suite** = genast, uttalat [tutsɥit].',
+    noteEn: '**On m’a proposé** (someone offered me) is the usual French way to avoid the passive. **Tout de suite** = right away, pronounced [tutsɥit].',
+    gloss: [['on m’a proposé', 'man erbjöd mig', 'they offered me'], ['un CDI', 'en fast anställning', 'a permanent contract'], ['j’ai accepté', 'jag tackade ja', 'I accepted'], ['tout de suite', 'direkt', 'straight away']],
+  }),
+];

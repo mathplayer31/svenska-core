@@ -1,0 +1,162 @@
+// FranceCore, Unité 21 : Actualités et médias (journal, grève, élection, rapporter une info).
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT21_DECK = unitDeck({
+  n: 21, slug: 'fr-unit-21-news', sv: 'Nyheter och medier', en: 'News and media',
+  level: 'B1', section: 'fr-section-6-comprendre', after: 'fr-unit-20-nature',
+});
+const D = UNIT21_DECK.slug;
+
+export const UNIT21_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u21-journal', {
+    prompt: 'Tidningen, eller nyhetssändningen på tv', promptEn: 'The newspaper, or the TV news bulletin',
+    fr: 'le journal', sv: 'tidningen / nyhetssändningen', en: 'the newspaper / the news',
+    ipa: '/lə ʒuʁ.nal/',
+    note: 'Falsk vän: **le journal** är aldrig en patientjournal. **Le journal de 20 heures** (*le 20 heures*) är den stora tv-nyhetssändningen. Plural: *les journaux*.',
+    noteEn: '**Le journal** is both a newspaper and a news bulletin: **le journal de 20 heures** (*le 20 heures*) is the main evening TV news. Plural: *les journaux*.',
+  }),
+  vocab(D, 'fr-u21-actualites', {
+    prompt: 'Det som händer just nu i världen', promptEn: 'What is happening in the world right now',
+    fr: 'les actualités', sv: 'nyheterna', en: 'the news / current affairs',
+    ipa: '/le.z‿ak.tɥa.li.te/',
+    note: 'Vardagligt **les actus**. **Actuel** betyder *aktuell*, nuvarande, precis som på svenska. I singular: *l’actualité* = det aktuella läget.',
+    noteEn: 'Casually **les actus**. False friend: **actuel** means *current*, not *actual*, and **actuellement** means *currently*.',
+  }),
+  vocab(D, 'fr-u21-la-une', {
+    prompt: 'Tidningens förstasida', promptEn: 'A newspaper’s front page',
+    fr: 'la une', sv: 'förstasidan', en: 'the front page',
+    ipa: '/la yn/',
+    note: 'Ingen elision: man skriver och säger **la une**, inte *l’une*. *Être à la une* = vara förstasidesnyhet.',
+    noteEn: 'No elision: you write and say **la une**, not *l’une*. *Être à la une* = to be front-page news.',
+  }),
+  vocab(D, 'fr-u21-fait-divers', {
+    prompt: 'Kort nyhet om ett brott eller en olycka', promptEn: 'A short news item about a crime or an accident',
+    fr: 'un fait divers', sv: 'en notis / en lokal händelse', en: 'a news item / a minor incident',
+    ipa: '/œ̃ fɛ di.vɛʁ/',
+    note: 'En egen tidningsgenre: inbrott, trafikolyckor, märkliga händelser. I plural: **des faits divers**, där bara *fait* får ett tyst s, och sidan i tidningen heter *les faits divers*.',
+    noteEn: 'A genre of its own: burglaries, road accidents, odd events. Plural: **des faits divers**, where only *fait* gains a silent s, and the newspaper section is called *les faits divers*.',
+  }),
+  vocab(D, 'fr-u21-greve', {
+    prompt: 'När anställda lägger ner arbetet i protest', promptEn: 'When employees stop working in protest',
+    fr: 'une grève', sv: 'en strejk', en: 'a strike',
+    ipa: '/yn ɡʁɛv/',
+    note: 'Strejkrätten står i den franska konstitutionen och används flitigt, inte minst inom tåg och kollektivtrafik. *Faire grève* = strejka, *être en grève* = vara i strejk.',
+    noteEn: 'The right to strike is in the French constitution and widely used, especially on trains and public transport. *Faire grève* = to strike, *être en grève* = to be on strike.',
+  }),
+  vocab(D, 'fr-u21-manifestation', {
+    prompt: 'När många går ut på gatan och protesterar', promptEn: 'When crowds take to the streets in protest',
+    fr: 'une manifestation', sv: 'en demonstration', en: 'a demonstration / a protest',
+    ipa: '/yn ma.ni.fɛs.ta.sjɔ̃/',
+    note: 'Vardagligt **une manif**, och deltagarna kallas **les manifestants**. Polisen och fackförbunden anger nästan alltid helt olika deltagarsiffror.',
+    noteEn: 'Casually **une manif**; the marchers are **les manifestants**. Police and unions almost always give wildly different turnout figures.',
+  }),
+  vocab(D, 'fr-u21-election', {
+    prompt: 'När medborgarna röstar', promptEn: 'When citizens vote',
+    fr: 'une élection', sv: 'ett val', en: 'an election',
+    ipa: '/yn e.lɛk.sjɔ̃/',
+    note: 'Franska val hålls på söndagar och ofta i två omgångar: **le premier tour** och **le second tour**. Presidentvalet äger rum vart femte år.',
+    noteEn: 'French elections are held on Sundays and often in two rounds: **le premier tour** and **le second tour**. The presidential election is every five years.',
+  }),
+  vocab(D, 'fr-u21-gouvernement', {
+    prompt: 'Premiärministern och ministrarna', promptEn: 'The prime minister and the ministers',
+    fr: 'le gouvernement', sv: 'regeringen', en: 'the government',
+    ipa: '/lə ɡu.vɛʁ.nə.mɑ̃/',
+    note: 'Presidenten utser premiärministern, **le Premier ministre**, som leder regeringen. Det är alltså presidenten, inte premiärministern, som har mest makt.',
+    noteEn: 'The president appoints **le Premier ministre**, who heads the government. So it is the president, not the prime minister, who holds the most power.',
+  }),
+  vocab(D, 'fr-u21-depute', {
+    prompt: 'Folkvald ledamot i nationalförsamlingen', promptEn: 'Elected member of the National Assembly',
+    fr: 'un député / une députée', sv: 'en riksdagsledamot / en parlamentsledamot', en: 'an MP / a member of parliament',
+    ipa: '/œ̃ de.py.te/',
+    note: 'De 577 ledamöterna sitter i **l’Assemblée nationale**. Ordet påminner om svenskans *deputerad*, men betyder alltså folkvald ledamot.',
+    noteEn: 'The 577 members sit in **l’Assemblée nationale**. Not a deputy in the sense of second-in-command: a *député* is an elected MP.',
+  }),
+  vocab(D, 'fr-u21-sondage', {
+    prompt: 'En undersökning av vad folk tycker', promptEn: 'A survey of what people think',
+    fr: 'un sondage', sv: 'en opinionsundersökning', en: 'an opinion poll',
+    ipa: '/œ̃ sɔ̃.daʒ/',
+    note: 'Av **sonder** = loda, sondera. *Selon un sondage...* är en av de vanligaste inledningarna i fransk press.',
+    noteEn: 'From **sonder** = to probe, to sound out. *Selon un sondage...* is one of the most common openings in the French press.',
+  }),
+  vocab(D, 'fr-u21-reforme', {
+    prompt: 'En förändring av en lag eller ett system', promptEn: 'A change to a law or a system',
+    fr: 'une réforme', sv: 'en reform', en: 'a reform',
+    ipa: '/yn ʁe.fɔʁm/',
+    note: 'I Frankrike betyder en stor reform, till exempel **la réforme des retraites** (pensionsreformen), nästan alltid strejker och demonstrationer.',
+    noteEn: 'In France a major reform, such as **la réforme des retraites** (pension reform), almost always means strikes and demonstrations.',
+  }),
+  vocab(D, 'fr-u21-selon', {
+    prompt: 'Ange källan för en uppgift', promptEn: 'Give the source of a piece of information',
+    fr: 'selon', sv: 'enligt', en: 'according to',
+    ipa: '/sə.lɔ̃/',
+    note: '*Selon la police*, *selon les médias*. Med pronomen: **selon moi** = enligt mig. Synonymt med *d’après*: *d’après lui*.',
+    noteEn: '*Selon la police*, *selon les médias*. With a pronoun: **selon moi** = in my view. Synonym: *d’après*: *d’après lui*.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u21-cheminots-en-greve', {
+    prompt: 'Säg att järnvägsarbetarna har strejkat sedan i tisdags', promptEn: 'Say the railway workers have been on strike since Tuesday',
+    fr: 'Les cheminots sont en grève depuis mardi.', sv: 'Järnvägsarbetarna har strejkat sedan i tisdags.', en: 'The railway workers have been on strike since Tuesday.',
+    ipa: '/le ʃə.mi.no sɔ̃.t‿ɑ̃ ɡʁɛv də.pɥi maʁ.di/',
+    note: '**Depuis** + presens för något som fortfarande pågår, där svenskan använder perfekt. **Les cheminots** (av *chemin de fer*) är SNCF:s anställda.',
+    noteEn: '**Depuis** + present for something still going on, where English uses the present perfect. **Les cheminots** (from *chemin de fer*) are SNCF rail workers.',
+    gloss: [['les cheminots', 'järnvägsarbetarna', 'the railway workers'], ['sont en grève', 'strejkar', 'are on strike'], ['depuis mardi', 'sedan i tisdags', 'since Tuesday']],
+  }),
+  phrase(D, 'fr-u21-majorite-serait-contre', {
+    prompt: 'Återge en undersökning: en majoritet av fransmännen ska vara emot reformen', promptEn: 'Report a poll: most French people are said to be against the reform',
+    fr: 'Selon un sondage, la majorité des Français serait contre la réforme.', sv: 'Enligt en undersökning ska en majoritet av fransmännen vara emot reformen.', en: 'According to a poll, most French people are against the reform.',
+    ipa: '/sə.lɔ̃ œ̃ sɔ̃.daʒ la ma.ʒɔ.ʁi.te de fʁɑ̃.sɛ sə.ʁɛ kɔ̃tʁ la ʁe.fɔʁm/',
+    note: 'Journalister använder **konditionalis** för uppgifter de inte själva bekräftat: *serait* = ska vara, uppges vara. Det motsvarar svenskans *ska* i *han ska ha sagt*.',
+    noteEn: 'Journalists use the **conditional** for unconfirmed information: *serait* = is said to be, reportedly is. Similar to English *allegedly*.',
+    gloss: [['selon un sondage', 'enligt en undersökning', 'according to a poll'], ['la majorité', 'majoriteten', 'the majority'], ['des Français', 'av fransmännen', 'of French people'], ['serait', 'ska vara', 'is reportedly'], ['contre la réforme', 'emot reformen', 'against the reform']],
+  }),
+  phrase(D, 'fr-u21-ministre-demissionnerait', {
+    prompt: 'Återge att ministern meddelade att han skulle avgå i slutet av månaden', promptEn: 'Report that the minister announced he would resign at the end of the month',
+    fr: 'Le ministre a annoncé qu’il démissionnerait à la fin du mois.', sv: 'Ministern meddelade att han skulle avgå i slutet av månaden.', en: 'The minister announced that he would resign at the end of the month.',
+    ipa: '/lə mi.nistʁ a a.nɔ̃.se kil de.mi.sjɔn.ʁɛ a la fɛ̃ dy mwa/',
+    note: 'I **indirekt tal** i dåtid blir futurum konditionalis: *”Je démissionnerai”* blir *il a annoncé qu’il démissionnerait*, precis som *will* blir *would*.',
+    noteEn: 'In **reported speech** in the past, the future becomes the conditional: *"Je démissionnerai"* becomes *il a annoncé qu’il démissionnerait*, just as *will* becomes *would*.',
+    gloss: [['le ministre', 'ministern', 'the minister'], ['a annoncé', 'meddelade', 'announced'], ['qu’il', 'att han', 'that he'], ['démissionnerait', 'skulle avgå', 'would resign'], ['à la fin du mois', 'i slutet av månaden', 'at the end of the month']],
+  }),
+  phrase(D, 'fr-u21-tu-as-vu-20-heures', {
+    prompt: 'Fråga en vän om hen såg vad de sa i kvällsnyheterna', promptEn: 'Ask a friend if they saw what was said on the evening news',
+    fr: 'Tu as vu ce qu’ils ont dit au journal de vingt heures ?', sv: 'Såg du vad de sa i nyheterna i kväll?', en: 'Did you see what they said on the eight o’clock news?',
+    ipa: '/ty a vy sə kil.z‿ɔ̃ di o ʒuʁ.nal də vɛ̃.t‿œʁ/',
+    note: '**Ce que** = det som, vad (som objekt): *ce qu’ils ont dit*. Bindning i *vingt heures*: t:et uttalas, [vɛ̃tœʁ].',
+    noteEn: '**Ce que** = what (as an object): *ce qu’ils ont dit*. Liaison in *vingt heures*: the t is pronounced, [vɛ̃tœʁ].',
+    gloss: [['tu as vu', 'såg du', 'did you see'], ['ce qu’', 'vad', 'what'], ['ils ont dit', 'de sa', 'they said'], ['au journal de vingt heures', 'i åttanyheterna', 'on the eight o’clock news']],
+  }),
+  phrase(D, 'fr-u21-second-tour', {
+    prompt: 'Säg att andra omgången i presidentvalet äger rum om två veckor', promptEn: 'Say the second round of the presidential election takes place in two weeks',
+    fr: 'Le second tour de l’élection présidentielle aura lieu dans deux semaines.', sv: 'Andra omgången i presidentvalet äger rum om två veckor.', en: 'The second round of the presidential election will take place in two weeks.',
+    ipa: '/lə sə.ɡɔ̃ tuʁ də le.lɛk.sjɔ̃ pʁe.zi.dɑ̃.sjɛl o.ʁa ljø dɑ̃ dø sə.mɛn/',
+    note: 'I **second** uttalas c:et [g]: [səgɔ̃]. **Dans** + tid = om (framåt i tiden): *dans deux semaines* = om två veckor.',
+    noteEn: 'In **second** the c is pronounced [g]: [səgɔ̃]. **Dans** + time = in (from now): *dans deux semaines* = in two weeks.',
+    gloss: [['le second tour', 'andra omgången', 'the second round'], ['de l’élection présidentielle', 'i presidentvalet', 'of the presidential election'], ['aura lieu', 'äger rum', 'will take place'], ['dans deux semaines', 'om två veckor', 'in two weeks']],
+  }),
+  phrase(D, 'fr-u21-accident-autoroute', {
+    prompt: 'Återge en olycka på motorvägen där tre personer uppges ha skadats', promptEn: 'Report a motorway accident in which three people were reportedly injured',
+    fr: 'Il y a eu un accident sur l’autoroute : trois personnes auraient été blessées.', sv: 'Det har skett en olycka på motorvägen: tre personer ska ha skadats.', en: 'There has been an accident on the motorway: three people were reportedly injured.',
+    ipa: '/il i.a y œ̃.n‿ak.si.dɑ̃ syʁ lo.to.ʁut tʁwa pɛʁ.sɔn o.ʁɛ.t‿e.te ble.se/',
+    note: 'Samma journalistiska konditionalis i dåtid: **auraient été blessées** = ska ha skadats. **Il y a eu** är passé composé av *il y a*.',
+    noteEn: 'The same journalistic conditional, in the past: **auraient été blessées** = were reportedly injured. **Il y a eu** is the passé composé of *il y a*.',
+    gloss: [['il y a eu', 'det har skett', 'there has been'], ['un accident', 'en olycka', 'an accident'], ['sur l’autoroute', 'på motorvägen', 'on the motorway'], ['trois personnes', 'tre personer', 'three people'], ['auraient été blessées', 'ska ha skadats', 'were reportedly injured']],
+  }),
+  phrase(D, 'fr-u21-a-cause-de-la-greve', {
+    prompt: 'Förklara att du inte kunde komma eftersom det inte gick några tåg på grund av strejken', promptEn: 'Explain you couldn’t come because there were no trains due to the strike',
+    fr: 'Je n’ai pas pu venir parce qu’il n’y avait aucun train à cause de la grève.', sv: 'Jag kunde inte komma, för det gick inga tåg på grund av strejken.', en: 'I couldn’t come because there were no trains because of the strike.',
+    ipa: '/ʒə ne pa py və.niʁ paʁs kil ni a.vɛ o.kœ̃ tʁɛ̃ a koz də la ɡʁɛv/',
+    note: '**À cause de** för en negativ orsak, **grâce à** (tack vare) för en positiv. **Aucun** (inte en enda) ersätter *pas de* och kräver *ne*.',
+    noteEn: '**À cause de** for a negative cause, **grâce à** (thanks to) for a positive one. **Aucun** (not a single) replaces *pas de* and needs *ne*.',
+    gloss: [['je n’ai pas pu', 'jag kunde inte', 'I couldn’t'], ['venir', 'komma', 'come'], ['parce qu’', 'eftersom', 'because'], ['il n’y avait aucun train', 'det gick inga tåg', 'there were no trains'], ['à cause de la grève', 'på grund av strejken', 'because of the strike']],
+  }),
+  phrase(D, 'fr-u21-milliers-ont-manifeste', {
+    prompt: 'Säg att tusentals människor demonstrerade i hela Frankrike i lördags', promptEn: 'Say thousands of people demonstrated all over France on Saturday',
+    fr: 'Des milliers de personnes ont manifesté dans toute la France samedi.', sv: 'Tusentals människor demonstrerade i hela Frankrike i lördags.', en: 'Thousands of people demonstrated all over France on Saturday.',
+    ipa: '/de mi.lje də pɛʁ.sɔn ɔ̃ ma.ni.fɛs.te dɑ̃ tut la fʁɑ̃s sam.di/',
+    note: '**Des milliers de** = tusentals, med *de* utan artikel framför substantivet. **Samedi** utan artikel betyder i lördags eller på lördag beroende på tempus.',
+    noteEn: '**Des milliers de** = thousands of, with *de* and no article before the noun. **Samedi** without an article means last or next Saturday depending on the tense.',
+    gloss: [['des milliers de', 'tusentals', 'thousands of'], ['personnes', 'människor', 'people'], ['ont manifesté', 'demonstrerade', 'demonstrated'], ['dans toute la France', 'i hela Frankrike', 'all over France'], ['samedi', 'i lördags', 'on Saturday']],
+  }),
+];

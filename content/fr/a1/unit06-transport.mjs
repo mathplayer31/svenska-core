@@ -1,0 +1,162 @@
+// FranceCore, Unité 6 : Se déplacer. Métro, bus, train SNCF, billets, demander son chemin.
+import { vocab, phrase, unitDeck } from '../helpers.mjs';
+
+export const UNIT6_DECK = unitDeck({
+  n: 6, slug: 'fr-unit-6-transport', sv: 'Att ta sig fram', en: 'Getting around',
+  level: 'A1', section: 'fr-section-2-vie-quotidienne', after: 'fr-unit-5-restaurant',
+});
+const D = UNIT6_DECK.slug;
+
+export const UNIT6_CARDS = [
+  // ===================== MOTS =====================
+  vocab(D, 'fr-u6-le-metro', {
+    prompt: 'Tunnelbanan', promptEn: 'The underground / subway',
+    fr: 'le métro', sv: 'tunnelbanan', en: 'the metro / the underground',
+    ipa: '/lə me.tʁo/',
+    note: 'Paris, Lyon, Marseille, Lille, Toulouse och Rennes har tunnelbana. Linjerna har nummer och anges med slutstationen: *direction Château de Vincennes*.',
+    noteEn: 'Paris, Lyon, Marseille, Lille, Toulouse and Rennes have a metro. Lines have numbers and are signed by their last stop: *direction Château de Vincennes*.',
+  }),
+  vocab(D, 'fr-u6-le-bus', {
+    prompt: 'Buss i stan', promptEn: 'A bus in town',
+    fr: 'le bus', sv: 'bussen', en: 'the bus',
+    ipa: '/lə bys/',
+    note: 'Här uttalas slutets **s**, och **u** är [y]: [bys]. En långfärdsbuss heter **un car**.',
+    noteEn: 'Here the final **s** is pronounced, and **u** is [y]: [bys]. A long-distance coach is **un car**.',
+  }),
+  vocab(D, 'fr-u6-le-train', {
+    prompt: 'Tåget mellan städer', promptEn: 'The train between cities',
+    fr: 'le train', sv: 'tåget', en: 'the train',
+    ipa: '/lə tʁɛ̃/',
+    note: 'Tågen körs av **la SNCF**, och snabbtåget heter **le TGV** (TGV INOUI eller billiga OUIGO). **ain** är nasalt [ɛ̃].',
+    noteEn: 'Trains are run by **la SNCF**, and the high-speed train is **le TGV** (TGV INOUI, or the low-cost OUIGO). **ain** is the nasal [ɛ̃].',
+  }),
+  vocab(D, 'fr-u6-la-gare', {
+    prompt: 'Stället där tågen stannar', promptEn: 'Where the trains stop',
+    fr: 'la gare', sv: 'järnvägsstationen', en: 'the train station',
+    ipa: '/la ɡaʁ/',
+    note: 'Paris har flera stora stationer, var och en åt sitt håll: tåg mot Lyon går från **la gare de Lyon**. En tunnelbanestation heter i stället *une station*.',
+    noteEn: 'Paris has several main stations, each serving its own direction: trains to Lyon leave from **la gare de Lyon**. A metro stop is called *une station* instead.',
+  }),
+  vocab(D, 'fr-u6-la-station', {
+    prompt: 'Hållplatsen för tunnelbanan', promptEn: 'The stop for the metro',
+    fr: 'la station', sv: 'tunnelbanestationen', en: 'the metro station',
+    ipa: '/la sta.sjɔ̃/',
+    note: '**-tion** uttalas [sjɔ̃], aldrig som engelskt *-shun*. För buss säger man **l’arrêt** (hållplatsen).',
+    noteEn: '**-tion** is [sjɔ̃], never the English *-shun*. For buses you say **l’arrêt** (the stop).',
+  }),
+  vocab(D, 'fr-u6-le-ticket', {
+    prompt: 'Biljett till tunnelbana eller buss', promptEn: 'A ticket for the metro or bus',
+    fr: 'le ticket / le billet', sv: 'biljetten', en: 'the ticket',
+    ipa: '/lə ti.kɛ/ /lə bi.jɛ/',
+    note: '**Un ticket** för metro och buss, **un billet** för tåg. I *billet* uttalas **ll** [j]: [bijɛ]. Stämpla bussbiljetten, annars riskerar du böter.',
+    noteEn: '**Un ticket** for the metro and bus, **un billet** for the train. In *billet* the **ll** is [j]: [bijɛ]. Validate your bus ticket, or you risk a fine.',
+  }),
+  vocab(D, 'fr-u6-un-aller-retour', {
+    prompt: 'Biljett dit och tillbaka', promptEn: 'A ticket there and back',
+    fr: 'un aller-retour / un aller simple', sv: 'en tur och retur / en enkelbiljett', en: 'a return / a single',
+    ipa: '/œ̃.n‿a.le ʁə.tuʁ/ /œ̃.n‿a.le sɛ̃pl/',
+    note: '**Aller** = att åka dit, **retour** = tillbaka. Bindning: *un‿aller* [œ̃nale].',
+    noteEn: '**Aller** = going, **retour** = coming back. Liaison: *un‿aller* [œ̃nale].',
+  }),
+  vocab(D, 'fr-u6-a-gauche', {
+    prompt: 'Vänster', promptEn: 'Left',
+    fr: 'à gauche', sv: 'till vänster', en: 'on the left / to the left',
+    ipa: '/a ɡoʃ/',
+    note: '**au** uttalas [o]. Används både för riktning (*tournez à gauche*) och plats (*c’est à gauche*).',
+    noteEn: '**au** is [o]. Used both for direction (*tournez à gauche*) and position (*c’est à gauche*).',
+  }),
+  vocab(D, 'fr-u6-a-droite', {
+    prompt: 'Höger', promptEn: 'Right',
+    fr: 'à droite', sv: 'till höger', en: 'on the right / to the right',
+    ipa: '/a dʁwat/',
+    note: 'Blanda inte ihop **à droite** (till höger) med **tout droit** (rakt fram): de låter nästan likadant. Här hörs t:et tack vare e:t.',
+    noteEn: 'Don’t mix up **à droite** (right) and **tout droit** (straight on): they sound very close. Here the t is heard thanks to the e.',
+  }),
+  vocab(D, 'fr-u6-tout-droit', {
+    prompt: 'Rakt fram', promptEn: 'Straight ahead',
+    fr: 'tout droit', sv: 'rakt fram', en: 'straight on / straight ahead',
+    ipa: '/tu dʁwa/',
+    note: 'Båda t:na är stumma: [tu dʁwa]. Jämför med *à droite* [a dʁwat], där t:et hörs.',
+    noteEn: 'Both t’s are silent: [tu dʁwa]. Compare *à droite* [a dʁwat], where the t is heard.',
+  }),
+  vocab(D, 'fr-u6-pres-loin', {
+    prompt: 'Nära och långt bort', promptEn: 'Near and far',
+    fr: 'près / loin', sv: 'nära / långt bort', en: 'near / far',
+    ipa: '/pʁɛ/ /lwɛ̃/',
+    note: 'Med en plats: **près de la gare**, **loin du centre**. **oin** uttalas [wɛ̃], ett w följt av en nasal.',
+    noteEn: 'With a place: **près de la gare**, **loin du centre**. **oin** is [wɛ̃], a w followed by a nasal vowel.',
+  }),
+  vocab(D, 'fr-u6-la-sortie', {
+    prompt: 'Vägen ut ur stationen', promptEn: 'The way out of the station',
+    fr: 'la sortie', sv: 'utgången', en: 'the exit / the way out',
+    ipa: '/la sɔʁ.ti/',
+    note: 'Följ skyltarna **Sortie** i metron. Ett byte mellan linjer heter **une correspondance**.',
+    noteEn: 'Follow the **Sortie** signs in the metro. Changing lines is **une correspondance**.',
+  }),
+
+  // ===================== PHRASES =====================
+  phrase(D, 'fr-u6-ou-est-la-station-de-metro', {
+    prompt: 'Fråga var tunnelbanan är', promptEn: 'Ask where the metro station is',
+    fr: 'Excusez-moi, où est la station de métro ?', sv: 'Ursäkta, var ligger tunnelbanestationen?', en: 'Excuse me, where is the metro station?',
+    ipa: '/ɛk.sky.ze mwa u ɛ la sta.sjɔ̃ də me.tʁo/',
+    note: 'Börja alltid med **excusez-moi** eller **bonjour** när du stoppar någon på gatan. **Où** (var) har accent, till skillnad från *ou* (eller).',
+    noteEn: 'Always start with **excusez-moi** or **bonjour** when you stop someone in the street. **Où** (where) has an accent, unlike *ou* (or).',
+    gloss: [['excusez-moi', 'ursäkta', 'excuse me'], ['où', 'var', 'where'], ['est', 'ligger', 'is'], ['la', '(den)', 'the'], ['station', 'station', 'station'], ['de', '(för)', 'of'], ['métro', 'tunnelbana', 'metro']],
+  }),
+  phrase(D, 'fr-u6-je-cherche-la-gare', {
+    prompt: 'Säg att du letar efter stationen', promptEn: 'Say you’re looking for the station',
+    fr: 'Je cherche la gare.', sv: 'Jag letar efter stationen.', en: 'I’m looking for the station.',
+    ipa: '/ʒə ʃɛʁʃ la ɡaʁ/',
+    note: '**Chercher** tar ett direkt objekt, utan preposition: *je cherche **la** gare*, inte *après* eller *pour*.',
+    noteEn: '**Chercher** takes a direct object with no preposition: *je cherche **la** gare*, no word for "for".',
+    gloss: [['je', 'jag', 'I'], ['cherche', 'letar efter', 'am looking for'], ['la', '(den)', 'the'], ['gare', 'stationen', 'station']],
+  }),
+  phrase(D, 'fr-u6-cest-loin', {
+    prompt: 'Fråga om det är långt', promptEn: 'Ask if it’s far',
+    fr: 'C’est loin d’ici ?', sv: 'Är det långt härifrån?', en: 'Is it far from here?',
+    ipa: '/sɛ lwɛ̃ di.si/',
+    note: 'Ofta får du svaret i minuter till fots: **C’est à cinq minutes à pied.** **D’ici** = *de* + *ici*.',
+    noteEn: 'You often get the answer in minutes on foot: **C’est à cinq minutes à pied.** **D’ici** = *de* + *ici*.',
+    gloss: [['c’est', 'är det', 'is it'], ['loin', 'långt', 'far'], ['d’ici', 'härifrån', 'from here']],
+  }),
+  phrase(D, 'fr-u6-tournez-a-gauche', {
+    prompt: 'Säg till någon att svänga vänster', promptEn: 'Tell someone to turn left',
+    fr: 'Tournez à gauche.', sv: 'Sväng till vänster.', en: 'Turn left.',
+    ipa: '/tuʁ.ne a ɡoʃ/',
+    note: 'Imperativ med *vous*: verbformen utan pronomen, **tournez**. Till en vän: **tourne à gauche**.',
+    noteEn: 'Imperative with *vous*: the verb form without the pronoun, **tournez**. To a friend: **tourne à gauche**.',
+    gloss: [['tournez', 'sväng', 'turn'], ['à gauche', 'till vänster', 'left']],
+  }),
+  phrase(D, 'fr-u6-cest-tout-droit', {
+    prompt: 'Säg att det är rakt fram', promptEn: 'Say it’s straight ahead',
+    fr: 'C’est tout droit.', sv: 'Det är rakt fram.', en: 'It’s straight ahead.',
+    ipa: '/sɛ tu dʁwa/',
+    note: 'Lyssna noga: [tu dʁwa] är rakt fram, [a dʁwat] är till höger. Bekräfta gärna: *À droite ou tout droit ?*',
+    noteEn: 'Listen carefully: [tu dʁwa] is straight on, [a dʁwat] is to the right. Feel free to check: *À droite ou tout droit ?*',
+    gloss: [['c’est', 'det är', 'it is'], ['tout droit', 'rakt fram', 'straight ahead']],
+  }),
+  phrase(D, 'fr-u6-un-aller-retour-pour-lyon', {
+    prompt: 'Köp en tur och retur till Lyon', promptEn: 'Buy a return ticket to Lyon',
+    fr: 'Un aller-retour pour Lyon, s’il vous plaît.', sv: 'En tur och retur till Lyon, tack.', en: 'A return to Lyon, please.',
+    ipa: '/œ̃.n‿a.le ʁə.tuʁ puʁ ljɔ̃ sil vu plɛ/',
+    note: 'Resmålet tar **pour**, inte *à*. De flesta köper biljetter i appen **SNCF Connect**, och de billigaste säljs långt i förväg.',
+    noteEn: 'The destination takes **pour**, not *à*. Most people buy tickets in the **SNCF Connect** app, and the cheapest ones sell out well in advance.',
+    gloss: [['un', 'en', 'a'], ['aller-retour', 'tur och retur', 'return ticket'], ['pour', 'till', 'to'], ['Lyon', 'Lyon', 'Lyon'], ['s’il vous plaît', 'tack', 'please']],
+  }),
+  phrase(D, 'fr-u6-le-train-part-a-quelle-heure', {
+    prompt: 'Fråga när tåget går', promptEn: 'Ask when the train leaves',
+    fr: 'Le train part à quelle heure ?', sv: 'När går tåget?', en: 'What time does the train leave?',
+    ipa: '/lə tʁɛ̃ paʁ a kɛ.l‿œʁ/',
+    note: 'Ordagrant ”tåget avgår vid vilken timme?”. **h** i *heure* är stumt, så *quelle heure* binds ihop: [kɛlœʁ]. Tåg och tider anges med 24-timmarsklocka.',
+    noteEn: 'Literally "the train leaves at what hour?". The **h** in *heure* is silent, so *quelle heure* runs together: [kɛlœʁ]. Timetables use the 24-hour clock.',
+    gloss: [['le', '(det)', 'the'], ['train', 'tåget', 'train'], ['part', 'går', 'leaves'], ['à', 'vid', 'at'], ['quelle', 'vilken', 'what'], ['heure', 'tid', 'time']],
+  }),
+  phrase(D, 'fr-u6-on-prend-le-metro', {
+    prompt: 'Föreslå att ni tar tunnelbanan', promptEn: 'Suggest taking the metro',
+    fr: 'On prend le métro ?', sv: 'Ska vi ta tunnelbanan?', en: 'Shall we take the metro?',
+    ipa: '/ɔ̃ pʁɑ̃ lə me.tʁo/',
+    note: 'Med stigande ton blir **on** + presens ett förslag: ”ska vi ...?”. Man **tar** transportmedlet: *prendre le bus, prendre le train*.',
+    noteEn: 'With a rising tone, **on** + present tense becomes a suggestion: "shall we ...?". You **take** a means of transport: *prendre le bus, prendre le train*.',
+    gloss: [['on', 'vi', 'we'], ['prend', 'tar', 'take'], ['le', '(den)', 'the'], ['métro', 'tunnelbanan', 'metro']],
+  }),
+];
