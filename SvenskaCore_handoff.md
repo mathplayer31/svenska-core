@@ -18,7 +18,7 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Postgres : `postgresql://postgres:postgres@127.0.0.1:54322/postgres`
 - `.env.local` : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
-- Dépôt git local (branche `main`). Dépôt GitHub **privé** à créer/pousser.
+- Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
 ## Refonte visuelle « nordique clair » : AJOUTÉ (18 nov 2026)
 - Thème dans `src/index.css` : variables CSS (`--bg`, `--surface`, `--ink`, `--accent` bleu #1F4E8C, `--gold` #F2C14E…) exposées à Tailwind via `@theme inline` (classes `bg-bg`, `bg-surface`, `text-ink`, `text-muted`, `bg-accent`, `border-line`…). Mode sombre automatique (`prefers-color-scheme`). Ne plus utiliser de couleurs Tailwind brutes (`slate-*`, `amber-*`…).
