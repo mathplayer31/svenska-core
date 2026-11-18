@@ -1,5 +1,5 @@
 // Textes de l'interface en français et en anglais (issue #1).
-// Le contenu des cartes est traduit côté données (content-en.mjs) ; ici, seulement l'interface.
+// Le contenu des cartes est traduit côté données (content/a1/en.mjs) ; ici, seulement l'interface.
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 export type Lang = 'fr' | 'en';

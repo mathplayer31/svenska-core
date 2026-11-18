@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview",
     "dev:local": "vite --mode android",
+    "build": "tsc -b && vite build",
+    "content": "node --env-file=.env.local scripts/sync-content.mjs",
+    "apk": "node scripts/build-android.mjs",
     "build:android": "tsc -b && vite build --mode android && cap sync android",
-    "apk": "node scripts/build-android.mjs"
+    "lint": "oxlint",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@capacitor/android": "^8.6.2",

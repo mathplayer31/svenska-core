@@ -1,6 +1,6 @@
 -- SvenskaCore : schéma complet de la base (public), exporté de Supabase local le 18/11/2026.
 -- Pour une base neuve : coller dans Supabase Studio > SQL Editor, puis lancer
---   node --env-file=.env.local generate-audio.mjs   pour remplir sections, decks et cartes.
+--   npm run content   pour remplir sections, decks et cartes.
 -- RLS : policies de dev permissives, à restreindre avant toute mise en ligne.
 
 CREATE TABLE public.cards (

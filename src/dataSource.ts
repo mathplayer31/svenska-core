@@ -1,6 +1,6 @@
 // Couche d'accès aux données.
 //  - Web (dev) : Supabase local, contenu + progression en base.
-//  - Android / mode « local » : contenu embarqué (content.json, exporté par generate-audio.mjs)
+//  - Android / mode « local » : contenu embarqué (content.json, exporté par scripts/sync-content.mjs)
 //    et progression stockée sur l'appareil. Aucun réseau nécessaire.
 import { Capacitor } from '@capacitor/core';
 
