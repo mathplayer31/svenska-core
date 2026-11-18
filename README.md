@@ -5,7 +5,7 @@ App d'apprentissage du suédois (A1) pour francophones : cartes audio avec rép�
 ## Stack
 - React 19 + TypeScript + Vite + Tailwind CSS v4
 - `ts-fsrs` pour la répétition espacée
-- Supabase local (Docker) pour le contenu et la progression en mode web
+- Supabase local (Docker) pour le pipeline de contenu, Supabase Cloud pour les comptes (synchro de progression)
 - `edge-tts` (`sv-SE-SofieNeural`) pour l'audio
 - Capacitor pour l'APK Android
 
@@ -22,7 +22,7 @@ scripts/
   build-android.mjs APK adapté à la charge du PC (npm run apk)
 src/                application React
 docs/               PROGRAMME.md (programme A1 à B2), HANDOFF.md (décisions et reste à faire)
-supabase/           schema.sql, migrations-manuelles/
+supabase/           schema.sql (contenu), cloud-schema.sql (comptes), migrations-manuelles/
 ```
 
 ## Démarrer (web)
@@ -40,6 +40,11 @@ npm run dev
 VITE_SUPABASE_URL=http://127.0.0.1:54321
 VITE_SUPABASE_ANON_KEY=<clé anon affichée par `supabase status`>
 ```
+
+Comptes : `.env.production` (build web) et `.env.android` (APK) contiennent l'URL et la clé anon du projet Supabase Cloud. Vides, l'app marche sans compte.
+
+## Déployer (web)
+Cloudflare Pages relié au dépôt GitHub : commande `npm run build`, dossier `dist` (Node 22, `.node-version`).
 
 ## Suivi du projet
 Décisions, schéma et reste à faire : [docs/HANDOFF.md](docs/HANDOFF.md).
