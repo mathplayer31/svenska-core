@@ -1,6 +1,6 @@
 // Carte d'étude retournable, notée avec FSRS (issue #10) : nouvelles cartes de la séance d'unité,
 // rappels sans exercice adapté (grammaire, paires minimales) et séances des fondations.
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Rating, type Grade } from 'ts-fsrs';
 import { BookOpen, Ear, MessageCircle, Play, Sparkles } from 'lucide-react';
 import { useI18n } from './i18n';
@@ -22,21 +22,33 @@ export interface StudyCardData {
   tone?: Tone | null;
 }
 
-export function playUrl(url: string, rate = 1): Promise<void> {
+/** onProgress reçoit l'avancement de 0 à 1 pendant la lecture, puis null à la fin */
+export function playUrl(url: string, rate = 1, onProgress?: (p: number | null) => void): Promise<void> {
   return new Promise((resolve) => {
     const audio = new Audio(url.trim());
     audio.playbackRate = rate;
     audio.preservesPitch = true;
-    audio.onended = () => resolve();
-    audio.onerror = () => resolve();
-    audio.play().catch(() => resolve());
+    const done = () => {
+      onProgress?.(null);
+      resolve();
+    };
+    // requestAnimationFrame plutôt que timeupdate (4 fois par seconde, trop saccadé pour un mot d'une seconde)
+    const tick = () => {
+      if (audio.ended || audio.paused) return;
+      if (audio.duration > 0) onProgress?.(audio.currentTime / audio.duration);
+      requestAnimationFrame(tick);
+    };
+    audio.onplaying = () => onProgress && requestAnimationFrame(tick);
+    audio.onended = done;
+    audio.onerror = done;
+    audio.play().catch(done);
   });
 }
 
-export async function playAll(audioUrl: string | undefined, rate = 1) {
+export async function playAll(audioUrl: string | undefined, rate = 1, onProgress?: (p: number | null) => void) {
   const urls = (audioUrl ?? '').split('|').map((u) => u.trim()).filter(Boolean);
   for (let i = 0; i < urls.length; i++) {
-    await playUrl(urls[i], rate);
+    await playUrl(urls[i], rate, onProgress);
     if (i < urls.length - 1) await new Promise((r) => setTimeout(r, 350));
   }
 }
@@ -86,12 +98,15 @@ export default function StudyCard({
     [Rating.Good]: t.rateGood,
     [Rating.Easy]: t.rateEasy,
   };
+  const [progress, setProgress] = useState<number | null>(null);
+  // La barre ne suit que le lecteur à un seul son (plusieurs sons : une ligne par forme, sans barre)
+  const track = urls.length === 1 ? setProgress : undefined;
   const TypeIcon =
     card.cardType === 'minimal_pair' ? Ear : card.cardType === 'cloze_grammar' ? BookOpen : card.cardType === 'phrase' ? MessageCircle : Sparkles;
 
   const flip = () => {
     onFlip();
-    playAll(card.audioUrl);
+    playAll(card.audioUrl, 1, track);
   };
 
   // Clavier : Espace retourne, 1 à 4 notent, R réécoute, S ralentit
@@ -104,8 +119,8 @@ export default function StudyCard({
       } else if (flipped) {
         const r = RATINGS.find((x) => x.key === e.key);
         if (r) onRate(r.grade);
-        if (e.key.toLowerCase() === 'r') playAll(card.audioUrl);
-        if (e.key.toLowerCase() === 's') playAll(card.audioUrl, 0.7);
+        if (e.key.toLowerCase() === 'r') playAll(card.audioUrl, 1, track);
+        if (e.key.toLowerCase() === 's') playAll(card.audioUrl, 0.7, track);
       }
     };
     window.addEventListener('keydown', onKey);
@@ -146,15 +161,15 @@ export default function StudyCard({
             {urls.length === 1 && (
               <div className="flex items-center gap-3 p-2.5 pr-3 rounded-full bg-bg">
                 <button
-                  onClick={() => playUrl(urls[0])}
+                  onClick={() => playUrl(urls[0], 1, setProgress)}
                   aria-label={t.listen}
                   className="grid place-items-center w-12 h-12 rounded-full bg-strong text-strong-ink shrink-0 cursor-pointer hover:opacity-90"
                 >
                   <Play className="w-5 h-5 fill-current" aria-hidden />
                 </button>
-                <PlayerWave className="flex-1 min-w-0" />
+                <PlayerWave progress={progress} className="flex-1 min-w-0" />
                 <button
-                  onClick={() => playUrl(urls[0], 0.7)}
+                  onClick={() => playUrl(urls[0], 0.7, setProgress)}
                   aria-label={t.listenSlowly}
                   className="h-10 px-3 rounded-full bg-surface text-ink text-sm font-semibold cursor-pointer hover:bg-surface-2"
                 >

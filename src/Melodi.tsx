@@ -96,11 +96,19 @@ export function WaveProgress({ value, label }: { value: number; label: string })
 }
 
 /** Forme d'onde décorative du mini-lecteur */
-export function PlayerWave({ className = '' }: { className?: string }) {
+/** Onde du lecteur : les barres se remplissent pendant la lecture (progress de 0 à 1, null à l'arrêt) */
+export function PlayerWave({ progress = null, className = '' }: { progress?: number | null; className?: string }) {
+  const bars = WAVE.slice(0, 22);
+  const filled = progress === null ? 0 : Math.ceil(progress * bars.length);
   return (
     <span aria-hidden className={`flex items-center gap-[2px] h-8 overflow-hidden ${className}`}>
-      {WAVE.slice(0, 22).map((h, i) => (
-        <span key={i} className={`w-[3px] shrink-0 rounded-sm ${i < 6 ? 'bg-accent' : 'bg-line'}`} style={{ height: Math.max(6, h) }} />
+      {bars.map((h, i) => (
+        <span
+          key={i}
+          className={`w-[3px] shrink-0 rounded-sm transition-[transform,background-color] duration-150 ${i < filled ? 'bg-accent' : 'bg-line'}`}
+          // La barre en cours de lecture grandit un peu : l'onde « bat » avec le son
+          style={{ height: Math.max(6, h), transform: progress !== null && i === filled - 1 ? 'scaleY(1.25)' : undefined }}
+        />
       ))}
     </span>
   );
