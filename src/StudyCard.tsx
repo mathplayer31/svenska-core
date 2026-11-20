@@ -32,13 +32,17 @@ export function playUrl(url: string, rate = 1, onProgress?: (p: number | null) =
       onProgress?.(null);
       resolve();
     };
-    // requestAnimationFrame plutôt que timeupdate (4 fois par seconde, trop saccadé pour un mot d'une seconde)
+    const report = () => {
+      if (!audio.ended && !audio.paused && audio.duration > 0) onProgress?.(audio.currentTime / audio.duration);
+    };
+    // requestAnimationFrame pour la fluidité ; timeupdate (4 fois par seconde) prend le relais si le navigateur bride les images
     const tick = () => {
       if (audio.ended || audio.paused) return;
-      if (audio.duration > 0) onProgress?.(audio.currentTime / audio.duration);
+      report();
       requestAnimationFrame(tick);
     };
     audio.onplaying = () => onProgress && requestAnimationFrame(tick);
+    audio.ontimeupdate = report;
     audio.onended = done;
     audio.onerror = done;
     audio.play().catch(done);
