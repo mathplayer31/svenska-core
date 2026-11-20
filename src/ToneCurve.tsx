@@ -44,8 +44,8 @@ export function tonePoints(tone: Tone, xs: number[], width: number) {
   const pts: { x: number; y: number }[] = [{ x: Math.max(-PAD, first - 30), y: LOW }];
   xs.forEach((x, i) => {
     if (tone.a === 2 && tone.p !== null && i === tone.p) {
-      // creux entre les deux sommets, puis remontée
-      pts.push({ x: (xs[tone.s] + x) / 2, y: LOW });
+      // Creux entre deux sommets voisins ; s'il y a des syllabes entre eux, elles forment déjà le creux
+      if (tone.p === tone.s + 1) pts.push({ x: (xs[tone.s] + x) / 2, y: LOW });
       pts.push({ x, y: HIGH + 6 });
     } else if (i === tone.s) {
       pts.push({ x, y: HIGH });
@@ -59,14 +59,27 @@ export function tonePoints(tone: Tone, xs: number[], width: number) {
 
 export default function ToneCurve({ tone, className = '' }: { tone: Tone; className?: string }) {
   const { t } = useI18n();
+  const fig = useRef<HTMLElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
+  const word = useRef<HTMLParagraphElement>(null);
   const nuclei = useRef<(HTMLSpanElement | null)[]>([]);
   const [geo, setGeo] = useState<{ w: number; xs: number[] } | null>(null);
+  const [size, setSize] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     const measure = () => {
+      const f = fig.current;
+      const p = word.current;
       const box = wrap.current?.getBoundingClientRect();
-      if (!box || box.width === 0) return;
+      if (!f || !p || !box || box.width === 0) return;
+      // Le mot reste sur une ligne : s'il déborde, la taille baisse jusqu'à tenir (sinon la courbe se décale)
+      const avail = f.clientWidth;
+      const cur = parseFloat(getComputedStyle(p).fontSize);
+      const fit = Math.max(22, Math.min(avail >= 480 ? 64 : 48, Math.floor((cur * avail) / p.scrollWidth)));
+      if (p.scrollWidth > avail + 0.5 || fit >= cur + 2) {
+        setSize(fit);
+        return;
+      }
       const xs = tone.v.map((_, i) => {
         const r = nuclei.current[i]?.getBoundingClientRect();
         return r ? r.left - box.left + r.width / 2 : 0;
@@ -75,10 +88,11 @@ export default function ToneCurve({ tone, className = '' }: { tone: Tone; classN
     };
     measure();
     const ro = new ResizeObserver(measure);
+    if (fig.current) ro.observe(fig.current);
     if (wrap.current) ro.observe(wrap.current);
     document.fonts?.ready.then(measure);
     return () => ro.disconnect();
-  }, [tone]);
+  }, [tone, size]);
 
   // Mot découpé en morceaux : consonnes, puis noyaux mesurés pour placer la courbe
   const parts: { text: string; i: number | null }[] = [];
@@ -93,8 +107,8 @@ export default function ToneCurve({ tone, className = '' }: { tone: Tone; classN
   const peaks = tone.a === 2 && tone.p !== null ? [tone.s, tone.p] : [tone.s];
 
   return (
-    <figure role="img" aria-label={t.toneLabel(tone.w, tone.a)} className={`m-0 ${className}`}>
-      <div ref={wrap} className="inline-block max-w-full" aria-hidden>
+    <figure ref={fig} role="img" aria-label={t.toneLabel(tone.w, tone.a)} className={`m-0 ${className}`}>
+      <div ref={wrap} className="inline-block" aria-hidden>
         <svg
           width={(geo?.w ?? 0) + 2 * PAD}
           height={H}
@@ -112,7 +126,11 @@ export default function ToneCurve({ tone, className = '' }: { tone: Tone; classN
             </>
           )}
         </svg>
-        <p className="font-display font-extrabold tracking-tight text-ink leading-none text-5xl md:text-6xl break-words">
+        <p
+          ref={word}
+          style={{ fontSize: size ?? 48 }}
+          className="font-display font-extrabold tracking-tight text-ink leading-none whitespace-nowrap"
+        >
           {parts.map((part, k) =>
             part.i === null ? (
               <span key={k}>{part.text}</span>

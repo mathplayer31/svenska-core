@@ -138,9 +138,6 @@ export default function StudyCard({
                 <p className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-ink leading-tight">{card.target}</p>
               )}
               <div className="flex flex-wrap items-center gap-2 mt-4">
-                {card.tone && (
-                  <span className="px-3 py-1 rounded-full bg-gold-soft text-gold-ink text-xs font-bold">{t.toneChip(card.tone.a)}</span>
-                )}
                 {card.ipa && <span className="font-mono text-sm text-muted">{card.ipa}</span>}
               </div>
               <p className="font-display text-2xl md:text-3xl font-bold tracking-tight text-ink mt-4">{card.translation}</p>
