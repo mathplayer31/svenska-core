@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, existsSync, statSync, rmSync, writeFileSync } from 'node:fs';
+import { TONES } from '../content/sv/tones.mjs';
+import { withTone } from './tones-lib.mjs';
 import { UNIT1_DECK, UNIT1_CARDS } from '../content/sv/a1/unit01-greetings.mjs';
 import { UNIT2_DECK, UNIT2_CARDS } from '../content/sv/a1/unit02-cafe.mjs';
 import { UNIT3_DECK, UNIT3_CARDS } from '../content/sv/a1/unit03-family.mjs';
@@ -300,7 +302,8 @@ async function exportContent() {
       section_id: d.section_id ? sectionSlug.get(d.section_id) : null,
       prerequisite_deck_id: d.prerequisite_deck_id ? deckSlug.get(d.prerequisite_deck_id) : null,
     })),
-    cards: cards.data.map(({ created_at: _c, ...c }) => ({ ...c, id: c.slug, deck_id: deckSlug.get(c.deck_id) })),
+    // Courbe d'accent tonal (issue #10) : seulement pour les mots saisis dans content/sv/tones.mjs
+    cards: cards.data.map(({ created_at: _c, ...c }) => withTone({ ...c, id: c.slug, deck_id: deckSlug.get(c.deck_id) }, TONES)),
   };
   writeFileSync('./src/content.json', JSON.stringify(content) + '\n');
   console.log(`Contenu hors ligne exporté : src/content.json (${content.cards.length} cartes).`);

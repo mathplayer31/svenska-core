@@ -21,6 +21,12 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
+## Design Melodi, séances d'unité et accents tonals : AJOUTÉ (20 nov 2026, issue #10)
+- Look « Melodi » (lecteur de musique) : palette bleue dans `src/index.css`, thème clair / sombre / système (`src/theme.ts`, clé `svenska.theme`), pièces visuelles dans `src/Melodi.tsx` (drapeaux, pochettes d'albums, panneau de choix du cours). Remplace la refonte « nordique clair » ci-dessous.
+- Parcours : les sections sont des albums, les unités des pistes. Plus d'onglet Réviser : navigation Parcours / Fondations / Compte.
+- Séance d'unité (`src/UnitSession.tsx`, plan dans `src/sessionPlan.ts`) : 2 nouvelles cartes, un exercice sur chacune, 1 rappel, et ainsi de suite ; au plus 8 nouvelles cartes et 10 rappels. Un rappel est un exercice noté dans FSRS (juste : Bien, avertissement : Difficile, faux : À revoir) ; une carte ratée revient une fois en fin de séance. Contrôle : `node --experimental-strip-types scripts/check-session.ts`.
+- Accents tonals : saisis dans `content/sv/tones.mjs` (slug -> 1 ou 2), seulement quand ils sont certains ; la liste des mots laissés sans courbe, à faire relire par une personne native, est en tête du fichier. `scripts/sync-content.mjs` ajoute le champ `tone` à l'export ; contrôle contre l'IPA : `node scripts/check-tones.mjs`. La courbe est dessinée par `src/ToneCurve.tsx`.
+
 ## Rangement des fichiers : FAIT (19 nov 2026, issue #7)
 - Contenu par niveau dans `content/` : `content/sv/a1/` (foundations.mjs, grammar.mjs, unit01 à unit07, en.mjs, notes-en.mjs), `content/sv/a2/`, `content/sv/b1/`, `content/sv/b2/` (grammar.mjs, unités, notes-en.mjs), plus `content/sv/sections.mjs` et `content/sv/helpers.mjs`. Arborescence complète : README.
 - Script de contenu : `scripts/sync-content.mjs` (ex `generate-audio.mjs`), lancé par `npm run content`. Les fondations phonétique et vocab/genres, autrefois codées dans le script, sont dans `content/sv/a1/foundations.mjs`.
