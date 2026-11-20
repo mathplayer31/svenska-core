@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  ArrowLeft,
+  X,
   CheckCircle2,
   XCircle,
   Volume2,
@@ -23,14 +23,14 @@ export interface PracticeCard {
   gloss: { sv: string; fr: string }[] | null;
 }
 
-type Exercise =
+export type Exercise =
   | { kind: 'match'; key: string; pairs: { id: string; sv: string; fr: string; audio?: string }[] }
   | { kind: 'mcq_sv'; key: string; card: PracticeCard; options: string[] }
   | { kind: 'mcq_listen'; key: string; card: PracticeCard; options: string[] }
   | { kind: 'build'; key: string; card: PracticeCard; tokens: { id: number; text: string }[]; answer: string[] }
   | { kind: 'write'; key: string; card: PracticeCard; dictation: boolean };
 
-type Verdict = { ok: boolean; message?: string };
+export type Verdict = { ok: boolean; message?: string };
 
 interface Props {
   unitTitle: string;
@@ -149,9 +149,11 @@ function pickDistinct(pool: string[], exclude: string, n: number): string[] {
 // ============================================================================
 // Génération de la série d'exercices
 // ============================================================================
-function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[] {
-  const vocab = shuffle(cards.filter((c) => c.cardType === 'vocab'));
-  const phrases = shuffle(cards.filter((c) => c.cardType === 'phrase'));
+/**
+ * Fabrique d'exercices sur un ensemble de cartes (distracteurs pris dans `cards` et `extraWords`).
+ * Partagée par l'entraînement libre et la séance d'unité (issue #10).
+ */
+export function exerciseFactory(cards: PracticeCard[], extraWords: string[], prefix = 'ex') {
   // Distracteurs des QCM : d'abord des cartes du même type (mot vs phrase), sinon on complète
   const pool = (field: 'swedishTarget' | 'english', card: PracticeCard) => {
     const same = cards.filter((c) => c.cardType === card.cardType && c.id !== card.id).map((c) => c[field]);
@@ -168,9 +170,8 @@ function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[]
         .map((w) => [w.toLowerCase(), w] as const)
     ).values()
   );
-  const out: Exercise[] = [];
   let n = 0;
-  const key = () => `ex-${n++}`;
+  const key = () => `${prefix}-${n++}`;
 
   const makeMatch = (subset: PracticeCard[]): Exercise | null =>
     subset.length >= 3
@@ -194,29 +195,42 @@ function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[]
     };
   };
 
+  // QCM : traduction vers la langue étudiée, ou écoute vers la traduction (si audio)
+  const makeMcq = (card: PracticeCard, listen: boolean): Exercise =>
+    listen && firstAudio(card)
+      ? { kind: 'mcq_listen', key: key(), card, options: shuffle([card.english, ...pool('english', card)]) }
+      : { kind: 'mcq_sv', key: key(), card, options: shuffle([card.swedishTarget, ...pool('swedishTarget', card)]) };
+
+  const makeWrite = (card: PracticeCard, dictation: boolean): Exercise => ({
+    kind: 'write',
+    key: key(),
+    card,
+    dictation: dictation && !!firstAudio(card),
+  });
+
+  return { makeMatch, makeBuild, makeMcq, makeWrite };
+}
+
+function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[] {
+  const vocab = shuffle(cards.filter((c) => c.cardType === 'vocab'));
+  const phrases = shuffle(cards.filter((c) => c.cardType === 'phrase'));
+  const { makeMatch, makeBuild, makeMcq, makeWrite } = exerciseFactory(cards, extraWords);
+  const out: Exercise[] = [];
+
   // 1. Échauffement : associer les paires
   const m1 = makeMatch(vocab.slice(0, 5));
   if (m1) out.push(m1);
 
   // 2. QCM (alternance FR -> SV et écoute -> FR)
-  vocab.slice(0, 6).forEach((card, i) => {
-    const listen = i % 2 === 1 && !!firstAudio(card);
-    out.push(
-      listen
-        ? { kind: 'mcq_listen', key: key(), card, options: shuffle([card.english, ...pool('english', card)]) }
-        : { kind: 'mcq_sv', key: key(), card, options: shuffle([card.swedishTarget, ...pool('swedishTarget', card)]) }
-    );
-  });
+  vocab.slice(0, 6).forEach((card, i) => out.push(makeMcq(card, i % 2 === 1)));
 
   // 3. Phrases à reconstruire avec des blocs
   phrases.slice(0, 4).forEach((card) => out.push(makeBuild(card)));
 
   // 4. Écriture libre : 2 mots (dont une dictée) + 1 phrase courte
-  vocab.slice(0, 2).forEach((card, i) =>
-    out.push({ kind: 'write', key: key(), card, dictation: i === 0 && !!firstAudio(card) })
-  );
+  vocab.slice(0, 2).forEach((card, i) => out.push(makeWrite(card, i === 0)));
   const shortPhrase = [...phrases].sort((a, b) => a.swedishTarget.length - b.swedishTarget.length)[0];
-  if (shortPhrase) out.push({ kind: 'write', key: key(), card: shortPhrase, dictation: false });
+  if (shortPhrase) out.push(makeWrite(shortPhrase, false));
 
   // 5. Retour au calme : nouvelles paires
   const m2 = makeMatch(shuffle([...vocab.slice(5), ...vocab.slice(0, 2)]).slice(0, 5));
@@ -243,13 +257,7 @@ function regenerate(ex: Exercise, cards: PracticeCard[], extraWords: string[], s
 // ============================================================================
 export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, onFinish, onExit }: Props) {
   const { t } = useI18n();
-  const KIND_LABEL: Record<Exercise['kind'], string> = {
-    match: t.kindMatch,
-    mcq_sv: t.kindMcqSv,
-    mcq_listen: t.kindMcqListen,
-    build: t.kindBuild,
-    write: t.kindWrite,
-  };
+  const KIND_LABEL = kindLabels(t);
   const [queue, setQueue] = useState<Exercise[]>(() => buildExercises(cards, extraWords));
   const [baseCount, setBaseCount] = useState(() => queue.length);
   const [index, setIndex] = useState(0);
@@ -303,22 +311,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
     reported.current = false;
   };
 
-  // Entrée = continuer une fois la correction affichée
-  useEffect(() => {
-    if (!verdict) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleContinue();
-      }
-    };
-    // Laisse passer l'Entrée qui vient de valider la réponse
-    const t = setTimeout(() => window.addEventListener('keydown', onKey), 50);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [verdict, handleContinue]);
+  useEnterToContinue(!!verdict, handleContinue);
 
   if (queue.length === 0) {
     return (
@@ -335,8 +328,8 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
       <div className="min-h-dvh bg-bg text-ink flex flex-col items-center justify-center p-6 text-center">
         <div className="w-full max-w-md bg-surface border border-line rounded-2xl p-8 space-y-5 shadow-card">
           <Trophy className={`w-14 h-14 mx-auto ${score >= 80 ? 'text-gold' : 'text-faint'}`} />
-          <h2 className="font-serif text-3xl text-ink">{t.practiceDone}</h2>
-          <p className="font-serif text-6xl text-accent tabular-nums">{score}%</p>
+          <h2 className="font-display text-3xl text-ink">{t.practiceDone}</h2>
+          <p className="font-display text-6xl text-accent tabular-nums">{score}%</p>
           <p className="text-sm text-muted leading-relaxed">
             {t.firstTry(firstTryCorrect, baseCount)}
             {retried.size > 0 && t.retriedInfo(retried.size)}
@@ -369,93 +362,141 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
     <Shell onExit={onExit} title={`${unitTitle} • ${Math.min(index + 1, baseCount)}/${baseCount}${isRetry ? ` • ${t.retry}` : ''}`}
       quitLabel={t.quit}
     >
-      <div className="w-full h-1.5 bg-surface-2 rounded-full mb-6 overflow-hidden">
-        <div className="h-full bg-accent transition-all" style={{ width: `${progress * 100}%` }} />
+      <div className="w-full h-2 bg-surface-2 rounded-full mb-5 overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
+        <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${progress * 100}%` }} />
       </div>
 
-      <div className="bg-surface border border-line rounded-2xl p-6 md:p-8 shadow-card space-y-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">{KIND_LABEL[exercise.kind]}</p>
+      <ExerciseView exercise={exercise} locked={!!verdict} onResult={handleResult} label={KIND_LABEL[exercise.kind]} />
 
-        {exercise.kind === 'match' && <MatchExercise key={exercise.key} ex={exercise} onDone={handleResult} />}
-        {(exercise.kind === 'mcq_sv' || exercise.kind === 'mcq_listen') && (
-          <McqExercise key={exercise.key} ex={exercise} locked={!!verdict} onAnswer={handleResult} />
-        )}
-        {exercise.kind === 'build' && (
-          <BuildExercise key={exercise.key} ex={exercise} locked={!!verdict} onCheck={handleResult} />
-        )}
-        {exercise.kind === 'write' && (
-          <WriteExercise key={exercise.key} ex={exercise} locked={!!verdict} onCheck={handleResult} />
-        )}
-      </div>
-
-      {verdict && (
-        <div
-          className={`mt-6 rounded-2xl border p-5 space-y-3 ${
-            verdict.ok ? 'bg-success-soft border-success/30' : 'bg-danger-soft border-danger/30'
-          }`}
-        >
-          <div className={`flex items-center gap-2 font-semibold ${verdict.ok ? 'text-success' : 'text-danger'}`}>
-            {verdict.ok ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
-            {verdict.ok ? t.wellDone : t.notQuite}
-          </div>
-          {verdict.message && (
-            <p className="text-sm text-gold-ink flex items-start gap-2">
-              <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" /> {verdict.message}
-            </p>
-          )}
-          {answerCard && (
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-lg font-semibold text-ink">{answerCard.swedishTarget}</p>
-                <p className="text-sm text-muted">{answerCard.english}</p>
-              </div>
-              {firstAudio(answerCard) && (
-                <button
-                  onClick={() => playUrl(firstAudio(answerCard))}
-                  className="p-2.5 rounded-lg bg-surface hover:bg-surface-2 text-accent cursor-pointer"
-                  aria-label={t.listenAgain}
-                >
-                  <Volume2 className="w-5 h-5" />
-                </button>
-              )}
-            </div>
-          )}
-          {answerCard?.gloss && answerCard.gloss.length > 1 && (
-            <div className="flex flex-wrap gap-1.5">
-              {answerCard.gloss.map((g, i) => (
-                <span key={`${g.sv}-${i}`} className="px-2 py-1 rounded-md bg-surface-2 text-xs">
-                  <span className="text-accent font-semibold">{g.sv}</span>{' '}
-                  <span className="text-muted">{g.fr}</span>
-                </span>
-              ))}
-            </div>
-          )}
-          <button
-            onClick={handleContinue}
-            className={`w-full py-3.5 rounded-xl font-semibold text-sm transition cursor-pointer ${
-              verdict.ok ? 'bg-success hover:opacity-90 text-accent-ink' : 'bg-danger hover:opacity-90 text-accent-ink'
-            }`}
-          >
-            {t.continueEnter}
-          </button>
-        </div>
-      )}
+      {verdict && <VerdictPanel verdict={verdict} card={answerCard} onContinue={handleContinue} />}
     </Shell>
   );
+}
+
+export const kindLabels = (t: Strings): Record<Exercise['kind'], string> => ({
+  match: t.kindMatch,
+  mcq_sv: t.kindMcqSv,
+  mcq_listen: t.kindMcqListen,
+  build: t.kindBuild,
+  write: t.kindWrite,
+});
+
+/** Carte d'un exercice : consigne et zone de réponse */
+export function ExerciseView({
+  exercise,
+  locked,
+  onResult,
+  label,
+  chip,
+}: {
+  exercise: Exercise;
+  locked: boolean;
+  onResult: (v: Verdict) => void;
+  label: string;
+  /** Étiquette en plus de la consigne (ex. « Rappel · Unité 1 ») */
+  chip?: string;
+}) {
+  return (
+    <div className="bg-surface rounded-3xl p-6 md:p-8 shadow-card space-y-6">
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-ink">{label}</h2>
+        {chip && <span className="px-2.5 py-1 rounded-full bg-gold-soft text-gold-ink text-xs font-bold">{chip}</span>}
+      </div>
+      {exercise.kind === 'match' && <MatchExercise key={exercise.key} ex={exercise} onDone={onResult} />}
+      {(exercise.kind === 'mcq_sv' || exercise.kind === 'mcq_listen') && (
+        <McqExercise key={exercise.key} ex={exercise} locked={locked} onAnswer={onResult} />
+      )}
+      {exercise.kind === 'build' && <BuildExercise key={exercise.key} ex={exercise} locked={locked} onCheck={onResult} />}
+      {exercise.kind === 'write' && <WriteExercise key={exercise.key} ex={exercise} locked={locked} onCheck={onResult} />}
+    </div>
+  );
+}
+
+/** Correction affichée sous l'exercice, avec la bonne réponse et le bouton Continuer */
+export function VerdictPanel({ verdict, card, onContinue }: { verdict: Verdict; card: PracticeCard | null; onContinue: () => void }) {
+  const { t } = useI18n();
+  return (
+    <div className={`mt-4 rounded-3xl p-5 space-y-3 ${verdict.ok ? 'bg-success-soft' : 'bg-danger-soft'}`} role="status">
+      <div className={`flex items-center gap-2 font-semibold ${verdict.ok ? 'text-success' : 'text-danger'}`}>
+        {verdict.ok ? <CheckCircle2 className="w-5 h-5" aria-hidden /> : <XCircle className="w-5 h-5" aria-hidden />}
+        {verdict.ok ? t.wellDone : t.notQuite}
+      </div>
+      {verdict.message && (
+        <p className="text-sm text-gold-ink flex items-start gap-2">
+          <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" aria-hidden /> {verdict.message}
+        </p>
+      )}
+      {card && (
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-lg font-semibold text-ink">{card.swedishTarget}</p>
+            <p className="text-sm text-muted">{card.english}</p>
+          </div>
+          {firstAudio(card) && (
+            <button
+              onClick={() => playUrl(firstAudio(card))}
+              className="grid place-items-center w-11 h-11 rounded-full bg-surface hover:bg-surface-2 text-accent cursor-pointer shrink-0"
+              aria-label={t.listenAgain}
+            >
+              <Volume2 className="w-5 h-5" aria-hidden />
+            </button>
+          )}
+        </div>
+      )}
+      {card?.gloss && card.gloss.length > 1 && (
+        <div className="flex flex-wrap gap-1.5">
+          {card.gloss.map((g, i) => (
+            <span key={`${g.sv}-${i}`} className="px-2 py-1 rounded-lg bg-surface text-xs">
+              <span className="text-accent font-semibold">{g.sv}</span> <span className="text-muted">{g.fr}</span>
+            </span>
+          ))}
+        </div>
+      )}
+      <button
+        onClick={onContinue}
+        className={`w-full py-3.5 rounded-full font-semibold text-sm transition cursor-pointer text-accent-ink ${
+          verdict.ok ? 'bg-success hover:opacity-90' : 'bg-danger hover:opacity-90'
+        }`}
+      >
+        {t.continueEnter}
+      </button>
+    </div>
+  );
+}
+
+/** Entrée = continuer, une fois la correction affichée */
+export function useEnterToContinue(active: boolean, onContinue: () => void) {
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        onContinue();
+      }
+    };
+    // Laisse passer l'Entrée qui vient de valider la réponse
+    const timer = setTimeout(() => window.addEventListener('keydown', onKey), 50);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [active, onContinue]);
 }
 
 function Shell({ onExit, title, quitLabel, children }: { onExit: () => void; title: string; quitLabel: string; children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-bg text-ink flex flex-col items-center p-4 pt-8 select-none">
       <div className="w-full max-w-xl">
-        <div className="mb-6 flex items-center justify-between gap-3 text-xs text-muted">
+        <div className="mb-5 flex items-center gap-3 text-sm text-muted">
           <button
             onClick={onExit}
-            className="inline-flex items-center gap-1.5 font-semibold text-muted hover:text-accent transition cursor-pointer shrink-0"
+            aria-label={quitLabel}
+            title={quitLabel}
+            className="grid place-items-center w-11 h-11 rounded-full bg-surface text-ink hover:bg-surface-2 transition cursor-pointer shrink-0"
           >
-            <ArrowLeft className="w-4 h-4" /> {quitLabel}
+            <X className="w-5 h-5" aria-hidden />
           </button>
-          <span className="truncate">{title}</span>
+          <span className="truncate font-semibold">{title}</span>
         </div>
         {children}
       </div>
@@ -625,7 +666,7 @@ function McqExercise({
           </button>
         </div>
       ) : (
-        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
+        <h2 className="font-display text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
       )}
 
       <div className="space-y-3">
@@ -691,7 +732,7 @@ function BuildExercise({
 
   return (
     <div className="space-y-6">
-      <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
+      <h2 className="font-display text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
 
       <div className="min-h-[64px] border-b-2 border-line pb-3 flex flex-wrap gap-2 items-end">
         {chosen.length === 0 && <span className="text-sm text-faint">{t.tapWords}</span>}
@@ -745,7 +786,8 @@ function BuildExercise({
 // ============================================================================
 // 5. Écrire à la main (traduction ou dictée)
 // ============================================================================
-const SPECIAL_CHARS = ['å', 'ä', 'ö'];
+// Lettres difficiles à taper selon la langue étudiée
+const SPECIAL_CHARS: Record<Course, string[]> = { sv: ['å', 'ä', 'ö'], fr: ['é', 'è', 'à', 'ç', 'ê'] };
 
 function WriteExercise({
   ex,
@@ -806,7 +848,7 @@ function WriteExercise({
           </div>
         </div>
       ) : (
-        <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
+        <h2 className="font-display text-2xl md:text-3xl text-ink leading-snug">{t.quote(ex.card.english)}</h2>
       )}
 
       <input
@@ -829,7 +871,7 @@ function WriteExercise({
       />
 
       <div className="flex items-center gap-2">
-        {SPECIAL_CHARS.map((ch) => (
+        {SPECIAL_CHARS[course].map((ch) => (
           <button
             key={ch}
             disabled={locked}

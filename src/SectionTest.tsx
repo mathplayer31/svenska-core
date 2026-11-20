@@ -153,10 +153,10 @@ export default function SectionTest({
           ) : (
             <XCircle className="w-14 h-14 text-danger mx-auto" />
           )}
-          <h2 className="font-serif text-3xl text-ink">
+          <h2 className="font-display text-3xl text-ink">
             {passed ? t.sectionValidated : t.notYet}
           </h2>
-          <p className="font-serif text-6xl text-accent tabular-nums">{finalScore}%</p>
+          <p className="font-display text-6xl text-accent tabular-nums">{finalScore}%</p>
           <p className="text-sm text-muted leading-relaxed">
             {t.correctAnswers(correct, questions.length)}{' '}
             {passed
@@ -210,7 +210,7 @@ export default function SectionTest({
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
             {question.kind === 'listen' ? t.listening : t.translation}
           </p>
-          <h2 className="font-serif text-2xl md:text-3xl text-ink leading-snug">{question.prompt || t.listenThenChoose}</h2>
+          <h2 className="font-display text-2xl md:text-3xl text-ink leading-snug">{question.prompt || t.listenThenChoose}</h2>
           {question.audio && (
             <button
               onClick={() => playUrl(question.audio!)}

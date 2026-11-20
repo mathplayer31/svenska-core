@@ -5,8 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>SvenskaCore</title>
-    <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0f1420" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef1f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1220" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Thème mémorisé appliqué avant le premier rendu, sans flash (voir src/theme.ts)
+      try {
+        var th = localStorage.getItem('svenska.theme');
+        if (th === 'light' || th === 'dark') document.documentElement.dataset.theme = th;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

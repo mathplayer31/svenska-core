@@ -60,7 +60,7 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
           <span className="grid place-items-center w-12 h-12 rounded-full bg-accent-soft text-accent">
             <CircleUser className="w-6 h-6" aria-hidden />
           </span>
-          <h1 className="font-serif text-4xl text-ink">{t.account}</h1>
+          <h1 className="font-display text-4xl text-ink">{t.account}</h1>
         </div>
 
         <div className="mt-8 rounded-3xl bg-surface border border-line shadow-card p-6 space-y-5">

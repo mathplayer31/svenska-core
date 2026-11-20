@@ -8,25 +8,29 @@ import {
   ArrowLeft,
   CheckCircle2,
   Check,
+  ChevronDown,
   ChevronRight,
   Compass,
-  Layers,
   RotateCcw,
   Lock,
-  MessageCircle,
-  Trophy,
   ClipboardCheck,
   Dumbbell,
   Play,
-  Snail,
   CircleUser,
-  ChevronsUpDown,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import * as data from './dataSource';
 import AccountScreen from './AccountScreen';
 import SectionTest from './SectionTest';
 import { COURSE_LANGS, useI18n, type Course, type Lang } from './i18n';
-import UnitPractice from './UnitPractice';
+import UnitPractice, { type PracticeCard } from './UnitPractice';
+import UnitSession, { type SessionItem } from './UnitSession';
+import StudyCard, { playAll, type StudyCardData } from './StudyCard';
+import { AlbumCover, COURSE_NAME, CourseSheet, Equalizer, Flag, ThemeToggle, WaveProgress } from './Melodi';
+import { useTheme } from './theme';
+import type { Tone } from './ToneCurve';
+import { MAX_NEW, MAX_RECALL } from './sessionPlan';
 
 interface DeckInfo {
   id: string;
@@ -76,6 +80,7 @@ interface SwedishCard {
   englishEn: string | null;
   ipa: string;
   pitchAccent?: string;
+  tone: Tone | null;
   explanation: string;
   explanationEn: string | null;
   ipaEn: string | null;
@@ -84,21 +89,16 @@ interface SwedishCard {
   fsrsCard: FSRSCard;
 }
 
-const f = fsrs();
-
-// Mini-rendu markdown des notes (**gras**, *italique*, ~~barré~~), sans dépendance
-// L'italique peut contenir du gras : « *att hon **inte har*** » (rendu récursif)
-function renderInlineMd(text: string): React.ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*(?:[^*]|\*\*[^*]+\*\*)+\*)/g).map((part, i) => {
-    if (part.startsWith('**') && part.endsWith('**') && !part.slice(2, -2).includes('*'))
-      return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
-    if (part.startsWith('~~') && part.endsWith('~~'))
-      return <s key={i} className="text-danger">{renderInlineMd(part.slice(2, -2))}</s>;
-    if (part.length > 2 && part.startsWith('*') && part.endsWith('*'))
-      return <em key={i} className="text-accent">{renderInlineMd(part.slice(1, -1))}</em>;
-    return part;
-  });
+/** Séance d'unité en cours : listes figées au lancement pour que la séance ne bouge pas en route */
+interface ActiveSession {
+  unitId: string | null;
+  title: string;
+  newIds: string[];
+  recallIds: string[];
+  key: number;
 }
+
+const f = fsrs();
 
 // Meilleurs scores d'entraînement par unité : confort local (pas de DB pour l'instant)
 const PRACTICE_KEY = 'svenska.practiceScores';
@@ -119,6 +119,7 @@ function savePracticeScores(scores: Record<string, number>) {
 
 export default function App() {
   const { lang, setLang, course, setCourse, t } = useI18n();
+  const theme = useTheme();
   const [decks, setDecks] = useState<DeckInfo[]>([]);
   const [cards, setCards] = useState<SwedishCard[]>([]);
   const [sections, setSections] = useState<SectionInfo[]>([]);
@@ -129,6 +130,7 @@ export default function App() {
   const [testSectionId, setTestSectionId] = useState<string | null>(null);
   const [unitDeckId, setUnitDeckId] = useState<string | null>(null);
   const [practiceDeckId, setPracticeDeckId] = useState<string | null>(null);
+  const [session, setSession] = useState<ActiveSession | null>(null);
   const [practiceScores, setPracticeScores] = useState<Record<string, number>>(loadPracticeScores);
   const [tab, setTab] = useState<(typeof NAV)[number]['id']>('parcours');
   const [cramMode, setCramMode] = useState(false);
@@ -137,6 +139,7 @@ export default function App() {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [syncError, setSyncError] = useState<string | null>(null);
   const [showAccount, setShowAccount] = useState(false);
+  const [showCourses, setShowCourses] = useState(false);
 
   // silent : rechargement en arrière-plan (retour sur l'app), sans écran de chargement
   const loadData = useCallback(async (silent = false) => {
@@ -150,22 +153,14 @@ export default function App() {
     }
     setUserEmail((await data.currentUser())?.email ?? null);
     const loaded = await data.load();
-    // Seul le cours actif est chargé : parcours, révisions et fondations ne voient que lui
+    // Seul le cours actif est chargé : parcours, rappels et fondations ne voient que lui
     const inCourse = (x: { course?: string | null }) => (x.course ?? 'sv') === course;
     const courseDecks = loaded.decks.filter(inCourse);
     const courseDeckIds = new Set(courseDecks.map((d) => d.id));
-    const decksRes = { data: courseDecks };
-    const cardsRes = { data: loaded.cards.filter((c) => courseDeckIds.has(c.deck_id)) };
-    const progressRes = { data: loaded.progress };
-    const sectionsRes = { data: loaded.sections.filter(inCourse) };
-    const sectionProgRes = { data: loaded.sectionProgress };
-
-    const progressMap = new Map(
-      (progressRes.data || []).map((p) => [p.card_id, p])
-    );
+    const progressMap = new Map((loaded.progress || []).map((p) => [p.card_id, p]));
 
     setDecks(
-      (decksRes.data || []).map((d) => ({
+      courseDecks.map((d) => ({
         id: d.id,
         slug: d.slug,
         title: d.title,
@@ -181,7 +176,7 @@ export default function App() {
     );
 
     setSections(
-      (sectionsRes.data || []).map((s) => ({
+      loaded.sections.filter(inCourse).map((s) => ({
         id: s.id,
         slug: s.slug,
         title: s.title,
@@ -195,7 +190,7 @@ export default function App() {
 
     setSectionProgress(
       new Map(
-        (sectionProgRes.data || []).map((p) => [
+        (loaded.sectionProgress || []).map((p) => [
           p.section_id as string,
           { bestScore: p.best_score, passed: p.passed, attempts: p.attempts },
         ])
@@ -203,42 +198,45 @@ export default function App() {
     );
 
     setCards(
-      (cardsRes.data || []).map((row) => {
-        const saved = progressMap.get(row.id);
-        const fsrsCard: FSRSCard = saved
-          ? {
-              due: new Date(saved.due),
-              stability: saved.stability,
-              difficulty: saved.difficulty,
-              elapsed_days: saved.elapsed_days,
-              scheduled_days: saved.scheduled_days,
-              reps: saved.reps,
-              lapses: saved.lapses,
-              state: saved.state,
-              last_review: saved.last_review ? new Date(saved.last_review) : undefined,
-              learning_steps: saved.learning_steps ?? 0,
-            }
-          : createEmptyCard();
+      loaded.cards
+        .filter((c) => courseDeckIds.has(c.deck_id))
+        .map((row) => {
+          const saved = progressMap.get(row.id);
+          const fsrsCard: FSRSCard = saved
+            ? {
+                due: new Date(saved.due),
+                stability: saved.stability,
+                difficulty: saved.difficulty,
+                elapsed_days: saved.elapsed_days,
+                scheduled_days: saved.scheduled_days,
+                reps: saved.reps,
+                lapses: saved.lapses,
+                state: saved.state,
+                last_review: saved.last_review ? new Date(saved.last_review) : undefined,
+                learning_steps: saved.learning_steps ?? 0,
+              }
+            : createEmptyCard();
 
-        return {
-          id: row.id,
-          deckId: row.deck_id,
-          cardType: row.card_type,
-          swedishPrompt: row.swedish_prompt,
-          promptEn: row.prompt_en ?? null,
-          swedishTarget: row.swedish_target,
-          english: row.french_translation || row.english_translation,
-          englishEn: row.english_translation ?? null,
-          ipa: row.ipa_transcription || '',
-          pitchAccent: row.pitch_accent,
-          explanation: row.explanation_md,
-          explanationEn: row.explanation_en ?? null,
-          ipaEn: row.ipa_en ?? null,
-          audioUrl: row.audio_url,
-          gloss: Array.isArray(row.gloss) ? row.gloss : null,
-          fsrsCard,
-        };
-      })
+          return {
+            id: row.id,
+            deckId: row.deck_id,
+            cardType: row.card_type,
+            swedishPrompt: row.swedish_prompt,
+            promptEn: row.prompt_en ?? null,
+            swedishTarget: row.swedish_target,
+            english: row.french_translation || row.english_translation,
+            englishEn: row.english_translation ?? null,
+            ipa: row.ipa_transcription || '',
+            pitchAccent: row.pitch_accent,
+            tone: row.tone ?? null,
+            explanation: row.explanation_md,
+            explanationEn: row.explanation_en ?? null,
+            ipaEn: row.ipa_en ?? null,
+            audioUrl: row.audio_url,
+            gloss: Array.isArray(row.gloss) ? row.gloss : null,
+            fsrsCard,
+          };
+        })
     );
 
     setLoading(false);
@@ -251,6 +249,11 @@ export default function App() {
     document.addEventListener('visibilitychange', onVisible);
     return () => document.removeEventListener('visibilitychange', onVisible);
   }, [loadData]);
+
+  // Chaque changement d'écran repart du haut de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [unitDeckId, session, practiceDeckId, testSectionId, selectedDeckId, tab]);
 
   // ---------------------------------------------------------------------------
   // Ordre, sections et verrouillage
@@ -267,15 +270,9 @@ export default function App() {
     [decks]
   );
 
-  const deckRank = useMemo(
-    () => new Map(sortedDecks.map((d, i) => [d.id, i])),
-    [sortedDecks]
-  );
+  const deckById = useMemo(() => new Map(decks.map((d) => [d.id, d])), [decks]);
 
-  const sortedSections = useMemo(
-    () => [...sections].sort((a, b) => a.sortOrder - b.sortOrder),
-    [sections]
-  );
+  const sortedSections = useMemo(() => [...sections].sort((a, b) => a.sortOrder - b.sortOrder), [sections]);
 
   // La 1re section est toujours ouverte ; la suivante s'ouvre quand le test de la précédente est réussi.
   const unlockedSectionIds = useMemo(() => {
@@ -303,27 +300,18 @@ export default function App() {
     return set;
   }, [decks, cards, unlockedSectionIds]);
 
+  // Séances des fondations : cartes dues, puis nouvelles (ou toutes en mode libre)
   const sessionQueue = useMemo(() => {
     if (!selectedDeckId) return [];
     const now = new Date();
-    const pool =
-      selectedDeckId === 'ALL'
-        ? cards.filter((c) => unlockedDeckIds.has(c.deckId))
-        : cards.filter((c) => c.deckId === selectedDeckId);
-
-    const rank = (c: SwedishCard) => deckRank.get(c.deckId) ?? 99;
-
-    if (cramMode) return [...pool].sort((a, b) => rank(a) - rank(b));
-
+    const pool = cards.filter((c) => c.deckId === selectedDeckId);
+    if (cramMode) return pool;
     const due = pool
       .filter((c) => c.fsrsCard.state !== 0 && c.fsrsCard.due <= now)
       .sort((a, b) => a.fsrsCard.due.getTime() - b.fsrsCard.due.getTime());
-    const fresh = pool
-      .filter((c) => c.fsrsCard.state === 0)
-      .sort((a, b) => rank(a) - rank(b));
-
+    const fresh = pool.filter((c) => c.fsrsCard.state === 0);
     return [...due, ...fresh];
-  }, [cards, selectedDeckId, cramMode, unlockedDeckIds, deckRank]);
+  }, [cards, selectedDeckId, cramMode]);
 
   const currentCard = useMemo(() => {
     if (sessionQueue.length === 0) return null;
@@ -335,58 +323,17 @@ export default function App() {
   }, [sessionQueue, currentCardId]);
 
   // ---------------------------------------------------------------------------
-  // Audio
+  // Notation FSRS (cartes retournées et rappels des séances)
   // ---------------------------------------------------------------------------
-  const playSingleUrl = useCallback((url: string, playbackRate = 1.0): Promise<void> => {
-    return new Promise((resolve) => {
-      const audio = new Audio(url.trim());
-      audio.playbackRate = playbackRate;
-      audio.preservesPitch = true;
-      audio.onended = () => resolve();
-      audio.onerror = () => resolve();
-      audio.play().catch(() => resolve());
-    });
-  }, []);
-
-  const playCardAudio = useCallback(
-    async (audioUrl?: string, playbackRate = 1.0) => {
-      if (!audioUrl) return;
-      const urls = audioUrl.split('|').map((u) => u.trim()).filter(Boolean);
-      for (let i = 0; i < urls.length; i++) {
-        await playSingleUrl(urls[i], playbackRate);
-        if (i < urls.length - 1) {
-          await new Promise((r) => setTimeout(r, 350));
-        }
-      }
-    },
-    [playSingleUrl]
-  );
-
-  // ---------------------------------------------------------------------------
-  // Notation FSRS
-  // ---------------------------------------------------------------------------
-  const handleRate = useCallback(
-    async (grade: Grade) => {
-      if (!currentCard) return;
+  const rateCard = useCallback(
+    async (cardId: string, grade: Grade) => {
+      const card = cards.find((c) => c.id === cardId);
+      if (!card) return;
       const now = new Date();
-      const updated = f.repeat(currentCard.fsrsCard, now)[grade].card;
-
-      setIsFlipped(false);
-
-      if (cramMode && sessionQueue.length > 1) {
-        const idx = sessionQueue.findIndex((c) => c.id === currentCard.id);
-        const nextCard = sessionQueue[(idx + 1) % sessionQueue.length];
-        setCurrentCardId(nextCard.id);
-      } else {
-        setCurrentCardId(null);
-      }
-
-      setCards((prev) =>
-        prev.map((c) => (c.id === currentCard.id ? { ...c, fsrsCard: updated } : c))
-      );
-
+      const updated = f.repeat(card.fsrsCard, now)[grade].card;
+      setCards((prev) => prev.map((c) => (c.id === cardId ? { ...c, fsrsCard: updated } : c)));
       await data.saveCardProgress({
-        card_id: currentCard.id,
+        card_id: cardId,
         state: updated.state,
         due: updated.due.toISOString(),
         stability: updated.stability,
@@ -399,7 +346,22 @@ export default function App() {
         last_review: now.toISOString(),
       });
     },
-    [currentCard, cramMode, sessionQueue]
+    [cards]
+  );
+
+  const handleFoundationRate = useCallback(
+    (grade: Grade) => {
+      if (!currentCard) return;
+      setIsFlipped(false);
+      if (cramMode && sessionQueue.length > 1) {
+        const idx = sessionQueue.findIndex((c) => c.id === currentCard.id);
+        setCurrentCardId(sessionQueue[(idx + 1) % sessionQueue.length].id);
+      } else {
+        setCurrentCardId(null);
+      }
+      rateCard(currentCard.id, grade);
+    },
+    [currentCard, cramMode, sessionQueue, rateCard]
   );
 
   // ---------------------------------------------------------------------------
@@ -430,26 +392,6 @@ export default function App() {
     [sections, testSectionId, sectionProgress]
   );
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (!currentCard || !selectedDeckId) return;
-      if (e.code === 'Space' && !isFlipped) {
-        e.preventDefault();
-        setIsFlipped(true);
-        playCardAudio(currentCard.audioUrl, 1.0);
-      } else if (isFlipped) {
-        if (e.key === '1') handleRate(Rating.Again);
-        if (e.key === '2') handleRate(Rating.Hard);
-        if (e.key === '3') handleRate(Rating.Good);
-        if (e.key === '4') handleRate(Rating.Easy);
-        if (e.key.toLowerCase() === 'r') playCardAudio(currentCard.audioUrl, 1.0);
-        if (e.key.toLowerCase() === 's') playCardAudio(currentCard.audioUrl, 0.65);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [isFlipped, currentCard, selectedDeckId, handleRate, playCardAudio]);
-
   const formatTimeDiff = (targetDate: Date) => {
     const now = new Date();
     const diffMins = Math.max(1, Math.round((targetDate.getTime() - now.getTime()) / 60000));
@@ -458,37 +400,29 @@ export default function App() {
     return diffDays >= 1 ? `${diffDays}${t.unitDays}` : `${Math.round(diffMins / 60)}${t.unitHours}`;
   };
 
-  const getIntervalLabel = (grade: Grade) => {
-    if (!currentCard) return '';
-    const now = new Date();
-    const nextDue = f.repeat(currentCard.fsrsCard, now)[grade].card.due;
-    return formatTimeDiff(nextDue);
+  const intervalsFor = (cardId: string): Record<number, string> => {
+    const card = cards.find((c) => c.id === cardId);
+    if (!card) return {};
+    const next = f.repeat(card.fsrsCard, new Date());
+    return Object.fromEntries(
+      ([Rating.Again, Rating.Hard, Rating.Good, Rating.Easy] as Grade[]).map((g) => [g, formatTimeDiff(next[g].card.due)])
+    );
   };
 
   const getStats = (subset: SwedishCard[]) => {
     const now = new Date();
     let newCount = 0;
-    let learningCount = 0;
-    let reviewCount = 0;
+    let dueCount = 0;
     let nextDueDate: Date | null = null;
-
     for (const c of subset) {
-      if (c.fsrsCard.state === 0) {
-        newCount++;
-      } else if (c.fsrsCard.due <= now) {
-        if (c.fsrsCard.state === 1 || c.fsrsCard.state === 3) learningCount++;
-        else reviewCount++;
-      } else {
-        if (!nextDueDate || c.fsrsCard.due < nextDueDate) {
-          nextDueDate = c.fsrsCard.due;
-        }
-      }
+      if (c.fsrsCard.state === 0) newCount++;
+      else if (c.fsrsCard.due <= now) dueCount++;
+      else if (!nextDueDate || c.fsrsCard.due < nextDueDate) nextDueDate = c.fsrsCard.due;
     }
     return {
       newCount,
-      learningCount,
-      reviewCount,
-      totalDue: newCount + learningCount + reviewCount,
+      dueCount,
+      totalDue: newCount + dueCount,
       nextDueLabel: nextDueDate ? formatTimeDiff(nextDueDate) : null,
     };
   };
@@ -511,11 +445,41 @@ export default function App() {
     setTestSectionId(null);
     setUnitDeckId(null);
     setPracticeDeckId(null);
+    setSession(null);
     setCurrentCardId(null);
     setTab('parcours');
-    setCourse(c);
+    setShowCourses(false);
+    window.scrollTo(0, 0);
+    if (c !== course) setCourse(c);
   };
   const localize = (c: SwedishCard) => ({ ...c, swedishPrompt: L.prompt(c), english: L.tr(c), gloss: L.gloss(c) });
+  const toStudy = (c: SwedishCard): StudyCardData => ({
+    id: c.id,
+    cardType: c.cardType,
+    prompt: L.prompt(c),
+    target: c.swedishTarget,
+    translation: L.tr(c),
+    ipa: L.ipa(c),
+    note: L.note(c),
+    gloss: L.gloss(c),
+    audioUrl: c.audioUrl,
+    accentLabel: c.pitchAccent ? L.accent(c.pitchAccent) : undefined,
+    tone: c.tone,
+  });
+  const toPractice = (c: SwedishCard): PracticeCard => ({
+    id: c.id,
+    cardType: c.cardType,
+    swedishTarget: c.swedishTarget,
+    english: L.tr(c),
+    audioUrl: c.audioUrl,
+    gloss: L.gloss(c),
+  });
+  const unitLabelOf = (c: SwedishCard) => {
+    const d = deckById.get(c.deckId);
+    if (!d) return '';
+    const { eyebrow, title } = splitTitle(L.deck(d));
+    return eyebrow || title;
+  };
 
   if (loading) {
     return (
@@ -525,13 +489,29 @@ export default function App() {
     );
   }
 
-  const availableCards = cards.filter((c) => unlockedDeckIds.has(c.deckId));
-  const globalStats = getStats(availableCards);
-  const startGlobalSession = () => {
-    setCramMode(globalStats.totalDue === 0);
-    setUnitDeckId(null);
-    setSelectedDeckId('ALL');
+  // Cartes des unités ouvertes : source des rappels et des distracteurs d'exercices
+  const openThematic = cards.filter((c) => deckById.get(c.deckId)?.track === 'thematic' && unlockedDeckIds.has(c.deckId));
+  const dueRecalls = () => {
+    const now = new Date();
+    return openThematic
+      .filter((c) => c.fsrsCard.state !== 0 && c.fsrsCard.due <= now)
+      .sort((a, b) => a.fsrsCard.due.getTime() - b.fsrsCard.due.getTime());
   };
+  const freshOf = (deckId: string) => cards.filter((c) => c.deckId === deckId && c.fsrsCard.state === 0);
+
+  const startSession = (unit: DeckInfo | null) => {
+    setSession({
+      unitId: unit?.id ?? null,
+      title: unit ? splitTitle(L.deck(unit)).title : t.recallsTitle,
+      newIds: unit ? freshOf(unit.id).map((c) => c.id) : [],
+      recallIds: dueRecalls().map((c) => c.id),
+      key: Date.now(),
+    });
+  };
+
+  // Unité en cours : la première unité ouverte qui a encore des cartes à découvrir
+  const currentUnit =
+    sortedDecks.find((d) => d.track === 'thematic' && unlockedDeckIds.has(d.id) && freshOf(d.id).length > 0) ?? null;
 
   // ============================================================================
   // VUE COMPTE (connexion, inscription, synchro)
@@ -567,15 +547,15 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 0 bis : EXERCICES D'UNITÉ
+  // VUE 0 bis : ENTRAÎNEMENT LIBRE D'UNITÉ
   // ============================================================================
-  const practiceDeck = practiceDeckId ? decks.find((d) => d.id === practiceDeckId) : undefined;
+  const practiceDeck = practiceDeckId ? deckById.get(practiceDeckId) : undefined;
   if (practiceDeck) {
     const unitCards = cards.filter((c) => c.deckId === practiceDeck.id);
     // Distracteurs des blocs : mots des unités thématiques précédentes
     const previousWords = cards
       .filter((c) => {
-        const d = decks.find((x) => x.id === c.deckId);
+        const d = deckById.get(c.deckId);
         return d?.track === 'thematic' && (d.unitNumber ?? 0) < (practiceDeck.unitNumber ?? 0);
       })
       .map((c) => c.swedishTarget);
@@ -599,9 +579,44 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 0 ter : PAGE D'UNITÉ (Découvrir -> Pratiquer)
+  // VUE 0 ter : SÉANCE D'UNITÉ (nouvelles cartes, exercices, rappels)
   // ============================================================================
-  const unitDeck = !selectedDeckId && unitDeckId ? decks.find((d) => d.id === unitDeckId) : undefined;
+  if (session) {
+    const byId = new Map(cards.map((c) => [c.id, c]));
+    const toItem = (id: string): SessionItem[] => {
+      const c = byId.get(id);
+      return c ? [{ study: toStudy(c), practice: toPractice(c), unitLabel: unitLabelOf(c) }] : [];
+    };
+    const unit = session.unitId ? deckById.get(session.unitId) : undefined;
+    const allSeen = unit ? freshOf(unit.id).length === 0 : false;
+    return (
+      <UnitSession
+        key={session.key}
+        title={session.title}
+        newItems={session.newIds.flatMap(toItem)}
+        recallItems={session.recallIds.flatMap(toItem)}
+        poolCards={openThematic.map(toPractice)}
+        extraWords={openThematic.map((c) => c.swedishTarget)}
+        onRate={rateCard}
+        intervals={intervalsFor}
+        onExit={() => setSession(null)}
+        onAgain={() => startSession(unit ?? null)}
+        onFreePractice={
+          unit && allSeen
+            ? () => {
+                setSession(null);
+                setPracticeDeckId(unit.id);
+              }
+            : undefined
+        }
+      />
+    );
+  }
+
+  // ============================================================================
+  // VUE 1 : PAGE D'UNITÉ (séance, entraînement libre, lexique)
+  // ============================================================================
+  const unitDeck = !selectedDeckId && unitDeckId ? deckById.get(unitDeckId) : undefined;
   if (unitDeck) {
     const unitCards = cards.filter((c) => c.deckId === unitDeck.id);
     const stats = getStats(unitCards);
@@ -610,20 +625,22 @@ export default function App() {
     const best = practiceScores[unitDeck.id];
     const vocabCards = unitCards.filter((c) => c.cardType === 'vocab');
     const phraseCards = unitCards.filter((c) => c.cardType === 'phrase');
-    const remaining = unitCards.length - seen;
     const { eyebrow, title } = splitTitle(L.deck(unitDeck));
+    const recallCount = Math.min(MAX_RECALL, dueRecalls().length);
+    const newCount = Math.min(MAX_NEW, stats.newCount);
+    const pct = unitCards.length ? Math.round((seen / unitCards.length) * 100) : 0;
 
     const lexiconRow = (c: SwedishCard) => {
       const hidden = c.fsrsCard.state === 0;
       return (
         <li key={c.id}>
           <button
-            onClick={() => playCardAudio(c.audioUrl)}
+            onClick={() => playAll(c.audioUrl)}
             disabled={hidden}
-            className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl hover:bg-surface-2 text-left transition cursor-pointer disabled:cursor-default disabled:opacity-45"
+            className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl hover:bg-bg text-left transition cursor-pointer disabled:cursor-default disabled:opacity-50"
           >
             <span className="min-w-0">
-              <span className="block font-medium text-ink truncate">{hidden ? t.toDiscover : c.swedishTarget}</span>
+              <span className="block font-semibold text-ink truncate">{hidden ? t.toDiscover : c.swedishTarget}</span>
               <span className="block text-sm text-muted truncate">{L.tr(c)}</span>
             </span>
             {!hidden && c.audioUrl && <Volume2 className="w-4 h-4 text-faint shrink-0" aria-hidden />}
@@ -635,55 +652,61 @@ export default function App() {
     return (
       <Page>
         <TopBar onBack={() => setUnitDeckId(null)} backLabel={t.navParcours} />
-        <header className="pt-2 pb-8">
+        <header className="pt-1 pb-6">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{title}</h1>
-          <div className="mt-6 flex items-center gap-4">
-            <ProgressBar value={unitCards.length ? seen / unitCards.length : 0} />
-            <span className="text-sm text-muted tabular-nums shrink-0">
-              {t.discovered(seen, unitCards.length)}
+          <h1 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-ink mt-1">{title}</h1>
+          <div className="mt-5 flex items-center gap-4">
+            <ProgressBar value={unitCards.length ? seen / unitCards.length : 0} label={t.unitProgress(pct, seen, unitCards.length)} />
+            <span className="text-sm font-semibold text-muted tabular-nums shrink-0" aria-hidden>
+              {pct} %
             </span>
           </div>
         </header>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          <StepCard
-            step={1}
-            title={t.discover}
-            text={t.discoverText(vocabCards.length, phraseCards.length)}
-            status={
-              stats.totalDue > 0
-                ? t.discoverDue(stats.newCount, stats.learningCount + stats.reviewCount)
-                : t.discoverUpToDate(stats.nextDueLabel)
-            }
-            done={stats.totalDue === 0}
-            action={stats.totalDue > 0 ? t.studyCards : t.reviewFreely}
-            primary={stats.totalDue > 0}
-            onClick={() => {
-              setCramMode(stats.totalDue === 0);
-              setSelectedDeckId(unitDeck.id);
-            }}
-          />
-          <StepCard
-            step={2}
-            title={t.practice}
-            text={t.practiceText}
-            status={allSeen ? (best !== undefined ? t.bestScore(best) : t.readyToStart) : t.discoverMore(remaining)}
-            done={best !== undefined && best >= 80}
-            locked={!allSeen}
-            action={t.train}
-            primary={allSeen && stats.totalDue === 0}
+        <div className="grid gap-3 md:grid-cols-2">
+          <button
+            onClick={() => startSession(unitDeck)}
+            className="text-left rounded-[28px] bg-strong text-strong-ink p-5 flex items-center justify-between gap-4 cursor-pointer hover:opacity-95 transition"
+          >
+            <span>
+              <span className="block font-display text-2xl font-extrabold tracking-tight">{t.startUnitSession}</span>
+              <span className="block text-sm text-strong-muted mt-1">
+                {newCount + recallCount > 0 ? t.resumeSub(newCount, recallCount) : t.allCaughtUpSub(stats.nextDueLabel)}
+              </span>
+            </span>
+            <span className="grid place-items-center w-14 h-14 rounded-full bg-white text-[#3b4fa8] shrink-0" aria-hidden>
+              <Play className="w-6 h-6 fill-current" />
+            </span>
+          </button>
+          <button
             onClick={() => allSeen && setPracticeDeckId(unitDeck.id)}
-          />
+            disabled={!allSeen}
+            className="text-left rounded-[28px] bg-surface shadow-card p-5 flex items-center justify-between gap-4 cursor-pointer disabled:cursor-not-allowed transition enabled:hover:bg-surface-2"
+          >
+            <span>
+              <span className={`block font-display text-2xl font-extrabold tracking-tight ${allSeen ? 'text-ink' : 'text-muted'}`}>
+                {t.freePractice}
+              </span>
+              <span className="block text-sm text-muted mt-1">
+                {allSeen ? (best !== undefined ? t.bestScore(best) : t.practiceText) : t.discoverMore(unitCards.length - seen)}
+              </span>
+            </span>
+            <span
+              className={`grid place-items-center w-14 h-14 rounded-full shrink-0 ${allSeen ? 'bg-accent-soft text-accent' : 'bg-bg text-faint'}`}
+              aria-hidden
+            >
+              {allSeen ? <Dumbbell className="w-6 h-6" /> : <Lock className="w-5 h-5" />}
+            </span>
+          </button>
         </div>
 
         <section className="mt-10">
-          <h2 className="font-serif text-2xl text-ink mb-3">{t.lexicon}</h2>
-          <div className="rounded-2xl bg-surface border border-line shadow-card p-2">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink mb-3">{t.lexicon}</h2>
+          <div className="rounded-[28px] bg-surface shadow-card p-2">
             <ul className="grid sm:grid-cols-2">{vocabCards.map(lexiconRow)}</ul>
             {phraseCards.length > 0 && (
               <>
-                <p className="px-4 pt-4 pb-1 text-xs font-semibold uppercase tracking-[0.14em] text-faint">{t.phrases}</p>
+                <p className="px-4 pt-4 pb-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">{t.phrases}</p>
                 <ul>{phraseCards.map(lexiconRow)}</ul>
               </>
             )}
@@ -694,82 +717,81 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 1 : TABLEAU DE BORD (3 onglets)
+  // VUE 2 : ACCUEIL (parcours en albums, fondations)
   // ============================================================================
   if (!selectedDeckId) {
     const foundationDecks = sortedDecks.filter((d) => d.track === 'foundation' && !d.sectionId);
     const orphanThematicDecks = sortedDecks.filter((d) => d.track === 'thematic' && !d.sectionId);
-    const thematicCards = cards.filter((c) => decks.find((d) => d.id === c.deckId)?.track === 'thematic');
-    const thematicSeen = thematicCards.filter((c) => c.fsrsCard.state !== 0).length;
-    // Niveau CECR d'une section = celui de ses decks ; niveau en cours = celui de la dernière section ouverte
     const sectionLevel = (x: SectionInfo) => decks.find((d) => d.sectionId === x.id)?.cefrLevel ?? 'A1';
-    const levels = [...new Set(sortedSections.map(sectionLevel))];
-    const openSections = sortedSections.filter((x) => unlockedSectionIds.has(x.id));
-    const currentLevel = openSections.length ? sectionLevel(openSections[openSections.length - 1]) : 'A1';
+    const foundationIds = new Set(foundationDecks.filter((d) => unlockedDeckIds.has(d.id)).map((d) => d.id));
+    const foundationDue = getStats(cards.filter((c) => foundationIds.has(c.deckId))).dueCount;
+    const recallCount = Math.min(MAX_RECALL, dueRecalls().length);
 
     const lockReasonFor = (deck: DeckInfo) => {
       if (deck.sectionId && !unlockedSectionIds.has(deck.sectionId)) return t.lockPrevSection;
-      const prereqDeck = deck.prerequisiteDeckId ? decks.find((d) => d.id === deck.prerequisiteDeckId) : undefined;
+      const prereqDeck = deck.prerequisiteDeckId ? deckById.get(deck.prerequisiteDeckId) : undefined;
       if (!prereqDeck) return '';
       const prereq = L.deck(prereqDeck);
       return t.lockAfter(splitTitle(prereq).eyebrow || prereq);
     };
 
-    const openDeck = (deck: DeckInfo, totalDue: number) => {
+    const openFoundation = (deck: DeckInfo, totalDue: number) => {
       if (!unlockedDeckIds.has(deck.id)) return;
-      if (deck.track === 'thematic') {
-        setUnitDeckId(deck.id);
-        return;
-      }
       // Tout est à jour : clic = mode libre direct
       setCramMode(totalDue === 0);
       setSelectedDeckId(deck.id);
     };
 
-    const renderUnitRow = (deck: DeckInfo) => {
+    const renderTrack = (deck: DeckInfo) => {
       const deckCards = cards.filter((c) => c.deckId === deck.id);
       const stats = getStats(deckCards);
       const locked = !unlockedDeckIds.has(deck.id);
       const seen = deckCards.filter((c) => c.fsrsCard.state !== 0).length;
       const complete = deckCards.length > 0 && seen === deckCards.length;
+      const isCurrent = currentUnit?.id === deck.id;
       const { title } = splitTitle(L.deck(deck));
+      const sub = locked
+        ? lockReasonFor(deck)
+        : isCurrent
+          ? `${t.trackCards(deckCards.length)} · ${t.inProgress}`
+          : stats.dueCount > 0
+            ? `${t.trackCards(deckCards.length)} · ${t.toReview(stats.dueCount)}`
+            : t.trackCards(deckCards.length);
 
       return (
         <li key={deck.id}>
           <button
-            onClick={() => openDeck(deck, stats.totalDue)}
+            onClick={() => !locked && setUnitDeckId(deck.id)}
             disabled={locked}
-            className="group w-full text-left flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-surface border border-line shadow-card transition hover:border-accent/40 cursor-pointer disabled:cursor-not-allowed disabled:shadow-none disabled:bg-transparent"
+            aria-current={isCurrent ? 'step' : undefined}
+            className={`w-full min-h-[60px] flex items-center gap-3 px-3 py-2 rounded-2xl text-left transition cursor-pointer disabled:cursor-not-allowed ${
+              isCurrent ? 'bg-accent-soft' : 'enabled:hover:bg-bg'
+            }`}
           >
-            <span
-              className={`grid place-items-center w-11 h-11 rounded-full shrink-0 font-serif text-lg ${
-                locked
-                  ? 'bg-surface-2 text-faint'
-                  : complete
-                    ? 'bg-gold text-[#14213d]'
-                    : 'bg-accent-soft text-accent'
-              }`}
-            >
-              {locked ? <Lock className="w-4 h-4" aria-hidden /> : deck.unitNumber}
+            <span className="w-7 grid place-items-center shrink-0 font-semibold text-muted tabular-nums">
+              {isCurrent ? <Equalizer /> : deck.unitNumber}
             </span>
             <span className="min-w-0 flex-1">
-              <span className={`block font-semibold ${locked ? 'text-muted' : 'text-ink'}`}>{title}</span>
-              <span className="block text-sm text-muted mt-0.5">
-                {locked
-                  ? lockReasonFor(deck)
-                  : stats.totalDue > 0
-                    ? t.unitDue(stats.totalDue, seen, deckCards.length)
-                    : t.unitUpToDate(deckCards.length)}
+              <span className={`block truncate ${isCurrent ? 'text-accent font-bold' : locked ? 'text-muted font-semibold' : 'text-ink font-semibold'}`}>
+                {title}
               </span>
-              {!locked && <ProgressBar value={deckCards.length ? seen / deckCards.length : 0} className="mt-3" thin />}
+              <span className="block text-xs text-muted mt-0.5 truncate">{sub}</span>
             </span>
-            {!locked && <ChevronRight className="w-5 h-5 text-faint group-hover:text-accent transition shrink-0" aria-hidden />}
+            {locked ? (
+              <Lock className="w-4 h-4 text-faint shrink-0" aria-label={t.locked} />
+            ) : complete ? (
+              <Check className="w-5 h-5 text-accent shrink-0" aria-label={t.done} />
+            ) : (
+              <span className="text-xs font-semibold text-muted tabular-nums shrink-0">
+                {seen}/{deckCards.length}
+              </span>
+            )}
           </button>
         </li>
       );
     };
 
-    const renderSection = (section: SectionInfo, idx: number) => {
+    const renderAlbum = (section: SectionInfo, idx: number) => {
       const sectionDecks = sortedDecks.filter((d) => d.sectionId === section.id);
       const deckIds = new Set(sectionDecks.map((d) => d.id));
       const sectionCards = cards.filter((c) => deckIds.has(c.deckId));
@@ -778,50 +800,49 @@ export default function App() {
       const seen = sectionCards.filter((c) => c.fsrsCard.state !== 0).length;
       const testReady = unlocked && sectionCards.length > 0 && seen === sectionCards.length;
       const prevTitle = idx > 0 ? splitTitle(L.section(sortedSections[idx - 1])).title : null;
-      const { eyebrow, title } = splitTitle(L.section(section));
+      const { title } = splitTitle(L.section(section));
 
       return (
-        <section key={section.id} className="space-y-4">
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-            <div>
-              <Eyebrow>{eyebrow}</Eyebrow>
-              <h2 className={`font-serif text-3xl font-medium tracking-tight mt-1 ${unlocked ? 'text-ink' : 'text-muted'}`}>
+        <section key={section.id} id={`album-${section.id}`} className="scroll-mt-6">
+          <div className="flex items-center gap-4">
+            <AlbumCover n={idx + 1} dim={!unlocked} />
+            <div className="min-w-0">
+              <p className="text-xs font-semibold text-muted">{t.albumVol(idx + 1, sectionLevel(section))}</p>
+              <h2 className={`font-display text-2xl md:text-3xl font-extrabold tracking-tight leading-tight ${unlocked ? 'text-ink' : 'text-muted'}`}>
                 {title}
               </h2>
-              <p className="text-sm text-muted mt-1.5 max-w-prose">
-                {unlocked ? L.sectionDesc(section) : t.sectionLocked(prevTitle ?? '')}
+              <p className={`text-sm mt-0.5 ${progress?.passed ? 'text-accent font-semibold' : 'text-muted'}`}>
+                {progress?.passed ? t.sectionPassed(progress.bestScore) : unlocked ? L.sectionDesc(section) : t.sectionLocked(prevTitle ?? '')}
               </p>
             </div>
-            {unlocked && progress?.passed && (
-              <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gold-soft text-gold-ink">
-                <Trophy className="w-3.5 h-3.5" aria-hidden /> {t.sectionPassed(progress.bestScore)}
-              </span>
-            )}
           </div>
 
-          <ul className="space-y-3">{sectionDecks.map(renderUnitRow)}</ul>
-
-          {unlocked && (
-            <button
-              onClick={() => testReady && setTestSectionId(section.id)}
-              disabled={!testReady}
-              className="w-full flex items-center gap-4 p-4 md:p-5 rounded-2xl border border-dashed border-line text-left transition enabled:hover:border-accent enabled:hover:bg-accent-soft cursor-pointer disabled:cursor-not-allowed"
-            >
-              <span className={`grid place-items-center w-11 h-11 rounded-full shrink-0 ${testReady ? 'bg-accent text-accent-ink' : 'bg-surface-2 text-faint'}`}>
-                <ClipboardCheck className="w-5 h-5" aria-hidden />
-              </span>
-              <span>
-                <span className={`block font-semibold ${testReady ? 'text-ink' : 'text-muted'}`}>
-                  {progress?.passed ? t.retakeTest : t.sectionTest}
-                </span>
-                <span className="block text-sm text-muted mt-0.5">
-                  {testReady
-                    ? `${t.testReady(section.passScore)}${progress ? t.bestScoreSuffix(progress.bestScore) : ''}`
-                    : t.testNotReady(seen, sectionCards.length)}
-                </span>
-              </span>
-            </button>
-          )}
+          <ol className="mt-3 p-1.5 rounded-[24px] bg-surface shadow-card space-y-0.5">
+            {sectionDecks.map(renderTrack)}
+            {unlocked && (
+              <li>
+                <button
+                  onClick={() => testReady && setTestSectionId(section.id)}
+                  disabled={!testReady}
+                  className="w-full min-h-[60px] flex items-center gap-3 px-3 py-2 rounded-2xl text-left transition cursor-pointer disabled:cursor-not-allowed enabled:hover:bg-bg"
+                >
+                  <span className={`w-7 grid place-items-center shrink-0 ${testReady ? 'text-accent' : 'text-faint'}`}>
+                    <ClipboardCheck className="w-5 h-5" aria-hidden />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block font-semibold ${testReady ? 'text-ink' : 'text-muted'}`}>
+                      {progress?.passed ? t.retakeTest : t.sectionTest}
+                    </span>
+                    <span className="block text-xs text-muted mt-0.5">
+                      {testReady
+                        ? `${t.testReady(section.passScore)}${progress ? t.bestScoreSuffix(progress.bestScore) : ''}`
+                        : t.testNotReady(seen, sectionCards.length)}
+                    </span>
+                  </span>
+                </button>
+              </li>
+            )}
+          </ol>
         </section>
       );
     };
@@ -834,20 +855,20 @@ export default function App() {
       return (
         <li key={deck.id}>
           <button
-            onClick={() => openDeck(deck, stats.totalDue)}
+            onClick={() => openFoundation(deck, stats.totalDue)}
             disabled={locked}
-            className="group w-full text-left flex items-center gap-4 p-4 md:p-5 rounded-2xl bg-surface border border-line shadow-card transition hover:border-accent/40 cursor-pointer disabled:cursor-not-allowed disabled:shadow-none disabled:bg-transparent"
+            className="group w-full min-h-[64px] flex items-center gap-3.5 px-3 py-2.5 rounded-2xl text-left transition cursor-pointer disabled:cursor-not-allowed enabled:hover:bg-bg"
           >
-            <span className={`grid place-items-center w-11 h-11 rounded-xl shrink-0 ${locked ? 'bg-surface-2 text-faint' : 'bg-accent-soft text-accent'}`}>
+            <span className={`grid place-items-center w-11 h-11 rounded-xl shrink-0 ${locked ? 'bg-bg text-faint' : 'bg-accent-soft text-accent'}`}>
               {locked ? <Lock className="w-4 h-4" aria-hidden /> : <Icon className="w-5 h-5" aria-hidden />}
             </span>
             <span className="min-w-0 flex-1">
               <span className={`block font-semibold ${locked ? 'text-muted' : 'text-ink'}`}>{L.deck(deck).replace(/^\d+\.\s*/, '')}</span>
-              <span className="block text-sm text-muted mt-0.5">
+              <span className="block text-xs text-muted mt-0.5">
                 {locked
                   ? lockReasonFor(deck)
                   : stats.totalDue > 0
-                    ? t.foundationDue(stats.newCount, stats.learningCount + stats.reviewCount)
+                    ? t.foundationDue(stats.newCount, stats.dueCount)
                     : t.foundationUpToDate(deckCards.length, stats.nextDueLabel)}
               </span>
             </span>
@@ -857,186 +878,237 @@ export default function App() {
       );
     };
 
+    // Bloc « Reprendre » : l'unité en cours, sinon les rappels, sinon tout est à jour
+    const resume = (() => {
+      if (currentUnit) {
+        const unitCards = cards.filter((c) => c.deckId === currentUnit.id);
+        const seen = unitCards.filter((c) => c.fsrsCard.state !== 0).length;
+        const value = unitCards.length ? seen / unitCards.length : 0;
+        return {
+          eyebrow: `${t.resume} · ${t.trackN(currentUnit.unitNumber ?? 0)}`,
+          title: splitTitle(L.deck(currentUnit)).title,
+          sub: t.resumeSub(Math.min(MAX_NEW, freshOf(currentUnit.id).length), recallCount),
+          progress: { value, label: t.unitProgress(Math.round(value * 100), seen, unitCards.length) },
+          start: () => startSession(currentUnit),
+        };
+      }
+      if (recallCount > 0) {
+        return { eyebrow: t.resume, title: t.recallsTitle, sub: t.resumeSub(0, recallCount), progress: null, start: () => startSession(null) };
+      }
+      return { eyebrow: t.resume, title: t.allCaughtUp, sub: t.allCaughtUpSub(getStats(openThematic).nextDueLabel), progress: null, start: null };
+    })();
+
+    const navItems = NAV.map((item) => ({ ...item, badge: item.id === 'fondations' ? foundationDue : 0 }));
+    const courseButton = (extra = '') => (
+      <button
+        onClick={() => setShowCourses(true)}
+        aria-label={t.changeCourse(COURSE_NAME[course])}
+        className={`inline-flex items-center gap-2 min-h-11 rounded-xl px-1 cursor-pointer hover:bg-surface-2 transition ${extra}`}
+      >
+        <Flag course={course} size={24} />
+        <Wordmark className="text-2xl" />
+        <ChevronDown className="w-4 h-4 text-muted" aria-hidden />
+      </button>
+    );
+
     return (
-      <Page withNav>
-        <header className="flex items-center justify-between gap-4 pt-2 pb-8">
-          <button
-            onClick={() => switchCourse(course === 'sv' ? 'fr' : 'sv')}
-            title={course === 'sv' ? 'FranceCore' : 'SvenskaCore'}
-            aria-label={t.switchCourse(course === 'sv' ? 'FranceCore' : 'SvenskaCore')}
-            className="inline-flex items-center gap-1.5 rounded-lg -ml-1 px-1 cursor-pointer hover:bg-surface-2 transition"
-          >
-            <Wordmark className="text-2xl" />
-            <ChevronsUpDown className="w-4 h-4 text-faint" aria-hidden />
-          </button>
-          <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-surface border border-line" aria-label={t.mainNav}>
-            {NAV.map((item) => (
+      <div className="min-h-dvh md:flex md:gap-4 md:p-4">
+        {/* Barre latérale (PC) */}
+        <aside className="hidden md:flex md:flex-col gap-5 w-64 lg:w-72 shrink-0 sticky top-4 h-[calc(100dvh-2rem)] overflow-y-auto rounded-[28px] bg-surface shadow-card p-4">
+          {courseButton('self-start')}
+          <nav aria-label={t.mainNav} className="flex flex-col gap-1">
+            {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setTab(item.id)}
                 aria-current={tab === item.id ? 'page' : undefined}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
-                  tab === item.id ? 'bg-accent text-accent-ink' : 'text-muted hover:text-ink'
-                }`}
-              >
-                {t[item.labelKey]}
-              </button>
-            ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <LangSwitch langs={COURSE_LANGS[course]} lang={lang} onChange={setLang} label={t.langLabel} />
-            {data.accountsAvailable && (
-              <button
-                onClick={() => setShowAccount(true)}
-                aria-label={t.account}
-                title={userEmail ?? t.account}
-                className={`grid place-items-center w-9 h-9 rounded-full border transition cursor-pointer ${
-                  userEmail ? 'bg-accent text-accent-ink border-accent' : 'bg-surface text-muted border-line hover:text-ink'
-                }`}
-              >
-                <CircleUser className="w-5 h-5" aria-hidden />
-              </button>
-            )}
-          </div>
-        </header>
-
-        {tab === 'parcours' && (
-          <div className="space-y-12">
-            <div>
-              <Eyebrow>{t.level(currentLevel)}</Eyebrow>
-              <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{t.yourPath}</h1>
-              <div className="mt-6 flex items-center gap-4">
-                <ProgressBar value={thematicCards.length ? thematicSeen / thematicCards.length : 0} />
-                <span className="text-sm text-muted tabular-nums shrink-0">
-                  {t.cardsCount(thematicSeen, thematicCards.length)}
-                </span>
-              </div>
-              {globalStats.totalDue > 0 && (
-                <button
-                  onClick={startGlobalSession}
-                  className="mt-6 w-full flex items-center justify-between gap-4 p-4 rounded-2xl bg-accent text-accent-ink transition hover:bg-accent-hover cursor-pointer"
-                >
-                  <span className="text-left">
-                    <span className="block font-semibold">
-                      {t.dueToday(globalStats.totalDue)}
-                    </span>
-                    <span className="block text-sm opacity-80">{t.dueTodaySub}</span>
-                  </span>
-                  <Play className="w-5 h-5 shrink-0" aria-hidden />
-                </button>
-              )}
-            </div>
-            {levels.map((lvl) => (
-              <div key={lvl} className="space-y-12">
-                {levels.length > 1 && (
-                  <div className="flex items-center gap-4">
-                    <span className="font-serif text-xl text-ink shrink-0">{t.level(lvl)}</span>
-                    <span className="h-px flex-1 bg-line" aria-hidden />
-                  </div>
-                )}
-                {sortedSections.map((x, i) => (sectionLevel(x) === lvl ? renderSection(x, i) : null))}
-              </div>
-            ))}
-            {orphanThematicDecks.length > 0 && <ul className="space-y-3">{orphanThematicDecks.map(renderUnitRow)}</ul>}
-          </div>
-        )}
-
-        {tab === 'reviser' && (
-          <div>
-            <Eyebrow>{t.spacedRepetition}</Eyebrow>
-            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{t.navReviser}</h1>
-            <p className="text-muted mt-3 max-w-prose">
-              {t.reviewIntro}
-            </p>
-            <div className="mt-8 rounded-3xl bg-surface border border-line shadow-card p-6 md:p-8">
-              <p className="font-serif text-6xl text-ink tabular-nums">{globalStats.totalDue}</p>
-              <p className="text-muted mt-1">
-                {t.toStudyNow(globalStats.totalDue)}
-                {globalStats.totalDue === 0 && globalStats.nextDueLabel ? t.nextIn(globalStats.nextDueLabel) : ''}
-              </p>
-              <dl className="grid grid-cols-3 gap-3 mt-6">
-                {[
-                  { label: t.statNew, value: globalStats.newCount },
-                  { label: t.statLearning, value: globalStats.learningCount },
-                  { label: t.statReview, value: globalStats.reviewCount },
-                ].map((s) => (
-                  <div key={s.label} className="rounded-xl bg-surface-2 p-3">
-                    <dt className="text-xs text-muted">{s.label}</dt>
-                    <dd className="font-serif text-2xl text-ink tabular-nums mt-0.5">{s.value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <button
-                onClick={startGlobalSession}
-                className="mt-6 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
-              >
-                <Play className="w-4 h-4" aria-hidden />
-                {globalStats.totalDue > 0 ? t.startSession : t.freePractice}
-              </button>
-            </div>
-          </div>
-        )}
-
-        {tab === 'fondations' && (
-          <div>
-            <Eyebrow>{t.supportsPath}</Eyebrow>
-            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-ink mt-2">{t.navFondations}</h1>
-            <p className="text-muted mt-3 max-w-prose">
-              {t.foundationsIntro}
-            </p>
-            <ul className="space-y-3 mt-8">{foundationDecks.map(renderFoundationRow)}</ul>
-          </div>
-        )}
-
-        <nav
-          className="md:hidden fixed bottom-0 inset-x-0 z-10 border-t border-line bg-surface/95 backdrop-blur pb-[env(safe-area-inset-bottom)]"
-          aria-label={t.mainNav}
-        >
-          <div className="grid grid-cols-3">
-            {NAV.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setTab(item.id)}
-                aria-current={tab === item.id ? 'page' : undefined}
-                className={`flex flex-col items-center gap-1 py-2.5 text-xs font-medium transition cursor-pointer ${
-                  tab === item.id ? 'text-accent' : 'text-muted'
+                className={`h-11 px-3.5 rounded-xl flex items-center gap-3 font-semibold text-left transition cursor-pointer ${
+                  tab === item.id ? 'bg-cover text-white' : 'text-ink hover:bg-bg'
                 }`}
               >
                 <item.Icon className="w-5 h-5" aria-hidden />
-                {t[item.labelKey]}
+                <span className="flex-1">{t[item.labelKey]}</span>
+                {item.badge > 0 && (
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-gold-soft text-gold-ink" aria-label={t.toReview(item.badge)}>
+                    {item.badge}
+                  </span>
+                )}
               </button>
             ))}
+            {data.accountsAvailable && (
+              <button
+                onClick={() => setShowAccount(true)}
+                title={userEmail ?? t.account}
+                className="h-11 px-3.5 rounded-xl flex items-center gap-3 font-semibold text-left text-ink hover:bg-bg transition cursor-pointer"
+              >
+                <CircleUser className={`w-5 h-5 ${userEmail ? 'text-accent' : ''}`} aria-hidden />
+                {t.account}
+              </button>
+            )}
+          </nav>
+          {tab === 'parcours' && (
+            <div>
+              <p className="px-2 text-xs font-bold uppercase tracking-[0.12em] text-muted">{t.albums}</p>
+              <ul className="mt-2 space-y-0.5">
+                {sortedSections.map((s, i) => (
+                  <li key={s.id}>
+                    <button
+                      onClick={() => document.getElementById(`album-${s.id}`)?.scrollIntoView({ behavior: 'smooth' })}
+                      className="w-full flex items-center gap-2.5 p-1.5 rounded-xl text-left hover:bg-bg transition cursor-pointer"
+                    >
+                      <AlbumCover n={i + 1} size={36} dim={!unlockedSectionIds.has(s.id)} />
+                      <span className={`text-sm truncate ${unlockedSectionIds.has(s.id) ? 'text-ink font-semibold' : 'text-muted'}`}>
+                        {splitTitle(L.section(s)).title}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="mt-auto pt-3 border-t border-line space-y-2">
+            <div role="group" aria-label={t.courseTitle} className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-bg">
+              {(['sv', 'fr'] as Course[]).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => switchCourse(c)}
+                  aria-pressed={course === c}
+                  className={`h-10 rounded-xl flex items-center justify-center gap-1.5 text-xs transition cursor-pointer ${
+                    course === c ? 'bg-surface text-ink font-bold shadow-card' : 'text-muted font-semibold hover:text-ink'
+                  }`}
+                >
+                  <Flag course={c} size={16} />
+                  {COURSE_NAME[c]}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={theme.toggle}
+              className="w-full h-11 px-3 rounded-xl bg-bg text-ink flex items-center gap-2.5 text-sm font-semibold hover:bg-surface-2 transition cursor-pointer"
+            >
+              {theme.isDark ? <Sun className="w-5 h-5" aria-hidden /> : <Moon className="w-5 h-5" aria-hidden />}
+              {theme.isDark ? t.toLight : t.toDark}
+            </button>
           </div>
+        </aside>
+
+        <main className="flex-1 min-w-0 px-4 md:px-2 pt-5 md:pt-2 pb-28 md:pb-10">
+          <div className="mx-auto w-full max-w-3xl">
+            <header className="flex items-center justify-between gap-3 pb-5">
+              {courseButton('-ml-1 md:hidden')}
+              <div className="flex items-center gap-2 ml-auto">
+                <ThemeToggle isDark={theme.isDark} onToggle={theme.toggle} className="md:hidden" />
+                <LangSwitch langs={COURSE_LANGS[course]} lang={lang} onChange={setLang} label={t.langLabel} />
+              </div>
+            </header>
+
+            {tab === 'parcours' && (
+              <div className="space-y-9">
+                <section aria-label={resume.title} className="rounded-[28px] bg-strong text-strong-ink p-5 md:p-6">
+                  <p className="text-sm font-semibold text-strong-muted">{resume.eyebrow}</p>
+                  <div className="flex items-end justify-between gap-4 mt-1.5">
+                    <div className="min-w-0">
+                      <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-none">{resume.title}</h1>
+                      <p className="text-sm text-strong-muted mt-2">{resume.sub}</p>
+                    </div>
+                    {resume.start && (
+                      <button
+                        onClick={resume.start}
+                        aria-label={`${t.startUnitSession} : ${resume.title}`}
+                        className="grid place-items-center w-16 h-16 rounded-full bg-white text-[#3b4fa8] shrink-0 cursor-pointer hover:scale-105 transition"
+                      >
+                        <Play className="w-7 h-7 fill-current" aria-hidden />
+                      </button>
+                    )}
+                  </div>
+                  {resume.progress && (
+                    <div className="mt-4">
+                      <WaveProgress value={resume.progress.value} label={resume.progress.label} />
+                    </div>
+                  )}
+                </section>
+
+                {sortedSections.map(renderAlbum)}
+                {orphanThematicDecks.length > 0 && (
+                  <ol className="p-1.5 rounded-[24px] bg-surface shadow-card">{orphanThematicDecks.map(renderTrack)}</ol>
+                )}
+              </div>
+            )}
+
+            {tab === 'fondations' && (
+              <div>
+                <Eyebrow>{t.supportsPath}</Eyebrow>
+                <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-ink mt-1">{t.navFondations}</h1>
+                <p className="text-muted mt-3 max-w-prose">{t.foundationsIntro}</p>
+                <ul className="mt-6 p-1.5 rounded-[24px] bg-surface shadow-card space-y-0.5">{foundationDecks.map(renderFoundationRow)}</ul>
+              </div>
+            )}
+          </div>
+        </main>
+
+        {/* Navigation mobile */}
+        <nav
+          aria-label={t.mainNav}
+          className="md:hidden fixed inset-x-4 z-10 bottom-[max(1rem,env(safe-area-inset-bottom))] grid gap-1 p-1.5 rounded-full bg-cover shadow-card"
+          style={{ gridTemplateColumns: `repeat(${navItems.length + (data.accountsAvailable ? 1 : 0)}, minmax(0, 1fr))` }}
+        >
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setTab(item.id)}
+              aria-current={tab === item.id ? 'page' : undefined}
+              className={`relative h-12 rounded-full text-sm transition cursor-pointer ${
+                tab === item.id ? 'bg-surface text-ink font-bold' : 'text-cover-muted font-semibold'
+              }`}
+            >
+              {t[item.labelKey]}
+              {item.badge > 0 && (
+                <span
+                  className="absolute top-1 right-1.5 min-w-5 h-5 px-1 rounded-full bg-gold text-[#141a2b] text-[11px] font-bold grid place-items-center"
+                  aria-label={t.toReview(item.badge)}
+                >
+                  {item.badge}
+                </span>
+              )}
+            </button>
+          ))}
+          {data.accountsAvailable && (
+            <button onClick={() => setShowAccount(true)} className="h-12 rounded-full text-sm font-semibold text-cover-muted cursor-pointer">
+              {t.account}
+            </button>
+          )}
         </nav>
-      </Page>
+
+        {showCourses && (
+          <CourseSheet onClose={() => setShowCourses(false)} onPickCourse={switchCourse} theme={theme.choice} onTheme={theme.setChoice} />
+        )}
+      </div>
     );
   }
 
-  const backLabel = unitDeckId ? t.unit : t.home;
-
   // ============================================================================
-  // VUE 2 : FIN DE SESSION
+  // VUE 3 : FIN DE SÉANCE DES FONDATIONS
   // ============================================================================
   if (!currentCard) {
     return (
       <Page>
         <div className="min-h-[70dvh] flex items-center justify-center">
-          <div className="w-full max-w-md text-center">
+          <div className="w-full max-w-md text-center rounded-[28px] bg-surface shadow-card p-8">
             <span className="grid place-items-center w-16 h-16 mx-auto rounded-full bg-success-soft text-success">
               <CheckCircle2 className="w-8 h-8" aria-hidden />
             </span>
-            <h1 className="font-serif text-4xl text-ink mt-6">{t.sessionDone}</h1>
+            <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink mt-5">{t.sessionDone}</h1>
             <p className="text-muted mt-3">{t.sessionDoneText}</p>
-            <div className="flex flex-col gap-3 mt-8">
+            <div className="flex flex-col gap-3 mt-7">
               <button
                 onClick={() => setSelectedDeckId(null)}
-                className="w-full py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
+                className="w-full py-3.5 rounded-full bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
               >
-                {unitDeckId ? t.backToUnit : t.backHome}
+                {t.backHome}
               </button>
               <button
                 onClick={() => setCramMode(true)}
-                className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
+                className="w-full py-3 rounded-full bg-surface-2 hover:bg-line text-ink font-medium text-sm inline-flex items-center justify-center gap-2 transition cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" aria-hidden /> {t.reviewAnyway}
               </button>
@@ -1048,22 +1120,8 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 3 : SESSION DE CARTES
+  // VUE 4 : SÉANCE DE CARTES DES FONDATIONS
   // ============================================================================
-  const audioUrls = currentCard.audioUrl
-    ? currentCard.audioUrl.split('|').map((u) => u.trim()).filter(Boolean)
-    : [];
-  const targetParts = currentCard.swedishTarget.split(' / ').map((s) => s.trim());
-  const currentGloss = L.gloss(currentCard);
-  const TypeIcon =
-    currentCard.cardType === 'minimal_pair'
-      ? Ear
-      : currentCard.cardType === 'cloze_grammar'
-        ? BookOpen
-        : currentCard.cardType === 'phrase'
-          ? MessageCircle
-          : Sparkles;
-
   return (
     <Page narrow>
       <TopBar
@@ -1071,112 +1129,17 @@ export default function App() {
           setIsFlipped(false);
           setSelectedDeckId(null);
         }}
-        backLabel={backLabel}
-        right={
-          <span className="text-sm text-muted tabular-nums">
-            {cramMode ? t.freeMode : t.remaining(sessionQueue.length)}
-          </span>
-        }
+        backLabel={t.home}
+        right={<span className="text-sm font-semibold text-muted tabular-nums">{cramMode ? t.freeMode : t.remaining(sessionQueue.length)}</span>}
       />
-
-      <article className="rounded-3xl bg-surface border border-line shadow-card p-6 md:p-10">
-        <div className="flex items-center justify-between gap-3">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-            <TypeIcon className="w-3.5 h-3.5" aria-hidden />
-            {t.cardType[currentCard.cardType] ?? currentCard.cardType}
-          </span>
-          {currentCard.pitchAccent && <span className="text-xs text-faint">{L.accent(currentCard.pitchAccent)}</span>}
-        </div>
-
-        <h1 className="font-serif text-2xl md:text-3xl text-ink leading-snug mt-5">{L.prompt(currentCard)}</h1>
-
-        {isFlipped ? (
-          <div className="mt-8 pt-8 border-t border-line space-y-6">
-            <div>
-              <p className="font-serif text-3xl md:text-4xl text-accent leading-tight">{currentCard.swedishTarget}</p>
-              {currentCard.ipa && <p className="font-mono text-sm text-faint mt-2">{L.ipa(currentCard)}</p>}
-              <p className="text-lg text-ink mt-3">{L.tr(currentCard)}</p>
-            </div>
-
-            {audioUrls.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {audioUrls.map((url, idx) => (
-                  <div key={url} className="inline-flex items-center rounded-full border border-line overflow-hidden">
-                    <button
-                      onClick={() => playSingleUrl(url, 1.0)}
-                      className="inline-flex items-center gap-2 pl-3.5 pr-3 py-2 text-sm font-medium text-ink hover:bg-surface-2 transition cursor-pointer"
-                    >
-                      <Volume2 className="w-4 h-4 text-accent" aria-hidden />
-                      {targetParts[idx] || t.audioN(idx + 1)}
-                    </button>
-                    <button
-                      onClick={() => playSingleUrl(url, 0.65)}
-                      aria-label={`${t.listenSlowly} ${targetParts[idx] ?? ''}`}
-                      className="px-3 py-2 border-l border-line text-muted hover:bg-surface-2 hover:text-ink transition cursor-pointer"
-                    >
-                      <Snail className="w-4 h-4" aria-hidden />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {currentGloss && currentGloss.length > 1 && (
-              <div className="flex flex-wrap gap-2">
-                {currentGloss.map((g, i) => (
-                  <span key={`${g.sv}-${i}`} className="px-3 py-1.5 rounded-lg bg-surface-2 text-center">
-                    <span className="block text-sm font-semibold text-ink">{g.sv}</span>
-                    <span className="block text-xs text-muted">{g.fr}</span>
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="rounded-2xl bg-gold-soft/60 border border-gold/30 p-4 text-[15px] leading-relaxed text-ink">
-              {renderInlineMd(L.note(currentCard))}
-            </div>
-          </div>
-        ) : (
-          <p className="mt-10 mb-2 text-center text-muted">{t.sayItFirst}</p>
-        )}
-      </article>
-
-      <div className="sticky bottom-0 mt-6 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] bg-bg/90 backdrop-blur">
-        {!isFlipped ? (
-          <button
-            onClick={() => {
-              setIsFlipped(true);
-              playCardAudio(currentCard.audioUrl, 1.0);
-            }}
-            className="w-full py-4 rounded-xl bg-accent hover:bg-accent-hover text-accent-ink font-semibold transition cursor-pointer"
-          >
-            {t.showAnswer} <span className="hidden md:inline opacity-70 font-normal">{t.spaceKey}</span>
-          </button>
-        ) : (
-          <div className="grid grid-cols-4 gap-2 md:gap-3">
-            {(
-              [
-                { label: t.rateAgain, key: '1', grade: Rating.Again, tone: 'text-danger' },
-                { label: t.rateHard, key: '2', grade: Rating.Hard, tone: 'text-gold-ink' },
-                { label: t.rateGood, key: '3', grade: Rating.Good, tone: 'text-success' },
-                { label: t.rateEasy, key: '4', grade: Rating.Easy, tone: 'text-accent' },
-              ] satisfies { label: string; key: string; grade: Grade; tone: string }[]
-            ).map((btn) => (
-              <button
-                key={btn.label}
-                onClick={() => handleRate(btn.grade)}
-                className="flex flex-col items-center py-3 px-1 rounded-xl bg-surface border border-line hover:border-accent/40 hover:bg-surface-2 transition cursor-pointer"
-              >
-                <span className={`font-semibold text-sm ${btn.tone}`}>{btn.label}</span>
-                <span className="text-xs text-faint tabular-nums mt-0.5">
-                  {getIntervalLabel(btn.grade)}
-                  <span className="hidden md:inline"> · {btn.key}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      <StudyCard
+        key={currentCard.id}
+        card={toStudy(currentCard)}
+        flipped={isFlipped}
+        onFlip={() => setIsFlipped(true)}
+        onRate={handleFoundationRate}
+        intervals={intervalsFor(currentCard.id)}
+      />
     </Page>
   );
 }
@@ -1186,7 +1149,6 @@ export default function App() {
 // ============================================================================
 const NAV = [
   { id: 'parcours', labelKey: 'navParcours', Icon: Compass },
-  { id: 'reviser', labelKey: 'navReviser', Icon: Layers },
   { id: 'fondations', labelKey: 'navFondations', Icon: BookOpen },
 ] as const;
 
@@ -1198,15 +1160,15 @@ function splitTitle(text: string) {
 
 function LangSwitch({ langs, lang, onChange, label }: { langs: Lang[]; lang: Lang; onChange: (l: Lang) => void; label: string }) {
   return (
-    <div role="group" aria-label={label} className="flex items-center p-1 rounded-full bg-surface border border-line text-xs font-semibold">
+    <div role="group" aria-label={label} className="flex items-center p-1 rounded-full bg-surface text-xs font-semibold">
       {langs.map((l) => (
         <button
           key={l}
           onClick={() => onChange(l)}
           aria-pressed={lang === l}
           lang={l}
-          className={`px-2.5 py-1 rounded-full uppercase tracking-wide transition cursor-pointer ${
-            lang === l ? 'bg-ink text-bg' : 'text-muted hover:text-ink'
+          className={`min-w-11 h-9 px-3 rounded-full uppercase tracking-wide transition cursor-pointer ${
+            lang === l ? 'bg-cover text-white' : 'text-muted hover:text-ink'
           }`}
         >
           {l}
@@ -1219,24 +1181,21 @@ function LangSwitch({ langs, lang, onChange, label }: { langs: Lang[]; lang: Lan
 function Wordmark({ className = '' }: { className?: string }) {
   const { course } = useI18n();
   return (
-    <span className={`font-serif font-semibold tracking-tight text-ink ${className}`}>
-      {course === 'sv' ? 'Svenska' : 'France'}
-      <span className="text-accent">Core</span>
-      <span className="inline-block w-1.5 h-1.5 rounded-full bg-gold ml-1 align-super" aria-hidden />
-    </span>
+    <span className={`font-display font-extrabold tracking-tight text-ink ${className}`}>{course === 'sv' ? 'svenskacore' : 'francecore'}</span>
   );
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   if (!children) return null;
-  return <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{children}</p>;
+  return <p className="text-sm font-semibold text-muted">{children}</p>;
 }
 
-function ProgressBar({ value, className = '', thin = false }: { value: number; className?: string; thin?: boolean }) {
+function ProgressBar({ value, label, className = '' }: { value: number; label?: string; className?: string }) {
   return (
     <div
-      className={`w-full rounded-full bg-surface-2 overflow-hidden ${thin ? 'h-1' : 'h-1.5'} ${className}`}
+      className={`w-full h-2 rounded-full bg-surface-2 overflow-hidden ${className}`}
       role="progressbar"
+      aria-label={label}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(value * 100)}
@@ -1246,9 +1205,9 @@ function ProgressBar({ value, className = '', thin = false }: { value: number; c
   );
 }
 
-function Page({ children, withNav = false, narrow = false }: { children: React.ReactNode; withNav?: boolean; narrow?: boolean }) {
+function Page({ children, narrow = false }: { children: React.ReactNode; narrow?: boolean }) {
   return (
-    <div className={`min-h-dvh px-5 md:px-8 pt-6 md:pt-10 ${withNav ? 'pb-28 md:pb-16' : 'pb-10'}`}>
+    <div className="min-h-dvh px-4 md:px-8 pt-5 md:pt-10 pb-10">
       <div className={`mx-auto w-full ${narrow ? 'max-w-xl' : 'max-w-3xl'}`}>{children}</div>
     </div>
   );
@@ -1256,56 +1215,17 @@ function Page({ children, withNav = false, narrow = false }: { children: React.R
 
 function TopBar({ onBack, backLabel, right }: { onBack: () => void; backLabel: string; right?: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between gap-4 mb-6">
+    <div className="flex items-center justify-between gap-4 mb-5">
       <button
         onClick={onBack}
-        className="inline-flex items-center gap-1.5 -ml-2 px-2 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-ink hover:bg-surface-2 transition cursor-pointer"
+        className="inline-flex items-center gap-2 h-11 pl-1.5 pr-4 rounded-full bg-surface text-sm font-semibold text-ink hover:bg-surface-2 transition cursor-pointer"
       >
-        <ArrowLeft className="w-4 h-4" aria-hidden /> {backLabel}
+        <span className="grid place-items-center w-8 h-8 rounded-full bg-bg" aria-hidden>
+          <ArrowLeft className="w-4 h-4" />
+        </span>
+        {backLabel}
       </button>
       {right}
-    </div>
-  );
-}
-
-function StepCard(props: {
-  step: number;
-  title: string;
-  text: string;
-  status: string;
-  action: string;
-  onClick: () => void;
-  primary?: boolean;
-  done?: boolean;
-  locked?: boolean;
-}) {
-  const { step, title, text, status, action, onClick, primary, done, locked } = props;
-  return (
-    <div className={`flex flex-col rounded-2xl border p-5 md:p-6 ${locked ? 'border-dashed border-line' : 'bg-surface border-line shadow-card'}`}>
-      <div className="flex items-center gap-3">
-        <span
-          className={`grid place-items-center w-9 h-9 rounded-full font-serif ${
-            locked ? 'bg-surface-2 text-faint' : done ? 'bg-gold text-[#14213d]' : 'bg-accent-soft text-accent'
-          }`}
-        >
-          {locked ? <Lock className="w-4 h-4" aria-hidden /> : done ? <Check className="w-4 h-4" aria-hidden /> : step}
-        </span>
-        <h2 className={`font-serif text-2xl ${locked ? 'text-muted' : 'text-ink'}`}>{title}</h2>
-      </div>
-      <p className="text-sm text-muted mt-3">{text}</p>
-      <p className={`text-sm font-medium mt-2 ${locked ? 'text-faint' : 'text-ink'}`}>{status}</p>
-      <button
-        onClick={onClick}
-        disabled={locked}
-        className={`mt-5 inline-flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition cursor-pointer disabled:cursor-not-allowed ${
-          primary
-            ? 'bg-accent hover:bg-accent-hover text-accent-ink'
-            : 'border border-line text-ink hover:bg-surface-2 disabled:text-faint disabled:hover:bg-transparent'
-        }`}
-      >
-        {step === 1 ? <Play className="w-4 h-4" aria-hidden /> : <Dumbbell className="w-4 h-4" aria-hidden />}
-        {action}
-      </button>
     </div>
   );
 }
