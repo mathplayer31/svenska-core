@@ -64,6 +64,42 @@ export const UNIT12_CARDS = [
     note: 'Infinitif et impératif identiques pour le groupe 1 : *Vila!* = Repose-toi ! Pas de réfléchi.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u12-tand', {
+    prompt: 'Dans la bouche : « une dent »', promptEn: 'In your mouth: "a tooth"',
+    sv: 'en tand', fr: 'une dent', en: 'a tooth', ipa: '/ɛn tand/',
+    note: 'Pluriel irrégulier : *tänder*. *Jag har ont i tänderna.*',
+  }),
+  vocab(D, 'u12-ryggen', {
+    prompt: 'Derrière toi, du cou aux reins : « le dos »', promptEn: 'Behind you, from neck to hips: "the back"',
+    sv: 'ryggen', fr: 'le dos', en: 'the back', ipa: '/ˈrʏɡːɛn/',
+    note: 'Défini de *en rygg*. *Jag har ont i ryggen* = j’ai mal au dos.',
+  }),
+  vocab(D, 'u12-forkyld', {
+    prompt: 'Le nez qui coule et la toux : « enrhumé »', promptEn: 'Runny nose and cough: "having a cold"',
+    sv: 'förkyld', fr: 'enrhumé(e)', en: 'having a cold', ipa: '/fœrˈɕʏlːd/',
+    note: '*Jag är förkyld* = j’ai un rhume. Le **k** devant **y** est doux [ɕ].',
+  }),
+  vocab(D, 'u12-hostar', {
+    prompt: 'Le bruit d’une gorge irritée : « tousser »', promptEn: 'The sound of an irritated throat: "to cough"',
+    sv: 'hostar', fr: 'tousse / tousser', en: 'coughs / to cough', ipa: '/ˈhuːstar/',
+    note: 'Infinitif *hosta*, 1er groupe. La toux : *hosta* aussi (*en hosta*).',
+  }),
+  vocab(D, 'u12-tablett', {
+    prompt: 'Un médicament à avaler : « un comprimé »', promptEn: 'Medicine you swallow: "a tablet"',
+    sv: 'en tablett', fr: 'un comprimé', en: 'a tablet / a pill', ipa: '/ɛn taˈblɛtː/',
+    note: 'Accent sur la fin. *Ta en tablett tre gånger om dagen.*',
+  }),
+  vocab(D, 'u12-frisk', {
+    prompt: 'Le contraire de *sjuk* : « en bonne santé »', promptEn: 'The opposite of *sjuk*: "healthy / well"',
+    sv: 'frisk', fr: 'en bonne santé', en: 'healthy / well', ipa: '/frɪsk/',
+    note: '*Jag är frisk igen* = je suis guéri. Aussi : *frisk luft* = air frais.',
+  }),
+  vocab(D, 'u12-recept', {
+    prompt: 'Ce que le médecin écrit pour la pharmacie : « une ordonnance »', promptEn: 'What the doctor writes for the pharmacy: "a prescription"',
+    sv: 'ett recept', fr: 'une ordonnance / une recette', en: 'a prescription / a recipe', ipa: '/ɛtː rɛˈsɛpt/',
+    note: 'Même mot pour une recette de cuisine. En Suède, l’ordonnance est électronique.',
+  }),
   phrase(D, 'u12-jag-ar-sjuk', {
     prompt: 'Prévenir : « Je suis malade aujourd’hui. »', promptEn: 'Letting someone know: "I am ill today."',
     sv: 'Jag är sjuk idag.', fr: 'Je suis malade aujourd’hui.', en: 'I am ill today.',

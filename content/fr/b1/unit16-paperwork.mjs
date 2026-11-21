@@ -93,6 +93,49 @@ export const UNIT16_CARDS = [
     note: 'Ändelsen **-asse** gör ordet nedsättande. Att klaga på *la paperasse* är nästan en nationalsport, så det är ett bra samtalsämne.',
     noteEn: 'The ending **-asse** makes the word pejorative. Complaining about *la paperasse* is almost a national sport, so it makes good small talk.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u16-le-titre-de-sejour', {
+    prompt: 'Tillståndet att bo i Frankrike för en utomeuropé', promptEn: 'The permit to live in France for a non-EU citizen',
+    fr: 'le titre de séjour', sv: 'uppehållstillståndet', en: 'the residence permit',
+    ipa: '/lə titʁ də se.ʒuʁ/',
+    note: 'Söks på *la préfecture*. Svenskar som EU-medborgare behöver inget.',
+    noteEn: 'Applied for at *la préfecture*. EU citizens such as Swedes do not need one.',
+  }),
+  vocab(D, 'fr-u16-la-signature', {
+    prompt: 'Ditt handskrivna namn längst ner', promptEn: 'Your handwritten name at the bottom',
+    fr: 'la signature', sv: 'underskriften', en: 'the signature',
+    ipa: '/la si.ɲa.tyʁ/',
+    note: 'Verbet: *signer*. **gn** = [ɲ]. *Signez ici, s’il vous plaît.*',
+    noteEn: 'The verb: *signer*. **gn** = [ɲ]. *Signez ici, s’il vous plaît.*',
+  }),
+  vocab(D, 'fr-u16-une-photocopie', {
+    prompt: 'En kopia av ett dokument', promptEn: 'A copy of a document',
+    fr: 'une photocopie', sv: 'en fotokopia', en: 'a photocopy',
+    ipa: '/yn fɔ.tɔ.kɔ.pi/',
+    note: 'Myndigheterna vill ofta ha både originalet och *une photocopie*.',
+    noteEn: 'Offices often want both the original and *une photocopie*.',
+  }),
+  vocab(D, 'fr-u16-le-delai', {
+    prompt: 'Den tid man har på sig', promptEn: 'The time you have',
+    fr: 'le délai', sv: 'tidsfristen / handläggningstiden', en: 'the deadline / processing time',
+    ipa: '/lə de.lɛ/',
+    note: '*Dans les délais* = i tid. *Quel est le délai ?* = hur lång tid tar det?',
+    noteEn: '*Dans les délais* = on time. *Quel est le délai ?* = how long does it take?',
+  }),
+  vocab(D, 'fr-u16-le-permis-de-conduire', {
+    prompt: 'Kortet som ger rätt att köra bil', promptEn: 'The card that lets you drive',
+    fr: 'le permis de conduire', sv: 'körkortet', en: 'the driving licence',
+    ipa: '/lə pɛʁ.mi də kɔ̃.dɥiʁ/',
+    note: 'Ofta bara *le permis*. *Passer le permis* = ta körkort.',
+    noteEn: 'Often just *le permis*. *Passer le permis* = take your driving test.',
+  }),
+  vocab(D, 'fr-u16-valable', {
+    prompt: 'Inte utgånget', promptEn: 'Not expired',
+    fr: 'valable', sv: 'giltig', en: 'valid',
+    ipa: '/va.labl/',
+    note: '*Votre passeport n’est plus valable* = ditt pass är inte längre giltigt.',
+    noteEn: '*Votre passeport n’est plus valable* = your passport is no longer valid.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u16-prendre-rendez-vous', {

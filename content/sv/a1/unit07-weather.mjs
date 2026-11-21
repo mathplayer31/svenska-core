@@ -1,5 +1,6 @@
 // Unité 7 : Météo & temps (Section 2)
 // Convention : voir content/sv/a1/unit01-greetings.mjs. Unité idéale pour la règle V2 : « Idag är det kallt », « Imorgon snöar det ».
+import { vocab } from '../helpers.mjs';
 
 export const UNIT7_DECK = {
   slug: 'swedish-unit-7-weather',
@@ -107,6 +108,37 @@ export const UNIT7_CARDS = [
     explanation_md: 'Singulier *en grad*. *minus tio grader* = moins dix degrés ; *plus fem grader* = cinq degrés.',
     words: ['grader'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u7-molnigt', {
+    prompt: 'Le ciel est couvert : « nuageux »', promptEn: 'The sky is overcast: "cloudy"',
+    sv: 'molnigt', fr: 'nuageux', en: 'cloudy', ipa: '/ˈmoːlnɪt/',
+    note: 'De *ett moln* (un nuage). Le **g** de *-igt* est muet : [-ɪt].',
+  }),
+  vocab(D, 'u7-soligt', {
+    prompt: 'Il y a du soleil : « ensoleillé »', promptEn: 'The sun is out: "sunny"',
+    sv: 'soligt', fr: 'ensoleillé', en: 'sunny', ipa: '/ˈsuːlɪt/',
+    note: 'De *sol* (soleil). *Det är soligt idag.* Même finale muette que *molnigt*.',
+  }),
+  vocab(D, 'u7-dimma', {
+    prompt: 'On ne voit pas loin : « du brouillard »', promptEn: 'You can’t see far: "fog"',
+    sv: 'en dimma', fr: 'un brouillard', en: 'a fog', ipa: '/ɛn ˈdɪmːa/',
+    note: '*Det är dimma idag* ou *det är dimmigt* = il y a du brouillard.',
+  }),
+  vocab(D, 'u7-paraply', {
+    prompt: 'Pour ne pas se mouiller : « un parapluie »', promptEn: 'To stay dry: "an umbrella"',
+    sv: 'ett paraply', fr: 'un parapluie', en: 'an umbrella', ipa: '/ɛtː paraˈplyː/',
+    note: 'Mot **ett**, venu du français. L’accent tombe sur la fin, comme en français.',
+  }),
+  vocab(D, 'u7-halt', {
+    prompt: 'Le sol est gelé : « glissant »', promptEn: 'The ground is icy: "slippery"',
+    sv: 'halt', fr: 'glissant', en: 'slippery', ipa: '/halt/',
+    note: '*Det är halt ute* = ça glisse dehors. L’hiver, attention aux trottoirs.',
+  }),
+  vocab(D, 'u7-arstid', {
+    prompt: 'Printemps, été, automne, hiver : « une saison »', promptEn: 'Spring, summer, autumn, winter: "a season"',
+    sv: 'en årstid', fr: 'une saison', en: 'a season', ipa: '/ɛn ˈoːʂˌtiːd/',
+    note: '*år* (année) + *tid* (temps). Les quatre : *vår, sommar, höst, vinter*.',
+  }),
 
   // ===================== PHRASES =====================
   {

@@ -64,6 +64,37 @@ export const UNIT21_CARDS = [
     gloss: [['en', 'une', 'a'], ['källa', 'source', 'source']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u21-rubrik', {
+    prompt: 'Le titre d’un article : « un gros titre »', promptEn: 'The title of an article: "a headline"',
+    sv: 'en rubrik', fr: 'un titre (de presse)', en: 'a headline', ipa: '/ɛn rɵˈbriːk/',
+    note: 'Accent sur la fin. *Läsa rubrikerna* = lire les gros titres.',
+  }),
+  vocab(D, 'u21-journalist', {
+    prompt: 'Celui qui écrit les articles : « un journaliste »', promptEn: 'The person writing articles: "a journalist"',
+    sv: 'en journalist', fr: 'un / une journaliste', en: 'a journalist', ipa: '/ɛn ɧɔɳaˈlɪst/',
+    note: 'Le **j** se prononce [ɧ], comme en français dans ce mot emprunté.',
+  }),
+  vocab(D, 'u21-riksdagen', {
+    prompt: 'Le parlement suédois', promptEn: 'The Swedish parliament',
+    sv: 'riksdagen', fr: 'le Parlement (suédois)', en: 'the Riksdag (parliament)', ipa: '/ˈrɪksˌdɑːɡɛn/',
+    note: '*rike* (royaume) + *dag* (assemblée). 349 députés : *riksdagsledamöter*.',
+  }),
+  vocab(D, 'u21-parti', {
+    prompt: 'Un groupe politique : « un parti »', promptEn: 'A political group: "a party"',
+    sv: 'ett parti', fr: 'un parti', en: 'a (political) party', ipa: '/ɛtː parˈtiː/',
+    note: 'Accent sur la fin. Pluriel : *partier*. Une fête : *en fest*, jamais *parti*.',
+  }),
+  vocab(D, 'u21-rostar', {
+    prompt: 'Ce qu’on fait le jour de l’élection : « voter »', promptEn: 'What you do on election day: "to vote"',
+    sv: 'röstar', fr: 'vote / voter', en: 'votes / to vote', ipa: '/ˈrœstar/',
+    note: 'Infinitif *rösta*. *en röst* = une voix. *Vem röstar du på?*',
+  }),
+  vocab(D, 'u21-statsminister', {
+    prompt: 'Le chef du gouvernement : « le Premier ministre »', promptEn: 'The head of government: "the prime minister"',
+    sv: 'en statsminister', fr: 'un Premier ministre', en: 'a prime minister', ipa: '/ɛn ˈstɑːtsmɪˌnɪstɛr/',
+    note: '*stat* (État) + *minister*. Nommé par le *riksdag*, pas élu directement.',
+  }),
   phrase(D, 'u21-sett-nyheterna', {
     prompt: '« Tu as vu les infos aujourd’hui ? »', promptEn: '"Have you seen the news today?"',
     sv: 'Har du sett nyheterna idag?', fr: 'Tu as vu les infos aujourd’hui ?', en: 'Have you seen the news today?',

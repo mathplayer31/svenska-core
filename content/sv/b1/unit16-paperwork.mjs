@@ -66,6 +66,37 @@ export const UNIT16_CARDS = [
     note: 'Forme en **-t** de *viktig*, avec *det är* : *Det är viktigt att…* Le **g** de *-igt* est muet.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u16-adress', {
+    prompt: 'Où tu habites, pour le courrier : « une adresse »', promptEn: 'Where you live, for post: "an address"',
+    sv: 'en adress', fr: 'une adresse', en: 'an address', ipa: '/ɛn aˈdrɛsː/',
+    note: 'Un seul **d**, deux **s**. Changer d’adresse : *anmäla flytt* à Skatteverket.',
+  }),
+  vocab(D, 'u16-migrationsverket', {
+    prompt: 'L’office de l’immigration', promptEn: 'The immigration authority',
+    sv: 'Migrationsverket', fr: 'l’Office des migrations', en: 'the Migration Agency', ipa: '/mɪɡraˈɧuːnsˌværkɛt/',
+    note: 'Pour les titres de séjour hors UE. *-verket* = l’office, comme dans *Skatteverket*.',
+  }),
+  vocab(D, 'u16-uppehallstillstand', {
+    prompt: 'Le droit de rester en Suède : « un titre de séjour »', promptEn: 'The right to stay in Sweden: "a residence permit"',
+    sv: 'ett uppehållstillstånd', fr: 'un titre de séjour', en: 'a residence permit', ipa: '/ɛtː ˈɵpːɛhɔlsˌtɪlːstɔnd/',
+    note: 'Abrégé *UT*. *uppehåll* (séjour) + *tillstånd* (autorisation).',
+  }),
+  vocab(D, 'u16-underskrift', {
+    prompt: 'Ton nom écrit à la main en bas du document : « une signature »', promptEn: 'Your handwritten name at the bottom: "a signature"',
+    sv: 'en underskrift', fr: 'une signature', en: 'a signature', ipa: '/ɛn ˈɵndɛˌʂkrɪft/',
+    note: 'Verbe : *skriva under* (signer). *under* + *skrift* (écrit).',
+  }),
+  vocab(D, 'u16-forsakringskassan', {
+    prompt: 'L’organisme des allocations : « la caisse d’assurance sociale »', promptEn: 'The benefits agency: "the Social Insurance Agency"',
+    sv: 'Försäkringskassan', fr: 'la Caisse d’assurance sociale', en: 'the Social Insurance Agency', ipa: '/fœˈʂɛːkrɪŋsˌkasːan/',
+    note: 'Gère les congés parentaux, les arrêts maladie et les allocations familiales.',
+  }),
+  vocab(D, 'u16-brev', {
+    prompt: 'Ce que le facteur apporte : « une lettre »', promptEn: 'What the postman brings: "a letter"',
+    sv: 'ett brev', fr: 'une lettre (courrier)', en: 'a letter', ipa: '/ɛtː breːv/',
+    note: 'Invariable au pluriel : *två brev*. Les administrations écrivent souvent par courrier.',
+  }),
   phrase(D, 'u16-behover-personnummer', {
     prompt: '« J’ai besoin d’un numéro personnel. »', promptEn: '"I need a personal identity number."',
     sv: 'Jag behöver ett personnummer.', fr: 'J’ai besoin d’un numéro personnel.', en: 'I need a personal identity number.',

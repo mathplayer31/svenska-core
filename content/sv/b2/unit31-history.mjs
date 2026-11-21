@@ -62,6 +62,37 @@ export const UNIT31_CARDS = [
     note: '*folk* (peuple) + *hem* (foyer) : la société vue comme une maison commune où personne n’est laissé de côté.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u31-drottningen', {
+    prompt: 'L’épouse du roi : « la reine »', promptEn: 'The king’s wife: "the queen"',
+    sv: 'drottningen', fr: 'la reine', en: 'the queen', ipa: '/ˈdrɔtːnɪŋɛn/',
+    note: 'Défini de *en drottning*. Le château royal : *Drottningholm*, « l’île de la reine ».',
+  }),
+  vocab(D, 'u31-krig', {
+    prompt: 'Le contraire de la paix : « une guerre »', promptEn: 'The opposite of peace: "a war"',
+    sv: 'ett krig', fr: 'une guerre', en: 'a war', ipa: '/ɛtː kriːɡ/',
+    note: 'Mot **ett**. La paix : *fred*. La Suède n’a pas connu de guerre depuis 1814.',
+  }),
+  vocab(D, 'u31-flykting', {
+    prompt: 'Celui qui fuit la guerre : « un réfugié »', promptEn: 'Someone fleeing war: "a refugee"',
+    sv: 'en flykting', fr: 'un réfugié / une réfugiée', en: 'a refugee', ipa: '/ɛn ˈflʏktɪŋ/',
+    note: 'De *fly* (fuir). Pluriel : *flyktingar*.',
+  }),
+  vocab(D, 'u31-rostratt', {
+    prompt: 'Le droit de participer aux élections : « le droit de vote »', promptEn: 'The right to take part in elections: "suffrage"',
+    sv: 'rösträtt', fr: 'le droit de vote', en: 'the right to vote', ipa: '/ˈrœstˌrɛtː/',
+    note: '*röst* (voix) + *rätt* (droit). Suffrage universel en Suède : 1921.',
+  }),
+  vocab(D, 'u31-tradition', {
+    prompt: 'Une coutume transmise : « une tradition »', promptEn: 'A custom passed down: "a tradition"',
+    sv: 'en tradition', fr: 'une tradition', en: 'a tradition', ipa: '/ɛn tradɪˈɧuːn/',
+    note: 'Le **tion** se prononce [ɧuːn]. Adjectif : *traditionell*.',
+  }),
+  vocab(D, 'u31-arhundrade', {
+    prompt: 'Cent ans : « un siècle »', promptEn: 'A hundred years: "a century"',
+    sv: 'ett århundrade', fr: 'un siècle', en: 'a century', ipa: '/ɛtː ˈoːrˌhɵndradɛ/',
+    note: '*år* (an) + *hundra* (cent). Plus courant pour les dates : *1900-talet* (le XXe siècle).',
+  }),
   phrase(D, 'u31-lang-historia', {
     prompt: '« La Suède a une longue histoire. »', promptEn: '"Sweden has a long history."',
     sv: 'Sverige har en lång historia.', fr: 'La Suède a une longue histoire.', en: 'Sweden has a long history.',

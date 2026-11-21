@@ -93,6 +93,49 @@ export const UNIT12_CARDS = [
     note: 'Kortet från **la Sécurité sociale** som man visar hos läkaren och på apoteket, så att kostnaden ersätts. De flesta har också en tilläggsförsäkring, **une mutuelle**.',
     noteEn: 'The card from **la Sécurité sociale** you show at the doctor’s and the pharmacy so costs are reimbursed. Most people also have top-up insurance, **une mutuelle**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u12-le-bras', {
+    prompt: 'Mellan axeln och handen', promptEn: 'Between shoulder and hand',
+    fr: 'le bras', sv: 'armen', en: 'the arm',
+    ipa: '/lə bʁa/',
+    note: 'Slutets **s** är stumt. *Je me suis cassé le bras* = jag bröt armen.',
+    noteEn: 'The final **s** is silent. *Je me suis cassé le bras* = I broke my arm.',
+  }),
+  vocab(D, 'fr-u12-la-jambe', {
+    prompt: 'Det man går med', promptEn: 'What you walk with',
+    fr: 'la jambe', sv: 'benet', en: 'the leg',
+    ipa: '/la ʒɑ̃b/',
+    note: '*J’ai mal à la jambe.* **am** framför konsonant är ett nasalljud.',
+    noteEn: '*J’ai mal à la jambe.* **am** before a consonant is nasal.',
+  }),
+  vocab(D, 'fr-u12-les-dents', {
+    prompt: 'I munnen', promptEn: 'In your mouth',
+    fr: 'les dents', sv: 'tänderna', en: 'the teeth',
+    ipa: '/le dɑ̃/',
+    note: 'Tandläkaren: *le / la dentiste*. *J’ai mal aux dents* (*à + les = aux*).',
+    noteEn: 'The dentist: *le / la dentiste*. *J’ai mal aux dents* (*à + les = aux*).',
+  }),
+  vocab(D, 'fr-u12-tousser', {
+    prompt: 'Det halsen gör när den är irriterad', promptEn: 'What your throat does when irritated',
+    fr: 'tousser', sv: 'att hosta', en: 'to cough',
+    ipa: '/tu.se/',
+    note: 'Hostan: *la toux*. Dubbelt **ss** = [s]; jämför *tout* med ett s.',
+    noteEn: 'The cough: *la toux*. Double **ss** = [s].',
+  }),
+  vocab(D, 'fr-u12-enrhume', {
+    prompt: 'Snuva och nästäppa', promptEn: 'Runny or blocked nose',
+    fr: 'enrhumé / enrhumée', sv: 'förkyld', en: 'having a cold',
+    ipa: '/ɑ̃.ʁy.me/',
+    note: 'Från *le rhume* (förkylningen). **rh** uttalas bara [ʁ].',
+    noteEn: 'From *le rhume* (a cold). **rh** is just [ʁ].',
+  }),
+  vocab(D, 'fr-u12-les-urgences', {
+    prompt: 'Akuten på sjukhuset', promptEn: 'The hospital emergency room',
+    fr: 'les urgences', sv: 'akuten', en: 'the emergency room',
+    ipa: '/le.z‿yʁ.ʒɑ̃s/',
+    note: 'Alltid plural. Ring **15** (SAMU) för ambulans, **112** fungerar också.',
+    noteEn: 'Always plural. Dial **15** (SAMU) for an ambulance; **112** works too.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u12-mal-a-la-tete', {

@@ -21,6 +21,14 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
+## Plus de mots par unité : AJOUTÉ (21 nov 2026, issue #14)
+- 5 à 8 cartes `vocab` (mots ou expressions) de plus dans chacune des 62 unités : 195 pour SvenskaCore, 190 pour FranceCore. Elles sont liées au thème de l'unité, sans doublon dans le cours (ex. *tack så mycket* dans l'Unité 1, avec *tack* ; *merci beaucoup* dans l'Unité 1 de FranceCore).
+- Placées dans chaque fichier d'unité après les mots d'origine, sous le commentaire `// Ajouts (issue #14)`, avant les phrases. Les unités A1 suédoises importent désormais `vocab` de `content/sv/helpers.mjs` pour ces ajouts (anglais intégré à la carte, note anglaise dans `content/sv/a1/notes-en.mjs`).
+- Accents tonals : 130 nouveaux mots dans `content/sv/tones.mjs`, les autres sont listés en tête du fichier. *nyår* et *patient* sont écartés par `node scripts/check-tones.mjs` (voyelles voisines à l'écrit).
+- `node scripts/check-fr.mjs` attend maintenant 17 à 20 mots et 8 phrases par unité.
+- Total : 1724 cartes (suédois : A1 208, A2 207, B1 206, B2 205 ; français : A1 223, A2 224, B1 226, B2 225).
+- Vérifié le 21 nov 2026 : `npm run content`, `node scripts/check-tones.mjs`, `node scripts/check-fr.mjs`, `npx tsc -b`, `npm run build`.
+
 ## PWA (app sur iPhone) et icône : AJOUTÉ (21 nov 2026, issue #12)
 - Pas d'app iOS native (il faudrait un Mac et Xcode) : le site s'installe comme une app. Sur iPhone : Safari, ouvrir https://svenska-core.pages.dev, Partager > Sur l'écran d'accueil.
 - Hors ligne complet : `scripts/sw.js` est le modèle du service worker ; au build, `vite.config.ts` écrit `dist/sw.js` avec la liste des fichiers (app + 1 386 sons). Deux caches versionnés par empreinte du contenu : un déploiement remplace l'app, les sons ne sont retéléchargés que s'ils ont changé. Les sons sont servis en 206 sur requête Range (obligatoire pour Safari iOS).
@@ -105,7 +113,7 @@ alter table public.sections add column if not exists description_en text;
 - Base : colonne `course` (`sv` par défaut, `fr`) sur `decks` et `sections` (`supabase/migrations-manuelles/migration_cours.sql`, incluse dans `schema.sql`). Les colonnes gardent leurs noms historiques : pour une carte française, `swedish_target` = français, `english_translation` / `french_translation` = suédois (langue de base), anglais dans les colonnes `_en`.
 - L'app ne charge que le cours actif (`loadData` dans `src/App.tsx`) ; parcours, révisions, tests et fondations restent inchangés. Tous les slugs français commencent par `fr-` : la progression des deux cours partage les mêmes clés et tables, avec la même synchro de compte.
 - Audio : `scripts/sync-content.mjs` choisit la voix d'après le cours du deck (`fr-FR-DeniseNeural` pour le français). Les exercices écrits reconnaissent les articles des deux langues (en / ett, un / une, le / la) et tolèrent les accents oubliés.
-- Contrôles : `npm run content` refuse une carte française sans suédois ou sans anglais ; `node scripts/check-fr.mjs [niveau]` vérifie le contenu français hors ligne (champs, gloses, 12 + 8 cartes par unité, slugs, tiret cadratin).
+- Contrôles : `npm run content` refuse une carte française sans suédois ou sans anglais ; `node scripts/check-fr.mjs [niveau]` vérifie le contenu français hors ligne (champs, gloses, 17 à 20 mots + 8 phrases par unité, slugs, tiret cadratin).
 
 ## Comptes et synchro de progression : AJOUTÉ (18 nov 2026, issue #8)
 - Seule la progression se synchronise ; le contenu reste embarqué. L'app marche sans compte.

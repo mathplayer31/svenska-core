@@ -62,6 +62,37 @@ export const UNIT25_CARDS = [
     note: 'Contraire de *höjs*. *Räntan sänks* = le taux est abaissé.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u25-aktie', {
+    prompt: 'Une part d’une entreprise en bourse : « une action »', promptEn: 'A share of a listed company: "a share"',
+    sv: 'en aktie', fr: 'une action (en bourse)', en: 'a share / a stock', ipa: '/ɛn ˈakːtsɪɛ/',
+    note: 'Pluriel : *aktier*. La bourse : *börsen*. Un fonds : *en fond*.',
+  }),
+  vocab(D, 'u25-bolan', {
+    prompt: 'Le crédit pour acheter un logement : « un prêt immobilier »', promptEn: 'The loan for buying a home: "a mortgage"',
+    sv: 'ett bolån', fr: 'un prêt immobilier', en: 'a mortgage', ipa: '/ɛtː ˈbuːˌloːn/',
+    note: '*bo* (habiter) + *lån* (prêt). Sensible à *räntan* (le taux).',
+  }),
+  vocab(D, 'u25-kostnad', {
+    prompt: 'Ce que quelque chose coûte : « un coût »', promptEn: 'What something costs: "a cost"',
+    sv: 'en kostnad', fr: 'un coût / une dépense', en: 'a cost / an expense', ipa: '/ɛn ˈkɔstnad/',
+    note: 'Souvent au pluriel : *kostnaderna ökar* (les coûts augmentent).',
+  }),
+  vocab(D, 'u25-inkomst', {
+    prompt: 'L’argent qui rentre : « un revenu »', promptEn: 'Money coming in: "an income"',
+    sv: 'en inkomst', fr: 'un revenu', en: 'an income', ipa: '/ɛn ˈɪnˌkɔmst/',
+    note: '*in* (dedans) + *komst* (venue). L’impôt sur le revenu : *inkomstskatt*.',
+  }),
+  vocab(D, 'u25-kris', {
+    prompt: 'Quand l’économie va très mal : « une crise »', promptEn: 'When the economy is in trouble: "a crisis"',
+    sv: 'en kris', fr: 'une crise', en: 'a crisis', ipa: '/ɛn kriːs/',
+    note: 'Pluriel : *kriser*. *Finanskrisen* = la crise financière.',
+  }),
+  vocab(D, 'u25-lagkonjunktur', {
+    prompt: 'Une période où l’économie ralentit : « une récession »', promptEn: 'A period of slowdown: "a recession"',
+    sv: 'en lågkonjunktur', fr: 'une récession / un ralentissement', en: 'a recession / a downturn', ipa: '/ɛn ˈloːɡkɔnjɵŋkˌtʉːr/',
+    note: '*låg* (bas) + *konjunktur* (conjoncture). Le contraire : *högkonjunktur*.',
+  }),
   phrase(D, 'u25-rantan-hojts', {
     prompt: 'Passif au parfait : « Le taux d’intérêt a encore été relevé. »', promptEn: 'Perfect passive: "The interest rate has been raised again."',
     sv: 'Räntan har höjts igen.', fr: 'Le taux d’intérêt a encore été relevé.', en: 'The interest rate has been raised again.',

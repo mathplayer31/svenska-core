@@ -66,6 +66,42 @@ export const UNIT18_CARDS = [
     gloss: [['en', 'un', 'an'], ['arbetsgivare', 'employeur', 'employer']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u18-deltid', {
+    prompt: 'Pas à temps plein : « temps partiel »', promptEn: 'Not full-time: "part-time"',
+    sv: 'deltid', fr: 'temps partiel', en: 'part-time', ipa: '/ˈdeːlˌtiːd/',
+    note: '*del* (partie) + *tid* (temps). *Jag jobbar deltid, 75 procent.*',
+  }),
+  vocab(D, 'u18-tjanst', {
+    prompt: 'Le poste proposé dans l’annonce', promptEn: 'The job on offer: "a position"',
+    sv: 'en tjänst', fr: 'un poste', en: 'a position', ipa: '/ɛn ɕɛnst/',
+    note: 'Aussi « un service » : *Kan du göra mig en tjänst?* = tu peux me rendre service ?',
+  }),
+  vocab(D, 'u18-referens', {
+    prompt: 'Quelqu’un qui parle de toi à l’employeur : « une référence »', promptEn: 'Someone who vouches for you: "a reference"',
+    sv: 'en referens', fr: 'une référence', en: 'a reference', ipa: '/ɛn rɛfɛˈrɛns/',
+    note: 'En Suède, l’employeur appelle souvent tes anciens chefs : *referenser lämnas på begäran*.',
+  }),
+  vocab(D, 'u18-provanstallning', {
+    prompt: 'Les premiers mois à l’essai : « une période d’essai »', promptEn: 'The first months on trial: "a probation period"',
+    sv: 'en provanställning', fr: 'une période d’essai', en: 'a probationary employment', ipa: '/ɛn ˈpruːvanˌstɛlːnɪŋ/',
+    note: 'Six mois maximum, puis souvent un CDI : *tillsvidareanställning*.',
+  }),
+  vocab(D, 'u18-arbetslos', {
+    prompt: 'Sans emploi : « au chômage »', promptEn: 'Without a job: "unemployed"',
+    sv: 'arbetslös', fr: 'au chômage', en: 'unemployed', ipa: '/ˈarbeːtsˌløːs/',
+    note: '*arbete* (travail) + *-lös* (sans). Le chômage : *arbetslöshet*.',
+  }),
+  vocab(D, 'u18-utbildning', {
+    prompt: 'Tes études et diplômes : « une formation »', promptEn: 'Your studies and degrees: "education / training"',
+    sv: 'en utbildning', fr: 'une formation / des études', en: 'education / training', ipa: '/ɛn ˈʉːtˌbɪldnɪŋ/',
+    note: 'Rubrique du CV, avec *arbetslivserfarenhet* (expérience professionnelle).',
+  }),
+  vocab(D, 'u18-arbetsformedlingen', {
+    prompt: 'L’agence publique pour l’emploi', promptEn: 'The public employment service',
+    sv: 'Arbetsförmedlingen', fr: 'l’agence pour l’emploi', en: 'the Public Employment Service', ipa: '/ˈarbeːtsfœrˌmeːdlɪŋɛn/',
+    note: 'L’équivalent de France Travail. Propose aussi des cours de suédois pour le travail.',
+  }),
   phrase(D, 'u18-soker-jobb-som', {
     prompt: '« Je cherche un emploi de développeur. »', promptEn: '"I am looking for a job as a developer."',
     sv: 'Jag söker jobb som utvecklare.', fr: 'Je cherche un emploi de développeur.', en: 'I am looking for a job as a developer.',

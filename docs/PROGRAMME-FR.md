@@ -5,7 +5,7 @@
 
 ## Structure
 
-8 sections, 31 unités, comme SvenskaCore. Chaque unité : **12 mots** (`vocab`) puis **8 phrases** (`phrase`), soit 20 cartes. Chaque section se termine par un test (80 % pour valider) qui ouvre la suivante.
+8 sections, 31 unités, comme SvenskaCore. Chaque unité : **12 mots** (`vocab`), **5 à 8 mots ou expressions ajoutés** (issue #14, `vocab` aussi), puis **8 phrases** (`phrase`), soit 25 à 28 cartes. Chaque section se termine par un test (80 % pour valider) qui ouvre la suivante.
 
 | Niveau | Section | Unités |
 |---|---|---|

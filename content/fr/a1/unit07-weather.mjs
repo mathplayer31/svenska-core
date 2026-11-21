@@ -93,6 +93,50 @@ export const UNIT7_CARDS = [
     note: 'Månader skrivs med **liten** bokstav och tar **en**: *en juillet*. **Août** är kort: [ut] eller [u].',
     noteEn: 'Months take a **small** letter in French and use **en**: *en juillet*. **Août** is short: [ut] or [u].',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u7-le-nuage', {
+    prompt: 'Grått på himlen', promptEn: 'Grey in the sky',
+    fr: 'le nuage', sv: 'molnet', en: 'the cloud',
+    ipa: '/lə nɥaʒ/',
+    note: 'Adjektiv: *nuageux* (molnigt). *Il y a des nuages.*',
+    noteEn: 'Adjective: *nuageux* (cloudy). *Il y a des nuages.*',
+  }),
+  vocab(D, 'fr-u7-il-y-a-du-vent', {
+    prompt: 'Säg att det blåser', promptEn: 'Saying it is windy',
+    fr: 'il y a du vent', sv: 'det blåser', en: 'it is windy',
+    ipa: '/il‿ja dy vɑ̃/',
+    note: 'Ordagrant ”det finns vind”. Man kan också säga *il fait du vent*.',
+    noteEn: 'Literally "there is some wind". You can also say *il fait du vent*.',
+    gloss: [['il y a', 'det finns', 'there is'], ['du', '(lite)', 'some'], ['vent', 'vind', 'wind']],
+  }),
+  vocab(D, 'fr-u7-lorage', {
+    prompt: 'Åska och blixtar', promptEn: 'Thunder and lightning',
+    fr: 'l’orage', sv: 'ovädret / åskvädret', en: 'the storm',
+    ipa: '/lɔ.ʁaʒ/',
+    note: 'Maskulinum: *un orage*. Vanligt i augusti i södra Frankrike.',
+    noteEn: 'Masculine: *un orage*. Common in August in southern France.',
+  }),
+  vocab(D, 'fr-u7-la-pluie', {
+    prompt: 'Det som faller när det regnar', promptEn: 'What falls when it rains',
+    fr: 'la pluie', sv: 'regnet', en: 'the rain',
+    ipa: '/la plɥi/',
+    note: 'Verbet: *il pleut*. **ui** uttalas [ɥi], som ett snabbt y + i.',
+    noteEn: 'The verb: *il pleut*. **ui** is [ɥi], a quick rounded glide + i.',
+  }),
+  vocab(D, 'fr-u7-la-neige', {
+    prompt: 'Vit och kall', promptEn: 'White and cold',
+    fr: 'la neige', sv: 'snön', en: 'the snow',
+    ipa: '/la nɛʒ/',
+    note: 'Verbet: *il neige*. **ei** uttalas [ɛ].',
+    noteEn: 'The verb: *il neige*. **ei** is pronounced [ɛ].',
+  }),
+  vocab(D, 'fr-u7-le-parapluie', {
+    prompt: 'Skydd mot regnet', promptEn: 'Protection from the rain',
+    fr: 'le parapluie', sv: 'paraplyet', en: 'the umbrella',
+    ipa: '/lə pa.ʁa.plɥi/',
+    note: '*para* (mot) + *pluie* (regn). Svenskans *paraply* kommer härifrån.',
+    noteEn: '*para* (against) + *pluie* (rain). Swedish *paraply* comes from it.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u7-quel-temps-fait-il', {

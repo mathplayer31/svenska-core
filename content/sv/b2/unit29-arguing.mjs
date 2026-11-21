@@ -64,6 +64,39 @@ export const UNIT29_CARDS = [
     gloss: [['till', 'pour', 'for'], ['exempel', 'exemple', 'example']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u29-eftersom', {
+    prompt: 'Pour donner une cause : « puisque / parce que »', promptEn: 'Giving a reason: "since / because"',
+    sv: 'eftersom', fr: 'puisque / parce que', en: 'since / because', ipa: '/ˈɛftɛˌʂɔmː/',
+    note: 'Conjonction de subordination : *Eftersom det regnade, stannade vi hemma.* En tête, elle entraîne V2 dans la principale.',
+  }),
+  vocab(D, 'u29-enligt-min-mening', {
+    prompt: 'Annoncer son avis, en registre soutenu', promptEn: 'Stating your view, formally',
+    sv: 'enligt min mening', fr: 'à mon sens / selon moi', en: 'in my opinion', ipa: '/ˈeːnlɪkt mɪn ˈmeːnɪŋ/',
+    note: 'Plus soutenu que *jag tycker*. En tête de phrase, le verbe suit (V2).',
+    gloss: [['enligt', 'selon', 'according to'], ['min', 'mon', 'my'], ['mening', 'avis', 'opinion']],
+  }),
+  vocab(D, 'u29-for-det-forsta', {
+    prompt: 'Pour annoncer le premier argument : « premièrement »', promptEn: 'Introducing your first point: "firstly"',
+    sv: 'för det första', fr: 'premièrement / d’abord', en: 'firstly', ipa: '/fœr deː ˈfœʂːta/',
+    note: 'Puis *för det andra* (deuxièmement). Comme tout adverbial en tête, il entraîne V2.',
+    gloss: [['för', 'pour', 'for'], ['det', 'le', 'the'], ['första', 'premier', 'first']],
+  }),
+  vocab(D, 'u29-sammanfattningsvis', {
+    prompt: 'Pour conclure un exposé : « en résumé »', promptEn: 'Wrapping up a talk: "to sum up"',
+    sv: 'sammanfattningsvis', fr: 'en résumé', en: 'to sum up / in summary', ipa: '/ˈsamːanfatnɪŋsˌviːs/',
+    note: '*sammanfattning* (résumé) + *-vis* (de manière). Même modèle : *förhoppningsvis* (avec un peu de chance).',
+  }),
+  vocab(D, 'u29-anda', {
+    prompt: 'Malgré tout : « quand même »', promptEn: 'Despite everything: "still / anyway"',
+    sv: 'ändå', fr: 'quand même / pourtant', en: 'still / anyway', ipa: '/ˈɛnːdoː/',
+    note: '*Det var dyrt, men vi köpte det ändå.* Se place après le verbe ou en fin de phrase.',
+  }),
+  vocab(D, 'u29-argument', {
+    prompt: 'Une raison qui soutient une thèse : « un argument »', promptEn: 'A reason supporting a view: "an argument"',
+    sv: 'ett argument', fr: 'un argument', en: 'an argument (reason)', ipa: '/ɛtː arɡɵˈmɛnt/',
+    note: 'Mot **ett**, invariable au pluriel. Une dispute se dit *ett gräl*, pas *argument*.',
+  }),
   phrase(D, 'u29-ena-andra-sidan', {
     prompt: '« D’un côté c’est cher, de l’autre c’est bien. »', promptEn: '"On the one hand it is expensive, on the other hand it is good."',
     sv: 'Å ena sidan är det dyrt, å andra sidan är det bra.', fr: 'D’un côté c’est cher, de l’autre c’est bien.', en: 'On the one hand it is expensive, on the other hand it is good.',

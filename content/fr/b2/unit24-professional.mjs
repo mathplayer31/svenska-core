@@ -93,6 +93,51 @@ export const UNIT24_CARDS = [
     note: 'Kortform av **la visioconférence**. *On se fait une visio ?* Franskan älskar att korta ord: *le resto, l’appart, la fac*.',
     noteEn: 'Short for **la visioconférence**. *On se fait une visio ?* French loves clipping words: *le resto, l’appart, la fac*.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u24-le-devis', {
+    prompt: 'Prisförslaget före ett uppdrag', promptEn: 'The price offer before a job',
+    fr: 'le devis', sv: 'offerten', en: 'the quote',
+    ipa: '/lə də.vi/',
+    note: '*Faire un devis* = lämna en offert. Slutets **s** är stumt.',
+    noteEn: '*Faire un devis* = give a quote. The final **s** is silent.',
+  }),
+  vocab(D, 'fr-u24-le-contrat', {
+    prompt: 'Det man skriver under', promptEn: 'What you sign',
+    fr: 'le contrat', sv: 'avtalet / kontraktet', en: 'the contract',
+    ipa: '/lə kɔ̃.tʁa/',
+    note: 'Slutets **t** är stumt. *Signer un contrat.*',
+    noteEn: 'The final **t** is silent. *Signer un contrat.*',
+  }),
+  vocab(D, 'fr-u24-la-piece-jointe', {
+    prompt: 'Filen som följer med mejlet', promptEn: 'The file sent with an email',
+    fr: 'la pièce jointe', sv: 'bilagan', en: 'the attachment',
+    ipa: '/la pjɛs ʒwɛ̃t/',
+    note: 'Förkortas *PJ*. *Vous trouverez en pièce jointe…*',
+    noteEn: 'Shortened to *PJ*. *Vous trouverez en pièce jointe…* (please find attached…)',
+    gloss: [['la pièce', 'delen', 'the piece'], ['jointe', 'bifogade', 'joined']],
+  }),
+  vocab(D, 'fr-u24-le-planning', {
+    prompt: 'Schemat för veckan eller projektet', promptEn: 'The schedule for the week or project',
+    fr: 'le planning', sv: 'schemat / planeringen', en: 'the schedule',
+    ipa: '/lə pla.niŋ/',
+    note: 'Lånord från engelskan, men betyder schema. Uttalas med [ŋ].',
+    noteEn: 'Borrowed from English but means "schedule". Pronounced with [ŋ].',
+  }),
+  vocab(D, 'fr-u24-le-responsable', {
+    prompt: 'Den som ansvarar för något', promptEn: 'The person in charge',
+    fr: 'le / la responsable', sv: 'den ansvarige / ansvariga', en: 'the manager / the person in charge',
+    ipa: '/lə ʁɛs.pɔ̃.sabl/',
+    note: '*Le responsable des ventes* = försäljningsansvarig.',
+    noteEn: '*Le responsable des ventes* = the sales manager.',
+  }),
+  vocab(D, 'fr-u24-la-date-limite', {
+    prompt: 'Sista dagen för något', promptEn: 'The last day for something',
+    fr: 'la date limite', sv: 'sista datum / deadline', en: 'the deadline',
+    ipa: '/la dat li.mit/',
+    note: 'Vardagligare än *l’échéance*. *La date limite de candidature.*',
+    noteEn: 'More everyday than *l’échéance*. *La date limite de candidature.*',
+    gloss: [['la date', 'datumet', 'the date'], ['limite', 'sista', 'limit']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u24-merci-retour', {

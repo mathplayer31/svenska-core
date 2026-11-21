@@ -61,6 +61,37 @@ export const UNIT11_CARDS = [
     note: 'Groupe 2 : *köpa, köper, köpte, har köpt*. Le **ö** devient court au prétérit.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u11-konsert', {
+    prompt: 'Écouter de la musique en direct : « un concert »', promptEn: 'Live music: "a concert"',
+    sv: 'en konsert', fr: 'un concert', en: 'a concert', ipa: '/ɛn kɔnˈsæʈː/',
+    note: 'Le **rt** final se prononce [ʈ], langue recourbée. *Gå på konsert* = aller au concert.',
+  }),
+  vocab(D, 'u11-simmar', {
+    prompt: 'Dans l’eau, à la piscine : « nager »', promptEn: 'In the water, at the pool: "to swim"',
+    sv: 'simmar', fr: 'nage / nager', en: 'swims / to swim', ipa: '/ˈsɪmːar/',
+    note: 'Infinitif *simma*, 1er groupe. La piscine : *simhallen*.',
+  }),
+  vocab(D, 'u11-museum', {
+    prompt: 'Pour voir des expositions : « un musée »', promptEn: 'To see exhibitions: "a museum"',
+    sv: 'ett museum', fr: 'un musée', en: 'a museum', ipa: '/ɛtː mɵˈseːɵm/',
+    note: 'Défini : *museet*. Pluriel : *museer*.',
+  }),
+  vocab(D, 'u11-promenad', {
+    prompt: 'Marcher pour le plaisir : « une promenade »', promptEn: 'Walking for pleasure: "a walk"',
+    sv: 'en promenad', fr: 'une promenade', en: 'a walk', ipa: '/ɛn prɔmɛˈnɑːd/',
+    note: '*Ta en promenad* = faire une promenade. Accent sur la fin.',
+  }),
+  vocab(D, 'u11-fotboll', {
+    prompt: 'Le sport le plus populaire : « le football »', promptEn: 'The most popular sport: "football"',
+    sv: 'fotboll', fr: 'le football', en: 'football / soccer', ipa: '/ˈfuːtˌbɔlː/',
+    note: 'Sans article : *Jag spelar fotboll.* *fot* (pied) + *boll* (ballon).',
+  }),
+  vocab(D, 'u11-gjorde', {
+    prompt: 'Le passé de *göra* : « a fait »', promptEn: 'Past of *göra*: "did"',
+    sv: 'gjorde', fr: 'a fait / faisait', en: 'did', ipa: '/ˈjuːɖɛ/',
+    note: '*göra, gör, gjorde, har gjort*. Le **gj** se prononce [j] et le **rd** [ɖ].',
+  }),
   phrase(D, 'u11-vad-gjorde-du', {
     prompt: 'Le lundi matin : « Qu’est-ce que tu as fait ce week-end ? »', promptEn: 'On Monday morning: "What did you do at the weekend?"',
     sv: 'Vad gjorde du i helgen?', fr: 'Qu’est-ce que tu as fait ce week-end ?', en: 'What did you do at the weekend?',

@@ -1,6 +1,7 @@
 // Unité 3 : Famille & relations (Section 1)
 // Convention : voir content/sv/a1/unit01-greetings.mjs. Phrases construites avec les mots des Unités 1-2 + ceux introduits ici.
 // Point de grammaire central : min/mitt/mina et le piège sin/sitt/sina vs hans/hennes.
+import { vocab } from '../helpers.mjs';
 
 export const UNIT3_DECK = {
   slug: 'swedish-unit-3-family',
@@ -140,6 +141,42 @@ export const UNIT3_CARDS = [
     explanation_md: '**hon** = elle (le **o** court sonne presque « ou »). Possessif : **hennes** (son/sa/ses… à elle).',
     words: ['hon'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u3-son', {
+    prompt: 'L’enfant garçon : « un fils »', promptEn: 'A male child: "a son"',
+    sv: 'en son', fr: 'un fils', en: 'a son', ipa: '/ɛn soːn/',
+    note: 'Pluriel irrégulier : **söner**. *Min son heter Leo.*',
+  }),
+  vocab(D, 'u3-dotter', {
+    prompt: 'L’enfant fille : « une fille »', promptEn: 'A female child: "a daughter"',
+    sv: 'en dotter', fr: 'une fille (enfant)', en: 'a daughter', ipa: '/ɛn ˈdɔtːɛr/',
+    note: 'Pluriel irrégulier : **döttrar**. Ne pas confondre avec *en flicka* (une fille en général).',
+  }),
+  vocab(D, 'u3-mormor', {
+    prompt: 'La mère de ta mère : « grand-mère maternelle »', promptEn: 'Your mother’s mother: "maternal grandmother"',
+    sv: 'en mormor', fr: 'une grand-mère (maternelle)', en: 'a grandmother (mother’s side)', ipa: '/ɛn ˈmʊrːˌmʊr/',
+    note: '*mor* (mère) + *mor*. Le suédois précise le côté : *farmor* = la mère du père.',
+  }),
+  vocab(D, 'u3-farfar', {
+    prompt: 'Le père de ton père : « grand-père paternel »', promptEn: 'Your father’s father: "paternal grandfather"',
+    sv: 'en farfar', fr: 'un grand-père (paternel)', en: 'a grandfather (father’s side)', ipa: '/ɛn ˈfarːˌfar/',
+    note: '*far* (père) + *far*. Et *morfar* = le père de la mère.',
+  }),
+  vocab(D, 'u3-sambo', {
+    prompt: 'Ton partenaire qui vit avec toi sans être marié : « un / une concubin(e) »', promptEn: 'Your partner you live with, unmarried: "a live-in partner"',
+    sv: 'en sambo', fr: 'un / une partenaire (en concubinage)', en: 'a live-in partner', ipa: '/ɛn ˈsamːˌbuː/',
+    note: '*sam-* (ensemble) + *bo* (habiter). Très courant en Suède, même avec des enfants.',
+  }),
+  vocab(D, 'u3-syskon', {
+    prompt: 'Frères et sœurs, en un seul mot', promptEn: 'Brothers and sisters, in one word: "siblings"',
+    sv: 'syskon', fr: 'frères et sœurs', en: 'siblings', ipa: '/ˈsʏsːkɔn/',
+    note: 'Mot **ett**, invariable : *Har du syskon?* = As-tu des frères et sœurs ?',
+  }),
+  vocab(D, 'u3-gift', {
+    prompt: 'Avoir un mari ou une femme : « marié(e) »', promptEn: 'Having a husband or wife: "married"',
+    sv: 'gift', fr: 'marié(e)', en: 'married', ipa: '/jɪft/',
+    note: 'Le **g** devant **i** se prononce [j]. *Jag är gift.* Au pluriel : *gifta*.',
+  }),
 
   // ===================== PHRASES =====================
   {

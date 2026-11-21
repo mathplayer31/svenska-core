@@ -60,6 +60,37 @@ export const UNIT27_CARDS = [
     note: 'Prétérit de *ska*. **skulle** + infinitif = conditionnel : *jag skulle köpa* (j’achèterais).',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u27-okar', {
+    prompt: 'Le contraire de *minskar* : « augmenter »', promptEn: 'The opposite of *minskar*: "to increase"',
+    sv: 'ökar', fr: 'augmente / augmenter', en: 'increases / to increase', ipa: '/ˈøːkar/',
+    note: 'Infinitif *öka*, 1er groupe. *Temperaturen ökar.* Le nom : *en ökning*.',
+  }),
+  vocab(D, 'u27-pant', {
+    prompt: 'Ce qu’on récupère en rendant une canette : « une consigne »', promptEn: 'What you get back for returning a can: "a deposit"',
+    sv: 'en pant', fr: 'une consigne', en: 'a deposit (on bottles)', ipa: '/ɛn pant/',
+    note: '*Panta burkar* = rapporter les canettes au supermarché, 1 à 2 kronor pièce.',
+  }),
+  vocab(D, 'u27-koldioxid', {
+    prompt: 'Le principal gaz à effet de serre', promptEn: 'The main greenhouse gas: "carbon dioxide"',
+    sv: 'koldioxid', fr: 'le dioxyde de carbone', en: 'carbon dioxide', ipa: '/ˈkoːldɪɔkˌsiːd/',
+    note: '*kol* (carbone) + *dioxid*. Souvent : *koldioxidutsläpp* (émissions de CO2).',
+  }),
+  vocab(D, 'u27-vindkraft', {
+    prompt: 'L’électricité produite par le vent : « l’éolien »', promptEn: 'Electricity from the wind: "wind power"',
+    sv: 'vindkraft', fr: 'l’énergie éolienne', en: 'wind power', ipa: '/ˈvɪndˌkraft/',
+    note: '*vind* (vent) + *kraft* (force). Une éolienne : *ett vindkraftverk*.',
+  }),
+  vocab(D, 'u27-kollektivtrafik', {
+    prompt: 'Bus, métro, train : « les transports en commun »', promptEn: 'Buses, metro, trains: "public transport"',
+    sv: 'kollektivtrafik', fr: 'les transports en commun', en: 'public transport', ipa: '/kɔlɛkˈtiːvtraˌfiːk/',
+    note: 'À l’oral : *åka kollektivt* = prendre les transports en commun.',
+  }),
+  vocab(D, 'u27-oversvamning', {
+    prompt: 'Quand l’eau envahit tout : « une inondation »', promptEn: 'When water floods everything: "a flood"',
+    sv: 'en översvämning', fr: 'une inondation', en: 'a flood', ipa: '/ɛn ˈøːvɛˌʂvɛmːnɪŋ/',
+    note: '*över* (par-dessus) + *svämma* (déborder). De plus en plus fréquentes avec le climat.',
+  }),
   phrase(D, 'u27-sorterar-soporna', {
     prompt: '« Nous trions les déchets et nous recyclons. »', promptEn: '"We sort our rubbish and recycle."',
     sv: 'Vi sorterar soporna och återvinner.', fr: 'Nous trions les déchets et nous recyclons.', en: 'We sort our rubbish and recycle.',

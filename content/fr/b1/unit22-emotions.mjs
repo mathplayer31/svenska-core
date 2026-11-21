@@ -93,6 +93,57 @@ export const UNIT22_CARDS = [
     note: '**Rompre avec quelqu’un** är neutralt. I talspråk säger man oftare *se séparer* eller, ledigt, *larguer quelqu’un* (dumpa någon).',
     noteEn: '**Rompre avec quelqu’un** is neutral. In speech people more often say *se séparer* or, casually, *larguer quelqu’un* (to dump someone).',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u22-heureux', {
+    prompt: 'Riktigt glad', promptEn: 'Truly happy',
+    fr: 'heureux / heureuse', sv: 'lycklig', en: 'happy',
+    ipa: '/œ.ʁø/ /œ.ʁøz/',
+    note: '*-eux* blir *-euse* i femininum. Lyckan: *le bonheur*.',
+    noteEn: '*-eux* becomes *-euse* in the feminine. Happiness: *le bonheur*.',
+  }),
+  vocab(D, 'fr-u22-triste', {
+    prompt: 'Motsatsen till glad', promptEn: 'The opposite of happy',
+    fr: 'triste', sv: 'ledsen', en: 'sad',
+    ipa: '/tʁist/',
+    note: 'Samma form för båda könen. *Ne sois pas triste.*',
+    noteEn: 'Same form for both genders. *Ne sois pas triste.*',
+  }),
+  vocab(D, 'fr-u22-fier', {
+    prompt: 'Nöjd med någon eller något', promptEn: 'Pleased with someone or something',
+    fr: 'fier / fière', sv: 'stolt', en: 'proud',
+    ipa: '/fjɛʁ/',
+    note: '*Je suis fière de toi* (med *de*). **r** uttalas i båda formerna.',
+    noteEn: '*Je suis fière de toi* (with *de*). The **r** is heard in both forms.',
+  }),
+  vocab(D, 'fr-u22-inquiet', {
+    prompt: 'När man oroar sig', promptEn: 'When you worry',
+    fr: 'inquiet / inquiète', sv: 'orolig', en: 'worried',
+    ipa: '/ɛ̃.kjɛ/ /ɛ̃.kjɛt/',
+    note: 'Verbet: *s’inquiéter*. *Ne t’inquiète pas* = oroa dig inte.',
+    noteEn: 'The verb: *s’inquiéter*. *Ne t’inquiète pas* = don’t worry.',
+  }),
+  vocab(D, 'fr-u22-en-colere', {
+    prompt: 'När man är arg', promptEn: 'Being angry',
+    fr: 'en colère', sv: 'arg', en: 'angry',
+    ipa: '/ɑ̃ kɔ.lɛʁ/',
+    note: '*Être en colère contre quelqu’un* = vara arg på någon. *La colère* = ilskan.',
+    noteEn: '*Être en colère contre quelqu’un* = be angry with someone. *La colère* = anger.',
+    gloss: [['en', 'i', 'in'], ['colère', 'ilska', 'anger']],
+  }),
+  vocab(D, 'fr-u22-fatigue', {
+    prompt: 'När man behöver sova', promptEn: 'When you need to sleep',
+    fr: 'fatigué / fatiguée', sv: 'trött', en: 'tired',
+    ipa: '/fa.ti.ɡe/',
+    note: '**gu** = [ɡ]: u:et finns bara för att **g** ska vara hårt.',
+    noteEn: '**gu** = [ɡ]: the u just keeps the **g** hard.',
+  }),
+  vocab(D, 'fr-u22-surpris', {
+    prompt: 'När något oväntat händer', promptEn: 'When something unexpected happens',
+    fr: 'surpris / surprise', sv: 'förvånad', en: 'surprised',
+    ipa: '/syʁ.pʁi/ /syʁ.pʁiz/',
+    note: 'Hankön: **s** stumt; honkön: [z] hörs. Överraskningen: *la surprise*.',
+    noteEn: 'Masculine: silent **s**; feminine: [z] is heard. The surprise: *la surprise*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u22-disputes-reconcilies', {

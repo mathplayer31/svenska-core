@@ -4,6 +4,7 @@
 //  - swedish_target = texte suédois
 //  - english_translation = traduction (en français dans ton app, on garde la convention)
 //  - words = textes suédois dont on génère un MP3 chacun
+import { vocab } from '../helpers.mjs';
 
 export const UNIT1_DECK = {
   slug: 'swedish-unit-1-greetings',
@@ -112,6 +113,46 @@ export const UNIT1_CARDS = [
     explanation_md: 'On le réutilisera avec la règle V2 (*Idag heter jag Anna*).',
     words: ['idag'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u1-tack-sa-mycket', {
+    prompt: 'Remercier chaleureusement : « merci beaucoup »', promptEn: 'Thanking warmly: "thank you very much"',
+    sv: 'tack så mycket', fr: 'merci beaucoup', en: 'thank you very much', ipa: '/takː sɔ ˈmʏkːɛ/',
+    note: '*så* = si, *mycket* = beaucoup. Encore plus fort : **tusen tack** (mille mercis).',
+    gloss: [['tack', 'merci', 'thanks'], ['så', 'si', 'so'], ['mycket', 'beaucoup', 'much']],
+  }),
+  vocab(D, 'u1-god-kvall', {
+    prompt: 'Saluer quelqu’un le soir : « bonsoir »', promptEn: 'Greeting someone in the evening: "good evening"',
+    sv: 'god kväll', fr: 'bonsoir', en: 'good evening', ipa: '/ɡuːd kvɛlː/',
+    note: 'Même modèle que *god morgon*. Le **ä** est court devant **ll**.',
+    gloss: [['god', 'bon', 'good'], ['kväll', 'soir', 'evening']],
+  }),
+  vocab(D, 'u1-god-natt', {
+    prompt: 'Avant d’aller dormir : « bonne nuit »', promptEn: 'Before going to bed: "good night"',
+    sv: 'god natt', fr: 'bonne nuit', en: 'good night', ipa: '/ɡuːd natː/',
+    note: 'Se dit en partant le soir ou avant de dormir. Le **a** est court devant **tt**.',
+    gloss: [['god', 'bonne', 'good'], ['natt', 'nuit', 'night']],
+  }),
+  vocab(D, 'u1-forlat', {
+    prompt: 'S’excuser d’une erreur : « pardon / désolé »', promptEn: 'Apologising for a mistake: "sorry"',
+    sv: 'förlåt', fr: 'pardon / désolé', en: 'sorry', ipa: '/fœˈɭoːt/',
+    note: 'Pour une vraie excuse. Le **r** et le **l** fusionnent en un **l** rétroflexe [ɭ].',
+  }),
+  vocab(D, 'u1-ursakta', {
+    prompt: 'Attirer l’attention de quelqu’un : « excusez-moi »', promptEn: 'Getting someone’s attention: "excuse me"',
+    sv: 'ursäkta', fr: 'excusez-moi', en: 'excuse me', ipa: '/ˈʉːˌʂɛkta/',
+    note: 'Pour aborder un inconnu ou passer devant quelqu’un. *Förlåt* sert plutôt à s’excuser.',
+  }),
+  vocab(D, 'u1-valkommen', {
+    prompt: 'Accueillir quelqu’un : « bienvenue »', promptEn: 'Welcoming someone: "welcome"',
+    sv: 'välkommen', fr: 'bienvenue', en: 'welcome', ipa: '/ˈvɛːlˌkɔmːɛn/',
+    note: 'S’accorde : **välkomna** pour plusieurs personnes.',
+  }),
+  vocab(D, 'u1-vi-ses', {
+    prompt: 'Se quitter entre amis : « on se voit / à plus »', promptEn: 'Leaving friends: "see you"',
+    sv: 'vi ses', fr: 'à plus / on se voit', en: 'see you', ipa: '/viː seːs/',
+    note: 'Très courant pour dire au revoir. Variante : **vi ses imorgon** (à demain).',
+    gloss: [['vi', 'on', 'we'], ['ses', 'se voit', 'see each other']],
+  }),
 
   // ===================== PHRASES =====================
   {

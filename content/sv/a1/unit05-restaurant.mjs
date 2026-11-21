@@ -1,5 +1,6 @@
 // Unité 5 : Au restaurant (Section 2)
 // Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise jag tar / kan jag / tack / det var gott / betala / vill… des unités 1 à 4.
+import { vocab } from '../helpers.mjs';
 
 export const UNIT5_DECK = {
   slug: 'swedish-unit-5-restaurant',
@@ -111,6 +112,42 @@ export const UNIT5_CARDS = [
     explanation_md: 'Le **g** devant **ä** se prononce « y » et le **rn** est rétroflexe : « yèèrna ». *Ja, gärna!* = Oui, volontiers !',
     words: ['gärna'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u5-forratt', {
+    prompt: 'Avant le plat principal : « une entrée »', promptEn: 'Before the main course: "a starter"',
+    sv: 'en förrätt', fr: 'une entrée', en: 'a starter', ipa: '/ɛn ˈfœːˌrɛtː/',
+    note: '*för* (avant) + *rätt* (plat). Attention : *entré* en suédois veut dire le hall d’entrée.',
+  }),
+  vocab(D, 'u5-huvudratt', {
+    prompt: 'Le plat principal du repas', promptEn: 'The main dish of the meal: "a main course"',
+    sv: 'en huvudrätt', fr: 'un plat principal', en: 'a main course', ipa: '/ɛn ˈhʉːvɵdˌrɛtː/',
+    note: '*huvud* (tête) + *rätt* (plat) : le plat « en tête » du repas.',
+  }),
+  vocab(D, 'u5-efterratt', {
+    prompt: 'À la fin du repas : « un dessert »', promptEn: 'At the end of the meal: "a dessert"',
+    sv: 'en efterrätt', fr: 'un dessert', en: 'a dessert', ipa: '/ɛn ˈɛftɛˌrɛtː/',
+    note: '*efter* (après) + *rätt*. On dit aussi *en dessert*.',
+  }),
+  vocab(D, 'u5-kyckling', {
+    prompt: 'Une viande blanche courante : « du poulet »', promptEn: 'A common white meat: "chicken"',
+    sv: 'kyckling', fr: 'du poulet', en: 'chicken', ipa: '/ˈɕʏkːlɪŋ/',
+    note: 'Le **k** devant **y** est doux [ɕ]. Sans article pour la viande au menu.',
+  }),
+  vocab(D, 'u5-dricks', {
+    prompt: 'Ce qu’on laisse en plus au serveur : « un pourboire »', promptEn: 'What you leave the waiter: "a tip"',
+    sv: 'dricks', fr: 'un pourboire', en: 'a tip', ipa: '/drɪks/',
+    note: 'Pas obligatoire en Suède, le service est compris. On arrondit souvent l’addition.',
+  }),
+  vocab(D, 'u5-servitor', {
+    prompt: 'La personne qui prend ta commande : « un serveur »', promptEn: 'The person taking your order: "a waiter"',
+    sv: 'en servitör', fr: 'un serveur', en: 'a waiter', ipa: '/ɛn sɛrvɪˈtøːr/',
+    note: 'Au féminin : *en servitris*. L’accent tombe sur la dernière syllabe.',
+  }),
+  vocab(D, 'u5-allergisk', {
+    prompt: 'Pour signaler une allergie : « allergique »', promptEn: 'To mention an allergy: "allergic"',
+    sv: 'allergisk', fr: 'allergique', en: 'allergic', ipa: '/aˈlɛrɡɪsk/',
+    note: '*Jag är allergisk mot nötter* = je suis allergique aux noix. *mot* = contre.',
+  }),
 
   // ===================== PHRASES =====================
   {

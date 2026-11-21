@@ -93,6 +93,49 @@ export const UNIT13_CARDS = [
     note: 'Betyder egentligen kastanj, och böjs därför **aldrig**: *des chaussures marron*. **Brun** används mest om hår och hy.',
     noteEn: 'It literally means chestnut, so it **never** agrees: *des chaussures marron*. **Brun** is used mostly for hair and skin.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u13-la-chemise', {
+    prompt: 'Plagget med krage och knappar', promptEn: 'The garment with a collar and buttons',
+    fr: 'la chemise', sv: 'skjortan', en: 'the shirt',
+    ipa: '/la ʃə.miz/',
+    note: 'Damblus: *le chemisier*. Ensamt **s** mellan vokaler = [z].',
+    noteEn: 'A woman’s blouse: *le chemisier*. A single **s** between vowels = [z].',
+  }),
+  vocab(D, 'fr-u13-la-jupe', {
+    prompt: 'Plagget som börjar i midjan', promptEn: 'Worn from the waist down',
+    fr: 'la jupe', sv: 'kjolen', en: 'the skirt',
+    ipa: '/la ʒyp/',
+    note: 'Kort kjol: *une minijupe*. **u** uttalas som svenskt **y**.',
+    noteEn: 'A short skirt: *une minijupe*. **u** is said with rounded lips.',
+  }),
+  vocab(D, 'fr-u13-le-manteau', {
+    prompt: 'Den långa vinterjackan', promptEn: 'The long winter coat',
+    fr: 'le manteau', sv: 'kappan / rocken', en: 'the coat',
+    ipa: '/lə mɑ̃.to/',
+    note: 'Plural med **x**: *les manteaux*. **eau** = [o].',
+    noteEn: 'Plural with **x**: *les manteaux*. **eau** = [o].',
+  }),
+  vocab(D, 'fr-u13-le-jean', {
+    prompt: 'Blå byxor i denim', promptEn: 'Blue denim trousers',
+    fr: 'le jean', sv: 'jeansen', en: 'the jeans',
+    ipa: '/lə dʒin/',
+    note: 'Singular på franska: *un jean*. Uttalas på engelska, [dʒin].',
+    noteEn: 'Singular in French: *un jean*. Pronounced the English way, [dʒin].',
+  }),
+  vocab(D, 'fr-u13-le-bonnet', {
+    prompt: 'Håller huvudet varmt', promptEn: 'Keeps your head warm',
+    fr: 'le bonnet', sv: 'mössan', en: 'the beanie',
+    ipa: '/lə bɔ.nɛ/',
+    note: 'Slutets **t** är stumt. Hatt: *le chapeau*.',
+    noteEn: 'The final **t** is silent. A hat: *le chapeau*.',
+  }),
+  vocab(D, 'fr-u13-rouge', {
+    prompt: 'Färgen på röda tomater', promptEn: 'The colour of ripe tomatoes',
+    fr: 'rouge', sv: 'röd', en: 'red',
+    ipa: '/ʁuʒ/',
+    note: 'Samma form för båda könen: *un pull rouge, une robe rouge*.',
+    noteEn: 'Same form for both genders: *un pull rouge, une robe rouge*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u13-essayer-robe', {

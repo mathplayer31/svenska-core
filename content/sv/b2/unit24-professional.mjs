@@ -66,6 +66,38 @@ export const UNIT24_CARDS = [
     note: 'Groupe 1 : présent passif = infinitif + **s** (*skickas*). Prétérit : *skickades*. Supin : *har skickats*.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u24-faktura', {
+    prompt: 'Le document à payer : « une facture »', promptEn: 'The document to pay: "an invoice"',
+    sv: 'en faktura', fr: 'une facture', en: 'an invoice', ipa: '/ɛn fakˈtʉːra/',
+    note: 'Pluriel : *fakturor*. Paiement à 30 jours : *30 dagars betalningsvillkor*.',
+  }),
+  vocab(D, 'u24-offert', {
+    prompt: 'Le prix proposé avant un contrat : « un devis »', promptEn: 'The price offered before a contract: "a quote"',
+    sv: 'en offert', fr: 'un devis / une offre', en: 'a quote / a tender', ipa: '/ɛn ɔˈfæʈː/',
+    note: '*Begära in en offert* = demander un devis. Le **rt** se prononce [ʈ].',
+  }),
+  vocab(D, 'u24-fattar-ett-beslut', {
+    prompt: 'Prendre une décision, en suédois soutenu', promptEn: 'Making a decision, in formal Swedish',
+    sv: 'fattar ett beslut', fr: 'prend une décision', en: 'makes a decision', ipa: '/ˈfatːar ɛtː bɛˈslʉːt/',
+    note: 'On ne « prend » pas une décision en suédois, on la *fattar* (saisit). Passif : *beslutet fattades*.',
+    gloss: [['fattar', 'prend (saisit)', 'makes (grasps)'], ['ett', 'une', 'a'], ['beslut', 'décision', 'decision']],
+  }),
+  vocab(D, 'u24-styrelse', {
+    prompt: 'Ceux qui dirigent l’entreprise au-dessus de la direction : « le conseil d’administration »', promptEn: 'Those above management: "the board"',
+    sv: 'en styrelse', fr: 'un conseil d’administration', en: 'a board (of directors)', ipa: '/ɛn ˈstyːrɛlsɛ/',
+    note: 'De *styra* (diriger). Le président du conseil : *styrelseordförande*.',
+  }),
+  vocab(D, 'u24-avdelning', {
+    prompt: 'Une partie de l’entreprise : « un service »', promptEn: 'A part of the company: "a department"',
+    sv: 'en avdelning', fr: 'un service / un département', en: 'a department', ipa: '/ɛn ˈɑːvˌdeːlnɪŋ/',
+    note: '*Ekonomiavdelningen* = le service comptable. Aussi un service à l’hôpital.',
+  }),
+  vocab(D, 'u24-forslag', {
+    prompt: 'Ce qu’on soumet en réunion : « une proposition »', promptEn: 'What you put forward in a meeting: "a proposal"',
+    sv: 'ett förslag', fr: 'une proposition', en: 'a proposal / a suggestion', ipa: '/ɛtː ˈfœːˌʂlɑːɡ/',
+    note: '*Lägga fram ett förslag* = présenter une proposition. Verbe : *föreslå*.',
+  }),
   phrase(D, 'u24-motet-halls', {
     prompt: 'Passif : « La réunion a lieu vendredi. »', promptEn: 'Passive: "The meeting is held on Friday."',
     sv: 'Mötet hålls på fredag.', fr: 'La réunion a lieu vendredi.', en: 'The meeting is held on Friday.',
