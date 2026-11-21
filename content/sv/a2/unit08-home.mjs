@@ -68,6 +68,37 @@ export const UNIT8_CARDS = [
     note: 'Infinitif *att flytta*, groupe 1 (*flyttade, har flyttat*). S’emploie aussi pour déplacer un objet.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u8-badrum', {
+    prompt: 'La pièce avec la douche : « une salle de bains »', promptEn: 'The room with the shower: "a bathroom"',
+    sv: 'ett badrum', fr: 'une salle de bains', en: 'a bathroom', ipa: '/ɛtː ˈbɑːdˌrɵmː/',
+    note: '*bad* (bain) + *rum* (pièce) : mot **ett**, comme *rum*.',
+  }),
+  vocab(D, 'u8-vardagsrum', {
+    prompt: 'La pièce où l’on se détend : « un salon »', promptEn: 'Where you relax: "a living room"',
+    sv: 'ett vardagsrum', fr: 'un salon', en: 'a living room', ipa: '/ɛtː ˈvɑːɖɑksˌrɵmː/',
+    note: '*vardag* (jour ordinaire) + *rum*. Le **rd** se prononce [ɖ], langue recourbée.',
+  }),
+  vocab(D, 'u8-dorr', {
+    prompt: 'Pour entrer dans une pièce : « une porte »', promptEn: 'To go into a room: "a door"',
+    sv: 'en dörr', fr: 'une porte', en: 'a door', ipa: '/ɛn dœrː/',
+    note: 'Défini : *dörren*. *Stäng dörren!* = ferme la porte !',
+  }),
+  vocab(D, 'u8-balkong', {
+    prompt: 'Dehors, accroché à l’appartement : « un balcon »', promptEn: 'Outside, attached to the flat: "a balcony"',
+    sv: 'en balkong', fr: 'un balcon', en: 'a balcony', ipa: '/ɛn balˈkɔŋː/',
+    note: 'Accent sur la dernière syllabe. *Lägenheten har balkong* (sans article).',
+  }),
+  vocab(D, 'u8-hiss', {
+    prompt: 'Pour monter sans les marches : « un ascenseur »', promptEn: 'To go up without the stairs: "a lift"',
+    sv: 'en hiss', fr: 'un ascenseur', en: 'a lift / an elevator', ipa: '/ɛn hɪsː/',
+    note: 'Défini : *hissen*. Dans les annonces : *hiss finns* (il y a un ascenseur).',
+  }),
+  vocab(D, 'u8-trappa', {
+    prompt: 'Les marches entre les étages : « un escalier »', promptEn: 'Steps between floors: "stairs"',
+    sv: 'en trappa', fr: 'un escalier', en: 'a staircase / stairs', ipa: '/ɛn ˈtrapːa/',
+    note: 'Aussi pour les étages : *Jag bor två trappor upp* = au 2e étage.',
+  }),
   phrase(D, 'u8-jag-bor-i', {
     prompt: 'Dire où tu habites : « J’habite dans un appartement à Stockholm. »', promptEn: 'Saying where you live: "I live in an apartment in Stockholm."',
     sv: 'Jag bor i en lägenhet i Stockholm.', fr: 'J’habite dans un appartement à Stockholm.', en: 'I live in an apartment in Stockholm.',

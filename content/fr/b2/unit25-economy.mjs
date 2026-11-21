@@ -93,6 +93,57 @@ export const UNIT25_CARDS = [
     note: 'Ursprungligen ett varumärke som blev ett vanligt ord, som *la CB*: *Je peux payer par CB ?* Lägg märke till prepositionen: **payer par carte**, men **payer en espèces** (kontant).',
     noteEn: 'Originally a brand name that became the generic word, like *la CB*: *Je peux payer par CB ?* Note the prepositions: **payer par carte**, but **payer en espèces** (in cash).',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u25-lepargne', {
+    prompt: 'Pengar man sparar', promptEn: 'Money you save',
+    fr: 'l’épargne', sv: 'sparandet / sparpengarna', en: 'savings',
+    ipa: '/le.paʁɲ/',
+    note: 'Femininum. Verbet: *épargner*. **gn** = [ɲ].',
+    noteEn: 'Feminine. The verb: *épargner*. **gn** = [ɲ].',
+  }),
+  vocab(D, 'fr-u25-un-pret', {
+    prompt: 'Pengar man lånar av banken', promptEn: 'Money you borrow from the bank',
+    fr: 'un prêt', sv: 'ett lån', en: 'a loan',
+    ipa: '/ɛ̃ pʁɛ/',
+    note: 'Bolån: *un prêt immobilier*. Verbet *prêter* = låna ut.',
+    noteEn: 'Mortgage: *un prêt immobilier*. The verb *prêter* = to lend.',
+  }),
+  vocab(D, 'fr-u25-le-taux-dinteret', {
+    prompt: 'Vad lånet kostar per år', promptEn: 'What the loan costs per year',
+    fr: 'le taux d’intérêt', sv: 'räntan', en: 'the interest rate',
+    ipa: '/lə to d‿ɛ̃.te.ʁɛ/',
+    note: '*taux* uttalas [to]. Fast ränta: *un taux fixe*.',
+    noteEn: '*taux* is pronounced [to]. Fixed rate: *un taux fixe*.',
+    gloss: [['le taux', 'satsen', 'the rate'], ['d’intérêt', 'ränte-', 'of interest']],
+  }),
+  vocab(D, 'fr-u25-les-impots', {
+    prompt: 'Det man betalar till staten', promptEn: 'What you pay to the state',
+    fr: 'les impôts', sv: 'skatterna', en: 'taxes',
+    ipa: '/le.z‿ɛ̃.po/',
+    note: 'Inkomstskatt: *l’impôt sur le revenu*. Slutets **t** och **s** är stumma.',
+    noteEn: 'Income tax: *l’impôt sur le revenu*. The final **t** and **s** are silent.',
+  }),
+  vocab(D, 'fr-u25-la-crise', {
+    prompt: 'När ekonomin går dåligt', promptEn: 'When the economy is struggling',
+    fr: 'la crise', sv: 'krisen', en: 'the crisis',
+    ipa: '/la kʁiz/',
+    note: 'Ensamt **s** mellan vokaler = [z].',
+    noteEn: 'A single **s** between vowels = [z].',
+  }),
+  vocab(D, 'fr-u25-depenser', {
+    prompt: 'Göra av med pengar', promptEn: 'Using up money',
+    fr: 'dépenser', sv: 'att spendera / göra av med', en: 'to spend',
+    ipa: '/de.pɑ̃.se/',
+    note: 'Utgifterna: *les dépenses*. Akta: ”spendera tid” heter *passer du temps*.',
+    noteEn: 'Expenses: *les dépenses*. Careful: "spend time" is *passer du temps*.',
+  }),
+  vocab(D, 'fr-u25-economiser', {
+    prompt: 'Lägga undan pengar', promptEn: 'Putting money aside',
+    fr: 'économiser', sv: 'att spara', en: 'to save (money)',
+    ipa: '/e.kɔ.nɔ.mi.ze/',
+    note: '*Économiser pour les vacances.* Synonym: *mettre de l’argent de côté*.',
+    noteEn: '*Économiser pour les vacances.* Synonym: *mettre de l’argent de côté*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u25-prix-flambe', {

@@ -93,6 +93,55 @@ export const UNIT28_CARDS = [
     note: 'Ordagrant ”lägga i sitt saltkorn”. Nästan alltid lite negativt: *Il faut toujours qu’il mette son grain de sel !* Possessivet följer subjektet: *je mets mon grain de sel*.',
     noteEn: 'Literally "to add your grain of salt". Almost always mildly critical: *Il faut toujours qu’il mette son grain de sel !* The possessive follows the subject: *je mets mon grain de sel*.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u28-le-coup-de-foudre', {
+    prompt: 'Bli kär direkt', promptEn: 'Falling in love instantly',
+    fr: 'avoir le coup de foudre', sv: 'bli förälskad vid första ögonkastet', en: 'fall in love at first sight',
+    ipa: '/a.vwaʁ lə ku d(ə) fudʁ/',
+    note: 'Ordagrant ”få blixtnedslaget”. *J’ai eu le coup de foudre pour Lyon.*',
+    noteEn: 'Literally "get the lightning strike". *J’ai eu le coup de foudre pour Lyon.*',
+    gloss: [['avoir', 'få', 'have'], ['le coup', 'slaget', 'the strike'], ['de foudre', 'av blixt', 'of lightning']],
+  }),
+  vocab(D, 'fr-u28-la-grasse-matinee', {
+    prompt: 'Sova länge på morgonen', promptEn: 'Sleeping in',
+    fr: 'faire la grasse matinée', sv: 'sova länge', en: 'to sleep in',
+    ipa: '/fɛʁ la ɡʁɑs ma.ti.ne/',
+    note: 'Ordagrant ”göra den feta morgonen”. Ledigt: *faire la grasse mat*.',
+    noteEn: 'Literally "do the fat morning". Casual: *faire la grasse mat*.',
+    gloss: [['faire', 'göra', 'do'], ['la grasse', 'den feta', 'the fat'], ['matinée', 'morgonen', 'morning']],
+  }),
+  vocab(D, 'fr-u28-dans-son-assiette', {
+    prompt: 'Inte må riktigt bra', promptEn: 'Not feeling quite right',
+    fr: 'ne pas être dans son assiette', sv: 'inte må riktigt bra', en: 'to feel under the weather',
+    ipa: '/nə pa.z‿ɛtʁ dɑ̃ sɔ̃.n‿a.sjɛt/',
+    note: 'Ordagrant ”inte vara i sin tallrik”. *Je ne suis pas dans mon assiette aujourd’hui.*',
+    noteEn: 'Literally "not be in one’s plate". *Je ne suis pas dans mon assiette aujourd’hui.*',
+    gloss: [['ne pas être', 'inte vara', 'not be'], ['dans', 'i', 'in'], ['son assiette', 'sin tallrik', 'one’s plate']],
+  }),
+  vocab(D, 'fr-u28-les-pieds-dans-le-plat', {
+    prompt: 'Säga något pinsamt rakt ut', promptEn: 'Saying something awkward bluntly',
+    fr: 'mettre les pieds dans le plat', sv: 'trampa i klaveret', en: 'to put your foot in it',
+    ipa: '/mɛtʁ le pje dɑ̃ lə pla/',
+    note: 'Ordagrant ”sätta fötterna i fatet”. Som svenskans *trampa i klaveret*.',
+    noteEn: 'Literally "put your feet in the dish".',
+    gloss: [['mettre', 'sätta', 'put'], ['les pieds', 'fötterna', 'the feet'], ['dans', 'i', 'in'], ['le plat', 'fatet', 'the dish']],
+  }),
+  vocab(D, 'fr-u28-un-chat-dans-la-gorge', {
+    prompt: 'Vara hes', promptEn: 'Being hoarse',
+    fr: 'avoir un chat dans la gorge', sv: 'ha en groda i halsen', en: 'to have a frog in your throat',
+    ipa: '/a.vwaʁ ɛ̃ ʃa dɑ̃ la ɡɔʁʒ/',
+    note: 'Fransmännen har en katt där svensken har en groda.',
+    noteEn: 'The French have a cat where English speakers have a frog.',
+    gloss: [['avoir', 'ha', 'have'], ['un chat', 'en katt', 'a cat'], ['dans', 'i', 'in'], ['la gorge', 'halsen', 'the throat']],
+  }),
+  vocab(D, 'fr-u28-tomber-des-nues', {
+    prompt: 'Bli helt förvånad', promptEn: 'Being completely taken aback',
+    fr: 'tomber des nues', sv: 'bli helt paff', en: 'to be flabbergasted',
+    ipa: '/tɔ̃.be de ny/',
+    note: 'Ordagrant ”falla från molnen” (*les nues* är ett gammalt ord för moln).',
+    noteEn: 'Literally "fall from the clouds" (*les nues* is an old word for clouds).',
+    gloss: [['tomber', 'falla', 'fall'], ['des nues', 'från molnen', 'from the clouds']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u28-mer-a-boire', {

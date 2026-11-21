@@ -1,5 +1,6 @@
 // Unité 6 : Déplacements & transports (Section 2)
 // Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise var / är / det / nästa… et la règle V2.
+import { vocab } from '../helpers.mjs';
 
 export const UNIT6_DECK = {
   slug: 'swedish-unit-6-transport',
@@ -123,6 +124,38 @@ export const UNIT6_CARDS = [
     explanation_md: '**till** = la destination (*till Göteborg*), **från** = l’origine (Unité 1). *Från Stockholm till Göteborg.*',
     words: ['till'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u6-hallplats', {
+    prompt: 'Là où l’on attend le bus : « un arrêt »', promptEn: 'Where you wait for the bus: "a stop"',
+    sv: 'en hållplats', fr: 'un arrêt (de bus)', en: 'a (bus) stop', ipa: '/ɛn ˈhɔlːˌplats/',
+    note: '*hålla* (tenir, s’arrêter) + *plats* (endroit). *Nästa hållplats* = prochain arrêt.',
+  }),
+  vocab(D, 'u6-rakt-fram', {
+    prompt: 'Ni à gauche ni à droite : « tout droit »', promptEn: 'Neither left nor right: "straight ahead"',
+    sv: 'rakt fram', fr: 'tout droit', en: 'straight ahead', ipa: '/rɑːkt framː/',
+    note: '*rak* (droit) + *fram* (en avant). *Gå rakt fram* = allez tout droit.',
+    gloss: [['rakt', 'droit', 'straight'], ['fram', 'devant', 'ahead']],
+  }),
+  vocab(D, 'u6-cykel', {
+    prompt: 'Deux roues et des pédales : « un vélo »', promptEn: 'Two wheels and pedals: "a bike"',
+    sv: 'en cykel', fr: 'un vélo', en: 'a bike', ipa: '/ɛn ˈsʏkːɛl/',
+    note: 'Défini : *cykeln*. Le **c** se prononce [s]. *Jag cyklar* = je fais du vélo.',
+  }),
+  vocab(D, 'u6-taxi', {
+    prompt: 'Une voiture avec chauffeur : « un taxi »', promptEn: 'A car with a driver: "a taxi"',
+    sv: 'en taxi', fr: 'un taxi', en: 'a taxi', ipa: '/ɛn ˈtaksɪ/',
+    note: 'Mot **en** : *taxin*. Le **x** se prononce [ks], comme en français.',
+  }),
+  vocab(D, 'u6-avgar', {
+    prompt: 'L’heure à laquelle le train part : « part »', promptEn: 'When the train leaves: "departs"',
+    sv: 'avgår', fr: 'part (départ)', en: 'departs', ipa: '/ˈɑːvˌɡoːr/',
+    note: 'Mot des panneaux et annonces. Le départ : *avgången*. L’arrivée : *ankomst*.',
+  }),
+  vocab(D, 'u6-installt', {
+    prompt: 'Le train ne part pas du tout : « annulé »', promptEn: 'The train is not running at all: "cancelled"',
+    sv: 'inställt', fr: 'annulé', en: 'cancelled', ipa: '/ˈɪnˌstɛlt/',
+    note: '*Tåget är inställt* = le train est annulé. Avec un mot **en** : *bussen är inställd*.',
+  }),
 
   // ===================== PHRASES =====================
   {

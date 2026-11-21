@@ -93,6 +93,53 @@ export const UNIT1_CARDS = [
     note: '**Faire la bise** = hälsa med kindpussar, oftast två, men antalet varierar mellan regioner. Mellan kollegor och obekanta tar man i hand: **serrer la main**.',
     noteEn: '**Faire la bise** = greet with cheek kisses, usually two, though the number varies by region. With colleagues and strangers you shake hands: **serrer la main**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u1-merci-beaucoup', {
+    prompt: 'Tacka extra varmt', promptEn: 'Thanking warmly',
+    fr: 'merci beaucoup', sv: 'tack så mycket', en: 'thank you very much',
+    ipa: '/mɛʁ.si bo.ku/',
+    note: '**beaucoup** = mycket. **eau** uttalas [o], och slutets **p** är stumt.',
+    noteEn: '**beaucoup** = a lot. **eau** is pronounced [o], and the final **p** is silent.',
+    gloss: [['merci', 'tack', 'thanks'], ['beaucoup', 'så mycket', 'a lot']],
+  }),
+  vocab(D, 'fr-u1-de-rien', {
+    prompt: 'Svara på ett tack', promptEn: 'Answering a thank you',
+    fr: 'de rien', sv: 'ingen orsak', en: 'you’re welcome',
+    ipa: '/də ʁjɛ̃/',
+    note: 'Ordagrant ”av ingenting”. Artigare: **je vous en prie**.',
+    noteEn: 'Literally "of nothing". More polite: **je vous en prie**.',
+    gloss: [['de', 'av', 'of'], ['rien', 'ingenting', 'nothing']],
+  }),
+  vocab(D, 'fr-u1-bonne-nuit', {
+    prompt: 'Innan man går och lägger sig', promptEn: 'Before going to bed',
+    fr: 'bonne nuit', sv: 'god natt', en: 'good night',
+    ipa: '/bɔn nɥi/',
+    note: 'Bara när någon ska sova. Mot kvällen säger man *bonsoir*.',
+    noteEn: 'Only when someone is going to sleep. In the evening you say *bonsoir*.',
+    gloss: [['bonne', 'god', 'good'], ['nuit', 'natt', 'night']],
+  }),
+  vocab(D, 'fr-u1-a-demain', {
+    prompt: 'Vi ses i morgon', promptEn: 'See you tomorrow',
+    fr: 'à demain', sv: 'vi ses i morgon', en: 'see you tomorrow',
+    ipa: '/a də.mɛ̃/',
+    note: 'Samma mönster som *à bientôt*: **à** + tidpunkt. *À lundi!* = vi ses på måndag!',
+    noteEn: 'Same pattern as *à bientôt*: **à** + a time. *À lundi !* = see you Monday!',
+    gloss: [['à', 'till', 'until'], ['demain', 'i morgon', 'tomorrow']],
+  }),
+  vocab(D, 'fr-u1-pardon', {
+    prompt: 'Kort ursäkt, till exempel när du stöter till någon', promptEn: 'Short apology, for example when you bump into someone',
+    fr: 'pardon', sv: 'förlåt / ursäkta', en: 'sorry / pardon',
+    ipa: '/paʁ.dɔ̃/',
+    note: 'Med frågeton betyder **Pardon ?** ”Förlåt, vad sa du?”',
+    noteEn: 'With a rising tone, **Pardon ?** means "Sorry, what did you say?"',
+  }),
+  vocab(D, 'fr-u1-bienvenue', {
+    prompt: 'Hälsa någon välkommen', promptEn: 'Welcoming someone',
+    fr: 'bienvenue', sv: 'välkommen', en: 'welcome',
+    ipa: '/bjɛ̃v.ny/',
+    note: 'Som svar på ett tack i Québec betyder det ”ingen orsak”. I Frankrike: *de rien*.',
+    noteEn: 'In Quebec it also answers a thank you ("you’re welcome"). In France: *de rien*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u1-je-mappelle', {

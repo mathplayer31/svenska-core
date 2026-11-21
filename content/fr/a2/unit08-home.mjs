@@ -93,6 +93,49 @@ export const UNIT8_CARDS = [
     note: 'Fransmännen räknar inte bottenvåningen: **le premier étage** ligger en trappa upp. Maskulinum trots ändelsen **-ée**.',
     noteEn: 'The French don’t count the ground floor: **le premier étage** is one flight up, as in British English. Masculine despite the **-ée** ending.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u8-la-porte', {
+    prompt: 'Den man öppnar för att gå in', promptEn: 'What you open to go in',
+    fr: 'la porte', sv: 'dörren', en: 'the door',
+    ipa: '/la pɔʁt/',
+    note: '*Fermer la porte à clé* = låsa dörren. Ytterdörren: *la porte d’entrée*.',
+    noteEn: '*Fermer la porte à clé* = lock the door. Front door: *la porte d’entrée*.',
+  }),
+  vocab(D, 'fr-u8-la-fenetre', {
+    prompt: 'Att titta ut genom', promptEn: 'To look out of',
+    fr: 'la fenêtre', sv: 'fönstret', en: 'the window',
+    ipa: '/la fə.nɛtʁ/',
+    note: 'Cirkumflexen **ê** visar att ett s har fallit bort (jämför engelska *fenestration*).',
+    noteEn: 'The circumflex **ê** marks a lost s.',
+  }),
+  vocab(D, 'fr-u8-lascenseur', {
+    prompt: 'För att slippa trappan', promptEn: 'To avoid the stairs',
+    fr: 'l’ascenseur', sv: 'hissen', en: 'the lift / elevator',
+    ipa: '/la.sɑ̃.sœʁ/',
+    note: 'Maskulinum: *un ascenseur*. Många gamla hus i Paris saknar hiss.',
+    noteEn: 'Masculine: *un ascenseur*. Many old Paris buildings have no lift.',
+  }),
+  vocab(D, 'fr-u8-le-balcon', {
+    prompt: 'Utomhus, utanför lägenheten', promptEn: 'Outside, attached to the flat',
+    fr: 'le balcon', sv: 'balkongen', en: 'the balcony',
+    ipa: '/lə bal.kɔ̃/',
+    note: 'Slutet är ett nasalljud: n:et uttalas inte.',
+    noteEn: 'It ends in a nasal vowel: the n is not pronounced.',
+  }),
+  vocab(D, 'fr-u8-le-lit', {
+    prompt: 'Där man sover', promptEn: 'Where you sleep',
+    fr: 'le lit', sv: 'sängen', en: 'the bed',
+    ipa: '/lə li/',
+    note: 'Slutets **t** är stumt: [li]. Bädda sängen: *faire son lit*.',
+    noteEn: 'The final **t** is silent: [li]. Make your bed: *faire son lit*.',
+  }),
+  vocab(D, 'fr-u8-lescalier', {
+    prompt: 'Trapporna mellan våningarna', promptEn: 'The stairs between floors',
+    fr: 'l’escalier', sv: 'trappan', en: 'the staircase',
+    ipa: '/lɛs.ka.lje/',
+    note: 'Maskulinum. *Monter l’escalier* = gå uppför trappan.',
+    noteEn: 'Masculine. *Monter l’escalier* = go up the stairs.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u8-deux-pieces', {

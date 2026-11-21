@@ -93,6 +93,49 @@ export const UNIT2_CARDS = [
     note: 'Ordagrant ”för att dricka”. Serviceavgiften ingår alltid i priset (**service compris**), så dricks är frivillig: man lämnar ofta lite växel.',
     noteEn: 'Literally "for drinking". Service is always included in the price (**service compris**), so tipping is optional: people often leave some small change.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u2-un-expresso', {
+    prompt: 'Den lilla starka kaffen', promptEn: 'The small strong coffee',
+    fr: 'un expresso', sv: 'en espresso', en: 'an espresso',
+    ipa: '/ɛ̃.n‿ɛk.spʁɛ.so/',
+    note: 'Det är vad du får om du bara beställer *un café*. Bindning: *un‿expresso*.',
+    noteEn: 'This is what you get if you just order *un café*. Liaison: *un‿expresso*.',
+  }),
+  vocab(D, 'fr-u2-une-biere', {
+    prompt: 'En öl på uteserveringen', promptEn: 'A beer on the terrace',
+    fr: 'une bière', sv: 'en öl', en: 'a beer',
+    ipa: '/yn bjɛʁ/',
+    note: 'Fatöl: **une pression**. En liten: **un demi** (25 cl).',
+    noteEn: 'Draught beer: **une pression**. A small one: **un demi** (25 cl).',
+  }),
+  vocab(D, 'fr-u2-un-croque-monsieur', {
+    prompt: 'Den varma smörgåsen med skinka och ost', promptEn: 'The hot ham and cheese sandwich',
+    fr: 'un croque-monsieur', sv: 'en varm macka med skinka och ost', en: 'a toasted ham and cheese sandwich',
+    ipa: '/ɛ̃ kʁɔk.mə.sjø/',
+    note: 'Klassiker på kaféer. Med ett stekt ägg på: **un croque-madame**.',
+    noteEn: 'A café classic. With a fried egg on top: **un croque-madame**.',
+  }),
+  vocab(D, 'fr-u2-le-sucre', {
+    prompt: 'Att söta kaffet med', promptEn: 'For sweetening your coffee',
+    fr: 'le sucre', sv: 'sockret', en: 'sugar',
+    ipa: '/lə sykʁ/',
+    note: 'En sockerbit: **un sucre**. *Avec du sucre ?* = med socker?',
+    noteEn: 'A sugar lump: **un sucre**. *Avec du sucre ?* = with sugar?',
+  }),
+  vocab(D, 'fr-u2-avec-sans', {
+    prompt: 'Med och utan', promptEn: 'With and without',
+    fr: 'avec / sans', sv: 'med / utan', en: 'with / without',
+    ipa: '/a.vɛk/ /sɑ̃/',
+    note: '*Un café sans sucre* = kaffe utan socker. **sans** är ett nasalljud: n:et hörs inte.',
+    noteEn: '*Un café sans sucre* = coffee without sugar. **sans** is nasal: the n is not heard.',
+  }),
+  vocab(D, 'fr-u2-une-infusion', {
+    prompt: 'Örtte, utan koffein', promptEn: 'Herbal tea, caffeine-free',
+    fr: 'une infusion', sv: 'ett örtte', en: 'a herbal tea',
+    ipa: '/yn ɛ̃.fy.zjɔ̃/',
+    note: 'Kallas också **une tisane**. Vanligt efter middagen: *une verveine* (citronverbena).',
+    noteEn: 'Also called **une tisane**. Common after dinner: *une verveine* (lemon verbena).',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u2-je-voudrais-un-cafe', {

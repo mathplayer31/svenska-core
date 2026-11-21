@@ -93,6 +93,56 @@ export const UNIT18_CARDS = [
     note: 'Hette **Pôle emploi** fram till 2024, och många använder fortfarande det gamla namnet. Hit vänder man sig när man är **au chômage** (arbetslös).',
     noteEn: 'Called **Pôle emploi** until 2024, and many people still use the old name. This is where you go when you are **au chômage** (unemployed).',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u18-le-poste', {
+    prompt: 'Tjänsten man söker', promptEn: 'The job you apply for',
+    fr: 'le poste', sv: 'tjänsten', en: 'the position',
+    ipa: '/lə pɔst/',
+    note: 'Maskulinum = tjänst. Femininum *la poste* = posten (brev). Samma uttal.',
+    noteEn: 'Masculine = a job. Feminine *la poste* = the post office. Same sound.',
+  }),
+  vocab(D, 'fr-u18-lexperience', {
+    prompt: 'Det du har gjort tidigare i arbetslivet', promptEn: 'What you have done in your career so far',
+    fr: 'l’expérience', sv: 'erfarenheten', en: 'experience',
+    ipa: '/lɛk.spe.ʁjɑ̃s/',
+    note: '*Expérience professionnelle* = arbetslivserfarenhet, en rubrik i CV:t.',
+    noteEn: '*Expérience professionnelle* = work experience, a CV heading.',
+  }),
+  vocab(D, 'fr-u18-les-competences', {
+    prompt: 'Det du kan göra', promptEn: 'What you can do',
+    fr: 'les compétences', sv: 'kompetenserna / kunskaperna', en: 'the skills',
+    ipa: '/le kɔ̃.pe.tɑ̃s/',
+    note: 'Språkkunskaper: *les compétences linguistiques*.',
+    noteEn: 'Language skills: *les compétences linguistiques*.',
+  }),
+  vocab(D, 'fr-u18-embaucher', {
+    prompt: 'När arbetsgivaren tar in en ny person', promptEn: 'When the employer takes someone on',
+    fr: 'embaucher', sv: 'att anställa', en: 'to hire',
+    ipa: '/ɑ̃.bo.ʃe/',
+    note: '*Il a été embauché en CDI.* Motsats: *licencier* (säga upp).',
+    noteEn: '*Il a été embauché en CDI.* Opposite: *licencier* (to lay off).',
+  }),
+  vocab(D, 'fr-u18-le-temps-partiel', {
+    prompt: 'Deltid och heltid', promptEn: 'Part-time and full-time',
+    fr: 'le temps partiel / le temps plein', sv: 'deltid / heltid', en: 'part-time / full-time',
+    ipa: '/lə tɑ̃ paʁ.sjɛl/ /lə tɑ̃ plɛ̃/',
+    note: '*Travailler à temps partiel.* Lagstadgad heltid: 35 timmar i veckan.',
+    noteEn: '*Travailler à temps partiel.* The legal full-time week: 35 hours.',
+  }),
+  vocab(D, 'fr-u18-le-chomage', {
+    prompt: 'Att vara utan arbete', promptEn: 'Being out of work',
+    fr: 'le chômage', sv: 'arbetslösheten', en: 'unemployment',
+    ipa: '/lə ʃo.maʒ/',
+    note: '*Être au chômage* = vara arbetslös. Ersättning via *France Travail*.',
+    noteEn: '*Être au chômage* = to be unemployed. Benefits via *France Travail*.',
+  }),
+  vocab(D, 'fr-u18-demissionner', {
+    prompt: 'Säga upp sig själv', promptEn: 'Quitting your job',
+    fr: 'démissionner', sv: 'att säga upp sig', en: 'to resign',
+    ipa: '/de.mi.sjɔ.ne/',
+    note: 'Uppsägningen: *la démission*. Den andra parten säger upp dig: *licencier*.',
+    noteEn: 'The resignation: *la démission*. Being dismissed: *être licencié*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u18-je-me-permets', {

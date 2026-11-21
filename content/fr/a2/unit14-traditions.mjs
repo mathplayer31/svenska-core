@@ -93,6 +93,50 @@ export const UNIT14_CARDS = [
     note: 'Sedan 1982 får alla spela musik på gator och torg på sommarsolståndet, gratis och till sent på natten. Den infaller ungefär samtidigt som svensk midsommar.',
     noteEn: 'Since 1982 anyone may play music in the streets on the summer solstice, free and late into the night. It has since spread to cities worldwide.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u14-la-buche-de-noel', {
+    prompt: 'Den rullade tårtan på julafton', promptEn: 'The rolled cake at Christmas',
+    fr: 'la bûche de Noël', sv: 'julstubben', en: 'the Yule log',
+    ipa: '/la byʃ də nɔ.ɛl/',
+    note: 'En tårta formad som en vedklabbe. *Noël* uttalas med två stavelser: [nɔ.ɛl].',
+    noteEn: 'A cake shaped like a log. *Noël* has two syllables: [nɔ.ɛl].',
+  }),
+  vocab(D, 'fr-u14-le-sapin', {
+    prompt: 'Granen man klär till jul', promptEn: 'The tree you decorate at Christmas',
+    fr: 'le sapin', sv: 'granen', en: 'the Christmas tree',
+    ipa: '/lə sa.pɛ̃/',
+    note: 'Hela namnet: *le sapin de Noël*. Slutar på nasalljud.',
+    noteEn: 'Full name: *le sapin de Noël*. Ends in a nasal vowel.',
+  }),
+  vocab(D, 'fr-u14-le-cadeau', {
+    prompt: 'Det man ger på födelsedagar', promptEn: 'What you give on birthdays',
+    fr: 'le cadeau', sv: 'presenten', en: 'the present',
+    ipa: '/lə ka.do/',
+    note: 'Plural: *les cadeaux*. *C’est pour offrir ?* = ska det slås in?',
+    noteEn: 'Plural: *les cadeaux*. *C’est pour offrir ?* = is it a gift (shall I wrap it)?',
+  }),
+  vocab(D, 'fr-u14-joyeux-anniversaire', {
+    prompt: 'Gratulera på födelsedagen', promptEn: 'Birthday wishes',
+    fr: 'joyeux anniversaire', sv: 'grattis på födelsedagen', en: 'happy birthday',
+    ipa: '/ʒwa.jø.z‿a.ni.vɛʁ.sɛʁ/',
+    note: 'Bindning: *joyeux‿anniversaire*, x:et uttalas [z]. Kort: *bon anniversaire*.',
+    noteEn: 'Liaison: *joyeux‿anniversaire*, the x sounds like [z]. Also: *bon anniversaire*.',
+    gloss: [['joyeux', 'glad', 'happy'], ['anniversaire', 'födelsedag', 'birthday']],
+  }),
+  vocab(D, 'fr-u14-le-nouvel-an', {
+    prompt: 'Den 31 december och 1 januari', promptEn: '31 December and 1 January',
+    fr: 'le Nouvel An', sv: 'nyår', en: 'New Year',
+    ipa: '/lə nu.vɛl ɑ̃/',
+    note: '*nouvel* framför vokal i stället för *nouveau*. Nyårsafton: *la Saint-Sylvestre*.',
+    noteEn: '*nouvel* before a vowel instead of *nouveau*. New Year’s Eve: *la Saint-Sylvestre*.',
+  }),
+  vocab(D, 'fr-u14-la-crepe', {
+    prompt: 'Tunn pannkaka från Bretagne', promptEn: 'Thin pancake from Brittany',
+    fr: 'la crêpe', sv: 'pannkakan (tunn)', en: 'the crêpe',
+    ipa: '/la kʁɛp/',
+    note: 'Med bovetemjöl och salt fyllning: *la galette*. Äts särskilt till *la Chandeleur*.',
+    noteEn: 'Buckwheat with a savoury filling: *la galette*. Eaten especially at *la Chandeleur*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u14-regarde-feu', {

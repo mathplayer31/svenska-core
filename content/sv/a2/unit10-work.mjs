@@ -65,6 +65,37 @@ export const UNIT10_CARDS = [
     note: 'Position : **hemma** (à la maison). Direction : **hem** (vers la maison) : *jag går hem*.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u10-kontor', {
+    prompt: 'Le lieu de travail avec des bureaux : « un bureau »', promptEn: 'A workplace with desks: "an office"',
+    sv: 'ett kontor', fr: 'un bureau (lieu)', en: 'an office', ipa: '/ɛtː kɔnˈtuːr/',
+    note: 'Mot **ett**. *Jag jobbar på kontoret* = je travaille au bureau.',
+  }),
+  vocab(D, 'u10-larare', {
+    prompt: 'Celui qui enseigne : « un professeur »', promptEn: 'Someone who teaches: "a teacher"',
+    sv: 'en lärare', fr: 'un professeur / une professeure', en: 'a teacher', ipa: '/ɛn ˈlæːrarɛ/',
+    note: 'De *lära* (apprendre). Invariable au pluriel : *två lärare*.',
+  }),
+  vocab(D, 'u10-ledig', {
+    prompt: 'Ne pas travailler ce jour-là : « libre / en congé »', promptEn: 'Not working that day: "off / free"',
+    sv: 'ledig', fr: 'libre / en congé', en: 'off / free', ipa: '/ˈleːdɪɡ/',
+    note: '*Jag är ledig på fredag* = je ne travaille pas vendredi. *En ledig plats* = une place libre.',
+  }),
+  vocab(D, 'u10-dator', {
+    prompt: 'L’outil de travail à écran : « un ordinateur »', promptEn: 'The work tool with a screen: "a computer"',
+    sv: 'en dator', fr: 'un ordinateur', en: 'a computer', ipa: '/ɛn ˈdɑːtɔr/',
+    note: 'Défini : *datorn*. Un portable : *en bärbar dator* (*bära* = porter).',
+  }),
+  vocab(D, 'u10-rast', {
+    prompt: 'Un moment sans travailler : « une pause »', promptEn: 'A moment off work: "a break"',
+    sv: 'en rast', fr: 'une pause', en: 'a break', ipa: '/ɛn rast/',
+    note: 'La pause café au travail a son propre nom : *fikarast*.',
+  }),
+  vocab(D, 'u10-slutar', {
+    prompt: 'Quitter le travail le soir : « finir »', promptEn: 'Leaving work in the evening: "to finish"',
+    sv: 'slutar', fr: 'finit / finir', en: 'finishes / to finish', ipa: '/ˈslʉːtar/',
+    note: '*Jag slutar klockan fem* = je finis à 5 h. Aussi : quitter un emploi.',
+  }),
   phrase(D, 'u10-jobbar-som', {
     prompt: 'Dire ton métier : « Je travaille comme professeur. »', promptEn: 'Saying your job: "I work as a teacher."',
     sv: 'Jag jobbar som lärare.', fr: 'Je travaille comme professeur.', en: 'I work as a teacher.',

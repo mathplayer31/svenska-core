@@ -61,6 +61,38 @@ export const UNIT9_CARDS = [
     gloss: [['på', 'à', 'in'], ['kvällen', 'le soir', 'the evening']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u9-lunch', {
+    prompt: 'Le repas de midi : « le déjeuner »', promptEn: 'The midday meal: "lunch"',
+    sv: 'en lunch', fr: 'un déjeuner', en: 'a lunch', ipa: '/ɛn lɵnɕ/',
+    note: 'Le **ch** final se prononce [ɕ]. *Äta lunch* = déjeuner, souvent vers 11 h 30.',
+  }),
+  vocab(D, 'u9-pa-eftermiddagen', {
+    prompt: 'Après le déjeuner : « l’après-midi »', promptEn: 'After lunch: "in the afternoon"',
+    sv: 'på eftermiddagen', fr: 'l’après-midi', en: 'in the afternoon', ipa: '/pɔ ˈɛftɛrmɪˌdɑːɡɛn/',
+    note: 'Même modèle que *på morgonen* et *på kvällen* : *på* + forme définie.',
+    gloss: [['på', 'à', 'in'], ['eftermiddagen', 'l’après-midi', 'the afternoon']],
+  }),
+  vocab(D, 'u9-tidigt', {
+    prompt: 'Pas tard du tout : « tôt »', promptEn: 'Not late at all: "early"',
+    sv: 'tidigt', fr: 'tôt', en: 'early', ipa: '/ˈtiːdɪt/',
+    note: '*Jag vaknar tidigt.* Le **g** est muet : [ˈtiːdɪt].',
+  }),
+  vocab(D, 'u9-sent', {
+    prompt: 'Le contraire de *tidigt* : « tard »', promptEn: 'The opposite of *tidigt*: "late"',
+    sv: 'sent', fr: 'tard', en: 'late', ipa: '/seːnt/',
+    note: '*Jag lägger mig sent.* Être en retard : *vara sen*.',
+  }),
+  vocab(D, 'u9-sover', {
+    prompt: 'Ce que tu fais la nuit : « dormir »', promptEn: 'What you do at night: "to sleep"',
+    sv: 'sover', fr: 'dort / dormir', en: 'sleeps / to sleep', ipa: '/ˈsoːvɛr/',
+    note: 'Infinitif *sova*, verbe fort : *sov, har sovit*. *Sov gott!* = dors bien !',
+  }),
+  vocab(D, 'u9-timme', {
+    prompt: 'Soixante minutes : « une heure »', promptEn: 'Sixty minutes: "an hour"',
+    sv: 'en timme', fr: 'une heure (durée)', en: 'an hour', ipa: '/ɛn ˈtɪmːɛ/',
+    note: 'Pour une durée : *en timme*, pluriel *timmar*. Pour l’heure qu’il est : *klockan*.',
+  }),
   phrase(D, 'u9-vad-ar-klockan', {
     prompt: 'Demander l’heure : « Quelle heure est-il ? »', promptEn: 'Asking the time: "What time is it?"',
     sv: 'Vad är klockan?', fr: 'Quelle heure est-il ?', en: 'What time is it?',

@@ -93,6 +93,49 @@ export const UNIT6_CARDS = [
     note: 'Följ skyltarna **Sortie** i metron. Ett byte mellan linjer heter **une correspondance**.',
     noteEn: 'Follow the **Sortie** signs in the metro. Changing lines is **une correspondance**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u6-le-tram', {
+    prompt: 'Spårvagnen i stan', promptEn: 'The tram in town',
+    fr: 'le tram', sv: 'spårvagnen', en: 'the tram',
+    ipa: '/lə tʁam/',
+    note: 'Kort för *le tramway*. Finns i de flesta storstäder, till exempel Bordeaux och Strasbourg.',
+    noteEn: 'Short for *le tramway*. Found in most big cities, such as Bordeaux and Strasbourg.',
+  }),
+  vocab(D, 'fr-u6-le-quai', {
+    prompt: 'Där man väntar på tåget', promptEn: 'Where you wait for the train',
+    fr: 'le quai', sv: 'perrongen', en: 'the platform',
+    ipa: '/lə ke/',
+    note: '**qu** = [k]. *Le train part du quai B.* Spåret: *la voie*.',
+    noteEn: '**qu** = [k]. *Le train part du quai B.* The track: *la voie*.',
+  }),
+  vocab(D, 'fr-u6-le-retard', {
+    prompt: 'När tåget inte kommer i tid', promptEn: 'When the train is not on time',
+    fr: 'le retard', sv: 'förseningen', en: 'the delay',
+    ipa: '/lə ʁə.taʁ/',
+    note: '*Être en retard* = vara sen. *Le train a dix minutes de retard.*',
+    noteEn: '*Être en retard* = to be late. *Le train a dix minutes de retard.*',
+  }),
+  vocab(D, 'fr-u6-larret-de-bus', {
+    prompt: 'Där bussen stannar', promptEn: 'Where the bus stops',
+    fr: 'l’arrêt de bus', sv: 'busshållplatsen', en: 'the bus stop',
+    ipa: '/la.ʁɛ də bys/',
+    note: 'Från *arrêter* (stanna). *Le prochain arrêt* = nästa hållplats.',
+    noteEn: 'From *arrêter* (to stop). *Le prochain arrêt* = the next stop.',
+  }),
+  vocab(D, 'fr-u6-la-correspondance', {
+    prompt: 'Byte mellan två linjer', promptEn: 'Changing between two lines',
+    fr: 'la correspondance', sv: 'bytet / anslutningen', en: 'the connection / the change',
+    ipa: '/la kɔ.ʁɛs.pɔ̃.dɑ̃s/',
+    note: 'I metron: följ skylten *Correspondance* för att byta linje.',
+    noteEn: 'In the metro: follow the *Correspondance* sign to change lines.',
+  }),
+  vocab(D, 'fr-u6-le-taxi', {
+    prompt: 'En bil med chaufför', promptEn: 'A car with a driver',
+    fr: 'le taxi', sv: 'taxin', en: 'the taxi',
+    ipa: '/lə tak.si/',
+    note: 'Samma ord som på svenska. Appar som *Uber* heter *un VTC* i Frankrike.',
+    noteEn: 'Same word as in English. Ride-hailing cars are called *un VTC* in France.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u6-ou-est-la-station-de-metro', {

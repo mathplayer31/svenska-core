@@ -60,6 +60,37 @@ export const UNIT20_CARDS = [
     note: 'Mot **ett**, invariable : *ett bär, många bär*. *blåbär* (myrtilles), *lingon* (airelles).',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u20-talt', {
+    prompt: 'Pour dormir dans la nature : « une tente »', promptEn: 'For sleeping outdoors: "a tent"',
+    sv: 'ett tält', fr: 'une tente', en: 'a tent', ipa: '/ɛtː tɛlt/',
+    note: 'Mot **ett**. Le verbe *tälta* (camper) en vient.',
+  }),
+  vocab(D, 'u20-o', {
+    prompt: 'Une terre entourée d’eau : « une île »', promptEn: 'Land surrounded by water: "an island"',
+    sv: 'en ö', fr: 'une île', en: 'an island', ipa: '/ɛn øː/',
+    note: 'Le mot le plus court du suédois. Pluriel : *öar*. Sverige har över 260 000 öar.',
+  }),
+  vocab(D, 'u20-havet', {
+    prompt: 'La grande étendue d’eau salée : « la mer »', promptEn: 'The great stretch of salt water: "the sea"',
+    sv: 'havet', fr: 'la mer', en: 'the sea', ipa: '/ˈhɑːvɛt/',
+    note: 'Défini de *ett hav*. *Vid havet* = au bord de la mer.',
+  }),
+  vocab(D, 'u20-alg', {
+    prompt: 'Le roi de la forêt : « un élan »', promptEn: 'The king of the forest: "a moose / elk"',
+    sv: 'en älg', fr: 'un élan', en: 'a moose / an elk', ipa: '/ɛn ɛlj/',
+    note: 'Le **g** après **l** se prononce [j]. Panneau routier célèbre : *Varning för älg*.',
+  }),
+  vocab(D, 'u20-myggor', {
+    prompt: 'Ce qui pique l’été près des lacs : « des moustiques »', promptEn: 'What bites in summer near the lakes: "mosquitoes"',
+    sv: 'myggor', fr: 'des moustiques', en: 'mosquitoes', ipa: '/ˈmʏɡːɔr/',
+    note: 'Pluriel de *en mygga* (1er groupe). Le répulsif : *myggmedel*.',
+  }),
+  vocab(D, 'u20-skargarden', {
+    prompt: 'Les milliers d’îles devant Stockholm : « l’archipel »', promptEn: 'The thousands of islands off Stockholm: "the archipelago"',
+    sv: 'skärgården', fr: 'l’archipel', en: 'the archipelago', ipa: '/ˈɧæːrˌɡoːɖɛn/',
+    note: '*skär* (récif) + *gård* (cour). Le **sk** devant **ä** se prononce [ɧ].',
+  }),
   phrase(D, 'u20-ger-alla-ratt', {
     prompt: '« L’allemansrätt donne à tous le droit d’être dans la nature. »', promptEn: '"The right to roam gives everyone the right to be in nature."',
     sv: 'Allemansrätten ger alla rätt att vara i naturen.', fr: 'L’allemansrätt donne à tous le droit d’être dans la nature.', en: 'The right to roam gives everyone the right to be in nature.',

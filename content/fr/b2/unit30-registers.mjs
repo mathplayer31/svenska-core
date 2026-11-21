@@ -93,6 +93,49 @@ export const UNIT30_CARDS = [
     note: 'Ledigt men inte vulgärt. **un ami** är neutralt men kan också betyda pojkvän: *mon ami* eller *mon copain* kan tolkas romantiskt, *mon pote* aldrig.',
     noteEn: 'Casual but not vulgar. **un ami** is neutral but can also mean boyfriend: *mon ami* or *mon copain* can sound romantic, *mon pote* never does.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u30-la-bouffe', {
+    prompt: 'Ledigt ord för mat', promptEn: 'Casual word for food',
+    fr: 'la bouffe', sv: 'käket / maten (ledigt)', en: 'grub / food (slang)',
+    ipa: '/la buf/',
+    note: 'Verbet: *bouffer* (käka). Neutralt: *la nourriture, manger*.',
+    noteEn: 'The verb: *bouffer* (to eat). Neutral: *la nourriture, manger*.',
+  }),
+  vocab(D, 'fr-u30-le-flic', {
+    prompt: 'Ledigt ord för polis', promptEn: 'Casual word for a police officer',
+    fr: 'le flic', sv: 'snuten', en: 'the cop',
+    ipa: '/lə flik/',
+    note: 'Neutralt: *le policier*. Mycket vanligt i talspråk och på film.',
+    noteEn: 'Neutral: *le policier*. Very common in speech and films.',
+  }),
+  vocab(D, 'fr-u30-creve', {
+    prompt: 'Ledigt för väldigt trött', promptEn: 'Casual for very tired',
+    fr: 'crevé / crevée', sv: 'helt slut', en: 'knackered / beat',
+    ipa: '/kʁə.ve/',
+    note: 'Från *crever* (spricka). Neutralt: *épuisé*. *Je suis crevée.*',
+    noteEn: 'From *crever* (to burst). Neutral: *épuisé*. *Je suis crevée.*',
+  }),
+  vocab(D, 'fr-u30-un-truc', {
+    prompt: 'När man inte kommer på ordet', promptEn: 'When you can’t find the word',
+    fr: 'un truc', sv: 'en grej', en: 'a thing / stuff',
+    ipa: '/ɛ̃ tʁyk/',
+    note: 'Synonym: *un machin*. Också ”ett knep”: *J’ai un truc pour…*',
+    noteEn: 'Synonym: *un machin*. Also "a trick": *J’ai un truc pour…*',
+  }),
+  vocab(D, 'fr-u30-nickel', {
+    prompt: 'Ledigt för perfekt', promptEn: 'Casual for perfect',
+    fr: 'nickel', sv: 'perfekt / skinande rent', en: 'spotless / perfect',
+    ipa: '/ni.kɛl/',
+    note: '*C’est nickel !* = det är perfekt! Från metallen, som glänser.',
+    noteEn: '*C’est nickel !* = it’s perfect! From the shiny metal.',
+  }),
+  vocab(D, 'fr-u30-grave', {
+    prompt: 'Ledig förstärkning', promptEn: 'Casual intensifier',
+    fr: 'grave', sv: 'jättemycket / verkligen (ledigt)', en: 'totally / seriously (slang)',
+    ipa: '/ɡʁav/',
+    note: 'I standardspråk ”allvarlig”. Ledigt: *C’est grave bien* = det är skitbra. *Grave !* = absolut!',
+    noteEn: 'Standard meaning "serious". Slang: *C’est grave bien* = it’s really good. *Grave !* = totally!',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u30-saurais-gre', {

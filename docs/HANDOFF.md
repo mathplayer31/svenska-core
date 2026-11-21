@@ -26,9 +26,17 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Streak : un jour (heure locale de l'appareil) est validé par une séance terminée ; une séance des fondations est terminée quand sa file de cartes est vide (pas en mode libre). Récompenses à 7, 30, 100 et 365 jours de record : icônes à côté du pseudo.
 - Règles pures dans `src/xp.ts`, contrôle : `node --experimental-strip-types scripts/check-xp.ts`. Stockage et envoi dans `src/dataSource.ts` (clé locale `svenska.xp`) : chaque événement a un identifiant créé sur l'appareil, envoyé au compte tout de suite ou à la synchro suivante, sans doublon. Sans compte, XP et streak restent locaux ; l'XP gagnée avant la connexion est créditée au compte connecté ensuite.
 - Onglet Classement (`src/Leaderboard.tsx`) : série en cours, record, XP de la semaine ; classements semaine (depuis lundi 0 h), mois, série, position de l'utilisateur mise en avant. Pseudo dans l'écran Compte : 3 à 20 caractères `A-Z a-z 0-9 _`, unique sans tenir compte de la casse, modifiable ; sans pseudo, absent du classement.
-- Base : `supabase/migrations-manuelles/migration_classement.sql` (tables `profiles` et `xp_events`, fonction `leaderboard()`). RLS : chacun ne lit que ses lignes ; les autres comptes ne sont visibles que via `leaderboard()`, qui ne renvoie que pseudo, XP, streak et record. Appliquée sur la base locale le 21 nov 2026 ; à appliquer sur Supabase Cloud (SQL Editor).
+- Base : `supabase/migrations-manuelles/migration_classement.sql` (tables `profiles` et `xp_events`, fonction `leaderboard()`). RLS : chacun ne lit que ses lignes ; les autres comptes ne sont visibles que via `leaderboard()`, qui ne renvoie que pseudo, XP, streak et record. Appliquée le 21 nov 2026 sur la base locale et sur Supabase Cloud (SQL Editor).
 - Limite connue : un utilisateur peut insérer de faux événements par l'API avec sa propre clé de session (pas de contrôle côté serveur de la réalité des réponses).
 - Vérifié le 21 nov 2026 sur la base locale : deux comptes de test, pas de doublon au renvoi, insertion chez un autre refusée, pseudo pris (autre casse) et invalide refusés, profil et événements des autres illisibles, visiteur anonyme refusé ; dans l'app : séance des fondations sans compte (41 XP), connexion et envoi, séance d'unité hors ligne (+173 XP) puis envoi au retour du réseau (214 XP en base comme sur l'appareil), onglets et icônes, FR / EN, mobile.
+
+## Plus de mots par unité : AJOUTÉ (21 nov 2026, issue #14)
+- 5 à 8 cartes `vocab` (mots ou expressions) de plus dans chacune des 62 unités : 195 pour SvenskaCore, 190 pour FranceCore. Elles sont liées au thème de l'unité, sans doublon dans le cours (ex. *tack så mycket* dans l'Unité 1, avec *tack* ; *merci beaucoup* dans l'Unité 1 de FranceCore).
+- Placées dans chaque fichier d'unité après les mots d'origine, sous le commentaire `// Ajouts (issue #14)`, avant les phrases. Les unités A1 suédoises importent désormais `vocab` de `content/sv/helpers.mjs` pour ces ajouts (anglais intégré à la carte, note anglaise dans `content/sv/a1/notes-en.mjs`).
+- Accents tonals : 130 nouveaux mots dans `content/sv/tones.mjs`, les autres sont listés en tête du fichier. *nyår* et *patient* sont écartés par `node scripts/check-tones.mjs` (voyelles voisines à l'écrit).
+- `node scripts/check-fr.mjs` attend maintenant 17 à 20 mots et 8 phrases par unité.
+- Total : 1724 cartes (suédois : A1 208, A2 207, B1 206, B2 205 ; français : A1 223, A2 224, B1 226, B2 225).
+- Vérifié le 21 nov 2026 : `npm run content`, `node scripts/check-tones.mjs`, `node scripts/check-fr.mjs`, `npx tsc -b`, `npm run build`.
 
 ## PWA (app sur iPhone) et icône : AJOUTÉ (21 nov 2026, issue #12)
 - Pas d'app iOS native (il faudrait un Mac et Xcode) : le site s'installe comme une app. Sur iPhone : Safari, ouvrir https://svenska-core.pages.dev, Partager > Sur l'écran d'accueil.
@@ -114,7 +122,7 @@ alter table public.sections add column if not exists description_en text;
 - Base : colonne `course` (`sv` par défaut, `fr`) sur `decks` et `sections` (`supabase/migrations-manuelles/migration_cours.sql`, incluse dans `schema.sql`). Les colonnes gardent leurs noms historiques : pour une carte française, `swedish_target` = français, `english_translation` / `french_translation` = suédois (langue de base), anglais dans les colonnes `_en`.
 - L'app ne charge que le cours actif (`loadData` dans `src/App.tsx`) ; parcours, révisions, tests et fondations restent inchangés. Tous les slugs français commencent par `fr-` : la progression des deux cours partage les mêmes clés et tables, avec la même synchro de compte.
 - Audio : `scripts/sync-content.mjs` choisit la voix d'après le cours du deck (`fr-FR-DeniseNeural` pour le français). Les exercices écrits reconnaissent les articles des deux langues (en / ett, un / une, le / la) et tolèrent les accents oubliés.
-- Contrôles : `npm run content` refuse une carte française sans suédois ou sans anglais ; `node scripts/check-fr.mjs [niveau]` vérifie le contenu français hors ligne (champs, gloses, 12 + 8 cartes par unité, slugs, tiret cadratin).
+- Contrôles : `npm run content` refuse une carte française sans suédois ou sans anglais ; `node scripts/check-fr.mjs [niveau]` vérifie le contenu français hors ligne (champs, gloses, 17 à 20 mots + 8 phrases par unité, slugs, tiret cadratin).
 
 ## Comptes et synchro de progression : AJOUTÉ (18 nov 2026, issue #8)
 - Seule la progression se synchronise ; le contenu reste embarqué. L'app marche sans compte.

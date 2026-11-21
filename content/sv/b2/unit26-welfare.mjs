@@ -65,6 +65,37 @@ export const UNIT26_CARDS = [
     gloss: [['en', 'des', 'a'], ['avgift', 'frais', 'fee']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u26-sjukhuset', {
+    prompt: 'Pour les soins graves et les urgences : « l’hôpital »', promptEn: 'For serious care and emergencies: "the hospital"',
+    sv: 'sjukhuset', fr: 'l’hôpital', en: 'the hospital', ipa: '/ˈɧʉːkˌhʉːsɛt/',
+    note: '*sjuk* (malade) + *hus* (maison). Les urgences : *akuten*.',
+  }),
+  vocab(D, 'u26-patient', {
+    prompt: 'La personne soignée : « un patient »', promptEn: 'The person receiving care: "a patient"',
+    sv: 'en patient', fr: 'un patient / une patiente', en: 'a patient', ipa: '/ɛn pasɪˈɛnt/',
+    note: 'Le **ti** se prononce [sɪ]. Accent sur la fin.',
+  }),
+  vocab(D, 'u26-pension', {
+    prompt: 'L’argent touché après la vie active : « une retraite »', promptEn: 'Money after your working life: "a pension"',
+    sv: 'en pension', fr: 'une retraite (pension)', en: 'a pension', ipa: '/ɛn panˈɧuːn/',
+    note: 'Le **sion** se prononce [ɧuːn]. Partir à la retraite : *gå i pension*.',
+  }),
+  vocab(D, 'u26-barnbidrag', {
+    prompt: 'L’allocation versée pour chaque enfant', promptEn: 'The benefit paid for every child: "child benefit"',
+    sv: 'barnbidrag', fr: 'les allocations familiales', en: 'child benefit', ipa: '/ˈbɑːɳbɪˌdrɑːɡ/',
+    note: '*barn* (enfant) + *bidrag* (contribution). Versé par *Försäkringskassan* jusqu’à 16 ans.',
+  }),
+  vocab(D, 'u26-a-kassan', {
+    prompt: 'L’assurance chômage', promptEn: 'Unemployment insurance',
+    sv: 'a-kassan', fr: 'la caisse d’assurance chômage', en: 'the unemployment fund', ipa: '/ˈɑːˌkasːan/',
+    note: '*arbetslöshetskassa*, abrégé. L’adhésion est volontaire, souvent via le syndicat.',
+  }),
+  vocab(D, 'u26-tandlakare', {
+    prompt: 'Le médecin des dents : « un dentiste »', promptEn: 'The tooth doctor: "a dentist"',
+    sv: 'en tandläkare', fr: 'un / une dentiste', en: 'a dentist', ipa: '/ɛn ˈtandˌlɛːkarɛ/',
+    note: '*tand* (dent) + *läkare* (médecin). Gratuit jusqu’à 23 ans, ensuite payant.',
+  }),
   phrase(D, 'u26-sjukskriven-tva-veckor', {
     prompt: '« Je suis en arrêt maladie pour deux semaines. »', promptEn: '"I am on sick leave for two weeks."',
     sv: 'Jag är sjukskriven i två veckor.', fr: 'Je suis en arrêt maladie pour deux semaines.', en: 'I am on sick leave for two weeks.',

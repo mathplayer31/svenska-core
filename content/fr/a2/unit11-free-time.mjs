@@ -93,6 +93,49 @@ export const UNIT11_CARDS = [
     note: 'Används oftast i plural: *Quels sont tes loisirs ?* Slutets **s** är stumt, och **oi** uttalas [wa].',
     noteEn: 'Usually plural: *Quels sont tes loisirs ?* The final **s** is silent, and **oi** is [wa].',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u11-lire', {
+    prompt: 'Att läsa en bok', promptEn: 'Reading a book',
+    fr: 'lire', sv: 'att läsa', en: 'to read',
+    ipa: '/liʁ/',
+    note: 'Oregelbundet: *je lis, nous lisons*, perfekt *j’ai lu*.',
+    noteEn: 'Irregular: *je lis, nous lisons*, perfect *j’ai lu*.',
+  }),
+  vocab(D, 'fr-u11-le-theatre', {
+    prompt: 'Pjäser på scen', promptEn: 'Plays on stage',
+    fr: 'le théâtre', sv: 'teatern', en: 'the theatre',
+    ipa: '/lə te.ɑtʁ/',
+    note: '**th** uttalas [t]. *Aller au théâtre* = gå på teater.',
+    noteEn: '**th** sounds like [t]. *Aller au théâtre* = go to the theatre.',
+  }),
+  vocab(D, 'fr-u11-nager', {
+    prompt: 'I simhallen eller havet', promptEn: 'In the pool or the sea',
+    fr: 'nager', sv: 'att simma', en: 'to swim',
+    ipa: '/na.ʒe/',
+    note: '*Nous nageons*: ett **e** behålls framför **o** för att **g** ska låta [ʒ].',
+    noteEn: '*Nous nageons*: an **e** stays before **o** to keep the **g** soft [ʒ].',
+  }),
+  vocab(D, 'fr-u11-la-musique', {
+    prompt: 'Att lyssna eller spela', promptEn: 'Listening or playing',
+    fr: 'la musique', sv: 'musiken', en: 'music',
+    ipa: '/la my.zik/',
+    note: '**qu** = [k]. *Écouter de la musique* = lyssna på musik.',
+    noteEn: '**qu** = [k]. *Écouter de la musique* = listen to music.',
+  }),
+  vocab(D, 'fr-u11-le-jeu-video', {
+    prompt: 'Spel på skärm', promptEn: 'Games on a screen',
+    fr: 'le jeu vidéo', sv: 'tv-spelet / datorspelet', en: 'the video game',
+    ipa: '/lə ʒø vi.de.o/',
+    note: 'Plural: *les jeux vidéo* (*vidéo* böjs inte). *Jouer aux jeux vidéo.*',
+    noteEn: 'Plural: *les jeux vidéo* (*vidéo* does not change). *Jouer aux jeux vidéo.*',
+  }),
+  vocab(D, 'fr-u11-danser', {
+    prompt: 'Röra sig till musik', promptEn: 'Moving to music',
+    fr: 'danser', sv: 'att dansa', en: 'to dance',
+    ipa: '/dɑ̃.se/',
+    note: 'Regelbundet verb på *-er*. *On va danser ce soir ?*',
+    noteEn: 'Regular *-er* verb. *On va danser ce soir ?*',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u11-fait-ce-week-end', {

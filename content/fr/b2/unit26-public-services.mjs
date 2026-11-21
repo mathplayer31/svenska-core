@@ -93,6 +93,51 @@ export const UNIT26_CARDS = [
     note: 'Kortform av **le baccalauréat**, infört av Napoleon 1808. Det är både en examen och en symbol: årskurser och utbildningsnivåer räknas från det, till exempel *bac + 5* för en masterexamen.',
     noteEn: 'Short for **le baccalauréat**, created by Napoleon in 1808. It is both an exam and a yardstick: education levels are counted from it, as in *bac + 5* for a master’s degree.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u26-lhopital', {
+    prompt: 'Där man vårdas för allvarliga sjukdomar', promptEn: 'Where serious illnesses are treated',
+    fr: 'l’hôpital', sv: 'sjukhuset', en: 'the hospital',
+    ipa: '/lo.pi.tal/',
+    note: 'Plural: *les hôpitaux*. Universitetssjukhus: *le CHU*.',
+    noteEn: 'Plural: *les hôpitaux*. University hospital: *le CHU*.',
+  }),
+  vocab(D, 'fr-u26-le-lycee', {
+    prompt: 'Skolan mellan 15 och 18 år', promptEn: 'School from age 15 to 18',
+    fr: 'le lycée', sv: 'gymnasiet', en: 'the upper secondary school',
+    ipa: '/lə li.se/',
+    note: 'Maskulinum trots *-ée*. Avslutas med *le bac*.',
+    noteEn: 'Masculine despite *-ée*. It ends with *le bac*.',
+  }),
+  vocab(D, 'fr-u26-la-creche', {
+    prompt: 'Där de minsta barnen passas', promptEn: 'Where the youngest children are looked after',
+    fr: 'la crèche', sv: 'förskolan (för de minsta)', en: 'the nursery / daycare',
+    ipa: '/la kʁɛʃ/',
+    note: 'För barn under tre år. Platserna är få: många har *une nounou* (dagmamma).',
+    noteEn: 'For children under three. Places are scarce: many have *une nounou* (childminder).',
+  }),
+  vocab(D, 'fr-u26-lassurance-maladie', {
+    prompt: 'Den allmänna sjukförsäkringen', promptEn: 'Public health insurance',
+    fr: 'l’assurance maladie', sv: 'sjukförsäkringen', en: 'health insurance',
+    ipa: '/la.sy.ʁɑ̃s ma.la.di/',
+    note: 'Officiellt namn på det som kallas *la Sécu*. Webbplats: *ameli.fr*.',
+    noteEn: 'The official name of what people call *la Sécu*. Website: *ameli.fr*.',
+    gloss: [['l’assurance', 'försäkringen', 'the insurance'], ['maladie', 'sjukdom', 'sickness']],
+  }),
+  vocab(D, 'fr-u26-lallocation', {
+    prompt: 'Pengar som staten betalar ut', promptEn: 'Money paid out by the state',
+    fr: 'l’allocation', sv: 'bidraget', en: 'the allowance / benefit',
+    ipa: '/la.lɔ.ka.sjɔ̃/',
+    note: 'Barnbidrag: *les allocations familiales*, ofta bara *les allocs*.',
+    noteEn: 'Child benefit: *les allocations familiales*, often just *les allocs*.',
+  }),
+  vocab(D, 'fr-u26-le-service-public', {
+    prompt: 'Det som staten ordnar för alla', promptEn: 'What the state provides for everyone',
+    fr: 'le service public', sv: 'offentlig service', en: 'public service',
+    ipa: '/lə sɛʁ.vis py.blik/',
+    note: 'Ett starkt begrepp i Frankrike: post, tåg, skola, sjukhus.',
+    noteEn: 'A strong idea in France: post, trains, schools, hospitals.',
+    gloss: [['le service', 'tjänsten', 'the service'], ['public', 'offentlig', 'public']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u26-carte-vitale-phrase', {

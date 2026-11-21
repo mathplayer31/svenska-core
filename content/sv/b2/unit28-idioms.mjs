@@ -68,6 +68,43 @@ export const UNIT28_CARDS = [
     gloss: [['det', 'ce', 'it'], ['är', 'est', 'is'], ['ingen', 'aucun', 'no'], ['konst', 'art', 'art']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u28-rakmacka', {
+    prompt: 'Réussir sans effort, grâce à d’autres', promptEn: 'Succeeding effortlessly, thanks to others',
+    sv: 'glida in på en räkmacka', fr: 'avoir tout servi sur un plateau', en: 'have it handed to you on a plate', ipa: '/ˈɡliːda ɪn poː ɛn ˈrɛːkˌmakːa/',
+    note: 'Littéralement « glisser sur un sandwich aux crevettes ». Se dit de quelqu’un de privilégié.',
+    gloss: [['glida in', 'glisser', 'slide in'], ['på', 'sur', 'on'], ['en', 'un', 'a'], ['räkmacka', 'sandwich aux crevettes', 'shrimp sandwich']],
+  }),
+  vocab(D, 'u28-ana-ugglor', {
+    prompt: 'Se douter que quelque chose cloche', promptEn: 'Suspecting something is wrong',
+    sv: 'ana ugglor i mossen', fr: 'flairer quelque chose de louche', en: 'smell a rat', ipa: '/ˈɑːna ˈɵɡːlɔr ɪ ˈmɔsːɛn/',
+    note: 'Littéralement « soupçonner des hiboux dans le marais ». *Jag anar ugglor i mossen.*',
+    gloss: [['ana', 'soupçonner', 'suspect'], ['ugglor', 'des hiboux', 'owls'], ['i', 'dans', 'in'], ['mossen', 'le marais', 'the bog']],
+  }),
+  vocab(D, 'u28-lok-pa-laxen', {
+    prompt: 'Aggraver une situation déjà mauvaise', promptEn: 'Making a bad situation worse',
+    sv: 'lägga lök på laxen', fr: 'en rajouter une couche', en: 'add insult to injury', ipa: '/ˈlɛɡːa løːk poː ˈlaksɛn/',
+    note: 'Littéralement « mettre de l’oignon sur le saumon ». Ironique : on gâche ce qui était déjà là.',
+    gloss: [['lägga', 'mettre', 'put'], ['lök', 'oignon', 'onion'], ['på', 'sur', 'on'], ['laxen', 'le saumon', 'the salmon']],
+  }),
+  vocab(D, 'u28-korvspad', {
+    prompt: 'Quelque chose d’évident : « clair comme de l’eau de roche »', promptEn: 'Something obvious: "crystal clear"',
+    sv: 'klart som korvspad', fr: 'clair comme de l’eau de roche', en: 'crystal clear', ipa: '/klɑːʈ sɔm ˈkɔrvˌspɑːd/',
+    note: 'Littéralement « clair comme l’eau de cuisson des saucisses ». Souvent ironique : *Det är väl klart som korvspad!*',
+    gloss: [['klart', 'clair', 'clear'], ['som', 'comme', 'as'], ['korvspad', 'eau des saucisses', 'sausage water']],
+  }),
+  vocab(D, 'u28-smor-i-smaland', {
+    prompt: 'Refuser catégoriquement : « pour rien au monde »', promptEn: 'Refusing flatly: "not for all the tea in China"',
+    sv: 'inte för allt smör i Småland', fr: 'pour rien au monde', en: 'not for all the tea in China', ipa: '/ˈɪntɛ fœr alt smœːr ɪ ˈsmoːland/',
+    note: 'Littéralement « pas pour tout le beurre du Småland », une région agricole.',
+    gloss: [['inte', 'pas', 'not'], ['för', 'pour', 'for'], ['allt', 'tout', 'all'], ['smör', 'beurre', 'butter'], ['i', 'en', 'in'], ['Småland', 'Småland', 'Småland']],
+  }),
+  vocab(D, 'u28-over-en-kam', {
+    prompt: 'Juger tout le monde pareil : « mettre tout le monde dans le même sac »', promptEn: 'Judging everyone alike: "tar everyone with the same brush"',
+    sv: 'dra alla över en kam', fr: 'mettre tout le monde dans le même sac', en: 'tar everyone with the same brush', ipa: '/drɑː ˈalːa ˈøːvɛr ɛn kamː/',
+    note: 'Littéralement « passer tout le monde au même peigne ». *Man ska inte dra alla över en kam.*',
+    gloss: [['dra', 'passer', 'pull'], ['alla', 'tout le monde', 'everyone'], ['över', 'sur', 'over'], ['en', 'un', 'one'], ['kam', 'peigne', 'comb']],
+  }),
   phrase(D, 'u28-lagom-varmt', {
     prompt: '« Le café est juste à la bonne température. »', promptEn: '"The coffee is just the right temperature."',
     sv: 'Kaffet är lagom varmt.', fr: 'Le café est juste à la bonne température.', en: 'The coffee is just the right temperature.',

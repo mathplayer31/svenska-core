@@ -65,6 +65,42 @@ export const UNIT13_CARDS = [
     note: '*bra, bättre, bäst*. *Vilken är bäst?* = Lequel est le meilleur ?',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u13-klanning', {
+    prompt: 'Un vêtement d’une seule pièce : « une robe »', promptEn: 'A one-piece garment: "a dress"',
+    sv: 'en klänning', fr: 'une robe', en: 'a dress', ipa: '/ɛn ˈklɛnːɪŋ/',
+    note: 'Défini : *klänningen*. Pluriel : *klänningar*.',
+  }),
+  vocab(D, 'u13-kjol', {
+    prompt: 'Un vêtement qui part de la taille : « une jupe »', promptEn: 'A garment from the waist down: "a skirt"',
+    sv: 'en kjol', fr: 'une jupe', en: 'a skirt', ipa: '/ɛn ɕuːl/',
+    note: 'Le **kj** se prononce [ɕ], comme le **k** de *köpa*.',
+  }),
+  vocab(D, 'u13-mossa', {
+    prompt: 'Pour garder la tête au chaud : « un bonnet »', promptEn: 'To keep your head warm: "a beanie / hat"',
+    sv: 'en mössa', fr: 'un bonnet', en: 'a beanie', ipa: '/ɛn ˈmœsːa/',
+    note: 'Indispensable l’hiver. Pluriel : *mössor*.',
+  }),
+  vocab(D, 'u13-vantar', {
+    prompt: 'Pour les mains l’hiver : « des moufles »', promptEn: 'For your hands in winter: "mittens"',
+    sv: 'vantar', fr: 'des moufles', en: 'mittens', ipa: '/ˈvantar/',
+    note: 'Pluriel de *en vante*. Des gants à doigts : *handskar*.',
+  }),
+  vocab(D, 'u13-provrum', {
+    prompt: 'Pour essayer les vêtements : « une cabine d’essayage »', promptEn: 'To try on clothes: "a fitting room"',
+    sv: 'ett provrum', fr: 'une cabine d’essayage', en: 'a fitting room', ipa: '/ɛtː ˈpruːvˌrɵmː/',
+    note: '*prova* (essayer) + *rum* (pièce) : mot **ett**.',
+  }),
+  vocab(D, 'u13-snygg', {
+    prompt: 'Qui a du style : « beau / joli »', promptEn: 'Looking good: "nice / good-looking"',
+    sv: 'snygg', fr: 'beau / joli', en: 'nice-looking', ipa: '/snʏɡː/',
+    note: 'Pour les vêtements et les gens. Neutre : *snyggt*. Superlatif : *snyggast*.',
+  }),
+  vocab(D, 'u13-farg', {
+    prompt: 'Rouge, bleu, noir : « une couleur »', promptEn: 'Red, blue, black: "a colour"',
+    sv: 'en färg', fr: 'une couleur', en: 'a colour', ipa: '/ɛn færj/',
+    note: 'Le **g** après **r** se prononce [j]. *Vilken färg?* = quelle couleur ?',
+  }),
   phrase(D, 'u13-prova-trojan', {
     prompt: 'En magasin : « Je peux essayer ce pull ? »', promptEn: 'In a shop: "Can I try on this jumper?"',
     sv: 'Kan jag prova den här tröjan?', fr: 'Je peux essayer ce pull ?', en: 'Can I try on this jumper?',

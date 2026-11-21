@@ -67,6 +67,37 @@ export const UNIT15_CARDS = [
     note: 'Le **sk** devant **e** se prononce [ɧ] : « kann-chè ». En tête de phrase, il déclenche l’inversion V2.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u15-pass', {
+    prompt: 'Le document pour voyager : « un passeport »', promptEn: 'The document for travelling: "a passport"',
+    sv: 'ett pass', fr: 'un passeport', en: 'a passport', ipa: '/ɛtː pasː/',
+    note: 'Mot **ett**. Aussi : *ett arbetspass* = un service (au travail).',
+  }),
+  vocab(D, 'u15-resvaska', {
+    prompt: 'Pour emporter ses affaires : « une valise »', promptEn: 'To carry your things: "a suitcase"',
+    sv: 'en resväska', fr: 'une valise', en: 'a suitcase', ipa: '/ɛn ˈreːsˌvɛska/',
+    note: '*resa* (voyage) + *väska* (sac). *Packa resväskan* = faire sa valise.',
+  }),
+  vocab(D, 'u15-flygplats', {
+    prompt: 'D’où partent les avions : « un aéroport »', promptEn: 'Where planes leave from: "an airport"',
+    sv: 'en flygplats', fr: 'un aéroport', en: 'an airport', ipa: '/ɛn ˈflyːɡˌplats/',
+    note: '*flyg* (vol) + *plats* (endroit). Le plus grand : *Arlanda*.',
+  }),
+  vocab(D, 'u15-badar', {
+    prompt: 'Se baigner dans un lac ou la mer', promptEn: 'Going in a lake or the sea: "to swim / bathe"',
+    sv: 'badar', fr: 'se baigne / se baigner', en: 'bathes / goes swimming', ipa: '/ˈbɑːdar/',
+    note: 'Infinitif *bada*. Pour le plaisir de l’eau ; nager vraiment : *simma*.',
+  }),
+  vocab(D, 'u15-ska', {
+    prompt: 'Pour parler d’un projet : « vais / vas (faire) »', promptEn: 'For a plan: "will / am going to"',
+    sv: 'ska', fr: 'va / vais (faire)', en: 'will / am going to', ipa: '/skɑː/',
+    note: 'Projet décidé : *Jag ska åka till Gotland.* Plus neutre pour une prévision : *kommer att*.',
+  }),
+  vocab(D, 'u15-utomlands', {
+    prompt: 'Hors de Suède : « à l’étranger »', promptEn: 'Outside Sweden: "abroad"',
+    sv: 'utomlands', fr: 'à l’étranger', en: 'abroad', ipa: '/ˈʉːtɔmˌlands/',
+    note: '*Vi åker utomlands i sommar.* Sans préposition.',
+  }),
   phrase(D, 'u15-i-sommar', {
     prompt: '« Qu’est-ce que tu vas faire cet été ? »', promptEn: '"What are you doing this summer?"',
     sv: 'Vad ska du göra i sommar?', fr: 'Qu’est-ce que tu vas faire cet été ?', en: 'What are you doing this summer?',

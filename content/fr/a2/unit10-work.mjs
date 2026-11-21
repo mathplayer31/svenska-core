@@ -93,6 +93,49 @@ export const UNIT10_CARDS = [
     note: 'Många yrken har en form för varje kön: **-ier / -ière**, som *boulanger / boulangère*. **in** framför konsonant är nasalt, [ɛ̃].',
     noteEn: 'Many job titles have a form for each gender: **-ier / -ière**, like *boulanger / boulangère*. **in** before a consonant is nasal, [ɛ̃].',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u10-la-reunion', {
+    prompt: 'När kollegorna samlas för att diskutera', promptEn: 'When colleagues meet to discuss',
+    fr: 'la réunion', sv: 'mötet', en: 'the meeting',
+    ipa: '/la ʁe.y.njɔ̃/',
+    note: '*Je suis en réunion* = jag sitter i möte. Akta: inte en ”återförening”.',
+    noteEn: '*Je suis en réunion* = I’m in a meeting.',
+  }),
+  vocab(D, 'fr-u10-lordinateur', {
+    prompt: 'Arbetsverktyget med skärm', promptEn: 'The work tool with a screen',
+    fr: 'l’ordinateur', sv: 'datorn', en: 'the computer',
+    ipa: '/lɔʁ.di.na.tœʁ/',
+    note: 'Maskulinum. Bärbar dator: *un ordinateur portable*, ofta bara *un portable*.',
+    noteEn: 'Masculine. Laptop: *un ordinateur portable*, often just *un portable*.',
+  }),
+  vocab(D, 'fr-u10-le-professeur', {
+    prompt: 'Den som undervisar', promptEn: 'The person who teaches',
+    fr: 'le professeur / la professeure', sv: 'läraren', en: 'the teacher',
+    ipa: '/lə pʁɔ.fɛ.sœʁ/ /la pʁɔ.fɛ.sœʁ/',
+    note: 'Ledigt: *le / la prof*. I grundskolan: *l’instituteur / l’institutrice* eller *le maître*.',
+    noteEn: 'Casual: *le / la prof*. In primary school: *l’instituteur / l’institutrice*.',
+  }),
+  vocab(D, 'fr-u10-lingenieur', {
+    prompt: 'Den som konstruerar och beräknar', promptEn: 'The person who designs and calculates',
+    fr: 'l’ingénieur / l’ingénieure', sv: 'ingenjören', en: 'the engineer',
+    ipa: '/lɛ̃.ʒe.njœʁ/',
+    note: 'Honkönsformen *ingénieure* uttalas likadant.',
+    noteEn: 'The feminine *ingénieure* sounds the same.',
+  }),
+  vocab(D, 'fr-u10-le-client', {
+    prompt: 'Den som köper av företaget', promptEn: 'The person buying from the company',
+    fr: 'le client / la cliente', sv: 'kunden', en: 'the customer / the client',
+    ipa: '/lə kli.jɑ̃/ /la kli.jɑ̃t/',
+    note: 'Hankön slutar på nasalljud; honkön uttalar **t**.',
+    noteEn: 'The masculine ends in a nasal vowel; the feminine pronounces the **t**.',
+  }),
+  vocab(D, 'fr-u10-travailler', {
+    prompt: 'Att arbeta', promptEn: 'To work',
+    fr: 'travailler', sv: 'att arbeta / att jobba', en: 'to work',
+    ipa: '/tʁa.va.je/',
+    note: '**ill** uttalas [j]: *je travaille* [tʁavaj]. Ledigt: *bosser*.',
+    noteEn: '**ill** is pronounced [j]: *je travaille* [tʁavaj]. Slang: *bosser*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u10-dans-la-vie', {

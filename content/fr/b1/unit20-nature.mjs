@@ -93,6 +93,50 @@ export const UNIT20_CARDS = [
     note: 'Ofta en renoverad gård eller lada. Ett **gîte d’étape** är ett enkelt vandrarhem längs leden, och en **chambre d’hôtes** motsvarar ett bed and breakfast.',
     noteEn: 'Often a renovated farmhouse or barn. A **gîte d’étape** is a simple hikers’ hostel along a trail, and a **chambre d’hôtes** is a B&B.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u20-le-lac', {
+    prompt: 'Vatten omgivet av land', promptEn: 'Water surrounded by land',
+    fr: 'le lac', sv: 'sjön', en: 'the lake',
+    ipa: '/lə lak/',
+    note: 'Det största: *le lac Léman*, vid Genève. Slutets **c** uttalas.',
+    noteEn: 'The largest: *le lac Léman*, by Geneva. The final **c** is pronounced.',
+  }),
+  vocab(D, 'fr-u20-la-riviere', {
+    prompt: 'Vatten som rinner', promptEn: 'Flowing water',
+    fr: 'la rivière / le fleuve', sv: 'ån / floden (till havet)', en: 'the river',
+    ipa: '/la ʁi.vjɛʁ/ /lə flœv/',
+    note: '*Le fleuve* rinner ut i havet (*la Seine, la Loire*); *la rivière* i en annan flod.',
+    noteEn: '*Le fleuve* flows into the sea (*la Seine, la Loire*); *la rivière* into another river.',
+  }),
+  vocab(D, 'fr-u20-lile', {
+    prompt: 'Land omgivet av vatten', promptEn: 'Land surrounded by water',
+    fr: 'l’île', sv: 'ön', en: 'the island',
+    ipa: '/lil/',
+    note: 'Femininum. I Paris: *l’île de la Cité*, där Notre-Dame ligger.',
+    noteEn: 'Feminine. In Paris: *l’île de la Cité*, home to Notre-Dame.',
+  }),
+  vocab(D, 'fr-u20-la-vallee', {
+    prompt: 'Mellan två berg', promptEn: 'Between two mountains',
+    fr: 'la vallée', sv: 'dalen', en: 'the valley',
+    ipa: '/la va.le/',
+    note: 'Känd: *la vallée de la Loire*, med slotten.',
+    noteEn: 'Famous: *la vallée de la Loire*, with its châteaux.',
+  }),
+  vocab(D, 'fr-u20-le-champ', {
+    prompt: 'Där bonden odlar', promptEn: 'Where the farmer grows crops',
+    fr: 'le champ', sv: 'åkern / fältet', en: 'the field',
+    ipa: '/lə ʃɑ̃/',
+    note: '**p** är stumt. Jämför *les Champs-Élysées*.',
+    noteEn: 'The **p** is silent. Compare *les Champs-Élysées*.',
+  }),
+  vocab(D, 'fr-u20-le-parc-national', {
+    prompt: 'Ett skyddat naturområde', promptEn: 'A protected natural area',
+    fr: 'le parc national', sv: 'nationalparken', en: 'the national park',
+    ipa: '/lə paʁk na.sjɔ.nal/',
+    note: 'Frankrike har elva, bland annat *les Calanques* nära Marseille.',
+    noteEn: 'France has eleven, including *les Calanques* near Marseille.',
+    gloss: [['le parc', 'parken', 'the park'], ['national', 'national-', 'national']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u20-si-javais-plus-de-temps', {

@@ -1,5 +1,6 @@
 // Unité 4 : Courses : ICA & Systembolaget (Section 2)
 // Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise jag/du/det/har/tack/kort/med/och… des unités 1 à 3.
+import { vocab } from '../helpers.mjs';
 
 export const UNIT4_DECK = {
   slug: 'swedish-unit-4-shopping',
@@ -131,6 +132,37 @@ export const UNIT4_CARDS = [
     explanation_md: 'Le **g** de *-igt* est muet : « bi-lit ». Base : *billig*. *Det är billigt!* = c’est pas cher !',
     words: ['billigt'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u4-smor', {
+    prompt: 'À tartiner sur le pain : « du beurre »', promptEn: 'To spread on bread: "butter"',
+    sv: 'smör', fr: 'du beurre', en: 'butter', ipa: '/smœːr/',
+    note: 'Mot **ett** : *smöret*. Le **ö** s’ouvre devant **r**.',
+  }),
+  vocab(D, 'u4-agg', {
+    prompt: 'Vendu par boîte de six ou douze : « un œuf »', promptEn: 'Sold by the six or the dozen: "an egg"',
+    sv: 'ett ägg', fr: 'un œuf', en: 'an egg', ipa: '/ɛtː ɛɡː/',
+    note: 'Invariable au pluriel : *tolv ägg*. Le **ä** est court devant **gg**.',
+  }),
+  vocab(D, 'u4-kassan', {
+    prompt: 'Là où l’on paie : « la caisse »', promptEn: 'Where you pay: "the checkout"',
+    sv: 'kassan', fr: 'la caisse', en: 'the checkout', ipa: '/ˈkasːan/',
+    note: 'Défini de *en kassa*. Dans les grandes surfaces : *självscanning* (caisse automatique).',
+  }),
+  vocab(D, 'u4-betalar', {
+    prompt: 'Ce que tu fais à la caisse : « payer »', promptEn: 'What you do at the checkout: "to pay"',
+    sv: 'betalar', fr: 'paie / payer', en: 'pays / to pay', ipa: '/bɛˈtɑːlar/',
+    note: 'Infinitif *betala*. On paie souvent par carte ou avec **Swish** (paiement mobile).',
+  }),
+  vocab(D, 'u4-extrapris', {
+    prompt: 'L’affiche des promotions : « prix spécial »', promptEn: 'The sign for a special offer: "special price"',
+    sv: 'extrapris', fr: 'promotion / prix spécial', en: 'special offer', ipa: '/ˈɛkstraˌpriːs/',
+    note: 'Sur les étiquettes jaunes chez ICA. Plusieurs articles : *3 för 2*.',
+  }),
+  vocab(D, 'u4-kundvagn', {
+    prompt: 'Pour transporter les courses : « un caddie »', promptEn: 'To carry your shopping: "a trolley / a cart"',
+    sv: 'en kundvagn', fr: 'un caddie', en: 'a shopping trolley', ipa: '/ɛn ˈkɵndˌvaŋn/',
+    note: '*kund* (client) + *vagn* (chariot). Petit modèle : *en korg* (un panier).',
+  }),
 
   // ===================== PHRASES =====================
   {

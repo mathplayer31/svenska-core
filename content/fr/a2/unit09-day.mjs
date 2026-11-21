@@ -93,6 +93,50 @@ export const UNIT9_CARDS = [
     note: 'Man säger *il est midi*, inte *douze heures* i vardagligt tal. Båda är maskulinum: *midi et demi*, utan **e**.',
     noteEn: 'People say *il est midi* rather than *douze heures* in everyday speech. Both are masculine: *midi et demi*, with no **e**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u9-se-brosser-les-dents', {
+    prompt: 'Det man gör i badrummet morgon och kväll', promptEn: 'What you do in the bathroom morning and night',
+    fr: 'se brosser les dents', sv: 'borsta tänderna', en: 'to brush your teeth',
+    ipa: '/sə bʁɔ.se le dɑ̃/',
+    note: 'Reflexivt verb: *je me brosse les dents*. Ingen possessiv: *les dents*, inte *mes dents*.',
+    noteEn: 'Reflexive verb: *je me brosse les dents*. No possessive: *les dents*, not *mes dents*.',
+    gloss: [['se brosser', 'borsta sig', 'brush (oneself)'], ['les', '(de)', 'the'], ['dents', 'tänderna', 'teeth']],
+  }),
+  vocab(D, 'fr-u9-tot-tard', {
+    prompt: 'Tidigt och sent', promptEn: 'Early and late',
+    fr: 'tôt / tard', sv: 'tidigt / sent', en: 'early / late',
+    ipa: '/to/ /taʁ/',
+    note: '*Je me lève tôt.* Slutkonsonanterna **t** och **d** är stumma.',
+    noteEn: '*Je me lève tôt.* The final **t** and **d** are silent.',
+  }),
+  vocab(D, 'fr-u9-et-quart', {
+    prompt: 'Kvart över och kvart i', promptEn: 'Quarter past and quarter to',
+    fr: 'et quart / moins le quart', sv: 'kvart över / kvart i', en: 'quarter past / quarter to',
+    ipa: '/e kaʁ/ /mwɛ̃ lə kaʁ/',
+    note: '*Il est huit heures et quart* = kvart över åtta. *Neuf heures moins le quart* = kvart i nio.',
+    noteEn: '*Il est huit heures et quart* = quarter past eight. *Neuf heures moins le quart* = quarter to nine.',
+  }),
+  vocab(D, 'fr-u9-le-gouter', {
+    prompt: 'Barnens mellanmål vid fyra', promptEn: 'The children’s snack at four',
+    fr: 'le goûter', sv: 'mellanmålet', en: 'the afternoon snack',
+    ipa: '/lə ɡu.te/',
+    note: 'Från *goûter* (smaka). Ofta en bit bröd med choklad efter skolan.',
+    noteEn: 'From *goûter* (to taste). Often bread with chocolate after school.',
+  }),
+  vocab(D, 'fr-u9-dormir', {
+    prompt: 'Det man gör på natten', promptEn: 'What you do at night',
+    fr: 'dormir', sv: 'att sova', en: 'to sleep',
+    ipa: '/dɔʁ.miʁ/',
+    note: 'Oregelbundet: *je dors, tu dors, il dort*. *Bien dormi ?* = sov du gott?',
+    noteEn: 'Irregular: *je dors, tu dors, il dort*. *Bien dormi ?* = did you sleep well?',
+  }),
+  vocab(D, 'fr-u9-la-sieste', {
+    prompt: 'En kort sömn efter lunch', promptEn: 'A short sleep after lunch',
+    fr: 'la sieste', sv: 'tuppluren', en: 'the nap',
+    ipa: '/la sjɛst/',
+    note: '*Faire la sieste* = ta en tupplur. Vanligt i södra Frankrike på sommaren.',
+    noteEn: '*Faire la sieste* = take a nap. Common in southern France in summer.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u9-je-me-leve', {

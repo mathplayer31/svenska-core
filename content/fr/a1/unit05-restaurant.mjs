@@ -93,6 +93,49 @@ export const UNIT5_CARDS = [
     note: 'Bindning: **bon‿appétit** [bɔnapeti], där n:et inte längre är nasalt. Servitören säger det när maten kommer, och man svarar **merci**.',
     noteEn: 'Liaison: **bon‿appétit** [bɔnapeti], where the n stops being nasal. The waiter says it when the food arrives, and you reply **merci**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u5-le-poulet', {
+    prompt: 'Vanligt vitt kött', promptEn: 'Common white meat',
+    fr: 'le poulet', sv: 'kycklingen', en: 'chicken',
+    ipa: '/lə pu.lɛ/',
+    note: 'Slutets **t** är stumt. Klassiker: *le poulet rôti* (grillad kyckling).',
+    noteEn: 'The final **t** is silent. A classic: *le poulet rôti* (roast chicken).',
+  }),
+  vocab(D, 'fr-u5-le-poisson', {
+    prompt: 'Från havet eller sjön', promptEn: 'From the sea or the lake',
+    fr: 'le poisson', sv: 'fisken', en: 'fish',
+    ipa: '/lə pwa.sɔ̃/',
+    note: 'Dubbelt **ss** = [s]. Akta: *le poison* med ett s [z] betyder gift!',
+    noteEn: 'Double **ss** = [s]. Careful: *le poison* with one s [z] means poison!',
+  }),
+  vocab(D, 'fr-u5-la-viande', {
+    prompt: 'Nöt, fläsk, lamm', promptEn: 'Beef, pork, lamb',
+    fr: 'la viande', sv: 'köttet', en: 'meat',
+    ipa: '/la vjɑ̃d/',
+    note: 'Nötkött: *le bœuf*. Fläsk: *le porc*. Lamm: *l’agneau*.',
+    noteEn: 'Beef: *le bœuf*. Pork: *le porc*. Lamb: *l’agneau*.',
+  }),
+  vocab(D, 'fr-u5-les-frites', {
+    prompt: 'Det vanligaste tillbehöret', promptEn: 'The most common side dish',
+    fr: 'les frites', sv: 'pommes fritesen', en: 'chips / fries',
+    ipa: '/le fʁit/',
+    note: 'Klassiker: *un steak-frites*. Belgierna menar att de uppfann dem.',
+    noteEn: 'A classic: *un steak-frites*. The Belgians claim to have invented them.',
+  }),
+  vocab(D, 'fr-u5-vegetarien', {
+    prompt: 'Utan kött eller fisk', promptEn: 'Without meat or fish',
+    fr: 'végétarien / végétarienne', sv: 'vegetarisk / vegetarian', en: 'vegetarian',
+    ipa: '/ve.ʒe.ta.ʁjɛ̃/ /ve.ʒe.ta.ʁjɛn/',
+    note: '*Je suis végétarienne* (kvinna). Honkönet uttalar **n**.',
+    noteEn: '*Je suis végétarienne* (woman). The feminine pronounces the **n**.',
+  }),
+  vocab(D, 'fr-u5-leau-plate', {
+    prompt: 'Vatten utan eller med kolsyra', promptEn: 'Still or sparkling water',
+    fr: 'l’eau plate / l’eau gazeuse', sv: 'vatten utan kolsyra / kolsyrat vatten', en: 'still water / sparkling water',
+    ipa: '/lo plat/ /lo ɡa.zøz/',
+    note: 'Kranvatten är gratis: *une carafe d’eau*. Flaskvatten kostar.',
+    noteEn: 'Tap water is free: *une carafe d’eau*. Bottled water costs money.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u5-reserver-une-table-pour-deux', {
