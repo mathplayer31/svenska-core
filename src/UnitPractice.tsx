@@ -8,8 +8,10 @@ import {
   RotateCcw,
   Snail,
   AlertTriangle,
+  VolumeX,
 } from 'lucide-react';
 import { useI18n, type Course, type Strings } from './i18n';
+import { isMatchWord, type Factory } from './sessionPlan';
 
 // ============================================================================
 // Types
@@ -120,6 +122,40 @@ function checkWritten(input: string, target: string, t: Strings, course: Course 
   return { ok: false };
 }
 
+// « Je ne peux pas écouter maintenant » (issue #13) : plus d'exercice d'écoute pendant une heure
+const NO_AUDIO_KEY = 'svenska.noAudioUntil';
+
+export function audioOff(): boolean {
+  try {
+    return Number(localStorage.getItem(NO_AUDIO_KEY) ?? 0) > Date.now();
+  } catch {
+    return false;
+  }
+}
+
+function setAudioOff() {
+  try {
+    localStorage.setItem(NO_AUDIO_KEY, String(Date.now() + 60 * 60 * 1000));
+  } catch {
+    // stockage indisponible : l'exercice en cours et la séance passent quand même sans son
+  }
+}
+
+/** Exercice qui demande d'écouter : compréhension orale ou dictée */
+export function needsAudio(ex: Exercise): boolean {
+  return ex.kind === 'mcq_listen' || (ex.kind === 'write' && ex.dictation);
+}
+
+/** Même carte, exercice sans son (traduction au lieu de l'écoute, écriture au lieu de la dictée) */
+export function withoutAudio(ex: Exercise, f: Pick<Factory, 'makeMcq' | 'makeWrite'>): Exercise {
+  if (ex.kind === 'mcq_listen') return f.makeMcq(ex.card, false);
+  if (ex.kind === 'write' && ex.dictation) return f.makeWrite(ex.card, false);
+  return ex;
+}
+
+/** Première forme d'une carte à plusieurs formes (« salut / bonjour » -> « salut ») */
+const firstForm = (text: string) => text.split(' / ')[0].trim();
+
 function firstAudio(card: PracticeCard): string | undefined {
   return card.audioUrl?.split('|')[0]?.trim() || undefined;
 }
@@ -178,7 +214,7 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
       ? {
           kind: 'match',
           key: key(),
-          pairs: subset.map((c) => ({ id: c.id, sv: c.swedishTarget, fr: c.english, audio: firstAudio(c) })),
+          pairs: subset.map((c) => ({ id: c.id, sv: firstForm(c.swedishTarget), fr: firstForm(c.english), audio: firstAudio(c) })),
         }
       : null;
 
@@ -197,7 +233,7 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
 
   // QCM : traduction vers la langue étudiée, ou écoute vers la traduction (si audio)
   const makeMcq = (card: PracticeCard, listen: boolean): Exercise =>
-    listen && firstAudio(card)
+    listen && !audioOff() && firstAudio(card)
       ? { kind: 'mcq_listen', key: key(), card, options: shuffle([card.english, ...pool('english', card)]) }
       : { kind: 'mcq_sv', key: key(), card, options: shuffle([card.swedishTarget, ...pool('swedishTarget', card)]) };
 
@@ -205,7 +241,7 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
     kind: 'write',
     key: key(),
     card,
-    dictation: dictation && !!firstAudio(card),
+    dictation: dictation && !audioOff() && !!firstAudio(card),
   });
 
   return { makeMatch, makeBuild, makeMcq, makeWrite };
@@ -213,12 +249,13 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
 
 function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[] {
   const vocab = shuffle(cards.filter((c) => c.cardType === 'vocab'));
+  const words = vocab.filter(isMatchWord);
   const phrases = shuffle(cards.filter((c) => c.cardType === 'phrase'));
   const { makeMatch, makeBuild, makeMcq, makeWrite } = exerciseFactory(cards, extraWords);
   const out: Exercise[] = [];
 
   // 1. Échauffement : associer les paires
-  const m1 = makeMatch(vocab.slice(0, 5));
+  const m1 = makeMatch(words.slice(0, 5));
   if (m1) out.push(m1);
 
   // 2. QCM (alternance FR -> SV et écoute -> FR)
@@ -233,7 +270,7 @@ function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[]
   if (shortPhrase) out.push(makeWrite(shortPhrase, false));
 
   // 5. Retour au calme : nouvelles paires
-  const m2 = makeMatch(shuffle([...vocab.slice(5), ...vocab.slice(0, 2)]).slice(0, 5));
+  const m2 = makeMatch(shuffle([...words.slice(5), ...words.slice(0, 2)]).slice(0, 5));
   if (m2) out.push(m2);
 
   return out;
@@ -259,6 +296,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
   const { t } = useI18n();
   const KIND_LABEL = kindLabels(t);
   const [queue, setQueue] = useState<Exercise[]>(() => buildExercises(cards, extraWords));
+  const [factory] = useState(() => exerciseFactory(cards, extraWords, 'na'));
   const [baseCount, setBaseCount] = useState(() => queue.length);
   const [index, setIndex] = useState(0);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
@@ -366,7 +404,13 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
         <div className="h-full bg-accent rounded-full transition-all" style={{ width: `${progress * 100}%` }} />
       </div>
 
-      <ExerciseView exercise={exercise} locked={!!verdict} onResult={handleResult} label={KIND_LABEL[exercise.kind]} />
+      <ExerciseView
+        exercise={exercise}
+        locked={!!verdict}
+        onResult={handleResult}
+        label={KIND_LABEL[exercise.kind]}
+        onNoAudio={() => setQueue((q) => q.map((ex, i) => (i < index ? ex : withoutAudio(ex, factory))))}
+      />
 
       {verdict && <VerdictPanel verdict={verdict} card={answerCard} onContinue={handleContinue} />}
     </Shell>
@@ -388,6 +432,7 @@ export function ExerciseView({
   onResult,
   label,
   chip,
+  onNoAudio,
 }: {
   exercise: Exercise;
   locked: boolean;
@@ -395,7 +440,10 @@ export function ExerciseView({
   label: string;
   /** Étiquette en plus de la consigne (ex. « Rappel · Unité 1 ») */
   chip?: string;
+  /** Remplace les exercices d'écoute par des exercices sans son ; le bouton n'apparaît que s'il est fourni */
+  onNoAudio?: () => void;
 }) {
+  const { t } = useI18n();
   return (
     <div className="bg-surface rounded-3xl p-6 md:p-8 shadow-card space-y-6">
       <div className="flex flex-wrap items-center gap-2">
@@ -408,6 +456,17 @@ export function ExerciseView({
       )}
       {exercise.kind === 'build' && <BuildExercise key={exercise.key} ex={exercise} locked={locked} onCheck={onResult} />}
       {exercise.kind === 'write' && <WriteExercise key={exercise.key} ex={exercise} locked={locked} onCheck={onResult} />}
+      {onNoAudio && !locked && needsAudio(exercise) && (
+        <button
+          onClick={() => {
+            setAudioOff();
+            onNoAudio();
+          }}
+          className="w-full py-3 rounded-full text-sm font-semibold text-muted hover:text-ink hover:bg-surface-2 inline-flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <VolumeX className="w-4 h-4" aria-hidden /> {t.cantListen}
+        </button>
+      )}
     </div>
   );
 }
@@ -579,34 +638,18 @@ function MatchExercise({
     return 'bg-surface border-line hover:bg-surface-2 text-ink';
   };
 
-  return (
-    <div className="grid grid-cols-2 gap-3">
-      <div className="space-y-2.5">
-        {left.map((p) => (
-          <button
-            key={p.id}
-            disabled={matched.has(p.id) || !!wrong}
-            onClick={() => pick('l', p.id)}
-            className={`w-full px-3 py-3 rounded-xl border text-sm font-semibold transition cursor-pointer ${cell(p.id, 'l')}`}
-          >
-            {p.sv}
-          </button>
-        ))}
-      </div>
-      <div className="space-y-2.5">
-        {right.map((p) => (
-          <button
-            key={p.id}
-            disabled={matched.has(p.id) || !!wrong}
-            onClick={() => pick('r', p.id)}
-            className={`w-full px-3 py-3 rounded-xl border text-sm transition cursor-pointer ${cell(p.id, 'r')}`}
-          >
-            {p.fr}
-          </button>
-        ))}
-      </div>
-    </div>
+  // Une seule grille, ligne par ligne : les deux colonnes restent alignées même quand un mot passe à la ligne
+  const button = (p: (typeof left)[number], side: 'l' | 'r') => (
+    <button
+      key={`${side}-${p.id}`}
+      disabled={matched.has(p.id) || !!wrong}
+      onClick={() => pick(side, p.id)}
+      className={`w-full h-full min-h-14 px-3 py-2.5 rounded-xl border text-sm font-semibold leading-snug text-center break-words transition cursor-pointer ${cell(p.id, side)}`}
+    >
+      {side === 'l' ? p.sv : p.fr}
+    </button>
   );
+  return <div className="grid grid-cols-2 auto-rows-fr gap-x-3 gap-y-2.5">{left.flatMap((p, i) => [button(p, 'l'), button(right[i], 'r')])}</div>;
 }
 
 // ============================================================================
