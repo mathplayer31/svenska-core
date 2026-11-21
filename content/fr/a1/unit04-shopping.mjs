@@ -93,6 +93,56 @@ export const UNIT4_CARDS = [
     note: 'Inte ”pengar” i allmänhet, det heter **l’argent**. Bagaren kan fråga **Vous avez de la monnaie ?** om du betalar med en stor sedel.',
     noteEn: 'Not "money" in general, which is **l’argent**. The baker may ask **Vous avez de la monnaie ?** if you pay with a big note.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u4-le-beurre', {
+    prompt: 'Att bre på brödet', promptEn: 'To spread on bread',
+    fr: 'le beurre', sv: 'smöret', en: 'butter',
+    ipa: '/lə bœʁ/',
+    note: 'Salt eller osaltat: **demi-sel** eller **doux**. Bretagne äter saltat.',
+    noteEn: 'Salted or unsalted: **demi-sel** or **doux**. Brittany eats it salted.',
+  }),
+  vocab(D, 'fr-u4-le-lait', {
+    prompt: 'Det vita man häller i kaffet', promptEn: 'The white drink you pour in coffee',
+    fr: 'le lait', sv: 'mjölken', en: 'milk',
+    ipa: '/lə lɛ/',
+    note: 'Slutets **t** är stumt: [lɛ]. *Un café au lait* = kaffe med mjölk.',
+    noteEn: 'The final **t** is silent: [lɛ]. *Un café au lait* = coffee with milk.',
+  }),
+  vocab(D, 'fr-u4-les-oeufs', {
+    prompt: 'Säljs i kartonger om sex', promptEn: 'Sold in boxes of six',
+    fr: 'les œufs', sv: 'äggen', en: 'eggs',
+    ipa: '/le.z‿ø/',
+    note: 'Singular *un œuf* [œf], men plural *des œufs* [ø]: **f** försvinner.',
+    noteEn: 'Singular *un œuf* [œf], but plural *des œufs* [ø]: the **f** disappears.',
+  }),
+  vocab(D, 'fr-u4-le-supermarche', {
+    prompt: 'Den stora mataffären', promptEn: 'The big grocery store',
+    fr: 'le supermarché', sv: 'stormarknaden', en: 'the supermarket',
+    ipa: '/lə sy.pɛʁ.maʁ.ʃe/',
+    note: 'Mindre i stan: *la supérette*. Mycket stor: *l’hypermarché*.',
+    noteEn: 'Smaller in town: *la supérette*. Very large: *l’hypermarché*.',
+  }),
+  vocab(D, 'fr-u4-le-sac', {
+    prompt: 'För att bära varorna', promptEn: 'To carry your shopping',
+    fr: 'le sac', sv: 'påsen / väskan', en: 'the bag',
+    ipa: '/lə sak/',
+    note: 'Plastpåsar är förbjudna i kassan: ta med **un sac** själv.',
+    noteEn: 'Plastic bags are banned at the checkout: bring your own **sac**.',
+  }),
+  vocab(D, 'fr-u4-la-caisse', {
+    prompt: 'Där man betalar', promptEn: 'Where you pay',
+    fr: 'la caisse', sv: 'kassan', en: 'the checkout',
+    ipa: '/la kɛs/',
+    note: 'Kassören: **le caissier / la caissière**. Självbetjäning: *les caisses automatiques*.',
+    noteEn: 'The cashier: **le caissier / la caissière**. Self-checkout: *les caisses automatiques*.',
+  }),
+  vocab(D, 'fr-u4-cher', {
+    prompt: 'Dyrt och billigt', promptEn: 'Expensive and cheap',
+    fr: 'cher / pas cher', sv: 'dyrt / billigt', en: 'expensive / cheap',
+    ipa: '/ʃɛʁ/ /pa ʃɛʁ/',
+    note: 'Franskan säger oftast *pas cher* (inte dyrt) i stället för *bon marché*.',
+    noteEn: 'French usually says *pas cher* (not expensive) rather than *bon marché*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u4-une-tradition-pas-trop-cuite', {

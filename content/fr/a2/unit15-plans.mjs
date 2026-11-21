@@ -93,6 +93,50 @@ export const UNIT15_CARDS = [
     note: '**C’est complet** står på skylten när hotellet är fullt. Femininum: *la salle est complète*, och då hörs **t**.',
     noteEn: '**C’est complet** is on the sign when the hotel is full. Feminine: *la salle est complète*, and then the **t** is heard.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u15-le-passeport', {
+    prompt: 'Dokumentet för att resa', promptEn: 'The document for travelling',
+    fr: 'le passeport', sv: 'passet', en: 'the passport',
+    ipa: '/lə pas.pɔʁ/',
+    note: 'Inom EU räcker ofta id-kortet: *la carte d’identité*.',
+    noteEn: 'Within the EU an ID card is often enough: *la carte d’identité*.',
+  }),
+  vocab(D, 'fr-u15-laeroport', {
+    prompt: 'Där flygplanen lyfter', promptEn: 'Where planes take off',
+    fr: 'l’aéroport', sv: 'flygplatsen', en: 'the airport',
+    ipa: '/la.e.ʁɔ.pɔʁ/',
+    note: 'Maskulinum. Paris har två stora: *Roissy-Charles-de-Gaulle* och *Orly*.',
+    noteEn: 'Masculine. Paris has two big ones: *Roissy-Charles-de-Gaulle* and *Orly*.',
+  }),
+  vocab(D, 'fr-u15-lavion', {
+    prompt: 'Det man flyger med', promptEn: 'What you fly in',
+    fr: 'l’avion', sv: 'flygplanet', en: 'the plane',
+    ipa: '/la.vjɔ̃/',
+    note: '*Prendre l’avion* = flyga. *En avion* = med flyg.',
+    noteEn: '*Prendre l’avion* = to fly. *En avion* = by plane.',
+  }),
+  vocab(D, 'fr-u15-se-baigner', {
+    prompt: 'Bada i havet eller sjön', promptEn: 'Going in the sea or the lake',
+    fr: 'se baigner', sv: 'att bada', en: 'to swim / to bathe',
+    ipa: '/sə bɛ.ɲe/',
+    note: '**gn** uttalas [ɲ], som i *champagne*. Reflexivt: *on se baigne ?*',
+    noteEn: '**gn** is [ɲ], as in *champagne*. Reflexive: *on se baigne ?*',
+  }),
+  vocab(D, 'fr-u15-a-letranger', {
+    prompt: 'Utanför sitt eget land', promptEn: 'Outside your own country',
+    fr: 'à l’étranger', sv: 'utomlands', en: 'abroad',
+    ipa: '/a le.tʁɑ̃.ʒe/',
+    note: '*un étranger* = en utlänning. *Partir à l’étranger* = resa utomlands.',
+    noteEn: '*un étranger* = a foreigner. *Partir à l’étranger* = go abroad.',
+    gloss: [['à', 'i', 'in'], ['l’étranger', 'utlandet', 'abroad']],
+  }),
+  vocab(D, 'fr-u15-bronzer', {
+    prompt: 'Bli brun i solen', promptEn: 'Getting a tan',
+    fr: 'bronzer', sv: 'att sola / bli brun', en: 'to tan / sunbathe',
+    ipa: '/bʁɔ̃.ze/',
+    note: 'Från *bronze* (brons). Solkräm: *la crème solaire*.',
+    noteEn: 'From *bronze*. Sun cream: *la crème solaire*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u15-bretagne', {

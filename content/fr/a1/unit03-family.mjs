@@ -93,6 +93,49 @@ export const UNIT3_CARDS = [
     note: 'Bindning: **un enfant** [œ̃nɑ̃fɑ̃], **des enfants** [dezɑ̃fɑ̃]. Det stumma s:et i *des* blir ett [z] framför vokal.',
     noteEn: 'Liaison: **un enfant** [œ̃nɑ̃fɑ̃], **des enfants** [dezɑ̃fɑ̃]. The silent s of *des* turns into [z] before a vowel.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u3-loncle', {
+    prompt: 'Din förälders bror', promptEn: 'Your parent’s brother',
+    fr: 'l’oncle', sv: 'farbrodern / morbrodern', en: 'the uncle',
+    ipa: '/lɔ̃kl/',
+    note: 'Franskan skiljer inte på far- och morbror: båda är **l’oncle**.',
+    noteEn: 'French makes no difference between sides of the family: both are **l’oncle**.',
+  }),
+  vocab(D, 'fr-u3-la-tante', {
+    prompt: 'Din förälders syster', promptEn: 'Your parent’s sister',
+    fr: 'la tante', sv: 'fastern / mostern', en: 'the aunt',
+    ipa: '/la tɑ̃t/',
+    note: 'Samma ord för faster och moster. Slutets **e** är stumt men gör att **t** hörs.',
+    noteEn: 'Same word on both sides. The final **e** is silent but makes the **t** heard.',
+  }),
+  vocab(D, 'fr-u3-le-cousin', {
+    prompt: 'Barnet till din farbror eller moster', promptEn: 'The child of your uncle or aunt',
+    fr: 'le cousin / la cousine', sv: 'kusinen', en: 'the cousin',
+    ipa: '/lə ku.zɛ̃/ /la ku.zin/',
+    note: 'Hankön *cousin* slutar på ett nasalljud; honkön *cousine* uttalar **n**.',
+    noteEn: 'Masculine *cousin* ends in a nasal vowel; feminine *cousine* pronounces the **n**.',
+  }),
+  vocab(D, 'fr-u3-le-neveu', {
+    prompt: 'Ditt syskons barn', promptEn: 'Your sibling’s child',
+    fr: 'le neveu / la nièce', sv: 'brorsonen / systerdottern', en: 'the nephew / the niece',
+    ipa: '/lə nə.vø/ /la njɛs/',
+    note: 'Svenskan säger varifrån: *brorson, systerdotter*. Franskan har bara två ord.',
+    noteEn: 'Swedish says which side: *brorson, systerdotter*. French has just two words.',
+  }),
+  vocab(D, 'fr-u3-marie', {
+    prompt: 'Att ha en make eller maka', promptEn: 'Having a husband or wife',
+    fr: 'marié / mariée', sv: 'gift', en: 'married',
+    ipa: '/ma.ʁje/',
+    note: 'Kvinnan skriver *mariée*, men uttalet är detsamma. *Je suis marié.*',
+    noteEn: 'A woman writes *mariée*, but it sounds the same. *Je suis marié.*',
+  }),
+  vocab(D, 'fr-u3-les-petits-enfants', {
+    prompt: 'Dina barns barn', promptEn: 'Your children’s children',
+    fr: 'les petits-enfants', sv: 'barnbarnen', en: 'the grandchildren',
+    ipa: '/le pə.ti.z‿ɑ̃.fɑ̃/',
+    note: 'Bindning: *petits‿enfants*, s:et uttalas [z]. En: *le petit-fils, la petite-fille*.',
+    noteEn: 'Liaison: *petits‿enfants*, the s sounds like [z]. Singular: *le petit-fils, la petite-fille*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u3-jai-un-frere-et-une-soeur', {

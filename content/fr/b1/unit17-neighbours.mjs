@@ -93,6 +93,50 @@ export const UNIT17_CARDS = [
     note: 'Kort för **sympathique**, precis som svenskans *sympatisk*. Samma form för båda könen: *un voisin sympa, une voisine sympa*, och i plural *sympas*.',
     noteEn: 'Short for **sympathique**. A false friend: it means *nice*, not *sympathetic*. Same form for both genders: *un voisin sympa, une voisine sympa*.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u17-le-palier', {
+    prompt: 'Golvet utanför lägenhetsdörrarna', promptEn: 'The landing outside the flat doors',
+    fr: 'le palier', sv: 'trapplanet', en: 'the landing',
+    ipa: '/lə pa.lje/',
+    note: '*Le voisin de palier* = grannen på samma våning.',
+    noteEn: '*Le voisin de palier* = the neighbour on the same floor.',
+  }),
+  vocab(D, 'fr-u17-linterphone', {
+    prompt: 'Där besökare ringer på nere vid porten', promptEn: 'Where visitors ring at the street door',
+    fr: 'l’interphone', sv: 'porttelefonen', en: 'the intercom',
+    ipa: '/lɛ̃.tɛʁ.fɔn/',
+    note: '*Sonne à l’interphone* = ring på porttelefonen.',
+    noteEn: '*Sonne à l’interphone* = buzz the intercom.',
+  }),
+  vocab(D, 'fr-u17-le-digicode', {
+    prompt: 'Koden för att öppna porten', promptEn: 'The code to open the street door',
+    fr: 'le digicode', sv: 'portkoden', en: 'the door code',
+    ipa: '/lə di.ʒi.kɔd/',
+    note: 'Mycket vanligt i Paris. *C’est quoi, le code ?*',
+    noteEn: 'Very common in Paris. *C’est quoi, le code ?*',
+  }),
+  vocab(D, 'fr-u17-la-boite-aux-lettres', {
+    prompt: 'Där posten hamnar', promptEn: 'Where your post goes',
+    fr: 'la boîte aux lettres', sv: 'brevlådan', en: 'the letterbox',
+    ipa: '/la bwat o lɛtʁ/',
+    note: '*aux* = *à + les*. Namnet skrivs på en liten skylt på lådan.',
+    noteEn: '*aux* = *à + les*. Your name goes on a small label on the box.',
+    gloss: [['la boîte', 'lådan', 'the box'], ['aux', 'för', 'for the'], ['lettres', 'brev', 'letters']],
+  }),
+  vocab(D, 'fr-u17-le-tapage-nocturne', {
+    prompt: 'Störande ljud på natten', promptEn: 'Disturbing noise at night',
+    fr: 'le tapage nocturne', sv: 'nattlig störning', en: 'noise at night (disturbance)',
+    ipa: '/lə ta.paʒ nɔk.tyʁn/',
+    note: 'Juridisk term: kan ge böter efter klockan 22.',
+    noteEn: 'A legal term: it can lead to a fine after 10 pm.',
+  }),
+  vocab(D, 'fr-u17-les-poubelles', {
+    prompt: 'Där soporna slängs', promptEn: 'Where the rubbish goes',
+    fr: 'les poubelles', sv: 'soptunnorna', en: 'the bins',
+    ipa: '/le pu.bɛl/',
+    note: '*Sortir les poubelles* = ta ut soporna. Gula tunnan: återvinning.',
+    noteEn: '*Sortir les poubelles* = take the bins out. The yellow bin is for recycling.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u17-ca-vous-dirait', {

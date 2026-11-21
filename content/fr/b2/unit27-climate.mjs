@@ -93,6 +93,49 @@ export const UNIT27_CARDS = [
     note: '**durable** = hållbar, varaktig. Ordet handlar om tid: något som håller länge, även för kommande generationer.',
     noteEn: '**durable** = lasting, sustainable. In English *durable* means hard-wearing, but French **durable** is about time and future generations.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u27-le-recyclage', {
+    prompt: 'Att göra nytt av gammalt', promptEn: 'Making new things out of old ones',
+    fr: 'le recyclage', sv: 'återvinningen', en: 'recycling',
+    ipa: '/lə ʁə.si.klaʒ/',
+    note: 'Verbet: *recycler*. Den gula tunnan: *la poubelle jaune*.',
+    noteEn: 'The verb: *recycler*. The yellow bin: *la poubelle jaune*.',
+  }),
+  vocab(D, 'fr-u27-la-pollution', {
+    prompt: 'När luft eller vatten blir smutsigt', promptEn: 'When air or water gets dirty',
+    fr: 'la pollution', sv: 'föroreningarna', en: 'pollution',
+    ipa: '/la pɔ.ly.sjɔ̃/',
+    note: '*-tion* uttalas [sjɔ̃]. *Un pic de pollution* = höga luftföroreningar.',
+    noteEn: '*-tion* is pronounced [sjɔ̃]. *Un pic de pollution* = a pollution spike.',
+  }),
+  vocab(D, 'fr-u27-lenvironnement', {
+    prompt: 'Naturen omkring oss', promptEn: 'The nature around us',
+    fr: 'l’environnement', sv: 'miljön', en: 'the environment',
+    ipa: '/lɑ̃.vi.ʁɔn.mɑ̃/',
+    note: 'Maskulinum. *Respectueux de l’environnement* = miljövänlig.',
+    noteEn: 'Masculine. *Respectueux de l’environnement* = environmentally friendly.',
+  }),
+  vocab(D, 'fr-u27-la-biodiversite', {
+    prompt: 'Mångfalden av växter och djur', promptEn: 'The variety of plants and animals',
+    fr: 'la biodiversité', sv: 'den biologiska mångfalden', en: 'biodiversity',
+    ipa: '/la bjo.di.vɛʁ.si.te/',
+    note: 'Ord på *-ité* är feminina: *la société, la liberté*.',
+    noteEn: 'Words ending in *-ité* are feminine: *la société, la liberté*.',
+  }),
+  vocab(D, 'fr-u27-une-inondation', {
+    prompt: 'När vattnet täcker allt', promptEn: 'When water covers everything',
+    fr: 'une inondation', sv: 'en översvämning', en: 'a flood',
+    ipa: '/yn i.nɔ̃.da.sjɔ̃/',
+    note: 'Verbet: *inonder*. Vanliga vid kraftiga höstregn i södra Frankrike.',
+    noteEn: 'The verb: *inonder*. Common with heavy autumn rain in southern France.',
+  }),
+  vocab(D, 'fr-u27-leolienne', {
+    prompt: 'Ger el med hjälp av vinden', promptEn: 'Makes electricity from the wind',
+    fr: 'l’éolienne', sv: 'vindkraftverket', en: 'the wind turbine',
+    ipa: '/le.ɔ.ljɛn/',
+    note: 'Från *Éole*, vindguden. Havsbaserade: *les éoliennes en mer*.',
+    noteEn: 'From *Éole*, god of the wind. Offshore: *les éoliennes en mer*.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u27-reduire-emissions', {

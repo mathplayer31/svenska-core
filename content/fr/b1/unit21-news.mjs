@@ -93,6 +93,50 @@ export const UNIT21_CARDS = [
     note: '*Selon la police*, *selon les médias*. Med pronomen: **selon moi** = enligt mig. Synonymt med *d’après*: *d’après lui*.',
     noteEn: '*Selon la police*, *selon les médias*. With a pronoun: **selon moi** = in my view. Synonym: *d’après*: *d’après lui*.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u21-le-president', {
+    prompt: 'Statschefen i Frankrike', promptEn: 'The French head of state',
+    fr: 'le président / la présidente', sv: 'presidenten', en: 'the president',
+    ipa: '/lə pʁe.zi.dɑ̃/ /la pʁe.zi.dɑ̃t/',
+    note: 'Väljs direkt av folket för fem år. Bor i *l’Élysée*.',
+    noteEn: 'Elected directly by the people for five years. Lives at *l’Élysée*.',
+  }),
+  vocab(D, 'fr-u21-le-ministre', {
+    prompt: 'Medlem av regeringen', promptEn: 'A member of the government',
+    fr: 'le ministre / la ministre', sv: 'ministern', en: 'the minister',
+    ipa: '/lə mi.nistʁ/ /la mi.nistʁ/',
+    note: 'Regeringschefen: *le Premier ministre*, utsedd av presidenten.',
+    noteEn: 'The head of government: *le Premier ministre*, appointed by the president.',
+  }),
+  vocab(D, 'fr-u21-voter', {
+    prompt: 'Det man gör i valet', promptEn: 'What you do in an election',
+    fr: 'voter', sv: 'att rösta', en: 'to vote',
+    ipa: '/vɔ.te/',
+    note: 'Valsedeln: *le bulletin de vote*. Röstsedeln läggs i *l’urne*.',
+    noteEn: 'The ballot paper: *le bulletin de vote*. It goes into *l’urne*.',
+  }),
+  vocab(D, 'fr-u21-le-journaliste', {
+    prompt: 'Den som skriver nyheter', promptEn: 'The person who writes the news',
+    fr: 'le / la journaliste', sv: 'journalisten', en: 'the journalist',
+    ipa: '/lə ʒuʁ.na.list/',
+    note: 'Samma form för båda könen, bara artikeln ändras.',
+    noteEn: 'Same form for both genders; only the article changes.',
+  }),
+  vocab(D, 'fr-u21-lassemblee-nationale', {
+    prompt: 'Underhuset i parlamentet', promptEn: 'The lower house of parliament',
+    fr: 'l’Assemblée nationale', sv: 'nationalförsamlingen', en: 'the National Assembly',
+    ipa: '/la.sɑ̃.ble na.sjɔ.nal/',
+    note: '577 *députés*. Överhuset: *le Sénat*.',
+    noteEn: '577 *députés*. The upper house: *le Sénat*.',
+    gloss: [['l’Assemblée', 'församlingen', 'the Assembly'], ['nationale', 'national-', 'national']],
+  }),
+  vocab(D, 'fr-u21-les-infos', {
+    prompt: 'Ledigt för nyheterna', promptEn: 'Casual word for the news',
+    fr: 'les infos', sv: 'nyheterna', en: 'the news',
+    ipa: '/le.z‿ɛ̃.fo/',
+    note: 'Förkortning av *les informations*. *Tu as écouté les infos ?*',
+    noteEn: 'Short for *les informations*. *Tu as écouté les infos ?*',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u21-cheminots-en-greve', {

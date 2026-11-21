@@ -93,6 +93,51 @@ export const UNIT31_CARDS = [
     note: 'Grundad 1958 under de Gaulle, med en stark president, sedan 1962 vald direkt av folket. Skrivs också **la Ve République**. Frankrike har alltså haft fem republiker, två kejsardömen och flera monarkier sedan 1789.',
     noteEn: 'Founded in 1958 under de Gaulle, with a strong president elected directly by the people since 1962. Also written **la Ve République**. Since 1789 France has had five republics, two empires and several monarchies.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u31-la-monarchie', {
+    prompt: 'Statsskick med kung eller drottning', promptEn: 'A system with a king or queen',
+    fr: 'la monarchie', sv: 'monarkin', en: 'the monarchy',
+    ipa: '/la mɔ.naʁ.ʃi/',
+    note: 'Avskaffad 1792. *L’Ancien Régime* = tiden före revolutionen.',
+    noteEn: 'Abolished in 1792. *L’Ancien Régime* = the period before the Revolution.',
+  }),
+  vocab(D, 'fr-u31-napoleon', {
+    prompt: 'Kejsaren som ritade om Europa', promptEn: 'The emperor who redrew Europe',
+    fr: 'Napoléon', sv: 'Napoleon', en: 'Napoleon',
+    ipa: '/na.pɔ.le.ɔ̃/',
+    note: 'Kejsare 1804. Hans lagbok *le Code civil* gäller delvis än i dag. Hans marskalk Bernadotte blev kung av Sverige.',
+    noteEn: 'Emperor in 1804. His *Code civil* still partly applies. His marshal Bernadotte became king of Sweden.',
+  }),
+  vocab(D, 'fr-u31-la-premiere-guerre-mondiale', {
+    prompt: 'Kriget 1914 till 1918', promptEn: 'The war from 1914 to 1918',
+    fr: 'la Première Guerre mondiale', sv: 'första världskriget', en: 'the First World War',
+    ipa: '/la pʁə.mjɛʁ ɡɛʁ mɔ̃.djal/',
+    note: 'I Frankrike *la Grande Guerre*. Minnesdag: den 11 november.',
+    noteEn: 'Known in France as *la Grande Guerre*. Remembrance day: 11 November.',
+    gloss: [['la Première', 'det första', 'the First'], ['Guerre', 'kriget', 'War'], ['mondiale', 'världs-', 'World']],
+  }),
+  vocab(D, 'fr-u31-la-liberation', {
+    prompt: 'Slutet på ockupationen 1944', promptEn: 'The end of the occupation in 1944',
+    fr: 'la Libération', sv: 'befrielsen', en: 'the Liberation',
+    ipa: '/la li.be.ʁa.sjɔ̃/',
+    note: 'Paris befriades den 25 augusti 1944. Stor bokstav för den historiska händelsen.',
+    noteEn: 'Paris was liberated on 25 August 1944. Capital letter for the historical event.',
+  }),
+  vocab(D, 'fr-u31-la-colonisation', {
+    prompt: 'När Frankrike tog över andra länder', promptEn: 'When France took over other countries',
+    fr: 'la colonisation', sv: 'koloniseringen', en: 'colonisation',
+    ipa: '/la kɔ.lɔ.ni.za.sjɔ̃/',
+    note: 'Förklarar varför franska talas i Afrika. Algeriet blev självständigt 1962.',
+    noteEn: 'It explains why French is spoken in Africa. Algeria became independent in 1962.',
+  }),
+  vocab(D, 'fr-u31-lunion-europeenne', {
+    prompt: 'Frankrike var med och grundade den', promptEn: 'France was one of its founders',
+    fr: 'l’Union européenne', sv: 'Europeiska unionen', en: 'the European Union',
+    ipa: '/ly.njɔ̃ ø.ʁɔ.pe.ɛn/',
+    note: 'Förkortas *l’UE*. Europaparlamentet sitter i Strasbourg.',
+    noteEn: 'Shortened to *l’UE*. The European Parliament sits in Strasbourg.',
+    gloss: [['l’Union', 'unionen', 'the Union'], ['européenne', 'europeiska', 'European']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u31-bastille-fut-prise', {

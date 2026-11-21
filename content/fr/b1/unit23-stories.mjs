@@ -93,6 +93,50 @@ export const UNIT23_CARDS = [
     note: '**Enfin** betyder *äntligen* eller *till slut*, men också ett irriterat ”alltså” i talspråk: *Enfin, qu’est-ce que tu fais ?* Mellanleden kan också vara **puis**.',
     noteEn: '**Enfin** means *finally* or *at last*, but in speech also an exasperated "honestly": *Enfin, qu’est-ce que tu fais ?* The middle step can also be **puis**.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u23-un-jour', {
+    prompt: 'Början på en berättelse', promptEn: 'The start of a story',
+    fr: 'un jour', sv: 'en dag', en: 'one day',
+    ipa: '/ɛ̃ ʒuʁ/',
+    note: '*Un jour, il a décidé de partir.* Följs ofta av *passé composé*.',
+    noteEn: '*Un jour, il a décidé de partir.* Often followed by the *passé composé*.',
+  }),
+  vocab(D, 'fr-u23-finalement', {
+    prompt: 'Hur det slutade', promptEn: 'How it ended',
+    fr: 'finalement', sv: 'till slut', en: 'in the end / finally',
+    ipa: '/fi.nal.mɑ̃/',
+    note: '*-ment* motsvarar svenskans *-t* i adverb: *final → finalement*.',
+    noteEn: '*-ment* is like English *-ly*: *final → finalement*.',
+  }),
+  vocab(D, 'fr-u23-pendant-que', {
+    prompt: 'Två saker samtidigt', promptEn: 'Two things at once',
+    fr: 'pendant que', sv: 'medan', en: 'while',
+    ipa: '/pɑ̃.dɑ̃ kə/',
+    note: '*Pendant que je dormais, il est parti.* Bakgrunden står i *imparfait*.',
+    noteEn: '*Pendant que je dormais, il est parti.* The background is in the *imparfait*.',
+    gloss: [['pendant', 'under', 'during'], ['que', 'att', 'that']],
+  }),
+  vocab(D, 'fr-u23-avant-apres', {
+    prompt: 'Före och efter', promptEn: 'Before and after',
+    fr: 'avant / après', sv: 'före / efter', en: 'before / after',
+    ipa: '/a.vɑ̃/ /a.pʁɛ/',
+    note: '*Avant de partir* (före avfärden) + infinitiv; *après avoir mangé* (efter att ha ätit).',
+    noteEn: '*Avant de partir* + infinitive; *après avoir mangé* (after eating).',
+  }),
+  vocab(D, 'fr-u23-un-personnage', {
+    prompt: 'Någon i en berättelse', promptEn: 'Someone in a story',
+    fr: 'un personnage', sv: 'en romanfigur / en karaktär', en: 'a character',
+    ipa: '/ɛ̃ pɛʁ.sɔ.naʒ/',
+    note: 'Maskulinum även för en kvinnlig figur. Huvudpersonen: *le personnage principal*.',
+    noteEn: 'Masculine even for a female character. The main character: *le personnage principal*.',
+  }),
+  vocab(D, 'fr-u23-la-fin', {
+    prompt: 'Där berättelsen slutar', promptEn: 'Where the story ends',
+    fr: 'la fin', sv: 'slutet', en: 'the end',
+    ipa: '/la fɛ̃/',
+    note: '*À la fin* = i slutet. *Fin* står sist i franska filmer.',
+    noteEn: '*À la fin* = at the end. *Fin* appears at the end of French films.',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u23-princesse-chateau', {

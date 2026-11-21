@@ -93,6 +93,52 @@ export const UNIT19_CARDS = [
     note: 'Fransmännen säger själva att de är ett folk av **râleurs**. Att gnälla är ofta ett sätt att skapa samhörighet, inte ett tecken på att man är olycklig.',
     noteEn: 'The French readily call themselves a nation of **râleurs** (grumblers). Grumbling is often a way of bonding, not a sign of real unhappiness.',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u19-dapres-moi', {
+    prompt: 'Säga sin åsikt', promptEn: 'Giving your opinion',
+    fr: 'd’après moi', sv: 'enligt mig', en: 'in my view',
+    ipa: '/da.pʁɛ mwa/',
+    note: 'Synonym till *à mon avis*. Också: *selon moi*.',
+    noteEn: 'Synonym of *à mon avis*. Also: *selon moi*.',
+    gloss: [['d’après', 'enligt', 'according to'], ['moi', 'mig', 'me']],
+  }),
+  vocab(D, 'fr-u19-pas-du-tout', {
+    prompt: 'Stark nekning', promptEn: 'Strong denial',
+    fr: 'pas du tout', sv: 'inte alls', en: 'not at all',
+    ipa: '/pa dy tu/',
+    note: 'Ensamt som svar: *Pas du tout !* I mening: *Je ne suis pas du tout d’accord.*',
+    noteEn: 'On its own as an answer: *Pas du tout !* In a sentence: *Je ne suis pas du tout d’accord.*',
+    gloss: [['pas', 'inte', 'not'], ['du', 'av', 'of the'], ['tout', 'alls', 'all']],
+  }),
+  vocab(D, 'fr-u19-bien-sur', {
+    prompt: 'Det är självklart', promptEn: 'It goes without saying',
+    fr: 'bien sûr', sv: 'självklart / förstås', en: 'of course',
+    ipa: '/bjɛ̃ syʁ/',
+    note: 'Cirkumflexen skiljer *sûr* (säker) från *sur* (på).',
+    noteEn: 'The circumflex separates *sûr* (sure) from *sur* (on).',
+    gloss: [['bien', 'väl', 'well'], ['sûr', 'säkert', 'sure']],
+  }),
+  vocab(D, 'fr-u19-peut-etre', {
+    prompt: 'Varken ja eller nej', promptEn: 'Neither yes nor no',
+    fr: 'peut-être', sv: 'kanske', en: 'maybe',
+    ipa: '/pø.tɛtʁ/',
+    note: 'Ordagrant ”kan vara”. Skrivs med bindestreck.',
+    noteEn: 'Literally "can be". Written with a hyphen.',
+  }),
+  vocab(D, 'fr-u19-un-avantage', {
+    prompt: 'För- och nackdel', promptEn: 'Pros and cons',
+    fr: 'un avantage / un inconvénient', sv: 'en fördel / en nackdel', en: 'an advantage / a drawback',
+    ipa: '/ɛ̃.n‿a.vɑ̃.taʒ/ /ɛ̃.n‿ɛ̃.kɔ̃.ve.njɑ̃/',
+    note: '*Le principal inconvénient, c’est le prix.*',
+    noteEn: '*Le principal inconvénient, c’est le prix* (the main drawback is the price).',
+  }),
+  vocab(D, 'fr-u19-etre-pour', {
+    prompt: 'Vara för eller emot', promptEn: 'Being for or against',
+    fr: 'être pour / être contre', sv: 'vara för / vara emot', en: 'to be for / to be against',
+    ipa: '/ɛtʁ puʁ/ /ɛtʁ kɔ̃tʁ/',
+    note: '*Je suis contre cette réforme.* *Pour ou contre ?* = för eller emot?',
+    noteEn: '*Je suis contre cette réforme.* *Pour ou contre ?* = for or against?',
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u19-pas-une-bonne-idee', {

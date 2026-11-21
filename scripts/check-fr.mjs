@@ -43,12 +43,12 @@ for (const c of FR_CARDS) {
   if (bad.test(JSON.stringify(c))) errors.push(`${where} : tiret cadratin ou emoji`);
 }
 
-// Chaque unité : 12 mots puis 8 phrases
+// Chaque unité : 12 mots, 5 à 8 mots ajoutés (issue #14), puis 8 phrases
 for (const d of FR_DECKS.filter((x) => x.track === 'thematic' && (!level || x.cefr_level === level))) {
   const cards = FR_CARDS.filter((c) => c.deck_slug === d.slug);
   const v = cards.filter((c) => c.card_type === 'vocab').length;
   const p = cards.filter((c) => c.card_type === 'phrase').length;
-  if (v !== 12 || p !== 8) errors.push(`unité ${d.slug} : ${v} mots et ${p} phrases au lieu de 12 et 8`);
+  if (v < 17 || v > 20 || p !== 8) errors.push(`unité ${d.slug} : ${v} mots et ${p} phrases au lieu de 17 à 20 et 8`);
 }
 
 const scope = level ?? 'A1 à B2';

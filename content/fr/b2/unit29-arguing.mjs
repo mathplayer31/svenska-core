@@ -93,6 +93,53 @@ export const UNIT29_CARDS = [
     note: 'Formellt ord. I vardagen: **contester** eller *démonter un argument* (plocka isär ett argument).',
     noteEn: 'A formal word. In everyday speech: **contester** or *démonter un argument* (to take an argument apart).',
   }),
+  // Ajouts (issue #14)
+  vocab(D, 'fr-u29-toutefois', {
+    prompt: 'Ett formellt ”men ändå”', promptEn: 'A formal "however"',
+    fr: 'toutefois', sv: 'dock / emellertid', en: 'however',
+    ipa: '/tut.fwa/',
+    note: 'Synonym till *cependant*, lite mer skriftspråk.',
+    noteEn: 'Synonym of *cependant*, slightly more written.',
+  }),
+  vocab(D, 'fr-u29-ainsi', {
+    prompt: 'Dra en slutsats eller ge ett exempel', promptEn: 'Drawing a conclusion or giving an example',
+    fr: 'ainsi', sv: 'således / på så sätt', en: 'thus / in this way',
+    ipa: '/ɛ̃.si/',
+    note: 'I början av meningen kan det ge inversion: *Ainsi a-t-il décidé…*',
+    noteEn: 'At the start of a sentence it can trigger inversion: *Ainsi a-t-il décidé…*',
+  }),
+  vocab(D, 'fr-u29-bien-que', {
+    prompt: 'Trots att', promptEn: 'Although',
+    fr: 'bien que', sv: 'trots att / fastän', en: 'although',
+    ipa: '/bjɛ̃ kə/',
+    note: 'Kräver konjunktiv: *Bien qu’il soit tard, je reste.*',
+    noteEn: 'Requires the subjunctive: *Bien qu’il soit tard, je reste.*',
+    gloss: [['bien', 'väl', 'well'], ['que', 'att', 'that']],
+  }),
+  vocab(D, 'fr-u29-en-outre', {
+    prompt: 'Lägga till ett argument', promptEn: 'Adding an argument',
+    fr: 'en outre', sv: 'dessutom / vidare', en: 'furthermore',
+    ipa: '/ɑ̃.n‿utʁ/',
+    note: 'Formellt synonym till *de plus*. Bindning: *en‿outre*.',
+    noteEn: 'A formal synonym of *de plus*. Liaison: *en‿outre*.',
+    gloss: [['en', 'i', 'in'], ['outre', 'utöver', 'beyond']],
+  }),
+  vocab(D, 'fr-u29-en-conclusion', {
+    prompt: 'Avsluta en text', promptEn: 'Ending an essay',
+    fr: 'en conclusion', sv: 'sammanfattningsvis / avslutningsvis', en: 'in conclusion',
+    ipa: '/ɑ̃ kɔ̃.kly.zjɔ̃/',
+    note: 'Standardinledning till sista stycket i en fransk uppsats (*dissertation*).',
+    noteEn: 'The standard opener for the last paragraph of a French essay (*dissertation*).',
+    gloss: [['en', 'i', 'in'], ['conclusion', 'slutsats', 'conclusion']],
+  }),
+  vocab(D, 'fr-u29-quant-a', {
+    prompt: 'Byta fokus till något annat', promptEn: 'Switching focus to something else',
+    fr: 'quant à', sv: 'vad gäller / när det gäller', en: 'as for',
+    ipa: '/kɑ̃.t‿a/',
+    note: '*Quant à moi, je reste* = själv stannar jag. Med *le*: *quant au prix*.',
+    noteEn: '*Quant à moi, je reste* = as for me, I’m staying. With *le*: *quant au prix*.',
+    gloss: [['quant', 'vad', 'as'], ['à', 'gäller', 'for']],
+  }),
 
   // ===================== PHRASES =====================
   phrase(D, 'fr-u29-certes-mais', {
