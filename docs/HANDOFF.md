@@ -21,6 +21,13 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
+## PWA (app sur iPhone) et icône : AJOUTÉ (21 nov 2026, issue #12)
+- Pas d'app iOS native (il faudrait un Mac et Xcode) : le site s'installe comme une app. Sur iPhone : Safari, ouvrir https://svenska-core.pages.dev, Partager > Sur l'écran d'accueil.
+- Hors ligne complet : `scripts/sw.js` est le modèle du service worker ; au build, `vite.config.ts` écrit `dist/sw.js` avec la liste des fichiers (app + 1 386 sons). Deux caches versionnés par empreinte du contenu : un déploiement remplace l'app, les sons ne sont retéléchargés que s'ils ont changé. Les sons sont servis en 206 sur requête Range (obligatoire pour Safari iOS).
+- Le service worker n'est enregistré qu'en production web (`src/main.tsx`) : ni en dev, ni dans l'APK.
+- Icône : drapeau suédois sur fond bleu Melodi. Favicon `public/favicon.svg` ; icônes PWA, iPhone et Android générées par `python scripts/make-icons.py` (Pillow).
+- Tester le build de production en local : `npm run build` puis `npm run preview` (port 4173).
+
 ## Design Melodi, séances d'unité et accents tonals : AJOUTÉ (20 nov 2026, issue #10)
 - Look « Melodi » (lecteur de musique) : palette bleue dans `src/index.css`, thème clair / sombre / système (`src/theme.ts`, clé `svenska.theme`), pièces visuelles dans `src/Melodi.tsx` (drapeaux, pochettes d'albums, panneau de choix du cours). Remplace la refonte « nordique clair » ci-dessous.
 - Parcours : les sections sont des albums, les unités des pistes. Plus d'onglet Réviser : navigation Parcours / Fondations / Compte.
