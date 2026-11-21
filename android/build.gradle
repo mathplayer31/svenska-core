@@ -27,3 +27,19 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// @capacitor/local-notifications (issue #16) exige une chaîne Java 21 (kotlin { jvmToolchain(21) }), absente du PC :
+// seul le JDK 25 d'Android Studio est installé. On ignore cet appel (le plugin est compilé par le JDK de Gradle)
+// et on garde le bytecode Java 21 : sourceCompatibility 21 côté Java, jvmTarget 21 côté Kotlin.
+subprojects {
+    plugins.withId('org.jetbrains.kotlin.android') {
+        kotlin.metaClass.jvmToolchain = { int version -> }
+        afterEvaluate {
+            // Classes Kotlin chargées depuis le plugin : elles ne sont pas sur le classpath de ce fichier
+            def jvm21 = buildscript.classLoader.loadClass('org.jetbrains.kotlin.gradle.dsl.JvmTarget').fromTarget('21')
+            tasks.matching { it.class.name.startsWith('org.jetbrains.kotlin.gradle.tasks.KotlinCompile') }.configureEach {
+                it.compilerOptions.jvmTarget.set(jvm21)
+            }
+        }
+    }
+}

@@ -71,3 +71,31 @@ self.addEventListener('fetch', (e) => {
     })
   );
 });
+
+// Rappel quotidien (issue #16) : la fonction Supabase send-reminders envoie { title, body }
+self.addEventListener('push', (e) => {
+  let msg = {};
+  try {
+    msg = e.data ? e.data.json() : {};
+  } catch {
+    // message illisible : notification par défaut
+  }
+  e.waitUntil(
+    self.registration.showNotification(msg.title || 'SvenskaCore', {
+      body: msg.body || '',
+      icon: '/icons/icon-192.png',
+      tag: 'rappel',
+    })
+  );
+});
+
+// Un appui sur la notification ramène l'app au premier plan, ou l'ouvre
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      const win = list.find((c) => 'focus' in c);
+      return win ? win.focus() : self.clients.openWindow('/');
+    })
+  );
+});

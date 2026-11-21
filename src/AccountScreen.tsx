@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft, CircleUser, RefreshCw } from 'lucide-react';
 import * as data from './dataSource';
 import { useI18n } from './i18n';
+import ReminderSettings from './ReminderSettings';
+import { forgetWebReminder } from './reminders';
 import { PSEUDO_RE } from './xp';
 
 interface Props {
@@ -47,7 +49,7 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
       return mustConfirm ? t.confirmEmail : null;
     });
   const syncNow = () => run(async () => (await data.sync(), t.syncedOk));
-  const signOut = () => run(async () => (await data.signOut(), null));
+  const signOut = () => run(async () => (await forgetWebReminder().catch(() => {}), await data.signOut(), null));
   const savePseudo = () =>
     run(async () => {
       const value = pseudo.trim();
@@ -172,6 +174,8 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
           )}
           {message && <p className={`text-sm ${message.ok ? 'text-success' : 'text-danger'}`}>{message.text}</p>}
         </div>
+        {/* Remonté à la connexion et à la déconnexion : le rappel web dépend du compte */}
+        <ReminderSettings key={email ?? ''} />
       </div>
     </div>
   );

@@ -21,6 +21,43 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
+## Rappel quotidien : AJOUTÉ (21 nov 2026, issue #16)
+- Réglage dans l'écran Compte (`src/ReminderSettings.tsx`) : interrupteur et heure, mémorisés sur l'appareil (clé `svenska.reminder`). La permission de notification n'est demandée qu'à l'activation. Logique : `src/reminders.ts`.
+- APK : notification locale répétée chaque jour (`@capacitor/local-notifications`, id 1), sans serveur. Le plugin la reprogramme au redémarrage du téléphone (récepteur `BOOT_COMPLETED`) ; un appui ouvre l'app.
+- PWA (iPhone avec l'app sur l'écran d'accueil, iOS 16.4 ou plus, et navigateurs compatibles) : push web, compte obligatoire. L'abonnement va dans la table `push_subscriptions` (RLS : le propriétaire seul), avec l'heure, le fuseau et le texte dans la langue de l'interface. La fonction `supabase/functions/send-reminders` (planifiée toutes les 5 minutes) envoie le rappel une fois par jour dès que l'heure est passée dans le fuseau de l'abonnement, et supprime les abonnements expirés (404 ou 410). `scripts/sw.js` affiche la notification (`push`) et ouvre l'app à l'appui (`notificationclick`).
+- iPhone sans l'app installée : le réglage explique comment l'ajouter à l'écran d'accueil. Navigateur sans push, ou dev (`npm run dev`, pas de service worker) : message « ce navigateur ne peut pas recevoir de rappels ».
+- Le texte (titre et corps) suit la langue de l'interface : l'app le remet à jour à l'ouverture et à chaque changement de langue. À la déconnexion, le rappel web est retiré (il est lié au compte).
+- Android 12 et plus : à l'activation, le plugin ouvre l'écran système « Alarmes et rappels » pour une alarme exacte. Refusée, l'alarme devient non exacte et Android peut la retarder jusqu'à une heure.
+- Build Android : le plugin impose une chaîne Java 21 absente du PC (seul le JDK 25 d'Android Studio est installé) ; `android/build.gradle` ignore son `jvmToolchain(21)` et garde le bytecode Java 21.
+- Vérifié le 21 nov 2026 : `npx tsc -b`, `npm run build`, `npm run apk` ; sur la base locale, fonction servie par `npx supabase functions serve send-reminders --no-verify-jwt --env-file <fichier>` : 401 sans secret, envoi chiffré accepté (201), abonnement en 410 supprimé, pas de second envoi le même jour, heure pas encore atteinte ignorée ; RLS (un autre compte ne voit ni ne modifie rien, ne peut pas écrire chez le premier) ; dans le navigateur intégré (build de production sur la base locale, service push simulé : ce navigateur n'en a pas) : activation, changement d'heure, changement de langue, coupure et déconnexion mettent la table à jour ; message iPhone. Sur l'émulateur Android (API 37) : permission, alarme exacte à l'heure choisie, notification reçue en français, appui qui ouvre l'app, rappel du lendemain reprogrammé, rappel conservé après redémarrage du téléphone sans rouvrir l'app.
+
+### Mise en place sur Supabase Cloud : FAIT (21 nov 2026)
+Commandes exécutées dans cet ordre, depuis la racine du dépôt (projet `dzbjgjlkwbendatibgkb`). Le CLI exige `--yes` pour toute modification du projet hébergé.
+1. Connexion du CLI (une page de validation s'ouvre dans le navigateur) :
+```powershell
+npx supabase login
+```
+2. Table, RLS et droits :
+```powershell
+npx supabase db query --remote=dzbjgjlkwbendatibgkb --yes --file supabase/migrations-manuelles/migration_rappels.sql
+```
+   Sur ce projet, une nouvelle table ne reçoit aucun droit automatique : sans le `grant ... to service_role` de la migration, la fonction répondait 500 « permission denied for table push_subscriptions ».
+3. Clés VAPID, secrets et déploiement (l'adresse sert de contact aux services push) :
+```powershell
+node scripts/setup-reminders.mjs mailto:mathplayer31@gmail.com --yes
+```
+   Le script génère les clés VAPID et le secret d'appel, les enregistre comme secrets de la fonction (`VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`, `CRON_SECRET` ; la clé privée n'est écrite nulle part ailleurs), écrit `VITE_VAPID_PUBLIC_KEY` dans `.env.production`, déploie `send-reminders` (`--no-verify-jwt` : la fonction vérifie elle-même le secret d'appel) et écrit le SQL de planification dans `supabase/rappels-cron.sql.local` (ignoré par git, il contient le secret). **Ne pas le relancer** : de nouvelles clés rendent inutilisables les abonnements existants.
+4. Planification (extensions `pg_cron` et `pg_net`, secret d'appel dans Vault sous `rappels_cron_secret`, tâche `rappels-quotidiens` toutes les 5 minutes, délai de 30 s), puis suppression du fichier :
+```powershell
+npx supabase db query --remote=dzbjgjlkwbendatibgkb --yes --file supabase/rappels-cron.sql.local
+Remove-Item supabase/rappels-cron.sql.local
+```
+   Avec le délai par défaut de pg_net (5 s), le premier appel a échoué sur le démarrage à froid de la fonction : d'où `timeout_milliseconds := 30000`.
+5. Contrôle : la réponse de chaque passage est dans `net._http_response` (attendu : 200 et `{"sent":…,"removed":…,"failed":…}`).
+```powershell
+npx supabase db query --remote=dzbjgjlkwbendatibgkb --read-only "select status_code, content::text, created from net._http_response order by created desc limit 3"
+```
+6. Commit de `.env.production` (clé publique) et push : Cloudflare reconstruit l'app avec la clé.
 ## XP, streak et classement : AJOUTÉ (21 nov 2026, issue #15)
 - XP par réponse dans les séances d'unité et des fondations : 10 par nouvelle carte, 5 par rappel ou exercice réussi, 1 par erreur, +20 par séance terminée. Le total gagné s'affiche en fin de séance d'unité. L'entraînement libre et les tests de section ne rapportent pas d'XP.
 - Streak : un jour (heure locale de l'appareil) est validé par une séance terminée ; une séance des fondations est terminée quand sa file de cartes est vide (pas en mode libre). Récompenses à 7, 30, 100 et 365 jours de record : icônes à côté du pseudo.

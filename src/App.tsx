@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import * as data from './dataSource';
 import AccountScreen from './AccountScreen';
+import { refreshReminder } from './reminders';
 import Leaderboard from './Leaderboard';
 import SectionTest from './SectionTest';
 import { COURSE_LANGS, useI18n, type Course, type Lang } from './i18n';
@@ -121,6 +122,10 @@ function savePracticeScores(scores: Record<string, number>) {
 
 export default function App() {
   const { lang, setLang, course, setCourse, t } = useI18n();
+  // Rappel quotidien (issue #16) : texte dans la langue de l'interface, fuseau à jour
+  useEffect(() => {
+    refreshReminder({ title: t.reminderTitle, body: t.reminderBody });
+  }, [t.reminderTitle, t.reminderBody]);
   const theme = useTheme();
   const [decks, setDecks] = useState<DeckInfo[]>([]);
   const [cards, setCards] = useState<SwedishCard[]>([]);
