@@ -69,6 +69,37 @@ export const UNIT17_CARDS = [
     gloss: [['en', 'une', 'a'], ['nyckel', 'clé', 'key']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u17-tvattmaskin', {
+    prompt: 'L’appareil pour laver le linge : « une machine à laver »', promptEn: 'The appliance for washing clothes: "a washing machine"',
+    sv: 'en tvättmaskin', fr: 'une machine à laver', en: 'a washing machine', ipa: '/ɛn ˈtvɛtːmaˌɧiːn/',
+    note: '*tvätt* (lessive) + *maskin*. Souvent partagée dans la *tvättstuga*.',
+  }),
+  vocab(D, 'u17-hogljudd', {
+    prompt: 'Qui fait trop de bruit : « bruyant »', promptEn: 'Making too much noise: "loud"',
+    sv: 'högljudd', fr: 'bruyant(e)', en: 'loud / noisy', ipa: '/ˈhøːɡˌjɵdː/',
+    note: '*hög* (fort) + *ljud* (son). *Grannarna är högljudda.*',
+  }),
+  vocab(D, 'u17-lapp', {
+    prompt: 'Le mot laissé dans l’escalier : « un petit mot »', promptEn: 'The note left in the stairwell: "a note"',
+    sv: 'en lapp', fr: 'un petit mot (affiché)', en: 'a note', ipa: '/ɛn lapː/',
+    note: 'Le *lapp* passif-agressif dans la buanderie est une institution suédoise.',
+  }),
+  vocab(D, 'u17-reparerar', {
+    prompt: 'Remettre en état : « réparer »', promptEn: 'Making it work again: "to repair"',
+    sv: 'reparerar', fr: 'répare / réparer', en: 'repairs / to repair', ipa: '/rɛpaˈreːrar/',
+    note: 'Infinitif *reparera*. Plus courant à l’oral : *laga* (*laga diskmaskinen*).',
+  }),
+  vocab(D, 'u17-soprum', {
+    prompt: 'Là où l’on jette les ordures : « le local poubelles »', promptEn: 'Where you take the rubbish: "the bin room"',
+    sv: 'ett soprum', fr: 'un local poubelles', en: 'a bin room', ipa: '/ɛtː ˈsuːpˌrɵmː/',
+    note: '*sopor* (ordures) + *rum*. On y trie : papier, verre, plastique, alimentaire.',
+  }),
+  vocab(D, 'u17-hyresgast', {
+    prompt: 'Celui qui loue l’appartement : « un locataire »', promptEn: 'The person renting the flat: "a tenant"',
+    sv: 'en hyresgäst', fr: 'un / une locataire', en: 'a tenant', ipa: '/ɛn ˈhyːrɛsˌjɛst/',
+    note: '*hyra* (loyer) + *gäst* (invité). Défendu par *Hyresgästföreningen*.',
+  }),
   phrase(D, 'u17-som-bor-ovanfor', {
     prompt: 'Relative en « som » : « Le voisin qui habite au-dessus est très sympa. »', promptEn: '"Som" relative clause: "The neighbour who lives upstairs is very nice."',
     sv: 'Grannen som bor ovanför är väldigt trevlig.', fr: 'Le voisin qui habite au-dessus est très sympa.', en: 'The neighbour who lives upstairs is very nice.',

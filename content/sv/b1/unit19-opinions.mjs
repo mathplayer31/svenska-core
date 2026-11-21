@@ -63,6 +63,38 @@ export const UNIT19_CARDS = [
     gloss: [['en', 'une', 'an'], ['idé', 'idée', 'idea']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u19-for-min-del', {
+    prompt: 'Pour donner ton avis personnel : « en ce qui me concerne »', promptEn: 'Giving your own view: "as for me"',
+    sv: 'för min del', fr: 'en ce qui me concerne', en: 'as for me / personally', ipa: '/fœr mɪn deːl/',
+    note: 'Se place en tête : *För min del är det okej.* Attention au V2 : le verbe suit.',
+    gloss: [['för', 'pour', 'for'], ['min', 'ma', 'my'], ['del', 'part', 'part']],
+  }),
+  vocab(D, 'u19-sjalvklart', {
+    prompt: 'C’est évident : « bien sûr »', promptEn: 'It goes without saying: "of course"',
+    sv: 'självklart', fr: 'bien sûr', en: 'of course', ipa: '/ˈɧɛlvˌklɑːʈ/',
+    note: '*själv* (soi-même) + *klart* (clair). Plus neutre : *så klart* ou *klart*.',
+  }),
+  vocab(D, 'u19-precis', {
+    prompt: 'Pour approuver fortement : « exactement »', promptEn: 'Strongly agreeing: "exactly"',
+    sv: 'precis', fr: 'exactement', en: 'exactly', ipa: '/prɛˈsiːs/',
+    note: 'Seul, c’est une réponse : *Precis!* Le **c** se prononce [s].',
+  }),
+  vocab(D, 'u19-absolut', {
+    prompt: 'Accord sans réserve : « absolument »', promptEn: 'Full agreement: "absolutely"',
+    sv: 'absolut', fr: 'absolument', en: 'absolutely', ipa: '/apsɔˈlʉːt/',
+    note: 'Le **b** devant **s** se prononce [p]. Négatif : *absolut inte* (absolument pas).',
+  }),
+  vocab(D, 'u19-fordel', {
+    prompt: 'Le bon côté d’une solution : « un avantage »', promptEn: 'The good side of a solution: "an advantage"',
+    sv: 'en fördel', fr: 'un avantage', en: 'an advantage', ipa: '/ɛn ˈfœːˌɖeːl/',
+    note: 'Souvent avec son contraire : *fördelar och nackdelar* (avantages et inconvénients).',
+  }),
+  vocab(D, 'u19-nackdel', {
+    prompt: 'Le mauvais côté : « un inconvénient »', promptEn: 'The bad side: "a disadvantage"',
+    sv: 'en nackdel', fr: 'un inconvénient', en: 'a disadvantage', ipa: '/ɛn ˈnakːˌdeːl/',
+    note: '*Nackdelen är att det är dyrt.* La forme définie introduit une explication avec *att*.',
+  }),
   phrase(D, 'u19-vad-tycker-du', {
     prompt: 'Demander un avis : « Qu’est-ce que tu penses du film ? »', promptEn: 'Asking for an opinion: "What do you think of the film?"',
     sv: 'Vad tycker du om filmen?', fr: 'Qu’est-ce que tu penses du film ?', en: 'What do you think of the film?',

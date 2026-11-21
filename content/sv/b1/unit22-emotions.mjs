@@ -60,6 +60,42 @@ export const UNIT22_CARDS = [
     note: 'Pas de réfléchi : *de bråkar* = ils se disputent. *bråka om* = se disputer à propos de.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u22-radd', {
+    prompt: 'Avoir peur : « effrayé »', promptEn: 'Being afraid: "scared"',
+    sv: 'rädd', fr: 'qui a peur', en: 'scared / afraid', ipa: '/rɛdː/',
+    note: '*Jag är rädd för hundar* = j’ai peur des chiens. *för* introduit ce qui fait peur.',
+  }),
+  vocab(D, 'u22-nervos', {
+    prompt: 'Avant un examen : « nerveux »', promptEn: 'Before an exam: "nervous"',
+    sv: 'nervös', fr: 'nerveux / nerveuse', en: 'nervous', ipa: '/nɛrˈvøːs/',
+    note: 'Accent sur la fin. *Jag är nervös inför intervjun* (*inför* = avant).',
+  }),
+  vocab(D, 'u22-lycklig', {
+    prompt: 'Plus fort que *glad* : « heureux »', promptEn: 'Stronger than *glad*: "happy"',
+    sv: 'lycklig', fr: 'heureux / heureuse', en: 'happy (deeply)', ipa: '/ˈlʏkːlɪɡ/',
+    note: '*glad* = content sur le moment ; *lycklig* = heureux dans la vie. *Lycka* = le bonheur.',
+  }),
+  vocab(D, 'u22-avundsjuk', {
+    prompt: 'Vouloir ce que l’autre a : « jaloux »', promptEn: 'Wanting what others have: "envious / jealous"',
+    sv: 'avundsjuk', fr: 'jaloux / envieux', en: 'envious / jealous', ipa: '/ˈɑːvɵndsˌɧʉːk/',
+    note: '*avund* (envie) + *sjuk* (malade) : littéralement « malade d’envie ».',
+  }),
+  vocab(D, 'u22-forvanad', {
+    prompt: 'Quand on ne s’y attendait pas : « surpris »', promptEn: 'When you didn’t expect it: "surprised"',
+    sv: 'förvånad', fr: 'surpris(e)', en: 'surprised', ipa: '/fœrˈvoːnad/',
+    note: '*Jag blev förvånad* = j’ai été surpris. *blev* = est devenu.',
+  }),
+  vocab(D, 'u22-ensam', {
+    prompt: 'Sans personne autour : « seul »', promptEn: 'With nobody around: "alone / lonely"',
+    sv: 'ensam', fr: 'seul(e)', en: 'alone / lonely', ipa: '/ˈeːnsam/',
+    note: 'Pluriel : *ensamma* (le **m** double). *Känner du dig ensam?*',
+  }),
+  vocab(D, 'u22-kar', {
+    prompt: 'Amoureux de quelqu’un', promptEn: 'In love with someone',
+    sv: 'kär', fr: 'amoureux / amoureuse', en: 'in love', ipa: '/ɕæːr/',
+    note: '*Jag är kär i dig* = je suis amoureux de toi (avec *i*). Le **k** devant **ä** est doux [ɕ].',
+  }),
   phrase(D, 'u22-hur-kanner-du-dig', {
     prompt: '« Comment tu te sens aujourd’hui ? »', promptEn: '"How are you feeling today?"',
     sv: 'Hur känner du dig idag?', fr: 'Comment tu te sens aujourd’hui ?', en: 'How are you feeling today?',

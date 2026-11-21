@@ -6,6 +6,7 @@
 //  - words = textes suédois dont on génère un MP3 chacun
 // Règle de contenu : les phrases ne réutilisent que des mots de l'Unité 1 (jag, du, det, vad, tack, är…)
 // ou des mots introduits plus haut dans cette unité.
+import { vocab } from '../helpers.mjs';
 
 export const UNIT2_DECK = {
   slug: 'swedish-unit-2-cafe',
@@ -125,6 +126,37 @@ export const UNIT2_CARDS = [
     explanation_md: 'Le **ä** devant **r** s’ouvre beaucoup (presque « è » très ouvert). Contraire : *där* = là-bas.',
     words: ['här'],
   },
+  // Ajouts (issue #14)
+  vocab(D, 'u2-varsagod', {
+    prompt: 'En tendant quelque chose : « voilà / je vous en prie »', promptEn: 'When handing something over: "here you go"',
+    sv: 'varsågod', fr: 'voilà / je vous en prie', en: 'here you go / you’re welcome', ipa: '/ˈvɑːʂɔˌɡuːd/',
+    note: 'Le serveur le dit en posant ton café. Réponds simplement *tack*.',
+  }),
+  vocab(D, 'u2-smorgas', {
+    prompt: 'À manger avec le café : « un sandwich »', promptEn: 'Something to eat with your coffee: "a sandwich"',
+    sv: 'en smörgås', fr: 'un sandwich / une tartine', en: 'a sandwich', ipa: '/ɛn ˈsmœrˌɡoːs/',
+    note: 'Souvent une tartine ouverte (pain + garniture). Familier : *en macka*.',
+  }),
+  vocab(D, 'u2-glas', {
+    prompt: 'Pour boire de l’eau : « un verre »', promptEn: 'For drinking water: "a glass"',
+    sv: 'ett glas', fr: 'un verre', en: 'a glass', ipa: '/ɛtː ɡlɑːs/',
+    note: 'Mot **ett**, invariable au pluriel : *två glas*. *Ett glas vatten* = un verre d’eau.',
+  }),
+  vocab(D, 'u2-socker', {
+    prompt: 'Pour sucrer le café : « du sucre »', promptEn: 'To sweeten your coffee: "sugar"',
+    sv: 'socker', fr: 'du sucre', en: 'sugar', ipa: '/ˈsɔkːɛr/',
+    note: 'Pas d’article pour une quantité indéfinie : *Vill du ha socker?*',
+  }),
+  vocab(D, 'u2-utan', {
+    prompt: 'Le contraire de *med* : « sans »', promptEn: 'The opposite of *med*: "without"',
+    sv: 'utan', fr: 'sans', en: 'without', ipa: '/ˈʉːtan/',
+    note: '*Kaffe utan mjölk* = café sans lait. S’oppose à *med* (avec).',
+  }),
+  vocab(D, 'u2-patar', {
+    prompt: 'Une deuxième tasse, souvent offerte : « un refill »', promptEn: 'A second cup, often free: "a refill"',
+    sv: 'en påtår', fr: 'une deuxième tasse (offerte)', en: 'a refill', ipa: '/ɛn ˈpoːˌtoːr/',
+    note: '*på* + *tår* (goutte). Beaucoup de cafés suédois l’offrent : *Ingår påtår?*',
+  }),
 
   // ===================== PHRASES =====================
   {

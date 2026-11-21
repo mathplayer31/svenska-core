@@ -66,6 +66,42 @@ export const UNIT14_CARDS = [
     note: 'Se place comme *inte*, juste après le verbe conjugué : *jag har aldrig sett*. À l’oral, le **g** final tombe souvent.',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u14-pask', {
+    prompt: 'La fête de printemps avec des œufs : « Pâques »', promptEn: 'The spring holiday with eggs: "Easter"',
+    sv: 'påsk', fr: 'Pâques', en: 'Easter', ipa: '/pɔsk/',
+    note: '*Glad påsk!* = joyeuses Pâques. Les enfants se déguisent en sorcières (*påskkärringar*).',
+  }),
+  vocab(D, 'u14-julgran', {
+    prompt: 'L’arbre décoré à Noël : « un sapin de Noël »', promptEn: 'The decorated tree at Christmas: "a Christmas tree"',
+    sv: 'en julgran', fr: 'un sapin de Noël', en: 'a Christmas tree', ipa: '/ɛn ˈjʉːlˌɡrɑːn/',
+    note: '*jul* (Noël) + *gran* (sapin). Il reste souvent jusqu’à la Saint-Knut, le 13 janvier.',
+  }),
+  vocab(D, 'u14-nyar', {
+    prompt: 'Le 31 décembre et le 1er janvier : « le Nouvel An »', promptEn: '31 December and 1 January: "New Year"',
+    sv: 'nyår', fr: 'le Nouvel An', en: 'New Year', ipa: '/ˈnyːˌoːr/',
+    note: '*ny* (nouveau) + *år* (an). La veille : *nyårsafton*.',
+  }),
+  vocab(D, 'u14-ljus', {
+    prompt: 'Une flamme sur la table : « une bougie »', promptEn: 'A flame on the table: "a candle"',
+    sv: 'ett ljus', fr: 'une bougie / une lumière', en: 'a candle / a light', ipa: '/ɛtː jʉːs/',
+    note: 'Le **lj** se prononce [j]. Partout en hiver, et sur la couronne de Lucia.',
+  }),
+  vocab(D, 'u14-tomte', {
+    prompt: 'Celui qui apporte les cadeaux : « le père Noël »', promptEn: 'The one who brings presents: "Santa"',
+    sv: 'en tomte', fr: 'un lutin / le père Noël', en: 'a gnome / Santa', ipa: '/ɛn ˈtɔmːtɛ/',
+    note: 'Le père Noël suédois : *jultomten*. Il frappe à la porte le 24 : *Finns det några snälla barn?*',
+  }),
+  vocab(D, 'u14-majstang', {
+    prompt: 'Le grand mât fleuri de la Saint-Jean : « un mât de mai »', promptEn: 'The tall decorated pole at Midsummer: "a maypole"',
+    sv: 'en majstång', fr: 'un mât de la Saint-Jean', en: 'a maypole', ipa: '/ɛn ˈmajˌstɔŋː/',
+    note: 'On danse autour à *midsommar*, en chantant *Små grodorna*.',
+  }),
+  vocab(D, 'u14-kraftskiva', {
+    prompt: 'La fête des écrevisses en août', promptEn: 'The crayfish party in August',
+    sv: 'en kräftskiva', fr: 'une fête des écrevisses', en: 'a crayfish party', ipa: '/ɛn ˈkrɛftˌɧiːva/',
+    note: '*kräfta* (écrevisse) + *skiva* (fête). Chapeaux en papier et chansons à boire (*snapsvisor*).',
+  }),
   phrase(D, 'u14-grattis-fodelsedagen', {
     prompt: 'Souhaiter un anniversaire : « Joyeux anniversaire ! »', promptEn: 'Birthday wishes: "Happy birthday!"',
     sv: 'Grattis på födelsedagen!', fr: 'Joyeux anniversaire !', en: 'Happy birthday!',

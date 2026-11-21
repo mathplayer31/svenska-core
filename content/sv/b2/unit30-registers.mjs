@@ -64,6 +64,44 @@ export const UNIT30_CARDS = [
     gloss: [['sa', 'a dit', 'said'], ['att', 'que', 'that']],
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u30-grym', {
+    prompt: 'En argot, très positif : « génial »', promptEn: 'Very positive slang: "awesome"',
+    sv: 'grym', fr: 'génial (familier)', en: 'awesome (slang)', ipa: '/ɡrʏmː/',
+    note: 'Au sens propre « cruel », mais chez les jeunes : *Det var grymt!* = c’était génial !',
+  }),
+  vocab(D, 'u30-assa', {
+    prompt: 'Le petit mot qui ponctue l’oral : « genre / enfin »', promptEn: 'The filler word in speech: "like / I mean"',
+    sv: 'asså', fr: 'enfin / genre (familier)', en: 'like / I mean (filler)', ipa: '/ˈasːɔ/',
+    note: 'Forme orale de *alltså*. *Asså, jag vet inte.* À éviter à l’écrit soutenu.',
+  }),
+  vocab(D, 'u30-kaka', {
+    prompt: 'Manger, en familier : « bouffer »', promptEn: 'Eating, casually: "to grab food"',
+    sv: 'käka', fr: 'bouffer / manger (familier)', en: 'to eat (casual)', ipa: '/ˈɕɛːka/',
+    note: '*Ska vi käka?* = on mange ? Registre neutre : *äta*.',
+  }),
+  vocab(D, 'u30-jobbigt', {
+    prompt: 'Ce qui est pénible ou fatigant', promptEn: 'Something tiring or annoying: "a hassle"',
+    sv: 'jobbigt', fr: 'pénible / galère', en: 'annoying / a hassle', ipa: '/ˈjɔbːɪt/',
+    note: 'Très courant à l’oral : *Vad jobbigt!* = quelle galère !',
+  }),
+  vocab(D, 'u30-sjukt', {
+    prompt: 'Intensif familier : « grave / trop »', promptEn: 'Casual intensifier: "insanely / super"',
+    sv: 'sjukt', fr: 'grave / trop (familier)', en: 'insanely / super (slang)', ipa: '/ɧʉːkt/',
+    note: 'Devant un adjectif : *sjukt bra* = trop bien. Sens propre : malade (*sjuk*).',
+  }),
+  vocab(D, 'u30-med-anledning-av', {
+    prompt: 'Pour introduire un motif, en style administratif', promptEn: 'Introducing a reason, in official style',
+    sv: 'med anledning av', fr: 'suite à / en raison de', en: 'in view of / regarding', ipa: '/meː ˈanˌleːdnɪŋ ɑːv/',
+    note: 'Début typique de courriel officiel : *Med anledning av ditt mejl…*',
+    gloss: [['med', 'avec', 'with'], ['anledning', 'raison', 'reason'], ['av', 'de', 'of']],
+  }),
+  vocab(D, 'u30-vi-hors', {
+    prompt: 'Se quitter en promettant de se reparler : « on s’appelle »', promptEn: 'Saying goodbye, promising to talk: "talk soon"',
+    sv: 'vi hörs', fr: 'on s’appelle / on se tient au courant', en: 'talk soon', ipa: '/viː hœʂː/',
+    note: 'Forme réciproque en **-s** de *höra* (entendre). Pendant de *vi ses*.',
+    gloss: [['vi', 'on', 'we'], ['hörs', 's’entend', 'hear each other']],
+  }),
   phrase(D, 'u30-vanligen-kontakta', {
     prompt: 'Formel : « Veuillez nous contacter par e-mail. »', promptEn: 'Formal: "Please contact us by email."',
     sv: 'Vänligen kontakta oss via e-post.', fr: 'Veuillez nous contacter par e-mail.', en: 'Please contact us by email.',

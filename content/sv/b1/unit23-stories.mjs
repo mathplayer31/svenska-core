@@ -62,6 +62,40 @@ export const UNIT23_CARDS = [
     note: 'À l’oral : *sen*. Même mot que dans *för två år sedan* (il y a deux ans, Grammaire A2).',
   }),
 
+  // Ajouts (issue #14)
+  vocab(D, 'u23-det-var-en-gang', {
+    prompt: 'Le début des contes : « il était une fois »', promptEn: 'How fairy tales begin: "once upon a time"',
+    sv: 'det var en gång', fr: 'il était une fois', en: 'once upon a time', ipa: '/deː vɑːr ɛn ɡɔŋː/',
+    note: '*Det var en gång en kung…* Mot à mot : « c’était une fois ».',
+    gloss: [['det', 'ce', 'it'], ['var', 'était', 'was'], ['en', 'une', 'one'], ['gång', 'fois', 'time']],
+  }),
+  vocab(D, 'u23-berattar', {
+    prompt: 'Faire le récit d’une histoire : « raconter »', promptEn: 'Telling a story: "to tell"',
+    sv: 'berättar', fr: 'raconte / raconter', en: 'tells / to tell', ipa: '/bɛˈrɛtːar/',
+    note: 'Infinitif *berätta*. *Berätta mer!* = raconte-moi plus ! De là : *en berättelse*.',
+  }),
+  vocab(D, 'u23-senare', {
+    prompt: 'Après, mais pas tout de suite : « plus tard »', promptEn: 'After, but not straight away: "later"',
+    sv: 'senare', fr: 'plus tard', en: 'later', ipa: '/ˈseːnarɛ/',
+    note: 'Comparatif de *sen*. *Vi ses senare!* = à plus tard !',
+  }),
+  vocab(D, 'u23-da', {
+    prompt: 'À ce moment du passé : « alors »', promptEn: 'At that moment in the past: "then"',
+    sv: 'då', fr: 'alors / à ce moment-là', en: 'then / at that time', ipa: '/doː/',
+    note: '*Då ringde telefonen.* En tête, il entraîne l’inversion (V2).',
+  }),
+  vocab(D, 'u23-under-tiden', {
+    prompt: 'Pendant qu’autre chose se passe : « pendant ce temps »', promptEn: 'While something else happens: "meanwhile"',
+    sv: 'under tiden', fr: 'pendant ce temps', en: 'meanwhile', ipa: '/ˈɵndɛr ˈtiːdɛn/',
+    note: 'Adverbe, à ne pas confondre avec la conjonction *medan* (pendant que).',
+    gloss: [['under', 'pendant', 'during'], ['tiden', 'le temps', 'the time']],
+  }),
+  vocab(D, 'u23-for-lange-sedan', {
+    prompt: 'Il y a très longtemps', promptEn: 'A very long time ago',
+    sv: 'för länge sedan', fr: 'il y a longtemps', en: 'a long time ago', ipa: '/fœr ˈlɛŋːɛ ˈseːdan/',
+    note: 'Même structure que *för två år sedan*. À l’oral : *för länge sen*.',
+    gloss: [['för', 'il y a', 'ago (for)'], ['länge', 'longtemps', 'long'], ['sedan', 'depuis', 'since']],
+  }),
   phrase(D, 'u23-vad-hande-sedan', {
     prompt: '« Qu’est-ce qui s’est passé ensuite ? »', promptEn: '"What happened next?"',
     sv: 'Vad hände sedan?', fr: 'Qu’est-ce qui s’est passé ensuite ?', en: 'What happened next?',
