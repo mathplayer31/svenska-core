@@ -1,7 +1,7 @@
 // Séance d'unité (issues #10 et #13) : blocs de nouvelles cartes, exercices après chaque bloc, rappels des mots déjà vus.
 // Un rappel est un exercice dont le résultat note la carte dans FSRS. En fin de séance, chaque carte trouvée
 // difficile (notée À revoir ou Difficile, exercice raté) revient une fois en révision.
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Rating, type Grade } from 'ts-fsrs';
 import { ArrowRight, CheckCircle2, X } from 'lucide-react';
 import { useI18n } from './i18n';
@@ -18,6 +18,8 @@ import {
   type Verdict,
 } from './UnitPractice';
 import { planSession, reviewSteps, type SessionItem, type Step } from './sessionPlan';
+import { awardXp } from './dataSource';
+import { XP, type XpKind } from './xp';
 
 export { type SessionItem } from './sessionPlan';
 
@@ -61,6 +63,11 @@ export default function UnitSession({
   const [difficult, setDifficult] = useState<Map<string, SessionItem>>(new Map());
   const [reviewAdded, setReviewAdded] = useState(false);
   const [stats, setStats] = useState({ learned: 0, recalls: 0, recallOk: 0 });
+  const [xp, setXp] = useState(0);
+  const gain = (kind: XpKind) => {
+    setXp((n) => n + XP[kind]);
+    awardXp(kind);
+  };
 
   const step = steps[index] as Step | undefined;
   const finished = steps.length > 0 && index >= steps.length;
@@ -79,6 +86,15 @@ export default function UnitSession({
     setSteps((list) => [...list, ...reviewSteps([...difficult.values()], factory)]);
   }, [finished, reviewAdded, difficult, factory]);
 
+  // Séance terminée (révision des difficultés comprise) : bonus et journée validée pour le streak, une seule fois
+  const done = finished && (reviewAdded || difficult.size === 0);
+  const rewarded = useRef(false);
+  useEffect(() => {
+    if (!done || rewarded.current) return;
+    rewarded.current = true;
+    awardXp('session');
+  }, [done]);
+
   const next = useCallback(() => {
     setVerdict(null);
     setFlipped(false);
@@ -89,6 +105,7 @@ export default function UnitSession({
 
   const onExerciseResult = (v: Verdict) => {
     setVerdict(v);
+    if (step) gain(v.ok ? 'ok' : 'miss');
     if (step?.type === 'practice') {
       if (step.item && !v.ok) markDifficult(step.item);
       return;
@@ -109,6 +126,7 @@ export default function UnitSession({
   const onCardRate = (grade: Grade) => {
     if (!step || step.type === 'practice') return;
     onRate(step.item.study.id, grade);
+    gain(step.type === 'learn' ? 'new' : grade === Rating.Again ? 'miss' : 'ok');
     if (step.type === 'learn') setStats((s) => ({ ...s, learned: s.learned + 1 }));
     else setStats((s) => ({ ...s, recalls: s.recalls + 1, recallOk: s.recallOk + (grade === Rating.Again ? 0 : 1) }));
     if (grade === Rating.Again || grade === Rating.Hard) markDifficult(step.item);
@@ -167,7 +185,7 @@ export default function UnitSession({
 
   if (finished || !step) {
     return shell(
-      <EndCard title={t.sessionFinished} text={t.sessionSummary(stats.learned, stats.recalls, stats.recallOk)}>
+      <EndCard title={t.sessionFinished} text={`${t.sessionSummary(stats.learned, stats.recalls, stats.recallOk)} ${t.xpGained(xp + (done ? XP.session : 0))}`}>
         <button onClick={onAgain} className="w-full py-3.5 rounded-full bg-accent hover:bg-accent-hover text-accent-ink font-semibold cursor-pointer inline-flex items-center justify-center gap-2">
           {t.nextSession} <ArrowRight className="w-4 h-4" aria-hidden />
         </button>

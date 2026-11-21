@@ -5,6 +5,7 @@
 //  - Connecté à un compte, elle est fusionnée avec Supabase : à chaque carte, la révision la plus récente gagne.
 import { supabase } from './supabaseClient';
 import { mergeCard, mergeSection, sameRow, isoOrNull } from './syncMerge';
+import { XP, dayKey, periodStarts, streaks, type XpKind } from './xp';
 
 type Row = Record<string, any>;
 
@@ -163,5 +164,98 @@ export async function sync(): Promise<{ pulled: number; pushed: number } | null>
     const { error } = await supabase!.from('progress_sections').upsert(sectionsToPush);
     if (error) throw error;
   }
+  await flushXp();
+  const { data: sessionDays, error } = await supabase!.from('xp_events').select('day').eq('kind', 'session');
+  if (error) throw error;
+  const store = readXp();
+  store.days = [...new Set([...store.days, ...sessionDays.map((r) => r.day as string)])];
+  writeXp(store);
   return { pulled, pushed: cardsToPush.length + sectionsToPush.length };
+}
+
+// ---------------------------------------------------------------------------
+// XP et streak (issue #15) : tout est noté sur l'appareil ; connecté, chaque événement est envoyé au compte.
+// Un envoi raté reste en attente et repart à la synchro suivante, avec le même identifiant (pas de doublon).
+// ---------------------------------------------------------------------------
+interface XpEvent { id: string; kind: XpKind; at: string; day: string }
+interface XpStore {
+  /** XP gagnée sur cet appareil, par jour local */
+  log: Record<string, number>;
+  /** Jours où une séance a été terminée (cet appareil et, connecté, le compte) */
+  days: string[];
+  /** Événements pas encore reçus par le compte */
+  pending: XpEvent[];
+}
+const XP_KEY = 'svenska.xp';
+
+function readXp(): XpStore {
+  const s = readMap(XP_KEY) as Partial<XpStore>;
+  return { log: s.log ?? {}, days: s.days ?? [], pending: s.pending ?? [] };
+}
+const writeXp = (s: XpStore) => writeMap(XP_KEY, s as never);
+const newId = () => crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+export async function awardXp(kind: XpKind) {
+  const now = new Date();
+  const day = dayKey(now);
+  const store = readXp();
+  store.log[day] = (store.log[day] ?? 0) + XP[kind];
+  if (kind === 'session' && !store.days.includes(day)) store.days.push(day);
+  store.pending.push({ id: newId(), kind, at: now.toISOString(), day });
+  writeXp(store);
+  try {
+    await flushXp();
+  } catch {
+    // hors ligne : l'événement reste en attente
+  }
+}
+
+async function flushXp() {
+  const sent = readXp().pending;
+  if (!sent.length || !(await currentUser())) return;
+  const { error } = await supabase!.from('xp_events').upsert(sent, { onConflict: 'user_id,id', ignoreDuplicates: true });
+  if (error) throw error;
+  const done = new Set(sent.map((e) => e.id));
+  const store = readXp(); // relu : d'autres événements ont pu arriver pendant l'envoi
+  store.pending = store.pending.filter((e) => !done.has(e.id));
+  writeXp(store);
+}
+
+/** XP de la semaine et du mois gagnée sur cet appareil, streak courant et record */
+export function localStats() {
+  const now = new Date();
+  const { week, month } = periodStarts(now);
+  const store = readXp();
+  const since = (d: Date) => Object.entries(store.log).reduce((sum, [day, xp]) => (day >= dayKey(d) ? sum + xp : sum), 0);
+  return { week: since(week), month: since(month), ...streaks(store.days, dayKey(now)) };
+}
+
+export interface BoardRow { pseudo: string; xp_week: number; xp_month: number; streak: number; best_streak: number; is_me: boolean }
+
+export async function leaderboard(): Promise<BoardRow[]> {
+  const now = new Date();
+  const { week, month } = periodStarts(now);
+  const { data, error } = await supabase!.rpc('leaderboard', {
+    since_week: week.toISOString(),
+    since_month: month.toISOString(),
+    today: dayKey(now),
+  });
+  if (error) throw error;
+  return data;
+}
+
+export async function getPseudo(): Promise<string | null> {
+  const user = await currentUser();
+  if (!user) return null;
+  const { data, error } = await supabase!.from('profiles').select('pseudo').eq('user_id', user.id).maybeSingle();
+  if (error) throw error;
+  return data?.pseudo ?? null;
+}
+
+/** Enregistre le pseudo ; 'taken' s'il est déjà pris (unicité sans tenir compte de la casse) */
+export async function setPseudo(pseudo: string): Promise<'ok' | 'taken'> {
+  const { error } = await supabase!.from('profiles').upsert({ pseudo, updated_at: new Date().toISOString() });
+  if (error?.code === '23505') return 'taken';
+  if (error) throw error;
+  return 'ok';
 }
