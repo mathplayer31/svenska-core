@@ -1,8 +1,9 @@
-// Séance d'unité (issue #10) : nouvelles cartes, exercice juste après, rappels des mots déjà vus.
-// Un rappel est un exercice dont le résultat note la carte dans FSRS ; une carte ratée revient une fois.
-import { useCallback, useState } from 'react';
+// Séance d'unité (issues #10 et #13) : blocs de nouvelles cartes, exercices après chaque bloc, rappels des mots déjà vus.
+// Un rappel est un exercice dont le résultat note la carte dans FSRS. En fin de séance, chaque carte trouvée
+// difficile (notée À revoir ou Difficile, exercice raté) revient une fois en révision.
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { Rating, type Grade } from 'ts-fsrs';
-import { CheckCircle2, RotateCcw, X } from 'lucide-react';
+import { ArrowRight, CheckCircle2, X } from 'lucide-react';
 import { useI18n } from './i18n';
 import StudyCard, { type StudyCardData } from './StudyCard';
 import {
@@ -11,11 +12,12 @@ import {
   exerciseFactory,
   kindLabels,
   useEnterToContinue,
+  withoutAudio,
   type Exercise,
   type PracticeCard,
   type Verdict,
 } from './UnitPractice';
-import { planSession, recallExercise, type SessionItem, type Step } from './sessionPlan';
+import { planSession, reviewSteps, type SessionItem, type Step } from './sessionPlan';
 
 export { type SessionItem } from './sessionPlan';
 
@@ -56,21 +58,26 @@ export default function UnitSession({
   const [index, setIndex] = useState(0);
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [flipped, setFlipped] = useState(false);
-  const [requeued, setRequeued] = useState<Set<string>>(new Set());
+  const [difficult, setDifficult] = useState<Map<string, SessionItem>>(new Map());
+  const [reviewAdded, setReviewAdded] = useState(false);
   const [stats, setStats] = useState({ learned: 0, recalls: 0, recallOk: 0 });
 
   const step = steps[index] as Step | undefined;
   const finished = steps.length > 0 && index >= steps.length;
+  const inReview = step?.type === 'recall' && !!step.review;
 
-  // Une carte ratée revient une fois en fin de séance, sous forme d'un nouveau rappel
-  const requeue = useCallback(
-    (item: SessionItem) => {
-      if (requeued.has(item.study.id)) return;
-      setRequeued((s) => new Set(s).add(item.study.id));
-      setSteps((list) => [...list, { type: 'recall', item, ex: recallExercise(item, factory, list.length) }]);
-    },
-    [requeued, factory]
-  );
+  // Carte trouvée difficile pendant la séance (pas pendant la révision elle-même : elle ne revient qu'une fois)
+  const markDifficult = (item: SessionItem) => {
+    if (inReview) return;
+    setDifficult((m) => (m.has(item.study.id) ? m : new Map(m).set(item.study.id, item)));
+  };
+
+  // Plan terminé : la révision des difficultés s'ajoute avant que l'écran de fin ne s'affiche
+  useLayoutEffect(() => {
+    if (!finished || reviewAdded || difficult.size === 0) return;
+    setReviewAdded(true);
+    setSteps((list) => [...list, ...reviewSteps([...difficult.values()], factory)]);
+  }, [finished, reviewAdded, difficult, factory]);
 
   const next = useCallback(() => {
     setVerdict(null);
@@ -82,18 +89,29 @@ export default function UnitSession({
 
   const onExerciseResult = (v: Verdict) => {
     setVerdict(v);
+    if (step?.type === 'practice') {
+      if (step.item && !v.ok) markDifficult(step.item);
+      return;
+    }
     if (step?.type !== 'recall' || !step.ex) return;
-    onRate(step.item.study.id, gradeFromVerdict(v));
+    const grade = gradeFromVerdict(v);
+    onRate(step.item.study.id, grade);
     setStats((s) => ({ ...s, recalls: s.recalls + 1, recallOk: s.recallOk + (v.ok ? 1 : 0) }));
-    if (!v.ok) requeue(step.item);
+    if (grade !== Rating.Good) markDifficult(step.item);
   };
+
+  // « Je ne peux pas écouter » : l'exercice en cours et les suivants passent sans son
+  const noAudio = () =>
+    setSteps((list) =>
+      list.map((s, i) => (i < index || s.type === 'learn' || !s.ex ? s : { ...s, ex: withoutAudio(s.ex, factory) }))
+    );
 
   const onCardRate = (grade: Grade) => {
     if (!step || step.type === 'practice') return;
     onRate(step.item.study.id, grade);
     if (step.type === 'learn') setStats((s) => ({ ...s, learned: s.learned + 1 }));
     else setStats((s) => ({ ...s, recalls: s.recalls + 1, recallOk: s.recallOk + (grade === Rating.Again ? 0 : 1) }));
-    if (grade === Rating.Again) requeue(step.item);
+    if (grade === Rating.Again || grade === Rating.Hard) markDifficult(step.item);
     next();
   };
 
@@ -151,7 +169,7 @@ export default function UnitSession({
     return shell(
       <EndCard title={t.sessionFinished} text={t.sessionSummary(stats.learned, stats.recalls, stats.recallOk)}>
         <button onClick={onAgain} className="w-full py-3.5 rounded-full bg-accent hover:bg-accent-hover text-accent-ink font-semibold cursor-pointer inline-flex items-center justify-center gap-2">
-          <RotateCcw className="w-4 h-4" aria-hidden /> {t.nextSession}
+          {t.nextSession} <ArrowRight className="w-4 h-4" aria-hidden />
         </button>
         <button onClick={onExit} className="w-full py-3 rounded-full bg-surface-2 hover:bg-line text-ink font-medium cursor-pointer">
           {t.back}
@@ -165,7 +183,7 @@ export default function UnitSession({
       <StudyCard
         key={`${index}-${step.item.study.id}`}
         card={step.item.study}
-        chip={step.type === 'learn' ? t.newCard : t.recallChip(step.item.unitLabel)}
+        chip={step.type === 'learn' ? t.newCard : step.review ? t.reviewChip : t.recallChip(step.item.unitLabel)}
         flipped={flipped}
         onFlip={() => setFlipped(true)}
         onRate={onCardRate}
@@ -184,7 +202,8 @@ export default function UnitSession({
         locked={!!verdict}
         onResult={onExerciseResult}
         label={KIND[ex.kind]}
-        chip={step.type === 'recall' ? t.recallChip(step.item.unitLabel) : undefined}
+        chip={step.type === 'recall' ? (step.review ? t.reviewChip : t.recallChip(step.item.unitLabel)) : undefined}
+        onNoAudio={noAudio}
       />
       {verdict && <VerdictPanel verdict={verdict} card={answerCard} onContinue={next} />}
     </>
