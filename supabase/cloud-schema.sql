@@ -2,6 +2,7 @@
 -- À coller une seule fois dans Supabase Cloud > SQL Editor. Appliqué aussi à la base locale pour les tests.
 -- Le contenu (cartes, decks, sections) n'est PAS en ligne : il est embarqué dans l'app (src/content.json).
 -- Seule la progression de chaque utilisateur est stockée ici, et chacun ne voit que la sienne (RLS).
+-- Ensuite : migrations-manuelles/migration_classement.sql (XP, streak et classement, issue #15).
 
 create table if not exists public.progress_cards (
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,

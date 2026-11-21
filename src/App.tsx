@@ -19,9 +19,11 @@ import {
   CircleUser,
   Moon,
   Sun,
+  Trophy,
 } from 'lucide-react';
 import * as data from './dataSource';
 import AccountScreen from './AccountScreen';
+import Leaderboard from './Leaderboard';
 import SectionTest from './SectionTest';
 import { COURSE_LANGS, useI18n, type Course, type Lang } from './i18n';
 import UnitPractice, { type PracticeCard } from './UnitPractice';
@@ -352,6 +354,9 @@ export default function App() {
   const handleFoundationRate = useCallback(
     (grade: Grade) => {
       if (!currentCard) return;
+      data.awardXp(currentCard.fsrsCard.state === 0 ? 'new' : grade === Rating.Again ? 'miss' : 'ok');
+      // Dernière carte de la séance (une carte notée sort de la file jusqu'à sa prochaine échéance)
+      if (!cramMode && sessionQueue.length === 1) data.awardXp('session');
       setIsFlipped(false);
       if (cramMode && sessionQueue.length > 1) {
         const idx = sessionQueue.findIndex((c) => c.id === currentCard.id);
@@ -1043,6 +1048,8 @@ export default function App() {
                 <ul className="mt-6 p-1.5 rounded-[24px] bg-surface shadow-card space-y-0.5">{foundationDecks.map(renderFoundationRow)}</ul>
               </div>
             )}
+
+            {tab === 'classement' && <Leaderboard signedIn={!!userEmail} onOpenAccount={() => setShowAccount(true)} />}
           </div>
         </main>
 
@@ -1150,6 +1157,7 @@ export default function App() {
 const NAV = [
   { id: 'parcours', labelKey: 'navParcours', Icon: Compass },
   { id: 'fondations', labelKey: 'navFondations', Icon: BookOpen },
+  { id: 'classement', labelKey: 'navClassement', Icon: Trophy },
 ] as const;
 
 /** « Unité 1 : Salutations » ou "Unit 1: Greetings" -> { eyebrow: 'Unité 1', title: 'Salutations' } */

@@ -1,8 +1,10 @@
 // Écran Compte (issue #8) : connexion / inscription par e-mail et mot de passe, synchro, déconnexion.
-import { useState } from 'react';
+// Pseudo du classement (issue #15).
+import { useEffect, useState } from 'react';
 import { ArrowLeft, CircleUser, RefreshCw } from 'lucide-react';
 import * as data from './dataSource';
 import { useI18n } from './i18n';
+import { PSEUDO_RE } from './xp';
 
 interface Props {
   email: string | null;
@@ -18,6 +20,11 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
+  const [pseudo, setPseudo] = useState('');
+
+  useEffect(() => {
+    if (email) data.getPseudo().then((p) => setPseudo(p ?? ''), () => {});
+  }, [email]);
 
   const run = async (action: () => Promise<string | null>) => {
     setBusy(true);
@@ -41,6 +48,13 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
     });
   const syncNow = () => run(async () => (await data.sync(), t.syncedOk));
   const signOut = () => run(async () => (await data.signOut(), null));
+  const savePseudo = () =>
+    run(async () => {
+      const value = pseudo.trim();
+      if (!PSEUDO_RE.test(value)) throw new Error(t.pseudoInvalid);
+      if ((await data.setPseudo(value)) === 'taken') throw new Error(t.pseudoTaken);
+      return t.pseudoSaved;
+    });
 
   const canSubmit = formEmail.includes('@') && password.length >= 6 && !busy;
   const input =
@@ -68,6 +82,32 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
             <>
               <p className="text-ink">{t.signedInAs(email)}</p>
               {syncError && <p className="text-sm text-danger">{t.syncFailed(syncError)}</p>}
+              <form
+                className="space-y-3"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!busy) savePseudo();
+                }}
+              >
+                <label className="block">
+                  <span className="block text-sm font-medium text-ink mb-1.5">{t.pseudo}</span>
+                  <input
+                    value={pseudo}
+                    onChange={(e) => setPseudo(e.target.value)}
+                    maxLength={20}
+                    autoComplete="nickname"
+                    className={input}
+                  />
+                  <span className="block text-xs text-faint mt-1">{t.pseudoHint}</span>
+                </label>
+                <button
+                  type="submit"
+                  disabled={busy || !pseudo.trim()}
+                  className="w-full py-3 rounded-xl border border-line hover:bg-surface-2 text-ink font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {t.pseudoSave}
+                </button>
+              </form>
               <button
                 onClick={syncNow}
                 disabled={busy}
