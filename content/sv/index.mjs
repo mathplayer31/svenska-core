@@ -39,8 +39,10 @@ import { FOUNDATION_DECKS, FOUNDATION_CARDS } from './a1/foundations.mjs';
 // Decks thématiques de vocabulaire (issue #18)
 import { THEMES_A2_1 } from './a2/themes-1.mjs';
 import { THEMES_A2_2 } from './a2/themes-2.mjs';
+import { THEMES_B1_1 } from './b1/themes-1.mjs';
+import { THEMES_B1_2 } from './b1/themes-2.mjs';
 
-const THEMES = [...THEMES_A2_1, ...THEMES_A2_2];
+const THEMES = [...THEMES_A2_1, ...THEMES_A2_2, ...THEMES_B1_1, ...THEMES_B1_2];
 
 export const SV_DECKS = [
   ...FOUNDATION_DECKS, UNIT1_DECK, UNIT2_DECK, UNIT3_DECK, UNIT4_DECK, UNIT5_DECK, UNIT6_DECK, UNIT7_DECK,
