@@ -38,3 +38,33 @@ export function unitDeck({ n, slug, fr, en, level, section, after }) {
     prerequisite_slug: after,
   };
 }
+
+// Decks thématiques de vocabulaire (issue #18) : étudiés comme les fondations, débloqués par une unité.
+// Une ligne par mot : [suédois, IPA, français, anglais, genre ?]. Les noms comptables portent leur article
+// (en / ett) ; pour un nom sans article (indénombrable), `genre` donne l'article et la forme définie
+// (ex. 'ett blodet'), dont la note de la carte est tirée. Slug : `v-` + 1re forme, å ä ö en aa ae oe.
+const ascii = (s) =>
+  s.toLowerCase().replace(/å/g, 'aa').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/é/g, 'e')
+    .replace(/^(en|ett|att) /, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+export function themeDeck({ level, key, sort, fr, en, after }, rows) {
+  const deck = {
+    slug: `swedish-theme-${key}`,
+    title: `Vocabulaire ${level} : ${fr}`,
+    title_en: `${level} Vocabulary: ${en}`,
+    category: 'vocabulary',
+    cefr_level: level,
+    sort_order: sort,
+    prerequisite_slug: after,
+  };
+  const cards = rows.map(([sv, ipa, frWord, enWord, genre]) => {
+    const [art, def] = genre?.split(' ') ?? [];
+    const c = vocab(deck.slug, `v-${ascii(sv.split(' / ')[0])}`, {
+      prompt: `${fr} : « ${frWord} »`, promptEn: `${en}: "${enWord}"`,
+      sv, fr: frWord, en: enWord, ipa,
+      note: genre ? `Nom en **${art}** : *${def}* au défini.` : '',
+    });
+    return { ...c, note_en: genre ? `An **${art}** noun: definite form *${def}*.` : '' };
+  });
+  return { deck, cards };
+}

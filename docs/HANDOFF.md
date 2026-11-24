@@ -21,6 +21,16 @@ App d'apprentissage du suédois, local-first, style Mjølnir, pour **PC Web** et
 - Schéma complet de la base : `supabase/schema.sql` (à coller dans le SQL Editor pour une base neuve).
 - Dépôt GitHub **privé** : https://github.com/mathplayer31/svenska-core (branche `main`, remote `origin`).
 
+## Vocabulaire B2 : decks thématiques : AJOUTÉ (25 nov 2026, issue #18)
+- SvenskaCore compte **3 023 mots ou expressions distincts** (point de départ : 518). Comptage : `node scripts/count-vocab.mjs` (une carte `vocab` = un mot, comptée par sa 1re forme sans article ; le script sort en erreur si un mot d'un deck thématique existe déjà ailleurs, paires minimales de phonétique comprises).
+- 44 decks de fondation « Vocabulaire A2 / B1 / B2 : thème » : 13 en A2 (761 mots : corps, maison, nourriture, gens, ville, temps et nombres, loisirs, vêtements et couleurs, nature et animaux, voyages, verbes, adjectifs, petits mots), 14 en B1 (790 mots), 17 en B2 (954 mots, dont 55 expressions imagées). Les unités n'ont pas changé, aucun slug existant n'a changé.
+- Fichiers : `content/sv/a2/themes-1.mjs` et `themes-2.mjs`, idem en `b1/` et `b2/`. Une ligne par mot : `[suédois, IPA, français, anglais, genre ?]`, transformée en carte par `themeDeck` (`content/sv/helpers.mjs`) : slug `v-<mot>` (å ä ö en aa ae oe), consigne « Thème : « traduction » », son du mot avec son article. Les noms comptables portent leur article en / ett ; un nom sans article (indénombrable) a son genre et sa forme définie en 5e colonne, d'où sa note (« Nom en **ett** : *blodet* au défini »). Les autres cartes n'ont pas de note : `sync-content` n'exige la note anglaise que si la note française existe.
+- Déverrouillage : chaque deck a pour prérequis une unité de son niveau (ex. « Le corps » après l'Unité 12, « Économie et finance » après l'Unité 25). Étude comme les fondations, avec FSRS. L'onglet Fondations range les decks par niveau CECR (un bloc A1, A2, B1, B2).
+- `content/sv/index.mjs` regroupe désormais tous les decks et cartes suédois (`SV_DECKS`, `SV_CARDS`), lus par `scripts/sync-content.mjs` et `scripts/count-vocab.mjs`. Pour ajouter un deck thématique : une entrée `themeDeck(...)` dans le fichier `themes-*.mjs` du niveau, puis `npm run content`.
+- Accents tonals : seuls les monosyllabes des nouveaux decks (accent 1, certain) sont dans `content/sv/tones.mjs` (405 mots). Les mots de deux syllabes ou plus sont sans courbe, à faire relire par une personne native.
+- Sons : 2 505 MP3 de plus dans `public/audio` (environ 4 300 au total). Le cache hors ligne de la PWA les inclut (liste générée au build dans `dist/sw.js`) ; la liste des sons change, donc un appareil déjà installé retélécharge tous les sons une fois.
+- Vérifié le 25 nov 2026 : `npm run content`, `node scripts/count-vocab.mjs`, `node scripts/check-tones.mjs`, `node scripts/check-fr.mjs`, `npx tsc -b`, `npm run build`, `npm run apk`.
+
 ## Rappel quotidien : AJOUTÉ (21 nov 2026, issue #16)
 - Réglage dans l'écran Compte (`src/ReminderSettings.tsx`) : interrupteur et heure, mémorisés sur l'appareil (clé `svenska.reminder`). La permission de notification n'est demandée qu'à l'activation. Logique : `src/reminders.ts`.
 - APK : notification locale répétée chaque jour (`@capacitor/local-notifications`, id 1), sans serveur. Le plugin la reprogramme au redémarrage du téléphone (récepteur `BOOT_COMPLETED`) ; un appui ouvre l'app.
@@ -347,7 +357,7 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 5. [~] Carte `phrase` : glose affichée en chips mot/traduction sur la face réponse (pas encore au tap).
 6. [x] Boucle de révision FSRS (Again/Hard/Good/Easy + upsert `user_card_progress`), faite directement dans App.tsx. Typage corrigé (`Rating` -> `Grade`, ts-fsrs v5).
 7. [x] Page d'unité Découvrir -> Pratiquer + 5 types d'exercices (`UnitPractice.tsx`).
-8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2, B1 et B2 livrés (issues #2, #3, #4, Unités 8 à 31, Sections 3 à 8, Grammaires A2 / B1 / B2), fusionnés dans `main`. Prochaine étape possible : decks de vocabulaire thématique plus denses pour approcher les 3 000 mots d'un vrai B2.
+8. [x] Seeds Unités 2 à 7 + Section 2 complète. A2, B1 et B2 livrés (issues #2, #3, #4, Unités 8 à 31, Sections 3 à 8, Grammaires A2 / B1 / B2), fusionnés dans `main`. Decks de vocabulaire thématique A2 à B2 ajoutés (issue #18) : 3 023 mots. Reste : la même chose pour FranceCore.
 8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`content/sv/a1/grammar.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
