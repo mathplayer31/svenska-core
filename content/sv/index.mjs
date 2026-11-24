@@ -41,8 +41,10 @@ import { THEMES_A2_1 } from './a2/themes-1.mjs';
 import { THEMES_A2_2 } from './a2/themes-2.mjs';
 import { THEMES_B1_1 } from './b1/themes-1.mjs';
 import { THEMES_B1_2 } from './b1/themes-2.mjs';
+import { THEMES_B2_1 } from './b2/themes-1.mjs';
+import { THEMES_B2_2 } from './b2/themes-2.mjs';
 
-const THEMES = [...THEMES_A2_1, ...THEMES_A2_2, ...THEMES_B1_1, ...THEMES_B1_2];
+const THEMES = [...THEMES_A2_1, ...THEMES_A2_2, ...THEMES_B1_1, ...THEMES_B1_2, ...THEMES_B2_1, ...THEMES_B2_2];
 
 export const SV_DECKS = [
   ...FOUNDATION_DECKS, UNIT1_DECK, UNIT2_DECK, UNIT3_DECK, UNIT4_DECK, UNIT5_DECK, UNIT6_DECK, UNIT7_DECK,
