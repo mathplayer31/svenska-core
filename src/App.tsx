@@ -1050,7 +1050,15 @@ export default function App() {
                 <Eyebrow>{t.supportsPath}</Eyebrow>
                 <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-ink mt-1">{t.navFondations}</h1>
                 <p className="text-muted mt-3 max-w-prose">{t.foundationsIntro}</p>
-                <ul className="mt-6 p-1.5 rounded-[24px] bg-surface shadow-card space-y-0.5">{foundationDecks.map(renderFoundationRow)}</ul>
+                {/* Un bloc par niveau CECR : les decks de vocabulaire thématique (issue #18) allongent la liste */}
+                {[...new Set(foundationDecks.map((d) => d.cefrLevel))].sort().map((level) => (
+                  <section key={level} className="mt-6">
+                    <Eyebrow>{level}</Eyebrow>
+                    <ul className="mt-2 p-1.5 rounded-[24px] bg-surface shadow-card space-y-0.5">
+                      {foundationDecks.filter((d) => d.cefrLevel === level).map(renderFoundationRow)}
+                    </ul>
+                  </section>
+                ))}
               </div>
             )}
 

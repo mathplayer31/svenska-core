@@ -39,7 +39,7 @@ const fr = {
   freePractice: 'Entraînement libre',
   // Fondations
   supportsPath: 'En soutien du parcours',
-  foundationsIntro: 'Prononciation, grammaire et genres en/ett. Ces modules s’ouvrent au fil des unités.',
+  foundationsIntro: 'Prononciation, grammaire, genres en/ett et vocabulaire par thème. Ces modules s’ouvrent au fil des unités.',
   foundationDue: (n: number, m: number) => `${n} nouvelle${s(n)}, ${m} à revoir`,
   foundationUpToDate: (total: number, next: string | null) =>
     `${total} cartes, à jour${next ? ` (prochaine dans ${next})` : ''}`,
@@ -258,7 +258,7 @@ const en: typeof fr = {
   testNotReady: (seen, total) => `Discover every card in the section (${seen}/${total})`,
   freePractice: 'Free practice',
   supportsPath: 'Supporting your path',
-  foundationsIntro: 'Pronunciation, grammar and en/ett genders. These modules unlock as you complete units.',
+  foundationsIntro: 'Pronunciation, grammar, en/ett genders and vocabulary by topic. These modules unlock as you complete units.',
   foundationDue: (n, m) => `${n} new, ${m} to review`,
   foundationUpToDate: (total, next) => `${total} cards, up to date${next ? ` (next in ${next})` : ''}`,
   discovered: (seen, total) => `${seen}/${total} discovered`,
