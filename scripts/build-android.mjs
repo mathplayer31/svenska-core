@@ -4,6 +4,7 @@
 //  - lance Gradle en priorité « inférieure à la normale » (le reste du PC reste fluide),
 //  - n'utilise pas de daemon Gradle (rien ne reste en mémoire après le build).
 // Usage : npm run apk            (build web hors ligne + sync Capacitor + APK debug)
+//         npm run apk:release    (même chose, puis .aab et .apk signés pour la publication, issue #17)
 //         node scripts/build-android.mjs --gradle-only
 import os from 'node:os';
 import { spawn, execSync } from 'node:child_process';
@@ -77,6 +78,14 @@ writeFileSync(path.join(androidDir, 'local.properties'), `sdk.dir=${sdk.replaceA
 
 const env = { ...process.env, JAVA_HOME: javaHome, ANDROID_HOME: sdk };
 
+// Version publiée : refuse de construire sans clé, plutôt que de livrer un paquet non signé
+const release = process.argv.includes('--release');
+const keystore = path.join(os.homedir(), '.svenskacore', 'keystore.properties');
+if (release && !existsSync(keystore)) {
+  console.error(`${keystore} introuvable : crée la clé de signature (procédure dans docs/HANDOFF.md).`);
+  process.exit(1);
+}
+
 // --- 3. Build web hors ligne + synchronisation Capacitor --------------------
 function runLowPriority(cmd, args, cwd) {
   return new Promise((resolve, reject) => {
@@ -98,11 +107,12 @@ if (!process.argv.includes('--gradle-only')) {
 }
 
 // --- 4. APK ----------------------------------------------------------------
-console.log('\n> Gradle assembleDebug');
+const tasks = release ? ['bundleRelease', 'assembleRelease'] : ['assembleDebug'];
+console.log(`\n> Gradle ${tasks.join(' ')}`);
 await runLowPriority(
   isWin ? 'gradlew.bat' : './gradlew',
   [
-    'assembleDebug',
+    ...tasks,
     '--no-daemon',
     `--max-workers=${workers}`,
     // Arguments passés tels quels sous Windows : guillemets nécessaires à cause de l'espace
@@ -117,9 +127,13 @@ await runLowPriority(
   androidDir
 );
 
-const apk = path.join(androidDir, 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk');
-if (!existsSync(apk)) {
-  console.error('\nÉchec : APK introuvable (voir les erreurs Gradle ci-dessus).');
+const outputs = path.join(androidDir, 'app', 'build', 'outputs');
+const files = release
+  ? [path.join(outputs, 'bundle', 'release', 'app-release.aab'), path.join(outputs, 'apk', 'release', 'app-release.apk')]
+  : [path.join(outputs, 'apk', 'debug', 'app-debug.apk')];
+const missing = files.filter((f) => !existsSync(f));
+if (missing.length) {
+  console.error(`\nÉchec : introuvable ${missing.join(', ')} (voir les erreurs Gradle ci-dessus).`);
   process.exit(1);
 }
-console.log(`\nAPK prêt : ${apk}`);
+for (const f of files) console.log(`${release ? 'Signé' : 'APK prêt'} : ${f}`);

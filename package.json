@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "content": "node --env-file=.env.local scripts/sync-content.mjs",
     "apk": "node scripts/build-android.mjs",
+    "apk:release": "node scripts/build-android.mjs --release",
     "build:android": "tsc -b && vite build --mode android && cap sync android",
     "lint": "oxlint",
     "preview": "vite preview"

@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+// Signature de la version publiée (issue #17) : la clé et ses mots de passe restent hors du dépôt,
+// dans ~/.svenskacore/ (keystore.properties + la clé). Procédure : docs/HANDOFF.md
+def keystoreFile = new File(System.getProperty('user.home'), '.svenskacore/keystore.properties')
+def keystore = new Properties()
+if (keystoreFile.exists()) keystoreFile.withInputStream { keystore.load(it) }
+
 android {
     namespace = "com.svenskacore.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,8 +13,9 @@ android {
         applicationId "com.svenskacore.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        // À augmenter à chaque publication sur le Play Store (versionCode strictement croissant)
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,8 +23,19 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            if (keystoreFile.exists()) {
+                storeFile new File(keystoreFile.parentFile, keystore['storeFile'])
+                storePassword keystore['storePassword']
+                keyAlias keystore['keyAlias']
+                keyPassword keystore['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
+            if (keystoreFile.exists()) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

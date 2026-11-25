@@ -163,6 +163,21 @@ alter table public.sections add column if not exists description_en text;
 - Build : `npm run apk` → `scripts/build-android.mjs`. Le script mesure cœurs / charge CPU / RAM libre et adapte le build (1 à 4 workers Gradle, JVM 1 à 3 Go, priorité basse, sans daemon) pour ne pas saturer le PC. APK debug : `android/app/build/outputs/apk/debug/app-debug.apk`.
 - Les notes (`explanation_md`) sont rendues avec un mini-markdown (`**gras**`, `*italique*`, `~~barré~~`).
 
+## Version Android signée (release) : AJOUTÉ (25 nov 2026, issue #17)
+Procédure vérifiée le 25 nov 2026.
+- La clé reste hors du dépôt, dans `C:\Users\mathp\.svenskacore\` : `svenskacore-release.jks` (alias `svenskacore`, RSA 2048, validité 10 000 jours) et `keystore.properties`. `android/.gitignore` exclut aussi `*.jks` et `*.keystore`.
+- **Avertissement** : sauvegarder tout le dossier `.svenskacore` et son mot de passe hors du PC. Sans cette clé, plus aucune mise à jour de l'app n'est publiable sur le Play Store.
+- Création de la clé (faite une seule fois, par l'utilisateur, pour que le mot de passe ne passe jamais par Claude), dans PowerShell :
+  1. `New-Item -ItemType Directory -Force "$env:USERPROFILE\.svenskacore"`
+  2. `& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -keystore "$env:USERPROFILE\.svenskacore\svenskacore-release.jks" -alias svenskacore -keyalg RSA -keysize 2048 -validity 10000`
+  3. `notepad "$env:USERPROFILE\.svenskacore\keystore.properties"`, avec les 4 lignes `storeFile=svenskacore-release.jks`, `storePassword=...`, `keyAlias=svenskacore`, `keyPassword=...` (même mot de passe).
+- Build : `npm run apk:release` (même script que `npm run apk`, avec `--release`). Sans `keystore.properties`, le script s'arrête avant de construire. Sorties :
+  - `android/app/build/outputs/bundle/release/app-release.aab` (à envoyer sur le Play Store) ;
+  - `android/app/build/outputs/apk/release/app-release.apk` (installation directe sur un téléphone).
+- Vérification de la signature : `& "$env:LOCALAPPDATA\Android\Sdk\build-tools\36.0.0\apksigner.bat" verify --print-certs android\app\build\outputs\apk\release\app-release.apk` (code 0, affiche le certificat, SHA-256 `8d74e759...0740`). Pour l'AAB : `jarsigner -verify` répond « jar verified » ; ses avertissements (certificat auto-signé, pas d'horodatage) sont normaux pour une clé d'envoi Play Store.
+- Résultat du 25 nov 2026 : APK de 30 Mo, AAB de 25 Mo.
+- À chaque publication : augmenter `versionCode` (entier strictement croissant) et `versionName` dans `android/app/build.gradle`.
+
 ## FranceCore, cours de français : AJOUTÉ (18 nov 2026, issue #9)
 - Même app, deux cours : un clic sur le nom de l'app (en-tête) bascule entre **SvenskaCore** (suédois, interface FR / EN) et **FranceCore** (français, interface EN / SV). Cours et langue mémorisés par appareil (`svenska.course`, `svenska.lang`, `svenska.lang.fr`).
 - Contenu : le suédois est rangé dans `content/sv/`, le français dans `content/fr/` (programme : `docs/PROGRAMME-FR.md`, format : `content/fr/helpers.mjs`). 8 sections, 31 unités de 12 mots + 8 phrases, fondations de prononciation et de genre, un deck de grammaire par niveau.
@@ -361,7 +376,7 @@ Chaque unité a pour prérequis la précédente (chaîne U1 → U7). Le plan ini
 8b. [x] Deck Grammaire V2 réécrit avec le vocabulaire des unités 1 à 7 (`content/sv/a1/grammar.mjs`).
 8c. [ ] Le test de la section 1 a été validé avant l'ajout des Unités 2 et 3 : à refaire pour couvrir leur vocabulaire.
 9. [ ] Persister les scores d'exercices en DB (et éventuellement faire compter une erreur d'exercice comme un « Again » FSRS).
-10. [~] APK Android hors ligne fait (`npm run apk`). Restent : icône et splash, APK signé (release).
+10. [~] APK Android hors ligne fait (`npm run apk`). Version signée faite (`npm run apk:release`, issue #17). Restent : icône et splash, fiche Play Store.
 11. [~] Comptes et synchro (issue #8) : code fait. Restent : projet Supabase Cloud, clés dans `.env.production` et `.env.android`, Cloudflare Pages, import de la progression PC.
 
 ## Consignes pour Gemini
