@@ -26,7 +26,7 @@ scripts/
   build-android.mjs APK adapté à la charge du PC (npm run apk)
   check-fr.mjs      contrôle hors ligne du contenu FranceCore (node scripts/check-fr.mjs [niveau])
 src/                application React
-docs/               PROGRAMME.md (suédois A1 à B2), PROGRAMME-FR.md (français A1 à B2), HANDOFF.md (décisions et reste à faire)
+docs/               PROGRAMME.md (suédois A1 à B2), PROGRAMME-FR.md (français A1 à B2)
 supabase/           schema.sql (contenu), cloud-schema.sql (comptes), migrations-manuelles/
 ```
 
@@ -50,6 +50,3 @@ Comptes : `.env.production` (build web) et `.env.android` (APK) contiennent l'UR
 
 ## Déployer (web)
 Cloudflare Pages relié au dépôt GitHub : commande `npm run build`, dossier `dist` (Node 22, `.node-version`).
-
-## Suivi du projet
-Décisions, schéma et reste à faire : [docs/HANDOFF.md](docs/HANDOFF.md).
