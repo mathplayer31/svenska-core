@@ -1,4 +1,4 @@
-// FranceCore, Unité 19 : Donner son avis (je pense que, à mon avis, subjonctif d'opinion).
+// FranceCore, Unit 19: Giving your opinion (je pense que, à mon avis, subjunctive of opinion).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT19_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT19_DECK = unitDeck({
 const D = UNIT19_DECK.slug;
 
 export const UNIT19_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u19-a-mon-avis', {
     prompt: 'Inled din åsikt: ”enligt mig”', promptEn: 'Introduce your view: "in my opinion"',
     fr: 'à mon avis', sv: 'enligt mig / som jag ser det', en: 'in my opinion',
@@ -93,7 +93,7 @@ export const UNIT19_CARDS = [
     note: 'Fransmännen säger själva att de är ett folk av **râleurs**. Att gnälla är ofta ett sätt att skapa samhörighet, inte ett tecken på att man är olycklig.',
     noteEn: 'The French readily call themselves a nation of **râleurs** (grumblers). Grumbling is often a way of bonding, not a sign of real unhappiness.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u19-dapres-moi', {
     prompt: 'Säga sin åsikt', promptEn: 'Giving your opinion',
     fr: 'd’après moi', sv: 'enligt mig', en: 'in my view',
@@ -140,7 +140,7 @@ export const UNIT19_CARDS = [
     noteEn: '*Je suis contre cette réforme.* *Pour ou contre ?* = for or against?',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u19-pas-une-bonne-idee', {
     prompt: 'Säg att du inte tror att det är en bra idé', promptEn: 'Say you don’t think it’s a good idea',
     fr: 'Je ne pense pas que ce soit une bonne idée.', sv: 'Jag tror inte att det är en bra idé.', en: 'I don’t think it’s a good idea.',

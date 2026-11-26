@@ -1,4 +1,4 @@
-// FranceCore, Unité 22 : Sentiments et relations (se disputer, se réconcilier).
+// FranceCore, Unit 22: Feelings and relationships (arguing, making up).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT22_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT22_DECK = unitDeck({
 const D = UNIT22_DECK.slug;
 
 export const UNIT22_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u22-se-disputer', {
     prompt: 'Bråka med ord, gräla', promptEn: 'Argue, quarrel',
     fr: 'se disputer', sv: 'gräla / bråka', en: 'to argue / to have a row',
@@ -93,7 +93,7 @@ export const UNIT22_CARDS = [
     note: '**Rompre avec quelqu’un** är neutralt. I talspråk säger man oftare *se séparer* eller, ledigt, *larguer quelqu’un* (dumpa någon).',
     noteEn: '**Rompre avec quelqu’un** is neutral. In speech people more often say *se séparer* or, casually, *larguer quelqu’un* (to dump someone).',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u22-heureux', {
     prompt: 'Riktigt glad', promptEn: 'Truly happy',
     fr: 'heureux / heureuse', sv: 'lycklig', en: 'happy',
@@ -145,7 +145,7 @@ export const UNIT22_CARDS = [
     noteEn: 'Masculine: silent **s**; feminine: [z] is heard. The surprise: *la surprise*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u22-disputes-reconcilies', {
     prompt: 'Säg att ni grälade i går kväll men blev sams i morse', promptEn: 'Say you argued last night but made up this morning',
     fr: 'On s’est disputés hier soir, mais on s’est réconciliés ce matin.', sv: 'Vi grälade i går kväll, men vi blev sams i morse.', en: 'We had a row last night, but we made up this morning.',

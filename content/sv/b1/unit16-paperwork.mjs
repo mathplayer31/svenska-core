@@ -1,4 +1,4 @@
-// Unité 16 : Démarches (B1, Section 5). Grammaire : subordonnées en « att », place de « inte » (BIFF).
+// Unit 16: Paperwork (B1, Section 5). Grammar: "att" clauses, position of "inte" (BIFF).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT16_DECK = unitDeck({
@@ -66,7 +66,7 @@ export const UNIT16_CARDS = [
     note: 'Forme en **-t** de *viktig*, avec *det är* : *Det är viktigt att…* Le **g** de *-igt* est muet.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u16-adress', {
     prompt: 'Où tu habites, pour le courrier : « une adresse »', promptEn: 'Where you live, for post: "an address"',
     sv: 'en adress', fr: 'une adresse', en: 'an address', ipa: '/ɛn aˈdrɛsː/',

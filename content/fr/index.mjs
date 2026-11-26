@@ -1,4 +1,4 @@
-// FranceCore (issue #9) : tout le contenu du cours de français, lu par scripts/sync-content.mjs.
+// FranceCore (issue #9): all the content of the French course, read by scripts/sync-content.mjs.
 import { FR_SECTIONS } from './sections.mjs';
 import * as A1 from './a1/index.mjs';
 import * as A2 from './a2/index.mjs';

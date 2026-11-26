@@ -1,7 +1,7 @@
-// Contenu anglais (issue #1). Les fichiers français restent la source de vérité du suédois ;
-// ce fichier donne, par slug, la consigne, la traduction et la glose en anglais.
-// `gloss` est aligné mot pour mot sur la glose française de la carte (même ordre, même longueur).
-// scripts/sync-content.mjs échoue si une carte, un deck ou une section n'a pas sa version anglaise.
+// English content (issue #1). The French files remain the source of truth for Swedish;
+// this file gives, by slug, the instruction, the translation and the gloss in English.
+// `gloss` is aligned word for word with the card's French gloss (same order, same length).
+// scripts/sync-content.mjs fails if a card, deck or section has no English version.
 
 export const DECKS_EN = {
   'swedish-core-a1': '1. Phonetics & Vowels',
@@ -28,7 +28,7 @@ export const SECTIONS_EN = {
 };
 
 export const CARDS_EN = {
-  // ===================== PHONÉTIQUE =====================
+  // ===================== PHONETICS =====================
   'phon-mal-sol': { prompt: 'Back vowels: "mål" (å) vs "sol" (o)', translation: 'a goal/meal / a sun' },
   'phon-ful-full': { prompt: 'Length of the "u" vowel: "ful" vs "full"', translation: 'ugly / drunk / full' },
   'phon-vag-vagg': { prompt: 'Length of the "ä" vowel: "väg" vs "vägg"', translation: 'a road / a wall' },
@@ -38,7 +38,7 @@ export const CARDS_EN = {
   'phon-kopa-kaka': { prompt: 'Soft vs hard "k": "köpa" vs "kaka"', translation: 'to buy / a cake / cookie' },
   'phon-sju-kors': { prompt: '"sj" sound (/ɧ/) vs retroflex "rs" (/ʂ/): "sju" vs "kors"', translation: 'seven (7) / a cross' },
 
-  // ===================== VOCABULAIRE & GENRES =====================
+  // ===================== VOCABULARY & GENDERS =====================
   'vocab-bok-bocker': { prompt: 'Full declension (gender + plural): "a book / the book / the books"', translation: 'a book / the book / the books' },
   'vocab-flicka-or': { prompt: 'Group 1 plural (-or): "a girl / the girl / girls"', translation: 'a girl / the girl / girls' },
   'vocab-pojke-ar': { prompt: 'Group 2 plural (-ar): "a boy / the boy / boys"', translation: 'a boy / the boy / boys' },
@@ -48,7 +48,7 @@ export const CARDS_EN = {
   'vocab-tala-prata': { prompt: 'Group 1 verbs (-ar): "to talk / chat" (infinitive / present / past)', translation: 'to talk / talks / talked' },
   'vocab-dricka-starka': { prompt: 'Strong verb (group 4): "to drink" (infinitive / present / past / supine)', translation: 'to drink / drinks / drank / has drunk' },
 
-  // ===================== GRAMMAIRE V2 =====================
+  // ===================== V2 GRAMMAR =====================
   'gram2-v2-idag': { prompt: 'V2 word order: put in order, starting with "idag": det / är / varmt / idag', translation: 'Today it is warm.', gloss: ['today', 'is', 'it', 'warm'] },
   'gram2-v2-imorgon': { prompt: 'V2 word order: Imorgon ___ ___ med min syster. (fikar / jag)', translation: 'Tomorrow I am having coffee with my sister.', gloss: ['tomorrow', 'have coffee', 'I', 'with', 'my', 'sister'] },
   'gram2-v2-igar': { prompt: 'V2 word order in the past: Igår ___ ___ försenat. (var / tåget)', translation: 'Yesterday the train was late.', gloss: ['yesterday', 'was', 'the train', 'late'] },
@@ -62,7 +62,7 @@ export const CARDS_EN = {
   'gram2-defini': { prompt: 'Definite form: "the ticket" (en biljett) / "the table" (ett bord)', translation: 'the ticket / the table' },
   'gram2-den-har': { prompt: 'Demonstrative: "this train" (ett tåg)', translation: 'this train', gloss: ['this', 'here', 'the train'] },
 
-  // ===================== UNITÉ 1 =====================
+  // ===================== UNIT 1 =====================
   'u1-hej': { prompt: 'The all-purpose greeting: "hi / hello"', translation: 'hi / hello' },
   'u1-tjena': { prompt: 'Casual greeting between friends', translation: 'hi (casual)' },
   'u1-god-morgon': { prompt: 'Greeting someone in the morning: "good morning"', translation: 'good morning', gloss: ['good', 'morning'] },
@@ -81,7 +81,7 @@ export const CARDS_EN = {
   'u1-trevligt-att-traffas': { prompt: 'Meeting someone: "Nice to meet you."', translation: 'Nice to meet you.', gloss: ['nice', 'to', 'meet'] },
   'u1-talar-du-engelska': { prompt: 'Asking about a language: "Do you speak English?"', translation: 'Do you speak English?', gloss: ['speak', 'you', 'English'] },
 
-  // ===================== UNITÉ 2 =====================
+  // ===================== UNIT 2 =====================
   'u2-fika': { prompt: 'The coffee-and-cake break, a Swedish institution', translation: 'coffee break (with something sweet)' },
   'u2-bryggkaffe': { prompt: 'Classic filter coffee, served everywhere', translation: 'a filter coffee', gloss: ['a', 'filter coffee'] },
   'u2-kanelbulle': { prompt: 'The iconic pastry of fika', translation: 'a cinnamon bun', gloss: ['a', 'cinnamon bun'] },
@@ -101,7 +101,7 @@ export const CARDS_EN = {
   'u2-betala-med-kort': { prompt: 'When paying: "Can I pay by card?"', translation: 'Can I pay by card?', gloss: ['can', 'I', 'pay', 'with', 'card'] },
   'u2-det-var-gott': { prompt: 'Complimenting as you leave: "That was good!"', translation: 'That was good!', gloss: ['it', 'was', 'good (taste)'] },
 
-  // ===================== UNITÉ 3 =====================
+  // ===================== UNIT 3 =====================
   'u3-familj': { prompt: 'All your relatives together: "a family"', translation: 'a family', gloss: ['a', 'family'] },
   'u3-mamma': { prompt: 'Your mother, in everyday speech: "a mum"', translation: 'a mum / a mother', gloss: ['a', 'mum'] },
   'u3-pappa': { prompt: 'Your father, in everyday speech: "a dad"', translation: 'a dad / a father', gloss: ['a', 'dad'] },
@@ -125,7 +125,7 @@ export const CARDS_EN = {
   'u3-sitt-barn': { prompt: '"He is having coffee with his (own) child." (ett barn)', translation: 'He is having coffee with his (own) child.', gloss: ['he', 'has coffee', 'with', 'his (own)', 'child'] },
   'u3-sina-foraldrar': { prompt: '"She is having coffee with her (own) parents."', translation: 'She is having coffee with her (own) parents.', gloss: ['she', 'has coffee', 'with', 'her (own)', 'parents'] },
 
-  // ===================== UNITÉ 4 =====================
+  // ===================== UNIT 4 =====================
   'u4-affar': { prompt: 'Where you go shopping: "a shop"', translation: 'a shop', gloss: ['a', 'shop'] },
   'u4-kopa': { prompt: 'The shopping verb: "buy" (present)', translation: 'buy / buys' },
   'u4-pase': { prompt: 'At the checkout, to carry your groceries: "a bag"', translation: 'a bag (plastic/paper)', gloss: ['a', 'bag'] },
@@ -148,7 +148,7 @@ export const CARDS_EN = {
   'u4-var-ligger': { prompt: 'Looking for the state alcohol shop: "Where is the Systembolaget?"', translation: 'Where is the Systembolaget?', gloss: ['where', 'is located', 'the Systembolaget'] },
   'u4-vin-pa-systemet': { prompt: '"I buy wine at the Systembolaget."', translation: 'I buy wine at the Systembolaget.', gloss: ['I', 'buy', 'wine', 'at', 'Systembolaget'] },
 
-  // ===================== UNITÉ 5 =====================
+  // ===================== UNIT 5 =====================
   'u5-restaurang': { prompt: 'Where you go for dinner: "a restaurant"', translation: 'a restaurant', gloss: ['a', 'restaurant'] },
   'u5-bord': { prompt: 'The furniture you eat at: "a table"', translation: 'a table', gloss: ['a', 'table'] },
   'u5-meny': { prompt: 'The list of dishes: "a menu"', translation: 'a menu', gloss: ['a', 'menu'] },
@@ -169,7 +169,7 @@ export const CARDS_EN = {
   'u5-notan-tack': { prompt: 'At the end of the meal: "The bill, please."', translation: 'The bill, please.', gloss: ['the bill', 'thanks'] },
   'u5-var-for-sig': { prompt: 'Each paying their share: "Can we pay separately?"', translation: 'Can we pay separately?', gloss: ['can', 'we', 'pay', 'each', 'for', 'oneself'] },
 
-  // ===================== UNITÉ 6 =====================
+  // ===================== UNIT 6 =====================
   'u6-buss': { prompt: 'Public transport on the road: "a bus"', translation: 'a bus', gloss: ['a', 'bus'] },
   'u6-tunnelbana': { prompt: 'Stockholm\'s underground train: "a metro"', translation: 'a metro / an underground', gloss: ['a', 'metro'] },
   'u6-tag': { prompt: 'To go from one city to another: "a train"', translation: 'a train', gloss: ['a', 'train'] },
@@ -190,7 +190,7 @@ export const CARDS_EN = {
   'u6-svang-vanster': { prompt: 'Giving directions: "Turn left, then right."', translation: 'Turn left, then right.', gloss: ['turn', 'left', 'and', 'then', 'right'] },
   'u6-nasta-station': { prompt: 'On the metro: "It is the next station."', translation: 'It is the next station.', gloss: ['it', 'is', 'next', 'station'] },
 
-  // ===================== UNITÉ 7 =====================
+  // ===================== UNIT 7 =====================
   'u7-vadret': { prompt: 'Conversation topic number one: "the weather"', translation: 'the weather' },
   'u7-solen': { prompt: 'The long-awaited star in winter: "the sun"', translation: 'the sun' },
   'u7-regnar': { prompt: 'The rain verb: "rains"', translation: 'rains' },

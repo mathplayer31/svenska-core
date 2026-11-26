@@ -1,4 +1,4 @@
-// Fondation : Grammaire B2. Vocabulaire des Unités 1 à 31 uniquement. Se débloque après l'Unité 31.
+// Foundation: B2 grammar. Vocabulary from Units 1 to 31 only. Unlocks after Unit 31.
 import { cloze } from '../helpers.mjs';
 
 export const GRAMMAR_B2_DECK = {

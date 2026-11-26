@@ -1,7 +1,7 @@
-// Notes de grammaire en anglais, A1 (issue #5). Adaptées à un anglophone : les repères de prononciation
-// et les pièges renvoient à l'anglais. Même markdown léger que les notes françaises.
+// English grammar notes, A1 (issue #5). Adapted for English speakers: pronunciation cues
+// and pitfalls refer to English. Same light markdown as the French notes.
 
-// Indications de prononciation des cartes de phonétique (le champ ipa_transcription contient du français)
+// Pronunciation hints for the phonetics cards (the ipa_transcription field holds French)
 export const IPA_EN = {
   'phon-mal-sol': '/moːl/ (å = close "aw") vs /suːl/ (o = very rounded "oo")',
   'phon-ful-full': '/fʉːl/ (long, tight u) vs /fɵlː/ (short, relaxed u)',
@@ -15,7 +15,7 @@ export const IPA_EN = {
 };
 
 export const NOTES_EN_A1 = {
-  // ===================== PHONÉTIQUE =====================
+  // ===================== PHONETICS =====================
   'phon-mal-sol': 'Long "å" (/oː/) sounds like the "aw" in British *law*, with very rounded lips. Long "o" (/uː/ in *sol*) is like "oo" in *food*, with the lips pushed far forward.',
   'phon-ful-full': 'Before a single consonant (*ful*), the "u" (/ʉː/) is long, with the lips tightly pressed together. Before a double consonant (*full*), the vowel becomes short (/ɵ/).',
   'phon-vag-vagg': 'A stressed syllable is always long: either the vowel is long (*väääg*) or the consonant after it is long (*väggg*).',
@@ -25,7 +25,7 @@ export const NOTES_EN_A1 = {
   'phon-kopa-kaka': 'Before front vowels (e, i, y, ä, ö), the letter "k" becomes soft (/ɕ/, a hissed sound close to the "ch" in *cheap* but softer). Before a, o, u, å, it stays hard (/k/).',
   'phon-sju-kors': 'When "r" comes before s, t, d, n or l (as in *kors* or *kort*), the two merge: curl the tip of your tongue back towards the roof of your mouth (/ʂ/).',
 
-  // ===================== VOCABULAIRE & GENRES =====================
+  // ===================== VOCABULARY & GENDERS =====================
   'vocab-bok-bocker': 'Group 3 plural (-er) with a vowel change (umlaut: o -> ö), like English *foot -> feet*. The vowel also gets shorter: *bok* (long /uː/) becomes *böcker* (short /œ/).',
   'vocab-flicka-or': 'Group 1: all common-gender (*en*) nouns ending in "-a" drop the "-a" and add "-or" in the indefinite plural (*flickor*) and "-orna" in the definite plural (*flickorna*).',
   'vocab-pojke-ar': 'Group 2: short common-gender (*en*) nouns, or ones ending in an unstressed "-e", swap the "-e" for "-ar" in the plural (*pojkar*, definite *pojkarna*).',
@@ -35,7 +35,7 @@ export const NOTES_EN_A1 = {
   'vocab-tala-prata': 'Group 1 (verbs ending in -ar in the present) covers about 80% of new Swedish verbs. The past tense always ends in "-ade" and the supine in "-at" (*har pratat*).',
   'vocab-dricka-starka': 'Just like English *drink / drank / drunk*, Swedish strong verbs change their inner vowel (i -> a -> u) in the past, with no ending in the past tense (*jag drack*).',
 
-  // ===================== UNITÉ 1 =====================
+  // ===================== UNIT 1 =====================
   'u1-hej': 'Works at any time of day and with anyone. The **j** is pronounced like English "y" in *yes*.',
   'u1-tjena': 'More casual than *hej*. **tj** is pronounced [ɕ], a soft hissing sound between "sh" and "ch".',
   'u1-god-morgon': '*God* + a noun: **god morgon**, **god kväll** (good evening), **god natt** (good night).',
@@ -54,7 +54,7 @@ export const NOTES_EN_A1 = {
   'u1-trevligt-att-traffas': 'A fixed phrase to learn as a whole when you meet someone.',
   'u1-talar-du-engelska': 'For a yes/no question, simply **swap** subject and verb (*Talar du…?*). No "do" is needed, unlike English *Do you speak…?*',
 
-  // ===================== UNITÉ 2 =====================
+  // ===================== UNIT 2 =====================
   'u2-fika': '**fika** is both a noun (*en fika*) and a verb (*att fika* = to have coffee together). Swedes fika at work, with friends, on dates… It is a social ritual, not just a drink.',
   'u2-bryggkaffe': '*brygga* = to brew, *kaffe* = coffee. Coffee as a substance is an **ett** word (*kaffet*), but when you order **a cup**, people naturally say **en** bryggkaffe / **en** kaffe.',
   'u2-kanelbulle': '*kanel* = cinnamon, *bulle* = bun. Plural: **kanelbullar**. The **u** in *bulle* is short (/ɵ/) because two consonants follow, as in *full*.',
@@ -74,7 +74,7 @@ export const NOTES_EN_A1 = {
   'u2-betala-med-kort': 'Yes/no question: **Kan jag…?** (verb first). After *kan*, the next verb stays in the infinitive without *att* ("to"): *kan jag betala*, just like English *can I pay*.',
   'u2-det-var-gott': '**var** = the past of *är* (was). **gott** = good (for taste). Do not confuse it with *bra* (good, fine) from Unit 1.',
 
-  // ===================== UNITÉ 3 =====================
+  // ===================== UNIT 3 =====================
   'u3-familj': 'Stress on the 2nd syllable (fa-**milj**). The final **j** is pronounced, like a light "y".',
   'u3-mamma': '**mamma** is the everyday word, even between adults. *mor* (mother) exists but is more formal or written.',
   'u3-pappa': 'Same logic as *mamma*: **pappa** is the everyday word (*far* is more formal).',
@@ -98,7 +98,7 @@ export const NOTES_EN_A1 = {
   'u3-sitt-barn': 'The reflexive agrees like *min / mitt / mina*: **sin** (*en* word), **sitt** (*ett* word), **sina** (plural). *ett barn -> sitt barn*.',
   'u3-sina-foraldrar': '**sina** = the plural reflexive. Summary: *sin syster*, *sitt barn*, *sina föräldrar*.',
 
-  // ===================== UNITÉ 4 =====================
+  // ===================== UNIT 4 =====================
   'u4-affar': 'Stress on the 2nd syllable. A grocery shop = *en mataffär* (*mat* = food). ICA, Coop, Lidl and Willys are the common chains.',
   'u4-kopa': 'Infinitive *att köpa* (seen in the phonetics deck). The **k** before **ö** is soft: [ɕ], a hissed "sh"-like sound. Same form for every person.',
   'u4-pase': 'Bags cost money in Sweden: you will almost always be asked if you want one. A handbag or backpack = *en väska*.',
@@ -121,7 +121,7 @@ export const NOTES_EN_A1 = {
   'u4-var-ligger': '**var** = where; **ligger** = is located (literally "lies"). The Systembolaget is the only shop allowed to sell strong alcohol; it closes early and on Sundays.',
   'u4-vin-pa-systemet': '**på** = at / in (for a shop or place). Swedes often just say *på Systemet*.',
 
-  // ===================== UNITÉ 5 =====================
+  // ===================== UNIT 5 =====================
   'u5-restaurang': 'Spelled **-ang** and pronounced [aŋ], like the end of *sang*. At lunchtime, look for *dagens lunch* (dish of the day, often with salad, bread and coffee).',
   'u5-bord': '**ett** word (*bordet* = the table). The **rd** is retroflex: a "d" with the tongue curled back.',
   'u5-meny': 'Stress on **ny** (long y, lips pushed out). Definite form: **menyn** (the menu).',
@@ -142,7 +142,7 @@ export const NOTES_EN_A1 = {
   'u5-notan-tack': 'Short and perfectly polite. Longer version: *Kan jag få notan?*',
   'u5-var-for-sig': '**var för sig** = each on their own. Completely normal in Sweden, even for a couple on a first date. *vi* = we (Unit 2).',
 
-  // ===================== UNITÉ 6 =====================
+  // ===================== UNIT 6 =====================
   'u6-buss': 'Short **u** [ɵ] before a double consonant (as in *full*). Definite: *bussen*. You pay with the app or a card, rarely to the driver.',
   'u6-tunnelbana': '*tunnel* + *bana* (track). Definite: **tunnelbanan**. Informally *T-banan*; stations are marked with a big **T**.',
   'u6-tag': '**ett** word -> definite **tåget** (the train). Long **å** = a close "aw" sound.',
@@ -163,7 +163,7 @@ export const NOTES_EN_A1 = {
   'u6-svang-vanster': '**sväng** = turn (imperative of *svänga*). **sedan** = then. In speech, *till* is often dropped after *sväng*.',
   'u6-nasta-station': 'After **nästa**, the noun takes neither an article nor a definite ending: *nästa station*, *nästa tåg*.',
 
-  // ===================== UNITÉ 7 =====================
+  // ===================== UNIT 7 =====================
   'u7-vadret': 'Definite form of *ett väder*. Not to be confused with time passing (*tid*).',
   'u7-solen': 'Definite of *en sol* (from the phonetics deck: long **o** = "oo").',
   'u7-regnar': '**gn** is pronounced [ŋn]: "reng-nar". The noun: *regn* (rain). *Det regnar* = it is raining.',
@@ -184,7 +184,7 @@ export const NOTES_EN_A1 = {
   'u7-blasigt-idag': 'Normal word order (subject first): *idag* can also go at the end, with no inversion. Compare with *Idag är det kallt*.',
   'u7-vilket-fint-vader': '*ett väder* is neuter, so **vilket** (not *vilken*) and **fint** (not *fin*). The *-t* agreement turns up everywhere!',
 
-  // ===================== GRAMMAIRE V2 =====================
+  // ===================== V2 GRAMMAR =====================
   'gram2-v2-idag': '**V2**: the conjugated verb is ALWAYS the 2nd element. *Idag* takes 1st place, so *är* comes right after and the subject *det* moves behind the verb. Never ~~*Idag det är varmt*~~ (the English word order).',
   'gram2-v2-imorgon': 'Same rule with *jag* as the subject: *Jag fikar imorgon* (subject first) **or** *Imorgon fikar jag* (inversion). The verb never leaves 2nd place.',
   'gram2-v2-igar': 'In the past too: *Igår* (1) **var** (2) *tåget* (3). The subject can be a whole phrase (*tåget*); it still moves after the verb.',
@@ -197,7 +197,7 @@ export const NOTES_EN_A1 = {
   'gram2-adj-ett': 'With an **ett** word, the adjective takes **-t**: *ett fint bord*, *ett dyrt vin*. With an **en** word, it stays bare: *en fin kopp*. Same logic as *Det är dyrt* or *Vilket fint väder!*',
   'gram2-defini': 'Swedish puts "the" **at the end**: *en* word -> **-en** (*biljetten*, *bussen*), *ett* word -> **-et** (*bordet*, *tåget*). After a vowel: *-n* / *-t* (*påsen*, *kvittot*).',
   'gram2-den-har': '*den här* (*en* word) / *det här* (*ett* word) + a **definite** noun: *den här bussen*, *det här tåget*. The noun keeps its definite ending: Swedish marks it twice.',
-  // Unité 1, ajouts (issue #14)
+  // Unit 1, additions (issue #14)
   'u1-tack-sa-mycket': '*så* = so, *mycket* = much. Even stronger: **tusen tack** (a thousand thanks).',
   'u1-god-kvall': 'Same pattern as *god morgon*. The **ä** is short before **ll**.',
   'u1-god-natt': 'Said when leaving late or before going to sleep. The **a** is short before **tt**.',
@@ -205,14 +205,14 @@ export const NOTES_EN_A1 = {
   'u1-ursakta': 'To approach a stranger or squeeze past someone. *Förlåt* is rather for apologising.',
   'u1-valkommen': 'Agrees in number: **välkomna** for several people.',
   'u1-vi-ses': 'Very common way to say goodbye. Variant: **vi ses imorgon** (see you tomorrow).',
-  // Unité 2, ajouts (issue #14)
+  // Unit 2, additions (issue #14)
   'u2-varsagod': 'The waiter says it when putting down your coffee. Just answer *tack*.',
   'u2-smorgas': 'Often open-faced (bread with a topping). Casual: *en macka*.',
   'u2-glas': '**ett** word, unchanged in the plural: *två glas*. *Ett glas vatten* = a glass of water.',
   'u2-socker': 'No article for an unspecified amount: *Vill du ha socker?*',
   'u2-utan': '*Kaffe utan mjölk* = coffee without milk. Opposite of *med* (with).',
   'u2-patar': '*på* (on) + *tår* (drop). Many Swedish cafés offer it for free: *Ingår påtår?* (Is a refill included?)',
-  // Unité 3, ajouts (issue #14)
+  // Unit 3, additions (issue #14)
   'u3-son': 'Irregular plural: **söner**. *Min son heter Leo.*',
   'u3-dotter': 'Irregular plural: **döttrar**. Not to be confused with *en flicka* (a girl).',
   'u3-mormor': '*mor* (mother) + *mor*. Swedish says which side: *farmor* = father’s mother.',
@@ -220,14 +220,14 @@ export const NOTES_EN_A1 = {
   'u3-sambo': '*sam-* (together) + *bo* (live). Very common in Sweden, even with children.',
   'u3-syskon': '**ett** word, unchanged in the plural: *Har du syskon?* = Do you have siblings?',
   'u3-gift': 'The **g** before **i** is pronounced [j]. *Jag är gift.* Plural: *gifta*.',
-  // Unité 4, ajouts (issue #14)
+  // Unit 4, additions (issue #14)
   'u4-smor': '**ett** word: *smöret*. The **ö** opens up before **r**.',
   'u4-agg': 'Unchanged in the plural: *tolv ägg*. The **ä** is short before **gg**.',
   'u4-kassan': 'Definite of *en kassa*. In supermarkets: *självscanning* (self-checkout).',
   'u4-betalar': 'Infinitive *betala*. People often pay by card or with **Swish** (mobile payment).',
   'u4-extrapris': 'On the yellow price tags at ICA. Multi-buy deals: *3 för 2*.',
   'u4-kundvagn': '*kund* (customer) + *vagn* (cart). Smaller: *en korg* (a basket).',
-  // Unité 5, ajouts (issue #14)
+  // Unit 5, additions (issue #14)
   'u5-forratt': '*för* (before) + *rätt* (dish). Careful: Swedish *entré* means the entrance hall.',
   'u5-huvudratt': '*huvud* (head) + *rätt* (dish): the "head" dish of the meal.',
   'u5-efterratt': '*efter* (after) + *rätt*. People also say *en dessert*.',
@@ -235,14 +235,14 @@ export const NOTES_EN_A1 = {
   'u5-dricks': 'Not compulsory in Sweden, service is included. People often round up the bill.',
   'u5-servitor': 'Feminine: *en servitris*. The stress falls on the last syllable.',
   'u5-allergisk': '*Jag är allergisk mot nötter* = I am allergic to nuts. *mot* = against.',
-  // Unité 6, ajouts (issue #14)
+  // Unit 6, additions (issue #14)
   'u6-hallplats': '*hålla* (hold, stop) + *plats* (place). *Nästa hållplats* = next stop.',
   'u6-rakt-fram': '*rak* (straight) + *fram* (forward). *Gå rakt fram* = go straight ahead.',
   'u6-cykel': 'Definite: *cykeln*. The **c** sounds like [s]. *Jag cyklar* = I cycle.',
   'u6-taxi': '**en** word: *taxin*. The **x** sounds like [ks], as in English.',
   'u6-avgar': 'Used on signs and announcements. Departure: *avgången*. Arrival: *ankomst*.',
   'u6-installt': '*Tåget är inställt* = the train is cancelled. With an **en** word: *bussen är inställd*.',
-  // Unité 7, ajouts (issue #14)
+  // Unit 7, additions (issue #14)
   'u7-molnigt': 'From *ett moln* (a cloud). The **g** in *-igt* is silent: [-ɪt].',
   'u7-soligt': 'From *sol* (sun). *Det är soligt idag.* Same silent ending as *molnigt*.',
   'u7-dimma': '*Det är dimma idag* or *det är dimmigt* = it is foggy.',

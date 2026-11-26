@@ -1,4 +1,4 @@
-// FranceCore, Unité 23 : Raconter (imparfait / passé composé, il était une fois, souvenirs).
+// FranceCore, Unit 23: Storytelling (imparfait / passé composé, il était une fois, memories).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT23_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT23_DECK = unitDeck({
 const D = UNIT23_DECK.slug;
 
 export const UNIT23_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u23-il-etait-une-fois', {
     prompt: 'Sagans klassiska början', promptEn: 'The classic opening of a fairy tale',
     fr: 'il était une fois', sv: 'det var en gång', en: 'once upon a time',
@@ -93,7 +93,7 @@ export const UNIT23_CARDS = [
     note: '**Enfin** betyder *äntligen* eller *till slut*, men också ett irriterat ”alltså” i talspråk: *Enfin, qu’est-ce que tu fais ?* Mellanleden kan också vara **puis**.',
     noteEn: '**Enfin** means *finally* or *at last*, but in speech also an exasperated "honestly": *Enfin, qu’est-ce que tu fais ?* The middle step can also be **puis**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u23-un-jour', {
     prompt: 'Början på en berättelse', promptEn: 'The start of a story',
     fr: 'un jour', sv: 'en dag', en: 'one day',
@@ -138,7 +138,7 @@ export const UNIT23_CARDS = [
     noteEn: '*À la fin* = at the end. *Fin* appears at the end of French films.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u23-princesse-chateau', {
     prompt: 'Börja en saga om en prinsessa som bodde i ett slott', promptEn: 'Start a fairy tale about a princess who lived in a castle',
     fr: 'Il était une fois une princesse qui vivait dans un château.', sv: 'Det var en gång en prinsessa som bodde i ett slott.', en: 'Once upon a time there was a princess who lived in a castle.',

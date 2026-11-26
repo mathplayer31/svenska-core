@@ -1,4 +1,4 @@
-// FranceCore, Grammaire B1 : 16 phrases à trou (temps du passé, conditionnel, subjonctif, relatifs, gérondif, discours indirect, doubles pronoms).
+// FranceCore, B1 grammar: 16 fill-in-the-blank sentences (past tenses, conditional, subjunctive, relatives, gerund, reported speech, double pronouns).
 import { cloze, foundationDeck } from '../helpers.mjs';
 
 export const GRAMMAR_B1_DECK = foundationDeck({
@@ -8,7 +8,7 @@ export const GRAMMAR_B1_DECK = foundationDeck({
 const D = GRAMMAR_B1_DECK.slug;
 
 export const GRAMMAR_B1_CARDS = [
-  // ---------- Imparfait ou passé composé ----------
+  // ---------- Imparfait or passé composé ----------
   cloze(D, 'fr-gram-b1-imparfait-decor', {
     prompt: 'Imparfait eller passé composé? Quand je suis arrivée à la préfecture, il y ___ déjà beaucoup de monde. (avoir)',
     promptEn: 'Imparfait or passé composé? Quand je suis arrivée à la préfecture, il y ___ déjà beaucoup de monde. (avoir)',
@@ -46,7 +46,7 @@ export const GRAMMAR_B1_CARDS = [
     noteEn: 'Verbs that take **être** in the passé composé also take it in the plus-que-parfait: *elle était partie*. English says *had left*, French literally *was left*.',
     gloss: [['quand', 'när', 'when'], ['nous sommes arrivés', 'vi kom', 'we arrived'], ['Marie', 'Marie', 'Marie'], ['était', 'hade', 'had'], ['déjà', 'redan', 'already'], ['partie', 'gått', 'left']],
   }),
-  // ---------- Conditionnel ----------
+  // ---------- Conditional ----------
   cloze(D, 'fr-gram-b1-conditionnel-politesse', {
     prompt: 'Konditionalis (artighet): ___-vous m’aider à remplir ce formulaire ? (pouvoir)',
     promptEn: 'Conditional (politeness): ___-vous m’aider à remplir ce formulaire ? (pouvoir)',
@@ -84,7 +84,7 @@ export const GRAMMAR_B1_CARDS = [
     noteEn: 'The main clause is in the **conditional**: *prendr-* + *-ait*. Verbs in *-re* drop the final *e*: *prendre* becomes *prendr-*.',
     gloss: [['si', 'om', 'if'], ['tu venais', 'du kom', 'you came'], ['samedi', 'på lördag', 'on Saturday'], ['on prendrait', 'skulle vi ta', 'we’d have'], ['l’apéro', 'en drink', 'drinks'], ['sur le balcon', 'på balkongen', 'on the balcony']],
   }),
-  // ---------- Subjonctif présent ----------
+  // ---------- Present subjunctive ----------
   cloze(D, 'fr-gram-b1-subj-il-faut', {
     prompt: 'Subjonctif efter il faut que: Il faut que tu ___ ce formulaire avant vendredi. (remplir)',
     promptEn: 'Subjunctive after il faut que: Il faut que tu ___ ce formulaire avant vendredi. (remplir)',
@@ -131,7 +131,7 @@ export const GRAMMAR_B1_CARDS = [
     noteEn: '**Où** for place and time: *la ville où*, *le jour où*. **Qui** is a subject, **que** an object: *la ville qui me plaît*, *la ville que j’aime*.',
     gloss: [['la ville', 'staden', 'the town'], ['où', 'där', 'where'], ['j’ai grandi', 'jag växte upp', 'I grew up'], ['est', 'ligger', 'is'], ['au bord de la mer', 'vid havet', 'by the sea']],
   }),
-  // ---------- Gérondif ----------
+  // ---------- Gerund ----------
   cloze(D, 'fr-gram-b1-gerondif', {
     prompt: 'Gerundium: J’ai trouvé ce travail ___ les offres sur Internet. (regarder)',
     promptEn: 'Gerund: J’ai trouvé ce travail ___ les offres sur Internet. (regarder)',
@@ -141,7 +141,7 @@ export const GRAMMAR_B1_CARDS = [
     noteEn: '**Gérondif** = *en* + the *nous* stem + *-ant*: *nous regard-ons* gives *en regardant*. It expresses manner (*by doing*) or simultaneity (*while doing*).',
     gloss: [['j’ai trouvé', 'jag hittade', 'I found'], ['ce travail', 'det här jobbet', 'this job'], ['en regardant', 'genom att titta på', 'by looking at'], ['les offres', 'annonserna', 'the ads'], ['sur Internet', 'på nätet', 'online']],
   }),
-  // ---------- Discours indirect ----------
+  // ---------- Reported speech ----------
   cloze(D, 'fr-gram-b1-discours-indirect', {
     prompt: 'Indirekt tal (han sa ”Je serai en retard”): Il m’a dit qu’il ___ en retard. (être)',
     promptEn: 'Reported speech (he said "Je serai en retard"): Il m’a dit qu’il ___ en retard. (être)',
@@ -151,7 +151,7 @@ export const GRAMMAR_B1_CARDS = [
     noteEn: 'When the reporting verb is in the past, the future becomes the **conditional**: *je serai* becomes *il serait*. The present becomes the imparfait: *"Je suis là"* becomes *il a dit qu’il était là*.',
     gloss: [['il m’a dit', 'han sa till mig', 'he told me'], ['qu’il', 'att han', 'that he'], ['serait', 'skulle bli', 'would be'], ['en retard', 'sen', 'late']],
   }),
-  // ---------- Doubles pronoms ----------
+  // ---------- Double pronouns ----------
   cloze(D, 'fr-gram-b1-doubles-pronoms', {
     prompt: 'Två pronomen i rätt ordning: Les photos ? Je ___ montrerai ce soir. (te + les)',
     promptEn: 'Two pronouns in the right order: Les photos ? Je ___ montrerai ce soir. (te + les)',

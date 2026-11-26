@@ -1,5 +1,5 @@
-// Decks thématiques B2 (issue #18), 2e partie : société, histoire, langue, notions abstraites, verbes, adjectifs,
-// nuances, expressions. Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// B2 thematic decks (issue #18), part 2: society, history, language, abstract notions, verbs, adjectives,
+// nuances, expressions. Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_B2_2 = [

@@ -1,4 +1,4 @@
-// FranceCore, grammaire A1 : 16 phrases à trou, avec uniquement le vocabulaire des unités 1 à 7.
+// FranceCore, A1 grammar: 16 fill-in-the-blank sentences, using only the vocabulary of units 1 to 7.
 import { cloze, foundationDeck } from '../helpers.mjs';
 
 export const GRAMMAR_A1_DECK = foundationDeck({

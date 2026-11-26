@@ -1,4 +1,4 @@
-// FranceCore, Unité 5 : Au restaurant. Réserver, la carte, entrée / plat / dessert, la cuisson.
+// FranceCore, Unit 5: At the restaurant. Booking, the menu, starter / main / dessert, doneness.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT5_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT5_DECK = unitDeck({
 const D = UNIT5_DECK.slug;
 
 export const UNIT5_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u5-reserver', {
     prompt: 'Boka ett bord i förväg', promptEn: 'Book a table in advance',
     fr: 'réserver', sv: 'boka / reservera', en: 'to book / to reserve',
@@ -93,7 +93,7 @@ export const UNIT5_CARDS = [
     note: 'Bindning: **bon‿appétit** [bɔnapeti], där n:et inte längre är nasalt. Servitören säger det när maten kommer, och man svarar **merci**.',
     noteEn: 'Liaison: **bon‿appétit** [bɔnapeti], where the n stops being nasal. The waiter says it when the food arrives, and you reply **merci**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u5-le-poulet', {
     prompt: 'Vanligt vitt kött', promptEn: 'Common white meat',
     fr: 'le poulet', sv: 'kycklingen', en: 'chicken',
@@ -137,7 +137,7 @@ export const UNIT5_CARDS = [
     noteEn: 'Tap water is free: *une carafe d’eau*. Bottled water costs money.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u5-reserver-une-table-pour-deux', {
     prompt: 'Ring och boka ett bord för två', promptEn: 'Call and book a table for two',
     fr: 'Je voudrais réserver une table pour deux.', sv: 'Jag skulle vilja boka ett bord för två.', en: 'I’d like to book a table for two.',

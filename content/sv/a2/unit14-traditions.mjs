@@ -1,4 +1,4 @@
-// Unité 14 : Fêtes & traditions (A2, Section 4). Grammaire : parfait (har + supin) vs prétérit.
+// Unit 14: Holidays & traditions (A2, Section 4). Grammar: perfect (har + supine) vs preterite.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT14_DECK = unitDeck({
@@ -66,7 +66,7 @@ export const UNIT14_CARDS = [
     note: 'Se place comme *inte*, juste après le verbe conjugué : *jag har aldrig sett*. À l’oral, le **g** final tombe souvent.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u14-pask', {
     prompt: 'La fête de printemps avec des œufs : « Pâques »', promptEn: 'The spring holiday with eggs: "Easter"',
     sv: 'påsk', fr: 'Pâques', en: 'Easter', ipa: '/pɔsk/',

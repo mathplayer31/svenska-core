@@ -1,4 +1,4 @@
-// FranceCore, Unité 27 : Environnement (réchauffement, recyclage, transition, débat).
+// FranceCore, Unit 27: Environment (global warming, recycling, transition, debate).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT27_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT27_DECK = unitDeck({
 const D = UNIT27_DECK.slug;
 
 export const UNIT27_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u27-rechauffement', {
     prompt: 'Jordens stigande medeltemperatur', promptEn: 'The rise in the Earth’s average temperature',
     fr: 'le réchauffement climatique', sv: 'den globala uppvärmningen', en: 'global warming',
@@ -93,7 +93,7 @@ export const UNIT27_CARDS = [
     note: '**durable** = hållbar, varaktig. Ordet handlar om tid: något som håller länge, även för kommande generationer.',
     noteEn: '**durable** = lasting, sustainable. In English *durable* means hard-wearing, but French **durable** is about time and future generations.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u27-le-recyclage', {
     prompt: 'Att göra nytt av gammalt', promptEn: 'Making new things out of old ones',
     fr: 'le recyclage', sv: 'återvinningen', en: 'recycling',
@@ -137,7 +137,7 @@ export const UNIT27_CARDS = [
     noteEn: 'From *Éole*, god of the wind. Offshore: *les éoliennes en mer*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u27-reduire-emissions', {
     prompt: 'Säg att vi måste minska utsläppen', promptEn: 'Say we must cut emissions',
     fr: 'Il faut réduire nos émissions de gaz à effet de serre.', sv: 'Vi måste minska våra utsläpp av växthusgaser.', en: 'We need to reduce our greenhouse gas emissions.',

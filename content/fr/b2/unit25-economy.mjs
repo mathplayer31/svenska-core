@@ -1,4 +1,4 @@
-// FranceCore, Unité 25 : Économie et consommation (pouvoir d'achat, inflation, budget, banque).
+// FranceCore, Unit 25: Economy and consumption (purchasing power, inflation, budget, bank).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT25_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT25_DECK = unitDeck({
 const D = UNIT25_DECK.slug;
 
 export const UNIT25_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u25-pouvoir-dachat', {
     prompt: 'Vad man faktiskt har råd med för sin lön', promptEn: 'What your income can actually buy',
     fr: 'le pouvoir d’achat', sv: 'köpkraften', en: 'purchasing power',
@@ -93,7 +93,7 @@ export const UNIT25_CARDS = [
     note: 'Ursprungligen ett varumärke som blev ett vanligt ord, som *la CB*: *Je peux payer par CB ?* Lägg märke till prepositionen: **payer par carte**, men **payer en espèces** (kontant).',
     noteEn: 'Originally a brand name that became the generic word, like *la CB*: *Je peux payer par CB ?* Note the prepositions: **payer par carte**, but **payer en espèces** (in cash).',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u25-lepargne', {
     prompt: 'Pengar man sparar', promptEn: 'Money you save',
     fr: 'l’épargne', sv: 'sparandet / sparpengarna', en: 'savings',
@@ -145,7 +145,7 @@ export const UNIT25_CARDS = [
     noteEn: '*Économiser pour les vacances.* Synonym: *mettre de l’argent de côté*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u25-prix-flambe', {
     prompt: 'Säg att priserna har rusat i år', promptEn: 'Say that prices have soared this year',
     fr: 'Les prix ont flambé cette année.', sv: 'Priserna har rusat i år.', en: 'Prices have soared this year.',

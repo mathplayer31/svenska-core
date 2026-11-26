@@ -1,4 +1,4 @@
-// FranceCore, Unité 14 : Fêtes et traditions.
+// FranceCore, Unit 14: Holidays and traditions.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT14_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT14_DECK = unitDeck({
 const D = UNIT14_DECK.slug;
 
 export const UNIT14_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u14-jour-ferie', {
     prompt: 'En ledig dag enligt lag', promptEn: 'A day off by law',
     fr: 'le jour férié', sv: 'helgdagen / den röda dagen', en: 'the public holiday / the bank holiday',
@@ -93,7 +93,7 @@ export const UNIT14_CARDS = [
     note: 'Sedan 1982 får alla spela musik på gator och torg på sommarsolståndet, gratis och till sent på natten. Den infaller ungefär samtidigt som svensk midsommar.',
     noteEn: 'Since 1982 anyone may play music in the streets on the summer solstice, free and late into the night. It has since spread to cities worldwide.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u14-la-buche-de-noel', {
     prompt: 'Den rullade tårtan på julafton', promptEn: 'The rolled cake at Christmas',
     fr: 'la bûche de Noël', sv: 'julstubben', en: 'the Yule log',
@@ -138,7 +138,7 @@ export const UNIT14_CARDS = [
     noteEn: 'Buckwheat with a savoury filling: *la galette*. Eaten especially at *la Chandeleur*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u14-regarde-feu', {
     prompt: 'Berätta att man tittar på fyrverkerierna den 14 juli', promptEn: 'Say people watch the fireworks on 14 July',
     fr: 'Le 14 juillet, on regarde le feu d’artifice.', sv: 'Den 14 juli tittar man på fyrverkerierna.', en: 'On 14 July we watch the fireworks.',

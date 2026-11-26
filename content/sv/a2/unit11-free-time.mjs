@@ -1,4 +1,4 @@
-// Unité 11 : Loisirs & week-end (A2, Section 3). Grammaire : prétérit (gick, såg, åkte, köpte).
+// Unit 11: Hobbies & weekends (A2, Section 3). Grammar: preterite (gick, såg, åkte, köpte).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT11_DECK = unitDeck({
@@ -61,7 +61,7 @@ export const UNIT11_CARDS = [
     note: 'Groupe 2 : *köpa, köper, köpte, har köpt*. Le **ö** devient court au prétérit.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u11-konsert', {
     prompt: 'Écouter de la musique en direct : « un concert »', promptEn: 'Live music: "a concert"',
     sv: 'en konsert', fr: 'un concert', en: 'a concert', ipa: '/ɛn kɔnˈsæʈː/',

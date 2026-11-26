@@ -1,4 +1,4 @@
-// Unité 31 : Histoire & identité (B2, Section 8). Grammaire : mots composés, dérivation (-het, -ning, -bar), passif au passé.
+// Unit 31: History & identity (B2, Section 8). Grammar: compound words, derivation (-het, -ning, -bar), past passive.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT31_DECK = unitDeck({
@@ -62,7 +62,7 @@ export const UNIT31_CARDS = [
     note: '*folk* (peuple) + *hem* (foyer) : la société vue comme une maison commune où personne n’est laissé de côté.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u31-drottningen', {
     prompt: 'L’épouse du roi : « la reine »', promptEn: 'The king’s wife: "the queen"',
     sv: 'drottningen', fr: 'la reine', en: 'the queen', ipa: '/ˈdrɔtːnɪŋɛn/',

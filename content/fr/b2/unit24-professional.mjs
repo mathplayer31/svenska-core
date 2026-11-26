@@ -1,4 +1,4 @@
-// FranceCore, Unité 24 : Vie professionnelle (réunion, négocier, courriel formel, télétravail).
+// FranceCore, Unit 24: Working life (meetings, negotiating, formal email, remote work).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT24_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT24_DECK = unitDeck({
 const D = UNIT24_DECK.slug;
 
 export const UNIT24_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u24-ordre-du-jour', {
     prompt: 'Listan över punkter som ska tas upp på ett möte', promptEn: 'The list of points to cover in a meeting',
     fr: 'l’ordre du jour', sv: 'dagordningen', en: 'the agenda',
@@ -93,7 +93,7 @@ export const UNIT24_CARDS = [
     note: 'Kortform av **la visioconférence**. *On se fait une visio ?* Franskan älskar att korta ord: *le resto, l’appart, la fac*.',
     noteEn: 'Short for **la visioconférence**. *On se fait une visio ?* French loves clipping words: *le resto, l’appart, la fac*.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u24-le-devis', {
     prompt: 'Prisförslaget före ett uppdrag', promptEn: 'The price offer before a job',
     fr: 'le devis', sv: 'offerten', en: 'the quote',
@@ -139,7 +139,7 @@ export const UNIT24_CARDS = [
     gloss: [['la date', 'datumet', 'the date'], ['limite', 'sista', 'limit']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u24-merci-retour', {
     prompt: 'Tacka formellt för ett svar i ett mejl', promptEn: 'Formally thank someone for their reply in an email',
     fr: 'Je vous remercie pour votre retour.', sv: 'Tack för ert svar.', en: 'Thank you for your feedback.',

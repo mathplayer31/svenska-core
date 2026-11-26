@@ -1,4 +1,4 @@
-// Unité 23 : Raconter au passé (B1, Section 6). Grammaire : enchaînement des temps, medan / innan / efter att.
+// Unit 23: Telling stories in the past (B1, Section 6). Grammar: sequence of tenses, medan / innan / efter att.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT23_DECK = unitDeck({
@@ -62,7 +62,7 @@ export const UNIT23_CARDS = [
     note: 'À l’oral : *sen*. Même mot que dans *för två år sedan* (il y a deux ans, Grammaire A2).',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u23-det-var-en-gang', {
     prompt: 'Le début des contes : « il était une fois »', promptEn: 'How fairy tales begin: "once upon a time"',
     sv: 'det var en gång', fr: 'il était une fois', en: 'once upon a time', ipa: '/deː vɑːr ɛn ɡɔŋː/',

@@ -1,5 +1,5 @@
-// Decks thématiques B2 (issue #18), 1re partie : économie, entreprise, politique, droit, environnement,
-// sciences, technique, médecine. Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// B2 thematic decks (issue #18), part 1: economy, business, politics, law, environment,
+// science, technology, medicine. Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_B2_1 = [

@@ -1,5 +1,5 @@
-// Unité 5 : Au restaurant (Section 2)
-// Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise jag tar / kan jag / tack / det var gott / betala / vill… des unités 1 à 4.
+// Unit 5: At the restaurant (Section 2)
+// Convention: see content/sv/a1/unit01-greetings.mjs. Reuses jag tar / kan jag / tack / det var gott / betala / vill… from units 1 to 4.
 import { vocab } from '../helpers.mjs';
 
 export const UNIT5_DECK = {
@@ -17,7 +17,7 @@ export const UNIT5_DECK = {
 const D = 'swedish-unit-5-restaurant';
 
 export const UNIT5_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u5-restaurang', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'Là où on va dîner : « un restaurant »',
@@ -112,7 +112,7 @@ export const UNIT5_CARDS = [
     explanation_md: 'Le **g** devant **ä** se prononce « y » et le **rn** est rétroflexe : « yèèrna ». *Ja, gärna!* = Oui, volontiers !',
     words: ['gärna'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u5-forratt', {
     prompt: 'Avant le plat principal : « une entrée »', promptEn: 'Before the main course: "a starter"',
     sv: 'en förrätt', fr: 'une entrée', en: 'a starter', ipa: '/ɛn ˈfœːˌrɛtː/',
@@ -149,7 +149,7 @@ export const UNIT5_CARDS = [
     note: '*Jag är allergisk mot nötter* = je suis allergique aux noix. *mot* = contre.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u5-bord-for-tva', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'En arrivant : « Une table pour deux, s’il vous plaît. »',

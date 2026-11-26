@@ -1,4 +1,4 @@
-// FranceCore, Unité 30 : Registres de langue (soutenu / courant / familier, verlan, argot courant).
+// FranceCore, Unit 30: Language registers (formal / standard / informal, verlan, common slang).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT30_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT30_DECK = unitDeck({
 const D = UNIT30_DECK.slug;
 
 export const UNIT30_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u30-verlan', {
     prompt: 'Slangen där man vänder på stavelserna', promptEn: 'The slang that flips syllables around',
     fr: 'le verlan', sv: 'verlan (baklängesslang)', en: 'verlan (back slang)',
@@ -93,7 +93,7 @@ export const UNIT30_CARDS = [
     note: 'Ledigt men inte vulgärt. **un ami** är neutralt men kan också betyda pojkvän: *mon ami* eller *mon copain* kan tolkas romantiskt, *mon pote* aldrig.',
     noteEn: 'Casual but not vulgar. **un ami** is neutral but can also mean boyfriend: *mon ami* or *mon copain* can sound romantic, *mon pote* never does.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u30-la-bouffe', {
     prompt: 'Ledigt ord för mat', promptEn: 'Casual word for food',
     fr: 'la bouffe', sv: 'käket / maten (ledigt)', en: 'grub / food (slang)',
@@ -137,7 +137,7 @@ export const UNIT30_CARDS = [
     noteEn: 'Standard meaning "serious". Slang: *C’est grave bien* = it’s really good. *Grave !* = totally!',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u30-saurais-gre', {
     prompt: 'Be mycket formellt om svar i ett brev', promptEn: 'Ask very formally for a reply in a letter',
     fr: 'Je vous saurais gré de bien vouloir me répondre.', sv: 'Jag vore tacksam om ni ville svara mig.', en: 'I would be grateful if you would kindly reply.',

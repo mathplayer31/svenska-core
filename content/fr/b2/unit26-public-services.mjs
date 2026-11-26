@@ -1,4 +1,4 @@
-// FranceCore, Unité 26 : Services publics (Sécurité sociale, mutuelle, retraite, école publique).
+// FranceCore, Unit 26: Public services (Sécurité sociale, mutuelle, pension, state school).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT26_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT26_DECK = unitDeck({
 const D = UNIT26_DECK.slug;
 
 export const UNIT26_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u26-securite-sociale', {
     prompt: 'Det offentliga systemet för sjukvård, pension och familjestöd', promptEn: 'The public system for healthcare, pensions and family benefits',
     fr: 'la Sécurité sociale / la Sécu', sv: 'socialförsäkringen', en: 'the national health and social security system',
@@ -93,7 +93,7 @@ export const UNIT26_CARDS = [
     note: 'Kortform av **le baccalauréat**, infört av Napoleon 1808. Det är både en examen och en symbol: årskurser och utbildningsnivåer räknas från det, till exempel *bac + 5* för en masterexamen.',
     noteEn: 'Short for **le baccalauréat**, created by Napoleon in 1808. It is both an exam and a yardstick: education levels are counted from it, as in *bac + 5* for a master’s degree.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u26-lhopital', {
     prompt: 'Där man vårdas för allvarliga sjukdomar', promptEn: 'Where serious illnesses are treated',
     fr: 'l’hôpital', sv: 'sjukhuset', en: 'the hospital',
@@ -139,7 +139,7 @@ export const UNIT26_CARDS = [
     gloss: [['le service', 'tjänsten', 'the service'], ['public', 'offentlig', 'public']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u26-carte-vitale-phrase', {
     prompt: 'Frågan du får hos läkaren eller på apoteket', promptEn: 'The question you get at the doctor’s or pharmacy',
     fr: 'Vous avez votre carte Vitale ?', sv: 'Har ni ert sjukförsäkringskort?', en: 'Do you have your health card?',

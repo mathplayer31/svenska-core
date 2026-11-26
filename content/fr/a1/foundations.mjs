@@ -1,5 +1,5 @@
-// FranceCore, fondations A1 : prononciation (paires minimales) et genre des noms (le / la).
-// Le deck de grammaire A1 est dans grammar.mjs. Programme : docs/PROGRAMME-FR.md.
+// FranceCore, A1 foundations: pronunciation (minimal pairs) and noun gender (le / la).
+// The A1 grammar deck is in grammar.mjs. Syllabus: docs/PROGRAMME-FR.md.
 import { vocab, pair, foundationDeck } from '../helpers.mjs';
 
 const CORE = foundationDeck({

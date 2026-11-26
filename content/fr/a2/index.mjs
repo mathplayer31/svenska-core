@@ -1,4 +1,4 @@
-// FranceCore A2 : decks et cartes du niveau, dans l'ordre du parcours.
+// FranceCore A2: decks and cards of the level, in path order.
 import { UNIT8_DECK, UNIT8_CARDS } from './unit08-home.mjs';
 import { UNIT9_DECK, UNIT9_CARDS } from './unit09-day.mjs';
 import { UNIT10_DECK, UNIT10_CARDS } from './unit10-work.mjs';

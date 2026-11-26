@@ -1,4 +1,4 @@
-// FranceCore, Fondations : grammaire B2 (16 phrases à trou), ouverte après l'unité 31.
+// FranceCore, Foundations: B2 grammar (16 fill-in-the-blank sentences), unlocked after unit 31.
 import { cloze, foundationDeck } from '../helpers.mjs';
 
 export const GRAMMAR_B2_DECK = foundationDeck({
@@ -8,7 +8,7 @@ export const GRAMMAR_B2_DECK = foundationDeck({
 const D = GRAMMAR_B2_DECK.slug;
 
 export const GRAMMAR_B2_CARDS = [
-  // ===== Subjonctif après conjonction =====
+  // ===== Subjunctive after a conjunction =====
   cloze(D, 'fr-gram-b2-bien-que', {
     prompt: 'Konjunktiv efter konjunktion: Bien qu’il ___, nous partons en randonnée. (pleuvoir)', promptEn: 'Subjunctive after a conjunction: Bien qu’il ___, nous partons en randonnée. (pleuvoir)',
     fr: 'Bien qu’il pleuve, nous partons en randonnée.', sv: 'Fast det regnar ger vi oss ut på vandring.', en: 'Although it’s raining, we’re going hiking.',
@@ -42,7 +42,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['il est parti', 'han gick', 'he left'], ['sans que', 'utan att', 'without'], ['je', 'jag', 'I'], ['le', 'det', 'it'], ['sache', 'visste', 'knew']],
   }),
 
-  // ===== Conditionnel passé =====
+  // ===== Past conditional =====
   cloze(D, 'fr-gram-b2-aurais-aime', {
     prompt: 'Konditionalis perfekt: J’___ venir, mais j’étais malade. (aimer)', promptEn: 'Past conditional: J’___ venir, mais j’étais malade. (aimer)',
     fr: 'J’aurais aimé venir, mais j’étais malade.', sv: 'Jag hade gärna kommit, men jag var sjuk.', en: 'I would have liked to come, but I was ill.',
@@ -78,7 +78,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['si', 'om', 'if'], ['nous étions partis', 'vi hade åkt', 'we had left'], ['plus tôt', 'tidigare', 'earlier'], ['nous aurions eu', 'hade vi hunnit med', 'we would have caught'], ['le train', 'tåget', 'the train']],
   }),
 
-  // ===== Passif =====
+  // ===== Passive =====
   cloze(D, 'fr-gram-b2-passif-votee', {
     prompt: 'Passiv (passé composé): La loi ___ ___ par l’Assemblée nationale. (voter)', promptEn: 'Passive (passé composé): La loi ___ ___ par l’Assemblée nationale. (voter)',
     fr: 'La loi a été votée par l’Assemblée nationale.', sv: 'Lagen röstades igenom av nationalförsamlingen.', en: 'The law was passed by the National Assembly.',
@@ -96,7 +96,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['ces maisons', 'de här husen', 'these houses'], ['ont été construites', 'byggdes', 'were built'], ['au XIXe siècle', 'på 1800-talet', 'in the 19th century']],
   }),
 
-  // ===== Participe présent =====
+  // ===== Present participle =====
   cloze(D, 'fr-gram-b2-ayant', {
     prompt: 'Presens particip: Les candidats ___ un diplôme peuvent postuler. (avoir)', promptEn: 'Present participle: Les candidats ___ un diplôme peuvent postuler. (avoir)',
     fr: 'Les candidats ayant un diplôme peuvent postuler.', sv: 'Sökande som har en examen kan söka.', en: 'Candidates holding a degree may apply.',
@@ -106,7 +106,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['les candidats', 'de sökande', 'candidates'], ['ayant', 'som har', 'holding'], ['un diplôme', 'en examen', 'a degree'], ['peuvent', 'kan', 'may'], ['postuler', 'söka', 'apply']],
   }),
 
-  // ===== Connecteurs =====
+  // ===== Connectors =====
   cloze(D, 'fr-gram-b2-pourtant', {
     prompt: 'Sambandsord: Il a beaucoup travaillé ; ___, il a raté son examen. (donc / pourtant)', promptEn: 'Connector: Il a beaucoup travaillé ; ___, il a raté son examen. (donc / pourtant)',
     fr: 'Il a beaucoup travaillé ; pourtant, il a raté son examen.', sv: 'Han pluggade mycket; ändå kuggade han på provet.', en: 'He worked hard; yet he failed his exam.',
@@ -116,7 +116,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['il a beaucoup travaillé', 'han pluggade mycket', 'he worked hard'], ['pourtant', 'ändå', 'yet'], ['il a raté', 'han kuggade på', 'he failed'], ['son examen', 'provet', 'his exam']],
   }),
 
-  // ===== Mise en relief =====
+  // ===== Emphasis (mise en relief) =====
   cloze(D, 'fr-gram-b2-ce-qui', {
     prompt: 'Framhävning: ___ ___ me dérange, c’est le bruit. (ce qui / ce que)', promptEn: 'Emphasis: ___ ___ me dérange, c’est le bruit. (ce qui / ce que)',
     fr: 'Ce qui me dérange, c’est le bruit.', sv: 'Det som stör mig är oljudet.', en: 'What bothers me is the noise.',
@@ -134,7 +134,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['c’est', 'det var', 'it was'], ['en 1789', '1789', 'in 1789'], ['que', 'som', 'that'], ['la Révolution', 'revolutionen', 'the Revolution'], ['a commencé', 'började', 'began']],
   }),
 
-  // ===== Passé simple (lecture) =====
+  // ===== Passé simple (reading) =====
   cloze(D, 'fr-gram-b2-passe-simple', {
     prompt: 'Passé simple (läsförståelse): Louis XVI ___ guillotiné en 1793. (être)', promptEn: 'Passé simple (reading): Louis XVI ___ guillotiné en 1793. (être)',
     fr: 'Louis XVI fut guillotiné en 1793.', sv: 'Ludvig XVI giljotinerades 1793.', en: 'Louis XVI was guillotined in 1793.',
@@ -144,7 +144,7 @@ export const GRAMMAR_B2_CARDS = [
     gloss: [['Louis XVI', 'Ludvig XVI', 'Louis XVI'], ['fut guillotiné', 'giljotinerades', 'was guillotined'], ['en 1793', '1793', 'in 1793']],
   }),
 
-  // ===== Accord du participe avec avoir =====
+  // ===== Past participle agreement with avoir =====
   cloze(D, 'fr-gram-b2-accord-avoir', {
     prompt: 'Particip med avoir: Les lettres que j’ai ___ sont sur la table. (écrire)', promptEn: 'Participle with avoir: Les lettres que j’ai ___ sont sur la table. (écrire)',
     fr: 'Les lettres que j’ai écrites sont sur la table.', sv: 'Breven som jag har skrivit ligger på bordet.', en: 'The letters I wrote are on the table.',

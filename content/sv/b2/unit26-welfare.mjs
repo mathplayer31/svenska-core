@@ -1,4 +1,4 @@
-// Unité 26 : Santé & société (B2, Section 7). Grammaire : participes présent (-ande) et passé, participe substantivé.
+// Unit 26: Health & society (B2, Section 7). Grammar: present (-ande) and past participles, nominalized participle.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT26_DECK = unitDeck({
@@ -65,7 +65,7 @@ export const UNIT26_CARDS = [
     gloss: [['en', 'des', 'a'], ['avgift', 'frais', 'fee']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u26-sjukhuset', {
     prompt: 'Pour les soins graves et les urgences : « l’hôpital »', promptEn: 'For serious care and emergencies: "the hospital"',
     sv: 'sjukhuset', fr: 'l’hôpital', en: 'the hospital', ipa: '/ˈɧʉːkˌhʉːsɛt/',

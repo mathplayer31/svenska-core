@@ -1,10 +1,10 @@
-// FranceCore (issue #9) : écriture compacte des cartes du cours de français.
-// Langue étudiée : le français. Langues de l'apprenant : le suédois (langue de base) et l'anglais.
-// Les colonnes de la base gardent leurs noms historiques du cours de suédois :
-//   swedish_target = texte français, swedish_prompt = consigne en suédois,
-//   english_translation = traduction suédoise, explanation_md = note en suédois,
-//   gloss[].sv = mot français, gloss[].fr = mot suédois (l'anglais est ajouté par scripts/sync-content.mjs).
-// Tous les slugs commencent par `fr-` : la progression des deux cours partage les mêmes tables.
+// FranceCore (issue #9): compact writing of the French course cards.
+// Language learned: French. Learner languages: Swedish (base language) and English.
+// The database columns keep their historical names from the Swedish course:
+//   swedish_target = French text, swedish_prompt = instruction in Swedish,
+//   english_translation = Swedish translation, explanation_md = note in Swedish,
+//   gloss[].sv = French word, gloss[].fr = Swedish word (English is added by scripts/sync-content.mjs).
+// All slugs start with `fr-`: the progress of both courses shares the same tables.
 
 function card(type, deck, slug, d) {
   return {
@@ -23,16 +23,16 @@ function card(type, deck, slug, d) {
   };
 }
 
-/** Mot ou expression : { prompt, promptEn, fr, sv, en, ipa, note, noteEn } */
+/** Word or expression: { prompt, promptEn, fr, sv, en, ipa, note, noteEn } */
 export const vocab = (deck, slug, d) => card('vocab', deck, slug, d);
-/** Phrase avec glose mot à mot : gloss = [[français, suédois, anglais], ...] */
+/** Sentence with a word-by-word gloss: gloss = [[French, Swedish, English], ...] */
 export const phrase = (deck, slug, d) => card('phrase', deck, slug, d);
-/** Grammaire à trou : prompt avec ___, fr = phrase complète */
+/** Fill-in-the-blank grammar: prompt with ___, fr = full sentence */
 export const cloze = (deck, slug, d) => card('cloze_grammar', deck, slug, d);
 /** Paire minimale de prononciation : fr = 'mot 1 / mot 2', words = [mot 1, mot 2] */
 export const pair = (deck, slug, d) => card('minimal_pair', deck, slug, d);
 
-/** Deck d'unité thématique : titres suédois / anglais, section et unité précédente. */
+/** Thematic unit deck: Swedish / English titles, section and previous unit. */
 export function unitDeck({ n, slug, sv, en, level, section, after }) {
   return {
     slug,
@@ -49,7 +49,7 @@ export function unitDeck({ n, slug, sv, en, level, section, after }) {
   };
 }
 
-/** Deck de fondation (prononciation, genres, grammaire), ouvert après l'unité `after`. */
+/** Foundation deck (pronunciation, genders, grammar), unlocked after unit `after`. */
 export function foundationDeck({ slug, sv, en, category, level, order, after }) {
   return {
     slug,

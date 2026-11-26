@@ -1,4 +1,4 @@
-// Unité 24 : Vie professionnelle (B2, Section 7). Grammaire : passif en -s (hålls, fattades, skrivas under).
+// Unit 24: Working life (B2, Section 7). Grammar: -s passive (hålls, fattades, skrivas under).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT24_DECK = unitDeck({
@@ -66,7 +66,7 @@ export const UNIT24_CARDS = [
     note: 'Groupe 1 : présent passif = infinitif + **s** (*skickas*). Prétérit : *skickades*. Supin : *har skickats*.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u24-faktura', {
     prompt: 'Le document à payer : « une facture »', promptEn: 'The document to pay: "an invoice"',
     sv: 'en faktura', fr: 'une facture', en: 'an invoice', ipa: '/ɛn fakˈtʉːra/',

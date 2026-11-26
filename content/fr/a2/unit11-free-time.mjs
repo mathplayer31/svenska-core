@@ -1,4 +1,4 @@
-// FranceCore, Unité 11 : Loisirs et week-end.
+// FranceCore, Unit 11: Hobbies and weekends.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT11_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT11_DECK = unitDeck({
 const D = UNIT11_DECK.slug;
 
 export const UNIT11_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u11-week-end', {
     prompt: 'Lördag och söndag', promptEn: 'Saturday and Sunday',
     fr: 'le week-end', sv: 'helgen', en: 'the weekend',
@@ -93,7 +93,7 @@ export const UNIT11_CARDS = [
     note: 'Används oftast i plural: *Quels sont tes loisirs ?* Slutets **s** är stumt, och **oi** uttalas [wa].',
     noteEn: 'Usually plural: *Quels sont tes loisirs ?* The final **s** is silent, and **oi** is [wa].',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u11-lire', {
     prompt: 'Att läsa en bok', promptEn: 'Reading a book',
     fr: 'lire', sv: 'att läsa', en: 'to read',
@@ -137,7 +137,7 @@ export const UNIT11_CARDS = [
     noteEn: 'Regular *-er* verb. *On va danser ce soir ?*',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u11-fait-ce-week-end', {
     prompt: 'Fråga en vän vad hen gjorde i helgen', promptEn: 'Ask a friend what they did at the weekend',
     fr: 'Qu’est-ce que tu as fait ce week-end ?', sv: 'Vad gjorde du i helgen?', en: 'What did you do at the weekend?',

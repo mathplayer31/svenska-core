@@ -1,4 +1,4 @@
-// FranceCore, Unité 20 : Nature et régions (montagne, mer, campagne, randonnée).
+// FranceCore, Unit 20: Nature and regions (mountains, sea, countryside, hiking).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT20_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT20_DECK = unitDeck({
 const D = UNIT20_DECK.slug;
 
 export const UNIT20_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u20-region', {
     prompt: 'Den största administrativa indelningen av Frankrike', promptEn: 'France’s largest administrative division',
     fr: 'une région', sv: 'en region', en: 'a region',
@@ -93,7 +93,7 @@ export const UNIT20_CARDS = [
     note: 'Ofta en renoverad gård eller lada. Ett **gîte d’étape** är ett enkelt vandrarhem längs leden, och en **chambre d’hôtes** motsvarar ett bed and breakfast.',
     noteEn: 'Often a renovated farmhouse or barn. A **gîte d’étape** is a simple hikers’ hostel along a trail, and a **chambre d’hôtes** is a B&B.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u20-le-lac', {
     prompt: 'Vatten omgivet av land', promptEn: 'Water surrounded by land',
     fr: 'le lac', sv: 'sjön', en: 'the lake',
@@ -138,7 +138,7 @@ export const UNIT20_CARDS = [
     gloss: [['le parc', 'parken', 'the park'], ['national', 'national-', 'national']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u20-si-javais-plus-de-temps', {
     prompt: 'Säg att om du hade mer tid skulle du gå GR20 på Korsika', promptEn: 'Say that if you had more time you’d hike the GR20 in Corsica',
     fr: 'Si j’avais plus de temps, je ferais le GR20 en Corse.', sv: 'Om jag hade mer tid skulle jag gå GR20 på Korsika.', en: 'If I had more time, I’d do the GR20 in Corsica.',

@@ -1,5 +1,5 @@
-// Unité 6 : Déplacements & transports (Section 2)
-// Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise var / är / det / nästa… et la règle V2.
+// Unit 6: Getting around & transport (Section 2)
+// Convention: see content/sv/a1/unit01-greetings.mjs. Reuses var / är / det / nästa… and the V2 rule.
 import { vocab } from '../helpers.mjs';
 
 export const UNIT6_DECK = {
@@ -17,7 +17,7 @@ export const UNIT6_DECK = {
 const D = 'swedish-unit-6-transport';
 
 export const UNIT6_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u6-buss', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'Le transport en commun sur route : « un bus »',
@@ -124,7 +124,7 @@ export const UNIT6_CARDS = [
     explanation_md: '**till** = la destination (*till Göteborg*), **från** = l’origine (Unité 1). *Från Stockholm till Göteborg.*',
     words: ['till'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u6-hallplats', {
     prompt: 'Là où l’on attend le bus : « un arrêt »', promptEn: 'Where you wait for the bus: "a stop"',
     sv: 'en hållplats', fr: 'un arrêt (de bus)', en: 'a (bus) stop', ipa: '/ɛn ˈhɔlːˌplats/',
@@ -157,7 +157,7 @@ export const UNIT6_CARDS = [
     note: '*Tåget är inställt* = le train est annulé. Avec un mot **en** : *bussen är inställd*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u6-biljett-till', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Au guichet : « Un billet pour Göteborg, s’il vous plaît. »',

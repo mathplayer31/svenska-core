@@ -1,9 +1,9 @@
-// Unité 1 : Salutations & premier contact
-// Même convention que CARDS_DATA dans scripts/sync-content.mjs :
-//  - swedish_prompt = consigne/indice en français
-//  - swedish_target = texte suédois
-//  - english_translation = traduction (en français dans ton app, on garde la convention)
-//  - words = textes suédois dont on génère un MP3 chacun
+// Unit 1: Greetings & first contact
+// Same convention as CARDS_DATA in scripts/sync-content.mjs:
+//  - swedish_prompt = instruction/hint in French
+//  - swedish_target = Swedish text
+//  - english_translation = translation (in French in the app, the convention is kept)
+//  - words = Swedish texts, one MP3 generated for each
 import { vocab } from '../helpers.mjs';
 
 export const UNIT1_DECK = {
@@ -14,13 +14,13 @@ export const UNIT1_DECK = {
   sort_order: 0,
   track: 'thematic',
   unit_number: 1,
-  section_slug: 'section-1-premiers-pas', // retiré avant l'upsert, remplacé par section_id
+  section_slug: 'section-1-premiers-pas', // removed before the upsert, replaced by section_id
 };
 
 const D = 'swedish-unit-1-greetings';
 
 export const UNIT1_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u1-hej', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'Le salut universel : « salut / bonjour »',
@@ -113,7 +113,7 @@ export const UNIT1_CARDS = [
     explanation_md: 'On le réutilisera avec la règle V2 (*Idag heter jag Anna*).',
     words: ['idag'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u1-tack-sa-mycket', {
     prompt: 'Remercier chaleureusement : « merci beaucoup »', promptEn: 'Thanking warmly: "thank you very much"',
     sv: 'tack så mycket', fr: 'merci beaucoup', en: 'thank you very much', ipa: '/takː sɔ ˈmʏkːɛ/',
@@ -154,7 +154,7 @@ export const UNIT1_CARDS = [
     gloss: [['vi', 'on', 'we'], ['ses', 'se voit', 'see each other']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u1-hur-ar-laget', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Demander des nouvelles : « Comment ça va ? »',

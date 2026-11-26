@@ -1,4 +1,4 @@
-// FranceCore, Unité 9 : Ma journée.
+// FranceCore, Unit 9: My day.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT9_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT9_DECK = unitDeck({
 const D = UNIT9_DECK.slug;
 
 export const UNIT9_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u9-se-reveiller', {
     prompt: 'Att vakna', promptEn: 'To wake up',
     fr: 'se réveiller', sv: 'vakna', en: 'to wake up',
@@ -93,7 +93,7 @@ export const UNIT9_CARDS = [
     note: 'Man säger *il est midi*, inte *douze heures* i vardagligt tal. Båda är maskulinum: *midi et demi*, utan **e**.',
     noteEn: 'People say *il est midi* rather than *douze heures* in everyday speech. Both are masculine: *midi et demi*, with no **e**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u9-se-brosser-les-dents', {
     prompt: 'Det man gör i badrummet morgon och kväll', promptEn: 'What you do in the bathroom morning and night',
     fr: 'se brosser les dents', sv: 'borsta tänderna', en: 'to brush your teeth',
@@ -138,7 +138,7 @@ export const UNIT9_CARDS = [
     noteEn: '*Faire la sieste* = take a nap. Common in southern France in summer.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u9-je-me-leve', {
     prompt: 'Säg att du går upp klockan sju', promptEn: 'Say you get up at seven',
     fr: 'Je me lève à sept heures.', sv: 'Jag går upp klockan sju.', en: 'I get up at seven o’clock.',

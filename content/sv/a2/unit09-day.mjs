@@ -1,4 +1,4 @@
-// Unité 9 : Ma journée (A2, Section 3). Grammaire : dire l'heure, verbes réfléchis (klä på sig, lägga sig).
+// Unit 9: My day (A2, Section 3). Grammar: telling the time, reflexive verbs (klä på sig, lägga sig).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT9_DECK = unitDeck({
@@ -61,7 +61,7 @@ export const UNIT9_CARDS = [
     gloss: [['på', 'à', 'in'], ['kvällen', 'le soir', 'the evening']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u9-lunch', {
     prompt: 'Le repas de midi : « le déjeuner »', promptEn: 'The midday meal: "lunch"',
     sv: 'en lunch', fr: 'un déjeuner', en: 'a lunch', ipa: '/ɛn lɵnɕ/',

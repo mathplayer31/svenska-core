@@ -1,4 +1,4 @@
-// Unité 10 : Travail & études (A2, Section 3). Grammaire : modaux + infinitif sans « att ».
+// Unit 10: Work & studies (A2, Section 3). Grammar: modals + infinitive without "att".
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT10_DECK = unitDeck({
@@ -65,7 +65,7 @@ export const UNIT10_CARDS = [
     note: 'Position : **hemma** (à la maison). Direction : **hem** (vers la maison) : *jag går hem*.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u10-kontor', {
     prompt: 'Le lieu de travail avec des bureaux : « un bureau »', promptEn: 'A workplace with desks: "an office"',
     sv: 'ett kontor', fr: 'un bureau (lieu)', en: 'an office', ipa: '/ɛtː kɔnˈtuːr/',

@@ -1,4 +1,4 @@
-// FranceCore, Unité 2 : Au café. Commander, payer, les codes du café français.
+// FranceCore, Unit 2: At the café. Ordering, paying, French café customs.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT2_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT2_DECK = unitDeck({
 const D = UNIT2_DECK.slug;
 
 export const UNIT2_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u2-un-cafe', {
     prompt: 'Det man får om man bara beställer ”kaffe”', promptEn: 'What you get if you just order "coffee"',
     fr: 'un café', sv: 'en espresso', en: 'an espresso',
@@ -93,7 +93,7 @@ export const UNIT2_CARDS = [
     note: 'Ordagrant ”för att dricka”. Serviceavgiften ingår alltid i priset (**service compris**), så dricks är frivillig: man lämnar ofta lite växel.',
     noteEn: 'Literally "for drinking". Service is always included in the price (**service compris**), so tipping is optional: people often leave some small change.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u2-un-expresso', {
     prompt: 'Den lilla starka kaffen', promptEn: 'The small strong coffee',
     fr: 'un expresso', sv: 'en espresso', en: 'an espresso',
@@ -137,7 +137,7 @@ export const UNIT2_CARDS = [
     noteEn: 'Also called **une tisane**. Common after dinner: *une verveine* (lemon verbena).',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u2-je-voudrais-un-cafe', {
     prompt: 'Beställ en espresso artigt', promptEn: 'Order an espresso politely',
     fr: 'Je voudrais un café, s’il vous plaît.', sv: 'Jag skulle vilja ha en espresso, tack.', en: 'I’d like an espresso, please.',

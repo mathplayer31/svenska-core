@@ -1,4 +1,4 @@
-// FranceCore, Unité 1 : Salutations & la bise. Unité de référence pour le format (voir docs/PROGRAMME-FR.md).
+// FranceCore, Unit 1: Greetings & la bise. Reference unit for the format (see docs/PROGRAMME-FR.md).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT1_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT1_DECK = unitDeck({
 const D = UNIT1_DECK.slug;
 
 export const UNIT1_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u1-bonjour', {
     prompt: 'Den vanliga hälsningen, hela dagen', promptEn: 'The everyday greeting, all day long',
     fr: 'bonjour', sv: 'hej / god dag', en: 'hello / good morning',
@@ -93,7 +93,7 @@ export const UNIT1_CARDS = [
     note: '**Faire la bise** = hälsa med kindpussar, oftast två, men antalet varierar mellan regioner. Mellan kollegor och obekanta tar man i hand: **serrer la main**.',
     noteEn: '**Faire la bise** = greet with cheek kisses, usually two, though the number varies by region. With colleagues and strangers you shake hands: **serrer la main**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u1-merci-beaucoup', {
     prompt: 'Tacka extra varmt', promptEn: 'Thanking warmly',
     fr: 'merci beaucoup', sv: 'tack så mycket', en: 'thank you very much',
@@ -141,7 +141,7 @@ export const UNIT1_CARDS = [
     noteEn: 'In Quebec it also answers a thank you ("you’re welcome"). In France: *de rien*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u1-je-mappelle', {
     prompt: 'Presentera dig: ”Jag heter Anna.”', promptEn: 'Introduce yourself: "My name is Anna."',
     fr: 'Je m’appelle Anna.', sv: 'Jag heter Anna.', en: 'My name is Anna.',

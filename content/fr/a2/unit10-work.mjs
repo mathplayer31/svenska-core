@@ -1,4 +1,4 @@
-// FranceCore, Unité 10 : Le travail et les études.
+// FranceCore, Unit 10: Work and studies.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT10_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT10_DECK = unitDeck({
 const D = UNIT10_DECK.slug;
 
 export const UNIT10_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u10-travail', {
     prompt: 'Det man gör för att tjäna pengar', promptEn: 'What you do to earn money',
     fr: 'le travail', sv: 'arbetet / jobbet', en: 'work / the job',
@@ -93,7 +93,7 @@ export const UNIT10_CARDS = [
     note: 'Många yrken har en form för varje kön: **-ier / -ière**, som *boulanger / boulangère*. **in** framför konsonant är nasalt, [ɛ̃].',
     noteEn: 'Many job titles have a form for each gender: **-ier / -ière**, like *boulanger / boulangère*. **in** before a consonant is nasal, [ɛ̃].',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u10-la-reunion', {
     prompt: 'När kollegorna samlas för att diskutera', promptEn: 'When colleagues meet to discuss',
     fr: 'la réunion', sv: 'mötet', en: 'the meeting',
@@ -137,7 +137,7 @@ export const UNIT10_CARDS = [
     noteEn: '**ill** is pronounced [j]: *je travaille* [tʁavaj]. Slang: *bosser*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u10-dans-la-vie', {
     prompt: 'Fråga någon vad hen jobbar med', promptEn: 'Ask someone what they do for a living',
     fr: 'Qu’est-ce que tu fais dans la vie ?', sv: 'Vad jobbar du med?', en: 'What do you do for a living?',

@@ -1,4 +1,4 @@
-// Unité 21 : Médias & actualités (B1, Section 6). Grammaire : plus-que-parfait (hade + supin), « enligt ».
+// Unit 21: Media & news (B1, Section 6). Grammar: pluperfect (hade + supine), "enligt".
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT21_DECK = unitDeck({
@@ -64,7 +64,7 @@ export const UNIT21_CARDS = [
     gloss: [['en', 'une', 'a'], ['källa', 'source', 'source']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u21-rubrik', {
     prompt: 'Le titre d’un article : « un gros titre »', promptEn: 'The title of an article: "a headline"',
     sv: 'en rubrik', fr: 'un titre (de presse)', en: 'a headline', ipa: '/ɛn rɵˈbriːk/',

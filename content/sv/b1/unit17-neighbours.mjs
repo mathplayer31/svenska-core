@@ -1,4 +1,4 @@
-// Unité 17 : Logement & voisinage (B1, Section 5). Grammaire : relatives en « som ».
+// Unit 17: Housing & neighbours (B1, Section 5). Grammar: relative clauses with "som".
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT17_DECK = unitDeck({
@@ -69,7 +69,7 @@ export const UNIT17_CARDS = [
     gloss: [['en', 'une', 'a'], ['nyckel', 'clé', 'key']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u17-tvattmaskin', {
     prompt: 'L’appareil pour laver le linge : « une machine à laver »', promptEn: 'The appliance for washing clothes: "a washing machine"',
     sv: 'en tvättmaskin', fr: 'une machine à laver', en: 'a washing machine', ipa: '/ɛn ˈtvɛtːmaˌɧiːn/',

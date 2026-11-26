@@ -1,4 +1,4 @@
-// FranceCore, Unité 7 : Le temps et les saisons. Il fait beau / froid, il pleut, saisons, mois.
+// FranceCore, Unit 7: Weather and seasons. Il fait beau / froid, il pleut, seasons, months.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT7_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT7_DECK = unitDeck({
 const D = UNIT7_DECK.slug;
 
 export const UNIT7_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u7-le-temps', {
     prompt: 'Vädret, men också tiden', promptEn: 'The weather, but also time',
     fr: 'le temps', sv: 'vädret / tiden', en: 'the weather / time',
@@ -93,7 +93,7 @@ export const UNIT7_CARDS = [
     note: 'Månader skrivs med **liten** bokstav och tar **en**: *en juillet*. **Août** är kort: [ut] eller [u].',
     noteEn: 'Months take a **small** letter in French and use **en**: *en juillet*. **Août** is short: [ut] or [u].',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u7-le-nuage', {
     prompt: 'Grått på himlen', promptEn: 'Grey in the sky',
     fr: 'le nuage', sv: 'molnet', en: 'the cloud',
@@ -138,7 +138,7 @@ export const UNIT7_CARDS = [
     noteEn: '*para* (against) + *pluie* (rain). Swedish *paraply* comes from it.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u7-quel-temps-fait-il', {
     prompt: 'Fråga hur vädret är', promptEn: 'Ask what the weather is like',
     fr: 'Quel temps fait-il ?', sv: 'Hur är vädret?', en: 'What’s the weather like?',

@@ -1,5 +1,5 @@
-// Decks thématiques B1 (issue #18), 1re partie : santé, logement, métiers, école, démarches, relations, commerce.
-// Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// B1 thematic decks (issue #18), part 1: health, housing, jobs, school, paperwork, relationships, trade.
+// Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_B1_1 = [

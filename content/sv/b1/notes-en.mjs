@@ -1,6 +1,6 @@
-// Notes de grammaire en anglais, B1 (issue #5). Adaptées à un anglophone.
+// English grammar notes, B1 (issue #5). Adapted for English speakers.
 export const NOTES_EN_B1 = {
-  // ===================== UNITÉ 16 =====================
+  // ===================== UNIT 16 =====================
   'u16-personnummer': 'Date of birth + 4 digits (*ÅÅMMDD-XXXX*). Without one, getting a bank account, a lease or a doctor is hard. The **rs** in *person* becomes [ʂ].',
   'u16-skatteverket': '*skatt* (tax) + *verket* (the agency). This is where you register on arrival (*folkbokföring*) and get your *personnummer*.',
   'u16-ansoker': 'Always with **om** ("for"): *ansöka om ett jobb*, *ansöka om personnummer*. The noun: *en ansökan* (an application).',
@@ -20,7 +20,7 @@ export const NOTES_EN_B1 = {
   'u16-viktigt-id-kort': 'Here **att** = "to" before an infinitive: *viktigt att ha* (important to have). Same word as the conjunction "that": two uses.',
   'u16-vantar-pa-svar': '**fortfarande** = still (continuity). *vänta på* + object. *svar* (an answer) does not change in the plural.',
 
-  // ===================== UNITÉ 17 =====================
+  // ===================== UNIT 17 =====================
   'u17-hyresvard': '*hyra* (rent) + *värd* (host). Often a municipal housing company (*kommunalt bostadsbolag*).',
   'u17-granne': 'Plural: *grannar*. Swedes keep to themselves with neighbours: a *hej* on the stairs is enough.',
   'u17-tvattstuga': 'A Swedish institution: you **book** a slot (*boka en tid*) and clean up after yourself. A classic source of neighbour disputes.',
@@ -40,7 +40,7 @@ export const NOTES_EN_B1 = {
   'u17-som-vi-kopte': '**som** also works as an object ("that"). As in English, you can leave it out: *lägenheten vi köpte* (the flat we bought).',
   'u17-tappat-nyckel': '**tappa** = to lose / drop (an object). To lose a match: *förlora*.',
 
-  // ===================== UNITÉ 18 =====================
+  // ===================== UNIT 18 =====================
   'u18-ansokan': 'Noun from *ansöka* (Unit 16). Irregular plural: *ansökningar*. The cover letter: *personligt brev*.',
   'u18-cv': '**ett** word, letters said the Swedish way: "seh-veh". No photo needed, and usually 2 pages at most.',
   'u18-erfarenhet': 'No article in *ha erfarenhet av* (have experience in). Suffix **-het**: an **en** word.',
@@ -60,7 +60,7 @@ export const NOTES_EN_B1 = {
   'u18-pa-heltid': '**på heltid** / *på deltid*: the preposition *på* is required.',
   'u18-goda-kunskaper': 'Plural of *god*: **goda** (adjectives take **-a** in the plural). *kunskaper i* + language.',
 
-  // ===================== UNITÉ 19 =====================
+  // ===================== UNIT 19 =====================
   'u19-tycker': '**tycka** = to have an opinion or taste: *jag tycker att filmen är bra*. Not used for beliefs about facts.',
   'u19-tror': '**tro** = to believe (uncertain information): *jag tror att hon kommer*. Also: believe in God (*tro på Gud*).',
   'u19-tanker': '**tänka** = to think, reflect (*jag tänker på dig* = I\'m thinking of you), or + infinitive = to intend (*jag tänker flytta*). English uses "think" for all three; Swedish splits them.',
@@ -80,7 +80,7 @@ export const NOTES_EN_B1 = {
   'u19-haller-inte-med': 'With a particle verb, *inte* slips **between** the verb and the particle: *håller **inte** med*.',
   'u19-egentligen-gora': 'In a question with inversion, the adverb comes after the subject: *vill du **egentligen** göra*.',
 
-  // ===================== UNITÉ 20 =====================
+  // ===================== UNIT 20 =====================
   'u20-allemansratten': 'Literally "everyone\'s right". You can walk, camp for a night, and pick berries and mushrooms almost anywhere, as long as you do no damage: *inte störa, inte förstöra* (don\'t disturb, don\'t destroy).',
   'u20-naturen': 'Always definite in Swedish: *ute i naturen* (out in nature), where English uses no article.',
   'u20-skogen': 'Definite of *en skog*. **sk** before **o** stays hard: [sk].',
@@ -100,7 +100,7 @@ export const NOTES_EN_B1 = {
   'u20-kom-ihag': '**komma ihåg** = to remember (literally "come to mind"). Imperative: *Kom ihåg!* *stänga* = to close.',
   'u20-det-finns-sjoar': '**det finns** = there is / there are (existence). *många* + countable plural (many); *mycket* + uncountable (much: *mycket vatten*).',
 
-  // ===================== UNITÉ 21 =====================
+  // ===================== UNIT 21 =====================
   'u21-nyheterna': 'Definite plural of *en nyhet* (*ny* + *-het*, "new-ness"). The final **rn** is retroflex. The big public broadcasters: *SVT* and *SR*.',
   'u21-artikel': 'Plural: *artiklar* (the **e** drops, as in *nyckel -> nycklar*). The **rt** is retroflex.',
   'u21-tidning': '*tid* (time) + *-ning*, like English *tidings*. The main titles: *Dagens Nyheter*, *Svenska Dagbladet*, *Aftonbladet*.',
@@ -120,7 +120,7 @@ export const NOTES_EN_B1 = {
   'u21-aldrig-last-forut': '*aldrig* goes between the auxiliary and the supine, as in the perfect. **förut** = before, previously.',
   'u21-vilken-kalla': 'The preposition **från** goes to the end of the question, exactly as in English *come from*. *-tion* is pronounced [ɧuːn].',
 
-  // ===================== UNITÉ 22 =====================
+  // ===================== UNIT 22 =====================
   'u22-kanner-mig': '**känna sig** + adjective, reflexive: *jag känner mig trött* (literally "I feel myself tired"). Without the reflexive, *känna* = to know a person (*jag känner henne*). The **k** before **ä** is soft.',
   'u22-glad': 'Neuter: *glatt*, plural: *glada*. *Glad påsk!* = Happy Easter.',
   'u22-ledsen': 'The **d** is silent: "les-sen". *Jag är ledsen* = I\'m sad **or** I\'m sorry, depending on context.',
@@ -140,7 +140,7 @@ export const NOTES_EN_B1 = {
   'u22-brakar-om-pengar': '*de* = they, pronounced [dɔmː]. *pengar* (money) is always plural.',
   'u22-arg-men-glad': 'After *men* (but), *nu* (now) opens the 2nd clause: V2, so *nu **är** han*. *igen* = again.',
 
-  // ===================== UNITÉ 23 =====================
+  // ===================== UNIT 23 =====================
   'u23-plotsligt': 'The **g** in *-igt* is silent. At the start of a sentence, V2 inversion: *Plötsligt **började** det regna*.',
   'u23-medan': 'Subordinating conjunction: *medan jag lagade mat…* The main clause that follows starts with its verb (V2).',
   'u23-innan': 'Conjunction (+ clause): *innan jag flyttade*. Before a noun, use **före**: *före jul* (before Christmas).',
@@ -160,7 +160,7 @@ export const NOTES_EN_B1 = {
   'u23-minns-inte': '*sa* = past of *säga* (written form: *sade*). Indirect question: *vad han sa*, subject before verb, as in English *what he said*.',
   'u23-till-slut-hittade': '*hitta* = to find. *vägen* = the way, definite of *en väg* (from the phonetics deck, *väg / vägg*).',
 
-  // ===================== GRAMMAIRE B1 =====================
+  // ===================== B1 GRAMMAR =====================
   'gram-b1-biff-att': '**BIFF** (*I Bisats kommer Inte Före det Finita verbet*, "in a subordinate clause, *inte* comes before the finite verb"): *inte* goes **before** the conjugated verb.',
   'gram-b1-biff-eftersom': 'One sentence, two positions: *kommer **inte*** (main clause, after the verb) and *eftersom vi **inte** har* (subordinate clause, before the verb).',
   'gram-b1-biff-aldrig': 'BIFF applies to all sentence adverbs (*aldrig, alltid, inte, kanske*): they move before the conjugated verb in a subordinate clause, much like English *she said she had never been*.',
@@ -173,21 +173,21 @@ export const NOTES_EN_B1 = {
   'gram-b1-plusqueparfait': '**hade** + supine for the earlier action, as in English *had started*. The fronted clause forces V2: **hade** *filmen*.',
   'gram-b1-innan-v2': 'The whole subordinate clause = 1st position, so **verb, then subject**: *duschar jag*. Classic mistake (English word order): ~~*Innan jag äter frukost jag duschar*~~.',
   'gram-b1-question-indirecte': 'Direct question: *Var **ligger** stationen?* Indirect: *var stationen **ligger*** (subject before verb, as in every subordinate clause), just like English *where the station is*.',
-  // Unité 16, ajouts (issue #14)
+  // Unit 16, additions (issue #14)
   'u16-adress': 'One **d**, two **s**. Changing address: *anmäla flytt* to Skatteverket.',
   'u16-migrationsverket': 'For residence permits outside the EU. *-verket* = the agency, as in *Skatteverket*.',
   'u16-uppehallstillstand': 'Often shortened to *UT*. *uppehåll* (stay) + *tillstånd* (permit).',
   'u16-underskrift': 'Verb: *skriva under* (sign). *under* + *skrift* (writing).',
   'u16-forsakringskassan': 'Handles parental leave, sick pay and child benefit.',
   'u16-brev': 'Unchanged in the plural: *två brev*. Authorities often write by post.',
-  // Unité 17, ajouts (issue #14)
+  // Unit 17, additions (issue #14)
   'u17-tvattmaskin': '*tvätt* (laundry) + *maskin*. Often shared in the *tvättstuga*.',
   'u17-hogljudd': '*hög* (loud, high) + *ljud* (sound). *Grannarna är högljudda.*',
   'u17-lapp': 'The passive-aggressive note in the laundry room is a Swedish institution.',
   'u17-reparerar': 'Infinitive *reparera*. More common in speech: *laga* (*laga diskmaskinen*).',
   'u17-soprum': '*sopor* (rubbish) + *rum*. You sort there: paper, glass, plastic, food.',
   'u17-hyresgast': '*hyra* (rent) + *gäst* (guest). Represented by *Hyresgästföreningen* (tenants’ union).',
-  // Unité 18, ajouts (issue #14)
+  // Unit 18, additions (issue #14)
   'u18-deltid': '*del* (part) + *tid* (time). *Jag jobbar deltid, 75 procent.*',
   'u18-tjanst': 'Also "a favour": *Kan du göra mig en tjänst?* = can you do me a favour?',
   'u18-referens': 'In Sweden, employers often call your former managers: *referenser lämnas på begäran* (references on request).',
@@ -195,28 +195,28 @@ export const NOTES_EN_B1 = {
   'u18-arbetslos': '*arbete* (work) + *-lös* (-less). Unemployment: *arbetslöshet*.',
   'u18-utbildning': 'A CV heading, next to *arbetslivserfarenhet* (work experience).',
   'u18-arbetsformedlingen': 'Sweden’s job centre. It also offers Swedish courses for work.',
-  // Unité 19, ajouts (issue #14)
+  // Unit 19, additions (issue #14)
   'u19-for-min-del': 'Goes first: *För min del är det okej.* Mind V2: the verb comes next.',
   'u19-sjalvklart': '*själv* (self) + *klart* (clear). More casual: *så klart* or *klart*.',
   'u19-precis': 'On its own, it is an answer: *Precis!* The **c** sounds like [s].',
   'u19-absolut': 'The **b** before **s** sounds like [p]. Negative: *absolut inte* (absolutely not).',
   'u19-fordel': 'Often with its opposite: *fördelar och nackdelar* (pros and cons).',
   'u19-nackdel': '*Nackdelen är att det är dyrt.* The definite form introduces an *att* clause.',
-  // Unité 20, ajouts (issue #14)
+  // Unit 20, additions (issue #14)
   'u20-talt': '**ett** word. The verb *tälta* (to camp) comes from it.',
   'u20-o': 'One of the shortest Swedish words. Plural: *öar*. Sweden has over 260,000 islands.',
   'u20-havet': 'Definite of *ett hav*. *Vid havet* = by the sea.',
   'u20-alg': 'The **g** after **l** sounds like [j]. Famous road sign: *Varning för älg*.',
   'u20-myggor': 'Plural of *en mygga* (group 1). Repellent: *myggmedel*.',
   'u20-skargarden': '*skär* (skerry) + *gård* (yard). The **sk** before **ä** is [ɧ].',
-  // Unité 21, ajouts (issue #14)
+  // Unit 21, additions (issue #14)
   'u21-rubrik': 'Stress at the end. *Läsa rubrikerna* = read the headlines.',
   'u21-journalist': 'The **j** sounds like [ɧ], a soft "sh", as in French.',
   'u21-riksdagen': '*rike* (realm) + *dag* (assembly). 349 members: *riksdagsledamöter*.',
   'u21-parti': 'Stress at the end. Plural: *partier*. A celebration is *en fest*, never *parti*.',
   'u21-rostar': 'Infinitive *rösta*. *en röst* = a voice, a vote. *Vem röstar du på?*',
   'u21-statsminister': '*stat* (state) + *minister*. Appointed via the *riksdag*, not directly elected.',
-  // Unité 22, ajouts (issue #14)
+  // Unit 22, additions (issue #14)
   'u22-radd': '*Jag är rädd för hundar* = I am scared of dogs. *för* introduces what scares you.',
   'u22-nervos': 'Stress at the end. *Jag är nervös inför intervjun* (*inför* = ahead of).',
   'u22-lycklig': '*glad* = pleased in the moment; *lycklig* = happy in life. *Lycka* = happiness.',
@@ -224,7 +224,7 @@ export const NOTES_EN_B1 = {
   'u22-forvanad': '*Jag blev förvånad* = I was surprised. *blev* = became.',
   'u22-ensam': 'Plural: *ensamma* (double **m**). *Känner du dig ensam?*',
   'u22-kar': '*Jag är kär i dig* = I am in love with you (with *i*). The **k** before **ä** is soft [ɕ].',
-  // Unité 23, ajouts (issue #14)
+  // Unit 23, additions (issue #14)
   'u23-det-var-en-gang': '*Det var en gång en kung…* Literally: "it was one time".',
   'u23-berattar': 'Infinitive *berätta*. *Berätta mer!* = tell me more! Hence *en berättelse*.',
   'u23-senare': 'Comparative of *sen* (late). *Vi ses senare!* = see you later!',

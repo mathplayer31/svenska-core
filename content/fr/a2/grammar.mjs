@@ -1,4 +1,4 @@
-// FranceCore, Grammaire A2 : 16 phrases à trou (voir docs/PROGRAMME-FR.md).
+// FranceCore, A2 grammar: 16 fill-in-the-blank sentences (see docs/PROGRAMME-FR.md).
 import { cloze, foundationDeck } from '../helpers.mjs';
 
 export const GRAMMAR_A2_DECK = foundationDeck({

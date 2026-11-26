@@ -1,5 +1,5 @@
-// Decks thématiques A2 (issue #18), 1re partie : corps, maison, nourriture, gens, ville, temps, loisirs.
-// Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// A2 thematic decks (issue #18), part 1: body, home, food, people, town, time, hobbies.
+// Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_A2_1 = [

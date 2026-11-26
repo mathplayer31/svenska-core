@@ -1,6 +1,6 @@
-// Notes de grammaire en anglais, B2 (issue #5). Adaptées à un anglophone.
+// English grammar notes, B2 (issue #5). Adapted for English speakers.
 export const NOTES_EN_B2 = {
-  // ===================== UNITÉ 24 =====================
+  // ===================== UNIT 24 =====================
   'u24-ansvar': '**ett** word, often with no article: *ha ansvar för* = be responsible for. Adjective: *ansvarig*.',
   'u24-forhandlar': '*för* + *handla* (to trade). *förhandla om* = negotiate something. The noun: *en förhandling*.',
   'u24-uppdrag': '**ett** word. The client who commissions it: *en uppdragsgivare*.',
@@ -20,7 +20,7 @@ export const NOTES_EN_B2 = {
   'u24-uppdraget-klart': '*klar* = ready, finished; **klart** because *uppdraget* is neuter. Here *ska* expresses a requirement.',
   'u24-skoter-kontakten': '*sköta* + direct object, no preposition (English needs "of": *take care of*). Definite plural: *kunderna*.',
 
-  // ===================== UNITÉ 25 =====================
+  // ===================== UNIT 25 =====================
   'u25-priset': 'Definite of *ett pris*. Careful: *ett pris* also means "a prize", as in the Nobel Prize (*Nobelpriset*).',
   'u25-lan': 'A mortgage: *bolån*. To borrow: *låna*; to lend: *låna ut* (literally "borrow out").',
   'u25-sparar': 'Infinitive *att spara*. Also: save a file (*spara filen*), just like in English.',
@@ -40,7 +40,7 @@ export const NOTES_EN_B2 = {
   'u25-halla-budgeten': '**hålla** = to keep / hold: *hålla budgeten*, *hålla tiden* (be on time), *hålla ett löfte* (keep a promise).',
   'u25-inflationen-sjunkit': '*sjunka, sjönk, har sjunkit* (strong verb, like *sink, sank, sunk*). **i år** = this year (like *i sommar*).',
 
-  // ===================== UNITÉ 26 =====================
+  // ===================== UNIT 26 =====================
   'u26-varden': 'Definite of *vård*. The **rd** is retroflex. Compare *vårdcentral* (Unit 12).',
   'u26-valfarden': '*väl* (well) + *färd* (journey, state): literally "well-fare", exactly the English word. Funded by high taxes: *välfärdsstaten* (the welfare state).',
   'u26-forsakring': 'Social insurance: *Försäkringskassan*, which pays sickness benefits and parental benefits.',
@@ -60,7 +60,7 @@ export const NOTES_EN_B2 = {
   'u26-avgiftsfri': '*avgift* + *fri* (free of) = free of charge. Same pattern as English *-free*: *rökfri* (smoke-free), *sockerfri* (sugar-free).',
   'u26-alla-anstallda': '*anställd* (past participle of *anställa*, to employ) becomes a noun: **de anställda** = the employees, like English *the employed*. Plural in **-a**.',
 
-  // ===================== UNITÉ 27 =====================
+  // ===================== UNIT 27 =====================
   'u27-klimatet': 'Definite of *ett klimat*. Not to be confused with *vädret* (today\'s weather, Unit 7).',
   'u27-utslapp': '*ut* (out) + *släppa* (release): literally "out-release". **ett** word, unchanged in the plural. Definite plural: *utsläppen*.',
   'u27-atervinner': '*åter* (again) + *vinna* (win): literally "re-win". The recycling station: *återvinningsstation*. Can and bottle deposit: *pant*.',
@@ -80,7 +80,7 @@ export const NOTES_EN_B2 = {
   'u27-klimatet-varmare': '**bli** + comparative = gradual change ("becomes warmer"), like English *is getting warmer*.',
   'u27-skulle-vilja-leva': '**skulle vilja** = would like (polite wish). The adverb is formed with **-t**: *hållbart* (sustainably), the Swedish equivalent of English *-ly*.',
 
-  // ===================== UNITÉ 28 =====================
+  // ===================== UNIT 28 =====================
   'u28-lagom': 'Not too much, not too little: the right amount, a core Swedish value. *lagom varmt* = just the right temperature.',
   'u28-ta-det-lugnt': 'Literally "take it calmly". Also a casual goodbye: *Ta det lugnt!* (take it easy).',
   'u28-ingen-fara': 'Literally "no danger". The natural reply to *Förlåt!* (sorry).',
@@ -100,7 +100,7 @@ export const NOTES_EN_B2 = {
   'u28-ingen-ko': 'The full form of the expression, with *det är*.',
   'u28-inte-riktigt-min-kopp': '*inte riktigt* = not really: softens criticism, very Swedish.',
 
-  // ===================== UNITÉ 29 =====================
+  // ===================== UNIT 29 =====================
   'u29-a-ena-sidan': 'Always followed by *å andra sidan*. At the start of a sentence, it triggers V2: *Å ena sidan **är** det…*',
   'u29-a-andra-sidan': '*andra* = other (definite form of *annan*).',
   'u29-daremot': 'Adverb: it can open the clause (and then triggers V2) or go after the verb.',
@@ -120,7 +120,7 @@ export const NOTES_EN_B2 = {
   'u29-visserligen-ung': 'Concession + objection: *Visserligen* (V2: **är** *han*), *men* (normal order).',
   'u29-till-exempel-taget': 'Adverbials like *till exempel* go after the conjugated verb, before the infinitive.',
 
-  // ===================== UNITÉ 30 =====================
+  // ===================== UNIT 30 =====================
   'u30-vanligen': 'Official register: *Vänligen kontakta oss*. In speech, you would rather say *Kan du…?*',
   'u30-tack-pa-forhand': 'Common in emails, from professional to personal.',
   'u30-med-vanliga-halsningar': 'Abbreviated *MVH*. More personal: *Hälsningar* (regards) or *Kram* (hugs, between friends).',
@@ -140,7 +140,7 @@ export const NOTES_EN_B2 = {
   'u30-kompis-schysst': '*så* + adjective = so, really (Unit 22).',
   'u30-fick-inte-anvanda': 'Two rules at once: tense shifted back (*får -> **fick***) and BIFF (*vi **inte** fick*). *använda* = to use.',
 
-  // ===================== UNITÉ 31 =====================
+  // ===================== UNIT 31 =====================
   'u31-historia': 'No article for the subject: *läsa historia* (study history). Definite: *historien*. A story you tell: *en berättelse* (Unit 23).',
   'u31-kungen': 'Definite of *en kung*. Constitutional monarchy: the king\'s role is purely symbolic. The queen: *drottningen*.',
   'u31-demokrati': 'Stressed on the last syllable. Definite: *demokratin*. Universal suffrage dates from 1921.',
@@ -160,7 +160,7 @@ export const NOTES_EN_B2 = {
   'u31-folkhemmet-byggdes': 'Centuries are named after their hundreds: *1900-talet* ("the 1900s") = the 20th century. *byggdes* = past passive of *bygga*.',
   'u31-sjalvklarhet': '*själv* (self) + *klar* (clear) = self-evident; + **-het** -> *självklarhet* (a given). *Självklart!* = Of course!',
 
-  // ===================== GRAMMAIRE B2 =====================
+  // ===================== B2 GRAMMAR =====================
   'gram-b2-passif-present': 'Group 2: *läser* -> **läses** (replace **-r** with **-s**, with a linking **e**). Group 1: *skickar* -> *skickas*. One word for English "is read".',
   'gram-b2-passif-preterit': 'Past + **-s**: *byggde* -> *byggdes* (was built). Years take no preposition: *1920* (*nittonhundratjugo*), unlike English *in 1920*.',
   'gram-b2-passif-bli': '**bli** + agreeing past participle: *vald* (en), *valt* (ett), *valda* (plural). Like English *got chosen*: it stresses the change of state.',
@@ -173,49 +173,49 @@ export const NOTES_EN_B2 = {
   'gram-b2-reciproque': 'Some **-s** verbs have a **reciprocal** meaning ("each other"): *träffas* (meet), *ses* (*Vi ses!* = See you!), *höras* (*Vi hörs!* = Talk soon!).',
   'gram-b2-deponent': '**Deponent** verbs: **-s** form but **active** meaning, with no form without -s: *hoppas* (hope), *minnas* (remember), *finnas* (exist), *andas* (breathe). *det går bra* = it goes well.',
   'gram-b2-derivation-bar': 'Stem + **-bar** = "-able": *lösa -> lösbar* (solvable), *äta -> ätbar* (edible), *hålla -> hållbar* (Unit 27). Neuter agreement: *lösbart*.',
-  // Unité 24, ajouts (issue #14)
+  // Unit 24, additions (issue #14)
   'u24-faktura': 'Plural: *fakturor*. 30-day terms: *30 dagars betalningsvillkor*.',
   'u24-offert': '*Begära in en offert* = ask for a quote. The **rt** is [ʈ].',
   'u24-fattar-ett-beslut': 'Swedish does not "take" a decision, it *fattar* (grasps) it. Passive: *beslutet fattades*.',
   'u24-styrelse': 'From *styra* (steer). The chair: *styrelseordförande*.',
   'u24-avdelning': '*Ekonomiavdelningen* = the finance department. Also a hospital ward.',
   'u24-forslag': '*Lägga fram ett förslag* = put forward a proposal. Verb: *föreslå*.',
-  // Unité 25, ajouts (issue #14)
+  // Unit 25, additions (issue #14)
   'u25-aktie': 'Plural: *aktier*. The stock exchange: *börsen*. A fund: *en fond*.',
   'u25-bolan': '*bo* (live) + *lån* (loan). Sensitive to *räntan* (the interest rate).',
   'u25-kostnad': 'Often plural: *kostnaderna ökar* (costs are rising).',
   'u25-inkomst': '*in* + *komst* (coming). Income tax: *inkomstskatt*.',
   'u25-kris': 'Plural: *kriser*. *Finanskrisen* = the financial crisis.',
   'u25-lagkonjunktur': '*låg* (low) + *konjunktur* (economic cycle). The opposite: *högkonjunktur*.',
-  // Unité 26, ajouts (issue #14)
+  // Unit 26, additions (issue #14)
   'u26-sjukhuset': '*sjuk* (sick) + *hus* (house). The emergency room: *akuten*.',
   'u26-patient': 'The **ti** sounds like [sɪ]. Stress at the end.',
   'u26-pension': 'The **sion** is [ɧuːn]. To retire: *gå i pension*.',
   'u26-barnbidrag': '*barn* (child) + *bidrag* (allowance). Paid by *Försäkringskassan* until 16.',
   'u26-a-kassan': 'Short for *arbetslöshetskassa*. Membership is voluntary, often through a union.',
   'u26-tandlakare': '*tand* (tooth) + *läkare* (doctor). Free up to age 23, then paid.',
-  // Unité 27, ajouts (issue #14)
+  // Unit 27, additions (issue #14)
   'u27-okar': 'Infinitive *öka*, group 1. *Temperaturen ökar.* Noun: *en ökning*.',
   'u27-pant': '*Panta burkar* = return cans at the supermarket, 1 to 2 kronor each.',
   'u27-koldioxid': '*kol* (carbon) + *dioxid*. Often: *koldioxidutsläpp* (CO2 emissions).',
   'u27-vindkraft': '*vind* (wind) + *kraft* (power). A wind turbine: *ett vindkraftverk*.',
   'u27-kollektivtrafik': 'In speech: *åka kollektivt* = take public transport.',
   'u27-oversvamning': '*över* (over) + *svämma* (overflow). Increasingly frequent with climate change.',
-  // Unité 28, ajouts (issue #14)
+  // Unit 28, additions (issue #14)
   'u28-rakmacka': 'Literally "slide in on a shrimp sandwich". Said of someone privileged.',
   'u28-ana-ugglor': 'Literally "suspect owls in the bog". *Jag anar ugglor i mossen.*',
   'u28-lok-pa-laxen': 'Literally "put onion on the salmon". Ironic: spoiling what was already there.',
   'u28-korvspad': 'Literally "clear as sausage water". Often ironic: *Det är väl klart som korvspad!*',
   'u28-smor-i-smaland': 'Literally "not for all the butter in Småland", a farming region.',
   'u28-over-en-kam': 'Literally "pull everyone through one comb". *Man ska inte dra alla över en kam.*',
-  // Unité 29, ajouts (issue #14)
+  // Unit 29, additions (issue #14)
   'u29-eftersom': 'A subordinating conjunction: *Eftersom det regnade, stannade vi hemma.* Fronted, it triggers V2 in the main clause.',
   'u29-enligt-min-mening': 'More formal than *jag tycker*. At the start of a sentence, the verb follows (V2).',
   'u29-for-det-forsta': 'Then *för det andra* (secondly). Like any fronted adverbial, it triggers V2.',
   'u29-sammanfattningsvis': '*sammanfattning* (summary) + *-vis* (-ly). Same pattern: *förhoppningsvis* (hopefully).',
   'u29-anda': '*Det var dyrt, men vi köpte det ändå.* Goes after the verb or at the end.',
   'u29-argument': '**ett** word, unchanged in the plural. A quarrel is *ett gräl*, not *argument*.',
-  // Unité 30, ajouts (issue #14)
+  // Unit 30, additions (issue #14)
   'u30-grym': 'Literally "cruel", but among young people: *Det var grymt!* = that was awesome!',
   'u30-assa': 'Spoken form of *alltså*. *Asså, jag vet inte.* Avoid in formal writing.',
   'u30-kaka': '*Ska vi käka?* = shall we eat? Neutral: *äta*.',
@@ -223,7 +223,7 @@ export const NOTES_EN_B2 = {
   'u30-sjukt': 'Before an adjective: *sjukt bra* = insanely good. Literally: sick (*sjuk*).',
   'u30-med-anledning-av': 'Typical start of an official email: *Med anledning av ditt mejl…*',
   'u30-vi-hors': 'Reciprocal **-s** form of *höra* (hear). The phone version of *vi ses*.',
-  // Unité 31, ajouts (issue #14)
+  // Unit 31, additions (issue #14)
   'u31-drottningen': 'Definite of *en drottning*. The royal palace: *Drottningholm*, "the queen’s island".',
   'u31-krig': '**ett** word. Peace: *fred*. Sweden has not been at war since 1814.',
   'u31-flykting': 'From *fly* (flee). Plural: *flyktingar*.',

@@ -1,4 +1,4 @@
-// Unité 15 : Projets & vacances (A2, Section 4). Grammaire : futur (ska / kommer att), « om » + V2 dans la principale.
+// Unit 15: Plans & holidays (A2, Section 4). Grammar: future (ska / kommer att), "om" + V2 in the main clause.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT15_DECK = unitDeck({
@@ -67,7 +67,7 @@ export const UNIT15_CARDS = [
     note: 'Le **sk** devant **e** se prononce [ɧ] : « kann-chè ». En tête de phrase, il déclenche l’inversion V2.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u15-pass', {
     prompt: 'Le document pour voyager : « un passeport »', promptEn: 'The document for travelling: "a passport"',
     sv: 'ett pass', fr: 'un passeport', en: 'a passport', ipa: '/ɛtː pasː/',

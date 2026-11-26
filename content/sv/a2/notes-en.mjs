@@ -1,6 +1,6 @@
-// Notes de grammaire en anglais, A2 (issue #5). Adaptées à un anglophone.
+// English grammar notes, A2 (issue #5). Adapted for English speakers.
 export const NOTES_EN_A2 = {
-  // ===================== UNITÉ 8 =====================
+  // ===================== UNIT 8 =====================
   'u8-lagenhet': 'Definite: **lägenheten**. In listings, *3 rok* means 3 rooms + kitchen (*rum och kök*).',
   'u8-rum': '**ett** word, unchanged in the plural: *ett rum, två rum*. The **u** is short before **mm**.',
   'u8-kok': 'The two **k**s sound different: the first, before **ö**, is soft [ɕ]; the last one is hard. Definite: *köket*.',
@@ -20,7 +20,7 @@ export const NOTES_EN_A2 = {
   'u8-vi-flyttar': 'Direction = **till** (to), not *i*. *ny* = new (from the phonetics deck, *ny / nu*).',
   'u8-sovrum-litet': 'Double **ett** agreement: *mitt* (not *min*) and **litet** (the irregular neuter form of *liten*).',
 
-  // ===================== UNITÉ 9 =====================
+  // ===================== UNIT 9 =====================
   'u9-vaknar': 'Just like English *I wake up*, no reflexive pronoun: *jag vaknar*. Infinitive *att vakna*, group 1.',
   'u9-duschar': '**sch** is pronounced like English "sh". No reflexive either: *jag duschar* = I shower.',
   'u9-frukost': 'No article for the meal: *äta frukost* (eat breakfast). The meals: *frukost*, *lunch*, *middag*.',
@@ -40,7 +40,7 @@ export const NOTES_EN_A2 = {
   'u9-lagar-middag': '**V2** rule: *på kvällen* (1) + **lagar** (2) + *jag* (3). *laga mat* = to cook.',
   'u9-lagger-mig': '**lägga sig** = to go to bed (reflexive). Do not confuse it with *ligga* (to lie, Unit 8), just like English *lay* vs *lie*. *elva* = eleven.',
 
-  // ===================== UNITÉ 10 =====================
+  // ===================== UNIT 10 =====================
   'u10-jobb': '**ett** word. More formal: *ett arbete*. *på jobbet* = at work.',
   'u10-jobbar': 'Infinitive *att jobba* (informal but used everywhere). Formal: *arbetar*.',
   'u10-kollega': 'Stress on **le**. Plural: *kollegor*. The office coffee break: *fika med kollegorna*.',
@@ -60,7 +60,7 @@ export const NOTES_EN_A2 = {
   'u10-hjalpa-mig': '**hj** is pronounced simply [j]: "yelpa". The **h** is silent.',
   'u10-jobbar-hemma': '**V2** review: *idag* (1) + **jobbar** (2) + *jag* (3). Working from home: *jobba hemifrån*.',
 
-  // ===================== UNITÉ 11 =====================
+  // ===================== UNIT 11 =====================
   'u11-helgen': 'Definite of *en helg*. *i helgen* = this weekend (past or future, depending on the verb tense). *Trevlig helg!* = Have a nice weekend!',
   'u11-tranar': 'Infinitive *att träna*, group 1. A gym: *ett gym*.',
   'u11-film': '**en** word (*filmen*). The cinema (place): *bio* (*gå på bio* = go to the cinema).',
@@ -80,7 +80,7 @@ export const NOTES_EN_A2 = {
   'u11-spelar-fotboll': 'No preposition after *spela*: *spela fotboll*, *spela tennis*.',
   'u11-kopte-soffa': 'Group 2 past tense: stem + **-te** (*köpte*) or **-de** (*ringde*). *soffa* is from Unit 8.',
 
-  // ===================== UNITÉ 12 =====================
+  // ===================== UNIT 12 =====================
   'u12-sjuk': '**sj** is pronounced [ɧ], as in *sju*. On sick leave: *vara sjukskriven*.',
   'u12-ha-ont': 'Pattern: **ha ont i** + a **definite** body part: *ont i huvudet* (headache), *ont i magen* (stomach ache).',
   'u12-huvudet': 'Definite of *ett huvud*. In speech, often shortened to [ˈhʉːvɛt].',
@@ -100,7 +100,7 @@ export const NOTES_EN_A2 = {
   'u12-behover-lakare': '**behöver** + infinitive without *att*, like a modal. *träffa* = to meet, to see someone (compare *träffas*, Unit 1).',
   'u12-vila-och-drick': 'Imperative = verb stem: *vila* (group 1, keeps the -a), **drick** (from *dricka*, drops the -a).',
 
-  // ===================== UNITÉ 13 =====================
+  // ===================== UNIT 13 =====================
   'u13-troja': 'Plural: *tröjor*. A T-shirt: *en t-shirt*.',
   'u13-jacka': 'A winter coat: *en vinterjacka*. Essential from November to March.',
   'u13-byxor': 'Always **plural**, just like English *trousers*: *ett par byxor* (a pair of trousers).',
@@ -120,7 +120,7 @@ export const NOTES_EN_A2 = {
   'u13-snyggast': 'Double definite with an adjective: **den** blå **tröjan**. *snygg* (nice-looking), *snyggare*, *snyggast*: no article before the superlative after *är*, unlike English *the nicest*.',
   'u13-vilken-ar-bast': '*vilken* on its own = which one. Answer: *Den här är bäst* (this one is the best).',
 
-  // ===================== UNITÉ 14 =====================
+  // ===================== UNIT 14 =====================
   'u14-midsommar': 'The Friday closest to 21 June: dancing round the maypole (*midsommarstången*), herring, strawberries. No article: *fira midsommar*.',
   'u14-julen': 'Definite of *jul*. The main celebration is on **24 December** (*julafton*). *God jul!* = Merry Christmas!',
   'u14-lucia': 'On 13 December, a procession in white, led by a girl with a crown of candles, sings in schools and offices. People eat *lussekatter* (saffron buns).',
@@ -140,7 +140,7 @@ export const NOTES_EN_A2 = {
   'u14-atit-sill': '**ätit** = supine of *äta* (strong verb, in **-it**): *äta, äter, åt, har ätit* (*eat, ate, eaten*). Pickled herring is on every festive table.',
   'u14-fin-dag': '**varit** = supine of *vara* (to be): *vara, är, var, har varit*. *fin* has no **-t** because *en dag* is an **en** word.',
 
-  // ===================== UNITÉ 15 =====================
+  // ===================== UNIT 15 =====================
   'u15-semester': 'No article: *ha semester* (be on holiday), *vara på semester*. Swedes often take 4 to 5 weeks off in July.',
   'u15-resa': 'Also a verb: *att resa* (to travel). *Trevlig resa!* = Have a good trip!',
   'u15-bokar': 'Infinitive *att boka*, group 1: *bokade, har bokat*, just like English *book*. Nothing to do with *en bok* (a book) in Swedish.',
@@ -160,7 +160,7 @@ export const NOTES_EN_A2 = {
   'u15-semester-juli': 'In Swedish you "have" holiday. Months are written in lower case: *i juli*, *i december*.',
   'u15-kanske-norge': '*kanske* in 1st position: the verb **åker** follows, then the subject (V2). Without inversion: *Vi åker kanske till Norge.*',
 
-  // ===================== GRAMMAIRE A2 =====================
+  // ===================== A2 GRAMMAR =====================
   'gram-a2-pret-g1': 'Group 1 (present in **-ar**): past in **-ade**, supine in **-at**: *jobba, jobbar, jobbade, har jobbat*. And still V2: *Igår* **jobbade** *jag*.',
   'gram-a2-pret-g2': 'Group 2 (present in **-er**): **-te** after a voiceless consonant (*köpte*, *åkte*), **-de** otherwise (*ringde*, *stängde*). Compare English *-ed* sounding "t" or "d".',
   'gram-a2-pret-fort': 'Strong verbs change their vowel and take no ending: *gå -> gick*, *se -> såg*, *äta -> åt*, *dricka -> drack*. Learn them by heart, like English irregular verbs.',
@@ -173,35 +173,35 @@ export const NOTES_EN_A2 = {
   'gram-a2-comparatif': '**-are** + **än** (than): *billigare än*, *större än*. *den där* = that one.',
   'gram-a2-superlatif': 'Before a definite noun, the superlative takes **-a**: *den bästa tröjan*, *det billigaste rummet*. On its own after *är*: *den är bäst*.',
   'gram-a2-for-sedan': '"ago" = **för … sedan** (often pronounced *sen*). *kom* = past of *komma*. Do not confuse it with *i två år* (for two years).',
-  // Unité 8, ajouts (issue #14)
+  // Unit 8, additions (issue #14)
   'u8-badrum': '*bad* (bath) + *rum* (room): **ett** word, like *rum*.',
   'u8-vardagsrum': '*vardag* (weekday) + *rum*. The **rd** is [ɖ], with the tongue curled back.',
   'u8-dorr': 'Definite: *dörren*. *Stäng dörren!* = close the door!',
   'u8-balkong': 'Stress on the last syllable. *Lägenheten har balkong* (no article).',
   'u8-hiss': 'Definite: *hissen*. In listings: *hiss finns* (there is a lift).',
   'u8-trappa': 'Also used for floors: *Jag bor två trappor upp* = two floors up.',
-  // Unité 9, ajouts (issue #14)
+  // Unit 9, additions (issue #14)
   'u9-lunch': 'The final **ch** is [ɕ]. *Äta lunch* = have lunch, often around 11.30.',
   'u9-pa-eftermiddagen': 'Same pattern as *på morgonen* and *på kvällen*: *på* + definite form.',
   'u9-tidigt': '*Jag vaknar tidigt.* The **g** is silent: [ˈtiːdɪt].',
   'u9-sent': '*Jag lägger mig sent.* To be late: *vara sen*.',
   'u9-sover': 'Infinitive *sova*, strong verb: *sov, har sovit*. *Sov gott!* = sleep well!',
   'u9-timme': 'For a duration: *en timme*, plural *timmar*. For the time of day: *klockan*.',
-  // Unité 10, ajouts (issue #14)
+  // Unit 10, additions (issue #14)
   'u10-kontor': '**ett** word. *Jag jobbar på kontoret* = I work at the office.',
   'u10-larare': 'From *lära* (teach, learn). Unchanged in the plural: *två lärare*.',
   'u10-ledig': '*Jag är ledig på fredag* = I am off on Friday. *En ledig plats* = a free seat.',
   'u10-dator': 'Definite: *datorn*. A laptop: *en bärbar dator* (*bära* = carry).',
   'u10-rast': 'The coffee break at work has its own name: *fikarast*.',
   'u10-slutar': '*Jag slutar klockan fem* = I finish at 5. Also: to quit a job.',
-  // Unité 11, ajouts (issue #14)
+  // Unit 11, additions (issue #14)
   'u11-konsert': 'The final **rt** is [ʈ], tongue curled back. *Gå på konsert* = go to a concert.',
   'u11-simmar': 'Infinitive *simma*, group 1. The swimming pool: *simhallen*.',
   'u11-museum': 'Definite: *museet*. Plural: *museer*.',
   'u11-promenad': '*Ta en promenad* = go for a walk. Stress at the end.',
   'u11-fotboll': 'No article: *Jag spelar fotboll.* *fot* (foot) + *boll* (ball).',
   'u11-gjorde': '*göra, gör, gjorde, har gjort*. **gj** sounds like [j] and **rd** like [ɖ].',
-  // Unité 12, ajouts (issue #14)
+  // Unit 12, additions (issue #14)
   'u12-tand': 'Irregular plural: *tänder*. *Jag har ont i tänderna.*',
   'u12-ryggen': 'Definite of *en rygg*. *Jag har ont i ryggen* = my back hurts.',
   'u12-forkyld': '*Jag är förkyld* = I have a cold. The **k** before **y** is soft [ɕ].',
@@ -209,7 +209,7 @@ export const NOTES_EN_A2 = {
   'u12-tablett': 'Stress at the end. *Ta en tablett tre gånger om dagen* (three times a day).',
   'u12-frisk': '*Jag är frisk igen* = I am well again. Also: *frisk luft* = fresh air.',
   'u12-recept': 'Same word as for a cooking recipe. In Sweden, prescriptions are electronic.',
-  // Unité 13, ajouts (issue #14)
+  // Unit 13, additions (issue #14)
   'u13-klanning': 'Definite: *klänningen*. Plural: *klänningar*.',
   'u13-kjol': 'The **kj** is [ɕ], like the **k** in *köpa*.',
   'u13-mossa': 'Essential in winter. Plural: *mössor*.',
@@ -217,7 +217,7 @@ export const NOTES_EN_A2 = {
   'u13-provrum': '*prova* (try on) + *rum* (room): **ett** word.',
   'u13-snygg': 'For clothes and people. Neuter: *snyggt*. Superlative: *snyggast*.',
   'u13-farg': 'The **g** after **r** sounds like [j]. *Vilken färg?* = which colour?',
-  // Unité 14, ajouts (issue #14)
+  // Unit 14, additions (issue #14)
   'u14-pask': '*Glad påsk!* = Happy Easter. Children dress up as witches (*påskkärringar*).',
   'u14-julgran': '*jul* (Christmas) + *gran* (spruce). It often stays up until Saint Knut’s Day, 13 January.',
   'u14-nyar': '*ny* (new) + *år* (year). New Year’s Eve: *nyårsafton*.',
@@ -225,7 +225,7 @@ export const NOTES_EN_A2 = {
   'u14-tomte': 'The Swedish Santa: *jultomten*. He knocks on the door on the 24th: *Finns det några snälla barn?*',
   'u14-majstang': 'People dance around it at *midsommar*, singing *Små grodorna*.',
   'u14-kraftskiva': '*kräfta* (crayfish) + *skiva* (party). Paper hats and drinking songs (*snapsvisor*).',
-  // Unité 15, ajouts (issue #14)
+  // Unit 15, additions (issue #14)
   'u15-pass': '**ett** word. Also: *ett arbetspass* = a work shift.',
   'u15-resvaska': '*resa* (trip) + *väska* (bag). *Packa resväskan* = pack your suitcase.',
   'u15-flygplats': '*flyg* (flight) + *plats* (place). The biggest one: *Arlanda*.',

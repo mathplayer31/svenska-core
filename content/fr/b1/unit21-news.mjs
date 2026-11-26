@@ -1,4 +1,4 @@
-// FranceCore, Unité 21 : Actualités et médias (journal, grève, élection, rapporter une info).
+// FranceCore, Unit 21: News and media (newspaper, strike, election, reporting information).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT21_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT21_DECK = unitDeck({
 const D = UNIT21_DECK.slug;
 
 export const UNIT21_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u21-journal', {
     prompt: 'Tidningen, eller nyhetssändningen på tv', promptEn: 'The newspaper, or the TV news bulletin',
     fr: 'le journal', sv: 'tidningen / nyhetssändningen', en: 'the newspaper / the news',
@@ -93,7 +93,7 @@ export const UNIT21_CARDS = [
     note: '*Selon la police*, *selon les médias*. Med pronomen: **selon moi** = enligt mig. Synonymt med *d’après*: *d’après lui*.',
     noteEn: '*Selon la police*, *selon les médias*. With a pronoun: **selon moi** = in my view. Synonym: *d’après*: *d’après lui*.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u21-le-president', {
     prompt: 'Statschefen i Frankrike', promptEn: 'The French head of state',
     fr: 'le président / la présidente', sv: 'presidenten', en: 'the president',
@@ -138,7 +138,7 @@ export const UNIT21_CARDS = [
     noteEn: 'Short for *les informations*. *Tu as écouté les infos ?*',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u21-cheminots-en-greve', {
     prompt: 'Säg att järnvägsarbetarna har strejkat sedan i tisdags', promptEn: 'Say the railway workers have been on strike since Tuesday',
     fr: 'Les cheminots sont en grève depuis mardi.', sv: 'Järnvägsarbetarna har strejkat sedan i tisdags.', en: 'The railway workers have been on strike since Tuesday.',

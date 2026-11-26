@@ -1,4 +1,4 @@
-// Unité 22 : Émotions & relations (B1, Section 6). Grammaire : känna sig + adjectif, accords au pluriel.
+// Unit 22: Emotions & relationships (B1, Section 6). Grammar: känna sig + adjective, plural agreement.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT22_DECK = unitDeck({
@@ -60,7 +60,7 @@ export const UNIT22_CARDS = [
     note: 'Pas de réfléchi : *de bråkar* = ils se disputent. *bråka om* = se disputer à propos de.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u22-radd', {
     prompt: 'Avoir peur : « effrayé »', promptEn: 'Being afraid: "scared"',
     sv: 'rädd', fr: 'qui a peur', en: 'scared / afraid', ipa: '/rɛdː/',

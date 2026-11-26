@@ -1,5 +1,5 @@
-// Decks thématiques B1 (issue #18), 2e partie : nature, médias, sentiments, verbes, adjectifs, adverbes, culture.
-// Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// B1 thematic decks (issue #18), part 2: nature, media, feelings, verbs, adjectives, adverbs, culture.
+// Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_B1_2 = [

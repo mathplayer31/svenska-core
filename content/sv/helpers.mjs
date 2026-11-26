@@ -1,6 +1,6 @@
-// Écriture compacte des unités A2 et suivantes : chaque carte porte son français ET son anglais.
-// gloss : liste de triplets [suédois, français, anglais], un par mot de la phrase.
-// Le champ `english_translation` contient le français (nom historique, voir scripts/sync-content.mjs).
+// Compact writing of units A2 and beyond: each card carries its French AND its English.
+// gloss: list of triples [Swedish, French, English], one per word of the sentence.
+// The `english_translation` field holds the French (historical name, see scripts/sync-content.mjs).
 
 function card(type, deck, slug, d) {
   return {
@@ -23,7 +23,7 @@ export const vocab = (deck, slug, d) => card('vocab', deck, slug, d);
 export const phrase = (deck, slug, d) => card('phrase', deck, slug, d);
 export const cloze = (deck, slug, d) => card('cloze_grammar', deck, slug, d);
 
-/** Deck d'unité thématique : titres FR / EN, section et unité précédente. */
+/** Thematic unit deck: FR / EN titles, section and previous unit. */
 export function unitDeck({ n, slug, fr, en, level, section, after }) {
   return {
     slug,
@@ -39,10 +39,10 @@ export function unitDeck({ n, slug, fr, en, level, section, after }) {
   };
 }
 
-// Decks thématiques de vocabulaire (issue #18) : étudiés comme les fondations, débloqués par une unité.
-// Une ligne par mot : [suédois, IPA, français, anglais, genre ?]. Les noms comptables portent leur article
-// (en / ett) ; pour un nom sans article (indénombrable), `genre` donne l'article et la forme définie
-// (ex. 'ett blodet'), dont la note de la carte est tirée. Slug : `v-` + 1re forme, å ä ö en aa ae oe.
+// Thematic vocabulary decks (issue #18): studied like the foundations, unlocked by a unit.
+// One row per word: [Swedish, IPA, French, English, gender?]. Countable nouns carry their article
+// (en / ett); for a noun without an article (uncountable), `genre` gives the article and the definite form
+// (e.g. 'ett blodet'), from which the card's note is built. Slug: `v-` + 1st form, å ä ö as aa ae oe.
 const ascii = (s) =>
   s.toLowerCase().replace(/å/g, 'aa').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/é/g, 'e')
     .replace(/^(en|ett|att) /, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');

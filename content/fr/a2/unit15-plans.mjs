@@ -1,4 +1,4 @@
-// FranceCore, Unité 15 : Projets et vacances.
+// FranceCore, Unit 15: Plans and holidays.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT15_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT15_DECK = unitDeck({
 const D = UNIT15_DECK.slug;
 
 export const UNIT15_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u15-vacances', {
     prompt: 'Ledigheten då man reser bort', promptEn: 'Time off when you go away',
     fr: 'les vacances', sv: 'semestern / lovet', en: 'the holidays / the vacation',
@@ -93,7 +93,7 @@ export const UNIT15_CARDS = [
     note: '**C’est complet** står på skylten när hotellet är fullt. Femininum: *la salle est complète*, och då hörs **t**.',
     noteEn: '**C’est complet** is on the sign when the hotel is full. Feminine: *la salle est complète*, and then the **t** is heard.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u15-le-passeport', {
     prompt: 'Dokumentet för att resa', promptEn: 'The document for travelling',
     fr: 'le passeport', sv: 'passet', en: 'the passport',
@@ -138,7 +138,7 @@ export const UNIT15_CARDS = [
     noteEn: 'From *bronze*. Sun cream: *la crème solaire*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u15-bretagne', {
     prompt: 'Säg att ni ska åka till Bretagne i sommar', promptEn: 'Say you’re going to Brittany this summer',
     fr: 'Cet été, on va partir en Bretagne.', sv: 'I sommar ska vi åka till Bretagne.', en: 'This summer we’re going to Brittany.',

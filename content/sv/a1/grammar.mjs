@@ -1,12 +1,12 @@
-// Fondation / Grammaire & Syntaxe V2
-// Règle de contenu : uniquement du vocabulaire déjà vu dans les Unités 1 à 7.
-// Le deck se débloque après l'Unité 7 (voir prerequisite_slug dans scripts/sync-content.mjs).
-// Convention : swedish_prompt = consigne en français, swedish_target = réponse suédoise.
+// Foundation / Grammar & Syntax V2
+// Content rule: only vocabulary already seen in Units 1 to 7.
+// The deck unlocks after Unit 7 (see prerequisite_slug in scripts/sync-content.mjs).
+// Convention: swedish_prompt = instruction in French, swedish_target = Swedish answer.
 
 const D = 'swedish-grammar-a1';
 
 export const GRAMMAR_CARDS = [
-  // ===================== RÈGLE V2 =====================
+  // ===================== V2 RULE =====================
   {
     slug: 'gram2-v2-idag', deck_slug: D, card_type: 'cloze_grammar',
     swedish_prompt: 'Ordre V2 : remets dans l’ordre, en commençant par « idag » : det / är / varmt / idag',
@@ -58,7 +58,7 @@ export const GRAMMAR_CARDS = [
     words: ['När går bussen?'],
   },
 
-  // ===================== NÉGATION =====================
+  // ===================== NEGATION =====================
   {
     slug: 'gram2-inte', deck_slug: D, card_type: 'cloze_grammar',
     swedish_prompt: 'Négation : Jag ___ ___ engelska. (talar + inte)',
@@ -80,7 +80,7 @@ export const GRAMMAR_CARDS = [
     words: ['Idag regnar det inte.'],
   },
 
-  // ===================== POSSESSIFS =====================
+  // ===================== POSSESSIVES =====================
   {
     slug: 'gram2-sin', deck_slug: D, card_type: 'cloze_grammar',
     swedish_prompt: 'Possessif réfléchi : Han fikar med ___ flickvän. (sa propre copine)',
@@ -102,7 +102,7 @@ export const GRAMMAR_CARDS = [
     words: ['Erik fikar med hans syster.'],
   },
 
-  // ===================== ACCORDS & DÉFINI =====================
+  // ===================== AGREEMENT & DEFINITE FORM =====================
   {
     slug: 'gram2-adj-ett', deck_slug: D, card_type: 'cloze_grammar',
     swedish_prompt: 'Accord de l’adjectif : Det är ett ___ bord. (fin, mot ett)',

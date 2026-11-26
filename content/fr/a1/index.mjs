@@ -1,4 +1,4 @@
-// FranceCore A1 : decks et cartes du niveau, dans l'ordre du parcours.
+// FranceCore A1: decks and cards of the level, in path order.
 import { FOUNDATION_DECKS, FOUNDATION_CARDS } from './foundations.mjs';
 import { GRAMMAR_A1_DECK, GRAMMAR_A1_CARDS } from './grammar.mjs';
 import { UNIT1_DECK, UNIT1_CARDS } from './unit01-greetings.mjs';

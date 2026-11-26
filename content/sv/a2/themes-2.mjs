@@ -1,5 +1,5 @@
-// Decks thématiques A2 (issue #18), 2e partie : vêtements, nature, voyages, verbes, adjectifs, petits mots.
-// Format des lignes : voir themeDeck dans content/sv/helpers.mjs.
+// A2 thematic decks (issue #18), part 2: clothes, nature, travel, verbs, adjectives, small words.
+// Row format: see themeDeck in content/sv/helpers.mjs.
 import { themeDeck } from '../helpers.mjs';
 
 export const THEMES_A2_2 = [

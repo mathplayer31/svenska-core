@@ -1,4 +1,4 @@
-// FranceCore B1 : decks et cartes du niveau, dans l'ordre du parcours.
+// FranceCore B1: decks and cards of the level, in path order.
 import { UNIT16_DECK, UNIT16_CARDS } from './unit16-paperwork.mjs';
 import { UNIT17_DECK, UNIT17_CARDS } from './unit17-neighbours.mjs';
 import { UNIT18_DECK, UNIT18_CARDS } from './unit18-job-hunting.mjs';

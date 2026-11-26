@@ -1,4 +1,4 @@
-// FranceCore, Unité 18 : Chercher du travail (CV, lettre de motivation, entretien, CDI / CDD).
+// FranceCore, Unit 18: Looking for work (CV, cover letter, interview, CDI / CDD).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT18_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT18_DECK = unitDeck({
 const D = UNIT18_DECK.slug;
 
 export const UNIT18_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u18-offre-demploi', {
     prompt: 'En annons om ett ledigt jobb', promptEn: 'An ad for a vacancy',
     fr: 'une offre d’emploi', sv: 'en platsannons', en: 'a job offer / a job ad',
@@ -93,7 +93,7 @@ export const UNIT18_CARDS = [
     note: 'Hette **Pôle emploi** fram till 2024, och många använder fortfarande det gamla namnet. Hit vänder man sig när man är **au chômage** (arbetslös).',
     noteEn: 'Called **Pôle emploi** until 2024, and many people still use the old name. This is where you go when you are **au chômage** (unemployed).',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u18-le-poste', {
     prompt: 'Tjänsten man söker', promptEn: 'The job you apply for',
     fr: 'le poste', sv: 'tjänsten', en: 'the position',
@@ -144,7 +144,7 @@ export const UNIT18_CARDS = [
     noteEn: 'The resignation: *la démission*. Being dismissed: *être licencié*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u18-je-me-permets', {
     prompt: 'Inled ditt personliga brev formellt: du söker tjänsten som projektledare', promptEn: 'Open your cover letter formally: you’re applying for the project manager post',
     fr: 'Je me permets de vous adresser ma candidature pour le poste de chef de projet.', sv: 'Härmed söker jag tjänsten som projektledare.', en: 'Please find enclosed my application for the position of project manager.',

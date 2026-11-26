@@ -1,4 +1,4 @@
-// Unité 8 : Chez moi (A2, Section 3). Grammaire : ligger / står / sitter, prépositions de lieu.
+// Unit 8: At home (A2, Section 3). Grammar: ligger / står / sitter, prepositions of place.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT8_DECK = unitDeck({
@@ -68,7 +68,7 @@ export const UNIT8_CARDS = [
     note: 'Infinitif *att flytta*, groupe 1 (*flyttade, har flyttat*). S’emploie aussi pour déplacer un objet.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u8-badrum', {
     prompt: 'La pièce avec la douche : « une salle de bains »', promptEn: 'The room with the shower: "a bathroom"',
     sv: 'ett badrum', fr: 'une salle de bains', en: 'a bathroom', ipa: '/ɛtː ˈbɑːdˌrɵmː/',

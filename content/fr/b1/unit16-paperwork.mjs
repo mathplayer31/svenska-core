@@ -1,4 +1,4 @@
-// FranceCore, Unité 16 : Démarches administratives (préfecture, mairie, dossier).
+// FranceCore, Unit 16: Paperwork (préfecture, town hall, application file).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT16_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT16_DECK = unitDeck({
 const D = UNIT16_DECK.slug;
 
 export const UNIT16_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u16-prefecture', {
     prompt: 'Statens kontor i varje departement, där man bland annat söker uppehållstillstånd', promptEn: 'The state office in each département, where you apply for residence permits among other things',
     fr: 'la préfecture', sv: 'prefekturen', en: 'the prefecture',
@@ -93,7 +93,7 @@ export const UNIT16_CARDS = [
     note: 'Ändelsen **-asse** gör ordet nedsättande. Att klaga på *la paperasse* är nästan en nationalsport, så det är ett bra samtalsämne.',
     noteEn: 'The ending **-asse** makes the word pejorative. Complaining about *la paperasse* is almost a national sport, so it makes good small talk.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u16-le-titre-de-sejour', {
     prompt: 'Tillståndet att bo i Frankrike för en utomeuropé', promptEn: 'The permit to live in France for a non-EU citizen',
     fr: 'le titre de séjour', sv: 'uppehållstillståndet', en: 'the residence permit',
@@ -137,7 +137,7 @@ export const UNIT16_CARDS = [
     noteEn: '*Votre passeport n’est plus valable* = your passport is no longer valid.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u16-prendre-rendez-vous', {
     prompt: 'Be artigt om en tid för att lämna in din ansökan', promptEn: 'Politely ask for an appointment to submit your application',
     fr: 'J’aimerais prendre rendez-vous pour déposer mon dossier.', sv: 'Jag skulle vilja boka en tid för att lämna in min ansökan.', en: 'I’d like to make an appointment to submit my application.',

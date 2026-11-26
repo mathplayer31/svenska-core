@@ -1,17 +1,17 @@
-// Fondations A1 : decks Phonétique, Grammaire & Syntaxe V2, Vocabulaire & Genres, et cartes de phonétique
-// et de vocabulaire. Les cartes de grammaire A1 sont dans content/sv/a1/grammar.mjs.
-// Convention : `english_translation` contient le français (nom historique) ; l'anglais est dans content/sv/a1/en.mjs.
+// A1 foundations: Phonetics, Grammar & Syntax V2 and Vocabulary & Genders decks, plus phonetics
+// and vocabulary cards. The A1 grammar cards are in content/sv/a1/grammar.mjs.
+// Convention: `english_translation` holds the French (historical name); English is in content/sv/a1/en.mjs.
 
 export const FOUNDATION_DECKS = [
   { slug: 'swedish-core-a1', title: '1. Phonétique & Voyelles', category: 'phonetics', cefr_level: 'A1', sort_order: 1 },
-  // Prérequis (prerequisite_slug -> prerequisite_deck_id) : vocab/genres après l'Unité 1,
-  // grammaire après l'Unité 7 (ses phrases utilisent le vocabulaire des unités 1 à 7)
+  // Prerequisites (prerequisite_slug -> prerequisite_deck_id): vocab/genders after Unit 1,
+  // grammar after Unit 7 (its sentences use the vocabulary of units 1 to 7)
   { slug: 'swedish-grammar-a1', title: '2. Grammaire & Syntaxe V2', category: 'grammar', cefr_level: 'A1', sort_order: 2, prerequisite_slug: 'swedish-unit-7-weather' },
   { slug: 'swedish-vocab-a1', title: '3. Vocabulaire & Genres (en/ett)', category: 'vocabulary', cefr_level: 'A1', sort_order: 3, prerequisite_slug: 'swedish-unit-1-greetings' },
 ];
 
 export const FOUNDATION_CARDS = [
-  // ================= 1. PHONÉTIQUE & VOYELLES (8 CARTES) =================
+  // ================= 1. PHONETICS & VOWELS (8 CARDS) =================
   {
     slug: 'phon-mal-sol',
     deck_slug: 'swedish-core-a1',
@@ -109,9 +109,9 @@ export const FOUNDATION_CARDS = [
     words: ['sju', 'ett kors'],
   },
 
-  // ================= 2. GRAMMAIRE & SYNTAXE V2 : voir content/sv/a1/grammar.mjs =================
+  // ================= 2. GRAMMAR & SYNTAX V2: see content/sv/a1/grammar.mjs =================
 
-  // ================= 3. VOCABULAIRE & GENRES EN/ETT (8 CARTES) =================
+  // ================= 3. VOCABULARY & EN/ETT GENDERS (8 CARDS) =================
   {
     slug: 'vocab-bok-bocker',
     deck_slug: 'swedish-vocab-a1',

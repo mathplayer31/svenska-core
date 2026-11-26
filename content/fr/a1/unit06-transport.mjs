@@ -1,4 +1,4 @@
-// FranceCore, Unité 6 : Se déplacer. Métro, bus, train SNCF, billets, demander son chemin.
+// FranceCore, Unit 6: Getting around. Metro, bus, SNCF train, tickets, asking the way.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT6_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT6_DECK = unitDeck({
 const D = UNIT6_DECK.slug;
 
 export const UNIT6_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u6-le-metro', {
     prompt: 'Tunnelbanan', promptEn: 'The underground / subway',
     fr: 'le métro', sv: 'tunnelbanan', en: 'the metro / the underground',
@@ -93,7 +93,7 @@ export const UNIT6_CARDS = [
     note: 'Följ skyltarna **Sortie** i metron. Ett byte mellan linjer heter **une correspondance**.',
     noteEn: 'Follow the **Sortie** signs in the metro. Changing lines is **une correspondance**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u6-le-tram', {
     prompt: 'Spårvagnen i stan', promptEn: 'The tram in town',
     fr: 'le tram', sv: 'spårvagnen', en: 'the tram',
@@ -137,7 +137,7 @@ export const UNIT6_CARDS = [
     noteEn: 'Same word as in English. Ride-hailing cars are called *un VTC* in France.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u6-ou-est-la-station-de-metro', {
     prompt: 'Fråga var tunnelbanan är', promptEn: 'Ask where the metro station is',
     fr: 'Excusez-moi, où est la station de métro ?', sv: 'Ursäkta, var ligger tunnelbanestationen?', en: 'Excuse me, where is the metro station?',

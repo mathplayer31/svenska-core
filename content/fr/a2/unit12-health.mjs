@@ -1,4 +1,4 @@
-// FranceCore, Unité 12 : La santé.
+// FranceCore, Unit 12: Health.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT12_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT12_DECK = unitDeck({
 const D = UNIT12_DECK.slug;
 
 export const UNIT12_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u12-tete', {
     prompt: 'Kroppsdelen överst', promptEn: 'The body part at the top',
     fr: 'la tête', sv: 'huvudet', en: 'the head',
@@ -93,7 +93,7 @@ export const UNIT12_CARDS = [
     note: 'Kortet från **la Sécurité sociale** som man visar hos läkaren och på apoteket, så att kostnaden ersätts. De flesta har också en tilläggsförsäkring, **une mutuelle**.',
     noteEn: 'The card from **la Sécurité sociale** you show at the doctor’s and the pharmacy so costs are reimbursed. Most people also have top-up insurance, **une mutuelle**.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u12-le-bras', {
     prompt: 'Mellan axeln och handen', promptEn: 'Between shoulder and hand',
     fr: 'le bras', sv: 'armen', en: 'the arm',
@@ -137,7 +137,7 @@ export const UNIT12_CARDS = [
     noteEn: 'Always plural. Dial **15** (SAMU) for an ambulance; **112** works too.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u12-mal-a-la-tete', {
     prompt: 'Säg att du har haft huvudvärk sedan i morse', promptEn: 'Say you’ve had a headache since this morning',
     fr: 'J’ai mal à la tête depuis ce matin.', sv: 'Jag har haft huvudvärk sedan i morse.', en: 'I’ve had a headache since this morning.',

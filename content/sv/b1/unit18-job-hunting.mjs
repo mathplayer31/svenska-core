@@ -1,4 +1,4 @@
-// Unité 18 : Travail & entretien (B1, Section 5). Grammaire : subordonnées en « när » et « om », V2 dans la principale.
+// Unit 18: Work & interviews (B1, Section 5). Grammar: "när" and "om" clauses, V2 in the main clause.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT18_DECK = unitDeck({
@@ -66,7 +66,7 @@ export const UNIT18_CARDS = [
     gloss: [['en', 'un', 'an'], ['arbetsgivare', 'employeur', 'employer']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u18-deltid', {
     prompt: 'Pas à temps plein : « temps partiel »', promptEn: 'Not full-time: "part-time"',
     sv: 'deltid', fr: 'temps partiel', en: 'part-time', ipa: '/ˈdeːlˌtiːd/',

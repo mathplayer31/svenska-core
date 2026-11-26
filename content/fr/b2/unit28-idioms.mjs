@@ -1,4 +1,4 @@
-// FranceCore, Unité 28 : Expressions idiomatiques (poser un lapin, avoir le cafard, coûter les yeux de la tête).
+// FranceCore, Unit 28: Idioms (poser un lapin, avoir le cafard, coûter les yeux de la tête).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT28_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT28_DECK = unitDeck({
 const D = UNIT28_DECK.slug;
 
 export const UNIT28_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u28-poser-un-lapin', {
     prompt: 'Inte dyka upp på en träff man har bestämt', promptEn: 'Not turn up to a date you arranged',
     fr: 'poser un lapin', sv: 'inte dyka upp / låta någon vänta förgäves', en: 'to stand someone up',
@@ -93,7 +93,7 @@ export const UNIT28_CARDS = [
     note: 'Ordagrant ”lägga i sitt saltkorn”. Nästan alltid lite negativt: *Il faut toujours qu’il mette son grain de sel !* Possessivet följer subjektet: *je mets mon grain de sel*.',
     noteEn: 'Literally "to add your grain of salt". Almost always mildly critical: *Il faut toujours qu’il mette son grain de sel !* The possessive follows the subject: *je mets mon grain de sel*.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u28-le-coup-de-foudre', {
     prompt: 'Bli kär direkt', promptEn: 'Falling in love instantly',
     fr: 'avoir le coup de foudre', sv: 'bli förälskad vid första ögonkastet', en: 'fall in love at first sight',
@@ -143,7 +143,7 @@ export const UNIT28_CARDS = [
     gloss: [['tomber', 'falla', 'fall'], ['des nues', 'från molnen', 'from the clouds']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u28-mer-a-boire', {
     prompt: 'Lugna någon: det är inte så svårt', promptEn: 'Reassure someone: it’s not that hard',
     fr: 'Ce n’est pas la mer à boire.', sv: 'Det är inte hela världen.', en: 'It’s not the end of the world.',

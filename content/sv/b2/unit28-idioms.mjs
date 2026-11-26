@@ -1,4 +1,4 @@
-// Unité 28 : Expressions idiomatiques (B2, Section 8). Expressions figées et leur emploi en contexte.
+// Unit 28: Idioms (B2, Section 8). Fixed expressions and how to use them in context.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT28_DECK = unitDeck({
@@ -68,7 +68,7 @@ export const UNIT28_CARDS = [
     gloss: [['det', 'ce', 'it'], ['är', 'est', 'is'], ['ingen', 'aucun', 'no'], ['konst', 'art', 'art']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u28-rakmacka', {
     prompt: 'Réussir sans effort, grâce à d’autres', promptEn: 'Succeeding effortlessly, thanks to others',
     sv: 'glida in på en räkmacka', fr: 'avoir tout servi sur un plateau', en: 'have it handed to you on a plate', ipa: '/ˈɡliːda ɪn poː ɛn ˈrɛːkˌmakːa/',

@@ -1,4 +1,4 @@
-// Fondation : Grammaire A2. Uniquement du vocabulaire des Unités 1 à 15. Se débloque après l'Unité 15.
+// Foundation: A2 grammar. Only vocabulary from Units 1 to 15. Unlocks after Unit 15.
 import { cloze } from '../helpers.mjs';
 
 export const GRAMMAR_A2_DECK = {

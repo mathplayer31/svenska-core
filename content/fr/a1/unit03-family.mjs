@@ -1,4 +1,4 @@
-// FranceCore, Unité 3 : La famille. Membres de la famille, possessifs mon / ma / mes, l'âge avec avoir.
+// FranceCore, Unit 3: Family. Family members, possessives mon / ma / mes, age with avoir.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT3_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT3_DECK = unitDeck({
 const D = UNIT3_DECK.slug;
 
 export const UNIT3_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u3-la-famille', {
     prompt: 'Föräldrar, syskon, barn ...', promptEn: 'Parents, siblings, children ...',
     fr: 'la famille', sv: 'familjen', en: 'the family',
@@ -93,7 +93,7 @@ export const UNIT3_CARDS = [
     note: 'Bindning: **un enfant** [œ̃nɑ̃fɑ̃], **des enfants** [dezɑ̃fɑ̃]. Det stumma s:et i *des* blir ett [z] framför vokal.',
     noteEn: 'Liaison: **un enfant** [œ̃nɑ̃fɑ̃], **des enfants** [dezɑ̃fɑ̃]. The silent s of *des* turns into [z] before a vowel.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u3-loncle', {
     prompt: 'Din förälders bror', promptEn: 'Your parent’s brother',
     fr: 'l’oncle', sv: 'farbrodern / morbrodern', en: 'the uncle',
@@ -137,7 +137,7 @@ export const UNIT3_CARDS = [
     noteEn: 'Liaison: *petits‿enfants*, the s sounds like [z]. Singular: *le petit-fils, la petite-fille*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u3-jai-un-frere-et-une-soeur', {
     prompt: 'Berätta att du har en bror och en syster', promptEn: 'Say you have a brother and a sister',
     fr: 'J’ai un frère et une sœur.', sv: 'Jag har en bror och en syster.', en: 'I have a brother and a sister.',

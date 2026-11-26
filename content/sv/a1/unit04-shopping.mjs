@@ -1,5 +1,5 @@
-// Unité 4 : Courses : ICA & Systembolaget (Section 2)
-// Convention : voir content/sv/a1/unit01-greetings.mjs. Réutilise jag/du/det/har/tack/kort/med/och… des unités 1 à 3.
+// Unit 4: Shopping: ICA & Systembolaget (Section 2)
+// Convention: see content/sv/a1/unit01-greetings.mjs. Reuses jag/du/det/har/tack/kort/med/och… from units 1 to 3.
 import { vocab } from '../helpers.mjs';
 
 export const UNIT4_DECK = {
@@ -17,7 +17,7 @@ export const UNIT4_DECK = {
 const D = 'swedish-unit-4-shopping';
 
 export const UNIT4_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u4-affar', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'Là où on fait ses achats : « un magasin »',
@@ -132,7 +132,7 @@ export const UNIT4_CARDS = [
     explanation_md: 'Le **g** de *-igt* est muet : « bi-lit ». Base : *billig*. *Det är billigt!* = c’est pas cher !',
     words: ['billigt'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u4-smor', {
     prompt: 'À tartiner sur le pain : « du beurre »', promptEn: 'To spread on bread: "butter"',
     sv: 'smör', fr: 'du beurre', en: 'butter', ipa: '/smœːr/',
@@ -164,7 +164,7 @@ export const UNIT4_CARDS = [
     note: '*kund* (client) + *vagn* (chariot). Petit modèle : *en korg* (un panier).',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u4-jag-koper-brod', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Dire ce que tu achètes : « J’achète du pain et du fromage. »',

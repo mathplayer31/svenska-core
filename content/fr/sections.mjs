@@ -1,5 +1,5 @@
-// FranceCore : sections du parcours. Titres et descriptions en suédois (langue de base) et en anglais.
-// La section N+1 se débloque quand le test de la section N est réussi. Programme : docs/PROGRAMME-FR.md.
+// FranceCore: path sections. Titles and descriptions in Swedish (base language) and English.
+// Section N+1 unlocks when the test of section N is passed. Syllabus: docs/PROGRAMME-FR.md.
 const section = (n, slug, sv, en, descSv, descEn) => ({
   slug,
   course: 'fr',

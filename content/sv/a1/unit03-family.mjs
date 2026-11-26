@@ -1,6 +1,6 @@
-// Unité 3 : Famille & relations (Section 1)
-// Convention : voir content/sv/a1/unit01-greetings.mjs. Phrases construites avec les mots des Unités 1-2 + ceux introduits ici.
-// Point de grammaire central : min/mitt/mina et le piège sin/sitt/sina vs hans/hennes.
+// Unit 3: Family & relationships (Section 1)
+// Convention: see content/sv/a1/unit01-greetings.mjs. Sentences built with the words of Units 1-2 + those introduced here.
+// Core grammar point: min/mitt/mina and the sin/sitt/sina vs hans/hennes trap.
 import { vocab } from '../helpers.mjs';
 
 export const UNIT3_DECK = {
@@ -18,7 +18,7 @@ export const UNIT3_DECK = {
 const D = 'swedish-unit-3-family';
 
 export const UNIT3_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u3-familj', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'L’ensemble des proches : « une famille »',
@@ -141,7 +141,7 @@ export const UNIT3_CARDS = [
     explanation_md: '**hon** = elle (le **o** court sonne presque « ou »). Possessif : **hennes** (son/sa/ses… à elle).',
     words: ['hon'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u3-son', {
     prompt: 'L’enfant garçon : « un fils »', promptEn: 'A male child: "a son"',
     sv: 'en son', fr: 'un fils', en: 'a son', ipa: '/ɛn soːn/',
@@ -178,7 +178,7 @@ export const UNIT3_CARDS = [
     note: 'Le **g** devant **i** se prononce [j]. *Jag är gift.* Au pluriel : *gifta*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u3-jag-har-syster', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Parler de ta fratrie : « J’ai une sœur et un frère. »',

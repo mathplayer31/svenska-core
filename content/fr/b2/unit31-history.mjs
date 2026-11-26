@@ -1,4 +1,4 @@
-// FranceCore, Unité 31 : Histoire et culture (Révolution, laïcité, francophonie, littérature).
+// FranceCore, Unit 31: History and culture (Revolution, laïcité, Francophonie, literature).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT31_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT31_DECK = unitDeck({
 const D = UNIT31_DECK.slug;
 
 export const UNIT31_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u31-revolution', {
     prompt: 'Omvälvningen som började 1789', promptEn: 'The upheaval that began in 1789',
     fr: 'la Révolution française', sv: 'franska revolutionen', en: 'the French Revolution',
@@ -93,7 +93,7 @@ export const UNIT31_CARDS = [
     note: 'Grundad 1958 under de Gaulle, med en stark president, sedan 1962 vald direkt av folket. Skrivs också **la Ve République**. Frankrike har alltså haft fem republiker, två kejsardömen och flera monarkier sedan 1789.',
     noteEn: 'Founded in 1958 under de Gaulle, with a strong president elected directly by the people since 1962. Also written **la Ve République**. Since 1789 France has had five republics, two empires and several monarchies.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u31-la-monarchie', {
     prompt: 'Statsskick med kung eller drottning', promptEn: 'A system with a king or queen',
     fr: 'la monarchie', sv: 'monarkin', en: 'the monarchy',
@@ -139,7 +139,7 @@ export const UNIT31_CARDS = [
     gloss: [['l’Union', 'unionen', 'the Union'], ['européenne', 'europeiska', 'European']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u31-bastille-fut-prise', {
     prompt: 'Berätta i historisk stil när Bastiljen stormades', promptEn: 'Say in historical style when the Bastille was stormed',
     fr: 'La Bastille fut prise le 14 juillet 1789.', sv: 'Bastiljen stormades den 14 juli 1789.', en: 'The Bastille was stormed on 14 July 1789.',

@@ -1,5 +1,5 @@
-// Unité 7 : Météo & temps (Section 2)
-// Convention : voir content/sv/a1/unit01-greetings.mjs. Unité idéale pour la règle V2 : « Idag är det kallt », « Imorgon snöar det ».
+// Unit 7: Weather & time (Section 2)
+// Convention: see content/sv/a1/unit01-greetings.mjs. Ideal unit for the V2 rule: "Idag är det kallt", "Imorgon snöar det".
 import { vocab } from '../helpers.mjs';
 
 export const UNIT7_DECK = {
@@ -17,7 +17,7 @@ export const UNIT7_DECK = {
 const D = 'swedish-unit-7-weather';
 
 export const UNIT7_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u7-vadret', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'Le sujet de conversation n°1 : « la météo / le temps qu’il fait »',
@@ -108,7 +108,7 @@ export const UNIT7_CARDS = [
     explanation_md: 'Singulier *en grad*. *minus tio grader* = moins dix degrés ; *plus fem grader* = cinq degrés.',
     words: ['grader'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u7-molnigt', {
     prompt: 'Le ciel est couvert : « nuageux »', promptEn: 'The sky is overcast: "cloudy"',
     sv: 'molnigt', fr: 'nuageux', en: 'cloudy', ipa: '/ˈmoːlnɪt/',
@@ -140,7 +140,7 @@ export const UNIT7_CARDS = [
     note: '*år* (année) + *tid* (temps). Les quatre : *vår, sommar, höst, vinter*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u7-hur-ar-vadret', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Demander : « Quel temps fait-il aujourd’hui ? »',

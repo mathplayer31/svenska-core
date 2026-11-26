@@ -1,4 +1,4 @@
-// FranceCore, Unité 17 : Voisins et vie sociale (inviter, apéro, rendre service).
+// FranceCore, Unit 17: Neighbours and social life (inviting, apéro, doing a favour).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT17_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT17_DECK = unitDeck({
 const D = UNIT17_DECK.slug;
 
 export const UNIT17_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u17-voisin', {
     prompt: 'Den som bor bredvid dig (man / kvinna)', promptEn: 'The person who lives next to you (man / woman)',
     fr: 'le voisin / la voisine', sv: 'grannen', en: 'the neighbour',
@@ -93,7 +93,7 @@ export const UNIT17_CARDS = [
     note: 'Kort för **sympathique**, precis som svenskans *sympatisk*. Samma form för båda könen: *un voisin sympa, une voisine sympa*, och i plural *sympas*.',
     noteEn: 'Short for **sympathique**. A false friend: it means *nice*, not *sympathetic*. Same form for both genders: *un voisin sympa, une voisine sympa*.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u17-le-palier', {
     prompt: 'Golvet utanför lägenhetsdörrarna', promptEn: 'The landing outside the flat doors',
     fr: 'le palier', sv: 'trapplanet', en: 'the landing',
@@ -138,7 +138,7 @@ export const UNIT17_CARDS = [
     noteEn: '*Sortir les poubelles* = take the bins out. The yellow bin is for recycling.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u17-ca-vous-dirait', {
     prompt: 'Bjud in grannarna på apéro på lördag', promptEn: 'Invite the neighbours for drinks on Saturday',
     fr: 'Ça vous dirait de venir prendre l’apéro samedi ?', sv: 'Skulle ni vilja komma på en drink på lördag?', en: 'Would you like to come over for drinks on Saturday?',

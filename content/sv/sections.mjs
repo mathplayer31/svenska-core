@@ -1,5 +1,5 @@
-// Sections du parcours (style Duolingo). Chaque section regroupe des unités (decks)
-// et se termine par un test. La section N+1 se débloque quand le test de la section N est réussi.
+// Path sections (Duolingo style). Each section groups units (decks)
+// and ends with a test. Section N+1 unlocks when the test of section N is passed.
 export const SECTIONS = [
   {
     slug: 'section-1-premiers-pas',
@@ -15,7 +15,7 @@ export const SECTIONS = [
     sort_order: 2,
     pass_score: 80,
   },
-  // ===================== A2 (anglais intégré) =====================
+  // ===================== A2 (English built in) =====================
   {
     slug: 'section-3-ma-vie',
     title: 'Section 3 : Ma vie au quotidien',

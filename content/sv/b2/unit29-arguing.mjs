@@ -1,4 +1,4 @@
-// Unité 29 : Argumenter & nuancer (B2, Section 8). Grammaire : connecteurs logiques et ordre des mots (V2 après adverbe).
+// Unit 29: Arguing & nuancing (B2, Section 8). Grammar: logical connectors and word order (V2 after an adverb).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT29_DECK = unitDeck({
@@ -64,7 +64,7 @@ export const UNIT29_CARDS = [
     gloss: [['till', 'pour', 'for'], ['exempel', 'exemple', 'example']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u29-eftersom', {
     prompt: 'Pour donner une cause : « puisque / parce que »', promptEn: 'Giving a reason: "since / because"',
     sv: 'eftersom', fr: 'puisque / parce que', en: 'since / because', ipa: '/ˈɛftɛˌʂɔmː/',

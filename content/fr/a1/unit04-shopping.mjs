@@ -1,4 +1,4 @@
-// FranceCore, Unité 4 : Boulangerie et marché. Pain, fruits et légumes, quantités, prix, combien.
+// FranceCore, Unit 4: Bakery and market. Bread, fruit and vegetables, quantities, prices, combien.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT4_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT4_DECK = unitDeck({
 const D = UNIT4_DECK.slug;
 
 export const UNIT4_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u4-la-boulangerie', {
     prompt: 'Butiken där man köper bröd', promptEn: 'The shop where you buy bread',
     fr: 'la boulangerie', sv: 'bageriet', en: 'the bakery',
@@ -93,7 +93,7 @@ export const UNIT4_CARDS = [
     note: 'Inte ”pengar” i allmänhet, det heter **l’argent**. Bagaren kan fråga **Vous avez de la monnaie ?** om du betalar med en stor sedel.',
     noteEn: 'Not "money" in general, which is **l’argent**. The baker may ask **Vous avez de la monnaie ?** if you pay with a big note.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u4-le-beurre', {
     prompt: 'Att bre på brödet', promptEn: 'To spread on bread',
     fr: 'le beurre', sv: 'smöret', en: 'butter',
@@ -144,7 +144,7 @@ export const UNIT4_CARDS = [
     noteEn: 'French usually says *pas cher* (not expensive) rather than *bon marché*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u4-une-tradition-pas-trop-cuite', {
     prompt: 'Beställ en baguette som inte är för mörkt gräddad', promptEn: 'Order a baguette that isn’t too well baked',
     fr: 'Une tradition pas trop cuite, s’il vous plaît.', sv: 'En baguette, inte för mörk, tack.', en: 'A traditional baguette, not too dark, please.',

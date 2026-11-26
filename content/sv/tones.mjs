@@ -1,34 +1,34 @@
-// Accents tonals des mots suédois (issue #10), suédois standard central (Stockholm).
-// Clé : slug de la carte ; valeur : accent du mot de tête (1re forme, sans article).
-// Ne saisir que les accents certains : un mot absent n'a pas de courbe sur la carte.
-// Contrôle : node scripts/check-tones.mjs (syllabes et place de l'accent comparées à l'IPA).
+// Tonal accents of Swedish words (issue #10), Central Standard Swedish (Stockholm).
+// Key: card slug; value: accent of the head word (1st form, without article).
+// Only enter accents that are certain: a missing word has no curve on the card.
+// Check: node scripts/check-tones.mjs (syllables and stress position compared with the IPA).
 //
-// Règles appliquées :
-//  - monosyllabe : accent 1 ;
-//  - accent tonique sur la dernière syllabe (idag, familj, station) : accent 1 ;
-//  - forme définie d'un mot à accent 1 (solen, helgen, naturen) : accent 1 ;
-//  - présent en -er des verbes de la 2e conjugaison (köper, läser, söker) : accent 1 ;
-//  - adjectif en -isk (vegetarisk, faktiskt) : accent 1 ;
-//  - mot composé, y compris à particule (bryggkaffe, ansöker, åsikt) : accent 2 ;
-//  - disyllabe natif en -a ou -e (flicka, påse, granne) et ses formes définies (klockan, magen) : accent 2 ;
-//  - verbe de la 1re conjugaison en -ar et passif en -as (pratar, skickas) : accent 2 ;
-//  - pluriel en -or, suffixes -ig, -ning, -are, -het : accent 2.
+// Rules applied:
+//  - one-syllable word: accent 1;
+//  - stress on the last syllable (idag, familj, station): accent 1;
+//  - definite form of an accent 1 word (solen, helgen, naturen): accent 1;
+//  - -er present of 2nd conjugation verbs (köper, läser, söker): accent 1;
+//  - adjective in -isk (vegetarisk, faktiskt): accent 1;
+//  - compound word, including particle compounds (bryggkaffe, ansöker, åsikt): accent 2;
+//  - native two-syllable word in -a or -e (flicka, påse, granne) and its definite forms (klockan, magen): accent 2;
+//  - 1st conjugation verb in -ar and -as passive (pratar, skickas): accent 2;
+//  - plural in -or, suffixes -ig, -ning, -are, -het: accent 2.
 //
-// Laissés sans courbe faute de certitude, à faire relire par une personne native :
+// Left without a curve for lack of certainty, to be reviewed by a native speaker:
 //  vatten / vattnet, syster, vänster, höger, fönster, nyckel, feber, artikel, semester, grader, vädret,
-//  säkert, ledsen (mots en -el / -en / -er) ; föräldrar, försenad, försäkring, förhandlar, besviken,
-//  berättelse, behandling, egentligen, regeringen (préfixes för- / be-, dérivés) ; åkte, köpte, hade,
-//  hände (prétérits) ; måste, skulle, kanske, aldrig, medan, innan, sedan, dessutom, därför, alltså,
-//  visserligen, enligt (mots grammaticaux) ; frukost, middag, imorgon, kollega, större, grattis, kompis,
+//  säkert, ledsen (words in -el / -en / -er); föräldrar, försenad, försäkring, förhandlar, besviken,
+//  berättelse, behandling, egentligen, regeringen (prefixes för- / be-, derived words); åkte, köpte, hade,
+//  hände (preterites); måste, skulle, kanske, aldrig, medan, innan, sedan, dessutom, därför, alltså,
+//  visserligen, enligt (function words); frukost, middag, imorgon, kollega, större, grattis, kompis,
 //  budget, lagom, hållbar, huvudet, plötsligt, vänligen, vikingarna.
-// Ajouts de l'issue #14 laissés sans courbe : varsågod, socker, utan, syskon, betalar, extrapris, kyckling,
+// Issue #14 additions left without a curve: varsågod, socker, utan, syskon, betalar, extrapris, kyckling,
 //  sover, gjorde, förkyld, ska, utomlands, Migrationsverket, Försäkringskassan, reparerar, Arbetsförmedlingen,
 //  förvånad, ensam, berättar, då, a-kassan, koldioxid, kollektivtrafik, eftersom, sammanfattningsvis, ändå, asså,
 //  dotter, förrätt, cykel, taxi, dator, museum, uppehållstillstånd, fördel, faktura, styrelse, förslag, aktie,
 //  kostnad, lågkonjunktur, flykting, århundrade, nyår, patient.
-// Écartés par le contrôle (syllabes écrites et IPA différentes) : snöar, rea, lucia, historia, id-kort, CV, nyår, patient.
-// Decks thématiques (issue #18) : seuls les monosyllabes (accent 1 certain) ont une courbe ; les mots de deux
-//  syllabes ou plus de ces decks sont laissés sans courbe, à faire relire par une personne native.
+// Ruled out by the check (written syllables and IPA differ): snöar, rea, lucia, historia, id-kort, CV, nyår, patient.
+// Thematic decks (issue #18): only one-syllable words (certain accent 1) have a curve; words of two
+//  or more syllables in these decks are left without a curve, to be reviewed by a native speaker.
 
 export const TONES = {
   // Accent 1 : monosyllabes
@@ -108,7 +108,7 @@ export const TONES = {
   'u30-typ': 1,
   'u30-kul': 1,
 
-  // Accent 1 : accent tonique sur la dernière syllabe
+  // Accent 1: stress on the last syllable
   'u1-idag': 1,
   'u3-familj': 1,
   'u4-affar': 1,
@@ -131,7 +131,7 @@ export const TONES = {
   'u31-neutral': 1,
   'u31-demokrati': 1,
 
-  // Accent 1 : forme définie d'un mot à accent 1
+  // Accent 1: definite form of an accent 1 word
   'u7-solen': 1,
   'u11-helgen': 1,
   'u12-halsen': 1,
@@ -146,7 +146,7 @@ export const TONES = {
   'u27-klimatet': 1,
   'u31-kungen': 1,
 
-  // Accent 1 : présent en -er de la 2e conjugaison, adjectifs en -isk
+  // Accent 1: -er present of the 2nd conjugation, adjectives in -isk
   'u4-kopa': 1,
   'u18-soker': 1,
   'u19-tycker': 1,
@@ -156,7 +156,7 @@ export const TONES = {
   'u5-vegetarisk': 1,
   'u19-faktiskt': 1,
 
-  // Accent 2 : mots composés
+  // Accent 2: compound words
   'u2-bryggkaffe': 2,
   'u2-kanelbulle': 2,
   'u3-flickvan': 2,
@@ -204,7 +204,7 @@ export const TONES = {
   'u31-samhalle': 2,
   'u31-folkhemmet': 2,
 
-  // Accent 2 : disyllabes natifs en -a / -e et leurs formes définies
+  // Accent 2: native two-syllable words in -a / -e and their definite forms
   'vocab-flicka-or': 2,
   'vocab-pojke-ar': 2,
   'vocab-apple-n': 2,
@@ -236,7 +236,7 @@ export const TONES = {
   'u25-rantan': 2,
   'u30-basta': 2,
 
-  // Accent 2 : verbes de la 1re conjugaison (-ar), passif en -as
+  // Accent 2: 1st conjugation verbs (-ar), -as passive
   'u7-regnar': 2,
   'u8-flyttar': 2,
   'u9-vaknar': 2,
@@ -277,7 +277,7 @@ export const TONES = {
   'u16-myndighet': 2,
   'u18-erfarenhet': 2,
   'u31-jamstalldhet': 2,
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   'u1-forlat': 1,
   'u1-ursakta': 2,
   'u1-valkommen': 2,
@@ -407,7 +407,7 @@ export const TONES = {
   'u31-krig': 1,
   'u31-rostratt': 2,
   'u31-tradition': 1,
-  // Decks thématiques A2 (issue #18) : monosyllabes seulement, accent 1
+  // A2 thematic decks (issue #18): one-syllable words only, accent 1
   'v-kropp': 1,
   'v-arm': 1,
   'v-hand': 1,
@@ -640,7 +640,7 @@ export const TONES = {
   'v-vad': 1,
   'v-men': 1,
   'v-saa': 1,
-  // Decks thématiques B1 (issue #18) : monosyllabes seulement, accent 1
+  // B1 thematic decks (issue #18): one-syllable words only, accent 1
   'v-saar': 1,
   'v-puls': 1,
   'v-dos': 1,
@@ -762,7 +762,7 @@ export const TONES = {
   'v-tal': 1,
   'v-troll': 1,
   'v-myt': 1,
-  // Decks thématiques B2 (issue #18) : monosyllabes seulement, accent 1
+  // B2 thematic decks (issue #18): one-syllable words only, accent 1
   'v-boers': 1,
   'v-fond': 1,
   'v-vinst': 1,

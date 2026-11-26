@@ -1,4 +1,4 @@
-// Unité 19 : Avis & débats (B1, Section 5). Grammaire : tycka / tro / tänka, adverbes de phrase.
+// Unit 19: Opinions & debates (B1, Section 5). Grammar: tycka / tro / tänka, sentence adverbs.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT19_DECK = unitDeck({
@@ -63,7 +63,7 @@ export const UNIT19_CARDS = [
     gloss: [['en', 'une', 'an'], ['idé', 'idée', 'idea']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u19-for-min-del', {
     prompt: 'Pour donner ton avis personnel : « en ce qui me concerne »', promptEn: 'Giving your own view: "as for me"',
     sv: 'för min del', fr: 'en ce qui me concerne', en: 'as for me / personally', ipa: '/fœr mɪn deːl/',

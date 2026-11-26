@@ -1,4 +1,4 @@
-// Unité 13 : Vêtements & achats (A2, Section 4). Grammaire : comparatif et superlatif (större, billigare, bäst).
+// Unit 13: Clothes & shopping (A2, Section 4). Grammar: comparative and superlative (större, billigare, bäst).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT13_DECK = unitDeck({
@@ -65,7 +65,7 @@ export const UNIT13_CARDS = [
     note: '*bra, bättre, bäst*. *Vilken är bäst?* = Lequel est le meilleur ?',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u13-klanning', {
     prompt: 'Un vêtement d’une seule pièce : « une robe »', promptEn: 'A one-piece garment: "a dress"',
     sv: 'en klänning', fr: 'une robe', en: 'a dress', ipa: '/ɛn ˈklɛnːɪŋ/',

@@ -1,4 +1,4 @@
-// Unité 20 : Nature & allemansrätten (B1, Section 6). Grammaire : verbes à particule, « det finns ».
+// Unit 20: Nature & allemansrätten (B1, Section 6). Grammar: particle verbs, "det finns".
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT20_DECK = unitDeck({
@@ -60,7 +60,7 @@ export const UNIT20_CARDS = [
     note: 'Mot **ett**, invariable : *ett bär, många bär*. *blåbär* (myrtilles), *lingon* (airelles).',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u20-talt', {
     prompt: 'Pour dormir dans la nature : « une tente »', promptEn: 'For sleeping outdoors: "a tent"',
     sv: 'ett tält', fr: 'une tente', en: 'a tent', ipa: '/ɛtː tɛlt/',

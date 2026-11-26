@@ -1,4 +1,4 @@
-// Unité 27 : Environnement & climat (B2, Section 7). Grammaire : conditionnel (skulle, om … hade), borde.
+// Unit 27: Environment & climate (B2, Section 7). Grammar: conditional (skulle, om … hade), borde.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT27_DECK = unitDeck({
@@ -60,7 +60,7 @@ export const UNIT27_CARDS = [
     note: 'Prétérit de *ska*. **skulle** + infinitif = conditionnel : *jag skulle köpa* (j’achèterais).',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u27-okar', {
     prompt: 'Le contraire de *minskar* : « augmenter »', promptEn: 'The opposite of *minskar*: "to increase"',
     sv: 'ökar', fr: 'augmente / augmenter', en: 'increases / to increase', ipa: '/ˈøːkar/',

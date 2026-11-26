@@ -1,11 +1,11 @@
-// Unité 2 : Café & fika
-// Même convention que content/sv/a1/unit01-greetings.mjs :
-//  - swedish_prompt = consigne/indice en français
-//  - swedish_target = texte suédois
-//  - english_translation = traduction française (nom de colonne trompeur)
-//  - words = textes suédois dont on génère un MP3 chacun
-// Règle de contenu : les phrases ne réutilisent que des mots de l'Unité 1 (jag, du, det, vad, tack, är…)
-// ou des mots introduits plus haut dans cette unité.
+// Unit 2: Café & fika
+// Same convention as content/sv/a1/unit01-greetings.mjs:
+//  - swedish_prompt = instruction/hint in French
+//  - swedish_target = Swedish text
+//  - english_translation = French translation (misleading column name)
+//  - words = Swedish texts, one MP3 generated for each
+// Content rule: sentences only reuse words from Unit 1 (jag, du, det, vad, tack, är…)
+// or words introduced earlier in this unit.
 import { vocab } from '../helpers.mjs';
 
 export const UNIT2_DECK = {
@@ -17,13 +17,13 @@ export const UNIT2_DECK = {
   track: 'thematic',
   unit_number: 2,
   section_slug: 'section-1-premiers-pas',
-  prerequisite_slug: 'swedish-unit-1-greetings', // résolu en prerequisite_deck_id par scripts/sync-content.mjs
+  prerequisite_slug: 'swedish-unit-1-greetings', // resolved to prerequisite_deck_id by scripts/sync-content.mjs
 };
 
 const D = 'swedish-unit-2-cafe';
 
 export const UNIT2_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   {
     slug: 'u2-fika', deck_slug: D, card_type: 'vocab',
     swedish_prompt: 'La pause café-gâteau, institution suédoise',
@@ -126,7 +126,7 @@ export const UNIT2_CARDS = [
     explanation_md: 'Le **ä** devant **r** s’ouvre beaucoup (presque « è » très ouvert). Contraire : *där* = là-bas.',
     words: ['här'],
   },
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u2-varsagod', {
     prompt: 'En tendant quelque chose : « voilà / je vous en prie »', promptEn: 'When handing something over: "here you go"',
     sv: 'varsågod', fr: 'voilà / je vous en prie', en: 'here you go / you’re welcome', ipa: '/ˈvɑːʂɔˌɡuːd/',
@@ -158,7 +158,7 @@ export const UNIT2_CARDS = [
     note: '*på* + *tår* (goutte). Beaucoup de cafés suédois l’offrent : *Ingår påtår?*',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   {
     slug: 'u2-ska-vi-fika', deck_slug: D, card_type: 'phrase',
     swedish_prompt: 'Proposer une pause : « On va prendre un café ? »',

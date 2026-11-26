@@ -1,4 +1,4 @@
-// FranceCore, Unité 13 : Vêtements et shopping.
+// FranceCore, Unit 13: Clothes and shopping.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT13_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT13_DECK = unitDeck({
 const D = UNIT13_DECK.slug;
 
 export const UNIT13_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u13-pantalon', {
     prompt: 'Plagget med två ben', promptEn: 'The garment with two legs',
     fr: 'le pantalon', sv: 'byxorna', en: 'the trousers / the pants',
@@ -93,7 +93,7 @@ export const UNIT13_CARDS = [
     note: 'Betyder egentligen kastanj, och böjs därför **aldrig**: *des chaussures marron*. **Brun** används mest om hår och hy.',
     noteEn: 'It literally means chestnut, so it **never** agrees: *des chaussures marron*. **Brun** is used mostly for hair and skin.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u13-la-chemise', {
     prompt: 'Plagget med krage och knappar', promptEn: 'The garment with a collar and buttons',
     fr: 'la chemise', sv: 'skjortan', en: 'the shirt',
@@ -137,7 +137,7 @@ export const UNIT13_CARDS = [
     noteEn: 'Same form for both genders: *un pull rouge, une robe rouge*.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u13-essayer-robe', {
     prompt: 'Fråga om du får prova den här klänningen', promptEn: 'Ask if you can try on this dress',
     fr: 'Je peux essayer cette robe ?', sv: 'Får jag prova den här klänningen?', en: 'Can I try on this dress?',

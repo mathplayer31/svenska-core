@@ -1,4 +1,4 @@
-// Unité 12 : Santé (A2, Section 4). Grammaire : « ha ont i » + partie du corps définie, impératif.
+// Unit 12: Health (A2, Section 4). Grammar: "ha ont i" + definite body part, imperative.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT12_DECK = unitDeck({
@@ -64,7 +64,7 @@ export const UNIT12_CARDS = [
     note: 'Infinitif et impératif identiques pour le groupe 1 : *Vila!* = Repose-toi ! Pas de réfléchi.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u12-tand', {
     prompt: 'Dans la bouche : « une dent »', promptEn: 'In your mouth: "a tooth"',
     sv: 'en tand', fr: 'une dent', en: 'a tooth', ipa: '/ɛn tand/',

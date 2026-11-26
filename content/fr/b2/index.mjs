@@ -1,4 +1,4 @@
-// FranceCore B2 : decks et cartes du niveau, dans l'ordre du parcours.
+// FranceCore B2: decks and cards of the level, in path order.
 import { UNIT24_DECK, UNIT24_CARDS } from './unit24-professional.mjs';
 import { UNIT25_DECK, UNIT25_CARDS } from './unit25-economy.mjs';
 import { UNIT26_DECK, UNIT26_CARDS } from './unit26-public-services.mjs';

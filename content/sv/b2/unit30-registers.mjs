@@ -1,4 +1,4 @@
-// Unité 30 : Registres (B2, Section 8). Formel vs familier, discours rapporté (concordance des temps).
+// Unit 30: Registers (B2, Section 8). Formal vs informal, reported speech (sequence of tenses).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT30_DECK = unitDeck({
@@ -64,7 +64,7 @@ export const UNIT30_CARDS = [
     gloss: [['sa', 'a dit', 'said'], ['att', 'que', 'that']],
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u30-grym', {
     prompt: 'En argot, très positif : « génial »', promptEn: 'Very positive slang: "awesome"',
     sv: 'grym', fr: 'génial (familier)', en: 'awesome (slang)', ipa: '/ɡrʏmː/',

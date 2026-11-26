@@ -1,5 +1,5 @@
-// SvenskaCore : tous les decks et cartes du cours de suédois, lus par scripts/sync-content.mjs
-// et scripts/count-vocab.mjs.
+// SvenskaCore: all the decks and cards of the Swedish course, read by scripts/sync-content.mjs
+// and scripts/count-vocab.mjs.
 import { UNIT1_DECK, UNIT1_CARDS } from './a1/unit01-greetings.mjs';
 import { UNIT2_DECK, UNIT2_CARDS } from './a1/unit02-cafe.mjs';
 import { UNIT3_DECK, UNIT3_CARDS } from './a1/unit03-family.mjs';
@@ -36,7 +36,7 @@ import { UNIT31_DECK, UNIT31_CARDS } from './b2/unit31-history.mjs';
 import { GRAMMAR_B2_DECK, GRAMMAR_B2_CARDS } from './b2/grammar.mjs';
 import { GRAMMAR_CARDS } from './a1/grammar.mjs';
 import { FOUNDATION_DECKS, FOUNDATION_CARDS } from './a1/foundations.mjs';
-// Decks thématiques de vocabulaire (issue #18)
+// Thematic vocabulary decks (issue #18)
 import { THEMES_A2_1 } from './a2/themes-1.mjs';
 import { THEMES_A2_2 } from './a2/themes-2.mjs';
 import { THEMES_B1_1 } from './b1/themes-1.mjs';
@@ -54,7 +54,7 @@ export const SV_DECKS = [
   UNIT16_DECK, UNIT17_DECK, UNIT18_DECK, UNIT19_DECK, UNIT20_DECK, UNIT21_DECK, UNIT22_DECK, UNIT23_DECK, GRAMMAR_B1_DECK,
   // B2
   UNIT24_DECK, UNIT25_DECK, UNIT26_DECK, UNIT27_DECK, UNIT28_DECK, UNIT29_DECK, UNIT30_DECK, UNIT31_DECK, GRAMMAR_B2_DECK,
-  // Vocabulaire thématique (issue #18)
+  // Thematic vocabulary (issue #18)
   ...THEMES.map((t) => t.deck),
 ];
 export const SV_CARDS = [
@@ -69,6 +69,6 @@ export const SV_CARDS = [
   // B2
   ...UNIT24_CARDS, ...UNIT25_CARDS, ...UNIT26_CARDS, ...UNIT27_CARDS,
   ...UNIT28_CARDS, ...UNIT29_CARDS, ...UNIT30_CARDS, ...UNIT31_CARDS, ...GRAMMAR_B2_CARDS,
-  // Vocabulaire thématique (issue #18)
+  // Thematic vocabulary (issue #18)
   ...THEMES.flatMap((t) => t.cards),
 ];

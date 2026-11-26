@@ -1,4 +1,4 @@
-// FranceCore, Unité 29 : Argumenter (connecteurs, concession, nuancer, réfuter).
+// FranceCore, Unit 29: Arguing (connectors, concession, nuancing, refuting).
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT29_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT29_DECK = unitDeck({
 const D = UNIT29_DECK.slug;
 
 export const UNIT29_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u29-cependant', {
     prompt: 'Sambandsord för motsats, i formell stil', promptEn: 'Linking word for contrast, formal style',
     fr: 'cependant', sv: 'emellertid / dock', en: 'however',
@@ -93,7 +93,7 @@ export const UNIT29_CARDS = [
     note: 'Formellt ord. I vardagen: **contester** eller *démonter un argument* (plocka isär ett argument).',
     noteEn: 'A formal word. In everyday speech: **contester** or *démonter un argument* (to take an argument apart).',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u29-toutefois', {
     prompt: 'Ett formellt ”men ändå”', promptEn: 'A formal "however"',
     fr: 'toutefois', sv: 'dock / emellertid', en: 'however',
@@ -141,7 +141,7 @@ export const UNIT29_CARDS = [
     gloss: [['quant', 'vad', 'as'], ['à', 'gäller', 'for']],
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u29-certes-mais', {
     prompt: 'Medge en fördel men invänd med kostnaden', promptEn: 'Grant a merit but object on cost',
     fr: 'Certes, l’idée est séduisante, mais elle coûte cher.', sv: 'Visserligen är idén lockande, men den är dyr.', en: 'Admittedly, the idea is appealing, but it’s expensive.',

@@ -1,4 +1,4 @@
-// FranceCore, Unité 8 : Le logement.
+// FranceCore, Unit 8: Housing.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT8_DECK = unitDeck({
@@ -8,7 +8,7 @@ export const UNIT8_DECK = unitDeck({
 const D = UNIT8_DECK.slug;
 
 export const UNIT8_CARDS = [
-  // ===================== MOTS =====================
+  // ===================== WORDS =====================
   vocab(D, 'fr-u8-appartement', {
     prompt: 'Bostaden som de flesta har i franska städer', promptEn: 'Where most people live in French cities',
     fr: 'un appartement', sv: 'en lägenhet', en: 'a flat / an apartment',
@@ -93,7 +93,7 @@ export const UNIT8_CARDS = [
     note: 'Fransmännen räknar inte bottenvåningen: **le premier étage** ligger en trappa upp. Maskulinum trots ändelsen **-ée**.',
     noteEn: 'The French don’t count the ground floor: **le premier étage** is one flight up, as in British English. Masculine despite the **-ée** ending.',
   }),
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'fr-u8-la-porte', {
     prompt: 'Den man öppnar för att gå in', promptEn: 'What you open to go in',
     fr: 'la porte', sv: 'dörren', en: 'the door',
@@ -137,7 +137,7 @@ export const UNIT8_CARDS = [
     noteEn: 'Masculine. *Monter l’escalier* = go up the stairs.',
   }),
 
-  // ===================== PHRASES =====================
+  // ===================== SENTENCES =====================
   phrase(D, 'fr-u8-deux-pieces', {
     prompt: 'Säg att du bor i en tvåa tre trappor upp', promptEn: 'Say you live in a two-room flat on the third floor',
     fr: 'J’habite dans un deux-pièces au troisième étage.', sv: 'Jag bor i en tvåa tre trappor upp.', en: 'I live in a two-room flat on the third floor.',

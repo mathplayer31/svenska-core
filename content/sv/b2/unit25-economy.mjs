@@ -1,4 +1,4 @@
-// Unité 25 : Économie & consommation (B2, Section 7). Grammaire : passif en « bli » + participe, passif au parfait.
+// Unit 25: Economy & consumption (B2, Section 7). Grammar: "bli" + participle passive, passive in the perfect.
 import { vocab, phrase, unitDeck } from '../helpers.mjs';
 
 export const UNIT25_DECK = unitDeck({
@@ -62,7 +62,7 @@ export const UNIT25_CARDS = [
     note: 'Contraire de *höjs*. *Räntan sänks* = le taux est abaissé.',
   }),
 
-  // Ajouts (issue #14)
+  // Additions (issue #14)
   vocab(D, 'u25-aktie', {
     prompt: 'Une part d’une entreprise en bourse : « une action »', promptEn: 'A share of a listed company: "a share"',
     sv: 'en aktie', fr: 'une action (en bourse)', en: 'a share / a stock', ipa: '/ɛn ˈakːtsɪɛ/',
