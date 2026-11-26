@@ -1,5 +1,5 @@
-// Thème clair / sombre (issue #10). « system » suit le réglage du téléphone ou de l'ordinateur.
-// Le choix est appliqué sur <html data-theme> ; index.html le relit avant le premier rendu.
+// Light / dark theme (issue #10). "system" follows the phone or computer setting.
+// The choice is applied on <html data-theme>; index.html reads it again before the first render.
 import { useEffect, useState } from 'react';
 
 export type ThemeChoice = 'light' | 'dark' | 'system';
@@ -35,7 +35,7 @@ export function useTheme() {
       if (choice === 'system') localStorage.removeItem(KEY);
       else localStorage.setItem(KEY, choice);
     } catch {
-      // stockage indisponible : le choix vaut pour cette session seulement
+      // storage unavailable: the choice only lasts for this session
     }
   }, [choice]);
 

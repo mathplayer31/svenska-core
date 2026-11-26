@@ -1,5 +1,5 @@
-// Écran Compte (issue #8) : connexion / inscription par e-mail et mot de passe, synchro, déconnexion.
-// Pseudo du classement (issue #15).
+// Account screen (issue #8): email and password sign-in / sign-up, sync, sign-out.
+// Leaderboard username (issue #15).
 import { useEffect, useState } from 'react';
 import { ArrowLeft, CircleUser, RefreshCw } from 'lucide-react';
 import * as data from './dataSource';
@@ -12,7 +12,7 @@ interface Props {
   email: string | null;
   syncError: string | null;
   onClose: () => void;
-  /** Après connexion, déconnexion ou synchro : l'app recharge la progression */
+  /** After sign-in, sign-out or sync: the app reloads the progress */
   onChanged: () => Promise<void> | void;
 }
 
@@ -174,7 +174,7 @@ export default function AccountScreen({ email, syncError, onClose, onChanged }: 
           )}
           {message && <p className={`text-sm ${message.ok ? 'text-success' : 'text-danger'}`}>{message.text}</p>}
         </div>
-        {/* Remonté à la connexion et à la déconnexion : le rappel web dépend du compte */}
+        {/* Remounted on sign-in and sign-out: the web reminder depends on the account */}
         <ReminderSettings key={email ?? ''} />
       </div>
     </div>

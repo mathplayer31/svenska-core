@@ -1,18 +1,18 @@
-// Courbe de l'accent tonal dessinée au-dessus du mot (issue #10).
-// Les données viennent de content/sv/tones.mjs, vérifiées contre l'IPA (scripts/check-tones.mjs).
-// Accent 1 : un sommet sur la syllabe accentuée. Accent 2 : sommet, creux, puis 2e sommet.
+// Tonal accent curve drawn above the word (issue #10).
+// The data comes from content/sv/tones.mjs, checked against the IPA (scripts/check-tones.mjs).
+// Accent 1: one peak on the stressed syllable. Accent 2: peak, dip, then a 2nd peak.
 import { useLayoutEffect, useRef, useState } from 'react';
 import { useI18n } from './i18n';
 
 export interface Tone {
   a: 1 | 2;
-  /** mot dessiné */
+  /** drawn word */
   w: string;
-  /** noyaux vocaliques [début, fin) dans le mot */
+  /** vowel nuclei [start, end) in the word */
   v: [number, number][];
-  /** syllabe accentuée (index) */
+  /** stressed syllable (index) */
   s: number;
-  /** 2e sommet de l'accent 2 (index), null pour l'accent 1 */
+  /** 2nd peak of accent 2 (index), null for accent 1 */
   p: number | null;
 }
 
@@ -20,10 +20,10 @@ const H = 72;
 const HIGH = 14;
 const LOW = 56;
 const MID = 44;
-// La courbe déborde du mot de chaque côté (dans la marge de la carte) : elle monte avant et redescend après
+// The curve overflows the word on each side (into the card margin): it rises before and falls after
 const PAD = 22;
 
-/** Tracé lissé passant par les points (Catmull-Rom converti en courbes de Bézier) */
+/** Smoothed path through the points (Catmull-Rom converted to Bezier curves) */
 function smoothPath(pts: { x: number; y: number }[]) {
   let d = `M ${pts[0].x} ${pts[0].y}`;
   for (let i = 0; i < pts.length - 1; i++) {
@@ -44,7 +44,7 @@ export function tonePoints(tone: Tone, xs: number[], width: number) {
   const pts: { x: number; y: number }[] = [{ x: Math.max(-PAD, first - 30), y: LOW }];
   xs.forEach((x, i) => {
     if (tone.a === 2 && tone.p !== null && i === tone.p) {
-      // Creux entre deux sommets voisins ; s'il y a des syllabes entre eux, elles forment déjà le creux
+      // Dip between two neighbouring peaks; if there are syllables between them, they already form the dip
       if (tone.p === tone.s + 1) pts.push({ x: (xs[tone.s] + x) / 2, y: LOW });
       pts.push({ x, y: HIGH + 6 });
     } else if (i === tone.s) {
@@ -72,7 +72,7 @@ export default function ToneCurve({ tone, className = '' }: { tone: Tone; classN
       const p = word.current;
       const box = wrap.current?.getBoundingClientRect();
       if (!f || !p || !box || box.width === 0) return;
-      // Le mot reste sur une ligne : s'il déborde, la taille baisse jusqu'à tenir (sinon la courbe se décale)
+      // The word stays on one line: if it overflows, the size shrinks until it fits (otherwise the curve shifts)
       const avail = f.clientWidth;
       const cur = parseFloat(getComputedStyle(p).fontSize);
       const fit = Math.max(22, Math.min(avail >= 480 ? 64 : 48, Math.floor((cur * avail) / p.scrollWidth)));
@@ -94,7 +94,7 @@ export default function ToneCurve({ tone, className = '' }: { tone: Tone; classN
     return () => ro.disconnect();
   }, [tone, size]);
 
-  // Mot découpé en morceaux : consonnes, puis noyaux mesurés pour placer la courbe
+  // Word cut into pieces: consonants, then measured nuclei to place the curve
   const parts: { text: string; i: number | null }[] = [];
   let at = 0;
   tone.v.forEach(([a, b], i) => {

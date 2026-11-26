@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Supabase sert uniquement aux comptes et à la synchro de la progression (le contenu est embarqué).
-// Sans variables d'environnement, l'app fonctionne sans compte (progression sur l'appareil seulement).
+// Supabase is only used for accounts and progress sync (the content is bundled).
+// Without environment variables, the app works without accounts (progress on the device only).
 const url = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 

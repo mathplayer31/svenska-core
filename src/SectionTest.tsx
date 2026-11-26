@@ -6,7 +6,7 @@ export interface TestCard {
   id: string;
   cardType: string;
   swedishTarget: string;
-  english: string; // traduction française
+  english: string; // French translation
   audioUrl?: string;
 }
 
@@ -91,7 +91,7 @@ export default function SectionTest({
 
   const question = questions[index];
 
-  // Joue automatiquement l'audio des questions d'écoute
+  // Automatically plays the audio of listening questions
   useEffect(() => {
     if (!finished && question?.audio) playUrl(question.audio);
   }, [index, finished, question]);
@@ -142,7 +142,7 @@ export default function SectionTest({
     );
   }
 
-  // ===================== RÉSULTAT =====================
+  // ===================== RESULT =====================
   if (finished) {
     const passed = finalScore >= passScore;
     return (

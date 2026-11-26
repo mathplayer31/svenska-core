@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
-// Signature de la version publiée (issue #17) : la clé et ses mots de passe restent hors du dépôt,
-// dans ~/.svenskacore/ (keystore.properties + la clé). Procédure : docs/HANDOFF.md
+// Release signing (issue #17): the key and its passwords stay outside the repository,
+// in ~/.svenskacore/ (keystore.properties + the key). Steps: "Signed Android release" in README.md
 def keystoreFile = new File(System.getProperty('user.home'), '.svenskacore/keystore.properties')
 def keystore = new Properties()
 if (keystoreFile.exists()) keystoreFile.withInputStream { keystore.load(it) }
@@ -13,7 +13,7 @@ android {
         applicationId "com.svenskacore.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        // À augmenter à chaque publication sur le Play Store (versionCode strictement croissant)
+        // Increase on every Play Store release (versionCode must strictly increase)
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

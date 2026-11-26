@@ -79,7 +79,7 @@ interface SwedishCard {
   swedishPrompt: string;
   promptEn: string | null;
   swedishTarget: string;
-  english: string; // traduction française
+  english: string; // French translation
   englishEn: string | null;
   ipa: string;
   pitchAccent?: string;
@@ -92,7 +92,7 @@ interface SwedishCard {
   fsrsCard: FSRSCard;
 }
 
-/** Séance d'unité en cours : listes figées au lancement pour que la séance ne bouge pas en route */
+/** Unit session in progress: lists frozen at launch so the session does not shift along the way */
 interface ActiveSession {
   unitId: string | null;
   title: string;
@@ -103,7 +103,7 @@ interface ActiveSession {
 
 const f = fsrs();
 
-// Meilleurs scores d'entraînement par unité : confort local (pas de DB pour l'instant)
+// Best practice scores per unit: local convenience (no DB for now)
 const PRACTICE_KEY = 'svenska.practiceScores';
 function loadPracticeScores(): Record<string, number> {
   try {
@@ -116,13 +116,13 @@ function savePracticeScores(scores: Record<string, number>) {
   try {
     localStorage.setItem(PRACTICE_KEY, JSON.stringify(scores));
   } catch {
-    // stockage indisponible : on ignore
+    // storage unavailable: ignored
   }
 }
 
 export default function App() {
   const { lang, setLang, course, setCourse, t } = useI18n();
-  // Rappel quotidien (issue #16) : texte dans la langue de l'interface, fuseau à jour
+  // Daily reminder (issue #16): text in the interface language, time zone kept up to date
   useEffect(() => {
     refreshReminder({ title: t.reminderTitle, body: t.reminderBody });
   }, [t.reminderTitle, t.reminderBody]);
@@ -148,10 +148,10 @@ export default function App() {
   const [showAccount, setShowAccount] = useState(false);
   const [showCourses, setShowCourses] = useState(false);
 
-  // silent : rechargement en arrière-plan (retour sur l'app), sans écran de chargement
+  // silent: background reload (back to the app), without a loading screen
   const loadData = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
-    // Synchro du compte d'abord (sans effet si déconnecté) ; en cas d'échec réseau, la progression locale suffit
+    // Account sync first (no effect when signed out); on a network failure, local progress is enough
     try {
       await data.sync();
       setSyncError(null);
@@ -160,7 +160,7 @@ export default function App() {
     }
     setUserEmail((await data.currentUser())?.email ?? null);
     const loaded = await data.load();
-    // Seul le cours actif est chargé : parcours, rappels et fondations ne voient que lui
+    // Only the active course is loaded: path, reviews and foundations only see that one
     const inCourse = (x: { course?: string | null }) => (x.course ?? 'sv') === course;
     const courseDecks = loaded.decks.filter(inCourse);
     const courseDeckIds = new Set(courseDecks.map((d) => d.id));
@@ -251,19 +251,19 @@ export default function App() {
 
   useEffect(() => {
     loadData();
-    // Retour sur l'app (onglet ou appli Android) : on récupère ce qui a été fait sur un autre appareil
+    // Back to the app (tab or Android app): fetch what was done on another device
     const onVisible = () => document.visibilityState === 'visible' && loadData(true);
     document.addEventListener('visibilitychange', onVisible);
     return () => document.removeEventListener('visibilitychange', onVisible);
   }, [loadData]);
 
-  // Chaque changement d'écran repart du haut de la page
+  // Every screen change starts from the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [unitDeckId, session, practiceDeckId, testSectionId, selectedDeckId, tab]);
 
   // ---------------------------------------------------------------------------
-  // Ordre, sections et verrouillage
+  // Order, sections and locking
   // ---------------------------------------------------------------------------
   const sortedDecks = useMemo(
     () =>
@@ -281,7 +281,7 @@ export default function App() {
 
   const sortedSections = useMemo(() => [...sections].sort((a, b) => a.sortOrder - b.sortOrder), [sections]);
 
-  // La 1re section est toujours ouverte ; la suivante s'ouvre quand le test de la précédente est réussi.
+  // The 1st section is always open; the next one opens when the previous one's test is passed.
   const unlockedSectionIds = useMemo(() => {
     const set = new Set<string>();
     sortedSections.forEach((s, i) => {
@@ -290,7 +290,7 @@ export default function App() {
     return set;
   }, [sortedSections, sectionProgress]);
 
-  // Un deck est débloqué si sa section est ouverte ET si son prérequis a été entièrement vu.
+  // A deck is unlocked if its section is open AND its prerequisite has been fully seen.
   const unlockedDeckIds = useMemo(() => {
     const set = new Set<string>();
     for (const deck of decks) {
@@ -307,7 +307,7 @@ export default function App() {
     return set;
   }, [decks, cards, unlockedSectionIds]);
 
-  // Séances des fondations : cartes dues, puis nouvelles (ou toutes en mode libre)
+  // Foundation sessions: due cards, then new ones (or all of them in free mode)
   const sessionQueue = useMemo(() => {
     if (!selectedDeckId) return [];
     const now = new Date();
@@ -330,7 +330,7 @@ export default function App() {
   }, [sessionQueue, currentCardId]);
 
   // ---------------------------------------------------------------------------
-  // Notation FSRS (cartes retournées et rappels des séances)
+  // FSRS grading (flipped cards and session reviews)
   // ---------------------------------------------------------------------------
   const rateCard = useCallback(
     async (cardId: string, grade: Grade) => {
@@ -360,7 +360,7 @@ export default function App() {
     (grade: Grade) => {
       if (!currentCard) return;
       data.awardXp(currentCard.fsrsCard.state === 0 ? 'new' : grade === Rating.Again ? 'miss' : 'ok');
-      // Dernière carte de la séance (une carte notée sort de la file jusqu'à sa prochaine échéance)
+      // Last card of the session (a graded card leaves the queue until it is due again)
       if (!cramMode && sessionQueue.length === 1) data.awardXp('session');
       setIsFlipped(false);
       if (cramMode && sessionQueue.length > 1) {
@@ -375,7 +375,7 @@ export default function App() {
   );
 
   // ---------------------------------------------------------------------------
-  // Test de section
+  // Section test
   // ---------------------------------------------------------------------------
   const handleTestFinish = useCallback(
     async (score: number) => {
@@ -437,13 +437,13 @@ export default function App() {
     };
   };
 
-  // Contenu dans la langue choisie : champs `En` en anglais, sinon langue de base du cours (français ou suédois)
+  // Content in the chosen language: `En` fields in English, otherwise the course's base language (French or Swedish)
   const L = {
     prompt: (c: SwedishCard) => (lang === 'en' && c.promptEn) || c.swedishPrompt,
     tr: (c: SwedishCard) => (lang === 'en' && c.englishEn) || c.english,
     note: (c: SwedishCard) => (lang === 'en' && c.explanationEn) || c.explanation,
     ipa: (c: SwedishCard) => (lang === 'en' && c.ipaEn) || c.ipa,
-    // Les accents tonals sont saisis en français (« Accent 1 (Aigu) ») : seuls ces deux mots changent
+    // Tonal accents are entered in French ("Accent 1 (Aigu)"): only these two words change
     accent: (x: string) => (lang === 'en' ? x.replace('(Aigu)', '(acute)').replace('(Grave)', '(grave)') : x),
     gloss: (c: SwedishCard) => c.gloss?.map((g) => ({ sv: g.sv, fr: (lang === 'en' && g.en) || g.fr })) ?? null,
     deck: (d: DeckInfo) => (lang === 'en' && d.titleEn) || d.title,
@@ -499,7 +499,7 @@ export default function App() {
     );
   }
 
-  // Cartes des unités ouvertes : source des rappels et des distracteurs d'exercices
+  // Cards of the unlocked units: source of reviews and of exercise distractors
   const openThematic = cards.filter((c) => deckById.get(c.deckId)?.track === 'thematic' && unlockedDeckIds.has(c.deckId));
   const dueRecalls = () => {
     const now = new Date();
@@ -519,12 +519,12 @@ export default function App() {
     });
   };
 
-  // Unité en cours : la première unité ouverte qui a encore des cartes à découvrir
+  // Current unit: the first unlocked unit that still has cards to discover
   const currentUnit =
     sortedDecks.find((d) => d.track === 'thematic' && unlockedDeckIds.has(d.id) && freshOf(d.id).length > 0) ?? null;
 
   // ============================================================================
-  // VUE COMPTE (connexion, inscription, synchro)
+  // ACCOUNT VIEW (sign-in, sign-up, sync)
   // ============================================================================
   if (showAccount) {
     return (
@@ -538,7 +538,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 0 : TEST DE FIN DE SECTION
+  // VIEW 0: END-OF-SECTION TEST
   // ============================================================================
   const testSection = testSectionId ? sections.find((s) => s.id === testSectionId) : undefined;
   if (testSection) {
@@ -557,12 +557,12 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 0 bis : ENTRAÎNEMENT LIBRE D'UNITÉ
+  // VIEW 0 bis: FREE UNIT PRACTICE
   // ============================================================================
   const practiceDeck = practiceDeckId ? deckById.get(practiceDeckId) : undefined;
   if (practiceDeck) {
     const unitCards = cards.filter((c) => c.deckId === practiceDeck.id);
-    // Distracteurs des blocs : mots des unités thématiques précédentes
+    // Block distractors: words from the previous thematic units
     const previousWords = cards
       .filter((c) => {
         const d = deckById.get(c.deckId);
@@ -589,7 +589,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 0 ter : SÉANCE D'UNITÉ (nouvelles cartes, exercices, rappels)
+  // VIEW 0 ter: UNIT SESSION (new cards, exercises, reviews)
   // ============================================================================
   if (session) {
     const byId = new Map(cards.map((c) => [c.id, c]));
@@ -624,7 +624,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 1 : PAGE D'UNITÉ (séance, entraînement libre, lexique)
+  // VIEW 1: UNIT PAGE (session, free practice, word list)
   // ============================================================================
   const unitDeck = !selectedDeckId && unitDeckId ? deckById.get(unitDeckId) : undefined;
   if (unitDeck) {
@@ -727,7 +727,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 2 : ACCUEIL (parcours en albums, fondations)
+  // VIEW 2: HOME (path as albums, foundations)
   // ============================================================================
   if (!selectedDeckId) {
     const foundationDecks = sortedDecks.filter((d) => d.track === 'foundation' && !d.sectionId);
@@ -747,7 +747,7 @@ export default function App() {
 
     const openFoundation = (deck: DeckInfo, totalDue: number) => {
       if (!unlockedDeckIds.has(deck.id)) return;
-      // Tout est à jour : clic = mode libre direct
+      // Everything is up to date: click = straight to free mode
       setCramMode(totalDue === 0);
       setSelectedDeckId(deck.id);
     };
@@ -888,7 +888,7 @@ export default function App() {
       );
     };
 
-    // Bloc « Reprendre » : l'unité en cours, sinon les rappels, sinon tout est à jour
+    // "Resume" block: the current unit, otherwise the reviews, otherwise everything is up to date
     const resume = (() => {
       if (currentUnit) {
         const unitCards = cards.filter((c) => c.deckId === currentUnit.id);
@@ -923,7 +923,7 @@ export default function App() {
 
     return (
       <div className="min-h-dvh md:flex md:gap-4 md:p-4">
-        {/* Barre latérale (PC) */}
+        {/* Sidebar (desktop) */}
         <aside className="hidden md:flex md:flex-col gap-5 w-64 lg:w-72 shrink-0 sticky top-4 h-[calc(100dvh-2rem)] overflow-y-auto rounded-[28px] bg-surface shadow-card p-4">
           {courseButton('self-start')}
           <nav aria-label={t.mainNav} className="flex flex-col gap-1">
@@ -1050,7 +1050,7 @@ export default function App() {
                 <Eyebrow>{t.supportsPath}</Eyebrow>
                 <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-ink mt-1">{t.navFondations}</h1>
                 <p className="text-muted mt-3 max-w-prose">{t.foundationsIntro}</p>
-                {/* Un bloc par niveau CECR : les decks de vocabulaire thématique (issue #18) allongent la liste */}
+                {/* One block per CEFR level: the thematic vocabulary decks (issue #18) make the list longer */}
                 {[...new Set(foundationDecks.map((d) => d.cefrLevel))].sort().map((level) => (
                   <section key={level} className="mt-6">
                     <Eyebrow>{level}</Eyebrow>
@@ -1066,7 +1066,7 @@ export default function App() {
           </div>
         </main>
 
-        {/* Navigation mobile */}
+        {/* Mobile navigation */}
         <nav
           aria-label={t.mainNav}
           className="md:hidden fixed inset-x-4 z-10 bottom-[max(1rem,env(safe-area-inset-bottom))] grid gap-1 p-1.5 rounded-full bg-cover shadow-card"
@@ -1107,7 +1107,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 3 : FIN DE SÉANCE DES FONDATIONS
+  // VIEW 3: END OF FOUNDATION SESSION
   // ============================================================================
   if (!currentCard) {
     return (
@@ -1140,7 +1140,7 @@ export default function App() {
   }
 
   // ============================================================================
-  // VUE 4 : SÉANCE DE CARTES DES FONDATIONS
+  // VIEW 4: FOUNDATION CARD SESSION
   // ============================================================================
   return (
     <Page narrow>
@@ -1165,7 +1165,7 @@ export default function App() {
 }
 
 // ============================================================================
-// Éléments d'interface partagés
+// Shared interface elements
 // ============================================================================
 const NAV = [
   { id: 'parcours', labelKey: 'navParcours', Icon: Compass },
@@ -1173,7 +1173,7 @@ const NAV = [
   { id: 'classement', labelKey: 'navClassement', Icon: Trophy },
 ] as const;
 
-/** « Unité 1 : Salutations » ou "Unit 1: Greetings" -> { eyebrow: 'Unité 1', title: 'Salutations' } */
+/** "Unité 1 : Salutations" or "Unit 1: Greetings" -> { eyebrow: 'Unité 1', title: 'Salutations' } */
 function splitTitle(text: string) {
   const m = text.match(/^(.*?) ?: (.*)$/);
   return m ? { eyebrow: m[1], title: m[2] } : { eyebrow: '', title: text };

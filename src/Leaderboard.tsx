@@ -1,5 +1,5 @@
-// Onglet Classement (issue #15) : série et XP de l'utilisateur (sur l'appareil, marche sans compte),
-// puis classement des comptes avec pseudo : XP de la semaine, du mois, série de jours.
+// Leaderboard tab (issue #15): the user's streak and XP (on the device, works without an account),
+// then the ranking of accounts with a username: XP this week, this month, day streak.
 import { useEffect, useState } from 'react';
 import { Crown, Flame, Medal, Trophy, type LucideIcon } from 'lucide-react';
 import * as data from './dataSource';
@@ -13,7 +13,7 @@ const BOARDS = [
 ] as const;
 
 const REWARD_ICONS: Record<(typeof REWARDS)[number], LucideIcon> = { 7: Flame, 30: Medal, 100: Trophy, 365: Crown };
-// shortcut: tout le classement est chargé puis coupé ici ; passer à une limite côté SQL au-delà de quelques milliers de comptes
+// shortcut: the whole leaderboard is loaded then cut here; move to an SQL-side limit beyond a few thousand accounts
 const TOP = 50;
 
 export default function Leaderboard({ signedIn, onOpenAccount }: { signedIn: boolean; onOpenAccount: () => void }) {

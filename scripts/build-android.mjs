@@ -1,10 +1,10 @@
-// Construit l'APK Android en ménageant le PC.
-// Détecte automatiquement les cœurs, la charge CPU actuelle et la RAM libre, puis :
-//  - limite le nombre de workers Gradle et la mémoire de la JVM,
-//  - lance Gradle en priorité « inférieure à la normale » (le reste du PC reste fluide),
-//  - n'utilise pas de daemon Gradle (rien ne reste en mémoire après le build).
+// Builds the Android APK while sparing the PC.
+// Automatically detects the cores, the current CPU load and the free RAM, then:
+//  - limits the number of Gradle workers and the JVM memory,
+//  - runs Gradle at "below normal" priority (the rest of the PC stays smooth),
+//  - does not use the Gradle daemon (nothing stays in memory after the build).
 // Usage : npm run apk            (build web hors ligne + sync Capacitor + APK debug)
-//         npm run apk:release    (même chose, puis .aab et .apk signés pour la publication, issue #17)
+//         npm run apk:release    (same thing, then signed .aab and .apk for publishing, issue #17)
 //         node scripts/build-android.mjs --gradle-only
 import os from 'node:os';
 import { spawn, execSync } from 'node:child_process';
@@ -15,12 +15,12 @@ const root = path.resolve(import.meta.dirname, '..');
 const androidDir = path.join(root, 'android');
 const isWin = process.platform === 'win32';
 
-// --- 1. Mesure de la machine ---------------------------------------------
+// --- 1. Measuring the machine ---------------------------------------------
 function cpuBusyRatio(sampleMs = 1000) {
   const snap = () => os.cpus().map((c) => c.times);
   const a = snap();
   const end = Date.now() + sampleMs;
-  while (Date.now() < end) { /* attente active courte, mesure seulement */ }
+  while (Date.now() < end) { /* short busy wait, measurement only */ }
   const b = snap();
   let idle = 0;
   let total = 0;
@@ -36,18 +36,18 @@ const cores = os.availableParallelism?.() ?? os.cpus().length;
 const busy = cpuBusyRatio();
 const freeGb = os.freemem() / 1024 ** 3;
 
-// Au plus 1/4 des cœurs réellement libres, entre 1 et 4 workers
+// At most 1/4 of the truly free cores, between 1 and 4 workers
 const freeCores = Math.max(1, Math.floor(cores * (1 - busy)));
 const workers = Math.min(4, Math.max(1, Math.floor(freeCores / 4)));
-// JVM Gradle : ~20 % de la RAM libre, entre 1 et 3 Go
+// Gradle JVM: ~20 % of the free RAM, between 1 and 3 GB
 const heapMb = Math.round(Math.min(3072, Math.max(1024, freeGb * 1024 * 0.2)));
 
 console.log(
-  `Machine : ${cores} cœurs (${Math.round(busy * 100)} % occupés), ${freeGb.toFixed(1)} Go de RAM libre`
+  `Machine: ${cores} cores (${Math.round(busy * 100)} % busy), ${freeGb.toFixed(1)} GB of free RAM`
 );
-console.log(`Build    : ${workers} worker(s) Gradle, JVM ${heapMb} Mo, priorité basse, sans daemon\n`);
+console.log(`Build:   ${workers} Gradle worker(s), JVM ${heapMb} MB, low priority, no daemon\n`);
 
-// --- 2. Environnement Android ---------------------------------------------
+// --- 2. Android environment -----------------------------------------------
 function findJavaHome() {
   const candidates = [
     process.env.JAVA_HOME,
@@ -70,37 +70,37 @@ function findSdk() {
 
 const javaHome = findJavaHome();
 const sdk = findSdk();
-if (!javaHome) throw new Error('JDK introuvable : installe Android Studio ou définis JAVA_HOME.');
-if (!sdk) throw new Error('SDK Android introuvable : installe-le via Android Studio ou définis ANDROID_HOME.');
+if (!javaHome) throw new Error('JDK not found: install Android Studio or set JAVA_HOME.');
+if (!sdk) throw new Error('Android SDK not found: install it with Android Studio or set ANDROID_HOME.');
 
-// local.properties attend des « / » (les « \ » sont des caractères d'échappement)
+// local.properties expects "/" ("\" are escape characters)
 writeFileSync(path.join(androidDir, 'local.properties'), `sdk.dir=${sdk.replaceAll('\\', '/')}\n`);
 
 const env = { ...process.env, JAVA_HOME: javaHome, ANDROID_HOME: sdk };
 
-// Version publiée : refuse de construire sans clé, plutôt que de livrer un paquet non signé
+// Release build: refuse to build without a key, rather than ship an unsigned package
 const release = process.argv.includes('--release');
 const keystore = path.join(os.homedir(), '.svenskacore', 'keystore.properties');
 if (release && !existsSync(keystore)) {
-  console.error(`${keystore} introuvable : crée la clé de signature (procédure dans docs/HANDOFF.md).`);
+  console.error(`${keystore} not found: create the signing key (see "Signed Android release" in README.md).`);
   process.exit(1);
 }
 
-// --- 3. Build web hors ligne + synchronisation Capacitor --------------------
+// --- 3. Offline web build + Capacitor sync -------------------------------
 function runLowPriority(cmd, args, cwd) {
   return new Promise((resolve, reject) => {
     const child = isWin
-      ? // « start /belownormal » : la priorité est héritée par java.exe lancé par gradlew.bat
+      ? // "start /belownormal": the priority is inherited by java.exe started by gradlew.bat
         spawn('cmd.exe', ['/c', 'start', '"build"', '/belownormal', '/wait', '/b', cmd, ...args], {
           cwd, env, stdio: 'inherit', windowsVerbatimArguments: true,
         })
       : spawn('nice', ['-n', '10', cmd, ...args], { cwd, env, stdio: 'inherit' });
-    child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${cmd} a échoué (code ${code})`))));
+    child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${cmd} failed (code ${code})`))));
   });
 }
 
 if (!process.argv.includes('--gradle-only')) {
-  console.log('> Build web (mode hors ligne) et sync Capacitor');
+  console.log('> Web build (offline mode) and Capacitor sync');
   execSync('npx tsc -b && npx vite build --mode android && npx cap sync android', {
     cwd: root, env, stdio: 'inherit',
   });
@@ -115,7 +115,7 @@ await runLowPriority(
     ...tasks,
     '--no-daemon',
     `--max-workers=${workers}`,
-    // Arguments passés tels quels sous Windows : guillemets nécessaires à cause de l'espace
+    // Arguments passed as is on Windows: quotes needed because of the space
     isWin
       ? `"-Dorg.gradle.jvmargs=-Xmx${heapMb}m -XX:+UseSerialGC"`
       : `-Dorg.gradle.jvmargs=-Xmx${heapMb}m -XX:+UseSerialGC`,
@@ -133,7 +133,7 @@ const files = release
   : [path.join(outputs, 'apk', 'debug', 'app-debug.apk')];
 const missing = files.filter((f) => !existsSync(f));
 if (missing.length) {
-  console.error(`\nÉchec : introuvable ${missing.join(', ')} (voir les erreurs Gradle ci-dessus).`);
+  console.error(`\nFailed: not found ${missing.join(', ')} (see the Gradle errors above).`);
   process.exit(1);
 }
-for (const f of files) console.log(`${release ? 'Signé' : 'APK prêt'} : ${f}`);
+for (const f of files) console.log(`${release ? 'Signed' : 'APK ready'}: ${f}`);

@@ -2,7 +2,7 @@
 @import "@fontsource-variable/bricolage-grotesque";
 @import "@fontsource-variable/inter";
 
-/* Thème Melodi (issue #10) : clair par défaut, sombre selon le système ou le choix mémorisé (data-theme) */
+/* Melodi theme (issue #10): light by default, dark following the system or the saved choice (data-theme) */
 :root {
   --bg: #eef1f6;
   --surface: #ffffff;
@@ -15,12 +15,12 @@
   --accent-hover: #32448f;
   --accent-ink: #ffffff;
   --accent-soft: #e6ebf7;
-  /* Grands aplats (bloc Reprendre, bouton lecture) : bleu profond et texte blanc dans les deux thèmes */
+  /* Large solid areas (Resume block, play button): deep blue and white text in both themes */
   --strong: #3b4fa8;
   --strong-ink: #ffffff;
   --strong-muted: #dce3f7;
   --strong-dim: #8d9cd6;
-  /* Pochettes d'albums et barre de navigation mobile : sombres dans les deux thèmes */
+  /* Album covers and mobile navigation bar: dark in both themes */
   --cover: #141a2b;
   --cover-muted: #d5dbea;
   --gold: #e8a33d;
@@ -112,7 +112,7 @@
   --shadow-card: var(--shadow);
   --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
   --font-sans: "Inter Variable", system-ui, sans-serif;
-  /* Formes arrondies de Melodi */
+  /* Melodi rounded shapes */
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
@@ -128,7 +128,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-  /* Encoche et barre de statut Android */
+  /* Notch and Android status bar */
   padding-top: env(safe-area-inset-top);
 }
 
@@ -139,7 +139,7 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
-/* Égaliseur de la piste en cours */
+/* Equalizer of the current track */
 @keyframes eq {
   0%, 100% { transform: scaleY(0.45); }
   50% { transform: scaleY(1); }

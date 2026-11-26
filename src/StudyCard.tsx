@@ -1,5 +1,5 @@
-// Carte d'étude retournable, notée avec FSRS (issue #10) : nouvelles cartes de la séance d'unité,
-// rappels sans exercice adapté (grammaire, paires minimales) et séances des fondations.
+// Flippable study card, graded with FSRS (issue #10): new cards of the unit session,
+// reviews with no suitable exercise (grammar, minimal pairs) and foundation sessions.
 import { useEffect, useState } from 'react';
 import { Rating, type Grade } from 'ts-fsrs';
 import { BookOpen, Ear, MessageCircle, Play, Sparkles } from 'lucide-react';
@@ -17,12 +17,12 @@ export interface StudyCardData {
   note: string;
   gloss: { sv: string; fr: string }[] | null;
   audioUrl?: string;
-  /** Accent tonal en texte (ancienne saisie), affiché quand il n'y a pas de courbe */
+  /** Tonal accent as text (older entry), shown when there is no curve */
   accentLabel?: string;
   tone?: Tone | null;
 }
 
-/** onProgress reçoit l'avancement de 0 à 1 pendant la lecture, puis null à la fin */
+/** onProgress receives playback progress from 0 to 1, then null at the end */
 export function playUrl(url: string, rate = 1, onProgress?: (p: number | null) => void): Promise<void> {
   return new Promise((resolve) => {
     const audio = new Audio(url.trim());
@@ -35,7 +35,7 @@ export function playUrl(url: string, rate = 1, onProgress?: (p: number | null) =
     const report = () => {
       if (!audio.ended && !audio.paused && audio.duration > 0) onProgress?.(audio.currentTime / audio.duration);
     };
-    // requestAnimationFrame pour la fluidité ; timeupdate (4 fois par seconde) prend le relais si le navigateur bride les images
+    // requestAnimationFrame for smoothness; timeupdate (4 times per second) takes over if the browser throttles frames
     const tick = () => {
       if (audio.ended || audio.paused) return;
       report();
@@ -57,8 +57,8 @@ export async function playAll(audioUrl: string | undefined, rate = 1, onProgress
   }
 }
 
-// Mini-rendu markdown des notes (**gras**, *italique*, ~~barré~~), sans dépendance
-// L'italique peut contenir du gras : « *att hon **inte har*** » (rendu récursif)
+// Tiny markdown renderer for notes (**bold**, *italic*, ~~strikethrough~~), no dependency
+// Italic can contain bold: "*att hon **inte har***" (recursive rendering)
 export function renderInlineMd(text: string): React.ReactNode[] {
   return text.split(/(\*\*[^*]+\*\*|~~[^~]+~~|\*(?:[^*]|\*\*[^*]+\*\*)+\*)/g).map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**') && !part.slice(2, -2).includes('*'))
@@ -103,7 +103,7 @@ export default function StudyCard({
     [Rating.Easy]: t.rateEasy,
   };
   const [progress, setProgress] = useState<number | null>(null);
-  // La barre ne suit que le lecteur à un seul son (plusieurs sons : une ligne par forme, sans barre)
+  // The bar only follows the single-sound player (several sounds: one row per form, no bar)
   const track = urls.length === 1 ? setProgress : undefined;
   const TypeIcon =
     card.cardType === 'minimal_pair' ? Ear : card.cardType === 'cloze_grammar' ? BookOpen : card.cardType === 'phrase' ? MessageCircle : Sparkles;
@@ -113,7 +113,7 @@ export default function StudyCard({
     playAll(card.audioUrl, 1, track);
   };
 
-  // Clavier : Espace retourne, 1 à 4 notent, R réécoute, S ralentit
+  // Keyboard: Space flips, 1 to 4 grade, R replays, S slows down
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement) return;

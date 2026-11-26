@@ -1,18 +1,18 @@
-// Textes de l'interface en français, anglais et suédois (issues #1 et #9), et cours actif.
-// Le contenu des cartes est traduit côté données (content/) ; ici, seulement l'interface.
+// Interface texts in French, English and Swedish (issues #1 and #9), and the active course.
+// Card content is translated on the data side (content/); here, only the interface.
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 export type Lang = 'fr' | 'en' | 'sv';
 
-/** Cours : sv = apprendre le suédois (SvenskaCore), fr = apprendre le français (FranceCore). */
+/** Course: sv = learn Swedish (SvenskaCore), fr = learn French (FranceCore). */
 export type Course = 'sv' | 'fr';
-/** Langues d'interface de chaque cours, la première est celle par défaut. */
+/** Interface languages of each course, the first one is the default. */
 export const COURSE_LANGS: Record<Course, Lang[]> = { sv: ['fr', 'en'], fr: ['en', 'sv'] };
 
 const s = (n: number) => (n > 1 ? 's' : '');
 
 const fr = {
-  // Navigation et en-tête
+  // Navigation and header
   navParcours: 'Parcours',
   navFondations: 'Fondations',
   mainNav: 'Navigation principale',
@@ -20,7 +20,7 @@ const fr = {
   switchCourse: (name: string) => `Passer à ${name}`,
   home: 'Accueil',
   unit: 'Unité',
-  // Parcours
+  // Path
   level: (l: string) => `Niveau ${l}`,
   yourPath: 'Ton parcours',
   cardsCount: (a: number, b: number) => `${a}/${b} cartes`,
@@ -35,15 +35,15 @@ const fr = {
   testReady: (pass: number) => `10 questions, ${pass} % pour valider`,
   bestScoreSuffix: (score: number) => `. Meilleur score : ${score} %`,
   testNotReady: (seen: number, total: number) => `Découvre toutes les cartes de la section (${seen}/${total})`,
-  // Réviser
+  // Review
   freePractice: 'Entraînement libre',
-  // Fondations
+  // Foundations
   supportsPath: 'En soutien du parcours',
   foundationsIntro: 'Prononciation, grammaire, genres en/ett et vocabulaire par thème. Ces modules s’ouvrent au fil des unités.',
   foundationDue: (n: number, m: number) => `${n} nouvelle${s(n)}, ${m} à revoir`,
   foundationUpToDate: (total: number, next: string | null) =>
     `${total} cartes, à jour${next ? ` (prochaine dans ${next})` : ''}`,
-  // Page d'unité
+  // Unit page
   discovered: (seen: number, total: number) => `${seen}/${total} découvertes`,
   discover: 'Découvrir',
   discoverText: (v: number, p: number) => `${v} mots et ${p} phrases, avec audio et traduction mot à mot.`,
@@ -60,7 +60,7 @@ const fr = {
   lexicon: 'Lexique',
   phrases: 'Phrases',
   toDiscover: 'À découvrir',
-  // Session de cartes
+  // Card session
   sessionDone: 'Session terminée',
   sessionDoneText: 'Toutes les cartes dues ont été reprogrammées par l’algorithme FSRS.',
   backToUnit: 'Retour à l’unité',
@@ -87,7 +87,7 @@ const fr = {
   unitMinutes: 'm',
   unitHours: 'h',
   unitDays: 'j',
-  // Exercices
+  // Exercises
   quit: 'Quitter',
   kindMatch: 'Associe les paires',
   kindMcqSv: 'Choisis la bonne traduction',
@@ -118,7 +118,7 @@ const fr = {
   wrongGender: (full: string) => `Mauvais genre : c’est « ${full} ».`,
   accentsWarning: 'Accepté, mais attention aux lettres å / ä / ö : elles changent le son (et parfois le sens).',
   typoAccepted: 'Accepté avec une petite faute de frappe.',
-  // Test de section
+  // Section test
   notEnoughForTest: 'Pas assez de cartes (mots ou phrases) pour générer un test.',
   back: 'Retour',
   sectionValidated: 'Section validée !',
@@ -135,8 +135,8 @@ const fr = {
   listenThenChoose: 'Écoute, puis choisis la bonne traduction',
   next: 'Suivant',
   seeResult: 'Voir le résultat',
-  // Compte
-  // Melodi (issue #10) : séances, albums, thème, choix du cours
+  // Account
+  // Melodi (issue #10): sessions, albums, theme, course choice
   resume: 'Reprendre',
   trackN: (n: number) => `piste ${n}`,
   resumeSub: (n: number, r: number) =>
@@ -182,7 +182,7 @@ const fr = {
   toneLabel: (word: string, a: number) => `Mélodie de ${word} : accent ${a}, ${a === 1 ? 'un sommet' : 'deux sommets'}`,
   slow: '0,7×',
   toReview: (n: number) => `${n} à revoir`,
-  // Rappel quotidien (issue #16)
+  // Daily reminder (issue #16)
   reminder: 'Rappel quotidien',
   reminderIntro: 'Une notification par jour, à l’heure de ton choix, pour faire ta séance.',
   reminderToggle: 'Activer le rappel',
@@ -659,7 +659,7 @@ const sv: typeof fr = {
 export type Strings = typeof fr;
 const STRINGS: Record<Lang, Strings> = { fr, en, sv };
 
-// Textes qui dépendent de la langue étudiée : en anglais, ils changent selon le cours
+// Texts that depend on the language being learned: in English, they change with the course
 const EN_FOR_FRENCH: Partial<Strings> = {
   kindWrite: 'Write in French',
   typePlaceholder: 'Type your answer in French…',
@@ -668,7 +668,7 @@ const EN_FOR_FRENCH: Partial<Strings> = {
 };
 
 const COURSE_KEY = 'svenska.course';
-// Langue mémorisée par cours ; la clé historique du suédois est conservée
+// Language remembered per course; the historical Swedish key is kept
 const langKey = (course: Course) => (course === 'sv' ? 'svenska.lang' : `svenska.lang.${course}`);
 
 function read(key: string) {
@@ -682,7 +682,7 @@ function write(key: string, value: string) {
   try {
     localStorage.setItem(key, value);
   } catch {
-    // stockage indisponible : le choix vaut pour cette session seulement
+    // storage unavailable: the choice only lasts for this session
   }
 }
 

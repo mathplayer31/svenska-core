@@ -1,7 +1,7 @@
--- SvenskaCore : schéma complet de la base (public), exporté de Supabase local le 18/11/2026.
--- Pour une base neuve : coller dans Supabase Studio > SQL Editor, puis lancer
---   npm run content   pour remplir sections, decks et cartes.
--- RLS : policies de dev permissives, à restreindre avant toute mise en ligne.
+-- SvenskaCore: full database schema (public), exported from local Supabase on 2026-11-18.
+-- For a new database: paste into Supabase Studio > SQL Editor, then run
+--   npm run content   to fill sections, decks and cards.
+-- RLS: permissive dev policies, to be restricted before going online.
 
 CREATE TABLE public.cards (
     id uuid DEFAULT gen_random_uuid() NOT NULL,

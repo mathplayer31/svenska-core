@@ -1,22 +1,22 @@
-// Plan d'une séance d'unité (issues #10 et #13), sans dépendance d'interface : testé par scripts/check-session.ts.
-// Ordre : un bloc de 6 nouvelles cartes, puis des exercices sur ce bloc (paires de mots, phrases à
-// reconstruire...), puis 2 rappels de mots déjà vus ; et ainsi de suite. Les rappels restants viennent
-// à la fin ; la révision de ce qui a été difficile est ajoutée par la séance une fois le plan terminé.
+// Plan of a unit session (issues #10 and #13), with no UI dependency: tested by scripts/check-session.ts.
+// Order: a block of 6 new cards, then exercises on that block (word pairs, sentences to
+// rebuild...), then 2 reviews of words already seen; and so on. Remaining reviews come
+// at the end; the review of what was hard is added by the session once the plan is finished.
 import type { StudyCardData } from './StudyCard';
 import type { Exercise, PracticeCard } from './UnitPractice';
 
 export interface SessionItem {
   study: StudyCardData;
   practice: PracticeCard;
-  /** Unité d'origine, affichée sur les rappels (« Rappel · Unité 1 ») */
+  /** Source unit, shown on reviews ("Review · Unit 1") */
   unitLabel: string;
 }
 
 export type Step =
   | { type: 'learn'; item: SessionItem }
-  /** item : la carte travaillée (absente pour les paires, qui en mêlent plusieurs) */
+  /** item: the card being worked on (absent for pairs, which mix several) */
   | { type: 'practice'; ex: Exercise; item?: SessionItem }
-  /** review : révision de fin de séance d'une carte trouvée difficile */
+  /** review: end-of-session review of a card found hard */
   | { type: 'recall'; item: SessionItem; ex: Exercise | null; review?: boolean };
 
 export interface Factory {
@@ -34,7 +34,7 @@ const EXERCISES_PER_BLOCK = 3;
 
 const ARTICLE = /^(en|ett|un|une|le|la|les|l['’])\s*/i;
 
-/** Un mot (ou nom avec article, ou mot composé de deux mots), jamais une phrase : seul admis dans les paires */
+/** One word (or noun with article, or two-word compound), never a sentence: the only kind allowed in pairs */
 export function isMatchWord(c: PracticeCard): boolean {
   if (c.cardType !== 'vocab') return false;
   const main = c.swedishTarget.split(' / ')[0].trim();
@@ -42,7 +42,7 @@ export function isMatchWord(c: PracticeCard): boolean {
   return main.replace(ARTICLE, '').split(/\s+/).filter(Boolean).length <= 2;
 }
 
-/** Exercice sur une carte (non noté) ; null pour la grammaire et les paires minimales */
+/** Exercise on one card (not graded); null for grammar and minimal pairs */
 export function practiceExercise(item: SessionItem, f: Factory, k: number): Exercise | null {
   const c = item.practice;
   if (c.cardType === 'phrase') return f.makeBuild(c);
@@ -50,7 +50,7 @@ export function practiceExercise(item: SessionItem, f: Factory, k: number): Exer
   return k % 2 === 0 ? f.makeMcq(c, k % 4 === 2) : f.makeWrite(c, false);
 }
 
-/** Exercice de rappel (noté) ; null = carte retournée et notée à la main */
+/** Review exercise (graded); null = card flipped and graded by hand */
 export function recallExercise(item: SessionItem, f: Factory, k: number): Exercise | null {
   const c = item.practice;
   if (c.cardType === 'phrase') return f.makeBuild(c);
@@ -59,7 +59,7 @@ export function recallExercise(item: SessionItem, f: Factory, k: number): Exerci
   return kind === 2 ? f.makeWrite(c, false) : f.makeMcq(c, kind === 1);
 }
 
-/** Exercices après un bloc : les paires sur les mots du bloc, puis les phrases et les autres mots */
+/** Exercises after a block: pairs on the block's words, then sentences and the other words */
 export function blockExercises(block: SessionItem[], f: Factory, k: number): Step[] {
   const steps: Step[] = [];
   const words = block.filter((x) => isMatchWord(x.practice));
@@ -96,7 +96,7 @@ export function planSession(newItems: SessionItem[], recallItems: SessionItem[],
   return steps;
 }
 
-/** Révision de fin de séance : un exercice noté par carte trouvée difficile (une seule fois chacune) */
+/** End-of-session review: one graded exercise per card found hard (only once each) */
 export function reviewSteps(items: SessionItem[], f: Factory): Step[] {
   return items.map((item, k) => ({ type: 'recall', item, ex: recallExercise(item, f, k + 1), review: true }));
 }

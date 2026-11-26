@@ -5,7 +5,7 @@ import App from './App.tsx'
 import { I18nProvider } from './i18n'
 import { Capacitor } from '@capacitor/core'
 
-// Hors ligne de la PWA (issue #12) ; l'APK embarque déjà tout, et le serveur de dev n'en a pas besoin
+// PWA offline support (issue #12); the APK already bundles everything, and the dev server does not need it
 if (import.meta.env.PROD && 'serviceWorker' in navigator && !Capacitor.isNativePlatform()) {
   navigator.serviceWorker.register('/sw.js').catch(() => {})
 }

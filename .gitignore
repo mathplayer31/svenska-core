@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Notes de travail et fichiers des assistants IA (gardés en local)
+# Working notes and AI assistant files (kept locally)
 CLAUDE.md
 .claude/
 docs/HANDOFF.md

@@ -1,6 +1,6 @@
--- Rappel quotidien par push web (issue #16) : un abonnement par navigateur (PWA), lié au compte.
--- À coller une fois dans Supabase Cloud > SQL Editor (appliqué aussi à la base locale de dev).
--- La fonction send-reminders lit cette table avec la clé service (hors RLS) et l'envoie à l'heure choisie.
+-- Daily web push reminder (issue #16): one subscription per browser (PWA), tied to the account.
+-- Paste once into Supabase Cloud > SQL Editor (also applied to the local dev database).
+-- The send-reminders function reads this table with the service key (bypassing RLS) and sends it at the chosen time.
 
 create table if not exists public.push_subscriptions (
   endpoint text primary key,
@@ -9,20 +9,20 @@ create table if not exists public.push_subscriptions (
   auth text not null,
   remind_at time not null,
   time_zone text not null,
-  -- Texte de la notification, dans la langue de l'interface au moment de l'enregistrement
+  -- Notification text, in the interface language at the time it was saved
   title text not null,
   body text not null,
-  -- Date locale (dans time_zone) du dernier rappel envoyé : un seul par jour
+  -- Local date (in time_zone) of the last reminder sent: only one per day
   last_sent date,
   updated_at timestamptz not null default now()
 );
 
 alter table public.push_subscriptions enable row level security;
 grant select, insert, update, delete on public.push_subscriptions to authenticated;
--- La fonction send-reminders (clé service) lit, date et supprime les abonnements
+-- The send-reminders function (service key) reads, dates and deletes subscriptions
 grant select, update, delete on public.push_subscriptions to service_role;
 
--- Chaque utilisateur connecté ne lit et n'écrit que ses propres abonnements. Les visiteurs anonymes n'ont aucun accès.
+-- Each signed-in user only reads and writes their own subscriptions. Anonymous visitors have no access.
 drop policy if exists "abonnements personnels" on public.push_subscriptions;
 create policy "abonnements personnels" on public.push_subscriptions
   for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);

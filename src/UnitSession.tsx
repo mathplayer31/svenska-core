@@ -1,6 +1,6 @@
-// Séance d'unité (issues #10 et #13) : blocs de nouvelles cartes, exercices après chaque bloc, rappels des mots déjà vus.
-// Un rappel est un exercice dont le résultat note la carte dans FSRS. En fin de séance, chaque carte trouvée
-// difficile (notée À revoir ou Difficile, exercice raté) revient une fois en révision.
+// Unit session (issues #10 and #13): blocks of new cards, exercises after each block, reviews of words already seen.
+// A review is an exercise whose result grades the card in FSRS. At the end of the session, each card found
+// hard (graded Again or Hard, failed exercise) comes back once for review.
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Rating, type Grade } from 'ts-fsrs';
 import { ArrowRight, CheckCircle2, X } from 'lucide-react';
@@ -23,7 +23,7 @@ import { XP, type XpKind } from './xp';
 
 export { type SessionItem } from './sessionPlan';
 
-/** Note FSRS d'un rappel : juste = Bien, juste avec avertissement = Difficile, faux = À revoir */
+/** FSRS grade of a review: correct = Good, correct with a warning = Hard, wrong = Again */
 export function gradeFromVerdict(v: Verdict): Grade {
   if (!v.ok) return Rating.Again;
   return v.message ? Rating.Hard : Rating.Good;
@@ -44,7 +44,7 @@ export default function UnitSession({
   title: string;
   newItems: SessionItem[];
   recallItems: SessionItem[];
-  /** Cartes ouvertes du cours, pour les distracteurs */
+  /** Unlocked cards of the course, for distractors */
   poolCards: PracticeCard[];
   extraWords: string[];
   onRate: (cardId: string, grade: Grade) => void;
@@ -73,20 +73,20 @@ export default function UnitSession({
   const finished = steps.length > 0 && index >= steps.length;
   const inReview = step?.type === 'recall' && !!step.review;
 
-  // Carte trouvée difficile pendant la séance (pas pendant la révision elle-même : elle ne revient qu'une fois)
+  // Card found hard during the session (not during the review itself: it only comes back once)
   const markDifficult = (item: SessionItem) => {
     if (inReview) return;
     setDifficult((m) => (m.has(item.study.id) ? m : new Map(m).set(item.study.id, item)));
   };
 
-  // Plan terminé : la révision des difficultés s'ajoute avant que l'écran de fin ne s'affiche
+  // Plan finished: the review of hard cards is added before the end screen shows
   useLayoutEffect(() => {
     if (!finished || reviewAdded || difficult.size === 0) return;
     setReviewAdded(true);
     setSteps((list) => [...list, ...reviewSteps([...difficult.values()], factory)]);
   }, [finished, reviewAdded, difficult, factory]);
 
-  // Séance terminée (révision des difficultés comprise) : bonus et journée validée pour le streak, une seule fois
+  // Session finished (review of hard cards included): bonus and day validated for the streak, only once
   const done = finished && (reviewAdded || difficult.size === 0);
   const rewarded = useRef(false);
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function UnitSession({
     if (grade !== Rating.Good) markDifficult(step.item);
   };
 
-  // « Je ne peux pas écouter » : l'exercice en cours et les suivants passent sans son
+  // "I can't listen": the current exercise and the next ones run without sound
   const noAudio = () =>
     setSteps((list) =>
       list.map((s, i) => (i < index || s.type === 'learn' || !s.ex ? s : { ...s, ex: withoutAudio(s.ex, factory) }))

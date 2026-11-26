@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 
-/** Écrit dist/sw.js (issue #12) : modèle scripts/sw.js + liste des fichiers du build à précharger */
+/** Writes dist/sw.js (issue #12): scripts/sw.js template + list of build files to preload */
 function serviceWorker(): Plugin {
   return {
     name: 'svenska-service-worker',
@@ -17,7 +17,7 @@ function serviceWorker(): Plugin {
         .map((f) => relative(dist, join(f.parentPath, f.name)).split(sep).join('/'))
         .filter((f) => f !== 'sw.js')
         .sort()
-      // Version = empreinte du contenu : le cache ne change que si un fichier change
+      // Version = content fingerprint: the cache only changes if a file changes
       const version = (list: string[]) => {
         const h = createHash('sha256')
         for (const f of list) h.update(f).update(readFileSync(join(dist, f)))
@@ -41,8 +41,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), serviceWorker()],
   server: {
     watch: {
-      // Dossiers générés (build Android, build web, MP3, Supabase) : chaque build en écrit des milliers,
-      // et les surveiller provoquait des rafales de rechargements et une fuite mémoire du serveur de dev.
+      // Generated folders (Android build, web build, MP3, Supabase): each build writes thousands of files,
+      // and watching them caused bursts of reloads and a memory leak in the dev server.
       ignored: ['**/android/**', '**/dist/**', '**/public/audio/**', '**/supabase/**'],
     },
   },

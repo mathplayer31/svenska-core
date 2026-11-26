@@ -20,7 +20,7 @@ export interface PracticeCard {
   id: string;
   cardType: string;
   swedishTarget: string;
-  english: string; // traduction dans la langue choisie
+  english: string; // translation in the chosen language
   audioUrl?: string;
   gloss: { sv: string; fr: string }[] | null;
 }
@@ -37,7 +37,7 @@ export type Verdict = { ok: boolean; message?: string };
 interface Props {
   unitTitle: string;
   cards: PracticeCard[];
-  /** Textes suédois des unités précédentes, découpés en mots pour les distracteurs des blocs */
+  /** Swedish texts of the previous units, split into words for block distractors */
   extraWords: string[];
   bestScore: number;
   onFinish: (score: number) => void;
@@ -45,7 +45,7 @@ interface Props {
 }
 
 // ============================================================================
-// Utilitaires
+// Utilities
 // ============================================================================
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -58,7 +58,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 const PUNCT = /[.,!?;:¿¡"“”«»]/g;
 
-/** Mots d'une phrase sans ponctuation : "Det är bra, tack." -> ["Det","är","bra","tack"] */
+/** Words of a sentence without punctuation: "Det är bra, tack." -> ["Det","är","bra","tack"] */
 function tokenize(text: string): string[] {
   return text.replace(PUNCT, ' ').split(/\s+/).filter(Boolean);
 }
@@ -72,12 +72,12 @@ function normalize(text: string): string {
     .trim();
 }
 
-// å ä ö é è ç... sans leurs signes diacritiques
+// å ä ö é è ç... without their diacritics
 function stripAccents(text: string): string {
   return text.normalize('NFD').replace(/\p{M}/gu, '');
 }
 
-// Paires d'articles qui portent le genre : oublier l'article ou prendre l'autre est signalé
+// Article pairs that carry gender: forgetting the article or using the other one is flagged
 const ARTICLE_PAIRS: Record<Course, [string, string][]> = {
   sv: [['en', 'ett']],
   fr: [['un', 'une'], ['le', 'la']],
@@ -98,7 +98,7 @@ function levenshtein(a: string, b: string): number {
   return dp[a.length][b.length];
 }
 
-/** Correction tolérante d'une réponse écrite */
+/** Lenient checking of a written answer */
 function checkWritten(input: string, target: string, t: Strings, course: Course = 'sv'): Verdict {
   const got = normalize(input);
   const want = normalize(target);
@@ -122,7 +122,7 @@ function checkWritten(input: string, target: string, t: Strings, course: Course 
   return { ok: false };
 }
 
-// « Je ne peux pas écouter maintenant » (issue #13) : plus d'exercice d'écoute pendant une heure
+// "I can't listen right now" (issue #13): no more listening exercises for one hour
 const NO_AUDIO_KEY = 'svenska.noAudioUntil';
 
 export function audioOff(): boolean {
@@ -137,23 +137,23 @@ function setAudioOff() {
   try {
     localStorage.setItem(NO_AUDIO_KEY, String(Date.now() + 60 * 60 * 1000));
   } catch {
-    // stockage indisponible : l'exercice en cours et la séance passent quand même sans son
+    // storage unavailable: the current exercise and the session still run without sound
   }
 }
 
-/** Exercice qui demande d'écouter : compréhension orale ou dictée */
+/** Exercise that requires listening: listening comprehension or dictation */
 export function needsAudio(ex: Exercise): boolean {
   return ex.kind === 'mcq_listen' || (ex.kind === 'write' && ex.dictation);
 }
 
-/** Même carte, exercice sans son (traduction au lieu de l'écoute, écriture au lieu de la dictée) */
+/** Same card, exercise without sound (translation instead of listening, writing instead of dictation) */
 export function withoutAudio(ex: Exercise, f: Pick<Factory, 'makeMcq' | 'makeWrite'>): Exercise {
   if (ex.kind === 'mcq_listen') return f.makeMcq(ex.card, false);
   if (ex.kind === 'write' && ex.dictation) return f.makeWrite(ex.card, false);
   return ex;
 }
 
-/** Première forme d'une carte à plusieurs formes (« salut / bonjour » -> « salut ») */
+/** First form of a card with several forms ("salut / bonjour" -> "salut") */
 const firstForm = (text: string) => text.split(' / ')[0].trim();
 
 function firstAudio(card: PracticeCard): string | undefined {
@@ -183,14 +183,14 @@ function pickDistinct(pool: string[], exclude: string, n: number): string[] {
 }
 
 // ============================================================================
-// Génération de la série d'exercices
+// Building the exercise series
 // ============================================================================
 /**
- * Fabrique d'exercices sur un ensemble de cartes (distracteurs pris dans `cards` et `extraWords`).
- * Partagée par l'entraînement libre et la séance d'unité (issue #10).
+ * Exercise factory for a set of cards (distractors taken from `cards` and `extraWords`).
+ * Shared by free practice and the unit session (issue #10).
  */
 export function exerciseFactory(cards: PracticeCard[], extraWords: string[], prefix = 'ex') {
-  // Distracteurs des QCM : d'abord des cartes du même type (mot vs phrase), sinon on complète
+  // Multiple-choice distractors: first cards of the same type (word vs sentence), otherwise fill up
   const pool = (field: 'swedishTarget' | 'english', card: PracticeCard) => {
     const same = cards.filter((c) => c.cardType === card.cardType && c.id !== card.id).map((c) => c[field]);
     const picked = pickDistinct(same, card[field], 3);
@@ -198,7 +198,7 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
     const others = cards.filter((c) => c.cardType !== card.cardType).map((c) => c[field]);
     return [...picked, ...pickDistinct(others, card[field], 3 - picked.length)];
   };
-  // Mots-blocs distracteurs : 1er mot de phrase en minuscule, noms propres conservés (Anna, Frankrike)
+  // Distractor word blocks: 1st word of a sentence in lowercase, proper nouns kept (Anna, Frankrike)
   const wordPool = Array.from(
     new Map(
       [...cards.map((c) => c.swedishTarget), ...extraWords]
@@ -231,7 +231,7 @@ export function exerciseFactory(cards: PracticeCard[], extraWords: string[], pre
     };
   };
 
-  // QCM : traduction vers la langue étudiée, ou écoute vers la traduction (si audio)
+  // Multiple choice: translation into the language being learned, or listening to translation (if audio)
   const makeMcq = (card: PracticeCard, listen: boolean): Exercise =>
     listen && !audioOff() && firstAudio(card)
       ? { kind: 'mcq_listen', key: key(), card, options: shuffle([card.english, ...pool('english', card)]) }
@@ -254,29 +254,29 @@ function buildExercises(cards: PracticeCard[], extraWords: string[]): Exercise[]
   const { makeMatch, makeBuild, makeMcq, makeWrite } = exerciseFactory(cards, extraWords);
   const out: Exercise[] = [];
 
-  // 1. Échauffement : associer les paires
+  // 1. Warm-up: match the pairs
   const m1 = makeMatch(words.slice(0, 5));
   if (m1) out.push(m1);
 
-  // 2. QCM (alternance FR -> SV et écoute -> FR)
+  // 2. Multiple choice (alternating FR -> SV and listening -> FR)
   vocab.slice(0, 6).forEach((card, i) => out.push(makeMcq(card, i % 2 === 1)));
 
-  // 3. Phrases à reconstruire avec des blocs
+  // 3. Sentences to rebuild with blocks
   phrases.slice(0, 4).forEach((card) => out.push(makeBuild(card)));
 
-  // 4. Écriture libre : 2 mots (dont une dictée) + 1 phrase courte
+  // 4. Free writing: 2 words (one of them a dictation) + 1 short sentence
   vocab.slice(0, 2).forEach((card, i) => out.push(makeWrite(card, i === 0)));
   const shortPhrase = [...phrases].sort((a, b) => a.swedishTarget.length - b.swedishTarget.length)[0];
   if (shortPhrase) out.push(makeWrite(shortPhrase, false));
 
-  // 5. Retour au calme : nouvelles paires
+  // 5. Cool-down: new pairs
   const m2 = makeMatch(shuffle([...words.slice(5), ...words.slice(0, 2)]).slice(0, 5));
   if (m2) out.push(m2);
 
   return out;
 }
 
-/** Recrée un exercice raté pour le reproposer en fin de série (avec de nouvelles options) */
+/** Rebuilds a failed exercise to offer it again at the end of the series (with new options) */
 function regenerate(ex: Exercise, cards: PracticeCard[], extraWords: string[], suffix: string): Exercise {
   const fresh = { ...ex, key: `${ex.key}-${suffix}` } as Exercise;
   if (fresh.kind === 'match') return { ...fresh, pairs: shuffle(fresh.pairs) };
@@ -290,7 +290,7 @@ function regenerate(ex: Exercise, cards: PracticeCard[], extraWords: string[], s
 }
 
 // ============================================================================
-// Composant principal
+// Main component
 // ============================================================================
 export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, onFinish, onExit }: Props) {
   const { t } = useI18n();
@@ -315,7 +315,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
       if (exercise?.kind === 'build' || exercise?.kind === 'write' || exercise?.kind === 'mcq_sv') playUrl(audio);
       if (!exercise) return;
       if (v.ok && !isRetry) setFirstTryCorrect((c) => c + 1);
-      // Un exercice raté est reproposé une seule fois en fin de série (pas de boucle infinie)
+      // A failed exercise is offered again only once at the end of the series (no infinite loop)
       if (!v.ok && !isRetry && !retried.has(exercise.key)) {
         setRetried((s) => new Set(s).add(exercise.key));
         setQueue((q) => [...q, regenerate(exercise, cards, extraWords, 'retry')]);
@@ -359,7 +359,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
     );
   }
 
-  // ===================== RÉSULTAT =====================
+  // ===================== RESULT =====================
   if (finished) {
     const score = Math.round((firstTryCorrect / baseCount) * 100);
     return (
@@ -392,7 +392,7 @@ export default function UnitPractice({ unitTitle, cards, extraWords, bestScore, 
     );
   }
 
-  // ===================== EXERCICE =====================
+  // ===================== EXERCISE =====================
   const progress = Math.min(index, baseCount) / baseCount;
   const answerCard = exercise.kind === 'match' ? null : exercise.card;
 
@@ -425,7 +425,7 @@ export const kindLabels = (t: Strings): Record<Exercise['kind'], string> => ({
   write: t.kindWrite,
 });
 
-/** Carte d'un exercice : consigne et zone de réponse */
+/** Exercise card: instruction and answer area */
 export function ExerciseView({
   exercise,
   locked,
@@ -438,9 +438,9 @@ export function ExerciseView({
   locked: boolean;
   onResult: (v: Verdict) => void;
   label: string;
-  /** Étiquette en plus de la consigne (ex. « Rappel · Unité 1 ») */
+  /** Label in addition to the instruction (e.g. "Review · Unit 1") */
   chip?: string;
-  /** Remplace les exercices d'écoute par des exercices sans son ; le bouton n'apparaît que s'il est fourni */
+  /** Replaces listening exercises with exercises without sound; the button only shows if this is provided */
   onNoAudio?: () => void;
 }) {
   const { t } = useI18n();
@@ -471,7 +471,7 @@ export function ExerciseView({
   );
 }
 
-/** Correction affichée sous l'exercice, avec la bonne réponse et le bouton Continuer */
+/** Feedback shown under the exercise, with the right answer and the Continue button */
 export function VerdictPanel({ verdict, card, onContinue }: { verdict: Verdict; card: PracticeCard | null; onContinue: () => void }) {
   const { t } = useI18n();
   return (
@@ -523,7 +523,7 @@ export function VerdictPanel({ verdict, card, onContinue }: { verdict: Verdict; 
   );
 }
 
-/** Entrée = continuer, une fois la correction affichée */
+/** Enter = continue, once the feedback is shown */
 export function useEnterToContinue(active: boolean, onContinue: () => void) {
   useEffect(() => {
     if (!active) return;
@@ -533,7 +533,7 @@ export function useEnterToContinue(active: boolean, onContinue: () => void) {
         onContinue();
       }
     };
-    // Laisse passer l'Entrée qui vient de valider la réponse
+    // Let through the Enter that just submitted the answer
     const timer = setTimeout(() => window.addEventListener('keydown', onKey), 50);
     return () => {
       clearTimeout(timer);
@@ -564,7 +564,7 @@ function Shell({ onExit, title, quitLabel, children }: { onExit: () => void; tit
 }
 
 // ============================================================================
-// 1. Associer les paires
+// 1. Match the pairs
 // ============================================================================
 function MatchExercise({
   ex,
@@ -596,7 +596,7 @@ function MatchExercise({
       setPickedRight(null);
       if (next.size === ex.pairs.length) {
         const n = mistakes.current;
-        // Une erreur d'association est tolérée (clic malheureux), au-delà l'exercice est à refaire
+        // One matching mistake is tolerated (misclick), beyond that the exercise has to be redone
         onDone(
           n === 0
             ? { ok: true }
@@ -638,7 +638,7 @@ function MatchExercise({
     return 'bg-surface border-line hover:bg-surface-2 text-ink';
   };
 
-  // Une seule grille, ligne par ligne : les deux colonnes restent alignées même quand un mot passe à la ligne
+  // A single grid, row by row: both columns stay aligned even when a word wraps
   const button = (p: (typeof left)[number], side: 'l' | 'r') => (
     <button
       key={`${side}-${p.id}`}
@@ -653,7 +653,7 @@ function MatchExercise({
 }
 
 // ============================================================================
-// 2 & 3. QCM (traduction FR -> SV, ou écoute -> FR)
+// 2 & 3. Multiple choice (translation FR -> SV, or listening -> FR)
 // ============================================================================
 function McqExercise({
   ex,
@@ -680,7 +680,7 @@ function McqExercise({
     onAnswer({ ok: opt === answer });
   };
 
-  // Raccourcis 1-4
+  // Shortcuts 1-4
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const i = Number(e.key) - 1;
@@ -740,7 +740,7 @@ function McqExercise({
 }
 
 // ============================================================================
-// 4. Composer la phrase avec des blocs de mots
+// 4. Build the sentence with word blocks
 // ============================================================================
 function BuildExercise({
   ex,
@@ -827,9 +827,9 @@ function BuildExercise({
 }
 
 // ============================================================================
-// 5. Écrire à la main (traduction ou dictée)
+// 5. Write by hand (translation or dictation)
 // ============================================================================
-// Lettres difficiles à taper selon la langue étudiée
+// Letters that are hard to type depending on the language being learned
 const SPECIAL_CHARS: Record<Course, string[]> = { sv: ['å', 'ä', 'ö'], fr: ['é', 'è', 'à', 'ç', 'ê'] };
 
 function WriteExercise({

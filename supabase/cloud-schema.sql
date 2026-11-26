@@ -1,8 +1,8 @@
--- SvenskaCore : schéma du projet Supabase Cloud (comptes + progression synchronisée), issue #8.
--- À coller une seule fois dans Supabase Cloud > SQL Editor. Appliqué aussi à la base locale pour les tests.
--- Le contenu (cartes, decks, sections) n'est PAS en ligne : il est embarqué dans l'app (src/content.json).
--- Seule la progression de chaque utilisateur est stockée ici, et chacun ne voit que la sienne (RLS).
--- Ensuite : migrations-manuelles/migration_classement.sql (XP, streak et classement, issue #15).
+-- SvenskaCore: Supabase Cloud project schema (accounts + synced progress), issue #8.
+-- Paste once into Supabase Cloud > SQL Editor. Also applied to the local database for tests.
+-- The content (cards, decks, sections) is NOT online: it is bundled in the app (src/content.json).
+-- Only each user's progress is stored here, and everyone only sees their own (RLS).
+-- Next: migrations-manuelles/migration_classement.sql (XP, streak and leaderboard, issue #15).
 
 create table if not exists public.progress_cards (
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
@@ -33,10 +33,10 @@ create table if not exists public.progress_sections (
 alter table public.progress_cards enable row level security;
 alter table public.progress_sections enable row level security;
 
--- Accès API explicite : nécessaire si « Grant API access to new tables automatically » est décoché
+-- Explicit API access: needed if "Grant API access to new tables automatically" is unchecked
 grant select, insert, update, delete on public.progress_cards, public.progress_sections to authenticated;
 
--- Chaque utilisateur connecté ne lit et n'écrit que ses propres lignes. Les visiteurs anonymes n'ont aucun accès.
+-- Each signed-in user only reads and writes their own rows. Anonymous visitors have no access.
 drop policy if exists "progression personnelle" on public.progress_cards;
 create policy "progression personnelle" on public.progress_cards
   for all to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);

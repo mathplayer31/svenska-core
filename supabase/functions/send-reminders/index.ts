@@ -1,7 +1,7 @@
-// Fonction Supabase planifiée (issue #16), appelée toutes les 5 minutes par pg_cron.
-// Envoie le rappel push de chaque abonnement dont l'heure est passée aujourd'hui dans son fuseau,
-// une fois par jour, et supprime les abonnements expirés (réponse 404 ou 410 du service push).
-// Secrets : VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, CRON_SECRET (procédure : docs/HANDOFF.md).
+// Scheduled Supabase function (issue #16), called every 5 minutes by pg_cron.
+// Sends the push reminder of each subscription whose time has passed today in its time zone,
+// once a day, and deletes expired subscriptions (404 or 410 response from the push service).
+// Secrets: VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, CRON_SECRET (steps: "Daily reminders" in README.md).
 import webpush from 'npm:web-push@3.6.7';
 import { createClient } from 'npm:@supabase/supabase-js@2';
 
@@ -11,7 +11,7 @@ const env = (name: string) => {
   return v;
 };
 
-/** Date 'YYYY-MM-DD' et heure 'HH:MM' locales dans le fuseau donné */
+/** Local date 'YYYY-MM-DD' and time 'HH:MM' in the given time zone */
 function localNow(timeZone: string) {
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat('en-CA', {

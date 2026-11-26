@@ -1,19 +1,19 @@
-// Importe dans ton compte la progression faite sur le PC avant l'issue #8 (tables user_card_progress /
-// user_section_progress de la base Supabase locale). Fusion sans perte : à chaque carte, la révision
-// la plus récente gagne ; ce qui est déjà plus récent dans le compte n'est pas écrasé.
+// Imports into your account the progress made on the PC before issue #8 (user_card_progress /
+// user_section_progress tables of the local Supabase database). Lossless merge: for each card, the most
+// recent review wins; what is already more recent in the account is not overwritten.
 //
-// Lancer (une seule fois) depuis la racine du projet, Supabase local démarré :
+// Run (only once) from the project root, with local Supabase started:
 //   SVENSKA_EMAIL=... SVENSKA_PASSWORD=... node --experimental-strip-types --env-file=.env.local \
 //     --env-file=.env.production scripts/import-progress.ts
-// Source : base locale (LOCAL_SUPABASE_URL / LOCAL_SUPABASE_ANON_KEY, sinon les valeurs de .env.local).
-// Cible : le projet du compte (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY de .env.production).
+// Source: local database (LOCAL_SUPABASE_URL / LOCAL_SUPABASE_ANON_KEY, otherwise the values from .env.local).
+// Target: the account's project (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY from .env.production).
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'node:fs';
 import { mergeCard, mergeSection, sameRow, isoOrNull } from '../src/syncMerge.ts';
 
 const LEGACY_USER_ID = '00000000-0000-0000-0000-000000000001';
 
-// .env.local et .env.production définissent les mêmes noms : on relit .env.local explicitement pour la source
+// .env.local and .env.production define the same names: .env.local is read again explicitly for the source
 const envLocal = Object.fromEntries(
   readFileSync('.env.local', 'utf8').split('\n').map((l) => l.trim().split('=')).filter(([k, v]) => k && v)
 );
@@ -24,7 +24,7 @@ const targetKey = process.env.VITE_SUPABASE_ANON_KEY;
 const { SVENSKA_EMAIL: email, SVENSKA_PASSWORD: password } = process.env;
 
 if (!sourceUrl || !sourceKey || !targetUrl || !targetKey || !email || !password) {
-  console.error('Variables manquantes : voir l’en-tête du script (SVENSKA_EMAIL, SVENSKA_PASSWORD, .env.production rempli).');
+  console.error('Missing variables: see the script header (SVENSKA_EMAIL, SVENSKA_PASSWORD, .env.production filled in).');
   process.exit(1);
 }
 
@@ -32,11 +32,11 @@ const source = createClient(sourceUrl, sourceKey);
 const target = createClient(targetUrl, targetKey, { auth: { persistSession: false } });
 
 const fail = (what: string, error: unknown) => {
-  console.error(`Échec (${what}) :`, error);
+  console.error(`Failed (${what}):`, error);
   process.exit(1);
 };
 
-// 1. Progression locale + correspondance uuid -> slug
+// 1. Local progress + uuid -> slug mapping
 const [progress, sectionProgress, cards, sections] = await Promise.all([
   source.from('user_card_progress').select('*').eq('user_id', LEGACY_USER_ID),
   source.from('user_section_progress').select('*').eq('user_id', LEGACY_USER_ID),
@@ -47,11 +47,11 @@ for (const [name, res] of Object.entries({ progress, sectionProgress, cards, sec
 const cardSlug = new Map(cards.data!.map((c) => [c.id, c.slug]));
 const sectionSlug = new Map(sections.data!.map((s) => [s.id, s.slug]));
 
-// 2. Connexion au compte cible
+// 2. Sign in to the target account
 const { error: authError } = await target.auth.signInWithPassword({ email, password });
 if (authError) fail('connexion', authError);
 
-// 3. Fusion avec ce que le compte contient déjà
+// 3. Merge with what the account already contains
 const [cloudCards, cloudSections] = await Promise.all([
   target.from('progress_cards').select('*'),
   target.from('progress_sections').select('*'),
@@ -87,14 +87,14 @@ const sectionRows = sectionProgress.data!
   })
   .filter((r) => r !== null);
 
-// 4. Envoi
+// 4. Send
 if (cardRows.length) {
   const { error } = await target.from('progress_cards').upsert(cardRows);
-  if (error) fail('envoi des cartes', error);
+  if (error) fail('sending cards', error);
 }
 if (sectionRows.length) {
   const { error } = await target.from('progress_sections').upsert(sectionRows);
-  if (error) fail('envoi des sections', error);
+  if (error) fail('sending sections', error);
 }
 const skipped = progress.data!.length - cardRows.length;
-console.log(`Importé : ${cardRows.length} carte(s), ${sectionRows.length} test(s) de section. Ignoré : ${skipped} carte(s) déjà à jour dans le compte ou absente(s) du contenu.`);
+console.log(`Imported: ${cardRows.length} card(s), ${sectionRows.length} section test(s). Skipped: ${skipped} card(s) already up to date in the account or missing from the content.`);

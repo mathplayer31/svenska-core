@@ -1,4 +1,4 @@
-// Réglage du rappel quotidien (issue #16), dans l'écran Compte.
+// Daily reminder setting (issue #16), in the Account screen.
 import { useState } from 'react';
 import { Bell } from 'lucide-react';
 import { loadReminder, reminderSupport, ReminderError, setReminder, type Reminder } from './reminders';

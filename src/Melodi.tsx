@@ -1,5 +1,5 @@
-// Éléments visuels de la direction Melodi (issue #10) : drapeaux, pochettes, égaliseur,
-// barre de progression en forme d'onde, bascule de thème et panneau de choix du cours.
+// Visual elements of the Melodi direction (issue #10): flags, album covers, equalizer,
+// waveform progress bar, theme toggle and course picker panel.
 import { useEffect, useRef } from 'react';
 import { Moon, Sun, X } from 'lucide-react';
 import { COURSE_LANGS, useI18n, type Course, type Lang } from './i18n';
@@ -33,7 +33,7 @@ export function Flag({ course, size = 24, className = '' }: { course: Course; si
 
 export const COURSE_NAME: Record<Course, string> = { sv: 'SvenskaCore', fr: 'FranceCore' };
 
-// Petites courbes de mélodie des pochettes, une par album (purement décoratives)
+// Small melody curves on the covers, one per album (purely decorative)
 const COVER_CURVES = [
   'M4 22c8 0 10-14 18-14s10 12 18 12 10-16 18-16 8 10 14 10',
   'M4 18c8 0 12-12 20-12s8 16 18 16 10-14 18-14 8 6 12 6',
@@ -63,7 +63,7 @@ export function AlbumCover({ n, size = 76, dim = false }: { n: number; size?: nu
   );
 }
 
-/** Égaliseur de la piste en cours */
+/** Equalizer of the current track */
 export function Equalizer({ className = '' }: { className?: string }) {
   return (
     <span aria-hidden className={`inline-flex items-end gap-0.5 h-4 ${className}`}>
@@ -74,10 +74,10 @@ export function Equalizer({ className = '' }: { className?: string }) {
   );
 }
 
-// Hauteurs fixes des barres : une forme d'onde stylisée, pas un vrai signal audio
+// Fixed bar heights: a stylized waveform, not a real audio signal
 const WAVE = [10, 18, 26, 14, 30, 22, 12, 20, 28, 16, 24, 10, 18, 30, 14, 22, 8, 20, 26, 12, 18, 10, 24, 16, 28, 12, 20, 14, 22, 10];
 
-/** Progression de l'unité dessinée comme une forme d'onde, avec le pourcentage à droite */
+/** Unit progress drawn as a waveform, with the percentage on the right */
 export function WaveProgress({ value, label }: { value: number; label: string }) {
   const pct = Math.round(value * 100);
   const filled = Math.round(value * WAVE.length);
@@ -95,8 +95,8 @@ export function WaveProgress({ value, label }: { value: number; label: string })
   );
 }
 
-/** Forme d'onde décorative du mini-lecteur */
-/** Onde du lecteur : les barres se remplissent pendant la lecture (progress de 0 à 1, null à l'arrêt) */
+/** Decorative waveform of the mini player */
+/** Player waveform: bars fill up during playback (progress from 0 to 1, null when stopped) */
 export function PlayerWave({ progress = null, className = '' }: { progress?: number | null; className?: string }) {
   const bars = WAVE.slice(0, 22);
   const filled = progress === null ? 0 : Math.ceil(progress * bars.length);
@@ -106,7 +106,7 @@ export function PlayerWave({ progress = null, className = '' }: { progress?: num
         <span
           key={i}
           className={`w-[3px] shrink-0 rounded-sm transition-[transform,background-color] duration-150 ${i < filled ? 'bg-accent' : 'bg-line'}`}
-          // La barre en cours de lecture grandit un peu : l'onde « bat » avec le son
+          // The bar being played grows a little: the wave "beats" with the sound
           style={{ height: Math.max(6, h), transform: progress !== null && i === filled - 1 ? 'scaleY(1.25)' : undefined }}
         />
       ))}
@@ -131,7 +131,7 @@ export function ThemeToggle({ isDark, onToggle, className = '' }: { isDark: bool
 
 const LANG_NAME: Record<Lang, string> = { fr: 'Français', en: 'English', sv: 'Svenska' };
 
-/** Panneau de choix du cours, de la langue de l'interface et du thème */
+/** Picker panel for the course, the interface language and the theme */
 export function CourseSheet({
   onClose,
   onPickCourse,

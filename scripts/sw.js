@@ -1,12 +1,12 @@
-// Service worker de la PWA (issue #12). Modèle : vite.config.ts le copie dans dist/sw.js
-// en ajoutant en tête SHELL, AUDIO (URL à précharger) et leurs versions SHELL_V, AUDIO_V.
-// L'app (HTML, JS, CSS, polices, icônes) et les sons sont en cache : tout marche hors ligne.
-// Deux caches séparés : un déploiement remplace l'app, et ne retélécharge les sons que s'ils ont changé.
+// PWA service worker (issue #12). Template: vite.config.ts copies it to dist/sw.js
+// prepending SHELL, AUDIO (URLs to preload) and their versions SHELL_V, AUDIO_V.
+// The app (HTML, JS, CSS, fonts, icons) and the sounds are cached: everything works offline.
+// Two separate caches: a deployment replaces the app, and only downloads the sounds again if they changed.
 /* global SHELL, AUDIO, SHELL_V, AUDIO_V */
 const SHELL_CACHE = `shell-${SHELL_V}`;
 const AUDIO_CACHE = `audio-${AUDIO_V}`;
 
-/** Ajoute au cache les URL qui n'y sont pas encore, par lots (reprend un préchargement interrompu) */
+/** Adds to the cache the URLs not there yet, in batches (resumes an interrupted preload) */
 async function fill(name, urls) {
   const cache = await caches.open(name);
   const missing = [];
@@ -27,7 +27,7 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-/** Safari iOS lit les sons par morceaux (en-tête Range) et refuse une réponse complète : on renvoie un 206 */
+/** iOS Safari reads sounds in chunks (Range header) and rejects a full response: a 206 is returned */
 async function ranged(request, response) {
   const range = request.headers.get('range');
   if (!range) return response;
@@ -56,11 +56,11 @@ async function ranged(request, response) {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   const url = new URL(req.url);
-  // Compte et synchro (Supabase) et tout ce qui n'est pas ce site : réseau direct
+  // Account and sync (Supabase) and anything that is not this site: straight to the network
   if (req.method !== 'GET' || url.origin !== self.location.origin) return;
 
   if (req.mode === 'navigate') {
-    // Application d'une seule page : toute navigation affiche la page d'accueil en cache ("/" : Cloudflare redirige /index.html vers /)
+    // Single-page app: any navigation shows the cached home page ("/": Cloudflare redirects /index.html to /)
     e.respondWith(caches.match('/', { cacheName: SHELL_CACHE }).then((r) => r || fetch(req)));
     return;
   }
@@ -72,13 +72,13 @@ self.addEventListener('fetch', (e) => {
   );
 });
 
-// Rappel quotidien (issue #16) : la fonction Supabase send-reminders envoie { title, body }
+// Daily reminder (issue #16): the Supabase send-reminders function sends { title, body }
 self.addEventListener('push', (e) => {
   let msg = {};
   try {
     msg = e.data ? e.data.json() : {};
   } catch {
-    // message illisible : notification par défaut
+    // unreadable message: default notification
   }
   e.waitUntil(
     self.registration.showNotification(msg.title || 'SvenskaCore', {
@@ -89,7 +89,7 @@ self.addEventListener('push', (e) => {
   );
 });
 
-// Un appui sur la notification ramène l'app au premier plan, ou l'ouvre
+// Tapping the notification brings the app to the foreground, or opens it
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
   e.waitUntil(

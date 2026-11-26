@@ -1,8 +1,8 @@
-// Couche d'accès aux données (issue #8).
-//  - Le contenu (sections, decks, cartes) est toujours embarqué : src/content.json, exporté par
-//    scripts/sync-content.mjs. Identifiants = slugs, donc la progression survit à un re-seed.
-//  - La progression est toujours enregistrée sur l'appareil d'abord (marche hors ligne et sans compte).
-//  - Connecté à un compte, elle est fusionnée avec Supabase : à chaque carte, la révision la plus récente gagne.
+// Data access layer (issue #8).
+//  - The content (sections, decks, cards) is always bundled: src/content.json, exported by
+//    scripts/sync-content.mjs. Ids = slugs, so progress survives a re-seed.
+//  - Progress is always saved on the device first (works offline and without an account).
+//  - When signed in, it is merged with Supabase: for each card, the most recent review wins.
 import { supabase } from './supabaseClient';
 import { mergeCard, mergeSection, sameRow, isoOrNull } from './syncMerge';
 import { XP, dayKey, periodStarts, streaks, type XpKind } from './xp';
@@ -17,7 +17,7 @@ export interface LoadedData {
   sectionProgress: Row[];
 }
 
-// Clés locales inchangées depuis l'APK hors ligne : la progression déjà sur le téléphone est conservée.
+// Local keys unchanged since the offline APK: progress already on the phone is kept.
 const CARD_KEY = 'svenska.cardProgress';
 const SECTION_KEY = 'svenska.sectionProgress';
 
@@ -33,7 +33,7 @@ function writeMap(key: string, map: Record<string, Row>) {
   try {
     localStorage.setItem(key, JSON.stringify(map));
   } catch {
-    // stockage indisponible : la progression de cette session ne sera pas conservée sur l'appareil
+    // storage unavailable: this session's progress will not be kept on the device
   }
 }
 
@@ -52,7 +52,7 @@ export async function load(): Promise<LoadedData> {
 }
 
 // ---------------------------------------------------------------------------
-// Conversion local <-> base
+// Local <-> database conversion
 // ---------------------------------------------------------------------------
 const CARD_FIELDS = ['state', 'due', 'stability', 'difficulty', 'elapsed_days', 'scheduled_days', 'learning_steps', 'reps', 'lapses', 'last_review'] as const;
 
@@ -74,7 +74,7 @@ const sectionFromCloud = (r: Row) => ({
 
 
 // ---------------------------------------------------------------------------
-// Enregistrement : d'abord l'appareil, puis le compte si connecté (un échec réseau sera rattrapé à la synchro)
+// Saving: first the device, then the account if signed in (a network failure is caught up at the next sync)
 // ---------------------------------------------------------------------------
 export async function saveCardProgress(row: Row) {
   const map = readMap(CARD_KEY);
@@ -91,7 +91,7 @@ export async function saveSectionProgress(row: Row) {
 }
 
 // ---------------------------------------------------------------------------
-// Compte
+// Account
 // ---------------------------------------------------------------------------
 export const accountsAvailable = supabase !== null;
 
@@ -106,7 +106,7 @@ export async function signIn(email: string, password: string) {
   if (error) throw error;
 }
 
-/** Renvoie true si un e-mail de confirmation doit être validé avant la connexion. */
+/** Returns true if a confirmation email must be validated before signing in. */
 export async function signUp(email: string, password: string) {
   const { data, error } = await supabase!.auth.signUp({ email, password });
   if (error) throw error;
@@ -114,15 +114,15 @@ export async function signUp(email: string, password: string) {
 }
 
 export async function signOut() {
-  // shortcut: la progression locale reste sur l'appareil après déconnexion ; un autre compte connecté
-  // ensuite sur le même appareil la récupérerait. Acceptable pour un usage personnel.
+  // shortcut: local progress stays on the device after sign-out; another account signed in
+  // later on the same device would pick it up. Acceptable for personal use.
   await supabase?.auth.signOut();
 }
 
 /**
- * Synchronisation bidirectionnelle : récupère la progression du compte, la fusionne avec celle de
- * l'appareil, enregistre le résultat sur l'appareil, puis renvoie au compte ce qui y manque ou y est plus ancien.
- * Ne fait rien sans compte connecté. Lève une erreur si le réseau échoue (la progression locale reste intacte).
+ * Two-way sync: fetches the account's progress, merges it with the device's,
+ * saves the result on the device, then sends back to the account what is missing or older there.
+ * Does nothing without a signed-in account. Throws if the network fails (local progress stays intact).
  */
 export async function sync(): Promise<{ pulled: number; pushed: number } | null> {
   if (!(await currentUser())) return null;
@@ -174,16 +174,16 @@ export async function sync(): Promise<{ pulled: number; pushed: number } | null>
 }
 
 // ---------------------------------------------------------------------------
-// XP et streak (issue #15) : tout est noté sur l'appareil ; connecté, chaque événement est envoyé au compte.
-// Un envoi raté reste en attente et repart à la synchro suivante, avec le même identifiant (pas de doublon).
+// XP and streak (issue #15): everything is recorded on the device; when signed in, each event is sent to the account.
+// A failed send stays pending and goes out at the next sync, with the same id (no duplicate).
 // ---------------------------------------------------------------------------
 interface XpEvent { id: string; kind: XpKind; at: string; day: string }
 interface XpStore {
-  /** XP gagnée sur cet appareil, par jour local */
+  /** XP earned on this device, per local day */
   log: Record<string, number>;
-  /** Jours où une séance a été terminée (cet appareil et, connecté, le compte) */
+  /** Days with a finished session (this device and, when signed in, the account) */
   days: string[];
-  /** Événements pas encore reçus par le compte */
+  /** Events not yet received by the account */
   pending: XpEvent[];
 }
 const XP_KEY = 'svenska.xp';
@@ -206,7 +206,7 @@ export async function awardXp(kind: XpKind) {
   try {
     await flushXp();
   } catch {
-    // hors ligne : l'événement reste en attente
+    // offline: the event stays pending
   }
 }
 
@@ -216,12 +216,12 @@ async function flushXp() {
   const { error } = await supabase!.from('xp_events').upsert(sent, { onConflict: 'user_id,id', ignoreDuplicates: true });
   if (error) throw error;
   const done = new Set(sent.map((e) => e.id));
-  const store = readXp(); // relu : d'autres événements ont pu arriver pendant l'envoi
+  const store = readXp(); // read again: other events may have arrived during the send
   store.pending = store.pending.filter((e) => !done.has(e.id));
   writeXp(store);
 }
 
-/** XP de la semaine et du mois gagnée sur cet appareil, streak courant et record */
+/** XP of the week and month earned on this device, current streak and best */
 export function localStats() {
   const now = new Date();
   const { week, month } = periodStarts(now);
@@ -252,7 +252,7 @@ export async function getPseudo(): Promise<string | null> {
   return data?.pseudo ?? null;
 }
 
-/** Enregistre le pseudo ; 'taken' s'il est déjà pris (unicité sans tenir compte de la casse) */
+/** Saves the username; 'taken' if it is already in use (case-insensitive uniqueness) */
 export async function setPseudo(pseudo: string): Promise<'ok' | 'taken'> {
   const { error } = await supabase!.from('profiles').upsert({ pseudo, updated_at: new Date().toISOString() });
   if (error?.code === '23505') return 'taken';

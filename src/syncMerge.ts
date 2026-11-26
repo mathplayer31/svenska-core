@@ -1,17 +1,17 @@
-// Règles de fusion de la progression entre l'appareil et le compte (issue #8). Sans dépendance,
-// pour être testées seules : node --experimental-strip-types scripts/check-sync.ts
+// Rules for merging progress between the device and the account (issue #8). No dependency,
+// so they can be tested alone: node --experimental-strip-types scripts/check-sync.ts
 type Row = Record<string, any>;
 
 const time = (iso: string | null | undefined) => (iso ? new Date(iso).getTime() : -Infinity);
 
-/** Carte : la révision la plus récente gagne ; à égalité, la version du compte (rien à renvoyer). */
+/** Card: the most recent review wins; on a tie, the account's version (nothing to send back). */
 export function mergeCard(local: Row | undefined, cloud: Row | undefined): Row | undefined {
   if (!local) return cloud;
   if (!cloud) return local;
   return time(cloud.last_review) >= time(local.last_review) ? cloud : local;
 }
 
-/** Test de section : meilleur score, validé s'il l'a été sur un appareil, tentatives max, dernière date. */
+/** Section test: best score, passed if passed on any device, max attempts, latest date. */
 export function mergeSection(local: Row | undefined, cloud: Row | undefined): Row | undefined {
   if (!local || !cloud) return local ?? cloud;
   return {
@@ -23,7 +23,7 @@ export function mergeSection(local: Row | undefined, cloud: Row | undefined): Ro
   };
 }
 
-/** Égalité indépendante de l'ordre des clés, des champs à null / absents et de l'ancien champ user_id. */
+/** Equality regardless of key order, null / missing fields and the old user_id field. */
 export function sameRow(a: Row | undefined, b: Row | undefined) {
   const canon = (o: Row | undefined) =>
     JSON.stringify(
@@ -34,5 +34,5 @@ export function sameRow(a: Row | undefined, b: Row | undefined) {
   return canon(a) === canon(b);
 }
 
-/** Date de la base (format Postgres) remise au format de l'appareil (toISOString). */
+/** Database date (Postgres format) converted to the device format (toISOString). */
 export const isoOrNull = (v: string | null | undefined) => (v ? new Date(v).toISOString() : null);
