@@ -1,64 +1,64 @@
-# SvenskaCore : programme A1 à B2
+# SvenskaCore: A1 to B2 syllabus
 
-Dernière mise à jour : 19 nov 2026 (issues #2, #3, #4).
+Last updated: 19 Nov 2026 (issues #2, #3, #4).
 
-Principes communs à tous les niveaux :
-- Une **section** = 4 unités thématiques + un test de fin de section (80 % pour valider). La section suivante s'ouvre quand le test est réussi.
-- Une **unité** = environ 10 mots + 8 phrases, au format complet : traduction FR + EN, glose mot à mot (phrases), prononciation API, note, audio. Chaque unité s'ouvre quand la précédente est entièrement découverte.
-- Les phrases n'utilisent que des mots déjà vus (unités précédentes ou mots de l'unité) ; chaque mot est glosé.
-- Un **deck de grammaire de fondation** par niveau, débloqué après la dernière unité du niveau, construit uniquement avec le vocabulaire déjà vu.
+Principles shared by all levels:
+- A **section** = 4 thematic units + an end-of-section test (80 % to pass). The next section opens when the test is passed.
+- A **unit** = about 10 words + 8 sentences, in the full format: FR + EN translation, word-by-word gloss (sentences), IPA pronunciation, note, audio. Each unit opens when the previous one has been fully discovered.
+- Sentences only use words already seen (previous units or words of the unit); every word is glossed.
+- One **foundation grammar deck** per level, unlocked after the last unit of the level, built only with vocabulary already seen.
 
-État au 19 nov 2026 : **A1, A2, B1 et B2 produits** (issues #2, #3, #4). 631 cartes au total.
+Status on 19 Nov 2026: **A1, A2, B1 and B2 produced** (issues #2, #3, #4). 631 cards in total.
 
-## A1 (livré)
+## A1 (shipped)
 
-| Section | Unités | Grammaire |
+| Section | Units | Grammar |
 |---|---|---|
-| 1 : Premiers pas | 1 Salutations, 2 Café & fika, 3 Famille | Fondation A1 : V2, questions, *inte*, *sin/hans*, accord en -t, forme définie |
-| 2 : Vie quotidienne | 4 Courses, 5 Restaurant, 6 Transports, 7 Météo | |
+| 1: First steps | 1 Greetings, 2 Café & fika, 3 Family | A1 foundation: V2, questions, *inte*, *sin/hans*, -t agreement, definite form |
+| 2: Everyday life | 4 Shopping, 5 Restaurant, 6 Transport, 7 Weather | |
 
-## A2 (livré, issue #2)
+## A2 (shipped, issue #2)
 
-| Section | Unité | Thème et vocabulaire | Point de grammaire mis en avant |
+| Section | Unit | Theme and vocabulary | Grammar focus |
 |---|---|---|---|
-| 3 : Ma vie au quotidien | 8 Chez moi | lägenhet, rum, kök, hyra, flytta, möbler | *ligger / står / sitter*, prépositions de lieu |
-| | 9 Ma journée | vakna, duscha, klockan, frukost, kväll | heure (*halv åtta*, *kvart över*), verbes réfléchis (*klä på sig*) |
-| | 10 Travail & études | jobb, kollega, möte, plugga, kurs | modaux + infinitif (*måste, kan, vill, får, ska*) |
-| | 11 Loisirs & week-end | träna, film, helg, spela, vänner | prétérit (*gick, såg, var, åkte*) |
-| 4 : Se débrouiller en Suède | 12 Santé | ont, huvud, mage, apotek, vårdcentral, 1177 | *ha ont i*, impératif |
-| | 13 Vêtements & achats | tröja, jacka, storlek, prova, rea | comparatif et superlatif (*större, billigast*) |
-| | 14 Fêtes & traditions | midsommar, jul, lucia, fira, present | parfait (*har firat*), *grattis på födelsedagen* |
-| | 15 Projets & vacances | semester, resa, boka, planera, sommarstuga | futur (*ska*, *kommer att*), *om* + présent |
-| Fondation | Grammaire A2 | | prétérit des 4 groupes, parfait vs prétérit, *kommer att* vs *ska*, comparatifs, modaux, réfléchis, *i / på / för … sedan* |
+| 3: My daily life | 8 At home | lägenhet, rum, kök, hyra, flytta, möbler | *ligger / står / sitter*, prepositions of place |
+| | 9 My day | vakna, duscha, klockan, frukost, kväll | telling the time (*halv åtta*, *kvart över*), reflexive verbs (*klä på sig*) |
+| | 10 Work & studies | jobb, kollega, möte, plugga, kurs | modals + infinitive (*måste, kan, vill, får, ska*) |
+| | 11 Hobbies & weekends | träna, film, helg, spela, vänner | preterite (*gick, såg, var, åkte*) |
+| 4: Getting by in Sweden | 12 Health | ont, huvud, mage, apotek, vårdcentral, 1177 | *ha ont i*, imperative |
+| | 13 Clothes & shopping | tröja, jacka, storlek, prova, rea | comparative and superlative (*större, billigast*) |
+| | 14 Holidays & traditions | midsommar, jul, lucia, fira, present | perfect (*har firat*), *grattis på födelsedagen* |
+| | 15 Plans & holidays | semester, resa, boka, planera, sommarstuga | future (*ska*, *kommer att*), *om* + present |
+| Foundation | A2 grammar | | preterite of the 4 groups, perfect vs preterite, *kommer att* vs *ska*, comparatives, modals, reflexives, *i / på / för … sedan* |
 
-## B1 (livré, issue #3)
+## B1 (shipped, issue #3)
 
-| Section | Unité | Thème | Point de grammaire |
+| Section | Unit | Theme | Grammar focus |
 |---|---|---|---|
-| 5 : S'installer en Suède | 16 Démarches | personnummer, Skatteverket, ansöka, blankett | subordonnées en *att*, place de *inte* (BIFF) |
-| | 17 Logement & voisinage | hyresvärd, tvättstuga, bostadsrätt, granne | relatives en *som* |
-| | 18 Travail & entretien | CV, erfarenhet, lön, anställning | *om* (si) et *när* + subordonnée |
-| | 19 Avis & débats | tycka, tro, tänka, hålla med | *tycka / tro / tänka*, adverbes de phrase |
-| 6 : Société & culture | 20 Nature & allemansrätten | skog, fjäll, stuga, vandra, allemansrätten | verbes à particule (*tycka om*, *hälsa på*) |
-| | 21 Médias & actualités | nyheter, artikel, debatt, val | plus-que-parfait (*hade gjort*) |
-| | 22 Émotions & relations | känna sig, orolig, stolt, bråka | *känna sig* + adjectif, accords |
-| | 23 Raconter au passé | berättelse, minnas, hände, plötsligt | enchaînement des temps, *medan / innan / efter att* |
-| Fondation | Grammaire B1 | | BIFF, *som*, conjonctions (*eftersom, fast, trots att*), verbes à particule, plus-que-parfait |
+| 5: Settling in Sweden | 16 Paperwork | personnummer, Skatteverket, ansöka, blankett | *att* clauses, position of *inte* (BIFF) |
+| | 17 Housing & neighbours | hyresvärd, tvättstuga, bostadsrätt, granne | relative clauses with *som* |
+| | 18 Work & interviews | CV, erfarenhet, lön, anställning | *om* (if) and *när* + subordinate clause |
+| | 19 Opinions & debates | tycka, tro, tänka, hålla med | *tycka / tro / tänka*, sentence adverbs |
+| 6: Society & culture | 20 Nature & allemansrätten | skog, fjäll, stuga, vandra, allemansrätten | particle verbs (*tycka om*, *hälsa på*) |
+| | 21 Media & news | nyheter, artikel, debatt, val | pluperfect (*hade gjort*) |
+| | 22 Emotions & relationships | känna sig, orolig, stolt, bråka | *känna sig* + adjective, agreement |
+| | 23 Telling stories in the past | berättelse, minnas, hände, plötsligt | sequence of tenses, *medan / innan / efter att* |
+| Foundation | B1 grammar | | BIFF, *som*, conjunctions (*eftersom, fast, trots att*), particle verbs, pluperfect |
 
-## B2 (livré, issue #4)
+## B2 (shipped, issue #4)
 
-| Section | Unité | Thème | Point de grammaire |
+| Section | Unit | Theme | Grammar focus |
 |---|---|---|---|
-| 7 : Travailler en suédois | 24 Vie professionnelle | ansvar, förhandla, uppdrag, chef | passif en *-s* (*mötet hålls*) |
-| | 25 Économie & consommation | pris, lån, spara, ränta | passif en *bli* + participe |
-| | 26 Santé & société | vården, välfärd, försäkring, sjukskriven | participes présent et passé |
-| | 27 Environnement & climat | klimat, utsläpp, återvinna, hållbar | conditionnel (*skulle*, *om jag vore*) |
-| 8 : Nuances & expression | 28 Expressions idiomatiques | lagom, ta det lugnt, ingen fara | expressions figées |
-| | 29 Argumenter & nuancer | å ena sidan, däremot, dessutom, trots att | connecteurs logiques |
-| | 30 Registres | formel (*ni*, *myndighetsspråk*) vs familier | discours rapporté |
-| | 31 Histoire & identité | historia, kung, demokrati, invandring | mots composés, dérivation (*-het, -ning, -bar*) |
-| Fondation | Grammaire B2 | | passif, participes, conditionnel, discours rapporté, verbes en *-s* (déponents, réciproques) |
+| 7: Working in Swedish | 24 Working life | ansvar, förhandla, uppdrag, chef | *-s* passive (*mötet hålls*) |
+| | 25 Economy & consumption | pris, lån, spara, ränta | *bli* + participle passive |
+| | 26 Health & society | vården, välfärd, försäkring, sjukskriven | present and past participles |
+| | 27 Environment & climate | klimat, utsläpp, återvinna, hållbar | conditional (*skulle*, *om jag vore*) |
+| 8: Nuance & expression | 28 Idioms | lagom, ta det lugnt, ingen fara | fixed expressions |
+| | 29 Arguing & nuancing | å ena sidan, däremot, dessutom, trots att | logical connectors |
+| | 30 Registers | formal (*ni*, *myndighetsspråk*) vs informal | reported speech |
+| | 31 History & identity | historia, kung, demokrati, invandring | compound words, derivation (*-het, -ning, -bar*) |
+| Foundation | B2 grammar | | passive, participles, conditional, reported speech, *-s* verbs (deponent, reciprocal) |
 
-## Volume réaliste
+## Realistic volume
 
-Ce parcours couvre le noyau (environ 550 mots, toute la grammaire courante). Un B2 complet suppose 3 000 à 4 000 mots : une fois B2 produit, l'étape suivante sera des decks de vocabulaire thématique plus denses, sans glose ni phrases, pour élargir le lexique.
+This path covers the core (about 550 words, all the common grammar). A full B2 assumes 3,000 to 4,000 words: once B2 was produced, the next step was denser thematic vocabulary decks, without glosses or sentences, to widen the vocabulary (issue #18, 3,023 distinct words in total).
